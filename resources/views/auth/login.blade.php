@@ -1,47 +1,36 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('layouts.auth')
 
+@section('page_title', __('auth.login.title'))
+
+@section('content')
+    <h1 class="text-xl text-color-18181a mb-3.5 font-medium">{{ __('auth.login.title') }}</h1>
+    <p class="text-sm">{{ __('auth.login.description') }}</p>
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+        <label class="block my-7">
+            <span class="text-xs">{{ __('auth.login.email.label') }}</span>
+            <input class="mt-2" required type="email" name="email" placeholder="{{ __('auth.login.email.placeholder') }}">
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+        </label>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
+        <label class="block my-7">
+            <span class="flex text-xs">
+                {{ __('auth.login.password.label') }}
+                <a class="ml-auto text-color-18181a underline hover:no-underline" href="{{ route('password.request') }}">{{ __('auth.login.password.forgetLink') }}</a>
+            </span>
+            <span class="relative block" x-data="{showPassword: false}">
+                <input :type="showPassword ? 'text' : 'password'" class="mt-2" required type="password" name="password" placeholder="{{ __('auth.login.password.placeholder') }}">
+                <span @click="showPassword = !showPassword" :class="showPassword ? 'show-password' : 'hide-password'" class="absolute z-[1] inset-y-1 right-1 bg-color-eff0f0 bg-no-repeat bg-center aspect-square rounded-sm cursor-pointer"></span>
+            </span>
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+        </label>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+        <label class="flex items-center my-7">
+            <input type="checkbox" name="remember" value="1"><span class="ml-2 text-xs">{{ __('auth.login.rememberme.label') }}</span>
+        </label>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ml-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
+        <button type="submit" class="block py-3.5 px-7 w-full bg-color-18181a text-white text-xs text-center font-medium rounded">{{ __('auth.login.submit') }}</button>
+    
     </form>
-</x-guest-layout>
+@endsection

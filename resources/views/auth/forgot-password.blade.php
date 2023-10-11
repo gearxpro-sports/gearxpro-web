@@ -1,25 +1,20 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-    </div>
+@extends('layouts.auth')
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@section('page_title', __('auth.forget_password.title'))
 
+@section('content')
+    <h1 class="text-xl text-color-18181a mb-3.5 font-medium">{{ __('auth.forget_password.title') }}</h1>
+    <p class="text-sm">{{ __('auth.forget_password.description') }}</p>
     <form method="POST" action="{{ route('password.email') }}">
         @csrf
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+        <label class="block my-7">
+            <span class="text-xs">{{ __('auth.forget_password.email.label') }}</span>
+            <input class="mt-2" required type="email" name="email" placeholder="{{ __('auth.forget_password.email.placeholder') }}" value="{{ old('email') }}">
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+        </label>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
+        <button type="submit" class="block py-3.5 px-7 w-full bg-color-18181a text-white text-xs text-center font-medium rounded">{{ __('auth.forget_password.submit') }}</button>
+    
     </form>
-</x-guest-layout>
+@endsection

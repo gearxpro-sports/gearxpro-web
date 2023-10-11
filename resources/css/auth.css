@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  @apply block p-3.5 w-full text-sm text-color-18181a border border-color-eff0f0 rounded focus:outline-none focus:ring-0 focus:ring-offset-0 placeholder:placeholder-color-b6b9bb;
+}
+
+.show-password {
+  @apply bg-[url('../images/icons/eye.svg')];
+}
+
+.hide-password {
+  @apply bg-[url('../images/icons/eye-off.svg')];
+}
