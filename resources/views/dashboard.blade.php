@@ -5,13 +5,12 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
+    <div class="grid grid-cols-6 gap-4">
+        <div class="bg-white p-4">1</div>
+        <div class="bg-white col-span-2 p-4">2</div>
+        <div class="bg-white col-span-3 p-4">3</div>
+        <div class="bg-white col-span-3 p-4">4</div>
+        <div class="bg-white col-span-3 p-4">5</div>
+        <div class="bg-white col-span-6 p-4">6</div>
     </div>
 </x-app-layout>
