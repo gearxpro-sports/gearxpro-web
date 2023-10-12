@@ -1,4 +1,4 @@
-<nav class="mt-5 px-2 h-[calc(100vh-80px)] flex flex-col justify-between">
+<nav class="mt-5 px-2 h-[calc(100vh-80px)] xl:h-[calc(100vh)] flex flex-col justify-between">
     <div class="space-y-2">
         <a href="{{ route('dashboard') }}"
            class="{{ request()->is('/') ? 'bg-gray-900 text-white' : 'text-color-6c757d hover:text-color-323a46' }} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
