@@ -28,4 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['role:superadmin'])->group(function () {
+    Route::get('/resellers', \App\Livewire\Resellers\Index::class)->name('resellers.index');
+});
+
 require __DIR__.'/auth.php';

@@ -2,5 +2,6 @@
 
 return [
     'search' => 'Cerca...',
-    'faq' => 'faq'
+    'faq' => 'faq',
+    'create' => 'Crea'
 ];

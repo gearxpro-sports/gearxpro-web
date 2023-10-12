@@ -43,26 +43,26 @@
                     </div>
                     @include('navigation-menu')
                 </div>
-{{--                <div class="flex-shrink-0 flex bg-gray-700 p-4">--}}
-{{--                    <a href="{{ route('profile.edit') }}" class="flex-shrink-0 w-full group block">--}}
-{{--                        <div class="flex items-center">--}}
-{{--                            <div>--}}
-{{--                                <div class="inline-block h-8 w-8 bg-red-500 rounded-full"></div>--}}
-{{--                            </div>--}}
-{{--                            <div class="ml-3 w-full flex items-center justify-between">--}}
-{{--                                <div>--}}
-{{--                                    <p class="text-sm font-medium text-white">{{ auth()->user()->name }}</p>--}}
-{{--                                    <p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">Profilo</p>--}}
-{{--                                </div>--}}
-{{--                                <form method="POST" action="{{ route('logout') }}" x-data>--}}
-{{--                                    @csrf--}}
-{{--                                    <x-heroicon-o-arrow-left-on-rectangle @click.prevent="$root.submit();"--}}
-{{--                                                                          class="w-5 h-5 text-white"></x-heroicon-o-arrow-left-on-rectangle>--}}
-{{--                                </form>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
+                {{--                <div class="flex-shrink-0 flex bg-gray-700 p-4">--}}
+                {{--                    <a href="{{ route('profile.edit') }}" class="flex-shrink-0 w-full group block">--}}
+                {{--                        <div class="flex items-center">--}}
+                {{--                            <div>--}}
+                {{--                                <div class="inline-block h-8 w-8 bg-red-500 rounded-full"></div>--}}
+                {{--                            </div>--}}
+                {{--                            <div class="ml-3 w-full flex items-center justify-between">--}}
+                {{--                                <div>--}}
+                {{--                                    <p class="text-sm font-medium text-white">{{ auth()->user()->name }}</p>--}}
+                {{--                                    <p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">Profilo</p>--}}
+                {{--                                </div>--}}
+                {{--                                <form method="POST" action="{{ route('logout') }}" x-data>--}}
+                {{--                                    @csrf--}}
+                {{--                                    <x-heroicon-o-arrow-left-on-rectangle @click.prevent="$root.submit();"--}}
+                {{--                                                                          class="w-5 h-5 text-white"></x-heroicon-o-arrow-left-on-rectangle>--}}
+                {{--                                </form>--}}
+                {{--                            </div>--}}
+                {{--                        </div>--}}
+                {{--                    </a>--}}
+                {{--                </div>--}}
             </div>
 
             <div class="flex-shrink-0 w-14">
@@ -98,26 +98,26 @@
                     </div>
                     @include('navigation-menu')
                 </div>
-{{--                <div class="flex-shrink-0 flex bg-gray-700 p-4">--}}
-{{--                    <a href="{{ route('profile.edit') }}" class="flex-shrink-0 w-full group block">--}}
-{{--                        <div class="flex items-center">--}}
-{{--                            <div>--}}
-{{--                                <div class="inline-block h-8 w-8 bg-red-500 rounded-full"></div>--}}
-{{--                            </div>--}}
-{{--                            <div class="ml-3 w-full flex items-center justify-between">--}}
-{{--                                <div>--}}
-{{--                                    <p class="text-sm font-medium text-white">{{ auth()->user()->name }}</p>--}}
-{{--                                    <p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">Profilo</p>--}}
-{{--                                </div>--}}
-{{--                                <form method="POST" action="{{ route('logout') }}" x-data>--}}
-{{--                                    @csrf--}}
-{{--                                    <x-heroicon-o-arrow-left-on-rectangle @click.prevent="$root.submit();"--}}
-{{--                                                                          class="w-5 h-5 text-white"></x-heroicon-o-arrow-left-on-rectangle>--}}
-{{--                                </form>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
+                {{--                <div class="flex-shrink-0 flex bg-gray-700 p-4">--}}
+                {{--                    <a href="{{ route('profile.edit') }}" class="flex-shrink-0 w-full group block">--}}
+                {{--                        <div class="flex items-center">--}}
+                {{--                            <div>--}}
+                {{--                                <div class="inline-block h-8 w-8 bg-red-500 rounded-full"></div>--}}
+                {{--                            </div>--}}
+                {{--                            <div class="ml-3 w-full flex items-center justify-between">--}}
+                {{--                                <div>--}}
+                {{--                                    <p class="text-sm font-medium text-white">{{ auth()->user()->name }}</p>--}}
+                {{--                                    <p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">Profilo</p>--}}
+                {{--                                </div>--}}
+                {{--                                <form method="POST" action="{{ route('logout') }}" x-data>--}}
+                {{--                                    @csrf--}}
+                {{--                                    <x-heroicon-o-arrow-left-on-rectangle @click.prevent="$root.submit();"--}}
+                {{--                                                                          class="w-5 h-5 text-white"></x-heroicon-o-arrow-left-on-rectangle>--}}
+                {{--                                </form>--}}
+                {{--                            </div>--}}
+                {{--                        </div>--}}
+                {{--                    </a>--}}
+                {{--                </div>--}}
             </div>
         </div>
         <div :class="{'xl:pl-64' : open}" class="flex flex-col flex-1">
@@ -138,9 +138,16 @@
                 </div>
                 <div>
                     <!-- Page Heading -->
-                    @if (isset($header))
-                        <div class="px-4 py-4">
-                            <h1 class="text-2xl font-semibold text-gray-900">{{ $header }}</h1>
+                    @if (isset($title))
+                        <div class="flex items-center justify-between px-4 py-4">
+                            <h1 class="text-xl font-semibold text-color-18181a">
+                                {{ $title }}
+                            </h1>
+                            @if(isset($actions))
+                                <div class="flex items-center space-x-2">
+                                    {{ $actions }}
+                                </div>
+                            @endif
                         </div>
                     @endif
                     <div class="px-4 pb-6">

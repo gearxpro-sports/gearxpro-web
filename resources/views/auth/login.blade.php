@@ -5,32 +5,29 @@
 @section('content')
     <h1 class="text-xl text-color-18181a mb-3.5 font-medium">{{ __('auth.login.title') }}</h1>
     <p class="text-sm">{{ __('auth.login.description') }}</p>
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('login') }}" class="space-y-7">
         @csrf
+        <x-input type="email" name="email" label="{{ __('auth.login.email.label') }}"
+                 placeholder="{{ __('auth.login.email.placeholder') }}"/>
 
-        <label class="block my-7">
-            <span class="text-xs">{{ __('auth.login.email.label') }}</span>
-            <input class="mt-2" required type="email" name="email" placeholder="{{ __('auth.login.email.placeholder') }}">
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </label>
+        <div x-data="{showPassword: false}">
+            <x-input x-bind:type="showPassword ? 'text' : 'password'" name="password"
+                     label="{{ __('auth.login.password.label') }}"
+                     placeholder="{{ __('auth.login.password.placeholder') }}">
+                <x-slot:action>
+                    <a class="ml-auto text-color-18181a underline hover:no-underline" tabindex="-1"
+                       href="{{ route('password.request') }}">{{ __('auth.login.password.forgetLink') }}</a>
+                </x-slot:action>
+                <x-slot:append>
+                    <span @click="showPassword = !showPassword"
+                          :class="showPassword ? 'show-password' : 'hide-password'"
+                          class="absolute z-[1] inset-y-1 right-1 bg-color-eff0f0 bg-no-repeat bg-center aspect-square rounded-sm cursor-pointer"></span>
+                </x-slot:append>
+            </x-input>
+        </div>
 
-        <label class="block my-7">
-            <span class="flex text-xs">
-                {{ __('auth.login.password.label') }}
-                <a class="ml-auto text-color-18181a underline hover:no-underline" href="{{ route('password.request') }}">{{ __('auth.login.password.forgetLink') }}</a>
-            </span>
-            <span class="relative block" x-data="{showPassword: false}">
-                <input :type="showPassword ? 'text' : 'password'" class="mt-2" required type="password" name="password" placeholder="{{ __('auth.login.password.placeholder') }}">
-                <span @click="showPassword = !showPassword" :class="showPassword ? 'show-password' : 'hide-password'" class="absolute z-[1] inset-y-1 right-1 bg-color-eff0f0 bg-no-repeat bg-center aspect-square rounded-sm cursor-pointer"></span>
-            </span>
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </label>
+        <x-checkbox name="remember" label="{{ __('auth.login.rememberme.label') }}" value="1"></x-checkbox>
 
-        <label class="flex items-center my-7">
-            <input type="checkbox" name="remember" value="1"><span class="ml-2 text-xs">{{ __('auth.login.rememberme.label') }}</span>
-        </label>
-
-        <button type="submit" class="block py-3.5 px-7 w-full bg-color-18181a text-white text-xs text-center font-medium rounded">{{ __('auth.login.submit') }}</button>
-    
+        <x-primary-button type="submit" class="w-full">{{ __('auth.login.submit') }}</x-primary-button>
     </form>
 @endsection
