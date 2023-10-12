@@ -37,8 +37,8 @@
                 <div class="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
                     <div class="flex-shrink-0 flex items-center">
                         <a href="{{ route('dashboard') }}" class="flex items-center flex-shrink-0 px-4">
-                            <img src="{{ asset('logo-horizontal.png') }}" alt="{{ env('APP_NAME') }}"
-                                 class="w-32 flex-shrink-0 h-auto">
+                            <img src="{{ Vite::asset('resources/images/logo.svg') }}" alt="{{ env('APP_NAME') }}"
+                                 class="w-36 flex-shrink-0 h-auto">
                         </a>
                     </div>
                     @include('navigation-menu')
@@ -86,8 +86,8 @@
                 <div class="flex-1 flex flex-col py-2.5 overflow-y-auto">
                     <div class="flex items-center justify-between">
                         <a href="{{ route('dashboard') }}" class="flex items-center flex-shrink-0 px-4">
-                            <img src="{{ asset('logo-horizontal.png') }}" alt="{{ env('APP_NAME') }}"
-                                 class="w-32 flex-shrink-0 h-auto">
+                            <img src="{{ Vite::asset('resources/images/logo.svg') }}" alt="{{ env('APP_NAME') }}"
+                                 class="w-36 flex-shrink-0 h-auto">
                         </a>
                         <div x-on:click="open = false"
                              class="text-gray-800 p-1 mr-2 rounded cursor-pointer hover:bg-gray-100">
