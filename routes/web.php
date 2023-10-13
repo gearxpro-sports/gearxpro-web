@@ -29,7 +29,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['role:superadmin'])->group(function () {
-    Route::get('/resellers', \App\Livewire\Resellers\Index::class)->name('resellers.index');
+    Route::prefix('resellers')->group(function() {
+        Route::get('/', \App\Livewire\Resellers\Index::class)->name('resellers.index');
+        Route::get('/create', \App\Livewire\Resellers\Create::class)->name('resellers.create');
+    });
 });
 
 require __DIR__.'/auth.php';
