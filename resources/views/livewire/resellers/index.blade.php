@@ -6,5 +6,6 @@
 </x-slot>
 
 <div>
+    <livewire:components.counter wire:model="counter" />
     Resellers Table
 </div>

@@ -163,6 +163,6 @@
 </div>
 <x-notification></x-notification>
 @stack('scripts')
-@livewireScripts
+@livewireScriptConfig
 </body>
 </html>
