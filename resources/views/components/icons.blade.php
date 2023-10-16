@@ -99,7 +99,7 @@
             </g>
         </svg>
         @break
-    @case('customer-data')
+    @case('user-data')
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" width="21.924" height="21.924" viewBox="0 0 21.924 21.924" {{ $attributes->merge(['class']) }}>
             <g stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6">
                 <path d="M10.962 10.962H.8A10.162 10.162 0 1 0 10.962.8 10.162 10.162 0 0 0 .8 10.962"/>
@@ -108,7 +108,7 @@
             </g>
         </svg>
     @break
-    @case('customers')
+    @case('user-w-search')
         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="13.668" height="12.998" viewBox="0 0 13.668 12.998" {{ $attributes->merge(['class']) }}>
             <path d="M5.363 6.033a4.808 4.808 0 0 0-.543 1.294c-1.8.154-3.546 1-3.546 1.388v.737h3.552a4.665 4.665 0 0 0 .536 1.274H0V8.714c0-1.783 3.573-2.681 5.363-2.681m0-6.033a2.681 2.681 0 0 1 2.681 2.681 2.709 2.709 0 0 1-.55 1.629 4.259 4.259 0 0 0-1.522.985l-.61.067A2.681 2.681 0 1 1 5.363 0m0 1.274a1.408 1.408 0 1 0 1.408 1.408 1.408 1.408 0 0 0-1.408-1.408M9.05 5.363a3.019 3.019 0 0 1 2.55 4.625l2.065 2.078-.929.934-2.091-2.06a3.017 3.017 0 1 1-1.6-5.577m0 1.341a1.676 1.676 0 1 0 1.676 1.676A1.676 1.676 0 0 0 9.05 6.7Z"/>
         </svg>

@@ -26,7 +26,7 @@
                     <td class="text-center"></td>
                     <td class="text-right">
                         <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="{{ route('customers.show', ['customer' => $customer->id]) }}">
-                            <x-heroicon-o-eye class="w-5 h-5"></x-heroicon-o-eye>
+                            <x-icons name="eye" class="w-5 h-5" />
                         </a>
                     </td>
                 </tr>

@@ -4,7 +4,7 @@
             <x-input wire:model.live.debounce.500ms="search" name="search" placeholder="{{ __('common.search') }}" class="h-10 py-0">
                 <x-slot:append>
                     <span class="search-btn absolute z-[1] inset-y-1 right-1 flex items-center justify-center w-9 bg-color-eff0f0 rounded-sm cursor-pointer">
-                        <x-heroicon-o-magnifying-glass class="w-4 h-4"></x-heroicon-o-magnifying-glass>
+                        <x-icons name="search" class="w-4 h-4" />
                     </span>
                 </x-slot:append>
             </x-input>
@@ -16,13 +16,13 @@
             <x-input name="filter[created_at]" placeholder="{{ __('customers.index.filter.select_registration_date') }}" class="h-10 py-0" datepickerId="{{ Str::random(9) }}">
                 <x-slot:append>
                     <span class="search-btn absolute z-[1] inset-y-1 right-1 flex items-center justify-center w-9 bg-color-eff0f0 rounded-sm">
-                        <x-heroicon-o-calendar class="w-4 h-4"></x-heroicon-o-calendar>
+                        <x-icons name="calendar" class="w-4 h-4" />
                     </span>
                 </x-slot:append>
             </x-input>
         </div>
         <x-primary-button>
-            <x-heroicon-o-funnel class="w-3.5 h-3.5 mr-2"></x-heroicon-o-funnel>
+            <x-icons name="filter" class="w-3.5 h-3.5 mr-2" />
             {{ __('common.filter') }}
         </x-primary-button>
     </div>

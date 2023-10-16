@@ -80,7 +80,7 @@
                  x-show="!open"
                  class="absolute top-5">
                 <div class="text-gray-800 p-1 rounded-r cursor-pointer bg-white hover:bg-gray-100">
-                    <x-icon name="heroicon-m-chevron-right" class="w-4 h-4"></x-icon>
+                    <x-heroicon-m-chevron-right class="w-4 h-4"></x-heroicon-m-chevron-right>
                 </div>
             </div>
             <div x-show="open" class="flex-1 flex flex-col min-h-0 bg-white">
@@ -93,7 +93,7 @@
                         <div x-on:click="open = false"
                              class="text-gray-800 p-1 mr-2 rounded cursor-pointer hover:bg-gray-100">
                             <template x-if="open">
-                                <x-icon name="heroicon-m-chevron-left" class="w-4 h-4"></x-icon>
+                                <x-heroicon-m-chevron-left class="w-4 h-4"></x-heroicon-m-chevron-left>
                             </template>
                         </div>
                     </div>
