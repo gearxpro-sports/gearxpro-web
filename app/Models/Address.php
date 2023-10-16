@@ -12,8 +12,8 @@ class Address extends Model
     use HasFactory;
 
     const TYPES = [
-        'invoice',
-        'delivery',
+        'billing',
+        'shipping',
     ];
 
     /**

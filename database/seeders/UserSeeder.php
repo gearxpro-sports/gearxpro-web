@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Address;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
@@ -16,7 +18,7 @@ class UserSeeder extends Seeder
     {
         // Superadmin
         $superadmin = User::create([
-            'name' => 'Superadmin',
+            'firstname' => 'Superadmin',
             'email' => 'admin@example.test',
             'password' => bcrypt('password'),
             'created_at' => now(),
@@ -26,24 +28,50 @@ class UserSeeder extends Seeder
         $superadmin->assignRole(User::SUPERADMIN);
 
         // Reseller
-        $reseller = User::create([
-            'name' => 'Reseller',
-            'email' => 'reseller@example.test',
-            'password' => bcrypt('password'),
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        $reseller = User::factory()
+            ->has(
+                Address::factory()
+                    ->count(2)
+                    ->state(new Sequence(
+                        ['type' => 'billing'],
+                        ['type' => 'shipping'],
+                    ))
+                    ->state(function (array $attributes) {
+                        return ['tax_code' => 'shipping' === $attributes['type'] ? null : $attributes['tax_code']];
+                    })
+            )
+            ->create([
+                'firstname' => 'Reseller',
+                'lastname' => null,
+                'email' => 'reseller@example.test',
+                'password' => bcrypt('password'),
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
 
         $reseller->assignRole(User::RESELLER);
 
         // Customer
-        $customer = User::create([
-            'name' => 'Customer',
-            'email' => 'customer@example.test',
-            'password' => bcrypt('password'),
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        $customer = User::factory()
+            ->has(
+                Address::factory()
+                    ->count(2)
+                    ->state(new Sequence(
+                        ['type' => 'billing'],
+                        ['type' => 'shipping'],
+                    ))
+                    ->state(function (array $attributes) {
+                        return ['tax_code' => 'shipping' === $attributes['type'] ? null : $attributes['tax_code']];
+                    })
+            )
+            ->create([
+                'firstname' => 'Customer',
+                'lastname' => null,
+                'email' => 'customer@example.test',
+                'password' => bcrypt('password'),
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
 
         $customer->assignRole(User::CUSTOMER);
     }

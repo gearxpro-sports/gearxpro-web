@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use App\Models\Address;
-use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Factories\Sequence;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Factories\Sequence;
+use Illuminate\Database\Seeder;
 
-class CustomerSeeder extends Seeder
+class ResellerSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,7 +16,7 @@ class CustomerSeeder extends Seeder
     public function run(): void
     {
         User::factory()
-            ->count(20)
+            ->count(4)
             ->has(
                 Address::factory()
                     ->count(2)
@@ -28,9 +28,15 @@ class CustomerSeeder extends Seeder
                         return ['tax_code' => 'shipping' === $attributes['type'] ? null : $attributes['tax_code']];
                     })
             )
+            ->state(new Sequence(
+                ['country_id' => 209], // ES
+                ['country_id' => 82], // DE
+                ['country_id' => 236], // US
+                ['country_id' => 14], // AU
+            ))
             ->create()
             ->each(function ($user) {
-                $user->assignRole(User::CUSTOMER);
+                $user->assignRole('reseller');
             });
     }
 }

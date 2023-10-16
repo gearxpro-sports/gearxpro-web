@@ -22,7 +22,7 @@
                                         <div class="h-8 w-8 rounded-full bg-red-500"></div>
                                     </div>
                                     <div class="flex flex-col items-start">
-                                        <span class="text-white">{{ Auth::user()->name }}</span>
+                                        <span class="text-white">{{ Auth::user()->fullname }}</span>
                                         <span class="text-xs text-color-b6b9bb">{{ Auth::user()->role->label }}</span>
                                     </div>
                                 </button>

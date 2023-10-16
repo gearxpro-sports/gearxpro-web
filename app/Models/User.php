@@ -58,9 +58,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    
+
     public function getRoleAttribute() {
         return $this->roles[0];
+    }
+
+    public function getFullnameAttribute() {
+        return "$this->firstname $this->lastname";
     }
 
     /**

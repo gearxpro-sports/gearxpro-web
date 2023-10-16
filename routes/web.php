@@ -3,6 +3,7 @@
 use App\Livewire\Customers\Index as CustomersIndex;
 use App\Livewire\Customers\Show as CustomerShow;
 use App\Livewire\Resellers\Index as ResellersIndex;
+use App\Livewire\Resellers\Create as ResellersCreate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
@@ -39,7 +40,11 @@ Route::middleware(['role:superadmin|reseller'])->group(function () {
 });
 
 Route::middleware(['role:superadmin'])->group(function () {
-    Route::get('/resellers', ResellersIndex::class)->name('resellers.index');
+    Route::prefix('resellers')->group(function() {
+        Route::get('/resellers', ResellersIndex::class)->name('resellers.index');
+        Route::get('/create', ResellersCreate::class)->name('resellers.create');
+    });
+    
 });
 
 require __DIR__.'/auth.php';
