@@ -1,11 +1,11 @@
-<div class="relative">    
+<div class="relative">
     <div wire:loading class="absolute inset-0 bg-white/50 z-10"></div>
     <x-admin-table-search-bars.customers-search-bar />
-    <div class="p-8 bg-white rounded">
+    <div class="p-8 bg-white rounded space-y-8">
         @if ($customers->count() > 0)
-        <div class="flex items-center mb-8">
+        <div class="flex items-center space-x-4">
             <h3 class="text-black-1 font-medium">{{ __('customers.index.table.title') }}</h3>
-            <span class="inline-block ml-4 py-1.5 px-4 bg-color-eff0f0 text-color-6c757d text-xs text-center font-medium rounded-full">{{ $customers->total() }}</span>
+            <x-badge>{{$customers->total()}}</x-badge>
         </div>
         <table class="table-auto border-collapse w-full text-xs text-black-1 border border-color-eff0f0 font-medium">
             <thead>
