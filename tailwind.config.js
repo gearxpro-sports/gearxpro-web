@@ -46,6 +46,8 @@ export default {
                 'color-b6b9bb': '#B6B9BB',
                 'color-dee2e6': '#DEE2E6',
                 'color-f3f7f9': '#F3F7F9',
+                'color-f2f0eb': '#F2F0EB',
+                'color-707070': '#707070'
             },
             fontSize: {
                 'xxs': '0.625rem'
@@ -53,6 +55,25 @@ export default {
             boxShadow: {
                 'shadow-1': '0px 3px 6px #0000000f',
                 'shadow-2': '3px 6px 11px #00000014',
+            },
+            keyframes: {
+                line: {
+                    '0%': { width: '0%' },
+                    '100%': { width: '100%'},
+                },
+                opacity: {
+                    '100%': { opacity: '1'},
+                    '0%': { opacity: '0'},
+                },
+            },
+            animation: {
+                line: 'line 300ms',
+                line_slow: 'line 600ms',
+                opacity: 'opacity 1000ms',
+            },
+            backgroundImage: {
+                texture: "url('/resources/images/texture.svg')",
+                jumbotron: "url('/resources/images/product.svg')",
             }
         },
     },
