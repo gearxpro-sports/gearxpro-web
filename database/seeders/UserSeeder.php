@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        $superadmin->assignRole(Role::findByName('superadmin'));
+        $superadmin->assignRole(User::SUPERADMIN);
 
         // Reseller
         $reseller = User::create([
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        $reseller->assignRole(Role::findByName('reseller'));
+        $reseller->assignRole(User::RESELLER);
 
         // Customer
         $customer = User::create([
@@ -45,6 +45,6 @@ class UserSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        $customer->assignRole(Role::findByName('customer'));
+        $customer->assignRole(User::CUSTOMER);
     }
 }
