@@ -21,6 +21,8 @@ class User extends Authenticatable
     const RESELLER   = 'reseller';
     const CUSTOMER   = 'customer';
 
+    protected $perPage = 10;
+
     /**
      * The attributes that are mass assignable.
      *

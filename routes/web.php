@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Livewire\Customers\Index as CustomersIndex;
+use App\Livewire\Customers\Show as CustomerShow;
+use App\Livewire\Resellers\Index as ResellersIndex;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +31,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['role:superadmin|reseller'])->group(function () {
+    Route::prefix('customers')->group(function () {
+        Route::get('/', CustomersIndex::class)->name('customers.index');
+        Route::get('/{customer}', CustomerShow::class)->name('customers.show');
+    });
+});
+
 Route::middleware(['role:superadmin'])->group(function () {
-    Route::get('/resellers', \App\Livewire\Resellers\Index::class)->name('resellers.index');
+    Route::get('/resellers', ResellersIndex::class)->name('resellers.index');
 });
 
 require __DIR__.'/auth.php';

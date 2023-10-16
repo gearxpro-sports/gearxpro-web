@@ -140,7 +140,7 @@
                 <div>
                     <!-- Page Heading -->
                     @if (isset($title))
-                        <div class="flex items-center justify-between px-4 py-4">
+                        <div class="flex items-center justify-between p-8">
                             <h1 class="text-xl font-semibold text-color-18181a">
                                 {{ $title }}
                             </h1>
@@ -151,7 +151,7 @@
                             @endif
                         </div>
                     @endif
-                    <div class="px-4 pb-6">
+                    <div class="p-8 pt-0">
                         <div>
                             {{ $slot }}
                         </div>

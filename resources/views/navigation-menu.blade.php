@@ -12,6 +12,12 @@
                 class="{{ request()->is('resellers*') ? 'text-color-323a46' : 'text-color-6c757d group-hover:text-color-323a46' }} mr-3 flex-shrink-0 h-5 w-5"></x-heroicon-o-users>
             {{ __('navigation.resellers') }}
         </a>
+        <a href="{{ route('customers.index') }}"
+           class="{{ request()->is('customers*') ? 'text-color-323a46' : 'text-color-6c757d hover:text-color-323a46' }} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+            <x-heroicon-o-users
+                class="{{ request()->is('customers*') ? 'text-color-323a46' : 'text-color-6c757d group-hover:text-color-323a46' }} mr-3 flex-shrink-0 h-5 w-5"></x-heroicon-o-users>
+            {{ __('navigation.customers') }}
+        </a>
 {{--        <h3 class="!mt-6 !mb-2 px-3 text-xs font-medium text-color-b6b9bb uppercase">Acquisti</h3>--}}
 {{--        <a href="#"--}}
 {{--           class="{{ request()->is('medias*') ? 'bg-gray-900 text-white' : 'text-color-6c757d hover:text-color-323a46' }} group flex items-center px-2 py-2 text-sm font-medium rounded-md">--}}
