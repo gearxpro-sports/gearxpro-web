@@ -39,9 +39,7 @@
         @endif
         <div class="relative @if($label || isset($action)) mt-2 @endif">
             @if($prepend)
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <x-icon name="{{$prepend}}" class="{{ $iconColor }} w-5 h-5"></x-icon>
-                </div>
+                {{ $prepend }}
             @endif
             <input
                 {{ $attributes->merge(['class' => $inputClass]) }}
