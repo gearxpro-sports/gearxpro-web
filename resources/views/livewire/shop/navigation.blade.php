@@ -19,16 +19,16 @@
             <!-- Navigation Links -->
             <div class="flex">
                 <div class="hidden space-x-10 sm:-my-px sm:ml-10 sm:flex items-center">
-                    <x-nav-link wire:navigate :href="route('home')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('shop.navigation.home') }}
                     </x-nav-link>
-                    <x-nav-link wire:navigate :href="route('home')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('shop')" :active="request()->routeIs('shop')">
                         {{ __('shop.navigation.shop') }}
                     </x-nav-link>
 
                     <x-custom-dropdown title="{{ __('shop.navigation.about_us') }}" :options='["opzione 1", "opzione 2", "opzione 3"]'/>
 
-                    <x-nav-link wire:navigate :href="route('home')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('dashboard')">
                         {{ __('shop.navigation.journal') }}
                     </x-nav-link>
 

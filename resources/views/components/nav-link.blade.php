@@ -8,5 +8,9 @@ $classes = ($active ?? false)
 
 <a {{ $attributes->merge(['class' => $classes]) }}>
     {{ $slot }}
-    <div class="h-[2px] w-0 bg-color-18181a group-hover:animate-line group-hover:w-full"></div>
+    @if ($active)
+        <div class="h-[2px] w-full bg-color-18181a"></div>
+    @else
+        <div class="h-[2px] w-0 bg-color-18181a group-hover:animate-line group-hover:w-full"></div>
+    @endif
 </a>
