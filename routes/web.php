@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Shop\Index as ShopIndex;
+use App\Livewire\Shop\Products\Index as ProductIndex;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,7 @@ use App\Livewire\Shop\Index as ShopIndex;
 */
 
 Route::get('/', [ShopIndex::class, '__invoke'])->name('home');
+Route::get('/shop', [ProductIndex::class, '__invoke'])->name('shop');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
