@@ -16,5 +16,11 @@ return [
     ],
     'carousel-top' => [
         'title' => 'In which all the 26 letters'
+    ],
+    'products' => [
+        'title' => 'Non puoi mettere un limite a nulla.',
+        'description' => 'Più sogni, più lontano arrivi.',
+        'button_filter' => 'Mostra filtri',
+        'order' => 'Ordina per',
     ]
 ];

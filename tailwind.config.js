@@ -47,7 +47,8 @@ export default {
                 'color-dee2e6': '#DEE2E6',
                 'color-f3f7f9': '#F3F7F9',
                 'color-f2f0eb': '#F2F0EB',
-                'color-707070': '#707070'
+                'color-707070': '#707070',
+                'color-edebe5': '#EDEBE5'
             },
             fontSize: {
                 'xxs': '0.625rem'
