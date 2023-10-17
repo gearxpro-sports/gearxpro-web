@@ -8,6 +8,7 @@ return [
     'faq' => 'faq',
     'create' => 'Crea',
     'save' => 'Salva',
+    'send' => 'Invia',
     'filter' => 'Filtra',
     'filter_by' => 'Filtra per:',
     'loading_data' => 'Caricamento dati...',

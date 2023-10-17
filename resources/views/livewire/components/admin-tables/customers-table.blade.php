@@ -23,7 +23,7 @@
                     <td>{{ $customer->firstname }} {{ $customer->lastname }}</td>
                     <td>{{ $customer->email }}</td>
                     <td class="text-center">{{ $customer->created_at->format('d M Y') }}</td>
-                    <td class="text-center"></td>
+                    <td class="text-center">-</td>
                     <td class="text-right">
                         <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="{{ route('customers.show', ['customer' => $customer->id]) }}">
                             <x-icons name="eye" class="w-5 h-5" />

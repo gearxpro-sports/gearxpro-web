@@ -30,6 +30,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        auth()->user()->update(['last_login' => now()]);
+
         if(auth()->user()->hasRole(User::SUPERADMIN) || auth()->user()->hasRole(User::RESELLER)) {
             return redirect()->intended(RouteServiceProvider::HOME);
         }

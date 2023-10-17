@@ -4,6 +4,7 @@ use App\Livewire\Customers\Index as CustomersIndex;
 use App\Livewire\Customers\Show as CustomerShow;
 use App\Livewire\Customers\Edit as CustomerEdit;
 use App\Livewire\Resellers\Index as ResellersIndex;
+use App\Livewire\Resellers\Show as ResellerShow;
 use App\Livewire\Resellers\Create as ResellersCreate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -37,6 +38,8 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {
         Route::prefix('resellers')->middleware(['role:superadmin'])->group(function() {
             Route::get('/', ResellersIndex::class)->name('resellers.index');
             Route::get('/create', ResellersCreate::class)->name('resellers.create');
+            Route::get('/{reseller}', ResellerShow::class)->name('resellers.show');
+//            Route::get('/{reseller}/edit', CustomerEdit::class)->name('resellers.edit')->middleware(['role:superadmin']);
         });
     });
 
