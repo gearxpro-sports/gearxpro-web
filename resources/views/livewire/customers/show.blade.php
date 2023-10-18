@@ -27,7 +27,7 @@
                 <span class="inline-block text-color-6c757d">{{ __('customers.show.data.registration_date') }}</span>
                 <span>{{ $customer->created_at->format('d M Y') }}</span>
             </li>
-            @if ($billingAddresses = $customer->addresses->firstWhere('type', 'invoice'))
+            @if ($billingAddresses = $customer->addresses->firstWhere('type', 'billing'))
             <li class="flex space-x-2">
                 <span class="inline-block text-color-6c757d">{{ __('customers.show.data.address') }}</span>
                 <span>{{ $billingAddresses->address_1 }} {{ $billingAddresses->address_2 }}</span>

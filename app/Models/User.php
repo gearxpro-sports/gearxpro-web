@@ -37,6 +37,7 @@ class User extends Authenticatable
         'lastname',
         'country_id',
         'active',
+        'last_login'
     ];
 
     /**
@@ -48,6 +49,10 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    /**
+     * @var string[]
+     */
+    protected $dates = ['last_login'];
 
     /**
      * The attributes that should be cast.
@@ -55,6 +60,8 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        'created_at' => 'date:d-m-Y',
+        'last_login' => 'datetime:d-m-Y H:i:s',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];

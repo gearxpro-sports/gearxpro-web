@@ -19,9 +19,19 @@
                        href="{{ route('password.request') }}">{{ __('auth.login.password.forgetLink') }}</a>
                 </x-slot:action>
                 <x-slot:append>
-                    <span @click="showPassword = !showPassword"
-                          :class="showPassword ? 'show-password' : 'hide-password'"
-                          class="absolute z-[1] inset-y-1 right-1 bg-color-eff0f0 bg-no-repeat bg-center aspect-square rounded-sm cursor-pointer"></span>
+                    <div
+                        @click="showPassword = !showPassword"
+                        class="flex items-center justify-center absolute z-[1] inset-y-1 right-1 bg-color-eff0f0 bg-no-repeat bg-center aspect-square rounded-sm cursor-pointer">
+                        <template x-if="showPassword">
+                            <x-icons name="eye" class="w-4 h-4"></x-icons>
+                        </template>
+                        <template x-if="!showPassword">
+                            <x-icons name="eye-off" class="w-4 h-4"></x-icons>
+                        </template>
+                    </div>
+                    {{--                    <span @click="showPassword = !showPassword"--}}
+                    {{--                          :class="showPassword ? 'show-password' : 'hide-password'"--}}
+                    {{--                          class="absolute z-[1] inset-y-1 right-1 bg-color-eff0f0 bg-no-repeat bg-center aspect-square rounded-sm cursor-pointer"></span>--}}
                 </x-slot:append>
             </x-input>
         </div>
