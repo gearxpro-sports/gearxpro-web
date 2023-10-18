@@ -20,7 +20,10 @@ return [
     'products' => [
         'title' => 'Non puoi mettere un limite a nulla.',
         'description' => 'Più sogni, più lontano arrivi.',
-        'button_filter' => 'Mostra filtri',
+        'button_filter_on' => 'Mostra filtri',
+        'button_filter_off' => 'Nascondi filtri',
         'order' => 'Ordina per',
+        'color' => 'Colore',
+        'size' => 'Taglia',
     ]
 ];
