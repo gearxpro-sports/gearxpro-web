@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Components\AdminTables;
 
-
 use Livewire\Component;
 use Livewire\WithPagination;
 
