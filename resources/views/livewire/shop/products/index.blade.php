@@ -1,27 +1,72 @@
 <div class="bg-color-f2f0eb px-[39px] py-[70px]">
     <h1 class="text-[73px] font-bold text-color-18181a leading-[86px]">{{__('shop.products.title')}}</h1>
-    <p class="text-[33px] font-semibold text-color-18181a leading-[40px] mt-[14px]">{{__('shop.products.description')}}</p>
+    <p class="text-[33px] font-semibold text-color-18181a leading-[40px] mt-[14px] mb-[38px]">{{__('shop.products.description')}}</p>
 
-    <div class="px-[51px] py-[32px] mt-[38px] flex justify-between items-center">
-        <div class="flex">
-            <x-custom-button :text="__('shop.products.button_filter')" :icon="'icona_filtri'" :link="'/'" />
+    <div id="action"
+        @class([
+            'px-[51px] py-[32px] z-50 bg-color-f2f0eb w-fit rounded-md flex items-center mb-[30px]',
+            $filter ? '!shadow-none' : 'sticky top-10',
+        ])
+    >
+        <livewire:components.filter-button />
 
-            <div class="flex gap-[14px] ml-[30px]">
-                @foreach ($categories as $key => $category )
-                    <livewire:components.section-button wire:key="{{$category.$key}}" :selected="$selectedCategory" :index="$key" :name="$category" />
-                @endforeach
-            </div>
+        <div class="flex gap-[14px] ml-[30px]">
+            @foreach ($categories as $key => $category )
+                <livewire:components.section-button wire:key="{{$category.$key}}" :selected="$selectedCategory" :index="$key" :name="$category" />
+            @endforeach
+        </div>
+    </div>
+
+    <div class="relative flex">
+        <div class="px-[51px] py-[32px] absolute right-0 top-[-142px]">
+            <livewire:components.select label="{{__('shop.products.order')}}" :selected="$selectedOrder" :options="$orders" />
         </div>
 
-        <livewire:components.select label="{{__('shop.products.order')}}" :selected="$selectedOrder" :options="$orders" />
-    </div>
+        @if ($filter)
+            <div class="z-50 min-w-[298px] h-[1000px] ml-[51px] mr-[82px] relative pt-[60px]">
+                <div class="absolute top-0 w-full pb-5 flex justify-between items-center border-b border-color-18181a">
+                    <h4 class="text-[21px] font-semibold leading-[25px] text-color-18181a ">120 risultati</h4>
+                    <span wire:click="clearFilter" class="text-[12px] font-medium leading-[15px] text-color-6c757d">Rimuovi filtri x</span>
+                </div>
 
-    <div class="flex flex-wrap justify-between gap-y-6">
-        <livewire:components.card-product :name="'SoXPro'" :description="'SOXPro Trekking - Green'" :availableColor="1" :price="'29,00 - € 35,00'" />
-        <livewire:components.card-product :name="'SoXPro'" :description="'SOXPro Trekking - Green'" :availableColor="3" :price="'29,00 - € 35,00'" />
-        <livewire:components.card-product :name="'SoXPro'" :description="'SOXPro Trekking - Green'" :availableColor="3" :price="'29,00 - € 35,00'" />
-        <livewire:components.card-product :name="'SoXPro'" :description="'SOXPro Trekking - Green'" :availableColor="3" :price="'29,00 - € 35,00'" />
-        <livewire:components.card-product :name="'SoXPro'" :description="'SOXPro Trekking - Green'" :availableColor="3" :price="'29,00 - € 35,00'" />
-        <livewire:components.card-product :name="'SoXPro'" :description="'SOXPro Trekking - Green'" :availableColor="3" :price="'29,00 - € 35,00'" />
+                <livewire:components.dropdown :name="'SOXPRO'" :options="['1', '2']" />
+                <livewire:components.dropdown :name="'FLEX-GXPRO'" :options="['1', '2']" />
+                <livewire:components.dropdown :name="'LACEXPRO'" :options="['1', '2']" />
+                <livewire:components.dropdown :name="'TUBEXPRO'" :options="['1', '2']" />
+                <livewire:components.dropdown :name="'RECOVERY'" :options="['1', '2']" />
+
+                <livewire:components.dropdown-color :options="['#000000', '#2459e8', '#ffffff', '#f84b4b', '#ff8b43']" />
+                <livewire:components.dropdown-size :options="['xs', 's', 'm', 'l', 'xl', 'xxl']" />
+            </div>
+        @endif
+
+        <div class="flex flex-wrap gap-[21px] relative">
+            @foreach ($products as $key => $product )
+                <livewire:components.card-product wire:key="{{$key}}"
+                    :image="$product['image']"
+                    :name="$product['name']"
+                    :description="$product['description']"
+                    :availableColor="$product['availableColor']"
+                    :price="$product['price']"
+                />
+            @endforeach
+        </div>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        var scrollPosition = window.scrollY;
+        var actionContainer = document.getElementById('action');
+
+        window.addEventListener('scroll', function() {
+            scrollPosition = window.scrollY;
+
+            if (scrollPosition >= 300) {
+                actionContainer.classList.add('shadow-lg')
+            } else {
+                actionContainer.classList.remove('shadow-lg')
+            }
+        })
+    </script>
+@endpush
