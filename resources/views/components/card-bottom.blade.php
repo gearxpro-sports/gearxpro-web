@@ -12,8 +12,8 @@
             <p class="z-10 text-[13px] font-medium text-color-18181a group-hover:text-white">€ {{ $price }}</p>
             <div class="h-full absolute top-0 left-0 w-0 bg-color-18181a group-hover:animate-line_slow group-hover:w-full rounded-bl-md"></div>
         </div>
-        <div class="h-full w-[88px] flex items-center justify-center border-l rounded-br-md border-color-18181a group-hover:border-color-f2f0eb group-hover:bg-color-18181a transition-all duration-500">
+        <a href="{{route('shop.show', $title)}}" class="h-full w-[88px] flex items-center justify-center border-l rounded-br-md border-color-18181a group-hover:border-color-f2f0eb group-hover:bg-color-18181a transition-all duration-500">
             <img class="!w-[10px] group-hover:invert" src="{{ Vite::asset('resources/images/icons/double_arrow_right.svg')}}" alt="">
-        </div>
+        </a>
     </div>
 </div>
