@@ -9,14 +9,14 @@ use Livewire\Component;
 
 class Create extends Component
 {
-    public $firstname, $lastname, $email, $company, $country, $phone;
+    public $firstname, $lastname, $email, $company, $country, $phone, $payment_method;
     public $billing_address, $billing_city, $billing_postcode, $billing_country, $billing_phone, $billing_vat_number, $billing_tax_code, $billing_sdi, $billing_pec;
     public $shipping_address, $shipping_city, $shipping_postcode, $shipping_country, $shipping_phone, $shipping_vat_number, $shipping_tax_code, $shipping_sdi, $shipping_pec;
 
     protected $rules = [
         'firstname' => 'required',
         'lastname' => 'required',
-        'email' => 'required|email',
+        'email' => 'required|email|unique:users,email',
         'company' => 'required',
         'country' => 'required|exists:countries,id', // Validazione custom per nazione già utilizzata da altro reseller
         'phone' => 'required',
@@ -40,6 +40,8 @@ class Create extends Component
         'shipping_tax_code' => 'required',
         'shipping_sdi' => 'nullable',
         'shipping_pec' => 'nullable',
+        // Payment
+        'payment_method' => 'required'
     ];
 
     public function copyFromBilling() {
@@ -62,7 +64,8 @@ class Create extends Component
             'email' => $this->email,
             'phone' => $this->phone,
             'password' => Str::password(10),
-            'country_id' => $this->country
+            'country_id' => $this->country,
+            'payment_method' => $this->payment_method
         ]);
         $reseller->assignRole(User::RESELLER);
 

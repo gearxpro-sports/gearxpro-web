@@ -9,8 +9,10 @@ return [
     'create' => 'Crea',
     'save' => 'Salva',
     'send' => 'Invia',
+    'select' => 'Seleziona',
     'filter' => 'Filtra',
     'filter_by' => 'Filtra per:',
     'loading_data' => 'Caricamento dati...',
     'search_not_found' => 'La ricerca non ha ottenuto risultati.',
+    'copy_from_billing' => 'Copia da Fatturazione',
 ];

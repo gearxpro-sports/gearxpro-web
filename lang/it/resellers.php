@@ -18,6 +18,12 @@ return [
         ],
     ],
     'create' => [
+        'titles' => [
+            'general_data' => 'Dati generali',
+            'billing_data' => 'Dati di Fatturazione',
+            'shipping_data' => 'Dati di Spedizione',
+            'payment' => 'Pagamento',
+        ],
         'firstname' => [
             'label' => 'Nome',
         ],
@@ -41,6 +47,7 @@ return [
         ],
         'country' => [
             'label' => 'Nazione',
+            'hint' => 'Seleziona la Nazione dove opera questo rivenditore'
         ],
         'vat_number' => [
             'label' => 'Partita IVA',

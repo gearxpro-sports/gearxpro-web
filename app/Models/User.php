@@ -37,7 +37,8 @@ class User extends Authenticatable
         'lastname',
         'country_id',
         'active',
-        'last_login'
+        'last_login',
+        'payment_method'
     ];
 
     /**
