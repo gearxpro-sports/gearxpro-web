@@ -16,10 +16,10 @@
         <div class="flex flex-wrap items-center gap-5 py-5">
             @foreach ($options as $option )
                 <div class="flex items-center gap-3 w-[calc(50%-20px)]">
-                    <div wire:click="selectColor('{{ $option }}')" class="w-[44px] h-[44px] rounded-full shadow-lg bg-white p-1">
-                        <div @class(['w-full h-full rounded-full', 'bg-['.$option.']'])></div>
+                    <div wire:click="selectColor('{{ $option['color'] }}')" class="w-[44px] h-[44px] rounded-full shadow-shadow-3 bg-white p-[2px]">
+                        <div style="background-color:{{$option['color']}}" class='w-full h-full rounded-full border'></div>
                     </div>
-                    <span class="text-[13px] font-medium leading-[16px]">black</span>
+                    <span class="text-[13px] font-medium leading-[16px] capitalize">{{$option['name']}}</span>
                 </div>
             @endforeach
         </div>

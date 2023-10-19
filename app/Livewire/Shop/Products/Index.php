@@ -30,6 +30,14 @@ class Index extends Component
         'Recovery'
     ];
 
+    public $categoriesFilter = [
+        'SOXPRO' => ['1', '2'],
+        'FLEX-GXPRO' => ['1', '2'],
+        'LACEXPRO' => ['1', '2'],
+        'TUBEXPRO' => ['1', '2'],
+        'RECOVERY' => ['1', '2'],
+    ];
+
     public $products = [
         0 => [
             'name' => 'SoXPro',
@@ -81,6 +89,31 @@ class Index extends Component
             'price' => '29,00 - € 35,00'
         ],
     ];
+
+    public $colors = [
+        [
+            'color' => '#000000',
+            'name' => 'black'
+        ],
+        [
+            'color' => '#2459e8',
+            'name' => 'blue'
+        ],
+        [
+            'color' => '#ffffff',
+            'name' => 'blanc'
+        ],
+        [
+            'color' => '#f84b4b',
+            'name' => 'red'
+        ],
+        [
+            'color' => '#ff8b43',
+            'name' => 'orange'
+        ],
+    ];
+
+    public $sizes = ['xs', 's', 'm', 'l', 'xl', 'xxl'];
 
     #[On('selectCategory')]
     public function selectCategory($index) {

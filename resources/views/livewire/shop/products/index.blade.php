@@ -30,14 +30,12 @@
                 </div>
 
                 <div class="w-full h-[1000px] overflow-y-auto scrollBar">
-                    <livewire:components.dropdown :name="'SOXPRO'" :options="['1', '2']" />
-                    <livewire:components.dropdown :name="'FLEX-GXPRO'" :options="['1', '2']" />
-                    <livewire:components.dropdown :name="'LACEXPRO'" :options="['1', '2']" />
-                    <livewire:components.dropdown :name="'TUBEXPRO'" :options="['1', '2']" />
-                    <livewire:components.dropdown :name="'RECOVERY'" :options="['1', '2']" />
+                    @foreach ($categoriesFilter as $name => $listProducts )
+                        <livewire:components.dropdown :name="$name" :options="$listProducts" />
+                    @endforeach
 
-                    <livewire:components.dropdown-color :options="['#000000', '#2459e8', '#ffffff', '#f84b4b', '#ff8b43']" />
-                    <livewire:components.dropdown-size :options="['xs', 's', 'm', 'l', 'xl', 'xxl']" />
+                    <livewire:components.dropdown-color :options="$colors" />
+                    <livewire:components.dropdown-size :options="$sizes" />
                 </div>
             </div>
         @endif
