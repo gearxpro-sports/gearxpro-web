@@ -23,20 +23,22 @@
         </div>
 
         @if ($filter)
-            <div class="z-50 min-w-[298px] h-[1000px] ml-[51px] mr-[82px] relative pt-[60px]">
-                <div class="absolute top-0 w-full pb-5 flex justify-between items-center border-b border-color-18181a">
+            <div class="z-50 min-w-[298px] ml-[51px] mr-[82px]">
+                <div class="w-full pb-5 flex justify-between items-center border-b border-color-18181a">
                     <h4 class="text-[21px] font-semibold leading-[25px] text-color-18181a ">120 risultati</h4>
                     <span wire:click="clearFilter" class="text-[12px] font-medium leading-[15px] text-color-6c757d">Rimuovi filtri x</span>
                 </div>
 
-                <livewire:components.dropdown :name="'SOXPRO'" :options="['1', '2']" />
-                <livewire:components.dropdown :name="'FLEX-GXPRO'" :options="['1', '2']" />
-                <livewire:components.dropdown :name="'LACEXPRO'" :options="['1', '2']" />
-                <livewire:components.dropdown :name="'TUBEXPRO'" :options="['1', '2']" />
-                <livewire:components.dropdown :name="'RECOVERY'" :options="['1', '2']" />
+                <div class="w-full h-[1000px] overflow-y-auto scrollBar">
+                    <livewire:components.dropdown :name="'SOXPRO'" :options="['1', '2']" />
+                    <livewire:components.dropdown :name="'FLEX-GXPRO'" :options="['1', '2']" />
+                    <livewire:components.dropdown :name="'LACEXPRO'" :options="['1', '2']" />
+                    <livewire:components.dropdown :name="'TUBEXPRO'" :options="['1', '2']" />
+                    <livewire:components.dropdown :name="'RECOVERY'" :options="['1', '2']" />
 
-                <livewire:components.dropdown-color :options="['#000000', '#2459e8', '#ffffff', '#f84b4b', '#ff8b43']" />
-                <livewire:components.dropdown-size :options="['xs', 's', 'm', 'l', 'xl', 'xxl']" />
+                    <livewire:components.dropdown-color :options="['#000000', '#2459e8', '#ffffff', '#f84b4b', '#ff8b43']" />
+                    <livewire:components.dropdown-size :options="['xs', 's', 'm', 'l', 'xl', 'xxl']" />
+                </div>
             </div>
         @endif
 

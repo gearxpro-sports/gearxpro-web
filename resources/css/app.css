@@ -9,6 +9,14 @@
     font-family: montserrat, sans-serif;
 }
 
+.scrollBar::-webkit-scrollbar {
+    display: none;
+}
+.scrollBar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
 @layer utilities {
     @variants responsive {
         .no-scrollbar::-webkit-scrollbar {
