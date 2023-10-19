@@ -64,8 +64,13 @@
 
             <div class="flex flex-wrap items-center gap-[18px] mt-5">
                 @foreach ($sizes as $size )
-                    <div wire:click="selectSize('{{ $size }}')" class="w-[48px] h-[46px] bg-color-edebe5 border border-color-e0e0df rounded-sm flex items-center justify-center">
-                        <span class="text-[13px] font-medium leading-[16px] text-color-6c757d uppercase">{{$size}}</span>
+                    <div wire:click="selectSize('{{ $size }}')" @class(['w-[48px] h-[46px] bg-color-edebe5 border border-color-e0e0df rounded-sm flex items-center justify-center',
+                        $selectedSize == $size ? '!bg-color-18181a !text-white' : '' ,
+                    ])>
+                        <span @class(['text-[13px] font-medium leading-[16px] text-color-6c757d uppercase',
+                        $selectedSize == $size ? '!text-white' : '' ,])>
+                            {{$size}}
+                        </span>
                     </div>
                 @endforeach
             </div>
