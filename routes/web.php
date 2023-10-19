@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Shop\Index as ShopIndex;
 use App\Livewire\Shop\Products\Index as ProductIndex;
+use App\Livewire\Shop\Products\Show as ProductShow;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,11 @@ use App\Livewire\Shop\Products\Index as ProductIndex;
 */
 
 Route::get('/', [ShopIndex::class, '__invoke'])->name('home');
-Route::get('/shop', [ProductIndex::class, '__invoke'])->name('shop');
+
+Route::name('shop.')->group(function () {
+    Route::get('/shop', [ProductIndex::class, '__invoke'])->name('index');
+    Route::get('/shop/{product}', [ProductShow::class, '__invoke'])->name('show');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
