@@ -1,5 +1,8 @@
 <x-slot name="title">
-    {{ __('resellers.show.title') }}
+    {{ $reseller->fullname }}
+</x-slot>
+<x-slot name="actions">
+    <x-primary-button href="{{ route('resellers.edit', ['reseller' => $reseller]) }}">{{ __('common.edit') }}</x-primary-button>
 </x-slot>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">

@@ -18,6 +18,7 @@ return [
         ],
     ],
     'create' => [
+        'title' => 'Crea Rivenditore',
         'titles' => [
             'general_data' => 'Dati generali',
             'billing_data' => 'Dati di Fatturazione',
@@ -69,7 +70,6 @@ return [
         ]
     ],
     'show' => [
-        'title' => 'Profilo Rivenditore',
         'data' => [
             'title' => 'Dati Rivenditore',
             'company' => 'Nome Azienda:',
@@ -86,4 +86,7 @@ return [
             'title' => 'Riepilogo Ordini',
         ],
     ],
+    'edit' => [
+        'title' => 'Modifica Rivenditore',
+    ]
 ];

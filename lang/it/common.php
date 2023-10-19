@@ -7,6 +7,7 @@ return [
     'search' => 'Cerca...',
     'faq' => 'faq',
     'create' => 'Crea',
+    'edit' => 'Modifica',
     'save' => 'Salva',
     'send' => 'Invia',
     'select' => 'Seleziona',

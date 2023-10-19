@@ -37,6 +37,8 @@ class Address extends Model
         'company',
         'vat_number',
         'tax_code',
+        'sdi',
+        'pec'
     ];
 
     /**
