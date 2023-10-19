@@ -18,6 +18,7 @@ class Edit extends Component
 
     public function update()
     {
+        $this->form->validate();
         $this->form->updateReseller();
     }
 

@@ -17,7 +17,6 @@ class UserForm extends Form
     #[Rule('required')]
     public $lastname;
     // TODO: validazione "unique" all'update
-    // #[Rule('required|email|unique:users,email')]
     #[Rule('required|email')]
     public $email;
     #[Rule('required')]

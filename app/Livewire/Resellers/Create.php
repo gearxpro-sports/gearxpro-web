@@ -26,8 +26,7 @@ class Create extends Component
 
     public function save()
     {
-        $this->validate();
-
+        $this->form->validate();
         $this->form->saveReseller();
     }
 
