@@ -22,7 +22,7 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('shop.navigation.home') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('shop')" :active="request()->routeIs('shop')">
+                    <x-nav-link :href="route('shop.index')" :active="request()->routeIs('shop.*')">
                         {{ __('shop.navigation.shop') }}
                     </x-nav-link>
 
