@@ -50,6 +50,8 @@ export default {
                 'color-707070': '#707070',
                 'color-edebe5': '#EDEBE5',
                 'color-e0e0df': '#E0E0DF',
+                'color-ff7f6e': '#FF7F6E',
+                'color-8be599': '#8BE599',
             },
             fontSize: {
                 'xxs': '0.625rem'
