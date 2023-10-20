@@ -75,6 +75,13 @@ class User extends Authenticatable
         return "$this->firstname $this->lastname";
     }
 
+    public function getBillingAddressAttribute() {
+        return $this->addresses()->firstWhere('type', 'billing');
+    }
+    public function getShippingAddressAttribute() {
+        return $this->addresses()->firstWhere('type', 'shipping');
+    }
+
     /**
      * @return HasMany
      */
