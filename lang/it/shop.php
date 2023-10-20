@@ -23,7 +23,25 @@ return [
         'button_filter_on' => 'Mostra filtri',
         'button_filter_off' => 'Nascondi filtri',
         'order' => 'Ordina per',
+        'mid_calf' => 'Metà polpaccio',
+        'above_calf' => 'Sopra il polpaccio',
+        'height_leg' => 'altezza gamba',
         'color' => 'Colore',
         'size' => 'Taglia',
-    ]
+        'amount' => 'quantità',
+        'characteristics' => 'caratteristiche',
+        'advantages' => 'vantaggi',
+        'technicality' => 'tecnicità',
+        'wash' => 'istruzioni di lavaggio',
+    ],
+    'button' => [
+        'pay_link' => 'Paga con link',
+        'add_to_cart' => 'Aggiungi al carrello',
+    ],
+    'options' => [
+        'or' => 'oppure',
+        'currency' => 'valuta',
+        'size_guide' => 'guida alle taglie',
+    ],
+    'most_purchased_title' => 'Gli articoli più acquistati dai nostri sportivi'
 ];
