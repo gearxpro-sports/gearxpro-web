@@ -58,6 +58,7 @@ export default {
                 'shadow-1': '0px 3px 6px #0000000f',
                 'shadow-2': '3px 6px 11px #00000014',
                 'shadow-3': '0px 0px 11px -7px #000000',
+                'shadow-4': '1px 3px 5px 0px #9d9c9a'
             },
             keyframes: {
                 line: {
@@ -81,5 +82,8 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        require('tailwindcss-labeled-groups')(['custom-button']),
+        forms
+    ],
 };
