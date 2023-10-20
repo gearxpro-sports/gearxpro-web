@@ -94,6 +94,17 @@ class Show extends Component
         ],
     ];
 
+    public $currency = [
+        [
+            'simbol' => '€',
+            'name' => '(€) Euro'
+        ],
+        [
+            'simbol' => '$',
+            'name' => '($) Dollaro'
+        ],
+    ];
+
     public function mount($product) {
         $this->product = $product;
     }
@@ -130,11 +141,17 @@ class Show extends Component
     #[On('addToCart')]
     public function addToCart() {
         $this->cart[$this->product] = [
+            'name' => $this->product,
             'format' => $this->format,
             'color' => $this->selectedColor,
             'size' => $this->selectedSize,
             'quantity' => $this->quantity,
+            'price' => (32 * $this->quantity)
         ];
+        $this->dispatch('openModal', 'modals.cart', [
+            "money" => $this->currency[$this->selectedMoney]['simbol'],
+            "cart" => $this->cart,
+        ]);
     }
 
     public function payForLink() {

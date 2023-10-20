@@ -43,5 +43,10 @@ return [
         'currency' => 'valuta',
         'size_guide' => 'guida alle taglie',
     ],
-    'most_purchased_title' => 'Gli articoli più acquistati dai nostri sportivi'
+    'most_purchased_title' => 'Gli articoli più acquistati dai nostri sportivi',
+    'modal_cart' => [
+        'add_product' => 'Articolo aggiunto al carrello',
+        'button_show' => 'Visualizza carrello',
+        'button_pay' => 'Vai al pagamento'
+    ]
 ];

@@ -107,7 +107,7 @@
                 <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">COD:  N / A</p>
                 <p class="mt-5 mb-[15px] text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.options.currency')}}</p>
 
-                <livewire:components.select-money :selected="$selectedMoney" :options="['(€) Euro','($) Dollaro']" />
+                <livewire:components.select-money :selected="$selectedMoney" :options="$currency" />
 
                 <div class="mt-10 flex items-center gap-2">
                     <span class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.options.size_guide')}}</span>
@@ -265,8 +265,8 @@
                 margin: 15,
                 loop: true,
                 autoWidth: true,
-                autoplay: false,
-                autoplayTimeout: 4000,
+                autoplay: true,
+                autoplayTimeout: 5000,
                 autoplaySpeed: 2000,
                 infinite: true,
             });
