@@ -15,28 +15,28 @@
     <div class="col-span-5 col-start-8 py-10">
         {{-- detail --}}
         <div>
-            <span class=" text-[17px] leading-[28px] text-color-6c757d">SOXPro</span>
-            <h1 class="text-[33px] font-semibold leading-[40px] text-color-18181a">SOXPro Trekking</h1>
-            <p class="text-[21px] font-medium leading-[38px] text-color-18181a">€ 29,00 - € 35,00</p>
+            <span class=" text-[17px] leading-[28px] text-color-6c757d">{{$product}}</span>
+            <h1 class="text-[33px] font-semibold leading-[40px] text-color-18181a">{{$product}}</h1>
+            <p class="text-[21px] font-medium leading-[38px] text-color-18181a">€ € 35,00</p>
         </div>
 
         {{-- format --}}
         <div class="mt-[50px]">
-            <p class=" text-[15px] font-medium leading-[19px] text-color-18181a">ALTEZZA GAMBA</p>
+            <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.height_leg')}}</p>
 
             <div class="w-[353px] h-[58px] flex justify-between bg-color-edebe5 px-[6px] py-[5px] rounded-md mt-5">
                 <button wire:click="changeFormat('short')" @class(['px-5 h-full text-[15px] bg-transparent rounded-md font-medium leading-[19px] text-color-6c757d',
                     $format == 'short' ? '!bg-color-18181a !text-white' : '',
-                ])>Metà polpaccio</button>
+                ])>{{__('shop.products.mid_calf')}}</button>
                 <button wire:click="changeFormat('long')" @class(['px-5 h-full text-[15px] bg-transparent rounded-md font-medium leading-[19px] text-color-6c757d',
                     $format == 'long' ? '!bg-color-18181a !text-white' : '',
-                ])>Sopra il polpaccio</button>
+                ])>{{__('shop.products.above_calf')}}</button>
             </div>
         </div>
 
         {{-- color --}}
         <div class="mt-10">
-            <p class=" text-[15px] font-medium leading-[19px] text-color-18181a">COLORE</p>
+            <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.color')}}</p>
 
             <div class="flex items-center gap-4 mt-5">
                 @foreach ($colors as $color )
@@ -60,7 +60,7 @@
 
         {{-- taglia --}}
         <div class="mt-10">
-            <p class=" text-[15px] font-medium leading-[19px] text-color-18181a">TAGLIA</p>
+            <p class=" text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.size')}}</p>
 
             <div class="flex flex-wrap items-center gap-[18px] mt-5">
                 @foreach ($sizes as $size )
@@ -78,7 +78,7 @@
 
         {{-- quantita --}}
         <div class="mt-10">
-            <p class="text-[15px] font-medium leading-[19px] text-color-18181a">QUANTITÀ</p>
+            <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.amount')}}</p>
 
             <div class="w-[185px] h-[48px] rounded-md flex items-center border border-color-b6b9bb mt-5 shadow-shadow-2">
                 <div wire:click="removeProduct" class="w-[60px] h-full flex items-center justify-center bg-transparent border-r border-color-b6b9bb">
@@ -93,30 +93,30 @@
 
         {{-- actions --}}
         <div class="mt-[30px]">
-            <livewire:components.button :wireAction="'payForLink'" :text="'Paga con link'" :icon="'arrow-right-xl'" :color="'#33DDB3'" />
+            <livewire:components.button :wireAction="'payForLink'" :text="__('shop.button.pay_link')" :icon="'arrow-right-xl'" :color="'#33DDB3'" />
             <div class="w-[438px] relative p-6">
                 <div class="h-[1px] bg-color-6c757d w-full"></div>
-                <span class="absolute top-[15px] left-[calc(50%-36px)] px-[10px] bg-color-f2f0eb text-[13px] font-medium leading-[16px] text-color-6c757d">oppure</span>
+                <span class="absolute top-[15px] left-[calc(50%-36px)] px-[10px] bg-color-f2f0eb text-[13px] font-medium leading-[16px] text-color-6c757d">{{__('shop.options.or')}}</span>
             </div>
-            <livewire:components.button :wireAction="'addToCart'" :text="'Aggiungi al carrello'" :icon="'bag'" :color="'#FF7F6E'" />
+            <livewire:components.button :wireAction="'addToCart'" :text="__('shop.button.add_to_cart')" :icon="'bag'" :color="'#FF7F6E'" />
         </div>
 
         {{-- other --}}
         <div class="mt-[26px] ">
             <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">COD:  N / A</p>
-            <p class="mt-5 mb-[15px] text-[15px] font-medium leading-[19px] text-color-18181a">VALUTA</p>
+            <p class="mt-5 mb-[15px] text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.options.currency')}}</p>
 
             <livewire:components.select-money :selected="$selectedMoney" :options="['(€) Euro','($) Dollaro']" />
 
             <div class="mt-10 flex items-center gap-2">
-                <span class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">GUIDA ALLE TAGLIE</span>
+                <span class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.options.size_guide')}}</span>
                 <img src="{{ Vite::asset('resources/images/icons/metro.svg')}}" alt="">
             </div>
         </div>
     </div>
 
     {{-- info product --}}
-    <div x-data="handler()" class="col-start-3 col-span-8 h-[631px] mt-[65px]">
+    <div x-data="handler()" class="col-start-3 col-span-8 mt-[65px]">
         {{-- section button --}}
         <div class="w-full h-[58px] rounded-md bg-color-edebe5 flex items-center gap-[10px] mb-[50px]">
             <template x-for="tab in tabs" :key="tab">
@@ -142,7 +142,7 @@
             </p>
         </template>
 
-        <template x-if="currentTab == 'caratteristiche'">
+        <template x-if="currentTab == '{{__('shop.products.characteristics')}}'">
             <div class="flex flex-wrap gap-10">
                 <div class="w-[calc(50%-40px)]">
                     <h5 class=" text-[13px] font-semibold leading-[24px] text-color-323a46 uppercase">DISPOSITIVO MEDICO CLASSE 1</h5>
@@ -155,7 +155,7 @@
             </div>
         </template>
 
-        <template x-if="currentTab == 'vantaggi'">
+        <template x-if="currentTab == '{{__('shop.products.advantages')}}'">
             <div class="flex gap-[31px]">
                 <div class="w-[530px]">
                     <ul class="list-disc pl-[18px]">
@@ -170,7 +170,7 @@
             </div>
         </template>
 
-        <template x-if="currentTab == 'tecnicita'">
+        <template x-if="currentTab == '{{__('shop.products.technicality')}}'">
             <div>
                 <div class="mb-[30px]">
                     <h5 class="text-[13px] font-semibold leading-[24px] text-color-323a46 uppercase">CATENA CINETICA</h5>
@@ -183,7 +183,7 @@
             </div>
         </template>
 
-        <template x-if="currentTab == 'istruzioni di lavaggio'">
+        <template x-if="currentTab == '{{__('shop.products.wash')}}'">
             <div>
                 <div class="h-[55px] px-9 flex items-center gap-3 border-b border-color-b6b9bb even:bg-color-edebe5">
                     <img src="{{ Vite::asset('resources/images/icons/lav-mano.svg')}}" alt="">
@@ -205,6 +205,38 @@
             </div>
         </template>
     </div>
+
+    {{-- carousel --}}
+    <div class="col-span-12 mb-[100px] mt-5">
+        <div class="mx-[50px] border-t-2 border-color-18181a shadow-shadow-4 mb-[50px]"></div>
+
+        <div class="relative">
+            <h2 class="mb-[27px] text-[33px] font-semibold leading-[40px] text-color-18181a">{{__('shop.most_purchased_title')}}</h2>
+
+            <div class="group-custom-button">
+                <button class="customPrevBtn w-[76px] h-[76px] rounded-full bg-white shadow hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] z-10">
+                    <img class="rotate-180" src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}" alt="">
+                </button>
+
+                <div class="owl-carousel carousel">
+                    @foreach ($mostPurchased as $key => $prod )
+                        <livewire:components.card-product wire:key="{{$key}}"
+                            :image="$prod['image']"
+                            :name="$prod['name']"
+                            :description="$prod['description']"
+                            :availableColor="$prod['availableColor']"
+                            :price="$prod['price']"
+                        />
+                    @endforeach
+                </div>
+
+                <button class="customNextBtn w-[76px] h-[76px] rounded-full bg-white shadow hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] right-0 z-10">
+                    <img src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}" alt="">
+                </button>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 @push('scripts')
@@ -214,12 +246,35 @@
                 currentTab: @json($product),
                 tabs: [
                     @json($product),
-                    'caratteristiche',
-                    'vantaggi',
-                    'tecnicita',
-                    'istruzioni di lavaggio'
+                    @json(__('shop.products.characteristics')),
+                    @json(__('shop.products.advantages')),
+                    @json(__('shop.products.technicality')),
+                    @json(__('shop.products.wash'))
                 ]
             }
         }
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            var carousel = new $(".carousel").owlCarousel({
+                items: 3,
+                margin: 30,
+                loop: false,
+                autoWidth: false,
+                autoplay: false,
+                autoplayTimeout: 4000,
+                autoplaySpeed: 2000,
+                infinite: false,
+            });
+
+            $('.customNextBtn').click(function() {
+                carousel.trigger('next.owl.carousel', [2000]);
+            })
+
+            $('.customPrevBtn').click(function() {
+                carousel.trigger('prev.owl.carousel', [2000]);
+            })
+        });
     </script>
 @endpush

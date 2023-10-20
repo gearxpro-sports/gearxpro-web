@@ -38,7 +38,61 @@ class Show extends Component
 
     ];
 
-    public $sizes = ['xs', 's', 'm', 'l', 'xl', 'xxl'];
+    public $sizes = [
+        'xs', 's', 'm', 'l', 'xl', 'xxl'
+    ];
+
+    public $mostPurchased = [
+        0 => [
+            'name' => 'SoXPro',
+            'image' => 'SOXPro.png',
+            'description' => 'SOXPro Trekking - Green',
+            'availableColor' => '1',
+            'price' => '29,00 - € 35,00'
+        ],
+        1 => [
+            'name' => 'SoXPro',
+            'image' => 'SOXPro.png',
+            'description' => 'SOXPro Trekking - Green',
+            'availableColor' => '1',
+            'price' => '29,00 - € 35,00'
+        ],
+        2 => [
+            'name' => 'SoXPro',
+            'image' => 'SOXPro.png',
+            'description' => 'SOXPro Trekking - Green',
+            'availableColor' => '1',
+            'price' => '29,00 - € 35,00'
+        ],
+        3 => [
+            'name' => 'SoXPro',
+            'image' => 'SOXPro.png',
+            'description' => 'SOXPro Trekking - Green',
+            'availableColor' => '1',
+            'price' => '29,00 - € 35,00'
+        ],
+        4 => [
+            'name' => 'SoXPro',
+            'image' => 'SOXPro.png',
+            'description' => 'SOXPro Trekking - Green',
+            'availableColor' => '1',
+            'price' => '29,00 - € 35,00'
+        ],
+        5 => [
+            'name' => 'SoXPro',
+            'image' => 'SOXPro.png',
+            'description' => 'SOXPro Trekking - Green',
+            'availableColor' => '1',
+            'price' => '29,00 - € 35,00'
+        ],
+        6 => [
+            'name' => 'SoXPro',
+            'image' => 'SOXPro.png',
+            'description' => 'SOXPro Trekking - Green',
+            'availableColor' => '1',
+            'price' => '29,00 - € 35,00'
+        ],
+    ];
 
     public function mount($product) {
         $this->product = $product;
