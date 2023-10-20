@@ -17,6 +17,11 @@ class Show extends Component
      */
     public function render()
     {
-        return view('livewire.customers.show');
+        $addresses = $this->customer->addresses;
+
+        return view('livewire.customers.show', [
+            'billing_address' => $addresses->firstWhere('type', 'billing'),
+            'shipping_address' => $addresses->firstWhere('type', 'shipping')
+        ]);
     }
 }

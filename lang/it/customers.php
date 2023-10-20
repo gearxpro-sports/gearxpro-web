@@ -34,4 +34,7 @@ return [
             'title' => 'Riepilogo Ordini',
         ],
     ],
+    'edit' => [
+        'title' => 'Modifica Cliente',
+    ]
 ];

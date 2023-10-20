@@ -22,7 +22,7 @@
                 <tr class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
                     <td>{{ $customer->firstname }} {{ $customer->lastname }}</td>
                     <td>{{ $customer->email }}</td>
-                    <td class="text-center">{{ $customer->created_at->format('d M Y') }}</td>
+                    <td class="text-center">{{ $customer->created_at->format('d/m/Y') }}</td>
                     <td class="text-center">-</td>
                     <td class="text-right">
                         <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="{{ route('customers.show', ['customer' => $customer->id]) }}">

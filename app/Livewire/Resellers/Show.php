@@ -17,9 +17,11 @@ class Show extends Component
      */
     public function render()
     {
+        $addresses = $this->reseller->addresses;
+
         return view('livewire.resellers.show', [
-            'billingAddress' => $this->reseller->addresses->firstWhere('type', 'billing'),
-            'shippingAddress' => $this->reseller->addresses->firstWhere('type', 'shipping'),
+            'billing_address' => $addresses->firstWhere('type', 'billing'),
+            'shipping_address' => $addresses->firstWhere('type', 'shipping')
         ]);
     }
 }
