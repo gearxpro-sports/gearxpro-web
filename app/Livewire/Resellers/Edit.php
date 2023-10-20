@@ -53,6 +53,19 @@ class Edit extends Component
         $this->shipping_address = $this->reseller->shipping_address;
     }
 
+    public function copyFromBilling()
+    {
+        $this->shipping_address->address_1 = $this->billing_address->address_1;
+        $this->shipping_address->city = $this->billing_address->city;
+        $this->shipping_address->postcode = $this->billing_address->postcode;
+        $this->shipping_address->country_id = $this->billing_address->country_id;
+        $this->shipping_address->phone = $this->billing_address->phone;
+        $this->shipping_address->vat_number = $this->billing_address->vat_number;
+        $this->shipping_address->tax_code = $this->billing_address->tax_code;
+        $this->shipping_address->sdi = $this->billing_address->sdi;
+        $this->shipping_address->pec = $this->billing_address->pec;
+    }
+
     public function save()
     {
         $this->validate();
