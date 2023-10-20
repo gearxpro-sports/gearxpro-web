@@ -233,7 +233,7 @@
                     @endforeach
                 </div>
 
-                <button class="customNextBtn w-[76px] h-[76px] rounded-full bg-white shadow hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] right-0 z-10">
+                <button class="customNextBtn w-[76px] h-[76px] rounded-full bg-white shadow hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] right-[39px] z-10">
                     <img src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}" alt="">
                 </button>
             </div>
