@@ -28,3 +28,7 @@
         }
     }
 }
+
+.owl-dots {
+    @apply h-0;
+}

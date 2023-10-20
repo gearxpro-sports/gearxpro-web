@@ -1,8 +1,8 @@
-@props(['title', 'description', 'color', 'price'])
+@props(['image','title', 'description', 'color', 'price'])
 
 <div class="min-w-[594px] max-w-[594px] h-[727px] rounded-b-md overflow-hidden swiper-slide">
     <div class="w-full h-[calc(100%-108px)] bg-white flex items-center justify-center overflow-hidden">
-        <img src="{{ Vite::asset('resources/images/Recovery-Long-T_1.svg')}}" alt="">
+        <img src="{{ Vite::asset('resources/images/'. $image)}}" alt="">
     </div>
     <div class="bg-color-f2f0eb h-[108px] w-full flex border-y border-color-18181a border-x border-x-color-f2f0eb hover:border-y-color-f2f0eb rounded-b-md transition-all duration-300 group">
         <div class="h-full grow flex flex-col px-[20px] py-[16px] relative">

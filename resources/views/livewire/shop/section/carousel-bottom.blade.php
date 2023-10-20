@@ -2,10 +2,10 @@
     <h2 class="text-[33px] font-bold leading-[86px] text-white">In which all the 26 letters</h2>
 
     <div class="owl-carousel carousel_bottom">
-        <x-card-bottom title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
-        <x-card-bottom title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
-        <x-card-bottom title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
-        <x-card-bottom title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
+        <x-card-bottom image="Recovery-Long-T_1.svg" title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
+        <x-card-bottom image="Recovery-Long-T_1.svg" title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
+        <x-card-bottom image="Recovery-Long-T_1.svg" title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
+        <x-card-bottom image="Recovery-Long-T_1.svg" title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
     </div>
 
     <div class="mt-[0px] flex item gap-5">
