@@ -101,6 +101,14 @@ class Edit extends Component
             'pec' => $this->shipping_address->pec,
             'default' => true
         ]);
+
+        $this->dispatch('open-notification',
+            title: __('notifications.updating'),
+            subtitle: __('notifications.customers.updating.success'),
+            type: 'success'
+        );
+
+        return redirect()->route('dashboard');
     }
 
     public function render()

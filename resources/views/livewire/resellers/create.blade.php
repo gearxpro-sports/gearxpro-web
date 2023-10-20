@@ -1,9 +1,6 @@
 <x-slot name="title">
     {{ __('resellers.create.title') }}
 </x-slot>
-<x-slot name="actions">
-    <x-primary-button>{{ __('common.save') }}</x-primary-button>
-</x-slot>
 
 <div x-data>
     <form wire:submit="save" class="bg-white space-y-10 p-4">
@@ -22,7 +19,7 @@
                 <option value="">{{ __('common.select') }}</option>
                 @foreach($countries as $country)
                     <option
-                        :disabled="{{ in_array($country->id, $resellers->pluck('country_id')->unique()->toArray()) }}"
+                        @disabled(in_array($country->id, $resellers->pluck('country_id')->unique()->toArray()))
                         value="{{ $country->id }}">{{ $country->name }}</option>
                 @endforeach
             </x-select>

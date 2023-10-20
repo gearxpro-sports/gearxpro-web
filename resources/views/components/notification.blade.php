@@ -1,16 +1,16 @@
 {{--
-$this->dispatchBrowserEvent('open-notification', [
-	'title'    => __('Profilo Salvato'),
-	'subtitle' => __('Hai salvato il tuo profilo con successo!'),
-	'type' => 'success',
-	'actions'  => [
-		'primary' => [
-			'label' => __('Vedi'),
-			'url'   => '#',
-			'target' => 'self',
-		]
-	]
-]);
+$this->dispatch('open-notification',
+    title: __('Reseller Salvato'),
+    subtitle: __('Hai salvato il reseller con successo!'),
+    type: 'success',
+    actions: [
+        'primary' => [
+        'label' => __('Vedi'),
+        'url'   => route('resellers.show', ['reseller' => $reseller]),
+        'target' => 'self',
+        ]
+        ]
+    );
 --}}
 
 <div
@@ -70,7 +70,7 @@ $this->dispatchBrowserEvent('open-notification', [
 							</template>
 							<button x-on:click="open = false"
 							        class="ml-6 text-sm font-medium text-gray-400 bg-white rounded-md hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-								{{ __('Chiudi') }}
+								{{ __('notifications.close') }}
 							</button>
 						</div>
 					</template>

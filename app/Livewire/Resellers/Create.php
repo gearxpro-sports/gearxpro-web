@@ -5,6 +5,7 @@ namespace App\Livewire\Resellers;
 use App\Livewire\Forms\UserForm;
 use App\Models\Country;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -90,7 +91,7 @@ class Create extends Component
             'firstname' => $this->firstname,
             'lastname' => $this->lastname,
             'email' => $this->email,
-            'password' => Str::password(10),
+            'password' => bcrypt('password'), // TODO: Str::password(10)
             'country_id' => $this->country_id,
             'phone' => $this->phone,
             'payment_method' => $this->payment_method,
@@ -128,6 +129,19 @@ class Create extends Component
             'pec' => $this->shipping_pec,
             'default' => true
         ]);
+
+        $this->dispatch('open-notification',
+            title: __('notifications.saving'),
+            subtitle: __('notifications.resellers.saving.success'),
+            type: 'success',
+            actions: [
+                'primary' => [
+                    'label' => __('notifications.actions.show'),
+                    'url'   => route('resellers.show', ['reseller' => $reseller]),
+                    'target' => '_self',
+                ]
+            ]
+        );
     }
 
     public function render()
