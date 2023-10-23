@@ -17,8 +17,8 @@ class Navigation extends Component
 
     public function mount() {
         $this->user = auth()->user();
-        $this->currentLanguage =  Session::get('language', Config::get('app.locale'));
-        app()->setLocale(session(Config::get('app.locale')));
+        $this->currentLanguage = Session::get('language', Config::get('app.locale'));
+        App::setLocale(session('language'));
     }
 
     #[On('addProducts')]
