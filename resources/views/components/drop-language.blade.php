@@ -12,8 +12,8 @@
     <ul x-cloak x-show="isOpen"  @click.away="isOpen = false"
         class="absolute left-0 z-20 p-1 mt-1 text-[12px] font-medium bg-white shadow overflow-hidden rounded border border-color-dee2e6 w-[83px]"
     >
-        @foreach ($options as $option )
-            <li class="text-color-6c757d hover:text-color-323a46 px-2 py-3 hover:bg-color-f3f7f9 cursor-default">
+        @foreach ($options as $key => $option )
+            <li wire:key='{{$key}}' wire:click="changeLanguage('{{$option}}')" class="text-color-6c757d hover:text-color-323a46 px-2 py-3 hover:bg-color-f3f7f9 cursor-default">
                 {{ $option }}
             </li>
         @endforeach
