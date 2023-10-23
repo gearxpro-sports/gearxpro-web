@@ -3,6 +3,7 @@
 namespace App\Livewire\Shop\Products;
 
 use App\Livewire\Modals\Cart as ModalCart;
+use App\Livewire\Shop\Navigation as ShopNavigation;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -151,6 +152,7 @@ class Show extends Component
         ];
 
         $this->dispatch('modalInfoCart', $this->currency[$this->selectedMoney]['simbol'], $this->cart)->to(ModalCart::class);
+        $this->dispatch('addProducts', $this->quantity)->to(ShopNavigation::class);
     }
 
     public function payForLink() {

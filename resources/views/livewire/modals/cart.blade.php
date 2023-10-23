@@ -23,7 +23,7 @@
                         <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">{{__('shop.products.color')}}: {{$product['color']}}</p>
                         <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">{{__('shop.products.size')}}: {{$product['size']}}</p>
                         <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">{{__('shop.products.amount')}}: {{$product['quantity']}}</p>
-                        <p class="text-[13px] font-medium leading-[16px] text-color-18181a">{{$money}} {{number_format($product['price'], 2, ',', '.')}}</p>
+                        <p class="text-[13px] font-medium leading-[24px] text-color-18181a">{{$money}} {{number_format($product['price'], 2, ',', '.')}}</p>
                     </div>
                 </div>
             @endforeach
