@@ -48,5 +48,21 @@ return [
         'add_product' => 'Articolo aggiunto al carrello',
         'button_show' => 'Visualizza carrello',
         'button_pay' => 'Vai al pagamento'
+    ],
+    'cart' => [
+        'back_to_shopping' => 'Torna allo shopping',
+        'go_to_pay' => 'Vai al pagamento',
+        'your_cart' => 'Il tuo carrello',
+        'total' => 'totale',
+        'product' => 'prodotti',
+        'shop_complete' => 'Completa l’acquisto per non perdere gli articoli da te inseriti.',
+        'summary' => 'Riepilogo ordine',
+        'apply' => 'Applica',
+        'subtotal' => 'Subtotale',
+        'shipping_cost' => 'Costi di spedizione',
+        'free' => 'Gratuita',
+        'remove' => 'rimuovi',
+        'promo_code' => 'Inserisci codice promo',
+        'product_recommended' => 'Aggiungi questi articoli per performance al TOP',
     ]
 ];
