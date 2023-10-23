@@ -8,7 +8,7 @@
         <x-card-bottom image="Recovery-Long-T_1.svg" title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
     </div>
 
-    <div class="mt-[0px] flex item gap-5">
+    <div class="mt-[40px] flex item gap-5">
         <button class="customPrevBtn">
             <img src="{{ Vite::asset('resources/images/icons/round_arrow.svg')}}" alt="">
         </button>

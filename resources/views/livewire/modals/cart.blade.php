@@ -29,12 +29,12 @@
             @endforeach
 
             <div class="flex items-center justify-between mt-[43px]">
-                <div class="px-[25px] h-[45px] flex items-center justify-center rounded-md text-white text-[13px] font-semibold leading-[32px] bg-color-ff7f6e hover:bg-white hover:text-color-18181a border border-transparent hover:border-color-18181a">
+                <a href="{{ route('shop.cart') }}" class="px-[25px] h-[45px] flex items-center justify-center rounded-md text-white text-[13px] font-semibold leading-[32px] bg-color-ff7f6e hover:bg-white hover:text-color-18181a border border-transparent hover:border-color-18181a">
                     {{__('shop.modal_cart.button_show')}}
-                </div>
-                <div class="px-[25px] h-[45px] flex items-center justify-center rounded-md text-white text-[13px] font-semibold leading-[32px] bg-color-18181a hover:bg-black">
+                </a>
+                <a href="" class="px-[25px] h-[45px] flex items-center justify-center rounded-md text-white text-[13px] font-semibold leading-[32px] bg-color-18181a hover:bg-black">
                     {{__('shop.modal_cart.button_pay')}}
-                </div>
+                </a>
             </div>
         </div>
     @endif
