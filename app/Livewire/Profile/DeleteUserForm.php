@@ -22,7 +22,6 @@ class DeleteUserForm extends Component
 
         Auth::logout();
 
-        // TODO: Chiedere se soft-delete o hard-delete
         $user->delete();
 
         $user->session()->invalidate();
