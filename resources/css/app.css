@@ -32,3 +32,7 @@
 .owl-dots {
     @apply h-0;
 }
+
+[x-cloak] {
+    display: none;
+}

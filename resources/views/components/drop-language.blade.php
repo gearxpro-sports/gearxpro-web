@@ -9,7 +9,7 @@
         <img src="{{ Vite::asset('resources/images/icons/arrow-down-bold.svg')}}" alt="">
     </button>
 
-    <ul x-show="isOpen"  @click.away="isOpen = false"
+    <ul x-cloak x-show="isOpen"  @click.away="isOpen = false"
         class="absolute left-0 z-20 p-1 mt-1 text-[12px] font-medium bg-white shadow overflow-hidden rounded border border-color-dee2e6 w-[83px]"
     >
         @foreach ($options as $option )

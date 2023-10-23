@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Shop\Products;
 
+use App\Livewire\Modals\Cart as ModalCart;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -140,7 +141,7 @@ class Show extends Component
 
     #[On('addToCart')]
     public function addToCart() {
-        $this->cart[$this->product] = [
+        $this->cart[] = [
             'name' => $this->product,
             'format' => $this->format,
             'color' => $this->selectedColor,
@@ -148,10 +149,8 @@ class Show extends Component
             'quantity' => $this->quantity,
             'price' => (32 * $this->quantity)
         ];
-        $this->dispatch('openModal', 'modals.cart', [
-            "money" => $this->currency[$this->selectedMoney]['simbol'],
-            "cart" => $this->cart,
-        ]);
+
+        $this->dispatch('modalInfoCart', $this->currency[$this->selectedMoney]['simbol'], $this->cart)->to(ModalCart::class);
     }
 
     public function payForLink() {

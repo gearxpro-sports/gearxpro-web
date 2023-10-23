@@ -16,7 +16,7 @@
         <div class="h-[2px] w-0 bg-color-18181a group-hover:animate-line group-hover:w-full"></div>
     </button>
 
-    <ul x-show="dropOpen" @click.away="dropOpen = false"
+    <ul x-cloak x-show="dropOpen" @click.away="dropOpen = false"
         class="absolute left-0 z-20 p-1 mt-1 text-[12px] font-medium bg-white shadow overflow-hidden rounded border border-color-dee2e6"
     >
         @foreach ($options as $option )

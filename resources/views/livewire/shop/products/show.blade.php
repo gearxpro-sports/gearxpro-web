@@ -240,6 +240,9 @@
 
         </div>
     </div>
+
+    {{-- modalInfoCart --}}
+    <livewire:modals.cart />
 </div>
 
 @push('scripts')
