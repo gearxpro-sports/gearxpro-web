@@ -8,6 +8,9 @@ use App\Livewire\Resellers\Show as ResellerShow;
 use App\Livewire\Resellers\Create as ResellerCreate;
 use App\Livewire\Resellers\Edit as ResellerEdit;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Shop\Index as ShopIndex;
+use App\Livewire\Shop\Products\Index as ProductIndex;
+use App\Livewire\Shop\Products\Show as ProductShow;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -21,9 +24,12 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('shop.index');
+Route::get('/', [ShopIndex::class, '__invoke'])->name('home');
+
+Route::name('shop.')->group(function () {
+    Route::get('/shop', [ProductIndex::class, '__invoke'])->name('index');
+    Route::get('/shop/{product}', [ProductShow::class, '__invoke'])->name('show');
+});
 
 Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {
     Route::middleware(['role:superadmin|reseller'])->group(function () {
