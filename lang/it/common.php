@@ -9,6 +9,8 @@ return [
     'create' => 'Crea',
     'edit' => 'Modifica',
     'save' => 'Salva',
+    'saved' => 'Salvato',
+    'cancel' => 'Annulla',
     'send' => 'Invia',
     'saving' => 'Salvataggio',
     'select' => 'Seleziona',

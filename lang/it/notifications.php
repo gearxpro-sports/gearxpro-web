@@ -10,6 +10,12 @@ return [
         'show' => 'Vedi',
         'close' => 'Chiudi',
     ],
+    'profile' => [
+        'updating' => [
+            'success' => 'Il profilo è stato aggiornato con successo!',
+            'error' => 'Errore durante l\'aggiornamento del profilo!',
+        ],
+    ],
     'customers' => [
         'saving' => [
             'success' => 'Il cliente è stato creato con successo!',

@@ -1,25 +1,27 @@
 <?php
 
-namespace App\Livewire\Customers;
+namespace App\Livewire\Profile;
 
 use App\Models\Address;
 use App\Models\Country;
 use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Livewire\Component;
 
 class Edit extends Component
 {
-    public User $customer;
-    public Address $billing_address;
-    public Address $shipping_address;
+    public User|Authenticatable $reseller;
+    public ?Address $billing_address;
+    public ?Address $shipping_address;
 
-    public function rules() {
+    public function rules()
+    {
         return [
-            'customer.firstname' => 'required',
-            'customer.lastname' => 'required',
-            'customer.email' => 'required|email|unique:users,email,'.$this->customer->id,
+            'reseller.firstname' => 'required',
+            'reseller.lastname' => 'required',
+            'reseller.email' => 'required|email|unique:users,email,'.$this->reseller->id,
             'billing_address.company' => 'required',
-            'customer.phone' => 'required',
+            'reseller.phone' => 'required',
             // Billing
             'billing_address.address_1' => 'required',
             'billing_address.city' => 'required',
@@ -45,8 +47,9 @@ class Edit extends Component
 
     public function mount()
     {
-        $this->billing_address = $this->customer->billing_address;
-        $this->shipping_address = $this->customer->shipping_address;
+        $this->reseller = auth()->user();
+        $this->billing_address = $this->reseller->billing_address;
+        $this->shipping_address = $this->reseller->shipping_address;
     }
 
     public function copyFromBilling()
@@ -65,11 +68,11 @@ class Edit extends Component
     public function save()
     {
         $this->validate();
-        $this->customer->update([
-            'firstname' => $this->customer->firstname,
-            'lastname' => $this->customer->lastname,
-            'email' => $this->customer->email,
-            'phone' => $this->customer->phone,
+        $this->reseller->update([
+            'firstname' => $this->reseller->firstname,
+            'lastname' => $this->reseller->lastname,
+            'email' => $this->reseller->email,
+            'phone' => $this->reseller->phone,
         ]);
 
         $this->billing_address->update([
@@ -104,16 +107,15 @@ class Edit extends Component
 
         $this->dispatch('open-notification',
             title: __('notifications.titles.updating'),
-            subtitle: __('notifications.customers.updating.success'),
+            subtitle: __('notifications.profile.updating.success'),
             type: 'success'
         );
-
-        return redirect()->route('dashboard');
     }
 
     public function render()
     {
-        return view('livewire.customers.edit', [
+        return view('livewire.profile.edit', [
+            'resellers' => User::role(User::RESELLER)->with('country')->get(),
             'countries' => Country::all()
         ]);
     }

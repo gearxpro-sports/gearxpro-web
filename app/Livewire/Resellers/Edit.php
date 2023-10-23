@@ -109,7 +109,7 @@ class Edit extends Component
         ]);
 
         $this->dispatch('open-notification',
-            title: __('notifications.updating'),
+            title: __('notifications.titles.updating'),
             subtitle: __('notifications.resellers.updating.success'),
             type: 'success'
         );

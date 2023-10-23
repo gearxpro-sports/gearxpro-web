@@ -17,7 +17,19 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Superadmin
-        $superadmin = User::create([
+        $superadmin = User::factory()
+            ->has(
+                Address::factory()
+                    ->count(2)
+                    ->state(new Sequence(
+                        ['type' => 'billing'],
+                        ['type' => 'shipping'],
+                    ))
+                    ->state(function (array $attributes) {
+                        return ['tax_code' => 'shipping' === $attributes['type'] ? null : $attributes['tax_code']];
+                    })
+            )
+            ->create([
             'firstname' => 'Superadmin',
             'email' => 'admin@example.test',
             'password' => bcrypt('password'),

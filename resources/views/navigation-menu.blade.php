@@ -16,7 +16,12 @@
             <x-icons name="user-w-search" class="{{ request()->is('dashboard/customers*') ? 'text-color-323a46' : 'text-color-6c757d group-hover:text-color-323a46' }} mr-3 flex-shrink-0 h-5 w-5" />
             {{ __('navigation.customers') }}
         </a>
-{{--        <h3 class="!mt-6 !mb-2 px-3 text-xs font-medium text-color-b6b9bb uppercase">Acquisti</h3>--}}
+        <h3 class="!mt-6 !mb-2 px-3 text-xs font-medium text-color-b6b9bb uppercase">{{ __('navigation.selling') }}</h3>
+        <a href="{{ route('profile.edit') }}"
+           class="{{ request()->is('dashboard/profile*') ? 'text-color-323a46' : 'text-color-6c757d hover:text-color-323a46' }} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+            <x-icons name="agenda" class="{{ request()->is('dashboard/profile*') ? 'text-color-323a46' : 'text-color-6c757d group-hover:text-color-323a46' }} mr-3 flex-shrink-0 h-5 w-5" />
+            {{ __('navigation.personal_data') }}
+        </a>
 {{--        <a href="#"--}}
 {{--           class="{{ request()->is('medias*') ? 'bg-gray-900 text-white' : 'text-color-6c757d hover:text-color-323a46' }} group flex items-center px-2 py-2 text-sm font-medium rounded-md">--}}
 {{--            <x-heroicon-o-shopping-cart--}}
