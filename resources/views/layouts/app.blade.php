@@ -169,5 +169,6 @@
 <x-notification></x-notification>
 @stack('scripts')
 @livewireScriptConfig
+@livewire('wire-elements-modal')
 </body>
 </html>

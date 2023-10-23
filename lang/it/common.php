@@ -11,6 +11,7 @@ return [
     'save' => 'Salva',
     'saved' => 'Salvato',
     'cancel' => 'Annulla',
+    'delete' => 'Elimina',
     'send' => 'Invia',
     'saving' => 'Salvataggio',
     'select' => 'Seleziona',

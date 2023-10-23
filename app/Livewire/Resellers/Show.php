@@ -3,6 +3,7 @@
 namespace App\Livewire\Resellers;
 
 use App\Models\User;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Show extends Component

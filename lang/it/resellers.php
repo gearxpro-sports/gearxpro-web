@@ -88,5 +88,9 @@ return [
     ],
     'edit' => [
         'title' => 'Modifica Rivenditore',
+    ],
+    'delete' => [
+        'title' => 'Sei sicuro di voler eliminare questo Rivenditore?',
+        'confirm' => 'Cancella Rivenditore'
     ]
 ];
