@@ -14,6 +14,11 @@
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
         rel="stylesheet">
 
+    <!-- FlatPickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/it.min.js"></script>
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
@@ -80,7 +85,7 @@
                  x-show="!open"
                  class="absolute top-5">
                 <div class="text-gray-800 p-1 rounded-r cursor-pointer bg-white hover:bg-gray-100">
-                    <x-icon name="heroicon-m-chevron-right" class="w-4 h-4"></x-icon>
+                    <x-heroicon-m-chevron-right class="w-4 h-4"></x-heroicon-m-chevron-right>
                 </div>
             </div>
             <div x-show="open" class="flex-1 flex flex-col min-h-0 bg-white">
@@ -93,7 +98,7 @@
                         <div x-on:click="open = false"
                              class="text-gray-800 p-1 mr-2 rounded cursor-pointer hover:bg-gray-100">
                             <template x-if="open">
-                                <x-icon name="heroicon-m-chevron-left" class="w-4 h-4"></x-icon>
+                                <x-heroicon-m-chevron-left class="w-4 h-4"></x-heroicon-m-chevron-left>
                             </template>
                         </div>
                     </div>
@@ -140,7 +145,7 @@
                 <div>
                     <!-- Page Heading -->
                     @if (isset($title))
-                        <div class="flex items-center justify-between px-4 py-4">
+                        <div class="flex items-center justify-between p-8">
                             <h1 class="text-xl font-semibold text-color-18181a">
                                 {{ $title }}
                             </h1>
@@ -151,7 +156,7 @@
                             @endif
                         </div>
                     @endif
-                    <div class="px-4 pb-6">
+                    <div class="p-8 pt-0">
                         <div>
                             {{ $slot }}
                         </div>

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->boolean('active')->default(true);
             $table->boolean('is_dev')->default(false);
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('last_login')->nullable();
+            $table->enum('payment_method', config('payment_methods'))->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->foreignId('country_id')->nullable()->constrained();

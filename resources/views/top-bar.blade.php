@@ -4,8 +4,8 @@
             <div class="flex flex-1 justify-end">
                 <input type="text" class="appearance-none bg-transparent border border-color-b6b9bb rounded-full w-full max-w-lg text-sm text-color-b6b9bb placeholder-color-b6b9bb focus:border-white focus:outline-none focus:ring-0" placeholder="{{ __('common.search') }}">
             </div>
-            <div class="relative">
-                <x-heroicon-o-bell class="text-white w-5 h-5"></x-heroicon-o-bell>
+            <div class="relative hover:cursor-pointer">
+                <x-icons name="bell" class="text-white w-5 h-5" />
                 <div class="absolute -top-2 -right-2 flex items-center justify-center bg-color-f55b3f text-white font-semibold rounded-full text-xxs w-4 h-4">12</div>
             </div>
             <a href="#" class="text-sm text-white uppercase">{{ __('common.faq') }}</a>

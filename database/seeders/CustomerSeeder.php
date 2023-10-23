@@ -30,7 +30,7 @@ class CustomerSeeder extends Seeder
             )
             ->create()
             ->each(function ($user) {
-                $user->assignRole('customer');
+                $user->assignRole(User::CUSTOMER);
             });
     }
 }

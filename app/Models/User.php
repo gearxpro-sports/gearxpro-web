@@ -3,7 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Scopes\CountryScope;
+
+use App\Traits\HasCountryScope;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -14,7 +15,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasCountryScope;
+
+    const SUPERADMIN = 'superadmin';
+    const RESELLER   = 'reseller';
+    const CUSTOMER   = 'customer';
+
+    protected $perPage = 10;
 
     /**
      * The attributes that are mass assignable.
@@ -30,6 +37,8 @@ class User extends Authenticatable
         'lastname',
         'country_id',
         'active',
+        'last_login',
+        'payment_method'
     ];
 
     /**
@@ -41,6 +50,10 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    /**
+     * @var string[]
+     */
+    protected $dates = ['last_login'];
 
     /**
      * The attributes that should be cast.
@@ -48,6 +61,8 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        'created_at' => 'date:d-m-Y',
+        'last_login' => 'datetime:d-m-Y H:i:s',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
@@ -58,6 +73,13 @@ class User extends Authenticatable
 
     public function getFullnameAttribute() {
         return "$this->firstname $this->lastname";
+    }
+
+    public function getBillingAddressAttribute() {
+        return $this->addresses()->firstWhere('type', 'billing');
+    }
+    public function getShippingAddressAttribute() {
+        return $this->addresses()->firstWhere('type', 'shipping');
     }
 
     /**

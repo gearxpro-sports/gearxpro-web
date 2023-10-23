@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -29,7 +30,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        auth()->user()->update(['last_login' => now()]);
+
+        if(auth()->user()->hasRole(User::SUPERADMIN) || auth()->user()->hasRole(User::RESELLER)) {
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+
+        return redirect()->intended('/');
     }
 
     /**
