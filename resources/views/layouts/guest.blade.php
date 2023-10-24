@@ -14,7 +14,7 @@
         <!-- Scripts -->
         @vite(
             [
-                'resources/css/app.css',
+                'resources/css/shop.css',
                 'resources/css/owl.carousel.css',
                 'resources/js/app.js',
                 'resources/js/owl.carousel.min.js',
