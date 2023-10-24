@@ -8,6 +8,8 @@ use Livewire\Attributes\Layout;
 #[Layout('layouts.guest')]
 class Index extends Component
 {
+    public $cart = [''];
+    public $promoCode;
     public $productsRecommended = [
         0 => [
             'name' => 'SoXPro',
@@ -59,6 +61,14 @@ class Index extends Component
             'price' => '29,00 - € 35,00'
         ],
     ];
+
+    // public function mount($cart) {
+    //     $this->cart = $cart;
+    // }
+
+    public function applyCode() {
+
+    }
 
     public function render()
     {

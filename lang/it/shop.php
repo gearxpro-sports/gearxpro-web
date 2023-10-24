@@ -50,6 +50,7 @@ return [
         'button_pay' => 'Vai al pagamento'
     ],
     'cart' => [
+        'cart_empty' => 'Nessun prodotto in carrello!',
         'back_to_shopping' => 'Torna allo shopping',
         'go_to_pay' => 'Vai al pagamento',
         'your_cart' => 'Il tuo carrello',
