@@ -19,7 +19,7 @@ class SupplyTable extends BaseTable
     ];
 
     public function addItem($id) {
-//        dd("Item aggiunto");
+        dd("Item aggiunto");
         $this->dispatch('open-notification',
             title: __('notifications.titles.adding'),
             subtitle: __('notifications.supply.adding.success'),
