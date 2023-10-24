@@ -11,15 +11,21 @@
         </div>
     </div>
     <div class="flex items-center gap-2">
-        <span>{{ __('common.filter_by') }}</span>
-        <div class="mx-2.5 w-80">
-            <x-flatpickr datepickerId="{{ Str::random(9) }}" name="filter[created_at]" placeholder="{{ __('customers.index.filter.select_registration_date') }}">
-                <x-slot:append>
-                    <span class="search-btn absolute z-[1] inset-y-1 right-1 flex items-center justify-center w-9 bg-color-eff0f0 rounded-sm">
-                        <x-icons name="calendar" class="w-4 h-4"/>
-                    </span>
-                </x-slot:append>
-            </x-flatpickr>
+        <div class="w-full max-w-xs">
+            <x-select name="prices">
+                <option value="">{{ __('supply.index.filter.prices') }}</option>
+                @foreach($prices as $price)
+                    <option :value="$price">{{ $price }}</option>
+                @endforeach
+            </x-select>
+        </div>
+        <div class="w-full max-w-xs">
+            <x-select name="prices">
+                <option value="">{{ __('supply.index.filter.availabilities') }}</option>
+                @foreach($availabilities as $availability)
+                    <option :value="$availability">{{ $availability }}</option>
+                @endforeach
+            </x-select>
         </div>
         <x-primary-button>
             <x-slot:prepend>

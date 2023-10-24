@@ -10,14 +10,22 @@ class Counter extends Component
     #[Modelable]
     public $value = 0;
 
+    public $disabled = false;
+
     public function increment()
     {
-        $this->value++;
+        if(!$this->disabled) {
+            $this->value++;
+        }
     }
 
     public function decrement()
     {
-        $this->value--;
+        if(!$this->disabled) {
+            if($this->value > 0) {
+                $this->value--;
+            }
+        }
     }
 
     public function render()
