@@ -17,6 +17,20 @@ class SupplyTable extends BaseTable
         'Disponibile',
         'Non disponibile'
     ];
+
+    public function addItem($id) {
+//        dd("Item aggiunto");
+        $this->dispatch('open-notification',
+            title: __('notifications.titles.adding'),
+            subtitle: __('notifications.supply.adding.success'),
+            type: 'success'
+        );
+    }
+
+    public function send() {
+        dd("Ordine inviato");
+    }
+
     /**
      * @return View
      */
