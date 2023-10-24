@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('attribute_product_variant', function (Blueprint $table) {
             $table->foreignId('attribute_id')->on('attribute')->onDelete('cascade');
             $table->foreignId('product_variant_id')->on('product_variants')->onDelete('cascade');
-            $table->float('wholesale_price', 6, 2, true);
-            $table->float('price', 6, 2, true);
+            $table->primary(['attribute_id', 'product_variant_id']);
         });
     }
 

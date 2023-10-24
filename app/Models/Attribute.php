@@ -24,6 +24,14 @@ class Attribute extends Model
     /**
      * @var array
      */
+    protected $hidden = [
+        'group_attribute_id',
+        'pivot',
+    ];
+
+    /**
+     * @var array
+     */
     public array $translatable = [
         'value',
     ];
@@ -33,7 +41,7 @@ class Attribute extends Model
      */
     public function group(): BelongsTo
     {
-        return $this->belongsTo(GroupAttribute::class);
+        return $this->belongsTo(GroupAttribute::class, 'group_attribute_id');
     }
 
     /**

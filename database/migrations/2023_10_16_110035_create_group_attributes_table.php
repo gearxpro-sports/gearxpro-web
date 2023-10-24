@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->json('name');
             $table->enum('options_type', ['select', 'radio'])->default('radio');
+            $table->unsignedInteger('position');
             $table->timestamps();
         });
     }

@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('product_variants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->string('barcode', 255)->nullable();
             $table->string('sku', 255)->nullable();
-            $table->unsignedInteger('quantity');
-            $table->unsignedInteger('minimal_quantity');
-            $table->unsignedInteger('low_stock_threshold');
+            $table->unsignedInteger('quantity')->default(0);
+            $table->unsignedInteger('minimal_quantity')->default(0);
+            $table->unsignedInteger('low_stock_threshold')->default(0);
             $table->boolean('low_stock_alert')->default(false);
-            $table->boolean('active')->default(false);
+            $table->unsignedInteger('position')->default(0);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class GroupAttribute extends Model
 {
@@ -17,6 +18,7 @@ class GroupAttribute extends Model
     protected $fillable = [
         'name',
         'options_type',
+        'position',
     ];
 
     /**
@@ -25,6 +27,16 @@ class GroupAttribute extends Model
     public array $translatable = [
         'name',
     ];
+
+    /**
+     * @return void
+     */
+    protected static function booted(): void
+    {
+        static::addGlobalScope('order_by_position', function (Builder $builder) {
+            $builder->orderBy('position');
+        });
+    }
 
     public function attributes(): HasMany
     {

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -16,12 +17,21 @@ class ProductVariant extends Model
      */
     protected $fillable = [
         'product_id',
+        'barcode',
         'sku',
         'quantity',
         'minimal_quantity',
         'low_stock_threshold',
         'low_stock_alert',
         'active',
+        'position',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $with = [
+        'attributes',
     ];
 
     /**
@@ -37,6 +47,16 @@ class ProductVariant extends Model
      */
     public function attributes(): BelongsToMany
     {
-        return $this->BelongsToMany(Attributes::class);
+        return $this->BelongsToMany(Attribute::class);
+    }
+    
+    /**
+     * @return void
+     */
+    protected static function booted(): void
+    {
+        static::addGlobalScope('order_by_position', function (Builder $builder) {
+            $builder->orderBy('position');
+        });
     }
 }
