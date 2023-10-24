@@ -9,6 +9,7 @@ use App\Livewire\Resellers\Show as ResellerShow;
 use App\Livewire\Resellers\Create as ResellerCreate;
 use App\Livewire\Resellers\Edit as ResellerEdit;
 use App\Livewire\Supply\Index as SupplyIndex;
+use App\Livewire\Supply\Purchases\Index as SupplyPurchasesIndex;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Shop\Index as ShopIndex;
 use App\Livewire\Shop\Products\Index as ProductIndex;
@@ -51,6 +52,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {
         });
         Route::prefix('supply')->middleware(['role:reseller'])->group(function() {
             Route::get('/', SupplyIndex::class)->name('supply.index');
+        });
+        Route::prefix('purchases')->middleware(['role:reseller'])->group(function() {
+            Route::get('/', SupplyPurchasesIndex::class)->name('supply.purchases.index');
         });
     });
 

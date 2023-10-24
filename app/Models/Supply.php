@@ -10,8 +10,11 @@ class Supply extends Model
     use HasFactory;
 
     const STATUSES = [
-        'working',
-        'completed',
+        'new' => 'orange',
+        'in_process' => 'lightblue',
+        'on_delivery' => 'blue',
+        'delivered' => 'green',
+        'canceled' => 'gray',
     ];
 
     public function reseller() {

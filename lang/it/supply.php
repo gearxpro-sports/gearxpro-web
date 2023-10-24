@@ -1,6 +1,13 @@
 <?php
 
 return [
+    'statuses' => [
+        'new' => 'Nuovo',
+        'in_process' => 'In lavorazione',
+        'on_delivery' => 'In consegna',
+        'delivered' => 'Consegnato',
+        'canceled' => 'Annullato',
+    ],
     'title' => 'Approvvigionamento',
     'index' => [
         'title' => 'Approvvigionamento',
@@ -18,8 +25,8 @@ return [
             ],
         ],
         'filter' => [
-            'prices' => 'Seleziona prezzo..',
-            'availabilities' => 'Seleziona disponibilità..',
+            'prices' => 'Seleziona prezzo',
+            'availabilities' => 'Seleziona disponibilità',
         ],
     ],
     'show' => [
@@ -91,4 +98,22 @@ return [
             'label' => 'Metodo di Pagamento',
         ]
     ],
+    'purchases' => [
+        'index' => [
+            'title' => 'Lista Acquisti',
+            'table' => [
+                'title' => 'Acquisti',
+                'cols' => [
+                    'order_number' => 'Numero Ordine',
+                    'order_date' => 'Data Ordine',
+                    'total' => 'Importo',
+                    'status' => 'Stato',
+                ],
+            ],
+            'filter' => [
+                'status' => 'Seleziona stato',
+                'date' => 'Seleziona data',
+            ],
+        ],
+    ]
 ];

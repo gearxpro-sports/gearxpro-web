@@ -7,6 +7,7 @@ return [
     'advanced_settings' => 'Impostazioni Avanzate',
     'purchasing' => 'Acquisti',
     'supply' => 'Approvvigionamento',
+    'supply.purchases' => 'Lista Acquisti',
     'selling' => 'Vendita',
     'personal_data' => 'Dati Anagrafici'
 ];

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('supplies', function (Blueprint $table) {
             $table->id();
-            $table->uuid();
+            $table->text('uuid');
             $table->foreignIdFor(\App\Models\User::class, 'user_id');
-            $table->float('total');
-            $table->enum('status', \App\Models\Supply::STATUSES);
+            $table->float('amount');
+            $table->enum('status', array_keys(\App\Models\Supply::STATUSES));
             $table->timestamps();
         });
     }
