@@ -3,16 +3,20 @@
 use App\Livewire\Customers\Index as CustomersIndex;
 use App\Livewire\Customers\Show as CustomerShow;
 use App\Livewire\Customers\Edit as CustomerEdit;
+use App\Livewire\Profile\Edit as ProfileEdit;
 use App\Livewire\Resellers\Index as ResellersIndex;
 use App\Livewire\Resellers\Show as ResellerShow;
-use App\Livewire\Resellers\Create as ResellersCreate;
+use App\Livewire\Resellers\Create as ResellerCreate;
+use App\Livewire\Resellers\Edit as ResellerEdit;
 use App\Livewire\Products\Index as ProductsIndex;
 use App\Livewire\Products\Edit as ProductsEdit;
 use App\Livewire\Categories\Index as CategoriesIndex;
 use App\Livewire\Categories\Create as CategoriesCreate;
 use App\Livewire\Categories\Edit as CategoriesEdit;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
+use App\Livewire\Shop\Index as ShopIndex;
+use App\Livewire\Shop\Products\Index as ProductIndex;
+use App\Livewire\Shop\Products\Show as ProductShow;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +29,12 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('shop.index');
+Route::get('/', [ShopIndex::class, '__invoke'])->name('home');
+
+Route::name('shop.')->group(function () {
+    Route::get('/shop', [ProductIndex::class, '__invoke'])->name('index');
+    Route::get('/shop/{product}', [ProductShow::class, '__invoke'])->name('show');
+});
 
 Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {
     Route::middleware(['role:superadmin|reseller'])->group(function () {
@@ -43,9 +50,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {
 
         Route::prefix('resellers')->middleware(['role:superadmin'])->group(function() {
             Route::get('/', ResellersIndex::class)->name('resellers.index');
-            Route::get('/create', ResellersCreate::class)->name('resellers.create');
+            Route::get('/create', ResellerCreate::class)->name('resellers.create');
             Route::get('/{reseller}', ResellerShow::class)->name('resellers.show');
-            // Route::get('/{reseller}/edit', CustomerEdit::class)->name('resellers.edit')->middleware(['role:superadmin']);
+            Route::get('/{reseller}/edit', ResellerEdit::class)->name('resellers.edit')->middleware(['role:superadmin']);
         });
 
         Route::prefix('products')->group(function () {
@@ -60,9 +67,7 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {
         });
     });
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', ProfileEdit::class)->name('profile.edit');
 });
 
 require __DIR__.'/auth.php';

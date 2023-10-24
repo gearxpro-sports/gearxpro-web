@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('vat_number')->nullable();
             $table->string('tax_code')->nullable();
             $table->string('sdi')->nullable();
-            $table->string('email')->nullable();
+            $table->string('pec')->nullable();
             $table->boolean('default')->default(true);
             $table->timestamps();
         });

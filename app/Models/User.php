@@ -37,7 +37,8 @@ class User extends Authenticatable
         'lastname',
         'country_id',
         'active',
-        'last_login'
+        'last_login',
+        'payment_method'
     ];
 
     /**
@@ -72,6 +73,13 @@ class User extends Authenticatable
 
     public function getFullnameAttribute() {
         return "$this->firstname $this->lastname";
+    }
+
+    public function getBillingAddressAttribute() {
+        return $this->addresses()->firstWhere('type', 'billing');
+    }
+    public function getShippingAddressAttribute() {
+        return $this->addresses()->firstWhere('type', 'shipping');
     }
 
     /**

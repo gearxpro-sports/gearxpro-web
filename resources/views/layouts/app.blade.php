@@ -171,5 +171,6 @@
 @livewire('wire-elements-modal')
 @stack('scripts')
 @livewireScriptConfig
+@livewire('wire-elements-modal')
 </body>
 </html>

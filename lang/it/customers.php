@@ -34,4 +34,56 @@ return [
             'title' => 'Riepilogo Ordini',
         ],
     ],
+    'edit' => [
+        'title' => 'Modifica Cliente',
+        'titles' => [
+            'general_data' => 'Dati generali',
+            'billing_data' => 'Dati di Fatturazione',
+            'shipping_data' => 'Dati di Spedizione',
+            'payment' => 'Pagamento',
+        ],
+        'firstname' => [
+            'label' => 'Nome',
+        ],
+        'lastname' => [
+            'label' => 'Cognome',
+        ],
+        'email' => [
+            'label' => 'Email',
+        ],
+        'company' => [
+            'label' => 'Ragione Sociale',
+        ],
+        'address' => [
+            'label' => 'Via',
+        ],
+        'city' => [
+            'label' => 'Città',
+        ],
+        'postcode' => [
+            'label' => 'CAP',
+        ],
+        'country' => [
+            'label' => 'Nazione',
+            'hint' => 'Seleziona la Nazione dove opera questo rivenditore'
+        ],
+        'vat_number' => [
+            'label' => 'Partita IVA',
+        ],
+        'tax_code' => [
+            'label' => 'Codice Fiscale',
+        ],
+        'phone' => [
+            'label' => 'Telefono',
+        ],
+        'sdi' => [
+            'label' => 'Codice SDI',
+        ],
+        'pec' => [
+            'label' => 'Email PEC',
+        ],
+        'payment_method' => [
+            'label' => 'Metodo di Pagamento',
+        ]
+    ],
 ];

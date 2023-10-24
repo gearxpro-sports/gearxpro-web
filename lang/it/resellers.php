@@ -18,6 +18,13 @@ return [
         ],
     ],
     'create' => [
+        'title' => 'Crea Rivenditore',
+        'titles' => [
+            'general_data' => 'Dati generali',
+            'billing_data' => 'Dati di Fatturazione',
+            'shipping_data' => 'Dati di Spedizione',
+            'payment' => 'Pagamento',
+        ],
         'firstname' => [
             'label' => 'Nome',
         ],
@@ -41,6 +48,7 @@ return [
         ],
         'country' => [
             'label' => 'Nazione',
+            'hint' => 'Seleziona la Nazione dove opera questo rivenditore'
         ],
         'vat_number' => [
             'label' => 'Partita IVA',
@@ -62,7 +70,6 @@ return [
         ]
     ],
     'show' => [
-        'title' => 'Profilo Rivenditore',
         'data' => [
             'title' => 'Dati Rivenditore',
             'company' => 'Nome Azienda:',
@@ -79,4 +86,11 @@ return [
             'title' => 'Riepilogo Ordini',
         ],
     ],
+    'edit' => [
+        'title' => 'Modifica Rivenditore',
+    ],
+    'delete' => [
+        'title' => 'Sei sicuro di voler eliminare questo Rivenditore?',
+        'confirm' => 'Cancella Rivenditore'
+    ]
 ];

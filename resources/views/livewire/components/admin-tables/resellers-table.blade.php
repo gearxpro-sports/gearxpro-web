@@ -22,8 +22,8 @@
                 <tr class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
                     <td>{{ $reseller->firstname }} {{ $reseller->lastname }}</td>
                     <td>{{ $reseller->email }}</td>
-                    <td class="text-center">{{ $reseller->created_at->format('d M Y') }}</td>
-                    <td class="text-center">{{ optional($reseller->last_login)->format('d M Y H:i:s') ?? '-' }}</td>
+                    <td class="text-center">{{ $reseller->created_at->format('d/m/Y') }}</td>
+                    <td class="text-center">{{ optional($reseller->last_login)->format('d/m/Y H:i:s') ?? '-' }}</td>
                     <td class="text-right">
                         <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="{{ route('resellers.show', ['reseller' => $reseller->id]) }}">
                             <x-icons name="eye" class="w-5 h-5" />

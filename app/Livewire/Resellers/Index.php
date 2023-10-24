@@ -9,8 +9,6 @@ class Index extends Component
 {
     public function render()
     {
-        return view('livewire.resellers.index', [
-            'resellers' => User::role('reseller')->get()
-        ]);
+        return view('livewire.resellers.index');
     }
 }

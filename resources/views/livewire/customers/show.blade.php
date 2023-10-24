@@ -1,5 +1,8 @@
 <x-slot name="title">
-    {{ __('customers.show.title') }}
+    {{ $customer->fullname }}
+</x-slot>
+<x-slot name="actions">
+    <x-primary-button href="{{ route('customers.edit', ['customer' => $customer]) }}">{{ __('common.edit') }}</x-primary-button>
 </x-slot>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -25,25 +28,49 @@
             </li>
             <li class="flex space-x-2">
                 <span class="inline-block text-color-6c757d">{{ __('customers.show.data.registration_date') }}</span>
-                <span>{{ $customer->created_at->format('d M Y') }}</span>
-            </li>
-            @if ($billingAddresses = $customer->addresses->firstWhere('type', 'billing'))
-            <li class="flex space-x-2">
-                <span class="inline-block text-color-6c757d">{{ __('customers.show.data.address') }}</span>
-                <span>{{ $billingAddresses->address_1 }} {{ $billingAddresses->address_2 }}</span>
-            </li>
-            <li class="flex space-x-2">
-                <span class="inline-block text-color-6c757d">{{ __('customers.show.data.city') }}</span>
-                <span>{{ $billingAddresses->city }}</span>
-            </li>
-            <li class="flex space-x-2">
-                <span class="inline-block text-color-6c757d">{{ __('customers.show.data.postcode') }}</span>
-                <span>{{ $billingAddresses->postcode }}</span>
+                <span>{{ $customer->created_at->format('d/m/Y') }}</span>
             </li>
             <li class="flex space-x-2">
                 <span class="inline-block text-color-6c757d">{{ __('customers.show.data.country') }}</span>
-                <span>{{ $billingAddresses->country->name }}</span>
+                <span>{{ $customer->country->name }}</span>
             </li>
+            @if($billing_address)
+                <h3 class="font-bold">Dati di fatturazione</h3>
+                <li class="flex space-x-2">
+                    <span class="inline-block text-color-6c757d">{{ __('customers.show.data.address') }}</span>
+                    <span>{{ $billing_address->address_1 }} {{ $billing_address->address_2 }}</span>
+                </li>
+                <li class="flex space-x-2">
+                    <span class="inline-block text-color-6c757d">{{ __('customers.show.data.city') }}</span>
+                    <span>{{ $billing_address->city }}</span>
+                </li>
+                <li class="flex space-x-2">
+                    <span class="inline-block text-color-6c757d">{{ __('customers.show.data.postcode') }}</span>
+                    <span>{{ $billing_address->postcode }}</span>
+                </li>
+                <li class="flex space-x-2">
+                    <span class="inline-block text-color-6c757d">{{ __('customers.show.data.country') }}</span>
+                    <span>{{ $billing_address->country->name }}</span>
+                </li>
+            @endif
+            @if($shipping_address)
+                <h3 class="font-bold">Dati di spedizione</h3>
+                <li class="flex space-x-2">
+                    <span class="inline-block text-color-6c757d">{{ __('customers.show.data.address') }}</span>
+                    <span>{{ $shipping_address->address_1 }} {{ $shipping_address->address_2 }}</span>
+                </li>
+                <li class="flex space-x-2">
+                    <span class="inline-block text-color-6c757d">{{ __('customers.show.data.city') }}</span>
+                    <span>{{ $shipping_address->city }}</span>
+                </li>
+                <li class="flex space-x-2">
+                    <span class="inline-block text-color-6c757d">{{ __('customers.show.data.postcode') }}</span>
+                    <span>{{ $shipping_address->postcode }}</span>
+                </li>
+                <li class="flex space-x-2">
+                    <span class="inline-block text-color-6c757d">{{ __('customers.show.data.country') }}</span>
+                    <span>{{ $shipping_address->country->name }}</span>
+                </li>
             @endif
         </ul>
     </div>

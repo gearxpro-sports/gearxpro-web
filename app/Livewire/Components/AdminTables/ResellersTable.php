@@ -12,7 +12,7 @@ class ResellersTable extends BaseTable
      */
     public function render()
     {
-        $resellers = User::role(User::RESELLER)
+        $resellers = User::with('roles')->role(User::RESELLER)
             ->search(['firstname', 'lastname', 'email'], $this->search)
             ->select(['id', 'firstname', 'lastname', 'email', 'created_at', 'last_login'])
             ->orderByDesc('id');
