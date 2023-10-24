@@ -30,6 +30,7 @@
                 autoplay: false,
                 autoplayTimeout: 4000,
                 autoplaySpeed: 2000,
+                autoplayHoverPause: true,
                 infinite: false,
             });
 
