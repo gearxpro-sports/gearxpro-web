@@ -10,7 +10,7 @@
 @endphp
 @else
     @php
-        $inputClass .= ' border-gray-300 focus:border-indigo-300 focus:ring-indigo-200';
+        $inputClass .= ' focus:border-indigo-300 focus:ring-indigo-200';
     @endphp
     @enderror
     @if($prepend)

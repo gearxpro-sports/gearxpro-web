@@ -224,4 +224,9 @@
             <path d="M6.324 7.315 3.759 4.75 1.194 7.315A.692.692 0 0 1 .7 7.52a.692.692 0 0 1-.5-.205.7.7 0 0 1 0-.989L2.764 3.76.2 1.195a.7.7 0 0 1 0-.991.7.7 0 0 1 .989 0L3.754 2.77 6.319.204a.7.7 0 0 1 .991 0 .7.7 0 0 1 0 .991L4.745 3.76 7.31 6.326a.7.7 0 0 1 0 .989.7.7 0 0 1-.5.205.7.7 0 0 1-.486-.205Z"/>
         </svg>
     @break
+    @case('bars')
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" {{ $attributes->merge(['class']) }}>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+        </svg>
+    @break
 @endswitch

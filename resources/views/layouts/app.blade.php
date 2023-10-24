@@ -23,6 +23,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
     @livewireStyles
+    @mediaLibraryStyles
 </head>
 <body class="font-sans antialiased bg-color-f3f7f9">
 <div x-cloak x-data="{ sidebarOpen: false }">
@@ -167,6 +168,7 @@
     </div>
 </div>
 <x-notification></x-notification>
+@livewire('wire-elements-modal')
 @stack('scripts')
 @livewireScriptConfig
 </body>
