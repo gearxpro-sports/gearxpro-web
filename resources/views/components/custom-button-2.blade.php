@@ -1,6 +1,7 @@
-@props(['text', 'icon', 'link'])
+@props(['text', 'icon', 'link', 'width' => ''])
 
-<a href="{{ $link }}" class="w-[280px] h-[48px] bg-transparent rounded-md flex justify-between items-center border border-black hover:border-white group">
+<a href="{{ $link }}"
+    @class(["h-[48px] bg-transparent rounded-md flex justify-between items-center border border-black hover:border-white group", $width])>
     <div class="h-full flex items-center grow relative group-hover:text-white">
         <span class="z-10 text-[15px] font-semibold m-auto pr-8">{{$text}}</span>
         <div class="h-full absolute top-0 w-0 bg-black group-hover:animate-line group-hover:w-full rounded-l-md"></div>
