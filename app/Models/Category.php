@@ -52,6 +52,6 @@ class Category extends Model
      */
     public function children(): HasMany
     {
-        return $this->hasMany(static::class);
+        return $this->hasMany(static::class, 'parent_id');
     }
 }

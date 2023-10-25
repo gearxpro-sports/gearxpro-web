@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->json('name');
             $table->json('description');
-            $table->foreignId('parent_id')->on('categories')->nullOndelete();
+            $table->foreignId('parent_id')->default(0)->on('categories')->nullOndelete();
             $table->timestamps();
         });
     }

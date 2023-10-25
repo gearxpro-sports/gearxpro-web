@@ -12,7 +12,11 @@ class CategoriesTable extends BaseTable
      */
     public function render()
     {
-        $categories = Category::where('parent_id', '=', 0)->get();
+        $categories = Category::search(['name->it'], $this->search)
+                        ->where('parent_id', '=', 0)
+                        ->orderBy('name')
+                        ->paginate()
+        ;
 
         return view('livewire.components.admin-tables.categories-table', compact('categories'));
     }
