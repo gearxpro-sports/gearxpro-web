@@ -18,6 +18,7 @@
             <x-icons name="user-w-search" class="{{ request()->is('dashboard/customers*') ? 'text-color-323a46' : 'text-color-6c757d group-hover:text-color-323a46' }} mr-3 flex-shrink-0 h-5 w-5" />
             {{ __('navigation.customers') }}
         </a>
+        @role(App\Models\User::SUPERADMIN)
         <a href="{{ route('products.index') }}"
            class="{{ request()->is('dashboard/products*') ? 'text-color-323a46' : 'text-color-6c757d hover:text-color-323a46' }} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
             <x-icons name="boxes" class="{{ request()->is('dashboard/products*') ? 'text-color-323a46' : 'text-color-6c757d group-hover:text-color-323a46' }} mr-3 flex-shrink-0 h-5 w-5" />
@@ -28,6 +29,7 @@
             <x-icons name="boxes" class="{{ request()->is('dashboard/categories*') ? 'text-color-323a46' : 'text-color-6c757d group-hover:text-color-323a46' }} mr-3 flex-shrink-0 h-5 w-5" />
             {{ __('navigation.categories') }}
         </a>
+        @endrole
         @role(App\Models\User::RESELLER)
         <h3 class="!mt-6 !mb-2 px-3 text-xs font-medium text-color-b6b9bb uppercase">{{ __('navigation.purchasing') }}</h3>
         <a href="{{ route('supply.index') }}"
