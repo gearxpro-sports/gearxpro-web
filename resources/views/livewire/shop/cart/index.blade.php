@@ -63,7 +63,7 @@
 
                 <div class="w-[1160px] h-[1px] bg-color-ff7f6e mt-[27px] mb-[24px]"></div>
 
-                <x-custom-button-2 :text="__('shop.cart.back_to_shopping')" :icon="'back'" :link="'/shop'" />
+                <x-custom-button-2 :text="__('shop.cart.back_to_shopping')" :icon="'back'" :link="'/shop'" width="w-[280px]" />
             </div>
 
             {{-- riepilogo ordine --}}
@@ -91,7 +91,11 @@
                     <span class="text-[15px] font-semibold leading-[19px] text-color-18181a">€ 70,00</span>
                 </div>
 
-                <x-custom-button-3 :text="__('shop.cart.go_to_pay')" :icon="'arrow-right-xl'" :link="'/shop'" />
+                @auth
+                    <x-custom-button-3 :text="__('shop.cart.go_to_pay')" :icon="'arrow-right-xl'" :link="'/shop/payment'" width="w-full" />
+                @else
+                    <x-custom-button-3 :text="__('shop.cart.go_to_pay')" :icon="'arrow-right-xl'" :link="'/shop/checkout'" width="w-full" />
+                @endauth
             </div>
         </div>
 
