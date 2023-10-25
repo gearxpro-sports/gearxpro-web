@@ -22,7 +22,9 @@
             </x-flatpickr>
         </div>
         <x-primary-button>
-            <x-icons name="filter" class="w-3.5 h-3.5 mr-2" />
+            <x-slot:prepend>
+                <x-icons name="filter" class="w-3.5 h-3.5"></x-icons>
+            </x-slot:prepend>
             {{ __('common.filter') }}
         </x-primary-button>
     </div>

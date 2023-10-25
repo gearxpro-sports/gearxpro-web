@@ -2,7 +2,7 @@
 @php
     $n = $attributes->wire('model')->value() ?: $name;
     $slug = $attributes->wire('model')->value() ?: $n;
-    $inputClass = 'h-10 block w-full text-sm text-color-18181a border border-color-eff0f0 rounded focus:outline-none focus:ring-0 focus:ring-offset-0 placeholder:placeholder-color-b6b9bb';
+    $inputClass = 'h-10 block w-full text-sm text-color-18181a border border-color-eff0f0 rounded focus:outline-none focus:ring-0 focus:ring-offset-0 placeholder:placeholder-color-b6b9bb disabled:bg-color-f7f8fa';
 @endphp
 @error($slug)
 @php

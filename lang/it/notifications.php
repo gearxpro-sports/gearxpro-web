@@ -5,6 +5,7 @@ return [
         'saving' => 'Creazione',
         'updating' => 'Aggiornamento',
         'deleting' => 'Cancellazione',
+        'adding' => 'Aggiunta'
     ],
     'actions' => [
         'show' => 'Vedi',
@@ -72,4 +73,9 @@ return [
             'error' => 'Errore durante l\'eliminazione della categoria!',
         ],
     ],
+    'supply' => [
+        'adding' => [
+            'success' => 'Il prodotto è stato aggiunto con successo!'
+        ]
+    ]
 ];

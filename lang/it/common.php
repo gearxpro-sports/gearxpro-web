@@ -13,6 +13,7 @@ return [
     'cancel' => 'Annulla',
     'delete' => 'Elimina',
     'update' => 'Aggiorna',
+    'add' => 'Aggiungi',
     'send' => 'Invia',
     'saving' => 'Salvataggio',
     'select' => 'Seleziona',

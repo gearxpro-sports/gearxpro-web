@@ -13,6 +13,8 @@ use App\Livewire\Products\Edit as ProductsEdit;
 use App\Livewire\Categories\Index as CategoriesIndex;
 use App\Livewire\Categories\Create as CategoriesCreate;
 use App\Livewire\Categories\Edit as CategoriesEdit;
+use App\Livewire\Supply\Index as SupplyIndex;
+use App\Livewire\Supply\Purchases\Index as SupplyPurchasesIndex;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Shop\Index as ShopIndex;
 use App\Livewire\Shop\Products\Index as ProductIndex;
@@ -64,6 +66,12 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {
             Route::get('/', CategoriesIndex::class)->name('categories.index');
             Route::get('/create', CategoriesCreate::class)->name('categories.create');
             Route::get('/{category}/edit', CategoriesEdit::class)->name('categories.edit');
+        });
+        Route::prefix('supply')->middleware(['role:reseller'])->group(function() {
+            Route::get('/', SupplyIndex::class)->name('supply.index');
+        });
+        Route::prefix('purchases')->middleware(['role:reseller'])->group(function() {
+            Route::get('/', SupplyPurchasesIndex::class)->name('supply.purchases.index');
         });
     });
 
