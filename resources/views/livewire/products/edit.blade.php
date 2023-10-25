@@ -27,7 +27,7 @@
                             <x-input type="text" wire:model.change="productForm.name" name="name" label="{{ __('products.edit.section.main.name.label') }}" required></x-input>
                             <x-input type="text" wire:model.change="productForm.slug" name="slug" label="{{ __('products.edit.section.main.slug.label') }}" class="text-color-6c757d" required>
                                 <x-slot:action>
-                                    <button type="button" wire:click="updateSlug()" class="ml-auto text-color-18181a underline hover:no-underline" tabindex="-1">{{ __('products.edit.section.main.slug.action') }}</a>
+                                    <button type="button" wire:click="updateSlug()" class="ml-auto text-color-18181a underline hover:no-underline" tabindex="-1">{{ __('products.edit.section.main.slug.action') }}</button>
                                 </x-slot:action>
                             </x-input>
                             <div x-data="{openedDescTab: '{{ $descFields[0] }}'}">
@@ -71,8 +71,8 @@
                             @else
                             <div class="flex flex-col space-y-4">
                                 <div>
-                                    <div 
-                                        x-data="{ 
+                                    <div
+                                        x-data="{
                                             selectedAttributes: {},
                                             updateAttributes(groupId, attributes) {
                                                 if (attributes.length > 0) {
@@ -96,7 +96,7 @@
                                                     $nextTick(this.addSelected());
                                                 },
                                             }">
-                                                <x-select x-model="selectedValues" @change="addSelected" class="h-40 mb-5 min-height-full" multiple name="group_{{ $groupId }}" label="{{ $group['name'] }}">  
+                                                <x-select x-model="selectedValues" @change="addSelected" class="h-40 mb-5 min-height-full" multiple name="group_{{ $groupId }}" label="{{ $group['name'] }}">
                                                 @foreach($group['attributes'] as $attrId => $attrData)
                                                     <option :key="{{ $attrId }}" value="{{ $attrId }}">{{ $attrData['value'] }}</option>
                                                 @endforeach
@@ -110,7 +110,7 @@
                                     @if ($productVariants->count())
                                     <div wire:sortable="updateProductVariantOrder" wire:sortable.options="{ animation: 100 }" class="flex flex-col space-y-4 mt-5">
                                         @foreach($productVariants as $productVariant)
-                                            <livewire:products.product-variant-item :images="$images" :productVariant="$productVariant" :product="$product" />
+                                            <livewire:products.product-variant-item :images="$images" :productVariant="$productVariant" :product="$product" wire:key="product_variant_{{$productVariant->id}}" />
                                         @endforeach
                                     </div>
                                     @endif
