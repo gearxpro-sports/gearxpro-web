@@ -57,7 +57,7 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {
 
         Route::prefix('products')->group(function () {
             Route::get('/', ProductsIndex::class)->name('products.index');
-            Route::get('/edit/{product}', ProductsEdit::class)->name('products.edit');
+            Route::get('/{product}/edit', ProductsEdit::class)->name('products.edit');
         });
 
         Route::prefix('categories')->middleware(['role:superadmin'])->group(function () {

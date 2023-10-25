@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\View;
 use App\Livewire\Products\Forms\ProductForm;
 use Illuminate\Database\Eloquent\Collection;
-use App\Livewire\Products\Forms\ProductVariantForm;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibraryPro\Livewire\Concerns\WithMedia;
 
 class Edit extends Component
@@ -29,11 +27,6 @@ class Edit extends Component
      * @var ProductForm
      */
     public ProductForm $productForm;
-
-    /**
-     * @var ProductVariantForm
-     */
-    public ProductVariantForm $productVariantForm;
 
     /**
      * @var bool
@@ -56,14 +49,14 @@ class Edit extends Component
     public array $countriesAvailable;
 
     /**
-     * @var integer
+     * @var array
      */
-    public int $editProductVariant = 0;
+    public array $images = [];
 
     /**
      * @var array
      */
-    public $images = [];
+    public array $prices = [];
 
     public function mount()
     {
@@ -82,16 +75,25 @@ class Edit extends Component
                     ->toArray();
         $this->productGroupAttributesList = $this->getCompleteGroupAttributesArray();
         $this->loadProductVariants();
+
+        foreach ($this->productVariants as $variant) {
+            $this->images['var_'.$variant->id] = [];
+        }
+
+        foreach($this->product->countries as $country) {
+            $this->prices[$country->id] = [
+                'wholesale_price' => $country->prices->wholesale_price,
+                'price' => $country->prices->price,
+            ];
+        }
     }
 
     /**
      * @return View
      */
     public function render()
-    {
-        $medias = $this->product->getMedia();
-
-        return view('livewire.products.edit', compact('medias'));
+    {       
+        return view('livewire.products.edit');
     }
 
     public function updateSlug()
@@ -170,50 +172,11 @@ class Edit extends Component
     /**
      * @param ProductVariant $productVariant
      */
-    public function editVariant(ProductVariant $productVariant)
-    {
-        $this->productVariantForm->setProductVariant($productVariant);
-        $this->editProductVariant = $productVariant->id;
-    }
-
-    public function updateVariant()
-    {
-        if ($this->productVariantForm->update()) {
-            $this->closeProductVariantForm();
-            $this->loadProductVariants();
-        } else {
-            session()->flash('variantFormError', __('products.edit.section.options.errors.variant_form'));
-        }
-    }
-
-    /**
-     * @param ProductVariant $productVariant
-     */
     public function removeVariant(ProductVariant $productVariant)
     {
         if ($productVariant->delete()) {
             $this->productVariants = $this->productVariants->reject(fn($item) => $item->id === $productVariant->id);
         }
-    }
-
-    public function closeProductVariantForm()
-    {
-        $this->editProductVariant = 0;
-        $this->productVariantForm->reset();
-    }
-
-    public function saveImages()
-    {
-        $this->product->addFromMediaLibraryRequest($this->images)->toMediaCollection('default');
-        $this->images = [];
-    }
-
-    /**
-     * @param string $imageUuid
-     */
-    public function removeImage(string $imageUuid)
-    {
-        Media::findByMediaUuid($imageUuid)->delete();
     }
 
     /**
@@ -261,7 +224,7 @@ class Edit extends Component
         return $combinations;
     }
 
-    private function loadProductVariants()
+    public function loadProductVariants()
     {
         $this->productVariants = $this->product->variants()->with('attributes.group')->get();
     }

@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Builder;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class ProductVariant extends Model
+class ProductVariant extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     /**
      * @var array
@@ -58,5 +62,17 @@ class ProductVariant extends Model
         static::addGlobalScope('order_by_position', function (Builder $builder) {
             $builder->orderBy('position');
         });
+    }
+
+    /**
+     * @param Media|null $media
+     * @return void
+     */
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('preview')
+            ->fit(Manipulations::FIT_CROP, 300, 300)
+            ->nonQueued();
     }
 }

@@ -168,7 +168,6 @@
     </div>
 </div>
 <x-notification></x-notification>
-@livewire('wire-elements-modal')
 @stack('scripts')
 @livewireScriptConfig
 @livewire('wire-elements-modal')

@@ -3,7 +3,7 @@
 @import "tailwindcss/utilities";
 @import "../../vendor/spatie/laravel-medialibrary-pro/resources/js/media-library-pro-styles/src/styles.css";
 
-*{
+/* *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -32,4 +32,4 @@
 
 .owl-dots {
     @apply h-0;
-}
+} */

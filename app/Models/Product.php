@@ -2,19 +2,15 @@
 
 namespace App\Models;
 
-use Spatie\Image\Manipulations;
-use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Product extends Model implements HasMedia
+class Product extends Model
 {
-    use HasFactory, HasTranslations, InteractsWithMedia;
+    use HasFactory, HasTranslations;
 
     /**
      * @var array
@@ -56,7 +52,7 @@ class Product extends Model implements HasMedia
         return $this
             ->belongsToMany(Country::class)
             ->withPivot('wholesale_price', 'price')
-            ->as('subscription')
+            ->as('prices')
         ;
     }
 
@@ -74,37 +70,5 @@ class Product extends Model implements HasMedia
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
-    }
-
-    // public static function boot(){
-    //     parent::boot();
-    
-    //     static::creating(function ($instance){
-    //         $translatable = [
-    //             'main_desc',
-    //             'features_desc',
-    //             'pros_desc',
-    //             'technical_desc',
-    //             'washing_desc',
-    //             'meta_title',
-    //             'meta_description',
-    //         ];
-
-    //         foreach($translatable as $trans) {
-    //             $instance->{$trans} = '';
-    //         }
-    //     });
-    // }
-
-    /**
-     * @param Media|null $media
-     * @return void
-     */
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this
-            ->addMediaConversion('preview')
-            ->fit(Manipulations::FIT_CROP, 300, 300)
-            ->nonQueued();
     }
 }

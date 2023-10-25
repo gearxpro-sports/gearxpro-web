@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use App\Models\GroupAttribute;
@@ -21,6 +22,8 @@ class ProductSeeder extends Seeder
         foreach ($groupAttributes as $index => $group) {
             $groupedIds[$index] = array_column($group->toArray(), 'id');
         }
+
+        $countriesAvailable = User::role(User::RESELLER)->pluck('country_id');
         
         for ($k=1; $k<8; $k++) {
             
@@ -58,6 +61,15 @@ class ProductSeeder extends Seeder
     
                 $productVariant->attributes()->attach($combination);
                 $position++;
+            }
+
+            foreach($countriesAvailable as $countryId) {
+                $product->countries()->attach([
+                    $countryId => [
+                        'wholesale_price' => rand(10, 40) / 10,
+                        'price'           => rand(41, 60) / 10,
+                    ]
+                ]);
             }
         }
     }

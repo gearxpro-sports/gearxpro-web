@@ -57,5 +57,19 @@ return [
             'success' => 'Il prodotto è stato eliminato con successo!',
             'error' => 'Errore durante l\'eliminazione del prodotto!',
         ],
-    ]
+    ],
+    'categories' => [
+        'saving' => [
+            'success' => 'La categoria è stata creata con successo!',
+            'error' => 'Errore durante il salvataggio della categoria!',
+        ],
+        'updating' => [
+            'success' => 'La categoria è stata aggiornata con successo!',
+            'error' => 'Errore durante l\'aggiornamento della categoria!',
+        ],
+        'deleting' => [
+            'success' => 'La categoria è stata eliminata con successo!',
+            'error' => 'Errore durante l\'eliminazione della categoria!',
+        ],
+    ],
 ];
