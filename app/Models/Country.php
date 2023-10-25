@@ -23,6 +23,9 @@ class Country extends Model
         'iso2_code',
         'iso3_code',
         'numeric_code',
+        'currency_code',
+        'currency_name',
+        'currency_symbol',
     ];
 
     /**

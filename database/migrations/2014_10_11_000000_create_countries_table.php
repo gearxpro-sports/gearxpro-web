@@ -17,6 +17,9 @@ return new class extends Migration
             $table->char('iso2_code', 2);
             $table->char('iso3_code', 3);
             $table->char('numeric_code', 3);
+            $table->char('currency_code');
+            $table->string('currency_name');
+            $table->string('currency_symbol');
         });
     }
 
