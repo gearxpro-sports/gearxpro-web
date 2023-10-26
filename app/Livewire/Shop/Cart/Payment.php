@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Shop\Cart;
 
+use App\Models\Address;
+use App\Models\Country;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -9,17 +11,18 @@ use Livewire\Attributes\Layout;
 #[Layout('layouts.checkout')]
 class Payment extends Component
 {
+    public User $user;
     // Data order customer
-    public $name;
-    public $lastName;
+    public $firstname;
+    public $lastname;
     public $address;
-    public $cap;
-    public $specific;
+    public $postcode;
+    public $company;
     public $city;
     public $province;
-    public $nation;
+    public $country;
     public $email;
-    public $telephone;
+    public $phone;
     public $dataUser = false;
     // Data payment customer
     public $creditCard;
@@ -29,6 +32,7 @@ class Payment extends Component
 
     public $money = '€';
     public $currentTab = 0;
+    public $countries;
     public $cart = [
         [
             'name' => 'SOXPro Trekking',
@@ -52,19 +56,26 @@ class Payment extends Component
         ]
     ];
 
+    public function mount() {
+        $this->countries = Country::all();
+        if (auth()->user()) {
+            $this->user = auth()->user();
+        }
+    }
+
     public function rules() {
         if ($this->currentTab == 0) {
             return [
-                'name' => 'required',
-                'lastName' => 'required',
+                'firstname' => 'required',
+                'lastname' => 'required',
                 'address' => 'required',
-                'cap' => 'required',
-                'specific' => 'nullable',
+                'postcode' => 'required',
+                'company' => 'nullable',
                 'city' => 'required',
                 'province' => 'required',
-                'nation' => 'required',
+                'country' => 'required',
                 'email' => 'required',
-                'telephone' => 'required',
+                'phone' => 'required',
             ];
         } elseif ($this->currentTab == 1) {
             return [
@@ -79,16 +90,16 @@ class Payment extends Component
     public function messages() {
         if ($this->currentTab == 0) {
             return [
-                'name.required' => __('shop.payment.required'),
-                'lastName.required' => __('shop.payment.required'),
+                'firstname.required' => __('shop.payment.required'),
+                'lastname.required' => __('shop.payment.required'),
                 'address.required' => __('shop.payment.required'),
-                'cap.required' => __('shop.payment.required'),
-                'specific.required' => __('shop.payment.required'),
+                'postcode.required' => __('shop.payment.required'),
+                'company.required' => __('shop.payment.required'),
                 'city.required' => __('shop.payment.required'),
                 'province.required' => __('shop.payment.required'),
-                'nation.required' => __('shop.payment.required'),
+                'country.required' => __('shop.payment.required'),
                 'email.required' => __('shop.payment.required'),
-                'telephone.required' => __('shop.payment.required'),
+                'phone.required' => __('shop.payment.required'),
             ];
         } elseif ($this->currentTab == 1) {
             return [
@@ -101,13 +112,28 @@ class Payment extends Component
     }
 
     public function getDataUser() {
+        // dd($this->validate());
         $this->validate();
         $this->dataUser = true;
         $this->currentTab = 1;
 
-        // User::create(
-        //     $this->customer->all()
-        // );
+        $this->user->update([
+            'phone' => $this->phone
+        ]);
+
+        $country_iso2 = Country::find($this->country);
+
+        Address::create([
+            'user_id' => $this->user->id,
+            'country_id' => $this->country,
+            'type' => 'shipping',
+            'address_1' => $this->address,
+            'postcode' => $this->postcode,
+            'company' => $this->company,
+            'city' => $this->city,
+            'state' => $country_iso2->iso2_code,
+            'phone' => $this->phone,
+        ]);
     }
 
     public function getDataPayment() {

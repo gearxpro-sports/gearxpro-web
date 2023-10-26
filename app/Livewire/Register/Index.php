@@ -2,18 +2,20 @@
 
 namespace App\Livewire\Register;
 
+use App\Models\User;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Facades\Auth;
 
 
 #[Layout('layouts.register')]
 class Index extends Component
 {
-    public $name;
-    public $lastName;
+    public $firstname;
+    public $lastname;
     public $email;
-    public string $password;
-    // public string $password_confirmation;
+    public $password;
+    public $password_confirmation;
     public $formatPassword = [
         'Un carattere in MAIUSCOLO',
         'Un numero',
@@ -27,20 +29,20 @@ class Index extends Component
         if ($property === 'password') {
             $password = str_split($this->password);
             if (count($password) > 7) {
-                $this->keyFormat[] = 2;
+                $this->keyFormat[2] = 2;
             }
             foreach ($password as $letter) {
                 if (ctype_upper($letter)) {
-                    $this->keyFormat[] = 0;
+                    $this->keyFormat[0] = 0;
                 }
                 if (is_numeric($letter)) {
-                    $this->keyFormat[] = 1;
+                    $this->keyFormat[1] = 1;
                 }
                 if (ctype_lower($letter)) {
-                    $this->keyFormat[] = 3;
+                    $this->keyFormat[3] = 3;
                 }
                 if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $letter)) {
-                    $this->keyFormat[] = 4;
+                    $this->keyFormat[4] = 4;
                 }
             }
         }
@@ -48,27 +50,33 @@ class Index extends Component
 
     public function rules() {
         return [
-            'name' => 'required',
-            'lastName' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
             'email' => 'required',
-            'password' => ['required', 'confirmed'],
-            // 'password_confirmation' => 'same:password',
+            'password' => 'required|confirmed',
         ];
     }
 
     public function messages() {
         return [
-            'name.required' => __('shop.payment.required'),
-            'lastName.required' => __('shop.payment.required'),
+            'firstname.required' => __('shop.payment.required'),
+            'lastname.required' => __('shop.payment.required'),
             'email.required' => __('shop.payment.required'),
             'password.required' => __('shop.payment.required'),
             'password.confirmed' => __('shop.payment.password_confirmation'),
-            // 'password_confirmation.same:password' => __('shop.payment.password_confirmation'),
         ];
     }
 
     public function store() {
         $this->validate();
+
+        if (count($this->keyFormat) > 4 AND $this->password === $this->password_confirmation) {
+            $user = User::create($this->validate());
+            // $this->dispatch('user', $user);
+            Auth::login($user);
+
+            $this->redirect('/shop/payment');
+        }
     }
 
     public function render()

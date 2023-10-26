@@ -4,8 +4,8 @@
         <p class="text-[17px] leading-[20px] text-color-18181a mb-[30px]">Completa questi piccoli step per continuare il tuo acquisto</p>
 
         <div class="flex flex-col gap-[27px] mb-[30px]">
-            <x-input-text wire:model="name" width="w-full" name="name" label="name" required="true" />
-            <x-input-text wire:model="lastName" width="w-full" name="lastName" label="lastName" required="true" />
+            <x-input-text wire:model="firstname" width="w-full" name="firstname" label="firstname" required="true" />
+            <x-input-text wire:model="lastname" width="w-full" name="lastname" label="lastname" required="true" />
             <x-input-text wire:model="email" width="w-full" name="email" label="email" required="true" />
 
             <div>
@@ -23,7 +23,7 @@
                             </template>
                         </div>
                     </div>
-                    <div>@error($password) <span class="text-[12px] text-color-f4432c">{{ $message }}</span> @enderror</div>
+                    <div>@error('password') <span class="text-[12px] text-color-f4432c">{{ $message }}</span> @enderror</div>
                 </div>
                 <div class="text-[12px] text-color-6c757d mt-[10px]">
                     <p>Assicurati che la password abbia almeno:</p>
@@ -49,7 +49,7 @@
             <div x-data="{password_confirmation: false}" class="w-full flex flex-col gap-1 relative">
                 <label for="password_confirmation" class="text-[12px] font-medium leading-[15px] text-color-18181a">{{ __('shop.payment.confirmPassword') }}*</label>
                 <div class="w-full flex flex-col gap-1 relative">
-                    <input wire:model="password_confirmation" x-bind:type="password_confirmation ? 'text' : 'password'" name="password_confirmation" id="password" class="h-[48px] px-4 rounded-md bg-color-edebe5 p-0 border-color-e0e0df focus:border-transparent focus:ring-0">
+                    <input wire:model.live="password_confirmation" x-bind:type="password_confirmation ? 'text' : 'password'" name="password_confirmation" id="password_confirmation" class="h-[48px] px-4 rounded-md bg-color-edebe5 p-0 border-color-e0e0df focus:border-transparent focus:ring-0">
                     <div @click="password_confirmation = !password_confirmation"
                         class="flex items-center justify-center absolute z-[1] inset-y-1 right-3 top-[5px] bg-no-repeat bg-center aspect-square rounded-sm cursor-pointer">
                         <template x-if="password_confirmation">
@@ -60,7 +60,7 @@
                         </template>
                     </div>
                 </div>
-                <div>@error($password_confirmation) <span class="text-[12px] text-color-f4432c">{{ $message }}</span> @enderror</div>
+                <div>@error('password') <span class="text-[12px] text-color-f4432c">{{ $message }}</span> @enderror</div>
             </div>
         </div>
 

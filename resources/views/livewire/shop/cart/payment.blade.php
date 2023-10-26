@@ -68,16 +68,16 @@
             <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a mb-[15px]">Indirizzo</h2>
 
             <div class="flex gap-5">
-                <x-input-text wire:model="name" width="w-1/2" name="name" label="name" required="true" />
-                <x-input-text wire:model="lastName" width="w-1/2" name="lastName" label="lastName" required="true" />
+                <x-input-text wire:model="firstname" width="w-1/2" name="firstname" label="firstname" required="true" />
+                <x-input-text wire:model="lastname" width="w-1/2" name="lastname" label="lastname" required="true" />
             </div>
 
             <div class="flex gap-5 my-[23px]">
                 <x-input-text wire:model="address" width="w-[494px]" name="address" label="address" required="true" />
-                <x-input-text wire:model="cap" width="grow" name="cap" label="cap" required="true" />
+                <x-input-text wire:model="postcode" width="grow" name="postcode" label="postcode" required="true" />
             </div>
 
-            <x-input-text wire:model="specific" width="w-full" name="specific" label="specific" required="" />
+            <x-input-text wire:model="company" width="w-full" name="company" label="company" required="" />
 
             <div class="flex gap-5 mt-[23px]">
                 <x-input-text wire:model="city" width="w-1/3" name="city" label="city" required="true" />
@@ -86,16 +86,17 @@
                     <option value="pr-a">a</option>
                     <option value="pr-n">n</option>
                 </x-select-custom>
-                <x-select-custom wire:model="nation" width="w-1/3" name="nation" label="nation" required="true">
+                <x-select-custom wire:model="country" width="w-1/3" name="country" label="country" required="true">
                     <option selected value=""></option>
-                    <option value="nt-a">a</option>
-                    <option value="nt-a">n</option>
+                    @foreach ($countries as $country )
+                        <option value="{{$country->id}}">{{$country->name}}</option>
+                    @endforeach
                 </x-select-custom>
             </div>
 
             <div class="flex gap-5 mt-[23px]">
                 <x-input-text wire:model="email" width="w-1/2" name="email" label="email" required="true" />
-                <x-input-text wire:model="telephone" width="w-1/2" name="telephone" label="telephone" required="true" />
+                <x-input-text wire:model="phone" width="w-1/2" name="phone" label="phone" required="true" />
             </div>
 
             <div class="mt-[42px] flex items-center justify-between">
