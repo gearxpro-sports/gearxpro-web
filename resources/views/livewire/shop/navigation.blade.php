@@ -41,22 +41,47 @@
                 <div class="flex space-x-[22px]">
                     <div>
                         @auth
-                            <a class="font-semibold text-gray-600">
-                                {{$user->firstname}}
-                            </a>
+                            <div class="relative">
+                                <x-dropdown align="right" width="48">
+                                    <x-slot name="trigger">
+                                        <button class="flex flex-col items-start">
+                                            <span class="text-lg font-medium text-color-b6b9bb">{{ Auth::user()->role->label }}</span>
+                                        </button>
+                                    </x-slot>
+
+                                    <x-slot name="content">
+                                        <x-dropdown-link href="/">
+                                            {{ __('Profile') }}
+                                        </x-dropdown-link>
+
+                                        <div class="border-t border-gray-100"></div>
+
+                                        <!-- Authentication -->
+                                        <form method="POST" action="{{ route('logout') }}" x-data>
+                                            @csrf
+
+                                            <x-dropdown-link href="{{ route('logout') }}"
+                                                             @click.prevent="$root.submit();">
+                                                {{ __('Log Out') }}
+                                            </x-dropdown-link>
+                                        </form>
+                                    </x-slot>
+                                </x-dropdown>
+                            </div>
                         @else
                             <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
                                 <img src="{{ Vite::asset('resources/images/icons/account.svg')}}" alt="">
                             </a>
                         @endauth
                     </div>
-                    <a href="{{ route('shop.cart') }}" class="relative">
-                        @if ($products)
-                            <div class="absolute top-[-9px] right-[-13px] w-5 h-5 bg-color-ff7f6e rounded-full text-white flex items-center justify-center text-[11px] font-semibold leading-[14px]">{{$products}}</div>
-                        @endif
-                        <img src="{{ Vite::asset('resources/images/icons/shopping-bag.svg')}}" alt="">
-                    </a>
                 </div>
+
+                <a href="{{ route('shop.cart') }}" class="relative">
+                    @if ($products)
+                        <div class="absolute top-[-9px] right-[-13px] w-5 h-5 bg-color-ff7f6e rounded-full text-white flex items-center justify-center text-[11px] font-semibold leading-[14px]">{{$products}}</div>
+                    @endif
+                    <img src="{{ Vite::asset('resources/images/icons/shopping-bag.svg')}}" alt="">
+                </a>
 
                 <x-drop-language :current="$currentLanguage" :options="$languages"/>
             </div>
