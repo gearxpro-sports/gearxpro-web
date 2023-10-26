@@ -54,7 +54,7 @@ class UserSeeder extends Seeder
             )
             ->create([
                 'firstname' => 'Reseller',
-                'lastname' => null,
+                'lastname' => 'Cognome',
                 'email' => 'reseller@example.test',
                 'password' => bcrypt('password'),
                 'created_at' => now(),

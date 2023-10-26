@@ -15,6 +15,7 @@ use App\Livewire\Categories\Create as CategoriesCreate;
 use App\Livewire\Categories\Edit as CategoriesEdit;
 use App\Livewire\Supply\Index as SupplyIndex;
 use App\Livewire\Supply\Purchases\Index as SupplyPurchasesIndex;
+use App\Livewire\Supply\Purchases\Show as SupplyPurchaseShow;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Shop\Index as ShopIndex;
 use App\Livewire\Shop\Products\Index as ProductIndex;
@@ -70,8 +71,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {
         Route::prefix('supply')->middleware(['role:reseller'])->group(function() {
             Route::get('/', SupplyIndex::class)->name('supply.index');
         });
-        Route::prefix('purchases')->middleware(['role:reseller'])->group(function() {
+        Route::prefix('purchases')->group(function() {
             Route::get('/', SupplyPurchasesIndex::class)->name('supply.purchases.index');
+            Route::get('/{supply}', SupplyPurchaseShow::class)->name('supply.purchases.show')->middleware(['role:superadmin']);
         });
     });
 

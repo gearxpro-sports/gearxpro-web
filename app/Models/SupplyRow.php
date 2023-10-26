@@ -9,6 +9,13 @@ class SupplyRow extends Model
 {
     use HasFactory;
 
+    /**
+     * @var array
+     */
+    protected $casts = [
+        'product' => 'object'
+    ];
+
     public function supply() {
         return $this->belongsTo(Supply::class);
     }

@@ -17,6 +17,9 @@
                                 <th>{{ __('supply.purchases.index.table.cols.order_number') }}</th>
                                 <th>{{ __('supply.purchases.index.table.cols.order_date') }}</th>
                                 <th>{{ __('supply.purchases.index.table.cols.total') }}</th>
+                                @role(App\Models\User::SUPERADMIN)
+                                <th>{{ __('supply.purchases.index.table.cols.reseller') }}</th>
+                                @endrole
                                 <th>{{ __('supply.purchases.index.table.cols.status') }}</th>
                                 <th></th>
                             </tr>
@@ -29,13 +32,23 @@
                                     </td>
                                     <td>{{ $order->created_at->format('d/m/Y') }}</td>
                                     <td>{{ $order->amount }}</td>
+                                    @role(App\Models\User::SUPERADMIN)
+                                    <td><a class="text-color-6c757d underline" target="_blank" href="{{ route('resellers.show', ['reseller' => $order->reseller_id]) }}">{{ $order->reseller_fullname}}</a></td>
+                                    @endrole
                                     <td class="whitespace-nowrap">
                                         <x-badge color="{{ \App\Models\Supply::STATUSES[$order->status] }}">{{ __('supply.statuses.' . $order->status) }}</x-badge>
                                     </td>
                                     <td class="text-right">
-                                        <a class="flex items-center justify-center ml-auto bg-color-ef4983 w-8 h-8 text-center text-white rounded-sm hover:bg-color-ef4983/90" href="#">
-                                            <x-icons name="download" class="w-4 h-4" />
-                                        </a>
+                                        <div class="inline-flex space-x-2">
+                                            @role(App\Models\User::SUPERADMIN)
+                                            <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm hover:bg-color-eff0f0/90" href="{{ route('supply.purchases.show', ['supply' => $order->id]) }}">
+                                                <x-icons name="eye" class="w-4 h-4" />
+                                            </a>
+                                            @endrole
+                                            <a class="flex items-center justify-center ml-auto bg-color-ef4983 w-8 h-8 text-center text-white rounded-sm hover:bg-color-ef4983/90" href="#">
+                                                <x-icons name="download" class="w-4 h-4" />
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

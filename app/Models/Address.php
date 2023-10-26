@@ -56,4 +56,9 @@ class Address extends Model
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function getInlineFormatAttribute()
+    {
+        return sprintf('%s %s, %s - %s %s', $this->address_1, $this->address_2, $this->city, $this->postcode, $this->state);
+    }
 }

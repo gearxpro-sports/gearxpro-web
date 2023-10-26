@@ -19,11 +19,12 @@ class SupplySeeder extends Seeder
             'uuid' => Str::random(10),
             'user_id' => User::role(User::RESELLER)->first()->id,
             'amount' => '1936.27',
-            'status' => fake()->randomElement(array_keys(Supply::STATUSES))
+            'status' => fake()->randomElement(array_keys(Supply::STATUSES)),
+            'payment_method' => 'delivery',
         ]);
 
         $supply->rows()->create([
-            'product' => json_encode(['id' => 1, 'sku' => 'PROD001', 'name' => 'Prodotto 1', 'um' => 'Pezzi', 'sale_price' => 10, 'purchase_price' => 15]),
+            'product' => ['id' => 1, 'sku' => 'PROD001', 'name' => 'Prodotto 1', 'um' => 'Pezzi', 'sale_price' => 10, 'purchase_price' => 15],
             'quantity' => 20,
         ]);
     }

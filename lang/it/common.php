@@ -41,4 +41,5 @@ return [
     'active' => 'Attiva',
     'yes' => 'Si',
     'no' => 'No',
+    'invoice' => 'Fattura',
 ];

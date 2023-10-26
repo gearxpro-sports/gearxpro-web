@@ -16,6 +16,6 @@
         @php($class = 'bg-color-20c391 text-white')
         @break
 @endswitch
-<span class="{{ $class }} inline-flex items-center rounded-full px-3.5 py-1 text-xs font-medium">
+<span {{ $attributes->merge(['class' => $class .' inline-flex items-center rounded-full px-3.5 py-1.5 text-xs font-medium']) }}>
     {{ $slot }}
 </span>

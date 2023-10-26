@@ -76,6 +76,10 @@ return [
     'supply' => [
         'adding' => [
             'success' => 'Il prodotto è stato aggiunto con successo!'
+        ],
+        'status_changed' => [
+            'success' => 'Lo stato dell\'ordine è stato modificato con successo',
+            'error' => 'Non é possibile modificare lo stato dell\'ordine',
         ]
     ]
 ];

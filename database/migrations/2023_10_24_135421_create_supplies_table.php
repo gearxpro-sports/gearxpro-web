@@ -16,7 +16,9 @@ return new class extends Migration
             $table->text('uuid');
             $table->foreignIdFor(\App\Models\User::class, 'user_id');
             $table->float('amount');
+            $table->string('payment_method')->nullable();
             $table->enum('status', array_keys(\App\Models\Supply::STATUSES));
+            $table->timestamp('shipped_at')->nullable();
             $table->timestamps();
         });
     }
