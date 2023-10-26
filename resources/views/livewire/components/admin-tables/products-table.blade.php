@@ -20,7 +20,7 @@
                     <td>{{ $product->name }}</td>
                     <td class="text-right">
                         <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="{{ route('products.edit', ['product' => $product->id]) }}">
-                            <x-icons name="edit" class="w-5 h-5" />
+                            <x-icons name="edit" class="w-4 h-4" />
                         </a>
                     </td>
                 </tr>
