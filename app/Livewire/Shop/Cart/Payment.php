@@ -112,7 +112,6 @@ class Payment extends Component
     }
 
     public function getDataUser() {
-        // dd($this->validate());
         $this->validate();
         $this->dataUser = true;
         $this->currentTab = 1;
