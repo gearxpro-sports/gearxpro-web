@@ -7,6 +7,7 @@ use Livewire\Attributes\On;
 
 class CardProduct extends Component
 {
+    public $slug;
     public $cardSmall = false;
     public $image;
     public $name;

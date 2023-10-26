@@ -43,11 +43,12 @@
         <div class="flex flex-wrap gap-[21px] relative">
             @foreach ($products as $key => $product )
                 <livewire:components.card-product wire:key="{{$key}}"
-                    :image="$product['image']"
-                    :name="$product['name']"
-                    :description="$product['description']"
-                    :availableColor="$product['availableColor']"
-                    :price="$product['price']"
+                    :slug="$product->id"
+                    :image="'SOXPro.png'"
+                    :name="$product->name"
+                    :description="$product->main_desc"
+                    :availableColor="$product->has_variants"
+                    :price="$product->price"
                 />
             @endforeach
         </div>

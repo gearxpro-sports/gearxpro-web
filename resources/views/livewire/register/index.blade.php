@@ -1,15 +1,15 @@
 <div>
-    <form wire:submit="store" class="w-[594px] mt-[90px] m-auto">
+    <form wire:submit="store" class="w-[594px] mt-[70px] m-auto">
         <h2 class="text-[33px] font-semibold leading-[40px] text-color-18181a mb-[14px]">Crea il tuo profilo</h2>
         <p class="text-[17px] leading-[20px] text-color-18181a mb-[30px]">Completa questi piccoli step per continuare il tuo acquisto</p>
 
-        <div class="flex flex-col gap-[27px] mb-[30px]">
+        <div class="flex flex-col gap-[20px] mb-[30px]">
             <x-input-text wire:model="firstname" width="w-full" name="firstname" label="firstname" required="true" />
             <x-input-text wire:model="lastname" width="w-full" name="lastname" label="lastname" required="true" />
             <x-input-text wire:model="email" width="w-full" name="email" label="email" required="true" />
 
             <div>
-                <div x-data="{showPassword: false}" class="w-full flex flex-col gap-1">
+                <div x-data="{showPassword: false}" class="w-full flex flex-col gap-1 relative">
                     <label for="password" class="text-[12px] font-medium leading-[15px] text-color-18181a">{{ __('auth.login.password.label') }}*</label>
                     <div class="w-full flex flex-col gap-1 relative">
                         <input wire:model.live="password" x-bind:type="showPassword ? 'text' : 'password'" name="password" id="password" class="h-[48px] px-4 rounded-md bg-color-edebe5 p-0 border-color-e0e0df focus:border-transparent focus:ring-0">
@@ -23,9 +23,9 @@
                             </template>
                         </div>
                     </div>
-                    <div>@error('password') <span class="text-[12px] text-color-f4432c">{{ $message }}</span> @enderror</div>
+                    <div class="absolute bottom-[-20px] right-0">@error('password') <span class="text-[12px] text-color-f4432c">{{ $message }}</span> @enderror</div>
                 </div>
-                <div class="text-[12px] text-color-6c757d mt-[10px]">
+                <div class="text-[12px] text-color-6c757d mt-[5px]">
                     <p>Assicurati che la password abbia almeno:</p>
                     <ul class="list-disc pl-[15px] pr-[5px]">
                         @foreach ($formatPassword as $key => $format)
@@ -60,7 +60,7 @@
                         </template>
                     </div>
                 </div>
-                <div>@error('password') <span class="text-[12px] text-color-f4432c">{{ $message }}</span> @enderror</div>
+                <div class="absolute bottom-[-20px] right-0">@error('password') <span class="text-[12px] text-color-f4432c">{{ $message }}</span> @enderror</div>
             </div>
         </div>
 
