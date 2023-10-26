@@ -1,17 +1,25 @@
 <?php
 
 namespace App\Livewire\Modals;
-use LivewireUI\Modal\ModalComponent;
 
+use Livewire\Component;
+use Livewire\Attributes\On;
 
-class Cart extends ModalComponent
+class Cart extends Component
 {
-    public $cart;
     public $money;
+    public $cart = [];
+    public $showModalCart = false;
 
-    public function mount($cart, $money) {
-        $this->cart = $cart;
+    #[On('modalInfoCart')]
+    public function modalInfoCart($money, $cart) {
         $this->money = $money;
+        $this->cart = $cart;
+        $this->showModalCart = true;
+    }
+
+    public function closeModal() {
+        $this->showModalCart = false;
     }
 
     public function render()

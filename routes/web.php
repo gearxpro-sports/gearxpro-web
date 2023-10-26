@@ -21,6 +21,11 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Shop\Index as ShopIndex;
 use App\Livewire\Shop\Products\Index as ProductIndex;
 use App\Livewire\Shop\Products\Show as ProductShow;
+use App\Livewire\Shop\Cart\Index as CartIndex;
+use App\Livewire\Shop\Cart\Checkout as CartCheckout;
+use App\Livewire\Shop\Cart\Payment as CartPayment;
+use App\Livewire\Register\Index as RegisterIndex;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,10 +40,21 @@ use App\Livewire\Shop\Products\Show as ProductShow;
 
 Route::get('/', [ShopIndex::class, '__invoke'])->name('home');
 
+Route::get('/shop/register', [RegisterIndex::class, '__invoke'])->name('register');
+
 Route::name('shop.')->group(function () {
     Route::get('/shop', [ProductIndex::class, '__invoke'])->name('index');
+    Route::get('/shop/cart', [CartIndex::class, '__invoke'])->name('cart');
+    Route::get('/shop/checkout', [CartCheckout::class, '__invoke'])->name('checkout');
+    Route::get('/shop/payment', [CartPayment::class, '__invoke'])->name('payment');
     Route::get('/shop/{product}', [ProductShow::class, '__invoke'])->name('show');
 });
+
+// TODO: check se vista accessibile sempre o solo se c'è un ordine effettuato in precedenza
+Route::get('/confirm', function() {
+    return view('confirm');
+})->name('confirm');
+
 
 Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {
     Route::middleware(['role:superadmin|reseller'])->group(function () {

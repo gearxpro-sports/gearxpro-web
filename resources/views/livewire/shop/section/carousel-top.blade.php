@@ -19,6 +19,7 @@
                 autoplay: true,
                 autoplayTimeout: 4000,
                 autoplaySpeed: 2000,
+                autoplayHoverPause: true,
                 infinite: true,
             });
         });

@@ -216,7 +216,7 @@
             <h2 class="px-[39px] mb-[27px] text-[33px] font-semibold leading-[40px] text-color-18181a">{{__('shop.most_purchased_title')}}</h2>
 
             <div class="pl-[39px] group-custom-button">
-                <button class="customPrevBtn w-[76px] h-[76px] rounded-full bg-white shadow hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] z-10">
+                <button class="customPrevBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] z-10 hover:border">
                     <img class="rotate-180" src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}" alt="">
                 </button>
 
@@ -233,13 +233,16 @@
                     @endforeach
                 </div>
 
-                <button class="customNextBtn w-[76px] h-[76px] rounded-full bg-white shadow hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] right-[39px] z-10">
+                <button class="customNextBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] right-[39px] z-10 hover:border">
                     <img src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}" alt="">
                 </button>
             </div>
 
         </div>
     </div>
+
+    {{-- modalInfoCart --}}
+    <livewire:modals.cart />
 </div>
 
 @push('scripts')
@@ -268,6 +271,7 @@
                 autoplay: true,
                 autoplayTimeout: 5000,
                 autoplaySpeed: 2000,
+                autoplayHoverPause: true,
                 infinite: true,
             });
 
