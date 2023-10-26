@@ -91,7 +91,7 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {
         });
         Route::prefix('purchases')->group(function() {
             Route::get('/', SupplyPurchasesIndex::class)->name('supply.purchases.index');
-            Route::get('/{supply}', SupplyPurchaseShow::class)->name('supply.purchases.show')->middleware(['role:superadmin']);
+            Route::get('/{supply}', SupplyPurchaseShow::class)->name('supply.purchases.show')->middleware(['role:superadmin|reseller']);
         });
     });
 

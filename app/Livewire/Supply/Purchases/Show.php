@@ -14,11 +14,6 @@ class Show extends Component
      */
     public Supply $supply;
 
-    public function render()
-    {
-        return view('livewire.supply.purchases.show');
-    }
-
     public function changeStatus(string $status)
     {
         if (
@@ -43,5 +38,10 @@ class Show extends Component
             subtitle: __('notifications.supply.status_changed.success'),
             type: 'success'
         );
+    }
+
+    public function render()
+    {
+        return view('livewire.supply.purchases.show');
     }
 }
