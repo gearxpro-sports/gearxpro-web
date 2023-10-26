@@ -3,6 +3,7 @@
 namespace App\Livewire\Shop\Products;
 
 use App\Livewire\Components\SectionButton;
+use App\Models\Product;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -36,58 +37,6 @@ class Index extends Component
         'LACEXPRO' => ['1', '2'],
         'TUBEXPRO' => ['1', '2'],
         'RECOVERY' => ['1', '2'],
-    ];
-
-    public $products = [
-        0 => [
-            'name' => 'SoXPro',
-            'image' => 'SOXPro.png',
-            'description' => 'SOXPro Trekking - Green',
-            'availableColor' => '1',
-            'price' => '29,00 - € 35,00'
-        ],
-        1 => [
-            'name' => 'SoXPro',
-            'image' => 'SOXPro.png',
-            'description' => 'SOXPro Trekking - Green',
-            'availableColor' => '1',
-            'price' => '29,00 - € 35,00'
-        ],
-        2 => [
-            'name' => 'SoXPro',
-            'image' => 'SOXPro.png',
-            'description' => 'SOXPro Trekking - Green',
-            'availableColor' => '1',
-            'price' => '29,00 - € 35,00'
-        ],
-        3 => [
-            'name' => 'SoXPro',
-            'image' => 'SOXPro.png',
-            'description' => 'SOXPro Trekking - Green',
-            'availableColor' => '1',
-            'price' => '29,00 - € 35,00'
-        ],
-        4 => [
-            'name' => 'SoXPro',
-            'image' => 'SOXPro.png',
-            'description' => 'SOXPro Trekking - Green',
-            'availableColor' => '1',
-            'price' => '29,00 - € 35,00'
-        ],
-        5 => [
-            'name' => 'SoXPro',
-            'image' => 'SOXPro.png',
-            'description' => 'SOXPro Trekking - Green',
-            'availableColor' => '1',
-            'price' => '29,00 - € 35,00'
-        ],
-        6 => [
-            'name' => 'SoXPro',
-            'image' => 'SOXPro.png',
-            'description' => 'SOXPro Trekking - Green',
-            'availableColor' => '1',
-            'price' => '29,00 - € 35,00'
-        ],
     ];
 
     public $colors = [
@@ -147,13 +96,16 @@ class Index extends Component
     }
 
     public function clearFilter() {
-        $this->product = null;
         $this->color = null;
         $this->size = null;
     }
 
     public function render()
     {
-        return view('livewire.shop.products.index');
+        $products = Product::all();
+
+        return view('livewire.shop.products.index', [
+            'products' => $products
+        ]);
     }
 }
