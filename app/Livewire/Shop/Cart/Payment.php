@@ -117,23 +117,26 @@ class Payment extends Component
         $this->dataUser = true;
         $this->currentTab = 1;
 
-        $this->user->update([
-            'phone' => $this->phone
-        ]);
+        if (auth()->user()) {
+            $this->user->update([
+                'phone' => $this->phone
+            ]);
 
-        $country_iso2 = Country::find($this->country);
+            $country_iso2 = Country::find($this->country);
 
-        Address::create([
-            'user_id' => $this->user->id,
-            'country_id' => $this->country,
-            'type' => 'shipping',
-            'address_1' => $this->address,
-            'postcode' => $this->postcode,
-            'company' => $this->company,
-            'city' => $this->city,
-            'state' => $country_iso2->iso2_code,
-            'phone' => $this->phone,
-        ]);
+            Address::create([
+                'user_id' => $this->user->id,
+                'country_id' => $this->country,
+                'type' => 'shipping',
+                'address_1' => $this->address,
+                'postcode' => $this->postcode,
+                'company' => $this->company,
+                'city' => $this->city,
+                'state' => $country_iso2->iso2_code,
+                'phone' => $this->phone,
+            ]);
+        }
+
     }
 
     public function getDataPayment() {
