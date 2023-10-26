@@ -16,9 +16,9 @@
         <div class="col-span-5 col-start-8 py-10">
             {{-- detail --}}
             <div>
-                <span class=" text-[17px] leading-[28px] text-color-6c757d">{{$product}}</span>
-                <h1 class="text-[33px] font-semibold leading-[40px] text-color-18181a">{{$product}}</h1>
-                <p class="text-[21px] font-medium leading-[38px] text-color-18181a">€ 35,00</p>
+                <span class=" text-[17px] leading-[28px] text-color-6c757d">{{$product->name}}</span>
+                <h1 class="text-[33px] font-semibold leading-[40px] text-color-18181a">{{$product->name}}</h1>
+                <p class="text-[21px] font-medium leading-[38px] text-color-18181a">€ {{$product->price}}</p>
             </div>
 
             {{-- format --}}
@@ -129,7 +129,7 @@
                 </template>
             </div>
 
-            <template x-if="currentTab == '{{$product}}'">
+            <template x-if="currentTab == '{{$product->name}}'">
                 <p class="text-[13px] leading-[24px] text-color-323a46">
                     La SOXPro Trekking Sock è la nuova calza sportiva grip progettata da GEARXPro Sports per soddisfare al meglio le esigenze degli atleti. SOXPro Trekking è essenzialmente dedicato agli escursionisti e agli amanti delle avventure all’aria aperta, ma adatto anche a tutte le attività sportive all’aria aperta.
 
@@ -249,9 +249,9 @@
     <script>
         function handler() {
             return {
-                currentTab: @json($product),
+                currentTab: @json($product->name),
                 tabs: [
-                    @json($product),
+                    @json($product->name),
                     @json(__('shop.products.characteristics')),
                     @json(__('shop.products.advantages')),
                     @json(__('shop.products.technicality')),

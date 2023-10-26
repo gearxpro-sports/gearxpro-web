@@ -4,6 +4,7 @@ namespace App\Livewire\Shop\Products;
 
 use App\Livewire\Modals\Cart as ModalCart;
 use App\Livewire\Shop\Navigation as ShopNavigation;
+use App\Models\Product;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -108,7 +109,7 @@ class Show extends Component
     ];
 
     public function mount($product) {
-        $this->product = $product;
+        $this->product = Product::find($product);
     }
 
     public function changeFormat($type) {
