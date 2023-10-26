@@ -18,6 +18,7 @@ return new class extends Migration
             $table->float('amount');
             $table->string('payment_method')->nullable();
             $table->enum('status', array_keys(\App\Models\Supply::STATUSES));
+            $table->boolean('confirmed')->default(false);
             $table->timestamp('shipped_at')->nullable();
             $table->timestamps();
         });

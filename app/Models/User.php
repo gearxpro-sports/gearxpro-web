@@ -82,6 +82,10 @@ class User extends Authenticatable
         return $this->addresses()->firstWhere('type', 'shipping');
     }
 
+    public function getCountryCodeAttribute() {
+        return $this->country->iso2_code;
+    }
+
     /**
      * @return HasMany
      */

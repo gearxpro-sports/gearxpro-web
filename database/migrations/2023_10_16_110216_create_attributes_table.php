@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('group_attribute_id')->constrained();
             $table->json('value');
             $table->string('color')->nullable();
+            $table->unsignedInteger('position');
             $table->timestamps();
         });
     }

@@ -2,11 +2,7 @@
 
 namespace App\Livewire\Components\AdminTables;
 
-use App\Models\User;
-use App\Models\Supply;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Auth;
 
 class SupplyPurchasesTable extends BaseTable
 {
@@ -31,6 +27,7 @@ class SupplyPurchasesTable extends BaseTable
         }
 
         $orders
+            ->where('confirmed', true)
             ->search(['uuid'], $this->search)
             ->orderByDesc('created_at')
         ;

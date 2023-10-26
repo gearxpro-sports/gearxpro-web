@@ -10,28 +10,28 @@
             </x-input>
         </div>
     </div>
-    <div class="flex items-center gap-2">
-        <div class="w-full max-w-xs">
-            <x-select name="prices">
-                <option value="">{{ __('supply.index.filter.prices') }}</option>
-                @foreach($prices as $price)
-                    <option :value="$price">{{ $price }}</option>
-                @endforeach
-            </x-select>
-        </div>
-        <div class="w-full max-w-xs">
-            <x-select name="prices">
-                <option value="">{{ __('supply.index.filter.availabilities') }}</option>
-                @foreach($availabilities as $availability)
-                    <option :value="$availability">{{ $availability }}</option>
-                @endforeach
-            </x-select>
-        </div>
-        <x-primary-button>
-            <x-slot:prepend>
-                <x-icons name="filter" class="w-3.5 h-3.5"></x-icons>
-            </x-slot:prepend>
-            {{ __('common.filter') }}
-        </x-primary-button>
-    </div>
+{{--    <div class="flex items-center gap-2">--}}
+{{--        <div class="w-full max-w-xs">--}}
+{{--            <x-select name="prices">--}}
+{{--                <option value="">{{ __('supply.index.filter.prices') }}</option>--}}
+{{--                @foreach($prices as $price)--}}
+{{--                    <option :value="$price">{{ $price }}</option>--}}
+{{--                @endforeach--}}
+{{--            </x-select>--}}
+{{--        </div>--}}
+{{--        <div class="w-full max-w-xs">--}}
+{{--            <x-select name="prices">--}}
+{{--                <option value="">{{ __('supply.index.filter.availabilities') }}</option>--}}
+{{--                @foreach($availabilities as $availability)--}}
+{{--                    <option :value="$availability">{{ $availability }}</option>--}}
+{{--                @endforeach--}}
+{{--            </x-select>--}}
+{{--        </div>--}}
+{{--        <x-primary-button>--}}
+{{--            <x-slot:prepend>--}}
+{{--                <x-icons name="filter" class="w-3.5 h-3.5"></x-icons>--}}
+{{--            </x-slot:prepend>--}}
+{{--            {{ __('common.filter') }}--}}
+{{--        </x-primary-button>--}}
+{{--    </div>--}}
 </div>

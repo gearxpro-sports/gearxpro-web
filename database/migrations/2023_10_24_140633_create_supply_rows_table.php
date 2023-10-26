@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\Supply::class, 'supply_id');
             $table->json('product');
+            $table->float('price');
             $table->integer('quantity');
             $table->timestamps();
         });

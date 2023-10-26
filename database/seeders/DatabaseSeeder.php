@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ResellerSeeder::class,
             CustomerSeeder::class,
-            SupplySeeder::class,
             GroupAttributeWithAttributeSeeder::class,
             ProductSeeder::class,
+//            SupplySeeder::class,
         ]);
     }
 }

@@ -38,6 +38,22 @@ class ProductVariant extends Model implements HasMedia
         'attributes',
     ];
 
+    public function inStock() {
+        return $this->quantity > 0;
+    }
+
+    public function getLengthAttribute() {
+        return $this->attributes()->where('group_attribute_id', 1)->first();
+    }
+
+    public function getColorAttribute() {
+        return $this->attributes()->where('group_attribute_id', 2)->first();
+    }
+
+    public function getSizeAttribute() {
+        return $this->attributes()->where('group_attribute_id', 3)->first();
+    }
+
     /**
      * @return BelongsTo
      */
@@ -53,7 +69,7 @@ class ProductVariant extends Model implements HasMedia
     {
         return $this->BelongsToMany(Attribute::class);
     }
-    
+
     /**
      * @return void
      */

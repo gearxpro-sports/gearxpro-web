@@ -3,5 +3,5 @@
 </x-slot>
 
 <div>
-    <livewire:components.admin-tables.supply-table />
+    <livewire:components.admin-tables.supply.supply-table />
 </div>
