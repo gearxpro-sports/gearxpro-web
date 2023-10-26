@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             GroupAttributeWithAttributeSeeder::class,
             ProductSeeder::class,
-            SupplySeeder::class,
+//            SupplySeeder::class,
         ]);
     }
 }
