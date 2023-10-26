@@ -5,17 +5,15 @@
             <p class="text-[17px] leading-[20px] text-color-18181a font-normal">{{ __('shop.checkout.login_checkout') }}</p>
         </div>
 
-        <form method="POST" action="{{ route('login') }}" class="mb-[70px]">
-            @csrf
-
+        <form wire:submit="login" class="mb-[70px]">
             <div class="w-full flex flex-col gap-1">
                 <label for="email" class="text-[12px] font-medium leading-[15px] text-color-18181a">{{ __('shop.checkout.email') }}</label>
-                <input type="text" name="email" class="h-[48px] px-4 rounded-md bg-color-edebe5 p-0 border-color-e0e0df focus:border-transparent focus:ring-0">
+                <input wire:model="email" type="text" name="email" class="h-[48px] px-4 rounded-md bg-color-edebe5 p-0 border-color-e0e0df focus:border-transparent focus:ring-0">
             </div>
 
             <div x-data="{showPassword: false}" class="w-full flex flex-col gap-1 mt-[23px] mb-[40px] relative">
                 <label for="password" class="text-[12px] font-medium leading-[15px] text-color-18181a">{{ __('auth.login.password.label') }}</label>
-                <input x-bind:type="showPassword ? 'text' : 'password'" name="password" class="h-[48px] px-4 rounded-md bg-color-edebe5 p-0 border-color-e0e0df focus:border-transparent focus:ring-0">
+                <input wire:model="password" x-bind:type="showPassword ? 'text' : 'password'" name="password" class="h-[48px] px-4 rounded-md bg-color-edebe5 p-0 border-color-e0e0df focus:border-transparent focus:ring-0">
                 <div @click="showPassword = !showPassword"
                     class="flex items-center justify-center absolute z-[1] inset-y-1 right-4 top-[25px] bg-no-repeat bg-center aspect-square rounded-sm cursor-pointer">
                     <template x-if="showPassword">
