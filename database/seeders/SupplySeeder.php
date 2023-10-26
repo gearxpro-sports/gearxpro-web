@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
+use App\Models\ProductVariant;
 use App\Models\Supply;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -22,9 +24,16 @@ class SupplySeeder extends Seeder
             'status' => fake()->randomElement(array_keys(Supply::STATUSES))
         ]);
 
-        $supply->rows()->create([
-            'product' => json_encode(['id' => 1, 'sku' => 'PROD001', 'name' => 'Prodotto 1', 'um' => 'Pezzi', 'sale_price' => 10, 'purchase_price' => 15]),
-            'quantity' => 20,
-        ]);
+        $product_ids = Product::all()->pluck('id');
+        $variants = ProductVariant::with('product')
+            ->whereIn('product_id', $product_ids);
+        foreach (range(1, 10) as $o) {
+            $variant = $variants->inRandomOrder()->first();
+            $supply->rows()->create([
+                'product' => $variant,
+                'price' => $variant->product->countries()->where('iso2_code', 'it')->first()->prices->wholesale_price,
+                'quantity' => fake()->randomDigit(),
+            ]);
+        }
     }
 }

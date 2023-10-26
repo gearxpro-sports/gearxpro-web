@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\User::class, 'user_id');
             $table->float('amount');
             $table->enum('status', array_keys(\App\Models\Supply::STATUSES));
+            $table->boolean('confirmed')->default(false);
             $table->timestamps();
         });
     }

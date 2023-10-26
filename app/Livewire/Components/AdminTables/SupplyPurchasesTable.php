@@ -11,7 +11,7 @@ class SupplyPurchasesTable extends BaseTable
      */
     public function render()
     {
-        $orders = auth()->user()->supplies()->search(['uuid'], $this->search)->select(['id', 'uuid', 'amount', 'created_at', 'status'])->orderByDesc('created_at');
+        $orders = auth()->user()->supplies()->where('confirmed', true)->search(['uuid'], $this->search)->select(['id', 'uuid', 'amount', 'created_at', 'status'])->orderByDesc('created_at');
 //        $orders = User::role(User::CUSTOMER)
 //            ->search(['firstname', 'lastname', 'email'], $this->search)
 //            ->select(['id', 'firstname', 'lastname', 'email', 'created_at'])

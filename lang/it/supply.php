@@ -17,86 +17,22 @@ return [
                 'product_name' => 'Nome Prodotto',
                 'product_id' => 'ID Prodotto',
                 'measures' => 'Misure',
+                'length' => 'Lunghezza gamba',
                 'unit_of_measurement' => 'Unità di misura',
                 'sale_price' => 'Prezzo Vendita',
                 'purchase_price' => 'Prezzo Acquisto',
                 'quantity' => 'Quantità',
                 'manufacturer_availability' => 'Disp. Produttore'
             ],
+            'footer' => [
+                'cart_total' => 'Totale Carrello',
+                'review_order' => 'Rivedi Ordine'
+            ]
         ],
         'filter' => [
             'prices' => 'Seleziona prezzo',
             'availabilities' => 'Seleziona disponibilità',
         ],
-    ],
-    'show' => [
-        'title' => 'Profilo Cliente',
-        'data' => [
-            'title' => 'Dati Cliente',
-            'firstname' => 'Nome:',
-            'lastname' => 'Cognome:',
-            'email' => 'Email:',
-            'registration_date' => 'Data di Registrazione:',
-            'address' => 'Indirizzo:',
-            'city' => 'Città:',
-            'postcode' => 'Cap:',
-            'country' => 'Paese:',
-        ],
-        'orders' => [
-            'title' => 'Riepilogo Ordini',
-        ],
-    ],
-    'edit' => [
-        'title' => 'Modifica Cliente',
-        'titles' => [
-            'general_data' => 'Dati generali',
-            'billing_data' => 'Dati di Fatturazione',
-            'shipping_data' => 'Dati di Spedizione',
-            'payment' => 'Pagamento',
-        ],
-        'firstname' => [
-            'label' => 'Nome',
-        ],
-        'lastname' => [
-            'label' => 'Cognome',
-        ],
-        'email' => [
-            'label' => 'Email',
-        ],
-        'company' => [
-            'label' => 'Ragione Sociale',
-        ],
-        'address' => [
-            'label' => 'Via',
-        ],
-        'city' => [
-            'label' => 'Città',
-        ],
-        'postcode' => [
-            'label' => 'CAP',
-        ],
-        'country' => [
-            'label' => 'Nazione',
-            'hint' => 'Seleziona la Nazione dove opera questo rivenditore'
-        ],
-        'vat_number' => [
-            'label' => 'Partita IVA',
-        ],
-        'tax_code' => [
-            'label' => 'Codice Fiscale',
-        ],
-        'phone' => [
-            'label' => 'Telefono',
-        ],
-        'sdi' => [
-            'label' => 'Codice SDI',
-        ],
-        'pec' => [
-            'label' => 'Email PEC',
-        ],
-        'payment_method' => [
-            'label' => 'Metodo di Pagamento',
-        ]
     ],
     'purchases' => [
         'index' => [
@@ -115,5 +51,38 @@ return [
                 'date' => 'Seleziona data',
             ],
         ],
-    ]
+    ],
+    'recap' => [
+        'title' => 'Riepilogo Ordine',
+        'table' => [
+            'title' => 'Prodotti',
+            'cols' => [
+                'product_name' => 'Nome Prodotto',
+                'measures' => 'Misure',
+                'purchase_price' => 'Prezzo Acquisto',
+                'quantity' => 'Quantità',
+                'total' => 'Totale',
+            ],
+        ],
+        'order_review' => [
+            'order' => [
+                'title' => 'Totale Ordine',
+                'subtotal' => 'Subtotale',
+                'shipping_cost' => 'Costo di Spedizione',
+                'vat' => 'IVA',
+                'total' => 'Totale'
+            ],
+            'shipping' => [
+                'title' => 'Info Spedizione',
+                'receiver' => 'Destinatario',
+                'address' => 'Indirizzo',
+                'phone' => 'Telefono',
+                'email' => 'Email',
+            ],
+            'payment' => [
+                'title' => 'Pagamento',
+            ],
+            'confirm' => 'Conferma Ordine'
+        ],
+    ],
 ];

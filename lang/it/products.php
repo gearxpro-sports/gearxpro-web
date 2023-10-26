@@ -2,6 +2,10 @@
 
 return [
     'title' => 'Prodotti',
+    'stock' => [
+        'in_stock' => 'Disponibile',
+        'out_of_stock' => 'Non disponibile',
+    ],
     'index' => [
         'title' => 'Prodotti',
         'table' => [
@@ -32,7 +36,7 @@ return [
                 'title' => 'Localizzazione',
                 'wholesale_price' => [
                     'label' => 'Prezzo di acquisto',
-                ],                
+                ],
                 'price' => [
                     'label' => 'Prezzo di vendita',
                 ],
