@@ -22,26 +22,6 @@ class Address extends Model
     protected $with = ['country'];
 
     /**
-     * @var array
-     */
-    protected $fillable = [
-        'user_id',
-        'country_id',
-        'type',
-        'address_1',
-        'address_2',
-        'postcode',
-        'city',
-        'state',
-        'phone',
-        'company',
-        'vat_number',
-        'tax_code',
-        'sdi',
-        'pec'
-    ];
-
-    /**
      * @return BelongsTo
      */
     public function user(): BelongsTo

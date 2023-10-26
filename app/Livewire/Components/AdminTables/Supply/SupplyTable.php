@@ -31,9 +31,8 @@ class SupplyTable extends BaseTable
 
         if($this->supply) {
             foreach ($this->supply->rows as $row) {
-                $product = json_decode($row->product);
-                $this->items[$product->id] = [
-                    'id' => $product->id,
+                $this->items[$row->product->id] = [
+                    'id' => $row->product->id,
                     'quantity' => $row->quantity,
                     'price' => $row->price,
                 ];

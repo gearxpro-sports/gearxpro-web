@@ -13,22 +13,22 @@
                 <div class="mt-4 space-y-3 text-color-6c757d">
                     <div class="flex items-center justify-between">
                         <span>{{ __('supply.recap.order_review.order.subtotal') }}:</span>
-                        <span>{{ $supply->amount }}</span>
+                        <span>@money($supply->amount)</span>
                     </div>
                     <div class="flex items-center justify-between">
                         <span>{{ __('supply.recap.order_review.order.shipping_cost') }}:</span>
-                        <span>0.00</span>
+                        <span>@money(0.00)</span>
                     </div>
                     <div class="flex items-center justify-between">
                         <span>{{ __('supply.recap.order_review.order.vat') }}:</span>
-                        <span>0.00</span>
+                        <span>@money(0.00)</span>
                     </div>
                 </div>
             </div>
             <div class="p-4 border">
                 <div class="flex items-center justify-between text-color-18181a font-semibold">
                     <span>{{ __('supply.recap.order_review.order.total') }}</span>
-                    <span>{{ $supply->amount }}</span>
+                    <span>@money($supply->amount)</span>
                 </div>
             </div>
         </div>

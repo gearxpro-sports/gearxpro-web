@@ -68,7 +68,7 @@
             <div class="grow">
                 <h3 class="mb-4 text-color-18181a font-medium">Informazioni Pagamento</h3>
                 <ul class="grow-0 text-sm">
-                    <li class="mt-2 text-color-6c757d">Metodo di pagamento: <span class="ml-2 font-medium">{{ __('payment_methods.'.$supply->payment_method) }}</span></li>
+                    <li class="mt-2 text-color-6c757d">Metodo di pagamento: <span class="ml-2 font-medium">{{ $supply->payment_method ? __('payment_methods.'.$supply->payment_method) : '-' }}</span></li>
                 </ul>
             </div>
             <div class="grow-0">
@@ -91,12 +91,13 @@
                 </thead>
                 <tbody>
                     @foreach ($supply->rows as $row)
+                        @php($variant = \App\Models\ProductVariant::find($row->product->id))
                     <tr class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
-                        <td class="text-left">{{ $row->product->name }}</td>
-                        <td class="text-left">{{ $row->product->sku }}</td>
-                        <td class="text-center">@money($row->quantity * $row->product->purchase_price)</td>
+                        <td class="text-left">{{ $variant->product->name }}</td>
+                        <td class="text-left">{{ $variant->product->sku }}</td>
+                        <td class="text-center">@money($row->price)</td>
                         <td class="text-center">{{ $row->quantity }}</td>
-                        <td class="text-right">@money($row->quantity * $row->product->purchase_price)</td>
+                        <td class="text-right">@money($row->quantity * $row->price)</td>
                     </tr>
                     @endforeach
                 </tbody>

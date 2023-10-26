@@ -15,23 +15,6 @@ class Product extends Model
     /**
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'main_desc',
-        'features_desc',
-        'pros_desc',
-        'technical_desc',
-        'washing_desc',
-        'slug',
-        'meta_title',
-        'meta_description',
-        'has_variants',
-        'active',
-    ];
-
-    /**
-     * @var array
-     */
     public array $translatable = [
         'name',
         'main_desc',

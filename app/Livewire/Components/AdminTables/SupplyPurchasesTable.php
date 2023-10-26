@@ -2,7 +2,10 @@
 
 namespace App\Livewire\Components\AdminTables;
 
+use App\Models\Supply;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
 
 class SupplyPurchasesTable extends BaseTable
 {
@@ -11,8 +14,8 @@ class SupplyPurchasesTable extends BaseTable
      */
     public function render()
     {
-        if (Auth::user()->hasRole(User::RESELLER)) {
-            $orders = Supply::where('user_id', Auth::user()->id)
+        if (auth()->user()->hasRole(User::RESELLER)) {
+            $orders = Supply::where('user_id', auth()->user()->id)
                         ->select(['id', 'uuid', 'amount', 'created_at', 'status']);
         } else {
             $orders = Supply::select([

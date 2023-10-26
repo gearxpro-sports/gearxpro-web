@@ -16,21 +16,11 @@ class Category extends Model
     /**
      * @var array
      */
-    protected $fillable = [
-        'product_id',
-        'name',
-        'description',
-        'parent_id',
-    ];
-
-    /**
-     * @var array
-     */
     public array $translatable = [
         'name',
         'description',
     ];
-    
+
     /**
      * @return BelongsToMany
      */

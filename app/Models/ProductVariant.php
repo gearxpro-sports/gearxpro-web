@@ -19,23 +19,9 @@ class ProductVariant extends Model implements HasMedia
     /**
      * @var array
      */
-    protected $fillable = [
-        'product_id',
-        'barcode',
-        'sku',
-        'quantity',
-        'minimal_quantity',
-        'low_stock_threshold',
-        'low_stock_alert',
-        'active',
-        'position',
-    ];
-
-    /**
-     * @var array
-     */
     protected $with = [
         'attributes',
+        'product'
     ];
 
     public function inStock() {

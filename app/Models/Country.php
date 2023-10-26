@@ -16,19 +16,6 @@ class Country extends Model
     public $timestamps = false;
 
     /**
-     * @var array
-     */
-    protected $fillable = [
-        'name',
-        'iso2_code',
-        'iso3_code',
-        'numeric_code',
-        'currency_code',
-        'currency_name',
-        'currency_symbol',
-    ];
-
-    /**
      * @return HasMany
      */
     public function users(): HasMany

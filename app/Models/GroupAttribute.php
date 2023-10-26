@@ -15,15 +15,6 @@ class GroupAttribute extends Model
     /**
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'options_type',
-        'position',
-    ];
-
-    /**
-     * @var array
-     */
     public array $translatable = [
         'name',
     ];

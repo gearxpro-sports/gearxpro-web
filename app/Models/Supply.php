@@ -17,6 +17,10 @@ class Supply extends Model
         'canceled' => 'gray',
     ];
 
+    protected $casts = [
+        'amount' => 'float'
+    ];
+
     public function reseller() {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }

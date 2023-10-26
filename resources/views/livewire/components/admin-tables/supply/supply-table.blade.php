@@ -47,7 +47,7 @@
         class="sticky bottom-0 h-20 flex items-center justify-end px-4 bg-color-f3f7f9 shadow-[0px_-8px_8px_-8px_#00000024]">
         <div class="flex items-center space-x-6">
             <p class="text-color-6c757d text-sm">
-                {{ __('supply.index.table.footer.cart_total') }}: <span class="font-bold">{{ number_format($amount, 2) }}</span>
+                {{ __('supply.index.table.footer.cart_total') }}: <span class="font-bold">@money($amount)</span>
             </p>
             <x-primary-button wire:click="send" wire:loading.attr="disabled" wire:target="send" type="button" :disabled="!$items" class="!bg-color-0c9d87 hover:!bg-color-0c9d87/90">
                 {{ __('supply.index.table.footer.review_order') }}

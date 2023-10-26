@@ -52,6 +52,29 @@ return [
                 'date' => 'Seleziona data',
             ],
         ],
+        'show' => [
+            'title' => 'Dettaglio acquisto',
+            'table' => [
+                'title' => 'Lista Approvvigionamento',
+                'cols' => [
+                    'name' => 'Nome Prodotto',
+                    'id' => 'ID Prodotto',
+                    'price' => 'Prezzo',
+                    'quantity' => 'Quantità',
+                    'total' => 'Totale per Quantità',
+                ],
+            ],
+            'alert' => [
+                'changing_status' => [
+                    'delivered' => 'Confermi di contrassegnare l\'ordine come consegnato? L\'operazione non potrà essere annullata.',
+                    'canceled' => 'Confermi di annullare l\'ordine? L\'operazione non potrà essere annullata.',
+                ],
+            ],
+            'supply_date' => 'Data Approvvigionamento',
+            'ship_date' => 'Data Spedizione',
+            'supply_total' => 'Totale Ordine Approvvigionamento',
+            'supply_state' => 'Stato Ordine',
+        ],
     ],
     'recap' => [
         'title' => 'Riepilogo Ordine',

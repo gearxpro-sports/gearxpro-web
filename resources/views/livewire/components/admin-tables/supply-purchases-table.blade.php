@@ -31,7 +31,7 @@
                                         #{{ $order->uuid }}
                                     </td>
                                     <td>{{ $order->created_at->format('d/m/Y') }}</td>
-                                    <td>{{ $order->amount }}</td>
+                                    <td>@money($order->amount)</td>
                                     @role(App\Models\User::SUPERADMIN)
                                     <td><a class="text-color-6c757d underline" target="_blank" href="{{ route('resellers.show', ['reseller' => $order->reseller_id]) }}">{{ $order->reseller_fullname}}</a></td>
                                     @endrole

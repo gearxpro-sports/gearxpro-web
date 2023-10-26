@@ -15,15 +15,6 @@ class Attribute extends Model
     /**
      * @var array
      */
-    protected $fillable = [
-        'group_attribute_id',
-        'value',
-        'color',
-    ];
-
-    /**
-     * @var array
-     */
     protected $hidden = [
         'group_attribute_id',
         'pivot',
@@ -35,7 +26,7 @@ class Attribute extends Model
     public array $translatable = [
         'value',
     ];
-    
+
     /**
      * @return BelongsTo
      */

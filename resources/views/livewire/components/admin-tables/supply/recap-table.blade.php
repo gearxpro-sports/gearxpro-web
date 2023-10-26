@@ -23,8 +23,7 @@
                             </thead>
                             <tbody>
                             @foreach($rows as $row)
-                                @php($p = json_decode($row->product))
-                                @php($variant = \App\Models\ProductVariant::find($p->id))
+                                @php($variant = \App\Models\ProductVariant::find($row->product->id))
                                 <tr wire:key="{{$variant->id}}"
                                     class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
                                     <td>
@@ -35,9 +34,9 @@
                                         </div>
                                     </td>
                                     <td>{{ $variant->size->value }} - {{ $variant->length->value }}</td>
-                                    <td>{{ $row->price }}</td>
+                                    <td>@money($row->price)</td>
                                     <td>{{ $row->quantity }}</td>
-                                    <td>{{ $row->price * $row->quantity }}</td>
+                                    <td>@money($row->price * $row->quantity)</td>
                                     <td class="text-right">
                                         <x-primary-button wire:click="deleteItem({{ $row->id }})"
                                                           class="!h-auto !p-3 !bg-color-f55b3f hover:!bg-color-f55b3f/90">
