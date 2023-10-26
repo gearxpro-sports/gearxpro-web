@@ -19,8 +19,8 @@
                                 <th>{{ __('supply.index.table.cols.measures') }}</th>
                                 <th>{{ __('supply.index.table.cols.length') }}</th>
                                 <th>{{ __('supply.index.table.cols.unit_of_measurement') }}</th>
-                                <th>{{ __('supply.index.table.cols.sale_price') }}</th>
                                 <th>{{ __('supply.index.table.cols.purchase_price') }}</th>
+                                <th>{{ __('supply.index.table.cols.sale_price') }}</th>
                                 <th>{{ __('supply.index.table.cols.quantity') }}</th>
                                 <th>{{ __('supply.index.table.cols.manufacturer_availability') }}</th>
                                 <th></th>

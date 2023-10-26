@@ -11,8 +11,8 @@
     </td>
     <td>{{ $variant->length->value }}</td>
     <td>unit_of_measurement</td>
-    <td>@money($variant->product->price)</td>
     <td>@money($variant->product->wholesale_price)</td>
+    <td>@money($variant->product->price)</td>
     <td>
         <livewire:components.counter wire:model="quantity" wire:key="$variant->id" :disabled="!$variant->inStock()"/>
     </td>
