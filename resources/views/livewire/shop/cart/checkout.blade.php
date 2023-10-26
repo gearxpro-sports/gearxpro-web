@@ -40,7 +40,7 @@
             <p class="text-[15px] leading-[21px] text-color-18181a font-normal">{{ __('shop.checkout.register') }}</p>
         </div>
 
-        <a href="" class="relative flex items-center justify-center h-[48px] w-fit px-[40px] rounded-md bg-color-18181a border border-color-18181a group">
+        <a href="/shop/register" class="relative flex items-center justify-center h-[48px] w-fit px-[40px] rounded-md bg-color-18181a border border-color-18181a group">
             <span class="z-10 text-[15px] font-semibold text-white leading-[19px] group-hover:text-color-18181a">{{ __('shop.checkout.button_register') }}</span>
             <div class="h-full absolute top-0 left-0 w-0 bg-white group-hover:animate-line group-hover:w-full rounded-md"></div>
         </a>
@@ -58,13 +58,13 @@
         </div>
 
         <div class="flex items-start gap-1 mt-5 mb-[30px]">
-            <x-checkbox-2 :required="true" :name="'privacy'" />
+            <x-checkbox-2 wire:model="privacy" :required="true" :name="'privacy'" />
             <p class="tex-[13px] leading-[18px] text-color-18181a">{{ __('shop.checkout.privacy')}}</p>
         </div>
 
-        <a href="" class="relative flex items-center justify-center h-[48px] w-fit px-[40px] rounded-md bg-white border border-color-18181a group">
+        <button wire:click="next" class="relative flex items-center justify-center h-[48px] w-fit px-[40px] rounded-md bg-white border border-color-18181a group">
             <span class="z-10 text-[15px] font-semibold text-color-18181a leading-[19px] group-hover:text-white">{{ __('shop.checkout.button_next') }}</span>
             <div class="h-full absolute top-0 left-0 w-0 bg-color-18181a group-hover:animate-line group-hover:w-full"></div>
-        </a>
+        </button>
     </div>
 </div>

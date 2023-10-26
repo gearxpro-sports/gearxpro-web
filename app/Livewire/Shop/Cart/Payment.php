@@ -112,6 +112,7 @@ class Payment extends Component
 
     public function getDataPayment() {
         $this->validate();
+        $this->redirect('/confirm');
     }
 
     public function changeTab($tab) {

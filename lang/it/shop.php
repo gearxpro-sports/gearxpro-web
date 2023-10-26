@@ -98,5 +98,12 @@ return [
         'ccv' => 'CVC / CCV',
         'accountHolder' => 'Nome sulla carta',
         'pay' => 'Paga ora',
+        'confirmPassword' => 'Conferma Password',
+        'password_confirmation' => 'La password non corrisponde',
+    ],
+    'confirm' => [
+        'title' => 'Conferma ordine!',
+        'message' => 'Ordine effettuato con successo. Il tuo ordine verrà spedito a breve. Nel frattempo puoi monitorare il tuo ordine nella sezione i miei ordini.',
+        'button' => 'Torna allo shopping'
     ]
 ];
