@@ -18,7 +18,8 @@ class Supply extends Model
     ];
 
     protected $casts = [
-        'amount' => 'float'
+        'amount' => 'float',
+        'shipped_at' => 'datetime'
     ];
 
     public function reseller() {

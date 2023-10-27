@@ -20,7 +20,7 @@ class Show extends Component
         if (
             !Auth::user()->hasRole(User::SUPERADMIN) ||
             !in_array($status, array_keys(Supply::STATUSES)) ||
-            in_array($this->supply->status, ['delivered', 'canceled'])
+            $this->supply->status === 'canceled'
         ) {
             $this->dispatch('open-notification',
                 title: __('supply.statuses.'.$this->supply->status),
@@ -50,8 +50,16 @@ class Show extends Component
             }
         }
 
-        $this->supply->status = $status;
-        $this->supply->save();
+        if($status === 'on_delivery') {
+            $this->supply->update([
+                'status' => 'on_delivery',
+                'shipped_at' => now()
+            ]);
+        } else {
+            $this->supply->status = $status;
+            $this->supply->save();
+        }
+
 
         $this->dispatch('open-notification',
             title: __('supply.statuses.'.$this->supply->status),

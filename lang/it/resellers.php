@@ -9,6 +9,7 @@ return [
             'cols' => [
                 'company' => 'Nome Azienda',
                 'email' => 'Email',
+                'country' => 'Nazione',
                 'creation_date' => 'Data di Creazione',
                 'last_login_date' => 'Data Ultimo Accesso',
             ],
@@ -70,8 +71,13 @@ return [
         ]
     ],
     'show' => [
+        'titles' => [
+            'data' => 'Dati rivenditore',
+            'billing' => 'Dati di fatturazione',
+            'shipping' => 'Dati di spedizione',
+            'payment' => 'Metodo di pagamento'
+        ],
         'data' => [
-            'title' => 'Dati Rivenditore',
             'company' => 'Nome Azienda:',
             'lastname' => 'Cognome:',
             'email' => 'Email:',
@@ -80,7 +86,7 @@ return [
             'address' => 'Indirizzo:',
             'city' => 'Città:',
             'postcode' => 'Cap:',
-            'country' => 'Paese:',
+            'country' => 'Nazione:',
         ],
         'orders' => [
             'title' => 'Riepilogo Ordini',

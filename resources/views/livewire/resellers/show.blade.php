@@ -14,13 +14,13 @@
             <span class="flex items-center justify-center mr-4 h-12 w-12  bg-color-fdce82 text-white rounded">
                 <x-heroicon-o-user-circle class="w-6 h-6"></x-heroicon-o-user-circle>
             </span>
-            {{ __('resellers.show.data.title') }}
+            {{ __('resellers.show.titles.data') }}
         </h2>
         <ul class="flex flex-col gap-5 text-sm">
             @if($billing_address)
                 <li class="flex space-x-2">
                     <span class="inline-block text-color-6c757d">{{ __('resellers.show.data.company') }}</span>
-                    <span>{{ $billing_address->company}}</span>
+                    <span>{{ $billing_address->company ?? '-'}}</span>
                 </li>
             @endif
             <li class="flex space-x-2">
@@ -40,7 +40,7 @@
                 <span>{{ optional($reseller->last_login)->format('d/m/Y H:i:s') ?? '-' }}</span>
             </li>
             @if($billing_address)
-                <h3 class="font-bold">Dati di fatturazione</h3>
+                <h3 class="font-bold">{{ __('resellers.show.titles.billing') }}</h3>
                 <li class="flex space-x-2">
                     <span class="inline-block text-color-6c757d">{{ __('resellers.show.data.address') }}</span>
                     <span>{{ $billing_address->address_1 }} {{ $billing_address->address_2 }}</span>
@@ -59,7 +59,7 @@
                 </li>
             @endif
             @if($shipping_address)
-                <h3 class="font-bold">Dati di spedizione</h3>
+                <h3 class="font-bold">{{ __('resellers.show.titles.shipping') }}</h3>
                 <li class="flex space-x-2">
                     <span class="inline-block text-color-6c757d">{{ __('resellers.show.data.address') }}</span>
                     <span>{{ $shipping_address->address_1 }} {{ $shipping_address->address_2 }}</span>
@@ -77,6 +77,10 @@
                     <span>{{ $shipping_address->country->name }}</span>
                 </li>
             @endif
+            <h3 class="font-bold">{{ __('resellers.show.titles.payment') }}</h3>
+            <li class="flex space-x-2">
+                <span>{{ __('payment_methods.' . $reseller->payment_method) }}</span>
+            </li>
         </ul>
     </div>
 

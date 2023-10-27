@@ -9,21 +9,23 @@
         </div>
         <table class="table-auto border-collapse w-full text-xs text-black-1 border border-color-eff0f0 font-medium">
             <thead>
-                <tr class="[&>th]:py-4 [&>th]:px-7 [&>th]:font-medium [&>th]:w-1/5 border-b-color-eff0f0">
-                    <th class="text-left">{{ __('resellers.index.table.cols.company') }}</th>
-                    <th class="text-left">{{ __('resellers.index.table.cols.email') }}</th>
+                <tr class="text-left [&>th]:py-4 [&>th]:px-7 [&>th]:font-medium [&>th]:w-1/5 border-b-color-eff0f0">
+                    <th>{{ __('resellers.index.table.cols.company') }}</th>
+                    <th>{{ __('resellers.index.table.cols.email') }}</th>
                     <th>{{ __('resellers.index.table.cols.creation_date') }}</th>
+                    <th>{{ __('resellers.index.table.cols.country') }}</th>
                     <th>{{ __('resellers.index.table.cols.last_login_date') }}</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($resellers as $reseller)
-                <tr class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
+                <tr class="text-left [&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
                     <td>{{ $reseller->firstname }} {{ $reseller->lastname }}</td>
                     <td>{{ $reseller->email }}</td>
-                    <td class="text-center">{{ $reseller->created_at->format('d/m/Y') }}</td>
-                    <td class="text-center">{{ optional($reseller->last_login)->format('d/m/Y H:i:s') ?? '-' }}</td>
+                    <td>{{ $reseller->created_at->format('d/m/Y') }}</td>
+                    <td>{{ $reseller->country->name ?? '-' }}</td>
+                    <td>{{ optional($reseller->last_login)->format('d/m/Y H:i:s') ?? '-' }}</td>
                     <td class="text-right">
                         <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="{{ route('resellers.show', ['reseller' => $reseller->id]) }}">
                             <x-icons name="eye" class="w-4 h-4" />
