@@ -26,27 +26,41 @@
                             </thead>
                             <tbody>
                             @foreach ($orders as $order)
-                                <tr wire:key="order_{{ $order->uuid }}" class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
+                                <tr wire:key="order_{{ $order->uuid }}"
+                                    class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
                                     <td class="whitespace-nowrap uppercase text-color-ff9d60">
                                         #{{ $order->uuid }}
                                     </td>
                                     <td>{{ $order->created_at->format('d/m/Y') }}</td>
                                     <td>@money($order->amount)</td>
                                     @role(App\Models\User::SUPERADMIN)
-                                    <td><a class="text-color-6c757d underline" target="_blank" href="{{ route('resellers.show', ['reseller' => $order->reseller_id]) }}">{{ $order->reseller_fullname}}</a></td>
+                                    <td>
+                                        <a href="{{ route('resellers.show', ['reseller' => $order->reseller->id]) }}"
+                                           target="_blank">
+                                            <span class="text-color-6c757d underline">
+                                                {{ $order->reseller->fullname}}
+                                            </span>
+                                            @if($order->reseller->trashed())
+                                                <span class="text-color-f55b3f ml-1">({{__('supply.purchases.index.table.trashed')}})</span>
+                                            @endif
+                                        </a>
+                                    </td>
                                     @endrole
                                     <td class="whitespace-nowrap">
-                                        <x-badge color="{{ \App\Models\Supply::STATUSES[$order->status] }}">{{ __('supply.statuses.' . $order->status) }}</x-badge>
+                                        <x-badge
+                                            color="{{ \App\Models\Supply::STATUSES[$order->status] }}">{{ __('supply.statuses.' . $order->status) }}</x-badge>
                                     </td>
                                     <td class="text-right">
                                         <div class="inline-flex space-x-2">
                                             @role(App\Models\User::SUPERADMIN)
-                                            <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm hover:bg-color-eff0f0/90" href="{{ route('supply.purchases.show', ['supply' => $order->id]) }}">
-                                                <x-icons name="eye" class="w-4 h-4" />
+                                            <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm hover:bg-color-eff0f0/90"
+                                               href="{{ route('supply.purchases.show', ['supply' => $order->id]) }}">
+                                                <x-icons name="eye" class="w-4 h-4"/>
                                             </a>
                                             @endrole
-                                            <a class="flex items-center justify-center ml-auto bg-color-ef4983 w-8 h-8 text-center text-white rounded-sm hover:bg-color-ef4983/90" href="#">
-                                                <x-icons name="download" class="w-4 h-4" />
+                                            <a class="flex items-center justify-center ml-auto bg-color-ef4983 w-8 h-8 text-center text-white rounded-sm hover:bg-color-ef4983/90"
+                                               href="#">
+                                                <x-icons name="download" class="w-4 h-4"/>
                                             </a>
                                         </div>
                                     </td>

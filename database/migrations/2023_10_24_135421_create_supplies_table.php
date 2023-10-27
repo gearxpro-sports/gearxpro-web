@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('supplies', function (Blueprint $table) {
             $table->id();
             $table->text('uuid');
-            $table->foreignIdFor(\App\Models\User::class, 'user_id');
+            $table->foreignIdFor(\App\Models\User::class)->constrained();
             $table->decimal('amount');
             $table->string('payment_method')->nullable();
             $table->enum('status', array_keys(\App\Models\Supply::STATUSES));

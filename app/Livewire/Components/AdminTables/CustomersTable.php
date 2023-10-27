@@ -14,7 +14,6 @@ class CustomersTable extends BaseTable
     {
         $customers = User::role(User::CUSTOMER)
             ->search(['firstname', 'lastname', 'email'], $this->search)
-            ->select(['id', 'firstname', 'lastname', 'email', 'created_at'])
             ->orderByDesc('id');
 
         foreach($this->filters as $k => $filter) {

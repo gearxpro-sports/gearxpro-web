@@ -23,7 +23,7 @@ class Supply extends Model
     ];
 
     public function reseller() {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id')->withTrashed();
     }
 
     public function rows() {

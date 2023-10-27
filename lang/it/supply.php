@@ -46,6 +46,7 @@ return [
                     'status' => 'Stato',
                     'reseller' => 'Rivenditore',
                 ],
+                'trashed' => 'Cancellato'
             ],
             'filter' => [
                 'status' => 'Seleziona stato',
