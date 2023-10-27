@@ -93,8 +93,17 @@
                     @foreach ($supply->rows as $row)
                         @php($variant = \App\Models\ProductVariant::find($row->product->id))
                     <tr class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
-                        <td class="text-left">{{ $variant->product->name }}</td>
-                        <td class="text-left">{{ $variant->product->sku }}</td>
+                        <td class="text-left">
+                            <div class="flex flex-col">
+                                {{ $variant->product->name }}
+                                <div class="flex divide-x text-xxs mt-1">
+                                    @foreach($variant->attributes as $attribute)
+                                        <span class="first:pl-0 px-1">{{ $attribute->value }}</span>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-left">{{ $variant->sku }}</td>
                         <td class="text-center">@money($row->price)</td>
                         <td class="text-center">{{ $row->quantity }}</td>
                         <td class="text-right">@money($row->quantity * $row->price)</td>
