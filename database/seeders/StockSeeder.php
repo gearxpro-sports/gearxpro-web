@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
 use App\Models\User;
 use App\Models\Stock;
 use App\Models\ProductVariant;
@@ -15,20 +16,19 @@ class StockSeeder extends Seeder
      */
     public function run(): void
     {
-        $reseller = User::where('email', 'reseller@example.test')->first();
-        $productVariants = ProductVariant::pluck('id');
+        $reseller = User::role(User::RESELLER)->first();
+        $variants = ProductVariant::with('product')->get()->take(20);
         $stocks = [];
 
-        for ($i=0; $i<20; $i++) {
-            $variantId = $productVariants->random();
-            
-            if (isset($stocks[$variantId])) {
+        foreach ($variants as $variant) {
+            if (isset($stocks[$variant->id])) {
                 continue;
             }
 
-            $stocks[$variantId] = [
+            $stocks[$variant->id] = [
                 'user_id' => $reseller->id,
-                'product_variant_id' => $variantId,
+                'product_id' => $variant->product->id,
+                'product_variant_id' => $variant->id,
                 'quantity' => rand(0, 500),
                 'created_at' => now(),
                 'updated_at' => now(),

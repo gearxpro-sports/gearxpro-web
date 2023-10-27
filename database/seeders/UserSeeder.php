@@ -31,6 +31,7 @@ class UserSeeder extends Seeder
             )
             ->create([
             'firstname' => 'Superadmin',
+            'lastname' => null,
             'email' => 'admin@example.test',
             'password' => bcrypt('password'),
             'created_at' => now(),
@@ -54,7 +55,7 @@ class UserSeeder extends Seeder
             )
             ->create([
                 'firstname' => 'Reseller',
-                'lastname' => 'Cognome',
+                'lastname' => null,
                 'email' => 'reseller@example.test',
                 'password' => bcrypt('password'),
                 'created_at' => now(),

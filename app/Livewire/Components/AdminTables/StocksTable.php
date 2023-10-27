@@ -21,7 +21,9 @@ class StocksTable extends BaseTable
                         $query->where('country_id', auth()->user()->country_id);
                     },
                 ]
-            );
+            )
+            ->orderBy('product_id')
+        ;
 
         return view('livewire.components.admin-tables.stocks-table', [
             'stocks' => $stocks->paginate(),
