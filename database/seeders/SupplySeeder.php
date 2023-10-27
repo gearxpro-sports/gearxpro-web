@@ -2,11 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Supply;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
+use App\Models\Supply;
+use App\Models\Product;
 use Illuminate\Support\Str;
+use App\Models\ProductVariant;
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class SupplySeeder extends Seeder
 {

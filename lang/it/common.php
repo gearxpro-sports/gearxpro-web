@@ -42,4 +42,7 @@ return [
     'yes' => 'Si',
     'no' => 'No',
     'invoice' => 'Fattura',
+    'running_low' => 'In Esaurimento',
+    'sold_out' => 'Non Disponibile', 
+    'available' => 'Disponibile',
 ];

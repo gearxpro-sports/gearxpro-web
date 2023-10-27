@@ -13,6 +13,7 @@ use App\Livewire\Products\Edit as ProductsEdit;
 use App\Livewire\Categories\Index as CategoriesIndex;
 use App\Livewire\Categories\Create as CategoriesCreate;
 use App\Livewire\Categories\Edit as CategoriesEdit;
+use App\Livewire\Stocks\Index as StocksIndex;
 use App\Livewire\Supply\Index as SupplyIndex;
 use App\Livewire\Supply\Recap as SupplyRecap;
 use App\Livewire\Supply\Purchases\Index as SupplyPurchasesIndex;
@@ -25,7 +26,6 @@ use App\Livewire\Shop\Cart\Index as CartIndex;
 use App\Livewire\Shop\Cart\Checkout as CartCheckout;
 use App\Livewire\Shop\Cart\Payment as CartPayment;
 use App\Livewire\Register\Index as RegisterIndex;
-use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,13 +85,19 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {
             Route::get('/create', CategoriesCreate::class)->name('categories.create');
             Route::get('/{category}/edit', CategoriesEdit::class)->name('categories.edit');
         });
+
         Route::prefix('supply')->middleware(['role:reseller'])->group(function() {
             Route::get('/', SupplyIndex::class)->name('supply.index');
             Route::get('/recap', SupplyRecap::class)->name('supply.recap');
         });
+
         Route::prefix('purchases')->group(function() {
             Route::get('/', SupplyPurchasesIndex::class)->name('supply.purchases.index');
             Route::get('/{supply}', SupplyPurchaseShow::class)->name('supply.purchases.show')->middleware(['role:superadmin']);
+        });
+
+        Route::prefix('stocks')->middleware(['role:reseller'])->group(function() {
+            Route::get('/', StocksIndex::class)->name('stocks.index');
         });
     });
 

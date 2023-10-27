@@ -12,5 +12,6 @@ return [
     'supply' => 'Approvvigionamento',
     'supply.purchases' => 'Lista Acquisti',
     'selling' => 'Vendita',
-    'personal_data' => 'Dati Anagrafici'
+    'personal_data' => 'Dati Anagrafici',
+    'stocks' => 'Magazzino',
 ];

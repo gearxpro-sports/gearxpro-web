@@ -84,7 +84,19 @@ class User extends Authenticatable
         return $this->belongsTo(Country::class);
     }
 
-    public function supplies() {
+    /**
+     * @return HasMany
+     */
+    public function supplies(): HasMany 
+    {
         return $this->hasMany(Supply::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function stocks(): HasMany
+    {
+        return $this->hasMany(Stock::class);
     }
 }

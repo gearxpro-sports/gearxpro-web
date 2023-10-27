@@ -50,11 +50,11 @@ class ProductSeeder extends Seeder
     
             $combinations = array_unique($combinations, SORT_REGULAR);
             $position = 1;
-            foreach ($combinations as $combination) {
+            foreach ($combinations as $index => $combination) {
                 $productVariant = ProductVariant::create([
                     'product_id' => $product->id,
                     'position'   => $position,
-                    'sku'        => 'SKU'.$k,
+                    'sku'        => 'SKU_'.$product->id.'_'.$index,
                     'barcode'    => '000000000'.$k,
                     'quantity'   => rand(0, 500),
                 ]);
