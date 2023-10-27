@@ -25,7 +25,9 @@
                                     @endif
                                 @endif
                                 <span
-                                    @if ($attribute->color && !in_array($attribute->color, ['#fff', '#ffffff'])) style="color: {{ $attribute->color }}" @endif>{{ $attribute->value }}</span>
+                                    @if ($attribute->color && !in_array($attribute->color, ['#fff', '#ffffff'])) style="color: {{ $attribute->color }}" @endif>
+                                    {{ $attribute->value }}
+                                </span>
                             </div>
                         @endforeach
                     </div>

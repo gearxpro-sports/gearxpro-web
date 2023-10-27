@@ -13,4 +13,6 @@ return [
     'supply.purchases' => 'Lista Acquisti',
     'supply.management' => 'Gestione Approvvigionamento',
     'selling' => 'Vendita',
+    'personal_data' => 'Dati Anagrafici',
+    'stocks' => 'Magazzino',
 ];
