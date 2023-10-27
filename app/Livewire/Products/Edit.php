@@ -53,11 +53,6 @@ class Edit extends Component
      */
     public array $images = [];
 
-    /**
-     * @var array
-     */
-    public array $prices = [];
-
     public function mount()
     {
         $this->productForm->setProduct($this->product);
@@ -79,13 +74,6 @@ class Edit extends Component
         foreach ($this->productVariants as $variant) {
             $this->images['var_'.$variant->id] = [];
         }
-
-        foreach($this->product->countries as $country) {
-            $this->prices[$country->id] = [
-                'wholesale_price' => $country->prices->wholesale_price,
-                'price' => $country->prices->price,
-            ];
-        }
     }
 
     /**
@@ -94,6 +82,17 @@ class Edit extends Component
     public function render()
     {       
         return view('livewire.products.edit');
+    }
+
+    public function save()
+    {
+        $this->productForm->update();
+
+        $this->dispatch('open-notification',
+            title: __('notifications.titles.updating'),
+            subtitle: __('notifications.products.updating.success'),
+            type: 'success'
+        );
     }
 
     public function updateSlug()
@@ -142,6 +141,21 @@ class Edit extends Component
             $positionStart++;
         }
 
+        if ($this->productVariants->isEmpty()) {
+            $this->dispatch('open-notification',
+                title: __('notifications.titles.saving'),
+                subtitle: __('notifications.product_variants.saving.success'),
+                type: 'success'
+            );
+        } else {
+            $this->dispatch('open-notification',
+                title: __('notifications.titles.updating'),
+                subtitle: __('notifications.product_variants.updating.success'),
+                type: 'success'
+            );
+        }
+
+
         $this->productVariants = $this->productVariants->merge(collect($newCombinations));
 
         $this->dispatch('list-updated');
@@ -149,7 +163,7 @@ class Edit extends Component
 
     public function updateProductVariantOrder(array $list)
     {
-        $list = array_column($list, 'value', 'order');
+        $list = array_column($list, 'order', 'value');
         $cases = $ids = $params = [];
 
         foreach ($this->productVariants as $productVariant) {
@@ -165,6 +179,12 @@ class Edit extends Component
             $updateQuery = sprintf('UPDATE %s SET `position` = CASE `id` %s END WHERE `id` in (%s)', app(ProductVariant::class)->getTable(), $cases, $ids);
             DB::update($updateQuery, $params);
         }
+
+        $this->dispatch('open-notification',
+            title: __('notifications.titles.updating'),
+            subtitle: __('notifications.product_variants.updating.success'),
+            type: 'success'
+        );
 
         $this->loadProductVariants();
     }

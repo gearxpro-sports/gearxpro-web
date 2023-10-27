@@ -6,12 +6,9 @@
 <x-slot name="title">
     {{ __('products.edit.title') }}
 </x-slot>
-<x-slot name="actions">
-    <x-primary-button>{{ __('common.save') }}</x-primary-button>
-</x-slot>
 
 <div x-data="{openedTab: '{{ $tabs[1] }}'}" x-on:list-updated="window.scrollTo(0, document.body.scrollHeight)">
-    <form wire:submit="save" class="bg-white space-y-10 p-4">
+    <form wire:submit="save" class="bg-white p-4">
         <div class="grid grid-cols-3 gap-4">
             <div class="p-8 col-span-2">
                 <ul class="grid grid-cols-5 gap">
@@ -127,12 +124,12 @@
                             <div wire:key="country_{{ $country['id'] }}">
                                 <h4 class="mb-4 font-bold"><img class="inline-block w-5 mr-2" src="https://flagcdn.com/w320/{{ $country['iso'] }}.png" alt="{{ $country['iso'] }}">{{ $country['name'] }}</h4>
                                 <div class="grid grid-cols-4 gap-4">
-                                    <x-input x-mask:dynamic="$money($input)" wire:model.blur="prices.{{ $country['id'] }}.wholesale_price" type="text" name="wholesale_price[]" label="{{ __('products.edit.section.locale.wholesale_price.label') }}">
+                                    <x-input x-mask:dynamic="$money($input)" wire:model.blur="productForm.country_prices.{{ $country['id'] }}.wholesale_price" type="text" name="wholesale_price[]" label="{{ __('products.edit.section.locale.wholesale_price.label') }}">
                                         <x-slot:append>
                                             <span class="search-btn absolute z-[1] inset-y-1 right-1 flex items-center justify-center w-9 bg-color-eff0f0 rounded-sm font-bold text-color-6c757d">€</span>
                                         </x-slot:append>
                                     </x-input>
-                                    <x-input x-mask:dynamic="$money($input)" wire:model.blur="prices.{{ $country['id'] }}.price" type="text" name="price[]" label="{{ __('products.edit.section.locale.price.label') }}">
+                                    <x-input x-mask:dynamic="$money($input)" wire:model.blur="productForm.country_prices.{{ $country['id'] }}.price" type="text" name="price[]" label="{{ __('products.edit.section.locale.price.label') }}">
                                         <x-slot:append>
                                             <span class="search-btn absolute z-[1] inset-y-1 right-1 flex items-center justify-center w-9 bg-color-eff0f0 rounded-sm font-bold text-color-6c757d">€</span>
                                         </x-slot:append>
@@ -144,6 +141,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="p-8">
+            <x-primary-button >{{ __('common.update') }}</x-primary-button>
         </div>
     </form>
 </div>
