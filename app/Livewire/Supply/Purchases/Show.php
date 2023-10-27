@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Supply\Purchases;
 
+use App\Models\Stock;
 use App\Models\User;
 use App\Models\Supply;
 use Livewire\Component;
@@ -28,6 +29,25 @@ class Show extends Component
             );
 
             return false;
+        }
+
+        foreach ($this->supply->rows as $row) {
+            $product_id = $row->product->product->id;
+            $variant_id = $row->product->id;
+
+            $exists = $this->supply->reseller->stocks()->where('product_id', $product_id)->where('product_variant_id', $variant_id)->first();
+
+            if ($exists) {
+                $exists->increment('quantity', $row->quantity);
+            } else {
+                Stock::updateOrCreate([
+                    'user_id' => $this->supply->reseller->id,
+                    'product_id' => $product_id,
+                    'product_variant_id' => $variant_id,
+                ], [
+                    'quantity' => $row->quantity
+                ]);
+            }
         }
 
         $this->supply->status = $status;

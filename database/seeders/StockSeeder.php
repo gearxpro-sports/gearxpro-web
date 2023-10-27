@@ -29,9 +29,7 @@ class StockSeeder extends Seeder
                 'user_id' => $reseller->id,
                 'product_id' => $variant->product->id,
                 'product_variant_id' => $variant->id,
-                'quantity' => rand(0, 500),
-                'created_at' => now(),
-                'updated_at' => now(),
+                'quantity' => rand(0, 500)
             ];
         }
 
