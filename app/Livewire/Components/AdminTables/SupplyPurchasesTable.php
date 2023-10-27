@@ -22,7 +22,10 @@ class SupplyPurchasesTable extends BaseTable
 
         $orders
             ->where('confirmed', true)
-            ->search(['uuid'], $this->search)
+            ->search($this->search, [
+                'uuid',
+                'reseller.firstname',
+            ])
             ->orderByDesc('created_at')
         ;
 

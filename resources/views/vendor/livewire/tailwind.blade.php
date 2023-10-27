@@ -88,7 +88,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
                             {{-- Next Page Link --}}
                             @if ($paginator->hasMorePages())
                                 <button type="button" wire:click="nextPage('{{ $paginator->getPageName() }}')" x-on:click="{{ $scrollIntoViewJsSnippet }}" dusk="nextPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.after" rel="next" class="relative inline-flex justify-center items-center border border-color-dee2e6 w-10 h-10 rounded-full hover:bg-color-dee2e6" aria-label="{{ __('pagination.next') }}">
-                                    <x-heroicon-o-chevron-right class="w-4 h-4"></x-heroicon-o-chevron-left>
+                                    <x-heroicon-o-chevron-right class="w-4 h-4"></x-heroicon-o-chevron-right>
                                 </button>
                             @else
                                 <span aria-disabled="true" aria-label="{{ __('pagination.next') }}">
