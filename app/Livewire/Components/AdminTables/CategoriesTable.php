@@ -15,7 +15,7 @@ class CategoriesTable extends BaseTable
         $categories = Category::search($this->search, [
             'name',
         ])
-            ->where('parent_id', '=', 0)
+            ->whereNull('parent_id')
             ->orderBy('name')
             ->paginate();
 
