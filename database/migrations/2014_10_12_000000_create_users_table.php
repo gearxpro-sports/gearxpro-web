@@ -26,6 +26,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('country_id')->nullable()->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

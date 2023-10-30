@@ -11,10 +11,7 @@ return [
         'table' => [
             'title' => 'Prodotti',
             'cols'  => [
-                'name'              => 'Nome Cliente',
-                'email'             => 'Indirizzo Email',
-                'registration_date' => 'Data di Registrazione',
-                'last_order_date'   => 'Data Ultimo Ordine',
+                'name'              => 'Nome Prodotto',
             ],
         ],
     ],

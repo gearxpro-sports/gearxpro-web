@@ -10,7 +10,6 @@ class Delete extends ModalComponent
     public User $reseller;
 
     public function delete() {
-        // TODO: Risolvere constraints
         $this->reseller->delete();
 
         return redirect()->route('resellers.index');

@@ -98,7 +98,11 @@ class SupplyTable extends BaseTable
         $product_ids = Product::all()->pluck('id');
         $variants = ProductVariant::with('product')
             ->whereIn('product_id', $product_ids)
-            //            ->search(['product.name->it'], $this->search) // TODO: ricerca
+            ->search($this->search, [
+                'product.name',
+                'attributes.value',
+                'sku'
+            ])
             ->orderBy('product_id');
 
         //        foreach($this->filters as $k => $filter) {

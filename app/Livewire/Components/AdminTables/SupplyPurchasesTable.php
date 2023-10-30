@@ -15,23 +15,17 @@ class SupplyPurchasesTable extends BaseTable
     public function render()
     {
         if (auth()->user()->hasRole(User::RESELLER)) {
-            $orders = Supply::where('user_id', auth()->user()->id)
-                        ->select(['id', 'uuid', 'amount', 'created_at', 'status']);
+            $orders = Supply::where('user_id', auth()->user()->id);
         } else {
-            $orders = Supply::select([
-                            'supplies.id AS id',
-                            'uuid', 'amount',
-                            'supplies.created_at as created_at',
-                            'status',
-                            'users.id AS reseller_id',
-                            DB::raw('CONCAT(users.firstname, \' \', users.firstname) AS reseller_fullname'),
-                        ])
-                        ->leftJoin('users', 'supplies.user_id', '=', 'users.id');
+            $orders = Supply::with(['reseller']);
         }
 
         $orders
             ->where('confirmed', true)
-            ->search(['uuid'], $this->search)
+            ->search($this->search, [
+                'uuid',
+                'reseller.firstname',
+            ])
             ->orderByDesc('created_at')
         ;
 

@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Supply extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     const STATUSES = [
         'new' => 'orange',
@@ -23,7 +24,7 @@ class Supply extends Model
     ];
 
     public function reseller() {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id')->withTrashed();
     }
 
     public function rows() {
