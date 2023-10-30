@@ -3,7 +3,8 @@
 use App\Livewire\Customers\Index as CustomersIndex;
 use App\Livewire\Customers\Show as CustomerShow;
 use App\Livewire\Customers\Edit as CustomerEdit;
-use App\Livewire\Invoice as InvoiceShow;
+use App\Livewire\Invoices\Show as InvoiceShow;
+use App\Livewire\Invoices\Index as InvoicesIndex;
 use App\Livewire\Profile\Edit as ProfileEdit;
 use App\Livewire\Resellers\Index as ResellersIndex;
 use App\Livewire\Resellers\Show as ResellerShow;
@@ -97,6 +98,10 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {
             Route::get('/', SupplyPurchasesIndex::class)->name('supply.purchases.index');
             Route::get('/{supply}', SupplyPurchaseShow::class)->name('supply.purchases.show')->middleware(['role:superadmin|reseller']);
             Route::get('/{supply}/invoice', InvoiceShow::class)->name('supply.purchases.invoice');
+        });
+
+        Route::prefix('invoices')->group(function() {
+            Route::get('/', InvoicesIndex::class)->name('invoices.index');
         });
 
         Route::prefix('stocks')->middleware(['role:reseller'])->group(function() {

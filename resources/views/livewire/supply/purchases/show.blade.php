@@ -23,7 +23,7 @@
                 </div>
             </div>
             @if($supply->invoice)
-            <x-primary-button href="#">
+            <x-primary-button href="{{ route('supply.purchases.invoice', ['supply' => $supply->id]) }}">
                 <span class="flex items-center space-x-2">
                     <x-icons name="download" class="w-3 h-3" />
                     <span>{{ __('common.invoice') }}</span>

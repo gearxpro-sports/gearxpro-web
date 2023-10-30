@@ -101,4 +101,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Stock::class);
     }
+
+    public function invoices() {
+        return $this->hasManyThrough(Invoice::class, Supply::class);
+    }
 }

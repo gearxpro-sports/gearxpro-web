@@ -2,12 +2,23 @@
 
 namespace App\Models;
 
+use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
+
+    const STATUSES = [
+        'to_pay' => 'black',
+        'not_payed' => 'red',
+        'payed' => 'lightgreen',
+    ];
+
+    protected $casts = [
+        'created_at' => 'date:d-m-Y'
+    ];
 
     protected static function boot()
     {
@@ -20,7 +31,8 @@ class Invoice extends Model
         });
     }
 
-    public function supply() {
+    public function supply()
+    {
         return $this->belongsTo(Supply::class);
     }
 }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\Supply::class, 'supply_id');
             $table->text('code');
+            $table->enum('status', array_keys(\App\Models\Invoice::STATUSES))->default('to_pay');
             $table->timestamps();
         });
     }

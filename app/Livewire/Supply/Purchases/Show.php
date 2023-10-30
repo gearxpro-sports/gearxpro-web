@@ -60,7 +60,10 @@ class Show extends Component
             $this->supply->save();
 
             if($status === 'delivered') {
-                $this->supply->invoice()->create();
+                $invoice = $this->supply->invoice()->create();
+                $invoice->update([
+                    'updated_at' => now()
+                ]);
             }
         }
 
