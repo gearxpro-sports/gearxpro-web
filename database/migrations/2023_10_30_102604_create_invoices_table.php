@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(\App\Models\Supply::class, 'supply_id');
+            $table->text('code');
             $table->timestamps();
         });
     }

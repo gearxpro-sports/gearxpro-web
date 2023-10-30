@@ -110,4 +110,22 @@ return [
             'confirm' => 'Conferma Ordine'
         ],
     ],
+    'invoice' => [
+        'invoice_n' => 'Fattura n.',
+        'of' => 'del',
+        'customer' => 'Cliente',
+        'customer_tax_codes' => 'P.IVA / Codice Fiscale',
+        'table' => [
+            'sku' => 'Codice Articolo',
+            'description' => 'Descrizione',
+            'quantity' => 'Quantità',
+            'unit_price' => 'Prezzo unitario',
+            'total' => 'Importo',
+            'vat' => 'IVA',
+            'taxable' => 'Imponibile',
+            'vat_tax' => 'Imposta IVA',
+            'invoice_amount' => 'Totale Fattura'
+        ],
+        'payment_method' => 'Modalità di Pagamento'
+    ]
 ];

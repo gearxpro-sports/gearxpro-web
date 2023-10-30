@@ -22,7 +22,14 @@
                     <span class="flex justify-center w-5"><x-icons name="clock" class="w-3.5 h-3.5" /></span>
                 </div>
             </div>
-            <x-primary-button href="#"><span class="flex items-center space-x-2"><x-icons name="download" class="w-3 h-3" /><span>{{ __('common.invoice') }}</span></span></x-primary-button>
+            @if($supply->invoice)
+            <x-primary-button href="#">
+                <span class="flex items-center space-x-2">
+                    <x-icons name="download" class="w-3 h-3" />
+                    <span>{{ __('common.invoice') }}</span>
+                </span>
+            </x-primary-button>
+            @endif
         </div>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">

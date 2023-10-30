@@ -50,7 +50,7 @@ class Show extends Component
             }
         }
 
-        if($status === 'on_delivery') {
+        if ($status === 'on_delivery') {
             $this->supply->update([
                 'status' => 'on_delivery',
                 'shipped_at' => now()
@@ -58,6 +58,10 @@ class Show extends Component
         } else {
             $this->supply->status = $status;
             $this->supply->save();
+
+            if($status === 'delivered') {
+                $this->supply->invoice()->create();
+            }
         }
 
 

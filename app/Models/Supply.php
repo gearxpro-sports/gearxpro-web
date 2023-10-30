@@ -30,4 +30,8 @@ class Supply extends Model
     public function rows() {
         return $this->hasMany(SupplyRow::class);
     }
+
+    public function invoice() {
+        return $this->hasOne(Invoice::class);
+    }
 }
