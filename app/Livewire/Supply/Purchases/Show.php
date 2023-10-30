@@ -75,6 +75,12 @@ class Show extends Component
         );
     }
 
+    public function setInvoiceStatus($status) {
+        $this->supply->invoice->update([
+            'status' => $status
+        ]);
+    }
+
     public function render()
     {
         return view('livewire.supply.purchases.show');
