@@ -23,9 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('attribute_product_variant', function (Blueprint $table) {
-            $table->dropForeign(['attribute_id', 'product_variant_id']);
-        });
         Schema::dropIfExists('attribute_product_variant');
     }
 };
