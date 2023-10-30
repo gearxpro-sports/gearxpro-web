@@ -3,6 +3,7 @@
 namespace App\Livewire\Products;
 
 use App\Models\User;
+use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Attribute;
@@ -17,7 +18,7 @@ use Spatie\MediaLibraryPro\Livewire\Concerns\WithMedia;
 class Edit extends Component
 {
     use WithMedia;
-    
+
     /**
      * @var Product
      */
@@ -53,6 +54,11 @@ class Edit extends Component
      */
     public array $images = [];
 
+    /**
+     * @var Collection
+     */
+    public Collection $categories;
+
     public function mount()
     {
         $this->productForm->setProduct($this->product);
@@ -74,13 +80,15 @@ class Edit extends Component
         foreach ($this->productVariants as $variant) {
             $this->images['var_'.$variant->id] = [];
         }
+
+        $this->categories = Category::with('children')->whereNull('parent_id')->get();
     }
 
     /**
      * @return View
      */
     public function render()
-    {       
+    {
         return view('livewire.products.edit');
     }
 
@@ -98,6 +106,14 @@ class Edit extends Component
     public function updateSlug()
     {
         $this->productForm->updateSlug();
+    }
+
+    /**
+     * @param array $categories
+     */
+    public function removeCategories(array $categories)
+    {
+        $this->productForm->removeCategories($categories);
     }
 
     public function generateVariants(array $groupAttributes)
@@ -122,7 +138,7 @@ class Edit extends Component
         })->toArray();
 
         $newCombinations = [];
-        $positionStart = $this->productVariants->count() > 0 ? $this->productVariants->count() : 1; 
+        $positionStart = $this->productVariants->count() > 0 ? $this->productVariants->count() : 1;
         foreach ($attributeSets as $attrSet) {
 
             // SECOND CHECK - Prevent duplicate combinations
@@ -219,7 +235,7 @@ class Edit extends Component
                 'attributes' => $attributes,
             ];
         }
-        
+
         return $data;
     }
 
@@ -234,13 +250,13 @@ class Edit extends Component
         if ($currentIndex == count($arrays)) {
             return [$currentCombination];
         }
-    
+
         $combinations = [];
         foreach ($arrays[$currentIndex] as $value) {
             $newCombination = array_merge($currentCombination, [$value]);
             $combinations = array_merge($combinations, $this->generateAttributeSets($arrays, $currentIndex + 1, $newCombination));
         }
-        
+
         return $combinations;
     }
 

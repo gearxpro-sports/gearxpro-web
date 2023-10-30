@@ -2,13 +2,14 @@
 
 namespace App\Livewire\Products\Forms;
 
+use App\Models\Category;
 use Livewire\Form;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Rule;
 
 class ProductForm extends Form
-{   
+{
     /**
      * @var Product|null
      */
@@ -23,7 +24,7 @@ class ProductForm extends Form
      * @var string
      */
     public string $slug = '';
-    
+
     /**
      * @var string
      */
@@ -50,12 +51,12 @@ class ProductForm extends Form
     public string $washing_desc = '';
 
     /**
-     * @var sting
+     * @var string
      */
     public string $meta_title = '';
 
     /**
-     * @var sting
+     * @var string
      */
     public string $meta_description = '';
 
@@ -67,16 +68,21 @@ class ProductForm extends Form
     /**
      * @var array
      */
+    public array $categories = [];
+
+    /**
+     * @var array
+     */
     protected $rules = [
-        'name'                            => 'required',
-        'slug'                            => 'required',
-        'main_desc'                       => 'nullable',
-        'features_desc'                   => 'nullable',
-        'pros_desc'                       => 'nullable',
-        'technical_desc'                  => 'nullable',
-        'washing_desc'                    => 'nullable',
-        'meta_title'                      => 'nullable',
-        'meta_description'                => 'nullable',
+        'name'                             => 'required',
+        'slug'                             => 'required',
+        'main_desc'                        => 'nullable',
+        'features_desc'                    => 'nullable',
+        'pros_desc'                        => 'nullable',
+        'technical_desc'                   => 'nullable',
+        'washing_desc'                     => 'nullable',
+        'meta_title'                       => 'nullable',
+        'meta_description'                 => 'nullable',
         // TODO: Decidere se i prezzi devoo essere settati entrambi per nazione
         'country_prices.*.wholesale_price' => 'nullable|numeric',
         'country_prices.*.price'           => 'nullable|numeric',
@@ -88,8 +94,9 @@ class ProductForm extends Form
     public function setProduct(Product $product)
     {
         $this->product = $product;
+        $this->categories = $product->categories->pluck('id')->toArray();
 
-        foreach (array_keys($this->except('product')) as $field) {
+        foreach (array_keys($this->except('product', 'categories')) as $field) {
             $this->{$field} = $product->{$field};
         }
     }
@@ -99,19 +106,31 @@ class ProductForm extends Form
         $this->slug = Str::kebab($this->name);
     }
 
+    /**
+     * @param array $cats
+     */
+    public function removeCategories(array $cats)
+    {
+        $this->categories = array_intersect($cats, $this->categories);
+    }
+
     public function update()
     {
         $this->validate();
 
         $this->country_prices = array_filter($this->country_prices, fn($item) => !empty($item['wholesale_price']) || !empty($item['price']));
 
-        $this->product->update(
-            $this->except(['country_prices', 'product'])
-        );
+        // remove ids not exist in category table
+        $this->categories = array_intersect($this->categories, Category::pluck('id')->toArray());
+
+        $this->product->update($this->except(['country_prices', 'product', 'categories']));
 
         if ($this->country_prices) {
             $this->product->countries()->sync($this->country_prices);
         }
-        
+
+        if ($this->categories) {
+            $this->product->categories()->sync($this->categories);
+        }
     }
 }
