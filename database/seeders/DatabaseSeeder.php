@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             GroupAttributeWithAttributeSeeder::class,
             ProductSeeder::class,
             StockSeeder::class,
+            CategorySeeder::class,
         ]);
     }
 }

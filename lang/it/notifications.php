@@ -59,6 +59,16 @@ return [
             'error' => 'Errore durante l\'eliminazione del prodotto!',
         ],
     ],
+    'product_variants' => [
+        'saving' => [
+            'success' => 'Le varianti sono state create con successo!',
+            'error' => 'Errore durante il salvataggio delle varianti!',
+        ],
+        'updating' => [
+            'success' => 'Le varianti sono state aggiornate con successo!',
+            'error' => 'Errore durante l\'aggiornamento del varianti!',
+        ],
+    ],
     'categories' => [
         'saving' => [
             'success' => 'La categoria è stata creata con successo!',

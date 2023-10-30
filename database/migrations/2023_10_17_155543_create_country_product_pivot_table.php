@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('country_product', function (Blueprint $table) {
             $table->foreignId('country_id')->on('countries')->onDelete('cascade');
             $table->foreignId('product_id')->on('products')->onDelete('cascade');
-            $table->decimal('wholesale_price');
-            $table->decimal('price');
+            $table->decimal('wholesale_price')->nullable();
+            $table->decimal('price')->nullable();
             $table->primary(['country_id', 'product_id']);
         });
     }

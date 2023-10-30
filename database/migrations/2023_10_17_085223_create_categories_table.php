@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->json('name');
-            $table->json('description');
-            $table->foreignId('parent_id')->default(0)->on('categories')->nullOndelete();
+            $table->json('description')->nullable();
+            $table->foreignId('parent_id')->nullable()->on('categories')->nullOndelete();
             $table->timestamps();
         });
     }

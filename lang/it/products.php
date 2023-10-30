@@ -17,6 +17,7 @@ return [
     ],
     'edit' => [
         'title' => 'Crea nuovo prodotto',
+        'categories_title' => 'Categorie',
         'tabs' => [
             'main'           => 'Informazioni',
             'options'        => 'Opzioni',
