@@ -9,10 +9,7 @@
                 <span class="text-xs text-color-6c757d">Ordine Numero</span>
                 <span class="block text-color-18181a uppercase">#{{ $supply->uuid }}</span>
             </div>
-            <div class="flex flex-col mr-8">
-                <span class="text-xs text-color-6c757d ml-3.5">Stato ordine</span>
-                <x-dropdown-supply-statuses current_status="{{ $supply->status }}"></x-dropdown-supply-statuses>
-            </div>
+            <x-dropdown-supply-statuses current_status="{{ $supply->status }}"></x-dropdown-supply-statuses>
         </div>
         <div class="ml-auto flex items-center space-x-4">
             <div class="flex flex-col space-y-1">
