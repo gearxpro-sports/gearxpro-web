@@ -5,6 +5,8 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Traits\HasCountryScope;
+use App\Traits\Searchable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -15,7 +17,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasCountryScope;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasCountryScope, SoftDeletes, Searchable;
 
     const SUPERADMIN = 'superadmin';
     const RESELLER   = 'reseller';
@@ -84,7 +86,23 @@ class User extends Authenticatable
         return $this->belongsTo(Country::class);
     }
 
-    public function supplies() {
+    /**
+     * @return HasMany
+     */
+    public function supplies(): HasMany
+    {
         return $this->hasMany(Supply::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function stocks(): HasMany
+    {
+        return $this->hasMany(Stock::class);
+    }
+
+    public function invoices() {
+        return $this->hasManyThrough(Invoice::class, Supply::class);
     }
 }

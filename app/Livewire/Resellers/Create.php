@@ -98,6 +98,8 @@ class Create extends Component
         ]);
         $reseller->assignRole(User::RESELLER);
 
+        // TODO: Inviare email a reseller con i dati di login
+
         $reseller->addresses()->create([
             'type' => 'billing',
             'country_id' => $this->billing_country_id,

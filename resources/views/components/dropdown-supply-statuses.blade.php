@@ -16,7 +16,7 @@
         <x-slot name="content">
         @foreach ($statuses as $status => $color)
             @if ($current_status !== $status)
-                <button 
+                <button
                     type="button"
                     class="py-0.5 px-1 w-full"
                     @if (in_array($status, ['delivered', 'canceled'])) wire:confirm="{{ __('supply.purchases.show.alert.changing_status.'.$status) }}" @endif

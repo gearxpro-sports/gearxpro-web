@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
-    use HasFactory, HasTranslations;
+    use HasFactory, HasTranslations, Searchable;
 
     /**
      * @var array
@@ -26,11 +27,14 @@ class Product extends Model
         'meta_title',
         'meta_description',
     ];
-
-    public function getWholesalePriceAttribute() {
+    
+    public function getWholesalePriceAttribute()
+    {
         return $this->countries()->where('iso2_code', auth()->user()->country_code)->first()->prices->wholesale_price;
     }
-    public function getPriceAttribute() {
+
+    public function getPriceAttribute()
+    {
         return $this->countries()->where('iso2_code', auth()->user()->country_code)->first()->prices->price;
     }
 
@@ -60,5 +64,22 @@ class Product extends Model
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    /**
+     * @return array
+     */
+    public function getCountryPricesAttribute(): array
+    {
+        $prices = [];
+
+        foreach($this->countries as $country) {
+            $prices[$country->id] = [
+                'wholesale_price' => $country->prices->wholesale_price,
+                'price' => $country->prices->price,
+            ];
+        }
+
+        return $prices;
     }
 }

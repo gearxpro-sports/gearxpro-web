@@ -3,6 +3,7 @@
 namespace App\Livewire\Products;
 
 use App\Models\User;
+use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Attribute;
@@ -17,7 +18,7 @@ use Spatie\MediaLibraryPro\Livewire\Concerns\WithMedia;
 class Edit extends Component
 {
     use WithMedia;
-    
+
     /**
      * @var Product
      */
@@ -54,9 +55,9 @@ class Edit extends Component
     public array $images = [];
 
     /**
-     * @var array
+     * @var Collection
      */
-    public array $prices = [];
+    public Collection $categories;
 
     public function mount()
     {
@@ -80,25 +81,39 @@ class Edit extends Component
             $this->images['var_'.$variant->id] = [];
         }
 
-        foreach($this->product->countries as $country) {
-            $this->prices[$country->id] = [
-                'wholesale_price' => $country->prices->wholesale_price,
-                'price' => $country->prices->price,
-            ];
-        }
+        $this->categories = Category::with('children')->whereNull('parent_id')->get();
     }
 
     /**
      * @return View
      */
     public function render()
-    {       
+    {
         return view('livewire.products.edit');
+    }
+
+    public function save()
+    {
+        $this->productForm->update();
+
+        $this->dispatch('open-notification',
+            title: __('notifications.titles.updating'),
+            subtitle: __('notifications.products.updating.success'),
+            type: 'success'
+        );
     }
 
     public function updateSlug()
     {
         $this->productForm->updateSlug();
+    }
+
+    /**
+     * @param array $categories
+     */
+    public function removeCategories(array $categories)
+    {
+        $this->productForm->removeCategories($categories);
     }
 
     public function generateVariants(array $groupAttributes)
@@ -123,7 +138,7 @@ class Edit extends Component
         })->toArray();
 
         $newCombinations = [];
-        $positionStart = $this->productVariants->count() > 0 ? $this->productVariants->count() : 1; 
+        $positionStart = $this->productVariants->count() > 0 ? $this->productVariants->count() : 1;
         foreach ($attributeSets as $attrSet) {
 
             // SECOND CHECK - Prevent duplicate combinations
@@ -142,6 +157,21 @@ class Edit extends Component
             $positionStart++;
         }
 
+        if ($this->productVariants->isEmpty()) {
+            $this->dispatch('open-notification',
+                title: __('notifications.titles.saving'),
+                subtitle: __('notifications.product_variants.saving.success'),
+                type: 'success'
+            );
+        } else {
+            $this->dispatch('open-notification',
+                title: __('notifications.titles.updating'),
+                subtitle: __('notifications.product_variants.updating.success'),
+                type: 'success'
+            );
+        }
+
+
         $this->productVariants = $this->productVariants->merge(collect($newCombinations));
 
         $this->dispatch('list-updated');
@@ -149,7 +179,7 @@ class Edit extends Component
 
     public function updateProductVariantOrder(array $list)
     {
-        $list = array_column($list, 'value', 'order');
+        $list = array_column($list, 'order', 'value');
         $cases = $ids = $params = [];
 
         foreach ($this->productVariants as $productVariant) {
@@ -165,6 +195,12 @@ class Edit extends Component
             $updateQuery = sprintf('UPDATE %s SET `position` = CASE `id` %s END WHERE `id` in (%s)', app(ProductVariant::class)->getTable(), $cases, $ids);
             DB::update($updateQuery, $params);
         }
+
+        $this->dispatch('open-notification',
+            title: __('notifications.titles.updating'),
+            subtitle: __('notifications.product_variants.updating.success'),
+            type: 'success'
+        );
 
         $this->loadProductVariants();
     }
@@ -199,7 +235,7 @@ class Edit extends Component
                 'attributes' => $attributes,
             ];
         }
-        
+
         return $data;
     }
 
@@ -214,13 +250,13 @@ class Edit extends Component
         if ($currentIndex == count($arrays)) {
             return [$currentCombination];
         }
-    
+
         $combinations = [];
         foreach ($arrays[$currentIndex] as $value) {
             $newCombination = array_merge($currentCombination, [$value]);
             $combinations = array_merge($combinations, $this->generateAttributeSets($arrays, $currentIndex + 1, $newCombination));
         }
-        
+
         return $combinations;
     }
 

@@ -3,6 +3,8 @@
 use App\Livewire\Customers\Index as CustomersIndex;
 use App\Livewire\Customers\Show as CustomerShow;
 use App\Livewire\Customers\Edit as CustomerEdit;
+use App\Livewire\Invoices\Show as InvoiceShow;
+use App\Livewire\Invoices\Index as InvoicesIndex;
 use App\Livewire\Profile\Edit as ProfileEdit;
 use App\Livewire\Resellers\Index as ResellersIndex;
 use App\Livewire\Resellers\Show as ResellerShow;
@@ -13,6 +15,7 @@ use App\Livewire\Products\Edit as ProductsEdit;
 use App\Livewire\Categories\Index as CategoriesIndex;
 use App\Livewire\Categories\Create as CategoriesCreate;
 use App\Livewire\Categories\Edit as CategoriesEdit;
+use App\Livewire\Stocks\Index as StocksIndex;
 use App\Livewire\Supply\Index as SupplyIndex;
 use App\Livewire\Supply\Recap as SupplyRecap;
 use App\Livewire\Supply\Purchases\Index as SupplyPurchasesIndex;
@@ -25,7 +28,6 @@ use App\Livewire\Shop\Cart\Index as CartIndex;
 use App\Livewire\Shop\Cart\Checkout as CartCheckout;
 use App\Livewire\Shop\Cart\Payment as CartPayment;
 use App\Livewire\Register\Index as RegisterIndex;
-use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,14 +42,15 @@ use App\Http\Controllers\ProfileController;
 
 Route::get('/', [ShopIndex::class, '__invoke'])->name('home');
 
-Route::get('/shop/register', [RegisterIndex::class, '__invoke'])->name('register');
-
 Route::name('shop.')->group(function () {
+    Route::get('/shop/register', [RegisterIndex::class, '__invoke'])->name('register');
+
     Route::get('/shop', [ProductIndex::class, '__invoke'])->name('index');
     Route::get('/shop/cart', [CartIndex::class, '__invoke'])->name('cart');
     Route::get('/shop/checkout', [CartCheckout::class, '__invoke'])->name('checkout');
     Route::get('/shop/payment', [CartPayment::class, '__invoke'])->name('payment');
     Route::get('/shop/{product}', [ProductShow::class, '__invoke'])->name('show');
+
 });
 
 // TODO: check se vista accessibile sempre o solo se c'è un ordine effettuato in precedenza
@@ -85,13 +88,24 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {
             Route::get('/create', CategoriesCreate::class)->name('categories.create');
             Route::get('/{category}/edit', CategoriesEdit::class)->name('categories.edit');
         });
+
         Route::prefix('supply')->middleware(['role:reseller'])->group(function() {
             Route::get('/', SupplyIndex::class)->name('supply.index');
             Route::get('/recap', SupplyRecap::class)->name('supply.recap');
         });
+
         Route::prefix('purchases')->group(function() {
             Route::get('/', SupplyPurchasesIndex::class)->name('supply.purchases.index');
-            Route::get('/{supply}', SupplyPurchaseShow::class)->name('supply.purchases.show')->middleware(['role:superadmin']);
+            Route::get('/{supply}', SupplyPurchaseShow::class)->name('supply.purchases.show')->middleware(['role:superadmin|reseller']);
+            Route::get('/{supply}/invoice', InvoiceShow::class)->name('supply.purchases.invoice');
+        });
+
+        Route::prefix('invoices')->group(function() {
+            Route::get('/', InvoicesIndex::class)->name('invoices.index');
+        });
+
+        Route::prefix('stocks')->middleware(['role:reseller'])->group(function() {
+            Route::get('/', StocksIndex::class)->name('stocks.index');
         });
     });
 

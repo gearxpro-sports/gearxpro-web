@@ -11,6 +11,8 @@ return [
     'categories'  => 'Categorie',
     'supply' => 'Approvvigionamento',
     'supply.purchases' => 'Lista Acquisti',
+    'supply.management' => 'Gestione Approvvigionamento',
+    'supply.purchases.invoices' => 'Fatture Acquisto',
     'selling' => 'Vendita',
-    'personal_data' => 'Dati Anagrafici'
+    'stocks' => 'Magazzino',
 ];

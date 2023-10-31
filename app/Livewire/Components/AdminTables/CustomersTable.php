@@ -13,15 +13,18 @@ class CustomersTable extends BaseTable
     public function render()
     {
         $customers = User::role(User::CUSTOMER)
-            ->search(['firstname', 'lastname', 'email'], $this->search)
-            ->select(['id', 'firstname', 'lastname', 'email', 'created_at'])
+            ->search($this->search, [
+                'firstname',
+                'lastname',
+                'email'
+            ])
             ->orderByDesc('id');
 
-        foreach($this->filters as $k => $filter) {
-            if($k === 'date') {
-                if($filter['mode'] === 'single') {
+        foreach ($this->filters as $k => $filter) {
+            if ($k === 'date') {
+                if ($filter['mode'] === 'single') {
                     $customers->whereDate($filter['column'], $filter['operator'], $filter['value']);
-                } elseif($filter['mode'] === 'range') {
+                } elseif ($filter['mode'] === 'range') {
                     $customers->whereBetween($filter['column'], $filter['value']);
                 }
             } else {

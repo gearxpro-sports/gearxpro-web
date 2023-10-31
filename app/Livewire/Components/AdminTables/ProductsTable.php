@@ -12,10 +12,11 @@ class ProductsTable extends BaseTable
      */
     public function render()
     {
-        $products = Product::search(['name->it'], $this->search)
-                ->orderBy('created_at')
-                ->paginate()
-        ;
+        $products = Product::search($this->search, [
+            'name'
+        ])
+            ->orderBy('created_at')
+            ->paginate();
 
         return view('livewire.components.admin-tables.products-table', [
             'products' => $products

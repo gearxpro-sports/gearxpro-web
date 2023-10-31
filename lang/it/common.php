@@ -15,6 +15,7 @@ return [
     'update' => 'Aggiorna',
     'add' => 'Aggiungi',
     'send' => 'Invia',
+    'print' => 'Stampa',
     'saving' => 'Salvataggio',
     'select' => 'Seleziona',
     'filter' => 'Filtra',
@@ -42,4 +43,7 @@ return [
     'yes' => 'Si',
     'no' => 'No',
     'invoice' => 'Fattura',
+    'running_low' => 'In Esaurimento',
+    'sold_out' => 'Non Disponibile',
+    'available' => 'Disponibile',
 ];

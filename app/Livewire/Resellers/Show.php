@@ -19,10 +19,14 @@ class Show extends Component
     public function render()
     {
         $addresses = $this->reseller->addresses;
+        $orders = $this->reseller->supplies()
+            ->where('confirmed', true)
+            ->orderByDesc('created_at');
 
         return view('livewire.resellers.show', [
             'billing_address' => $addresses->firstWhere('type', 'billing'),
-            'shipping_address' => $addresses->firstWhere('type', 'shipping')
+            'shipping_address' => $addresses->firstWhere('type', 'shipping'),
+            'orders' => $orders->paginate()
         ]);
     }
 }
