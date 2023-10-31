@@ -5,6 +5,7 @@ namespace App\Livewire\Products;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Product;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\Attribute;
 use App\Models\GroupAttribute;
@@ -32,7 +33,7 @@ class Edit extends Component
     /**
      * @var bool
      */
-    public bool $simple_product = false;
+   // public bool $simple_product = false;
 
     /**
      * @var Collection
@@ -108,14 +109,6 @@ class Edit extends Component
         $this->productForm->updateSlug();
     }
 
-    /**
-     * @param array $categories
-     */
-    public function removeCategories(array $categories)
-    {
-        $this->productForm->removeCategories($categories);
-    }
-
     public function generateVariants(array $groupAttributes)
     {
         if (!$groupAttributes) {
@@ -155,6 +148,7 @@ class Edit extends Component
             $productVariant->attributes()->attach($attrSet);
             $newCombinations[] = $productVariant;
             $positionStart++;
+            $this->images['var_'.$productVariant->id] = [];
         }
 
         if ($this->productVariants->isEmpty()) {
@@ -208,11 +202,25 @@ class Edit extends Component
     /**
      * @param ProductVariant $productVariant
      */
+    #[On('product-variant-deleted')]
     public function removeVariant(ProductVariant $productVariant)
     {
-        if ($productVariant->delete()) {
-            $this->productVariants = $this->productVariants->reject(fn($item) => $item->id === $productVariant->id);
-        }
+        $this->productVariants = $this->productVariants->reject(fn($item) => $item->id === $productVariant->id);
+        unset($this->images['var_'.$productVariant->id]);
+        $productVariant->delete();
+        $this->dispatch('open-notification',
+            title: __('notifications.titles.deleting'),
+            subtitle: __('notifications.product_variants.deleting.success'),
+            type: 'success'
+        );
+    }
+
+    /**
+     * @param Category $category
+     */
+    public function updateCategories(Category $category)
+    {
+        $this->productForm->updateCategories($category);
     }
 
     /**

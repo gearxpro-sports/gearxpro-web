@@ -31,8 +31,8 @@ return [
         'description' => [
             'label' => 'Descrizione',
         ],
-        'alert' => [
-            'delete_child' => 'Confermi di eliminare questa categoria?',
-        ],
+    ],
+    'alert' => [
+        'delete_category' => 'Confermi di voler eliminare questa categoria? Verranno eliminate anche le relative sottocategorie.'
     ],
 ];

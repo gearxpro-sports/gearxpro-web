@@ -22,7 +22,7 @@ return new class extends Migration
             $table->json('slug')->nullable();
             $table->json('meta_title')->nullable();
             $table->json('meta_description')->nullable();
-            $table->boolean('has_variants')->default(false);
+            //$table->boolean('has_variants')->default(false);
             $table->boolean('active')->default(false);
             $table->timestamps();
         });

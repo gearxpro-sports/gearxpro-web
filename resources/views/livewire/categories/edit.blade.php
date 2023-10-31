@@ -7,8 +7,8 @@
         @if ($category->parent)
             <x-primary-button class="mb-8 bg-color-38a39f" href="{{ route('categories.edit', ['category' => $category->parent->id]) }}">
             {{ __('categories.edit.parent_link') }}: <span class="ml-2 font-bold">{{ $category->parent->name }}</span>
-            </x-primary-button>   
-        @endif  
+            </x-primary-button>
+        @endif
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
             <div class="flex flex-col space-y-4 col-span-2">
                 <x-input type="text" wire:model="categoryForm.name" name="name" label="{{ __('categories.edit.name.label') }}" required></x-input>
@@ -23,7 +23,7 @@
                         <a class="flex items-center justify-center bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="{{ route('categories.edit', ['category' => $childCategory->id]) }}">
                             <x-icons name="edit" class="w-3 h-3" />
                         </a>
-                        <button type="button" class="flex items-center justify-center bg-color-e54f33 text-white w-8 h-8 text-center rounded-sm" wire:click="removeChild({{ $childCategory->id }})" wire:confirm="{{ __('categories.edit.alert.delete_child') }}">
+                        <button type="button" class="flex items-center justify-center bg-color-e54f33 text-white w-8 h-8 text-center rounded-sm" wire:click="deleteChild({{ $childCategory->id }})" wire:confirm="{{ __('categories.alert.delete_category') }}">
                             <x-icons name="trash" class="w-3 h-3" />
                         </button>
                     </div>
@@ -32,10 +32,13 @@
                 <x-primary-button type="button" wire:click.prevent="$dispatch('openModal', { component: 'categories.modal.add-child-category', arguments: { category: {{ $categoryForm->category->id }} }})">{{ __('common.create') }}</x-primary-button>
             </div>
         </div>
-        <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
             <x-primary-button>
                 {{ __('common.update') }}
             </x-primary-button>
+            <x-danger-button type="button" wire:click="deleteParent({{ $category->id }})" wire:confirm="{{ __('categories.alert.delete_category') }}">
+                {{ __('common.delete') }}
+            </x-danger-button>
         </div>
     </form>
 </div>

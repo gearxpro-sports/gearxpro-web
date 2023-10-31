@@ -43,6 +43,7 @@ return [
     'no' => 'No',
     'invoice' => 'Fattura',
     'running_low' => 'In Esaurimento',
-    'sold_out' => 'Non Disponibile', 
+    'sold_out' => 'Non Disponibile',
     'available' => 'Disponibile',
+    'close' => 'Chiudi',
 ];

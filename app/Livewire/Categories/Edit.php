@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Categories;
 
+use Symfony\Component\HttpFoundation\Response;
 use Livewire\Component;
 use App\Models\Category;
 use Livewire\Attributes\On;
@@ -15,7 +16,7 @@ class Edit extends Component
      * @var Category
      */
     public Category $category;
-    
+
     /**
      * @var Category
      */
@@ -34,7 +35,7 @@ class Edit extends Component
         $this->categoryForm->setCategoryForm($this->category);
         $this->childCategories = $this->category->children;
     }
-    
+
     /**
      * @return View
      */
@@ -54,10 +55,17 @@ class Edit extends Component
         );
     }
 
+    public function deleteParent()
+    {
+        $this->category->delete();
+
+        return redirect()->route('categories.index');
+    }
+
     /**
      * @param Category $category
      */
-    public function removeChild(Category $category)
+    public function deleteChild(Category $category)
     {
         $category->delete();
         $this->dispatch('reload-child-categories');

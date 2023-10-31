@@ -4,7 +4,7 @@
 @endphp
 
 <x-slot name="title">
-    {{ __('products.edit.title') }}
+    <span class="text-color-6c757d mr-2">{{ __('products.edit.title') }}:</span> {{ $product->name }}
 </x-slot>
 
 <div x-data="{openedTab: '{{ $tabs[0] }}'}" x-on:list-updated="window.scrollTo(0, document.body.scrollHeight)">
@@ -31,7 +31,7 @@
                                 <div class="mb-2 text-xs">{{ __('products.edit.section.main.descriptons_label') }}</div>
                                 <ul class="flex flex-row space-x-4 border border-color-eff0f0">
                                     @foreach($descFields as $descField)
-                                        <li class="border-color-eff0f0">
+                                        <li wire:key="tab_desc_{{ $descField }}" class="border-color-eff0f0">
                                             <button @click="openedDescTab = '{{ $descField }}'" :class="openedDescTab === '{{ $descField }}' && 'bg-color-18181a text-color-eff0f0'" type="button" class="block w-full py-2.5 px-5 text-center text-xs font-bold">
                                                 {{ __('products.edit.tabs.'. $descField .'_desc') }}
                                             </button>
@@ -39,7 +39,7 @@
                                     @endforeach
                                 </ul>
                                 @foreach($descFields as $descField)
-                                <div wire:key="desc_{{ $descField }}"class="p-8 border border-color-eff0f0 border-t-0" x-show="openedDescTab === '{{ $descField }}'">
+                                <div wire:key="desc_{{ $descField }}" class="p-8 border border-color-eff0f0 border-t-0" x-show="openedDescTab === '{{ $descField }}'">
                                     <x-rich-textarea wire:model="productForm.{{ $descField }}_desc" name="product.{{ $descField }}_desc" placeholder="{{ __('products.edit.section.main.'. $descField .'_desc.placeholder') }}"></x-rich-textarea>
                                 </div>
                                 @endforeach
@@ -60,19 +60,19 @@
                 <div x-show="openedTab === 'options'">
 
                     <div>
-                        <div class="my-4">
-                            <div class="flex items-center justify-end space-x-4">
-                                <h4 class="text-sm font-medium">Prodotto semplice</h4>
-                                <label class="inline-flex text-xs font-bold uppercase cursor-pointer"><input wire:model.change="simple_product" type="radio" name="simple_product" value="0" class="mr-2">{{ __('common.no') }}</label>
-                                <label class="inline-flex text-xs font-bold uppercase cursor-pointer"><input wire:model.change="simple_product" type="radio" name="simple_product" value="1" class="mr-2">{{ __('common.yes') }}</label>
-                            </div>
-                        </div>
-                        @if ($simple_product)
-                        <div class="grid grid-cols-4 gap-4">
-                            <x-input type="text" name="sku" label="{{ __('products.edit.section.options.sku.label') }}"></x-input>
-                            <x-input type="number" min="0" step="1" name="quantity" label="{{ __('products.edit.section.options.quantity.label') }}"></x-input>
-                        </div>
-                        @else
+{{--                        <div class="my-4">--}}
+{{--                            <div class="flex items-center justify-end space-x-4">--}}
+{{--                                <h4 class="text-sm font-medium">Prodotto semplice</h4>--}}
+{{--                                <label class="inline-flex text-xs font-bold uppercase cursor-pointer"><input wire:model.change="simple_product" type="radio" name="simple_product" value="0" class="mr-2">{{ __('common.no') }}</label>--}}
+{{--                                <label class="inline-flex text-xs font-bold uppercase cursor-pointer"><input wire:model.change="simple_product" type="radio" name="simple_product" value="1" class="mr-2">{{ __('common.yes') }}</label>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        @if ($simple_product)--}}
+{{--                        <div class="grid grid-cols-4 gap-4">--}}
+{{--                            <x-input type="text" name="sku" label="{{ __('products.edit.section.options.sku.label') }}"></x-input>--}}
+{{--                            <x-input type="number" min="0" step="1" name="quantity" label="{{ __('products.edit.section.options.quantity.label') }}"></x-input>--}}
+{{--                        </div>--}}
+{{--                        @else--}}
                         <div class="flex flex-col space-y-4">
                             <div>
                                 <div
@@ -114,13 +114,13 @@
                                 @if ($productVariants->count())
                                 <div wire:sortable="updateProductVariantOrder" wire:sortable.options="{ animation: 100 }" class="flex flex-col space-y-4 mt-5">
                                     @foreach($productVariants as $productVariant)
-                                        <livewire:products.product-variant-item :images="$images" :productVariant="$productVariant" :product="$product" wire:key="product_variant_{{$productVariant->id}}" />
+                                        <livewire:products.product-variant-item :images="$images" :productVariant="$productVariant" :product="$product" wire:key="product_variant_{{ $productVariant->id }}" />
                                     @endforeach
                                 </div>
                                 @endif
                             </div>
                         </div>
-                        @endif
+{{--                        @endif--}}
                     </div>
                 </div>
 

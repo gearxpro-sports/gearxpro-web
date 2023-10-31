@@ -8,7 +8,7 @@ use App\Models\ProductVariant;
 use App\Livewire\Products\Forms\ProductVariantForm;
 
 class ProductVariantItem extends Component
-{   
+{
     /**
      * @var ProductVariant
      */
@@ -28,7 +28,7 @@ class ProductVariantItem extends Component
      * @var ProductVariantForm
      */
     public ProductVariantForm $productVariantForm;
-    
+
     /**
      * @param ProductVariant $productVariant
      * @param Product $product
@@ -49,8 +49,7 @@ class ProductVariantItem extends Component
 
     public function update()
     {
-        if ($this->productVariantForm->update()) { 
-            $this->close();
+        if ($this->productVariantForm->update()) {
 
             $this->dispatch('open-notification',
                 title: __('notifications.titles.updating'),
@@ -58,13 +57,15 @@ class ProductVariantItem extends Component
                 type: 'success'
             );
 
+            $this->dispatch('reload-variants');
+
         } else {
             session()->flash('variantFormError', __('products.edit.section.options.errors.variant_form'));
         }
     }
 
-    public function close()
+    public function removeVariant()
     {
-        $this->productVariantForm->reset('barcode', 'sku', 'quantity');
+        $this->dispatch('product-variant-deleted', productVariant: $this->productVariant);
     }
 }

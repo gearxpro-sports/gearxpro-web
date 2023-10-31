@@ -106,6 +106,20 @@ class ProductForm extends Form
         $this->slug = Str::kebab($this->name);
     }
 
+    public function updateCategories(Category $category)
+    {
+        if ($category->parent_id === null) {
+            $childrenToRemove = [];
+            foreach ($category->children as $child) {
+                $childrenToRemove[] = $child->id;
+            }
+            //dump($this->categories, $childrenToRemove);
+            //dd(array_diff($this->categories, $childrenToRemove));
+
+            $this->categories = array_diff($this->categories, $childrenToRemove);
+        }
+    }
+
     /**
      * @param array $cats
      */
@@ -129,8 +143,6 @@ class ProductForm extends Form
             $this->product->countries()->sync($this->country_prices);
         }
 
-        if ($this->categories) {
-            $this->product->categories()->sync($this->categories);
-        }
+        $this->product->categories()->sync($this->categories);
     }
 }

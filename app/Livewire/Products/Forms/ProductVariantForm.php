@@ -17,16 +17,16 @@ class ProductVariantForm extends Form
      * @var string|null
      */
     public ?string $barcode = '';
-    
+
     /**
      * @var string|null
      */
     public ?string $sku = '';
 
     /**
-     * @var integer
+     * @var int|null
      */
-    public int $quantity = 0;
+    public ?int $quantity = 0;
 
     /**
      * @var array|null
@@ -44,7 +44,8 @@ class ProductVariantForm extends Form
     ];
 
     /**
-     * @param Product $product
+     * @param ProductVariant $productVariant
+     * @param array $images
      */
     public function setProductVariant(ProductVariant $productVariant, array $images)
     {
@@ -60,7 +61,7 @@ class ProductVariantForm extends Form
     public function update()
     {
         $this->validate();
-        
+
         $this->productVariant->update($this->only(['barcode', 'sku', 'quantity']));
         $this->productVariant->syncFromMediaLibraryRequest($this->images['var_'.$this->productVariant->id])->toMediaCollection('default');
 

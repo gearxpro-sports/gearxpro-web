@@ -1,6 +1,10 @@
-<div x-on:close-variant="edit = false" x-data="{edit: false}" wire:sortable.item="{{ $productVariant->id }}"
-     class="p-4 border border-color-eff0f0 hover:bg-color-f7f8fa shadow-shadow-1 rounded-md"
-     :class="!edit || 'bg-color-f7f8fa'">
+<div
+    x-data="{edit: false}"
+    wire:sortable.item="{{ $productVariant->id }}"
+    wire:loading.class="opacity-50"
+    wire:target="removeVariant"
+    class="p-4 border border-color-eff0f0 hover:bg-color-f7f8fa shadow-shadow-1 rounded-md"
+    :class="!edit || 'bg-color-f7f8fa'">
     <div class="grid grid-cols-2 gap-4">
         <div>
             <div class="flex items-center space-x-8">
@@ -38,16 +42,16 @@
             @if ($productVariant->sku)
                 <div class="mr-10"><small
                         class="block text-color-6c757d">{{ __('products.edit.section.options.sku.label') }}</small><span
-                        class="text-sm font-bold">{{ $productVariant->sku }}</span></div>
+                        class="text-sm font-bold">{{ $productVariantForm->sku }}</span></div>
             @endif
             @if ($productVariant->barcode)
                 <div class="mr-10"><small
                         class="block text-color-6c757d">{{ __('products.edit.section.options.barcode.label') }}</small><span
-                        class="text-sm font-bold">{{ $productVariant->barcode }}</span></div>
+                        class="text-sm font-bold">{{ $productVariantForm->barcode }}</span></div>
             @endif
             <div class="mr-10 text-center"><small
                     class="block text-color-6c757d">{{ __('products.edit.section.options.quantity.label') }}</small><span
-                    class="text-sm font-bold">{{ $productVariant->quantity }}</span></div>
+                    class="text-sm font-bold">{{ $productVariantForm->quantity }}</span></div>
             <div class="flex items-center space-x-2 ml-auto">
                 <button x-show="!edit" type="button"
                         class="flex items-center justify-center bg-color-eff0f0 w-8 h-8 ml-auto text-center rounded-sm"
@@ -56,7 +60,7 @@
                 </button>
                 <button type="button"
                         class="flex items-center justify-center bg-color-eff0f0 w-8 h-8 ml-auto text-center rounded-sm"
-                        wire:click="removeVariant({{ $productVariant->id }})"
+                        wire:click="removeVariant"
                         wire:confirm="{{ __('products.edit.section.options.alert.confirm_variant_delete') }}">
                     <x-icons name="trash" class="w-4 h-4"/>
                 </button>
@@ -90,8 +94,7 @@
         </div>
         <div class="mt-4 flex items-center space-x-4">
             <x-primary-button wire:click.prevent="update()" type="button">{{ __('common.update') }}</x-primary-button>
-            <x-primary-button class="bg-color-b6b9bb" wire:click="close"
-                              type="button">{{ __('common.cancel') }}</x-primary-button>
+            <x-primary-button class="bg-color-b6b9bb" @click="edit = false" type="button">{{ __('common.close') }}</x-primary-button>
             @if(session('variantFormError'))
                 <div class="flex items-center space-x-2 p-2 bg-color-fdce82 text-color-f55b3f text-xs">
                     <x-icon name="heroicon-o-exclamation-circle" class="w-5 h-5 text-color-f55b3f"></x-icon>

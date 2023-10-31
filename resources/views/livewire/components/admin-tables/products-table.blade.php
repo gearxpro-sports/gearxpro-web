@@ -18,10 +18,15 @@
                 @foreach ($products as $product)
                 <tr class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
                     <td>{{ $product->name }}</td>
-                    <td class="text-right">
-                        <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="{{ route('products.edit', ['product' => $product->id]) }}">
-                            <x-icons name="edit" class="w-4 h-4" />
-                        </a>
+                    <td>
+                        <div class="flex items-center space-x-2 justify-end">
+                            <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="{{ route('products.edit', ['product' => $product->id]) }}">
+                                <x-icons name="edit" class="w-4 h-4" />
+                            </a>
+                            <button type="button" class="flex items-center justify-center bg-color-e54f33 text-white w-8 h-8 text-center rounded-sm" wire:click="deleteProduct({{ $product->id }})" wire:confirm="{{ __('products.index.alert.delete_product') }}">
+                                <x-icons name="trash" class="w-3 h-3" />
+                            </button>
+                        </div>
                     </td>
                 </tr>
                 @endforeach

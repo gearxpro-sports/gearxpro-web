@@ -68,6 +68,10 @@ return [
             'success' => 'Le varianti sono state aggiornate con successo!',
             'error' => 'Errore durante l\'aggiornamento del varianti!',
         ],
+        'deleting' => [
+            'success' => 'La variante è stata eliminata con successo!',
+            'error' => 'Errore durante l\'eliminazione della variante!',
+        ],
     ],
     'categories' => [
         'saving' => [

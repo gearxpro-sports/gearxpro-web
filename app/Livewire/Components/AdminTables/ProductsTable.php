@@ -22,4 +22,18 @@ class ProductsTable extends BaseTable
             'products' => $products
         ]);
     }
+
+    /**
+     * @param Product $product
+     */
+    public function deleteProduct(Product $product)
+    {
+        $product->delete();
+
+        $this->dispatch('open-notification',
+            title: __('notifications.titles.deleting'),
+            subtitle: __('notifications.products.deleting.success'),
+            type: 'success'
+        );
+    }
 }

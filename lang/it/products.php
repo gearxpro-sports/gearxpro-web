@@ -14,9 +14,12 @@ return [
                 'name'              => 'Nome Prodotto',
             ],
         ],
+        'alert' => [
+            'delete_product' => 'Confermi di voler eliminare questo prodotto?'
+        ],
     ],
     'edit' => [
-        'title' => 'Crea nuovo prodotto',
+        'title' => 'Modifica',
         'categories_title' => 'Categorie',
         'tabs' => [
             'main'           => 'Informazioni',
@@ -81,10 +84,10 @@ return [
                 'quantity' => [
                     'label' => 'Quantità',
                 ],
-                'alert' => [
-                    'confirm_variant_delete' => 'Confermi di voler eliminare questa variante?',
-                    'confirm_switch_to_simple_product' => 'Confermi di passare a prodotto semplice? Al salvataggio del prodottto perderai tutte le varianti impostate precedentemente!',
-                ],
+//                'alert' => [
+//                    'confirm_variant_delete' => 'Confermi di voler eliminare questa variante?',
+//                    'confirm_switch_to_simple_product' => 'Confermi di passare a prodotto semplice? Al salvataggio del prodottto perderai tutte le varianti impostate precedentemente!',
+//                ],
                 'errors' => [
                     'variant_form' => 'Si è verificato un errore nel salvataggio della variante.',
                 ],

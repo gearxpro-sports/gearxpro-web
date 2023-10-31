@@ -21,4 +21,12 @@ class CategoriesTable extends BaseTable
 
         return view('livewire.components.admin-tables.categories-table', compact('categories'));
     }
+
+    /**
+     * @param Category $category
+     */
+    public function deleteCategory(Category $category)
+    {
+        $category->delete();
+    }
 }

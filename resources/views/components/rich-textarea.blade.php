@@ -7,13 +7,13 @@
 
 @pushOnce('styles')
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-@endPushOnce 
+@endPushOnce
 
 @pushOnce('scripts')
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 @endPushOnce
 
-<div x-data="{
+<div wire:ignore x-data="{
         value: @entangle($attributes->wire('model')).live,
         init() {
             let quill = new Quill('#rte-{{ $rteId }}', {
