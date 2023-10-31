@@ -3,7 +3,6 @@
 namespace App\Livewire\Products\Forms;
 
 use App\Models\ProductVariant;
-use Livewire\Attributes\Rule;
 use Livewire\Form;
 
 class ProductVariantForm extends Form
@@ -63,7 +62,7 @@ class ProductVariantForm extends Form
         $this->validate();
 
         $this->productVariant->update($this->only(['barcode', 'sku', 'quantity']));
-        $this->productVariant->syncFromMediaLibraryRequest($this->images['var_'.$this->productVariant->id])->toMediaCollection('default');
+        $this->productVariant->syncFromMediaLibraryRequest($this->images)->toMediaCollection('default');
 
         return true;
     }

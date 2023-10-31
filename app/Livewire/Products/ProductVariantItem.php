@@ -47,23 +47,6 @@ class ProductVariantItem extends Component
         return view('livewire.products.product-variant-item');
     }
 
-    public function update()
-    {
-        if ($this->productVariantForm->update()) {
-
-            $this->dispatch('open-notification',
-                title: __('notifications.titles.updating'),
-                subtitle: __('notifications.products.updating.success'),
-                type: 'success'
-            );
-
-            $this->dispatch('reload-variants');
-
-        } else {
-            session()->flash('variantFormError', __('products.edit.section.options.errors.variant_form'));
-        }
-    }
-
     public function removeVariant()
     {
         $this->dispatch('product-variant-deleted', productVariant: $this->productVariant);
