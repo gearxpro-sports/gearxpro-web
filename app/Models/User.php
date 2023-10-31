@@ -67,7 +67,7 @@ class User extends Authenticatable
     }
 
     public function getCountryCodeAttribute() {
-        return $this->country->iso2_code;
+        return strtolower($this->country->iso2_code) ?? 'it';
     }
 
     /**

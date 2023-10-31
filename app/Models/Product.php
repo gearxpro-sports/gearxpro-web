@@ -27,15 +27,17 @@ class Product extends Model
         'meta_title',
         'meta_description',
     ];
-    
+
     public function getWholesalePriceAttribute()
     {
-        return $this->countries()->where('iso2_code', auth()->user()->country_code)->first()->prices->wholesale_price;
+        $country_code = auth()->user() ? auth()->user()->country_code : session('country_code');
+        return $this->countries()->where('iso2_code', $country_code)->first()->prices->wholesale_price;
     }
 
     public function getPriceAttribute()
     {
-        return $this->countries()->where('iso2_code', auth()->user()->country_code)->first()->prices->price;
+        $country_code = auth()->user() ? auth()->user()->country_code : session('country_code');
+        return $this->countries()->where('iso2_code', $country_code)->first()->prices->price;
     }
 
     /**

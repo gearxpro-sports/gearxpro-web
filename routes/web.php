@@ -40,23 +40,26 @@ use App\Livewire\Register\Index as RegisterIndex;
 |
 */
 
-Route::get('/', [ShopIndex::class, '__invoke'])->name('home');
+Route::get('/welcome', \App\Livewire\Shop\Splash::class)->name('splash');
 
-Route::name('shop.')->group(function () {
-    Route::get('/shop/register', [RegisterIndex::class, '__invoke'])->name('register');
+Route::middleware('country')->group(function() {
+    Route::get('/', [ShopIndex::class, '__invoke'])->name('home');
 
-    Route::get('/shop', [ProductIndex::class, '__invoke'])->name('index');
-    Route::get('/shop/cart', [CartIndex::class, '__invoke'])->name('cart');
-    Route::get('/shop/checkout', [CartCheckout::class, '__invoke'])->name('checkout');
-    Route::get('/shop/payment', [CartPayment::class, '__invoke'])->name('payment');
-    Route::get('/shop/{product}', [ProductShow::class, '__invoke'])->name('show');
+    Route::name('shop.')->group(function () {
+        Route::get('/shop/register', [RegisterIndex::class, '__invoke'])->name('register');
 
+        Route::get('/shop', [ProductIndex::class, '__invoke'])->name('index');
+        Route::get('/shop/cart', [CartIndex::class, '__invoke'])->name('cart');
+        Route::get('/shop/checkout', [CartCheckout::class, '__invoke'])->name('checkout');
+        Route::get('/shop/payment', [CartPayment::class, '__invoke'])->name('payment');
+        Route::get('/shop/{product}', [ProductShow::class, '__invoke'])->name('show');
+    });
+
+    // TODO: check se vista accessibile sempre o solo se c'è un ordine effettuato in precedenza
+    Route::get('/confirm', function() {
+        return view('confirm');
+    })->name('confirm');
 });
-
-// TODO: check se vista accessibile sempre o solo se c'è un ordine effettuato in precedenza
-Route::get('/confirm', function() {
-    return view('confirm');
-})->name('confirm');
 
 
 Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {

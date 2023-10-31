@@ -6,22 +6,13 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title>
-		Fattura
+		{{ $title ?? env('APP_NAME') }}
 	</title>
-
-{{--	<style>--}}
-{{--		body {--}}
-{{--			width: 21cm;--}}
-{{--			height: 29.7cm;--}}
-{{--			margin: 30mm 45mm 30mm 45mm !important;--}}
-{{--		}--}}
-{{--	</style>--}}
-
 	@vite(['resources/css/app.css', 'resources/js/app.js'])
-	@livewireStyles
+    @livewireStyles
 </head>
-<body class="mx-28 print:mx-0">
+<body>
 {{ $slot }}
 
-@livewireScripts
+@livewireScriptConfig
 </body>
