@@ -1,9 +1,11 @@
 <x-slot name="title">
     {{ $customer->fullname }}
 </x-slot>
+@role(App\Models\User::SUPERADMIN)
 <x-slot name="actions">
     <x-primary-button href="{{ route('customers.edit', ['customer' => $customer]) }}">{{ __('common.edit') }}</x-primary-button>
 </x-slot>
+@endrole
 
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
     <div class="p-7 bg-white">

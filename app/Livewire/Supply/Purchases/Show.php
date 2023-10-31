@@ -50,7 +50,7 @@ class Show extends Component
             }
         }
 
-        if($status === 'on_delivery') {
+        if ($status === 'on_delivery') {
             $this->supply->update([
                 'status' => 'on_delivery',
                 'shipped_at' => now()
@@ -58,6 +58,13 @@ class Show extends Component
         } else {
             $this->supply->status = $status;
             $this->supply->save();
+
+            if($status === 'delivered') {
+                $invoice = $this->supply->invoice()->create();
+                $invoice->update([
+                    'updated_at' => now()
+                ]);
+            }
         }
 
 
@@ -66,6 +73,12 @@ class Show extends Component
             subtitle: __('notifications.supply.status_changed.success'),
             type: 'success'
         );
+    }
+
+    public function setInvoiceStatus($status) {
+        $this->supply->invoice->update([
+            'status' => $status
+        ]);
     }
 
     public function render()

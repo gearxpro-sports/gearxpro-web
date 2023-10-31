@@ -15,6 +15,7 @@ return [
     'update' => 'Aggiorna',
     'add' => 'Aggiungi',
     'send' => 'Invia',
+    'print' => 'Stampa',
     'saving' => 'Salvataggio',
     'select' => 'Seleziona',
     'filter' => 'Filtra',

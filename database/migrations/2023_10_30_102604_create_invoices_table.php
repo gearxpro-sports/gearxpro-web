@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->json('name');
-            $table->json('description')->nullable();
-            $table->foreignIdFor(Category::class, 'parent_id')->nullable()->constrained('categories')->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\Supply::class, 'supply_id');
+            $table->text('code');
+            $table->enum('status', array_keys(\App\Models\Invoice::STATUSES))->default('to_pay');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('invoices');
     }
 };

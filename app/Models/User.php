@@ -67,7 +67,7 @@ class User extends Authenticatable
     }
 
     public function getCountryCodeAttribute() {
-        return $this->country->iso2_code;
+        return strtolower($this->country->iso2_code) ?? 'it';
     }
 
     /**
@@ -100,5 +100,9 @@ class User extends Authenticatable
     public function stocks(): HasMany
     {
         return $this->hasMany(Stock::class);
+    }
+
+    public function invoices() {
+        return $this->hasManyThrough(Invoice::class, Supply::class);
     }
 }
