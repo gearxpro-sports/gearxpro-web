@@ -49,7 +49,7 @@ class EditProductVariant extends ModalComponent
                 type: 'success'
             );
 
-            $this->dispatch('reload-variants');
+            $this->dispatch('refresh-variant');
 
         } else {
             session()->flash('variantFormError', __('products.edit.section.options.errors.variant_form'));

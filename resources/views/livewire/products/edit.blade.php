@@ -7,7 +7,7 @@
     <span class="text-color-6c757d mr-2">{{ __('products.edit.title') }}:</span> {{ $product->name }}
 </x-slot>
 
-<div x-data="{openedTab: '{{ $tabs[1] }}'}" x-on:list-updated="window.scrollTo(0, document.body.scrollHeight)">
+<div x-data="{openedTab: '{{ $tabs[0] }}'}" x-on:list-updated="window.scrollTo(0, document.body.scrollHeight)">
     <form wire:submit="save" class="bg-white p-4">
         <div class="p-8">
             <ul class="grid grid-cols-5 gap">
@@ -87,7 +87,7 @@
                                         }}"
                                     @call-update-attributes="updateAttributes($event.detail[0], $event.detail[1])"
                                 >
-                                    <h4 class="mb-5 font-bold">Attributi</h4>
+                                    <h4 class="mb-5 font-bold text-lg">{{ __('products.edit.section.options.attributes_title') }}</h4>
                                     <div class="grid grid-cols-3 gap-4 mb-5 pb-5 border-b border-color-eff0f0">
                                         @foreach($productGroupAttributesList as $groupId => $group)
                                         <div x-data="{
@@ -112,6 +112,7 @@
                                     <x-primary-button x-bind:disabled="!Object.keys(selectedAttributes).length" wire:click="generateVariants(selectedAttributes)" class="h-12 !text-base bg-color-0c9d87" type="button">{{ __('products.edit.section.options.generate_variants') }}</x-primary-button>
                                 </div>
                                 @if ($productVariants->count())
+                                <h3 class="mt-10 font-bold text-lg">{{ __('products.edit.section.options.product_variants_title') }}</h3>
                                 <div wire:sortable="updateProductVariantOrder" wire:sortable.options="{ animation: 100 }" class="flex flex-col space-y-4 mt-5">
                                     @foreach($productVariants as $productVariant)
                                         <livewire:products.product-variant-item :images="$images" :productVariant="$productVariant" :product="$product" wire:key="product_variant_{{ $productVariant->id }}" />

@@ -18,18 +18,23 @@
         </div>
         <div class="flex items-center">
             @if ($productVariant->sku)
-                <div class="mr-10"><small
-                        class="block text-color-6c757d">{{ __('products.edit.section.options.sku.label') }}</small><span
-                        class="text-sm font-bold">{{ $productVariant->sku }}</span></div>
+                <div class="mr-10">
+                    <small class="block text-color-6c757d">{{ __('products.edit.section.options.sku.label') }}</small>
+                    <span class="text-sm font-bold">{{ $productVariant->sku }}</span>
+                </div>
             @endif
             @if ($productVariant->barcode)
-                <div class="mr-10"><small
-                        class="block text-color-6c757d">{{ __('products.edit.section.options.barcode.label') }}</small><span
-                        class="text-sm font-bold">{{ $productVariant->barcode }}</span></div>
+                <div class="mr-10">
+                    <small class="block text-color-6c757d">{{ __('products.edit.section.options.barcode.label') }}</small>
+                    <span class="text-sm font-bold">{{ $productVariant->barcode }}</span>
+                </div>
             @endif
-            <div class="mr-10 text-center"><small
-                    class="block text-color-6c757d">{{ __('products.edit.section.options.quantity.label') }}</small><span
-                    class="text-sm font-bold">{{ $productVariant->quantity }}</span></div>
+            @if ($productVariant->quantity)
+            <div class="mr-10 text-center">
+                <small class="block text-color-6c757d">{{ __('products.edit.section.options.quantity.label') }}</small>
+                <span class="text-sm font-bold">{{ $productVariant->quantity }}</span>
+            </div>
+            @endif
             <div class="flex items-center space-x-2 ml-auto">
                 <button type="button"
                         class="flex items-center justify-center bg-color-eff0f0 w-8 h-8 ml-auto text-center rounded-sm"

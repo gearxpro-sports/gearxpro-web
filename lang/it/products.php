@@ -76,6 +76,8 @@ return [
             'options' => [
                 'generate_variants' => 'Genera le varianti',
                 'edit_variant_modal_title' => 'Modifica variante',
+                'attributes_title' => 'Attributi',
+                'product_variants_title' => 'Lista Varianti',
                 'sku' => [
                     'label' => 'Codice interno',
                 ],

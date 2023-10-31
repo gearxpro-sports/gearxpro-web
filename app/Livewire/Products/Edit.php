@@ -165,10 +165,11 @@ class Edit extends Component
             );
         }
 
-
         $this->productVariants = $this->productVariants->merge(collect($newCombinations));
 
-        $this->dispatch('list-updated');
+        if ($newCombinations) {
+            $this->dispatch('list-updated');
+        }
     }
 
     public function updateProductVariantOrder(array $list)
