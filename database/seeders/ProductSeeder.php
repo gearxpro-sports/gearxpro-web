@@ -24,9 +24,9 @@ class ProductSeeder extends Seeder
         }
 
         $countriesAvailable = User::role(User::RESELLER)->pluck('country_id');
-        
+
         for ($k=1; $k<8; $k++) {
-            
+
             $product = Product::create([
                 'name' => 'Prodotto Test '.$k,
                 'main_desc' => fake()->paragraphs(2, true),
@@ -35,10 +35,10 @@ class ProductSeeder extends Seeder
                 'technical_desc' => fake()->paragraphs(2, true),
                 'washing_desc' => fake()->paragraphs(2, true),
                 'slug' => Str::kebab('Prodotto di Test'),
-                'has_variants' => true,
+//                'has_variants' => true,
                 'active' => 1,
             ]);
-    
+
             $combinations = [];
             for ($i=0; $i<10; $i++) {
                 $combinations[] = [
@@ -47,7 +47,7 @@ class ProductSeeder extends Seeder
                     $groupedIds[3][array_rand($groupedIds[3])],
                 ];
             }
-    
+
             $combinations = array_unique($combinations, SORT_REGULAR);
             $position = 1;
             foreach ($combinations as $index => $combination) {
@@ -58,7 +58,7 @@ class ProductSeeder extends Seeder
                     'barcode'    => '000000000'.$k,
                     'quantity'   => rand(0, 500),
                 ]);
-    
+
                 $productVariant->attributes()->attach($combination);
                 $position++;
             }
