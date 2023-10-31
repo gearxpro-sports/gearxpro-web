@@ -23,14 +23,16 @@
                     :sortable="false"
                 />
             </div>
+        </div>
+        <div class="mt-8 flex items-center space-x-4">
             <x-primary-button wire:click.prevent="update" type="button">{{ __('common.update') }}</x-primary-button>
             <x-primary-button wire:click.prevent="closeModal" class="bg-color-b6b9bb" type="button">{{ __('common.close') }}</x-primary-button>
-            @if(session('variantFormError'))
-                <div class="flex items-center space-x-2 p-2 bg-color-fdce82 text-color-f55b3f text-xs">
-                    <x-icon name="heroicon-o-exclamation-circle" class="w-5 h-5 text-color-f55b3f"></x-icon>
-                    <span>{{ __('products.edit.section.options.errors.variant_form') }}</span>
-                </div>
-            @endif
         </div>
+        @if(session('variantFormError'))
+            <div class="flex items-center space-x-2 p-2 bg-color-fdce82 text-color-f55b3f text-xs">
+                <x-icon name="heroicon-o-exclamation-circle" class="w-5 h-5 text-color-f55b3f"></x-icon>
+                <span>{{ __('products.edit.section.options.errors.variant_form') }}</span>
+            </div>
+        @endif
     </div>
 </div>
