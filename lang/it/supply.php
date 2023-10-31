@@ -65,6 +65,16 @@ return [
                     'total' => 'Totale per Quantità',
                 ],
             ],
+            'top_bar' => [
+                'order_number' => 'Ordine Numero',
+            ],
+            'boxes' => [
+                'reseller_data' => 'Dati Rivenditore',
+                'shipping_data' => 'Dati Spedizione',
+                'billing_data' => 'Dati Fatturazione',
+                'payment_data' => 'Informazioni Pagamento',
+                'payment_method' => 'Metodo di pagamento',
+            ],
             'alert' => [
                 'changing_status' => [
                     'delivered' => 'Confermi di contrassegnare l\'ordine come consegnato? L\'operazione non potrà essere annullata.',
@@ -75,6 +85,7 @@ return [
             'ship_date' => 'Data Spedizione',
             'supply_total' => 'Totale Ordine Approvvigionamento',
             'supply_state' => 'Stato Ordine',
+
         ],
     ],
     'recap' => [

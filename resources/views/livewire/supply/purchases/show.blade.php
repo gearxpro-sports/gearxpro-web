@@ -6,7 +6,7 @@
     <div class="flex items-center py-4 px-8 bg-white shadow-shadow-1 radius-sm">
         <div class="flex items-center">
             <div class="flex flex-col mr-8">
-                <span class="text-xs text-color-6c757d">Ordine Numero</span>
+                <span class="text-xs text-color-6c757d">{{ __('supply.purchases.show.top_bar.order_number') }}</span>
                 <span class="block text-color-18181a uppercase">#{{ $supply->uuid }}</span>
             </div>
             <x-dropdown-supply-statuses current_status="{{ $supply->status }}"></x-dropdown-supply-statuses>
@@ -58,10 +58,10 @@
             @endif
         </div>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4">
         <div class="p-8 bg-white rounded-sm flex">
             <div class="grow">
-                <h3 class="mb-4 text-color-18181a font-medium">Dati Rivenditore</h3>
+                <h3 class="mb-4 text-color-18181a font-medium">{{ __('supply.purchases.show.boxes.reseller_data') }}</h3>
                 <ul class="grow-0 text-sm">
                     <li class="mt-2 text-color-323a46">{{ $supply->reseller->fullname }}</li>
                     <li class="mt-2 text-color-6c757d">{{ $supply->reseller->email }}</li>
@@ -73,7 +73,7 @@
         </div>
         <div class="p-8 bg-white rounded-sm flex">
             <div class="grow">
-                <h3 class="mb-4 text-color-18181a font-medium">Dati Spedizione</h3>
+                <h3 class="mb-4 text-color-18181a font-medium">{{ __('supply.purchases.show.boxes.shipping_data') }}</h3>
                 <ul class="grow-0 text-sm">
                     <li class="mt-2 text-color-323a46">{{ $supply->reseller->fullname }}</li>
                     <li class="mt-2 text-color-6c757d">{{ $supply->reseller->shippingAddress->inlineFormat }}</li>
@@ -86,7 +86,7 @@
         </div>
         <div class="p-8 bg-white rounded-sm flex">
             <div class="grow">
-                <h3 class="mb-4 text-color-18181a font-medium">Dati Fatturazione</h3>
+                <h3 class="mb-4 text-color-18181a font-medium">{{ __('supply.purchases.show.boxes.billing_data') }}</h3>
                 <ul class="grow-0 text-sm">
                     <li class="mt-2 text-color-323a46">{{ $supply->reseller->fullname }}</li>
                     <li class="mt-2 text-color-6c757d">{{ $supply->reseller->billingAddress->inlineFormat }}</li>
@@ -99,9 +99,9 @@
         </div>
         <div class="p-8 bg-white rounded-sm flex">
             <div class="grow">
-                <h3 class="mb-4 text-color-18181a font-medium">Informazioni Pagamento</h3>
+                <h3 class="mb-4 text-color-18181a font-medium">{{ __('supply.purchases.show.boxes.payment_data') }}</h3>
                 <ul class="grow-0 text-sm">
-                    <li class="mt-2 text-color-6c757d">Metodo di pagamento: <span
+                    <li class="mt-2 text-color-6c757d">{{ __('supply.purchases.show.boxes.payment_method') }}<span
                             class="ml-2 font-medium">{{ $supply->payment_method ? __('payment_methods.'.$supply->payment_method) : '-' }}</span>
                     </li>
                 </ul>
@@ -111,8 +111,8 @@
             </div>
         </div>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="col-span-3 p-8 bg-white rounded-sm">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+        <div class="lg:col-span-3 p-8 bg-white rounded-sm">
             <h3 class="text-color-18181a font-medium">{{ __('supply.purchases.show.table.title') }}</h3>
             <table
                 class="my-8 table-auto border-collapse w-full text-xs text-black-1 border border-color-eff0f0 font-medium">
