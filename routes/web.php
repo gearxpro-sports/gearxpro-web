@@ -53,7 +53,6 @@ Route::middleware('country')->group(function() {
         Route::get('/shop/checkout', [CartCheckout::class, '__invoke'])->name('checkout');
         Route::get('/shop/payment', [CartPayment::class, '__invoke'])->name('payment');
         Route::get('/shop/{product}', [ProductShow::class, '__invoke'])->name('show');
-
     });
 
     // TODO: check se vista accessibile sempre o solo se c'è un ordine effettuato in precedenza
