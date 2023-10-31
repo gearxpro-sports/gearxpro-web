@@ -1,4 +1,4 @@
-<div>
+<div class="mx-28 print:mx-0">
     <div class="grid gap-1 first:pt-4 py-10 border-b-2 print:first:pt-0 print:py-0 print:border-b-0">
         <div class="text-center mb-4 print:hidden">
             <x-primary-button onclick="window.print()"
