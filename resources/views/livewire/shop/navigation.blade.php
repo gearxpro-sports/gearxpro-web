@@ -26,13 +26,15 @@
                         {{ __('shop.navigation.shop') }}
                     </x-nav-link>
 
-                    <x-custom-dropdown title="{{ __('shop.navigation.about_us') }}" :options='["opzione 1", "opzione 2", "opzione 3"]'/>
+                    <x-custom-dropdown title="{{ __('shop.navigation.about_us') }}"
+                                       :options='["opzione 1", "opzione 2", "opzione 3"]'/>
 
                     <x-nav-link :href="route('home')" :active="request()->routeIs('dashboard')">
                         {{ __('shop.navigation.journal') }}
                     </x-nav-link>
 
-                    <x-custom-dropdown title="{{ __('shop.navigation.assistance') }}" :options='["opzione 1", "opzione 2", "opzione 3"]'/>
+                    <x-custom-dropdown title="{{ __('shop.navigation.assistance') }}"
+                                       :options='["opzione 1", "opzione 2", "opzione 3"]'/>
                 </div>
             </div>
 
@@ -45,11 +47,17 @@
                                 <x-dropdown align="right" width="48">
                                     <x-slot name="trigger">
                                         <button class="flex flex-col items-start">
-                                            <span class="text-lg font-medium text-color-b6b9bb">{{ Auth::user()->role->label }}</span>
+                                            <span
+                                                class="text-lg font-medium text-color-b6b9bb">{{ Auth::user()->fullname }}</span>
                                         </button>
                                     </x-slot>
 
                                     <x-slot name="content">
+                                        @hasanyrole([App\Models\User::RESELLER, App\Models\User::SUPERADMIN])
+                                        <x-dropdown-link href="{{ route('dashboard') }}">
+                                            {{ __('Dashboard') }}
+                                        </x-dropdown-link>
+                                        @endrole
                                         <x-dropdown-link href="/">
                                             {{ __('Profile') }}
                                         </x-dropdown-link>
@@ -69,7 +77,8 @@
                                 </x-dropdown>
                             </div>
                         @else
-                            <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                            <a href="{{ route('login') }}"
+                               class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
                                 <img src="{{ Vite::asset('resources/images/icons/account.svg')}}" alt="">
                             </a>
                         @endauth
@@ -78,12 +87,13 @@
 
                 <a href="{{ route('shop.cart') }}" class="relative">
                     @if ($products)
-                        <div class="absolute top-[-9px] right-[-13px] w-5 h-5 bg-color-ff7f6e rounded-full text-white flex items-center justify-center text-[11px] font-semibold leading-[14px]">{{$products}}</div>
+                        <div
+                            class="absolute top-[-9px] right-[-13px] w-5 h-5 bg-color-ff7f6e rounded-full text-white flex items-center justify-center text-[11px] font-semibold leading-[14px]">{{$products}}</div>
                     @endif
                     <img src="{{ Vite::asset('resources/images/icons/shopping-bag.svg')}}" alt="">
                 </a>
 
-                <x-drop-language :current="$currentLanguage" :options="$languages"/>
+                <livewire:shop.components.language-switch/>
             </div>
         </div>
     </div>
