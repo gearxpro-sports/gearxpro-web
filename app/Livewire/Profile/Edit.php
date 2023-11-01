@@ -114,9 +114,16 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.profile.edit', [
-            'resellers' => User::role(User::RESELLER)->with('country')->get(),
-            'countries' => Country::all()
-        ]);
+        if(auth()->user()->hasanyrole([User::RESELLER, User::SUPERADMIN])) {
+            return view('livewire.profile.edit', [
+                'resellers' => User::role(User::RESELLER)->with('country')->get(),
+                'countries' => Country::all()
+            ]);
+        } else {
+            return view('livewire.profile.edit', [
+                'resellers' => User::role(User::RESELLER)->with('country')->get(),
+                'countries' => Country::all()
+            ])->layout('layouts.guest');
+        }
     }
 }

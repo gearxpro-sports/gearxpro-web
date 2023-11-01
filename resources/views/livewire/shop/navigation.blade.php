@@ -58,7 +58,7 @@
                                             {{ __('Dashboard') }}
                                         </x-dropdown-link>
                                         @endrole
-                                        <x-dropdown-link href="/">
+                                        <x-dropdown-link href="{{ route('profile.edit') }}">
                                             {{ __('Profile') }}
                                         </x-dropdown-link>
 

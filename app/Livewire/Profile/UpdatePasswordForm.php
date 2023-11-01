@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class UpdatePasswordForm extends Component
 {
-    public $current_password, $password, $password_confirmation, $saved = false;
+    public $current_password, $password, $password_confirmation;
 
     public function rules() {
         return [
