@@ -8,7 +8,7 @@
         <form wire:submit="login" class="mb-[70px]">
             <div class="w-full flex flex-col gap-1 relative">
                 <label for="email" class="text-[12px] font-medium leading-[15px] text-color-18181a">{{ __('shop.checkout.email') }}</label>
-                <input wire:model="email" type="text" name="email" class="h-[48px] px-4 rounded-md bg-color-edebe5 p-0 border-color-e0e0df focus:border-transparent focus:ring-0">
+                <input wire:model="email" type="email" name="email" class="h-[48px] px-4 rounded-md bg-color-edebe5 p-0 border-color-e0e0df focus:border-transparent focus:ring-0">
                 <div class="absolute bottom-[-20px] right-0">@error('email') <span class="text-[12px] text-color-f4432c">{{ $message }}</span> @enderror</div>
             </div>
 
@@ -54,7 +54,7 @@
 
         <div class="w-full flex flex-col gap-1 relative">
             <label for="emailGuest" class="text-[12px] font-medium leading-[15px] text-color-18181a">{{ __('shop.checkout.email') }}</label>
-            <input wire:model="emailGuest" type="text" name="emailGuest" class="h-[48px] px-4 rounded-md bg-color-f2f0eb p-0 border-color-e0e0df focus:border-transparent focus:ring-0">
+            <input wire:model="emailGuest" type="email" name="emailGuest" class="h-[48px] px-4 rounded-md bg-color-f2f0eb p-0 border-color-e0e0df focus:border-transparent focus:ring-0">
             <div class="absolute bottom-[-20px] right-0">@error('emailGuest') <span class="text-[12px] text-color-f4432c">{{ $message }}</span> @enderror</div>
         </div>
 

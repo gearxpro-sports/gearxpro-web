@@ -1,6 +1,6 @@
 <div class="pt-[66px] pb-[222px] pl-[351px] pr-[384px] flex gap-[70px]">
     <div class="w-[365px]">
-        <h1 class="text-[33px] font-semibold leading-[40px] text-color-18181a capitalize mb-[30px]">Pagamento</h1>
+        <h1 class="text-[33px] font-semibold leading-[40px] text-color-18181a capitalize mb-[30px]">{{__('shop.payment.payment')}}</h1>
 
         {{-- tabs --}}
         <div class="mb-[40px] flex flex-col gap-[10px]">
@@ -16,27 +16,27 @@
                     @else
                         <x-icons :name="$tab['icon-off']"/>
                     @endif
-                    <span>{{$tab['text']}}</span>
+                    <span>{{__('shop.payment.'.$tab['text'])}}</span>
                 </button>
             @endforeach
         </div>
 
         {{-- dettaglio carrello --}}
         <div class="mb-[30px]">
-            <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a mb-[15px]">Nel tuo carrello</h2>
+            <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a mb-[15px]">{{__('shop.payment.in_to_cart')}}</h2>
 
             <div class="flex items-center justify-between mb-5">
-                <span class="text-[13px] font-medium leading-[16px] text-color-18181a">Subtotale</span>
-                <span class="text-[13px] font-medium leading-[16px] text-color-18181a">€ 70,00</span>
+                <span class="text-[13px] font-medium leading-[16px] text-color-18181a">{{__('shop.payment.subtotal')}}</span>
+                <span class="text-[13px] font-medium leading-[16px] text-color-18181a">{{$money}} {{number_format(70, 2, ',', '.')}}</span>
             </div>
             <div class="flex items-center justify-between">
-                <span class="text-[13px] font-medium leading-[16px] text-color-18181a">Costi di spedizione</span>
-                <span class="text-[13px] font-medium leading-[16px] text-color-18181a">Gratuita</span>
+                <span class="text-[13px] font-medium leading-[16px] text-color-18181a">{{__('shop.payment.shipment_cost')}}</span>
+                <span class="text-[13px] font-medium leading-[16px] text-color-18181a">{{__('shop.payment.free')}}</span>
             </div>
 
             <div class="border-y border-color-18181a h-[61px] flex items-center justify-between mt-[25px]">
-                <span class="text-[15px] font-medium leading-[16px] text-color-18181a">Totale</span>
-                <span class="text-[15px] font-semibold  leading-[16px] text-color-18181a">€ 70,00</span>
+                <span class="text-[15px] font-medium leading-[16px] text-color-18181a">{{__('shop.payment.total')}}</span>
+                <span class="text-[15px] font-semibold  leading-[16px] text-color-18181a">{{$money}} {{number_format(70, 2, ',', '.')}}</span>
             </div>
         </div>
 
@@ -65,7 +65,7 @@
 
     @if ($currentTab == 0)
         <form wire:submit="getDataUser" class="pt-[90px] w-[750px]">
-            <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a mb-[15px]">Indirizzo</h2>
+            <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a mb-[15px]">{{__('shop.payment.address')}}</h2>
 
             <div class="flex gap-5">
                 <x-input-text wire:model="firstname" width="w-1/2" name="firstname" label="firstname" required="true" />
@@ -73,8 +73,8 @@
             </div>
 
             <div class="flex gap-5 my-[23px]">
-                <x-input-text wire:model="address" width="w-[494px]" name="address" label="address" required="true" />
-                <x-input-text wire:model="postcode" width="grow" name="postcode" label="postcode" required="true" />
+                <x-input-text wire:model="address" width="w-[494px]" name="address" label="address_civic" required="true" />
+                <x-input-text x-mask="{{ __('masks.postcode') }}" wire:model="postcode" width="grow" name="postcode" label="postcode" required="true" />
             </div>
 
             <x-input-text wire:model="company" width="w-full" name="company" label="company" required="" />
@@ -95,8 +95,8 @@
             </div>
 
             <div class="flex gap-5 mt-[23px]">
-                <x-input-text wire:model="email" width="w-1/2" name="email" label="email" required="true" />
-                <x-input-text wire:model="phone" width="w-1/2" name="phone" label="phone" required="true" />
+                <x-input-text wire:model="email" type="email" width="w-1/2" name="email" label="email" required="true" />
+                <x-input-text x-mask="{{ __('masks.phone') }}" wire:model="phone" width="w-1/2" name="phone" label="phone" required="true" />
             </div>
 
             <div class="mt-[42px] flex items-center justify-between">
@@ -114,16 +114,16 @@
                 <div class="w-full h-[197px] py-[24px] px-[21px] border border-color-e0e0df rounded-md">
                     <div class="flex items-center gap-2">
                         <x-icons name="flag_ON"/>
-                        <h3 class="text-[15px] font-semibold leading-[19px] text-color-18181a">Indirizzo</h3>
+                        <h3 class="text-[15px] font-semibold leading-[19px] text-color-18181a">{{__('shop.payment.address')}}</h3>
                     </div>
 
                     <h3 class="text-[13px] font-semibold leading-[24px] text-color-323a46 mt-[25px] mb-[5px]">Giancarlo Ferraro</h3>
 
                     <div class="text-[13px] font-medium flex gap-[15px]">
                         <div class="flex flex-col gap-[5px] min-w-[60px] text-color-6c757d">
-                            <span>Indirizzo:</span>
-                            <span>Email:</span>
-                            <span>Telefono:</span>
+                            <span>{{__('shop.payment.address')}}:</span>
+                            <span>{{__('shop.payment.email')}}:</span>
+                            <span>{{__('shop.payment.phone')}}:</span>
                         </div>
                         <div class="flex flex-col gap-[5px]  text-color-323a46">
                             <span>Via Jacopino da Tradate 47,  20155, Milano, Milano, Italia</span>
@@ -137,28 +137,27 @@
                 <div class="w-full h-[99px] py-[24px] px-[21px] border border-color-e0e0df rounded-md">
                     <div class="flex items-center gap-2">
                         <x-icons name="flag_ON"/>
-                        <h3 class="text-[15px] font-semibold leading-[19px] text-color-18181a">Spedizione Gratuita</h3>
+                        <h3 class="text-[15px] font-semibold leading-[19px] text-color-18181a">{{__('shop.payment.shipment_free')}}</h3>
                     </div>
 
-                    <p class="text-[13px] font-medium text-color-6c757d mt-[15px]">Spedizione stimata in 5-7 giorni.</p>
+                    <p class="text-[13px] font-medium text-color-6c757d mt-[15px]">{{__('shop.payment.shipment_time')}}</p>
                 </div>
             </div>
 
             <div class="w-full mt-[30px]">
-                <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a">Metodo di pagamento</h2>
+                <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a">{{__('shop.payment.method_payment')}}</h2>
 
                 <div class="w-full h-[73px] mt-[15px] bg-color-f5e3d7 py-[18px] px-[21px] flex items-center justify-between gap-[35px] rounded-md">
-                    <p class="text-[13px] font-medium leading-[20px] text-color-6c757d">I pagamenti sono crittografati con SSL per garantire la massima sicurezza della  tua carta di credito
-                        e dei tuoi dati di pagamento.</p>
+                    <p class="text-[13px] font-medium leading-[20px] text-color-6c757d">{{__('shop.payment.ssl')}}</p>
                     <x-icons name="trust" />
                 </div>
 
                 <form wire:submit="getDataPayment" class="mt-5">
-                    <x-input-text wire:model="creditCard" width="w-full" name="creditCard" label="creditCard" required="true" />
+                    <x-input-text x-mask:dynamic="creditCardMask" wire:model="creditCard" width="w-full" name="creditCard" label="creditCard" required="true" />
 
                     <div class="flex gap-5 my-5">
-                        <x-input-text wire:model="expiration" width="w-1/2" name="expiration" label="expiration" required="true" />
-                        <x-input-text wire:model="ccv" width="w-1/2" name="ccv" label="ccv" required="true" />
+                        <x-input-text x-mask="99/99" wire:model="expiration" width="w-1/2" name="expiration" label="expiration" required="true" />
+                        <x-input-text x-mask="999" wire:model="ccv" width="w-1/2" name="ccv" label="ccv" required="true" />
                     </div>
 
                     <x-input-text wire:model="accountHolder" width="w-full" name="accountHolder" label="accountHolder" required="true" />

@@ -45,12 +45,12 @@ class Payment extends Component
     ];
     public $tabs = [
         [
-            'text' => 'Recapiti e consegna',
+            'text' => 'tab_delivery',
             'icon-on' => 'delivery',
             'icon-off' => 'delivery-off'
         ],
         [
-            'text' => 'info Pagamento',
+            'text' => 'tab_payment',
             'icon-on' => 'payment',
             'icon-off' => 'payment-off',
         ]
@@ -74,7 +74,7 @@ class Payment extends Component
                 'city' => 'required',
                 'province' => 'required',
                 'country' => 'required',
-                'email' => 'required',
+                'email' => 'required|email',
                 'phone' => 'required',
             ];
         } elseif ($this->currentTab == 1) {
@@ -99,6 +99,7 @@ class Payment extends Component
                 'province.required' => __('shop.payment.required'),
                 'country.required' => __('shop.payment.required'),
                 'email.required' => __('shop.payment.required'),
+                'email.email' => __('shop.payment.invalid_email'),
                 'phone.required' => __('shop.payment.required'),
             ];
         } elseif ($this->currentTab == 1) {
