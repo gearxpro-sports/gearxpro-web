@@ -17,15 +17,12 @@ class CategoryForm extends Form
      * @var string|null
      */
     public ?string $name = '';
-    
+
     /**
      * @var string|null
      */
     public ?string $description = '';
 
-    /**
-     * @var array
-     */
     protected $rules = [
         'name'          => 'required',
         'description'   => 'nullable',
@@ -44,20 +41,20 @@ class CategoryForm extends Form
     }
 
     /**
-     * @param integer|null $parentCategoryId
+     * @param int|null $parentCategoryId
      */
     public function store(?int $parentCategoryId = null)
     {
         $fields = $this->only(['name', 'description']);
         $fields['parent_id'] = (int) $parentCategoryId;
-        
-        return Category::create($fields);
+
+        Category::create($fields);
     }
 
     public function update()
     {
         $this->validate();
-        
-        return $this->category->update($this->only(['name', 'description']));
+
+        $this->category->update($this->only(['name', 'description']));
     }
 }

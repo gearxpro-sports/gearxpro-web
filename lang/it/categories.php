@@ -31,6 +31,7 @@ return [
         'description' => [
             'label' => 'Descrizione',
         ],
+        'add_existing' => 'Aggiungi esistente',
     ],
     'alert' => [
         'delete_category' => 'Confermi di voler eliminare questa categoria? Verranno eliminate anche le relative sottocategorie.'

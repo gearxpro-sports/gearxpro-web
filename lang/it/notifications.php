@@ -81,6 +81,7 @@ return [
         'updating' => [
             'success' => 'La categoria è stata aggiornata con successo!',
             'error' => 'Errore durante l\'aggiornamento della categoria!',
+            'children_success' => 'La lista delle sottocategorie è stata aggiornata con successo!'
         ],
         'deleting' => [
             'success' => 'La categoria è stata eliminata con successo!',
