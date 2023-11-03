@@ -7,10 +7,10 @@
     </div>
     <div class="flex justify-center">
         <ul class="text-color-18181a space-x-5">
-            @foreach($resellers as $reseller)
-                <li wire:click="setCountry('{{ $reseller->country->iso2_code }}')" class="inline-flex items-center space-x-2 bg-gray-100 px-3 py-1 rounded hover:bg-gray-200 hover:cursor-pointer">
-                    <img src="https://flagcdn.com/w320/{{strtolower($reseller->country->iso2_code)}}.png" alt="" class="w-5">
-                    <span>{{ $reseller->country->name }}</span>
+            @foreach($resellers as $country_id => $reseller)
+                <li wire:click="setCountry('{{ $reseller->first()->country->iso2_code }}')" class="inline-flex items-center space-x-2 bg-gray-100 px-3 py-1 rounded hover:bg-gray-200 hover:cursor-pointer">
+                    <img src="https://flagcdn.com/w320/{{strtolower($reseller->first()->country->iso2_code)}}.png" alt="" class="w-5">
+                    <span>{{ $reseller->first()->country->name }}</span>
                 </li>
             @endforeach
         </ul>

@@ -15,6 +15,7 @@ use App\Livewire\Products\Edit as ProductsEdit;
 use App\Livewire\Categories\Index as CategoriesIndex;
 use App\Livewire\Categories\Create as CategoriesCreate;
 use App\Livewire\Categories\Edit as CategoriesEdit;
+use App\Livewire\Shop\Splash;
 use App\Livewire\Stocks\Index as StocksIndex;
 use App\Livewire\Supply\Index as SupplyIndex;
 use App\Livewire\Supply\Recap as SupplyRecap;
@@ -40,9 +41,14 @@ use App\Livewire\Register\Index as RegisterIndex;
 |
 */
 
-Route::get('/welcome', \App\Livewire\Shop\Splash::class)->name('splash');
+Route::domain(env('APP_URL'))->group(function() {
+    Route::get('/', function() {
+        return redirect()->route('splash');
+    });
+    Route::get('/welcome', Splash::class)->name('splash');
+});
 
-Route::middleware('country')->group(function() {
+Route::middleware('country')->domain('{country_code}.'.env('APP_URL'))->group(function() {
     Route::get('/', [ShopIndex::class, '__invoke'])->name('home');
 
     Route::name('shop.')->group(function () {
@@ -61,8 +67,7 @@ Route::middleware('country')->group(function() {
     })->name('confirm');
 });
 
-
-Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function() {
+Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->prefix('dashboard')->group(function() {
     Route::middleware(['role:superadmin|reseller'])->group(function () {
         Route::get('/', function () {
             return view('dashboard');
