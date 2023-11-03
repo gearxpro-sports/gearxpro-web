@@ -58,6 +58,10 @@ class ProductVariant extends Model implements HasMedia
         return $this->BelongsToMany(Attribute::class)->withPivot('term_id');
     }
 
+//    public function terms() {
+//        return $this->hasManyThrough(Term::class, Attribute::class, 'id', 'attribute_id', 'id', 'id');
+//    }
+
     /**
      * @return void
      */
