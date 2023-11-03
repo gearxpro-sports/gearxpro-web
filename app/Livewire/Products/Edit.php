@@ -7,8 +7,8 @@ use App\Models\Category;
 use App\Models\Product;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use App\Models\Term;
 use App\Models\Attribute;
-use App\Models\GroupAttribute;
 use App\Models\ProductVariant;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\View;
@@ -117,7 +117,7 @@ class Edit extends Component
 
         // FIRST CHECK - Prevent fake attribute ids
         // Get all attribute ids
-        $whiteListAttributeIds = Attribute::pluck('id')->toArray();
+        $whiteListAttributeIds = Term::pluck('id')->toArray();
         // Filter id attributes from fake ones
         $groupAttributes = array_map(fn($values) => array_unique(array_filter($values, fn($item) => in_array($item, $whiteListAttributeIds))), $groupAttributes);
 
@@ -229,7 +229,7 @@ class Edit extends Component
      */
     private function getCompleteGroupAttributesArray(): array
     {
-        $groupAttributes = GroupAttribute::with('attributes')->get();
+        $groupAttributes = Attribute::with('attributes')->get();
         $data = [];
         foreach ($groupAttributes as $groupAttribute) {
             $attributes = [];

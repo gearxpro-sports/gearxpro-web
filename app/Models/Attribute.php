@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Attribute extends Model
 {
@@ -15,31 +15,22 @@ class Attribute extends Model
     /**
      * @var array
      */
-    protected $hidden = [
-        'group_attribute_id',
-        'pivot',
-    ];
-
-    /**
-     * @var array
-     */
     public array $translatable = [
-        'value',
+        'name',
     ];
 
     /**
-     * @return BelongsTo
+     * @return void
      */
-    public function group(): BelongsTo
+    protected static function booted(): void
     {
-        return $this->belongsTo(GroupAttribute::class, 'group_attribute_id');
+        static::addGlobalScope('order_by_position', function (Builder $builder) {
+            $builder->orderBy('position');
+        });
     }
 
-    /**
-     * @return BelongsToMany
-     */
-    public function productVariants(): BelongsToMany
+    public function terms(): HasMany
     {
-        return $this->belongsToMany(ProductVariant::class);
+        return $this->hasMany(Term::class);
     }
 }
