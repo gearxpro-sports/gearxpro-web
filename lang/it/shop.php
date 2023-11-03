@@ -7,7 +7,8 @@ return [
         'shop' => 'Shop',
         'about_us' => 'Chi siamo',
         'journal' => 'Giornale GearxPro',
-        'assistance' => 'Assistenza'
+        'assistance' => 'Assistenza',
+        'login_register' => 'Accedi / Registrati',
     ],
     'jumbotron' => [
         'title' => 'Il negozio che stavi Aspettando',
