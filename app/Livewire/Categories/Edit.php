@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Categories;
 
-use Symfony\Component\HttpFoundation\Response;
 use Livewire\Component;
 use App\Models\Category;
 use Livewire\Attributes\On;
@@ -18,7 +17,7 @@ class Edit extends Component
     public Category $category;
 
     /**
-     * @var Category
+     * @var CategoryForm
      */
     public CategoryForm $categoryForm;
 
@@ -28,12 +27,19 @@ class Edit extends Component
     public Collection $childCategories;
 
     /**
-     * @param Category $category
+     * @var Collection
      */
+    public Collection $categories;
+
+    /**
+     * @var int|null
+     */
+    public ?int $existingToAdd = null;
+
     public function mount()
     {
         $this->categoryForm->setCategoryForm($this->category);
-        $this->childCategories = $this->category->children;
+        $this->loadCategories();
     }
 
     /**
@@ -73,6 +79,25 @@ class Edit extends Component
 
     #[On('reload-child-categories')]
     public function refresh(){
-        $this->childCategories = $this->category->children;
+        $this->loadCategories();
+        $this->existingToAdd = null;
+    }
+
+    public function addExisting()
+    {
+        Category::findOrFail((int) $this->existingToAdd)->update(['parent_id' => $this->category->id]);
+        $this->refresh();
+        $this->dispatch('open-notification',
+            title: __('notifications.titles.updating'),
+            subtitle: __('notifications.categories.updating.children_success'),
+            type: 'success'
+        );
+    }
+
+    private function loadCategories()
+    {
+        $categories = Category::where('id', '!=', $this->category->id)->orderBy('name->it')->get();
+        $this->childCategories = $categories->where('parent_id', $this->category->id)->sortBy('id');
+        $this->categories = $categories->whereNotIn('id', [$this->category->id, ...$this->childCategories->pluck('id')])->pluck('name', 'id');
     }
 }

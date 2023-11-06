@@ -30,15 +30,17 @@ class AddChildCategory extends ModalComponent
     public function store()
     {
         $this->validate();
-        
+
+        $this->childCategoryForm->store($this->category->id);
+
         $this->dispatch('closeModal');
 
         $this->dispatch('open-notification',
             title: __('notifications.titles.saving'),
             subtitle: __('notifications.categories.saving.success'),
-            type: $this->childCategoryForm->store($this->category->id) ? 'success' : 'error',
+            type: 'success',
         );
 
-        $this->dispatch('reload-child-categories'); 
+        $this->dispatch('reload-child-categories');
     }
 }
