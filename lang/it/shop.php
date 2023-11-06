@@ -6,7 +6,7 @@ return [
         'home' => 'Home',
         'shop' => 'Shop',
         'about_us' => 'Chi siamo',
-        'journal' => 'Giornale GearxPro',
+        'journal' => 'News',
         'assistance' => 'Assistenza',
         'login_register' => 'Accedi / Registrati',
     ],
@@ -16,7 +16,10 @@ return [
         'button' => 'Acquista ora'
     ],
     'carousel-top' => [
-        'title' => 'In which all the 26 letters'
+        'title' => 'Linea prodotto'
+    ],
+    'carousel-bottom' => [
+        'title' => 'Bestseller'
     ],
     'products' => [
         'title' => 'Non puoi mettere un limite a nulla.',

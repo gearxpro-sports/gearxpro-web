@@ -1,4 +1,4 @@
-<div class="w-full h-[561px] pt-[85px] pb-[67px] bg-black border-t border-white grid grid-cols-12 grid-rows-6 gap-[30px]">
+<div class="w-full h-[561px] pt-[85px] pb-[67px] bg-color-010101 grid grid-cols-12 grid-rows-6 gap-[30px]">
 
     <div class="col-start-3 col-span-3 row-start-1 row-span-6 pr-[86px] flex flex-col justify-between items-center text-white">
         <div class="flex flex-col gap-[28px] text-[13px] font-medium leading-[16px]">

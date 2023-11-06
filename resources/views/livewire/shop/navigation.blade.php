@@ -1,6 +1,6 @@
-<nav x-data="{ open: false }" class="z-50 w-[100vw] sticky top-0 xl:static">
+<nav x-data="{ open: false }" class="z-50 w-full sticky top-0 xl:static">
     <!-- Header -->
-    <div class="h-[36px] bg-color-18181a flex justify-center items-center border-b-color-707070">
+    <div class="h-[36px] bg-color-19181d flex justify-center items-center border-b-color-707070">
         <p class="text-white font-medium text-[13px] leading-4">
             {{ __('shop.header')}}
         </p>
