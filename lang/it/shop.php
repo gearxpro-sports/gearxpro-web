@@ -10,6 +10,9 @@ return [
         'assistance' => 'Assistenza',
         'login_register' => 'Accedi / Registrati',
     ],
+    'splash' => [
+        'title' => 'Seleziona il tuo Paese'
+    ],
     'jumbotron' => [
         'title' => 'Il negozio che stavi Aspettando',
         'description' => 'The quick brown fox jumps over a lazy dog is the most famous pangram in English that is the most short.',
