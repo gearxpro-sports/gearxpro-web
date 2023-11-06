@@ -15,6 +15,10 @@ class Button extends Component
         $this->dispatch('addToCart');
     }
 
+    public function payForLink() {
+        $this->dispatch('payForLink');
+    }
+
     public function render()
     {
         return view('livewire.components.button');

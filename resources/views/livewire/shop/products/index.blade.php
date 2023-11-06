@@ -55,7 +55,7 @@
     </div>
 </div>
 
-@push('scripts')
+{{-- @push('scripts')
     <script>
         var scrollPosition = window.scrollY;
         var actionContainer = document.getElementById('action');
@@ -70,4 +70,4 @@
             }
         })
     </script>
-@endpush
+@endpush --}}
