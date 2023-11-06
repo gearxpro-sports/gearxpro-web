@@ -20,7 +20,7 @@ class Country
             return redirect()->route('splash');
         }
 
-        URL::defaults(['country_code' => session('country_code')]);
+        URL::defaults(['country_code' => session('country_code', 'it')]);
 
         return $next($request);
     }

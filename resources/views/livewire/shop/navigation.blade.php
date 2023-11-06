@@ -11,7 +11,7 @@
         <div class="flex justify-between items-center h-[60px]">
             <!-- Logo -->
             <div class="shrink-0 flex items-center">
-                <a href="{{ route('home') }}">
+                <a href="{{ route('home', ['country_code' => session('country_code')]) }}">
                     <img src="{{ Vite::asset('resources/images/logo.svg') }}" alt="" class="w-[122px] xl:w-auto">
                 </a>
             </div>
@@ -19,17 +19,17 @@
             <!-- Navigation Links -->
             <div class="hidden xl:flex">
                 <div class="hidden space-x-10 sm:-my-px sm:ml-10 sm:flex items-center">
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                    <x-nav-link :href="route('home', ['country_code' => session('country_code')])" :active="request()->routeIs('home')">
                         {{ __('shop.navigation.home') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('shop.index')" :active="request()->routeIs('shop.*')">
+                    <x-nav-link :href="route('shop.index', ['country_code' => session('country_code')])" :active="request()->routeIs('shop.*')">
                         {{ __('shop.navigation.shop') }}
                     </x-nav-link>
 
                     <x-custom-dropdown title="{{ __('shop.navigation.about_us') }}"
                                        :options='["opzione 1", "opzione 2", "opzione 3"]'/>
 
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('home', ['country_code' => session('country_code')])" :active="request()->routeIs('dashboard')">
                         {{ __('shop.navigation.journal') }}
                     </x-nav-link>
 
@@ -88,7 +88,7 @@
                             </div>
                         </div>
 
-                        <a href="{{ route('shop.cart') }}" class="relative">
+                        <a href="{{ route('shop.cart', ['country_code' => session('country_code')]) }}" class="relative">
                             @if ($products)
                                 <div
                                     class="absolute top-[-9px] right-[-13px] w-5 h-5 bg-color-ff7f6e rounded-full text-white flex items-center justify-center text-[11px] font-semibold leading-[14px]">{{$products}}</div>
@@ -136,10 +136,10 @@
 
         <!-- Responsive Settings Options -->
         <div class="flex flex-col gap-6">
-            <a href="{{ route('home') }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.home') }}</a>
-            <a href="{{ route('shop.index') }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.shop') }}</a>
+            <a href="{{ route('home', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.home') }}</a>
+            <a href="{{ route('shop.index', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.shop') }}</a>
             <x-dropdown-mobile title="{{ __('shop.navigation.about_us') }}" :options="['Chi siamo', 'GEARXPro Values', 'Ricerca e Sviluppo']" />
-            <a href="{{ route('shop.index') }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.journal') }}</a>
+            <a href="{{ route('shop.index', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.journal') }}</a>
             <x-dropdown-mobile title="{{ __('shop.navigation.assistance') }}" :options="['contattaci']" />
             <x-dropdown-mobile title="{{ session()->get('language', app()->getLocale()) }}" :options="$languages" uppercase="uppercase" />
          </div>
