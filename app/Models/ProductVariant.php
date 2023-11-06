@@ -58,9 +58,11 @@ class ProductVariant extends Model implements HasMedia
         return $this->BelongsToMany(Attribute::class)->withPivot('term_id');
     }
 
-//    public function terms() {
-//        return $this->hasManyThrough(Term::class, Attribute::class, 'id', 'attribute_id', 'id', 'id');
-//    }
+    public function terms() {
+        return $this->belongsToMany(Term::class, 'attribute_product_variant', 'product_variant_id', 'term_id')
+            ->join('attributes', 'attributes.id', '=', 'attribute_product_variant.attribute_id')
+            ->orderBy('attributes.position');
+    }
 
     /**
      * @return void
