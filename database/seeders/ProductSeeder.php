@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Product;
 use Illuminate\Support\Str;
-use App\Models\GroupAttribute;
+use App\Models\Attribute;
 use App\Models\ProductVariant;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,57 +17,40 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        $groupAttributes = GroupAttribute::with('attributes')->get()->pluck('attributes', 'id');
-        $groupedIds = [];
-        foreach ($groupAttributes as $index => $group) {
-            $groupedIds[$index] = array_column($group->toArray(), 'id');
-        }
-
+        $groupAttributes = Attribute::with('terms')->get();
         $countriesAvailable = User::role(User::RESELLER)->pluck('country_id');
 
-        for ($k=1; $k<8; $k++) {
 
+        foreach (range(1, 5) as $n) {
             $product = Product::create([
-                'name' => 'Prodotto Test '.$k,
+                'name' => 'Prodotto Test '.Str::random(3),
                 'main_desc' => fake()->paragraphs(2, true),
                 'features_desc' => fake()->paragraphs(2, true),
                 'pros_desc' => fake()->paragraphs(2, true),
                 'technical_desc' => fake()->paragraphs(2, true),
                 'washing_desc' => fake()->paragraphs(2, true),
                 'slug' => Str::kebab('Prodotto di Test'),
-//                'has_variants' => true,
                 'active' => 1,
             ]);
 
-            $combinations = [];
-            for ($i=0; $i<10; $i++) {
-                $combinations[] = [
-                    $groupedIds[1][array_rand($groupedIds[1])],
-                    $groupedIds[2][array_rand($groupedIds[2])],
-                    $groupedIds[3][array_rand($groupedIds[3])],
-                ];
-            }
-
-            $combinations = array_unique($combinations, SORT_REGULAR);
-            $position = 1;
-            foreach ($combinations as $index => $combination) {
-                $productVariant = ProductVariant::create([
-                    'product_id' => $product->id,
-                    'position'   => $position,
-                    'sku'        => 'SKU_'.$product->id.'_'.$index,
-                    'barcode'    => '000000000'.$k,
-                    'quantity'   => rand(0, 500),
+            foreach (range(1, 5) as $nn) {
+                $variant = $product->variants()->create([
+                    'position' => $nn,
+                    'sku' => 'SKU_'.$product->id.'_'.Str::random(3),
+                    'barcode' => fake()->ean13(),
+                    'quantity' => rand(0, 500),
                 ]);
 
-                $productVariant->attributes()->attach($combination);
-                $position++;
+                foreach ($groupAttributes as $attribute) {
+                    $variant->attributes()->attach($attribute->id, ['term_id' => $attribute->terms->shuffle()->first()->id]);
+                }
             }
 
-            foreach($countriesAvailable as $countryId) {
+            foreach ($countriesAvailable as $countryId) {
                 $product->countries()->attach([
                     $countryId => [
                         'wholesale_price' => rand(10, 40) / 10,
-                        'price'           => rand(41, 60) / 10,
+                        'price' => rand(41, 60) / 10,
                     ]
                 ]);
             }
