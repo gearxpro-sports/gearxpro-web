@@ -128,7 +128,7 @@
     <!-- Responsive Navigation Menu -->
     <div x-cloak
         :class="{'fixed': open, 'hidden': ! open}"
-        class="z-50 w-[100vw] px-[16px] inset-0 top-[96px] left-0 bg-white"
+        class="z-50 w-full px-[16px] inset-0 top-[96px] left-0 bg-white"
     >
         <div class="mt-5 mb-10">
             <x-custom-button :text="__('shop.navigation.login_register')" :icon="'account'" :link="'/shop/checkout'" width="!w-full" />

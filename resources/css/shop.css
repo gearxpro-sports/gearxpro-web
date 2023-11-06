@@ -33,13 +33,6 @@
     @apply h-0;
 }
 
-.owl-item.active {
-    @apply z-0
-}
-.owl-item.active + .owl-item {
-    @apply z-50
-}
-
 [x-cloak] {
     display: none;
 }

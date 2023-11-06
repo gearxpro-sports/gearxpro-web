@@ -127,5 +127,10 @@ return [
         'title' => 'Conferma ordine!',
         'message' => 'Ordine effettuato con successo. Il tuo ordine verrà spedito a breve. Nel frattempo puoi monitorare il tuo ordine nella sezione i miei ordini.',
         'button' => 'Torna allo shopping'
+    ],
+    'footer' => [
+        'brands' => 'BRANDS',
+        'my_account' => 'Il MIO ACCOUNT',
+        'privacy' => 'PRIVACY'
     ]
 ];
