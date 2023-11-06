@@ -31,15 +31,15 @@ class ProductVariant extends Model implements HasMedia
     }
 
     public function getLengthAttribute() {
-        return $this->attributes()->where('attribute_id', 1)->first();
+        return $this->terms->where('attribute_id', 1)->first();
     }
 
     public function getColorAttribute() {
-        return $this->attributes()->where('attribute_id', 2)->first();
+        return $this->terms->where('attribute_id', 2)->first();
     }
 
     public function getSizeAttribute() {
-        return $this->attributes()->where('attribute_id', 3)->first();
+        return $this->terms->where('attribute_id', 3)->first();
     }
 
     /**
@@ -58,9 +58,15 @@ class ProductVariant extends Model implements HasMedia
         return $this->BelongsToMany(Attribute::class)->withPivot('term_id');
     }
 
-//    public function terms() {
-//        return $this->hasManyThrough(Term::class, Attribute::class, 'id', 'attribute_id', 'id', 'id');
-//    }
+    /**
+     * @return BelongsToMany
+     */
+    public function terms(): BelongsToMany
+    {
+        return $this->belongsToMany(Term::class, 'attribute_product_variant', 'product_variant_id', 'term_id')
+            ->join('attributes', 'attributes.id', '=', 'attribute_product_variant.attribute_id')
+            ->orderBy('attributes.position');
+    }
 
     /**
      * @return void

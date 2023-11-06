@@ -43,7 +43,7 @@ class Edit extends Component
     /**
      * @var array
      */
-    public array $productGroupAttributesList;
+    public array $productAttributesList;
 
     /**
      * @var array
@@ -75,7 +75,7 @@ class Edit extends Component
                     })
                     ->sortBy('name')
                     ->toArray();
-        $this->productGroupAttributesList = $this->getCompleteGroupAttributesArray();
+        $this->productAttributesList = $this->getCompleteAttributesArray();
         $this->loadProductVariants();
 
         foreach ($this->productVariants as $variant) {
@@ -109,35 +109,50 @@ class Edit extends Component
         $this->productForm->updateSlug();
     }
 
-    public function generateVariants(array $groupAttributes)
+    /**
+     * @param array $attributes
+     * @return bool|void
+     */
+    // TODO: verificare se é possibile semplificare alcuni passaggi
+    public function generateVariants(array $attributes)
     {
-        if (!$groupAttributes) {
+        if (!$attributes) {
             return false;
         }
 
-        // FIRST CHECK - Prevent fake attribute ids
-        // Get all attribute ids
-        $whiteListAttributeIds = Term::pluck('id')->toArray();
+        // FIRST CHECK - Prevent fake terms ids
+        // Get all terms ids
+        $whiteListTermsIds = Term::pluck('id')->toArray();
         // Filter id attributes from fake ones
-        $groupAttributes = array_map(fn($values) => array_unique(array_filter($values, fn($item) => in_array($item, $whiteListAttributeIds))), $groupAttributes);
+        $attributes = array_map(fn($values) => array_unique(array_filter($values, fn($item) => in_array($item, $whiteListTermsIds))), $attributes);
 
-        $attributeSets =  $this->generateAttributeSets(array_values($groupAttributes));
+        $termsWithAttributes = [];
+        foreach ($attributes as $attributeId => $terms) {
+            foreach ($terms as $termId) {
+                $termsWithAttributes[$attributeId][] = [
+                    'term_id' => $termId,
+                    'attribute_id' => $attributeId
+                ];
+            }
+        }
+
+        $termsSets =  $this->generateTermSets(array_values($termsWithAttributes));
 
         // Get all attribute sets in array format [attr1, attr2, attr3], [attr1, attr2, attr4], [attr1, attr5, attr3], ....
-        $existingAttributeSets = $this->productVariants->map(function($item){
-            $arrayIds = $item->attributes->pluck('id')->toArray();
+        $existingTermSets = $this->productVariants->map(function($item){
+            $arrayIds = $item->terms->pluck('id')->toArray();
             sort($arrayIds);
             return $arrayIds;
         })->toArray();
 
         $newCombinations = [];
         $positionStart = $this->productVariants->count() > 0 ? $this->productVariants->count() : 1;
-        foreach ($attributeSets as $attrSet) {
+        foreach ($termsSets as $termSet) {
 
             // SECOND CHECK - Prevent duplicate combinations
-            $tempAs = $attrSet;
-            sort($tempAs);
-            if (in_array($tempAs, $existingAttributeSets)) {
+            $tempTs = array_column($termSet, 'term_id');
+            sort($tempTs);
+            if (in_array($tempTs, $existingTermSets)) {
                 continue;
             }
 
@@ -145,7 +160,8 @@ class Edit extends Component
                 'product_id' => $this->product->id,
                 'position'   => $positionStart,
             ]);
-            $productVariant->attributes()->attach($attrSet);
+            $termSet = array_map(fn($item) => ['attribute_id' => $item['attribute_id']], array_column($termSet, null, 'term_id'));
+            $productVariant->terms()->attach($termSet);
             $newCombinations[] = $productVariant;
             $positionStart++;
             $this->images['var_'.$productVariant->id] = [];
@@ -227,21 +243,21 @@ class Edit extends Component
     /**
      * @return array
      */
-    private function getCompleteGroupAttributesArray(): array
+    private function getCompleteAttributesArray(): array
     {
-        $groupAttributes = Attribute::with('attributes')->get();
+        $attributes = Attribute::with('terms')->get();
         $data = [];
-        foreach ($groupAttributes as $groupAttribute) {
-            $attributes = [];
-            foreach ($groupAttribute->attributes as $attribute) {
-                $attributes[$attribute->id] = [
-                    'value' => $attribute->value,
-                    'color' => $attribute->color,
+        foreach ($attributes as $attribute) {
+            $terms = [];
+            foreach ($attribute->terms as $term) {
+                $terms[$term->id] = [
+                    'value' => $term->value,
+                    'color' => $term->color,
                 ];
             }
-            $data[$groupAttribute->id] = [
-                'name' => $groupAttribute->name,
-                'attributes' => $attributes,
+            $data[$attribute->id] = [
+                'name' => $attribute->name,
+                'terms' => $terms,
             ];
         }
 
@@ -254,7 +270,7 @@ class Edit extends Component
      * @param array $currentCombination
      * @return array
      */
-    private function generateAttributeSets(array $arrays, int $currentIndex = 0, array $currentCombination = []): array
+    private function generateTermSets(array $arrays, int $currentIndex = 0, array $currentCombination = []): array
     {
         if ($currentIndex == count($arrays)) {
             return [$currentCombination];
@@ -263,7 +279,7 @@ class Edit extends Component
         $combinations = [];
         foreach ($arrays[$currentIndex] as $value) {
             $newCombination = array_merge($currentCombination, [$value]);
-            $combinations = array_merge($combinations, $this->generateAttributeSets($arrays, $currentIndex + 1, $newCombination));
+            $combinations = array_merge($combinations, $this->generateTermSets($arrays, $currentIndex + 1, $newCombination));
         }
 
         return $combinations;
@@ -271,6 +287,6 @@ class Edit extends Component
 
     public function loadProductVariants()
     {
-        $this->productVariants = $this->product->variants()->with('attributes.group')->get();
+        $this->productVariants = $this->product->variants()->with('terms.attribute')->get();
     }
 }

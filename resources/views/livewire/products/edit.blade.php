@@ -77,45 +77,45 @@
                             <div>
                                 <div
                                     x-data="{
-                                        selectedAttributes: {},
-                                        updateAttributes(groupId, attributes) {
-                                            if (attributes.length > 0) {
-                                                this.selectedAttributes[groupId] = attributes;
+                                        selectedTerms: {},
+                                        updateTerms(attributeId, terms) {
+                                            if (terms.length > 0) {
+                                                this.selectedTerms[attributeId] = terms;
                                             } else {
-                                                delete this.selectedAttributes[groupId];
+                                                delete this.selectedTerms[attributeId];
                                             }
                                         }}"
-                                    @call-update-attributes="updateAttributes($event.detail[0], $event.detail[1])"
+                                    @call-update-terms="updateTerms($event.detail[0], $event.detail[1])"
                                 >
                                     <h4 class="mb-5 font-bold text-lg">{{ __('products.edit.section.options.attributes_title') }}</h4>
                                     <div class="grid grid-cols-3 gap-4 mb-5 pb-5 border-b border-color-eff0f0">
-                                        @foreach($productGroupAttributesList as $groupId => $group)
+                                        @foreach($productAttributesList as $attributeId => $attribute)
                                         <div x-data="{
                                             selectedValues: [],
                                             addSelected() {
-                                                $dispatch('call-update-attributes', [{{ $groupId }}, this.selectedValues])
+                                                $dispatch('call-update-terms', [{{ $attributeId }}, this.selectedValues])
                                             },
                                             selectAll() {
-                                                this.selectedValues = {{ json_encode(array_keys($group['attributes'])) }};
+                                                this.selectedValues = {{ json_encode(array_keys($attribute['terms'])) }};
                                                 $nextTick(this.addSelected());
                                             },
                                         }">
-                                            <x-select x-model="selectedValues" @change="addSelected" class="h-40 mb-5 min-height-full" multiple name="group_{{ $groupId }}" label="{{ $group['name'] }}">
-                                            @foreach($group['attributes'] as $attrId => $attrData)
-                                                <option :key="{{ $attrId }}" value="{{ $attrId }}">{{ $attrData['value'] }}</option>
+                                            <x-select x-model="selectedValues" @change="addSelected" class="h-40 mb-5 min-height-full" multiple name="group_{{ $attributeId }}" label="{{ $attribute['name'] }}">
+                                            @foreach($attribute['terms'] as $termId => $termData)
+                                                <option :key="{{ $termId }}" value="{{ $termId }}">{{ $termData['value'] }}</option>
                                             @endforeach
                                             </x-select>
                                             <x-primary-button type="button" @click="selectAll">{{ __('common.select_all') }}</x-primary-button>
                                         </div>
                                         @endforeach
                                     </div>
-                                    <x-primary-button x-bind:disabled="!Object.keys(selectedAttributes).length" wire:click="generateVariants(selectedAttributes)" class="h-12 !text-base bg-color-0c9d87" type="button">{{ __('products.edit.section.options.generate_variants') }}</x-primary-button>
+                                    <x-primary-button x-bind:disabled="!Object.keys(selectedTerms).length" wire:click="generateVariants(selectedTerms)" class="h-12 !text-base bg-color-0c9d87" type="button">{{ __('products.edit.section.options.generate_variants') }}</x-primary-button>
                                 </div>
                                 @if ($productVariants->count())
                                 <h3 class="mt-10 font-bold text-lg">{{ __('products.edit.section.options.product_variants_title') }}</h3>
                                 <div wire:sortable="updateProductVariantOrder" wire:sortable.options="{ animation: 100 }" class="flex flex-col space-y-4 mt-5">
-                                    @foreach($productVariants as $productVariant)
-                                        <livewire:products.product-variant-item :images="$images" :productVariant="$productVariant" :product="$product" wire:key="product_variant_{{ $productVariant->id }}" />
+                                    @foreach($productVariants as $index => $productVariant)
+                                        <livewire:products.product-variant-item :isFirst="$index === 0" :images="$images" :productVariant="$productVariant" :product="$product" wire:key="product_variant_{{ $productVariant->id }}" />
                                     @endforeach
                                 </div>
                                 @endif

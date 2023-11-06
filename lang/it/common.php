@@ -47,4 +47,5 @@ return [
     'sold_out' => 'Non Disponibile',
     'available' => 'Disponibile',
     'close' => 'Chiudi',
+    'default' => 'Default',
 ];
