@@ -31,15 +31,15 @@ class ProductVariant extends Model implements HasMedia
     }
 
     public function getLengthAttribute() {
-        return $this->attributes()->where('attribute_id', 1)->first();
+        return $this->terms->where('attribute_id', 1)->first();
     }
 
     public function getColorAttribute() {
-        return $this->attributes()->where('attribute_id', 2)->first();
+        return $this->terms->where('attribute_id', 2)->first();
     }
 
     public function getSizeAttribute() {
-        return $this->attributes()->where('attribute_id', 3)->first();
+        return $this->terms->where('attribute_id', 3)->first();
     }
 
     /**
