@@ -406,4 +406,12 @@
             <path id="Tracciato_420" data-name="Tracciato 420" d="M-19990.049,6223.686l-5.215-5.21-5.207,5.21a.9.9,0,0,1-.635.264.9.9,0,0,1-.633-.264.887.887,0,0,1,0-1.259l5.213-5.213-5.213-5.215a.888.888,0,0,1,0-1.26.9.9,0,0,1,1.268,0l5.207,5.213,5.217-5.213a.9.9,0,0,1,1.264,0,.9.9,0,0,1,0,1.26l-5.217,5.214,5.217,5.215a.894.894,0,0,1,0,1.259.9.9,0,0,1-.633.264A.9.9,0,0,1-19990.049,6223.686Z" transform="translate(20002 -6210.478)" fill="#18181a"/>
         </svg>
         @break
+    @case('ellisse')
+        <svg xmlns="http://www.w3.org/2000/svg" width="5" height="5" viewBox="0 0 5 5">
+            <g id="Ellisse_17" data-name="Ellisse 17" fill="none" stroke="#18181a" stroke-width="1">
+            <circle cx="2.5" cy="2.5" r="2.5" stroke="none"/>
+            <circle cx="2.5" cy="2.5" r="2" fill="none"/>
+            </g>
+        </svg>
+        @break
 @endswitch

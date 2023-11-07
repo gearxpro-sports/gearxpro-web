@@ -18,7 +18,7 @@
 
         <div class="owl-carousel carousel_jumbotron">
             @foreach ($slides as $slide )
-                <img src="{{ Vite::asset('resources/images/gear/'.$slide)}}" alt="">
+                <img class="!w-[100vw]" src="{{ Vite::asset('resources/images/gear/'.$slide)}}" alt="">
             @endforeach
         </div>
 
@@ -38,16 +38,16 @@
             var carousel_jumbotron = new $(".carousel_jumbotron").owlCarousel({
                 animateOut: 'slideOutLeft',
                 animateIn: 'fadeIn',
-                smartSpeed:1200,
                 items: 1,
                 margin: 0,
                 loop: true,
                 autoWidth: true,
                 autoplay: true,
-                autoplayTimeout: 6000,
-                autoplaySpeed: 3000,
-                autoplayHoverPause: true,
+                autoplayTimeout: 8000,
+                autoplayHoverPause: false,
                 infinite: true,
+                touchDrag  : false,
+                mouseDrag  : false
             });
 
             $('.customNextBtn').click(function() {
