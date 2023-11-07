@@ -15,6 +15,18 @@ class Show extends Component
      */
     public Supply $supply;
 
+    public function mount() {
+        if($this->supply->reseller === null) {
+            return abort(403);
+        }
+        if(!$this->supply->reseller->is(auth()->user()) && auth()->user()->role->name === User::RESELLER) {
+            return abort(403);
+        }
+        if(auth()->user()->role->name === User::SUPERADMIN) {
+            return true;
+        }
+    }
+
     public function changeStatus(string $status)
     {
         if (

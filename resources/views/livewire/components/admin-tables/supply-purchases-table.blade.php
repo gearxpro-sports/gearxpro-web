@@ -52,12 +52,12 @@
                                     </td>
                                     <td class="text-right">
                                         <div class="inline-flex space-x-2">
-                                            @role(App\Models\User::SUPERADMIN)
+                                            @hasanyrole([App\Models\User::RESELLER, App\Models\User::SUPERADMIN])
                                             <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm hover:bg-color-eff0f0/90"
                                                href="{{ route('supply.purchases.show', ['supply' => $order->id]) }}">
                                                 <x-icons name="eye" class="w-4 h-4"/>
                                             </a>
-                                            @endrole
+                                            @endhasanyrole
                                             @if($order->invoice)
                                                 <a class="flex items-center justify-center ml-auto bg-color-ef4983 w-8 h-8 text-center text-white rounded-sm hover:bg-color-ef4983/90"
                                                    href="{{ route('supply.purchases.invoice', ['supply' => $order->id]) }}">
