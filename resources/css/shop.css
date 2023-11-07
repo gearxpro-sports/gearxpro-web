@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.scrollBar::-webkit-scrollbar {
+    display: none;
+}
+.scrollBar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+@layer utilities {
+    @variants responsive {
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    }
+}
+
+.owl-dots {
+    @apply h-0;
+}
+
+.owl-item.active {
+    @apply z-0
+}
+.owl-item.active + .owl-item {
+    @apply z-50
+}
+
+[x-cloak] {
+    display: none;
+}
