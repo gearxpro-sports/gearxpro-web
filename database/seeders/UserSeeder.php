@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             'firstname' => 'Superadmin',
             'lastname' => null,
             'email' => 'admin@example.test',
-            'password' => bcrypt('password'),
+            'password' => app()->environment() === 'local' ?  bcrypt('password') : bcrypt('4lg0Ge4rX2023?'),
             'created_at' => now(),
             'updated_at' => now()
         ]);
