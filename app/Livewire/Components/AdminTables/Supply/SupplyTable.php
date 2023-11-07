@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\Supply;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 
@@ -95,15 +96,26 @@ class SupplyTable extends BaseTable
      */
     public function render()
     {
-        $product_ids = Product::all()->pluck('id');
         $variants = ProductVariant::with('product')
-            ->whereIn('product_id', $product_ids)
+            ->whereHas('product.countries', function(Builder $query) {
+                $query
+                    ->where('country_id', auth()->user()->country_id)
+                    ->where(function(Builder $query) {
+                        $query
+                            ->whereNotNull('wholesale_price')
+                            ->whereNotNull('price')
+                        ;
+                    })
+                ;
+            })
             ->search($this->search, [
                 'product.name',
                 'attributes.value',
                 'sku'
             ])
             ->orderBy('product_id');
+
+        //dd($variants);
 
         //        foreach($this->filters as $k => $filter) {
         //            if($k === 'date') {
