@@ -35,6 +35,8 @@ return [
         'section' => [
             'locale' => [
                 'title' => 'Localizzazione',
+                'price_description' => 'Per rendere disponibile questo prodotto in fase di approvvigionamento e di vendita
+                                        é necessario inserire entrambi i prezzi.',
                 'wholesale_price' => [
                     'label' => 'Prezzo di acquisto',
                 ],

@@ -127,6 +127,7 @@
 
                 <!-- Locale Tab -->
                 <div x-show="openedTab === 'locale'">
+                    <p class="inline-block mb-8 p-5 bg-color-2cb2d1/10 text-color-2cb2d1 font-semibold text-sm">{{ __('products.edit.section.locale.price_description') }}</p>
                     <div class="flex flex-col space-y-4">
                     @foreach($countriesAvailable as $country)
                         <div wire:key="country_{{ $country['id'] }}">
