@@ -113,8 +113,6 @@ class ProductForm extends Form
             foreach ($category->children as $child) {
                 $childrenToRemove[] = $child->id;
             }
-            //dump($this->categories, $childrenToRemove);
-            //dd(array_diff($this->categories, $childrenToRemove));
 
             $this->categories = array_diff($this->categories, $childrenToRemove);
         }
@@ -138,6 +136,14 @@ class ProductForm extends Form
         $this->categories = array_intersect($this->categories, Category::pluck('id')->toArray());
 
         $this->product->update($this->except(['country_prices', 'product', 'categories']));
+
+        // convert empty values with null
+        array_walk_recursive($this->country_prices, function(&$value) {
+            $value = trim($value);
+            if (empty($value)) {
+                $value = null;
+            }
+        });
 
         if ($this->country_prices) {
             $this->product->countries()->sync($this->country_prices);
