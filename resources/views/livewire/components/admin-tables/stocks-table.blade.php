@@ -23,25 +23,13 @@
                 @foreach ($stocks as $stock)
                 <tr class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
                     <td>
-                        <div class="font-semibold">{{ $stock->productVariant->product->name }}</div>
-                        <div class="inline-flex items-center space-x-2 mt-2 text-sm">
-                            @foreach($stock->productVariant->attributes as $attribute)
-                            <span class="inline-flex items-center space-x-1.5">
-                                <span class="text-color-6c757d">{{ $attribute->group->name}}</span>
-                                @if ($attribute->color)
-                                    @if (in_array($attribute->color, ['#fff', '#ffffff']))
-                                        <span class="inline-block h-3 w-3 rounded-full border border-color-b6b9bb bg-white"></span>
-                                    @else
-                                        <span class="inline-block h-3 w-3 rounded-full" style="background-color: {{ $attribute->color }}"></span>
-                                    @endif
-                                @endif
-                                <span class="font-bold"
-                                    @if ($attribute->color && !in_array($attribute->color, ['#fff', '#ffffff'])) style="color: {{ $attribute->color }}" @endif
-                                >
-                                    {{ $attribute->value }}
-                                </span>
-                            </span>
-                            @endforeach
+                        <div class="flex flex-col space-y-1">
+                            <span class="font-semibold text-sm">{{ $stock->productVariant->product->name }}</span>
+                            <div class="flex divide-x text-xxs">
+                                @foreach($stock->productVariant->terms as $term)
+                                    <span class="first:pl-0 px-1">{{ $term->value }}</span>
+                                @endforeach
+                            </div>
                         </div>
                     </td>
                     <td>{{ $stock->productVariant->sku }}</td>

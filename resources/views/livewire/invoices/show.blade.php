@@ -71,8 +71,8 @@
                                 <span>{{ $variant->product->name }}</span>
                                 <span class="text-color-b6b9bb">•</span>
                                 <div class="flex divide-x text-xxs">
-                                    @foreach($variant->attributes as $attribute)
-                                        <span class="first:pl-0 px-1">{{ $attribute->value }}</span>
+                                    @foreach($variant->terms as $term)
+                                        <span class="first:pl-0 px-1">{{ $term->value }}</span>
                                     @endforeach
                                 </div>
                             </div>
