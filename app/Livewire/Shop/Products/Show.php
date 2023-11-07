@@ -14,7 +14,7 @@ use Livewire\Attributes\On;
 #[Layout('layouts.guest')]
 class Show extends Component
 {
-    public $product;
+    public Product $product;
     public $format = 'short';
     public $selectedColor;
     public $selectedSize;
@@ -107,10 +107,6 @@ class Show extends Component
             'name' => '($) Dollaro'
         ],
     ];
-
-    public function mount($product) {
-        $this->product = Product::find($product);
-    }
 
     public function changeFormat($type) {
         $this->format = $type;

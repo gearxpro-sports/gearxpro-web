@@ -28,6 +28,11 @@ class Product extends Model
         'meta_description',
     ];
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug->'. session('country_code');
+    }
+
     public function getWholesalePriceAttribute()
     {
         $country_code = auth()->user() ? auth()->user()->country_code : session('country_code');
