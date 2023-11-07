@@ -86,4 +86,17 @@ return [
             'label' => 'Metodo di Pagamento',
         ]
     ],
+    'profile' => 'Profilo',
+    'profile_description' => 'Visualizza i tuoi dati, le impostazioni di accesso e password, i tuoi ordini.',
+    'tabs' => [
+        'personal_data' => 'Dati personali',
+        'delivery_address' => 'Indirizzo di consegna',
+        'orders' => 'Ordini',
+    ],
+    'edit_data' => 'Modifica',
+    'password' => 'Password',
+    'buttons' => [
+        'cancel' => 'Annulla',
+        'save' => 'Salva'
+    ]
 ];
