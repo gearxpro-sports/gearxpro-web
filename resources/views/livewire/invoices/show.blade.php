@@ -5,7 +5,8 @@
                               class="justify-center">{{ __('common.print') }}</x-primary-button>
         </div>
         <div class="grid grid-cols-2 gap-4">
-            <div>
+            <div class="space-y-5">
+                <img src="{{ Vite::asset('resources/images/logo.svg') }}" alt="" class="w-44">
                 <h3 class="text-sm">
                     <p>
                         {{ __('invoice.show.invoice_n') }} <span class="font-semibold">{{ $supply->invoice->code }}</span>
