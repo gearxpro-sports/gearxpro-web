@@ -115,7 +115,7 @@
                                 <h3 class="mt-10 font-bold text-lg">{{ __('products.edit.section.options.product_variants_title') }}</h3>
                                 <div wire:sortable="updateProductVariantOrder" wire:sortable.options="{ animation: 100 }" class="flex flex-col space-y-4 mt-5">
                                     @foreach($productVariants as $index => $productVariant)
-                                        <livewire:products.product-variant-item :isFirst="$index === 0" :images="$images" :productVariant="$productVariant" :product="$product" wire:key="product_variant_{{ $productVariant->id }}" />
+                                        <livewire:products.product-variant-item :images="$images" :productVariant="$productVariant" :product="$product" wire:key="product_variant_{{ $productVariant->id }}" />
                                     @endforeach
                                 </div>
                                 @endif

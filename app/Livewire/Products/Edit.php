@@ -288,5 +288,6 @@ class Edit extends Component
     public function loadProductVariants()
     {
         $this->productVariants = $this->product->variants()->with('terms.attribute')->get();
+        $this->dispatch('refresh-variant');
     }
 }
