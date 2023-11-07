@@ -143,19 +143,20 @@ class Show extends Component
 
     #[On('addToCart')]
     public function addToCart() {
-        $this->cart[] = [
-            'name' => $this->product,
+        $this->cart[$this->product->id] = [
+            'name' => $this->product->name,
             'format' => $this->format,
             'color' => $this->selectedColor,
             'size' => $this->selectedSize,
             'quantity' => $this->quantity,
-            'price' => (32 * $this->quantity)
+            'price' => ($this->product->price * $this->quantity)
         ];
 
         $this->dispatch('modalInfoCart', $this->currency[$this->selectedMoney]['simbol'], $this->cart)->to(ModalCart::class);
         $this->dispatch('addProducts', $this->quantity)->to(ShopNavigation::class);
     }
 
+    #[On('payForLink')]
     public function payForLink() {
         //TODO
     }

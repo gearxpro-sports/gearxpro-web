@@ -25,16 +25,20 @@
             <div class="p-8 bg-color-f3f7f9">
                 <h3 class="mb-4 font-bold">{{ __('categories.edit.child_categories_title') }}</h3>
                 <div class="flex items-center space-x-4">
-                    <x-primary-button type="button" wire:click.prevent="$dispatch('openModal', { component: 'categories.modal.add-child-category', arguments: { category: {{ $categoryForm->category->id }} }})">{{ __('common.create') }}</x-primary-button>
                     @if ($categories->count())
-                        <span class="text-xs">oppure</span>
-                        <div class="flex items-center gap-2 my-4">
-                            <x-select name="shipping_country" wire:model.change="existingToAdd">
-                                <option value="">{{ __('categories.edit.add_existing') }}</option>
-                                @foreach($categories as $id => $name)
-                                    <option wire:key="cat_{{ $id }}" value="{{ $id }}">{{ $name }}</option>
-                                @endforeach
-                            </x-select>
+                        <div class="flex items-end gap-2 my-4 w-full">
+                            <div class="w-full">
+                                <x-select name="shipping_country" wire:model.change="existingToAdd">
+                                    <x-slot:label></x-slot:label>
+                                    <option value="">{{ __('categories.edit.add_existing') }}</option>
+                                    @foreach($categories as $id => $name)
+                                        <option wire:key="cat_{{ $id }}" value="{{ $id }}">{{ $name }}</option>
+                                    @endforeach
+                                    <x-slot:action>
+                                        <span wire:click.prevent="$dispatch('openModal', { component: 'categories.modal.add-child-category', arguments: { category: {{ $categoryForm->category->id }} }})" class="text-xs text-color-2cb2d1 hover:cursor-pointer">{{ __('common.create') }}</span>
+                                    </x-slot:action>
+                                </x-select>
+                            </div>
                             <x-primary-button wire:click="addExisting" type="button" :disabled="!$existingToAdd">{{ __('common.add') }}</x-primary-button>
                         </div>
                     @endif

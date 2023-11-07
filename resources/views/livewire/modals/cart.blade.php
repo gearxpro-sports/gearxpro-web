@@ -17,7 +17,6 @@
                     <div class="w-[116px] h-[120px] overflow-hidden bg-color-edebe5">
                         <img src="" alt="">
                     </div>
-
                     <div class="my-auto">
                         <h4 class="text-[13px] font-semibold leading-[24px] text-color-18181a">{{$product['name']}}</h4>
                         <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">{{__('shop.products.color')}}: {{$product['color']}}</p>
@@ -32,9 +31,16 @@
                 <a href="{{ route('shop.cart') }}" class="px-[25px] h-[45px] flex items-center justify-center rounded-md text-white text-[13px] font-semibold leading-[32px] bg-color-ff7f6e hover:bg-white hover:text-color-18181a border border-transparent hover:border-color-18181a">
                     {{__('shop.modal_cart.button_show')}}
                 </a>
-                <a href="" class="px-[25px] h-[45px] flex items-center justify-center rounded-md text-white text-[13px] font-semibold leading-[32px] bg-color-18181a hover:bg-black">
-                    {{__('shop.modal_cart.button_pay')}}
-                </a>
+                @auth
+                    <a href="{{ route('shop.payment') }}" class="px-[25px] h-[45px] flex items-center justify-center rounded-md text-white text-[13px] font-semibold leading-[32px] bg-color-18181a hover:bg-black">
+                        {{__('shop.modal_cart.button_pay')}}
+                    </a>
+                @else
+                    <a href="{{ route('shop.checkout') }}" class="px-[25px] h-[45px] flex items-center justify-center rounded-md text-white text-[13px] font-semibold leading-[32px] bg-color-18181a hover:bg-black">
+                        {{__('shop.modal_cart.button_pay')}}
+                    </a>
+                @endauth
+
             </div>
         </div>
     @endif

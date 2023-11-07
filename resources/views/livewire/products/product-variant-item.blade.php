@@ -2,7 +2,7 @@
     wire:sortable.item="{{ $productVariant->id }}"
     wire:loading.class="opacity-50"
     wire:target="removeVariant"
-    class="p-4 border border-color-eff0f0 hover:bg-color-f7f8fa shadow-shadow-1 rounded-md"
+    class="p-4 border border-color-eff0f0 hover:bg-color-f7f8fa shadow-shadow-1 rounded-md @if ($productVariant->position === 1) bg-color-f3f7f9 @endif"
 >
     <div class="grid grid-cols-2 gap-4">
         <div>
@@ -36,6 +36,9 @@
             </div>
             @endif
             <div class="flex items-center space-x-2 ml-auto">
+                @if($productVariant->position === 1)
+                <x-badge class="mr-10 uppercase" color="black">{{ __('common.default') }}</x-badge>
+                @endif
                 <button type="button"
                         class="flex items-center justify-center bg-color-eff0f0 w-8 h-8 ml-auto text-center rounded-sm"
                         wire:click="$dispatch('openModal', {component: 'products.modal.edit-product-variant', arguments: {productVariant: {{ $productVariant->id }}}})"

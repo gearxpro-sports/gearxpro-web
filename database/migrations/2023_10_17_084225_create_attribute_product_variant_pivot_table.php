@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Attribute;
+use App\Models\Term;
 use App\Models\ProductVariant;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,8 +14,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('attribute_product_variant', function (Blueprint $table) {
-            $table->foreignIdFor(Attribute::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\Attribute::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(ProductVariant::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Term::class)->constrained()->cascadeOnDelete();
             $table->primary(['attribute_id', 'product_variant_id']);
         });
     }

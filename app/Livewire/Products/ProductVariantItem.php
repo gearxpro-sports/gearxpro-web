@@ -31,6 +31,11 @@ class ProductVariantItem extends Component
     public ProductVariantForm $productVariantForm;
 
     /**
+     * @var bool
+     */
+    public bool $isFirst = false;
+
+    /**
      * @param ProductVariant $productVariant
      * @param Product $product
      * @param array $images

@@ -5,7 +5,8 @@
                               class="justify-center">{{ __('common.print') }}</x-primary-button>
         </div>
         <div class="grid grid-cols-2 gap-4">
-            <div>
+            <div class="space-y-5">
+                <img src="{{ Vite::asset('resources/images/logo.svg') }}" alt="" class="w-44">
                 <h3 class="text-sm">
                     <p>
                         {{ __('invoice.show.invoice_n') }} <span class="font-semibold">{{ $supply->invoice->code }}</span>
@@ -71,8 +72,8 @@
                                 <span>{{ $variant->product->name }}</span>
                                 <span class="text-color-b6b9bb">•</span>
                                 <div class="flex divide-x text-xxs">
-                                    @foreach($variant->attributes as $attribute)
-                                        <span class="first:pl-0 px-1">{{ $attribute->value }}</span>
+                                    @foreach($variant->terms as $term)
+                                        <span class="first:pl-0 px-1">{{ $term->value }}</span>
                                     @endforeach
                                 </div>
                             </div>

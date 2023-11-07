@@ -9,7 +9,9 @@
                 <span class="text-xs text-color-6c757d">{{ __('supply.purchases.show.top_bar.order_number') }}</span>
                 <span class="block text-color-18181a uppercase">#{{ $supply->uuid }}</span>
             </div>
-            <x-dropdown-supply-statuses current_status="{{ $supply->status }}"></x-dropdown-supply-statuses>
+            @if(auth()->user()->hasRole(\App\Models\User::SUPERADMIN))
+                <x-dropdown-supply-statuses current_status="{{ $supply->status }}"></x-dropdown-supply-statuses>
+            @endif
         </div>
         <div class="ml-auto flex items-center space-x-4">
             <div class="flex flex-col space-y-1">
@@ -133,8 +135,8 @@
                             <div class="flex flex-col">
                                 {{ $variant->product->name }}
                                 <div class="flex divide-x text-xxs mt-1">
-                                    @foreach($variant->attributes as $attribute)
-                                        <span class="first:pl-0 px-1">{{ $attribute->value }}</span>
+                                    @foreach($variant->terms as $term)
+                                        <span class="first:pl-0 px-1">{{ $term->value }}</span>
                                     @endforeach
                                 </div>
                             </div>
@@ -164,7 +166,13 @@
                 <div class="flex flex-col text-center space-y-4 p-8 border-dashed border-2 border-color-dee2e6">
                     <span class="text-xs text-color-6c757d">{{ __('supply.purchases.show.supply_state') }}</span>
                     <div class="flex justify-center">
-                        <x-dropdown-supply-statuses current_status="{{ $supply->status }}"></x-dropdown-supply-statuses>
+                        @if(auth()->user()->hasRole(\App\Models\User::SUPERADMIN))
+                            <x-dropdown-supply-statuses
+                                current_status="{{ $supply->status }}"></x-dropdown-supply-statuses>
+                        @elseif(auth()->user()->hasRole(\App\Models\User::RESELLER))
+                            <x-badge
+                                color="{{ App\Models\Supply::STATUSES[$supply->status] }}">{{ __('supply.statuses.'.$supply->status) }}</x-badge>
+                        @endif
                     </div>
                 </div>
             </div>

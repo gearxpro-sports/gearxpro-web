@@ -10,6 +10,8 @@
         <div class="h-full absolute top-0 w-0 bg-black group-hover:animate-line group-hover:w-full rounded-l-md"></div>
     </div>
     <div class="h-full border-l border-black group-hover:border-white w-[47px] flex items-center justify-center group-hover:bg-black rounded-r-md">
-        <img class="group-hover:invert" src="{{ Vite::asset('resources/images/icons/icona_filtri.svg')}}" alt="">
+        <div class="group-hover:invert">
+            <x-icons name="filter_products" />
+        </div>
     </div>
 </div>

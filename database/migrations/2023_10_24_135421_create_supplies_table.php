@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('uuid');
             $table->foreignIdFor(User::class)->constrained();
             $table->decimal('amount');
-            $table->string('payment_method')->nullable();
+            $table->enum('payment_method', config('payment_methods'))->nullable();
             $table->enum('status', array_keys(Supply::STATUSES));
             $table->boolean('confirmed')->default(false);
             $table->timestamp('shipped_at')->nullable();

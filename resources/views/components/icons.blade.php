@@ -382,4 +382,28 @@
                   d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"/>
         </svg>
         @break
+    @case('filter_products')
+        <svg id="icona_filtri_B" data-name="icona filtri_B" xmlns="http://www.w3.org/2000/svg" width="14" height="13.997" viewBox="0 0 14 13.997">
+            <path id="Tracciato_232" data-name="Tracciato 232" d="M5043.73,11431.376v-6.513h-1.1a.517.517,0,0,1-.515-.518v-3.241a.518.518,0,0,1,.515-.518h1.1v-2.175a.517.517,0,1,1,1.033,0v2.175h1.106a.518.518,0,0,1,.515.518v3.241a.517.517,0,0,1-.515.518h-1.106v6.513a.517.517,0,1,1-1.033,0Zm-.585-7.548h2.207v-2.207h-2.207Zm-4.276,7.548v-1.1h-1.1a.513.513,0,0,1-.515-.518v-3.241a.513.513,0,0,1,.515-.515h1.1v-7.587a.518.518,0,0,1,1.036,0V11426h1.1a.516.516,0,0,1,.518.515v3.241a.516.516,0,0,1-.518.518h-1.1v1.1a.518.518,0,1,1-1.036,0Zm-.585-2.136h2.207v-2.208h-2.207Zm-4.276,2.136v-5.965h-1.1a.515.515,0,0,1-.515-.517v-3.241a.515.515,0,0,1,.515-.519h1.1v-2.723a.518.518,0,0,1,1.036,0v2.723h1.1a.518.518,0,0,1,.516.519v3.241a.517.517,0,0,1-.516.517h-1.1v5.965a.518.518,0,1,1-1.036,0Zm-.585-7h2.207v-2.206h-2.207Z" transform="translate(-11417.895 5046.385) rotate(-90)" fill="#18181a"/>
+        </svg>
+        @break
+    @case('chevron_down')
+        <svg xmlns="http://www.w3.org/2000/svg" width="14.582" height="8.201" viewBox="0 0 14.582 8.201">
+            <path id="Tracciato_421" data-name="Tracciato 421" d="M0,0,6.391,6.39,0,12.461" transform="translate(13.522 1.061) rotate(90)" fill="none" stroke="#18181a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+        </svg>
+        @break
+    @case('hamburger')
+        <svg xmlns="http://www.w3.org/2000/svg" width="18.394" height="13.888" viewBox="0 0 18.394 13.888">
+            <g id="Raggruppa_144" data-name="Raggruppa 144" transform="translate(-232.658 -105.75)">
+            <line id="Linea_47" data-name="Linea 47" x1="16.894" transform="translate(233.408 106.5)" fill="none" stroke="#18181a" stroke-linecap="round" stroke-width="1.5"/>
+            <line id="Linea_48" data-name="Linea 48" x1="16.894" transform="translate(233.408 112.694)" fill="none" stroke="#18181a" stroke-linecap="round" stroke-width="1.5"/>
+            <line id="Linea_49" data-name="Linea 49" x1="16.894" transform="translate(233.408 118.888)" fill="none" stroke="#18181a" stroke-linecap="round" stroke-width="1.5"/>
+            </g>
+        </svg>
+        @break
+    @case('x-close')
+        <svg xmlns="http://www.w3.org/2000/svg" width="13.477" height="13.472" viewBox="0 0 13.477 13.472">
+            <path id="Tracciato_420" data-name="Tracciato 420" d="M-19990.049,6223.686l-5.215-5.21-5.207,5.21a.9.9,0,0,1-.635.264.9.9,0,0,1-.633-.264.887.887,0,0,1,0-1.259l5.213-5.213-5.213-5.215a.888.888,0,0,1,0-1.26.9.9,0,0,1,1.268,0l5.207,5.213,5.217-5.213a.9.9,0,0,1,1.264,0,.9.9,0,0,1,0,1.26l-5.217,5.214,5.217,5.215a.894.894,0,0,1,0,1.259.9.9,0,0,1-.633.264A.9.9,0,0,1-19990.049,6223.686Z" transform="translate(20002 -6210.478)" fill="#18181a"/>
+        </svg>
+        @break
 @endswitch

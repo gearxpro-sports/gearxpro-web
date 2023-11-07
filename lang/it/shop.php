@@ -6,8 +6,12 @@ return [
         'home' => 'Home',
         'shop' => 'Shop',
         'about_us' => 'Chi siamo',
-        'journal' => 'Giornale GearxPro',
-        'assistance' => 'Assistenza'
+        'journal' => 'News',
+        'assistance' => 'Assistenza',
+        'login_register' => 'Accedi / Registrati',
+    ],
+    'splash' => [
+        'title' => 'Seleziona il tuo Paese'
     ],
     'jumbotron' => [
         'title' => 'Il negozio che stavi Aspettando',
@@ -15,7 +19,10 @@ return [
         'button' => 'Acquista ora'
     ],
     'carousel-top' => [
-        'title' => 'In which all the 26 letters'
+        'title' => 'Linea prodotto'
+    ],
+    'carousel-bottom' => [
+        'title' => 'Bestseller'
     ],
     'products' => [
         'title' => 'Non puoi mettere un limite a nulla.',
@@ -79,10 +86,24 @@ return [
         'button_next' => 'Continua',
     ],
     'payment' => [
+        'tab_delivery' => 'Recapiti e consegna',
+        'tab_payment' => 'Info Pagamento',
+        'payment' => 'Pagamento',
+        'in_to_cart' => 'Nel tuo carrello',
+        'subtotal' => 'Subtotale',
+        'shipment_cost' => 'Costi di spedizione',
+        'shipment_free' => 'Spedizione Gratuita',
+        'shipment_time' => 'Spedizione stimata in 5-7 giorni.',
+        'free' => 'Gratuita',
+        'total' => 'Totale',
+        'address' => 'Indirizzo',
+        'method_payment' => 'Metodo di pagamento',
+        'ssl' => 'I pagamenti sono crittografati con SSL per garantire la massima sicurezza della  tua carta di credito
+        e dei tuoi dati di pagamento.',
         'articols' => 'Articoli',
         'firstname' => 'Nome',
         'lastname' => 'Cognome',
-        'address' => 'Indirizzo e numero civico',
+        'address_civic' => 'Indirizzo e numero civico',
         'postcode' => 'Codice Postale',
         'company' => 'Interno/nome azienda (Opzionale)',
         'city' => 'Città',
@@ -93,6 +114,7 @@ return [
         'button_back' => 'Torna al carrello',
         'button_next_pay' => 'Continua il pagamento',
         'required' => 'Questo campo è obbligatorio',
+        'invalid_email' => 'Email non valida',
         'creditCard' => 'Numero Carta',
         'expiration' => 'Data di scadenza',
         'ccv' => 'CVC / CCV',

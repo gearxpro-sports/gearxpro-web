@@ -12,6 +12,8 @@ class Navigation extends Component
 {
     public $user;
     public $products = 0;
+    public $languages = ["it", "en", "fr", "de", "es"];
+
 
     #[On('addProducts')]
     public function addProducts($quantity) {
