@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
 use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
@@ -33,7 +34,7 @@ class UserSeeder extends Seeder
             'firstname' => 'Superadmin',
             'lastname' => null,
             'email' => 'admin@example.test',
-            'password' => app()->environment() === 'local' ?  bcrypt('password') : bcrypt('4lg0Ge4rX2023?'),
+            'password' => App::environment('local') ?  bcrypt('password') : bcrypt('4lg0Ge4rX2023?'),
             'created_at' => now(),
             'updated_at' => now()
         ]);
