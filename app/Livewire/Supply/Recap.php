@@ -18,7 +18,8 @@ class Recap extends Component
 
     public function confirm() {
         $this->supply->update([
-            'confirmed' => true
+            'confirmed' => true,
+            'payment_method' => $this->supply->reseller->payment_method
         ]);
 
         return redirect()->route('supply.purchases.index');
