@@ -62,7 +62,8 @@ class Show extends Component
             if($status === 'delivered') {
                 $invoice = $this->supply->invoice()->create();
                 $invoice->update([
-                    'updated_at' => now()
+                    'updated_at' => now(),
+                    'payment_method' => $this->supply->payment_method
                 ]);
             }
         }
