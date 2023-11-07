@@ -2,8 +2,9 @@
     <h2 class="text-[33px] font-bold leading-[86px]">{{ __('shop.carousel-top.title') }}</h2>
 
     <div class="owl-carousel carousel_top">
-        <x-card-top title="LACEXPro" description="Of the alphabet are used" image="AdobeStock_439635422.png"/>
-        <x-card-top title="LACEXPro" description="Of the alphabet are used" image="AdobeStock_439635422.png"/>
+        @foreach ($categories as $category )
+            <x-card-top title="{{$category['name']}}" description="{{$category['description']}}" image="gear/{{$category['image']}}"/>
+        @endforeach
     </div>
 
 </div>

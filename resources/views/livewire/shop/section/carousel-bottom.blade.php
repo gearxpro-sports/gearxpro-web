@@ -1,5 +1,5 @@
-<div class="w-full h-[1002px] bg-color-18181a pt-[60px] pb-[70px] pl-[39px]">
-    <h2 class="text-[33px] font-bold leading-[86px] text-white">In which all the 26 letters</h2>
+<div class="w-full h-[1002px] bg-black pt-[60px] pb-[70px] pl-[39px]">
+    <h2 class="text-[33px] font-bold leading-[86px] text-white">{{ __('shop.carousel-bottom.title') }}</h2>
 
     <div class="owl-carousel carousel_bottom">
         <x-card-bottom image="Recovery-Long-T_1.svg" title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>

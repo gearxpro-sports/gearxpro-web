@@ -133,8 +133,8 @@
                             <div class="flex flex-col">
                                 {{ $variant->product->name }}
                                 <div class="flex divide-x text-xxs mt-1">
-                                    @foreach($variant->attributes as $attribute)
-                                        <span class="first:pl-0 px-1">{{ $attribute->value }}</span>
+                                    @foreach($variant->terms as $term)
+                                        <span class="first:pl-0 px-1">{{ $term->value }}</span>
                                     @endforeach
                                 </div>
                             </div>
