@@ -3,6 +3,7 @@
 use App\Livewire\Customers\Index as CustomersIndex;
 use App\Livewire\Customers\Show as CustomerShow;
 use App\Livewire\Customers\Edit as CustomerEdit;
+use App\Livewire\Customers\Profile as CustomerProfile;
 use App\Livewire\Invoices\Show as InvoiceShow;
 use App\Livewire\Invoices\Index as InvoicesIndex;
 use App\Livewire\Profile\Edit as ProfileEdit;
@@ -67,6 +68,10 @@ Route::middleware('country')->domain('{country_code}.'.env('APP_URL'))->group(fu
     })->name('confirm');
 });
 
+Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->group(function() {
+    Route::get('customer/profile', CustomerProfile::class, '__invoke')->name('customer.profile');
+});
+
 Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->prefix('dashboard')->group(function() {
     Route::middleware(['role:superadmin|reseller'])->group(function () {
         Route::get('/', function () {
@@ -119,5 +124,7 @@ Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->prefix('dashboa
 
     Route::get('/profile', ProfileEdit::class)->name('profile.edit');
 });
+
+
 
 require __DIR__.'/auth.php';

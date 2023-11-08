@@ -55,15 +55,22 @@
                                                 </button>
                                             </x-slot>
 
-                                    <x-slot name="content">
-                                        @hasanyrole([App\Models\User::RESELLER, App\Models\User::SUPERADMIN])
-                                        <x-dropdown-link href="{{ route('dashboard') }}">
-                                            {{ __('Dashboard') }}
-                                        </x-dropdown-link>
-                                        @endrole
-                                        <x-dropdown-link href="{{ route('profile.edit') }}">
-                                            {{ __('Profile') }}
-                                        </x-dropdown-link>
+                                            <x-slot name="content">
+                                                @hasanyrole([App\Models\User::RESELLER, App\Models\User::SUPERADMIN])
+                                                <x-dropdown-link href="{{ route('dashboard') }}">
+                                                    {{ __('Dashboard') }}
+                                                </x-dropdown-link>
+                                                @endrole
+
+                                                @if (request()->route()->getName() != 'customer.profile')
+                                                    <x-dropdown-link href="{{ route('customer.profile') }}">
+                                                        {{ __('Profile') }}
+                                                    </x-dropdown-link>
+                                                @else
+                                                    <x-dropdown-link href="{{ route('home', ['country_code' => session('country_code')]) }}">
+                                                        {{ __('Home') }}
+                                                    </x-dropdown-link>
+                                                @endif
 
                                                 <div class="border-t border-gray-100"></div>
 
@@ -72,7 +79,7 @@
                                                     @csrf
 
                                                     <x-dropdown-link href="{{ route('logout') }}"
-                                                                     @click.prevent="$root.submit();">
+                                                                    @click.prevent="$root.submit();">
                                                         {{ __('Log Out') }}
                                                     </x-dropdown-link>
                                                 </form>
@@ -128,10 +135,14 @@
     <!-- Responsive Navigation Menu -->
     <div x-cloak
         :class="{'fixed': open, 'hidden': ! open}"
-        class="z-50 w-[100vw] px-[16px] inset-0 top-[96px] left-0 bg-white"
+        class="z-50 w-full px-[16px] inset-0 top-[96px] left-0 bg-white"
     >
         <div class="mt-5 mb-10">
-            <x-custom-button :text="__('shop.navigation.login_register')" :icon="'account'" :link="'/shop/checkout'" width="!w-full" />
+            @auth
+                <span class="text-lg font-medium text-color-b6b9bb">{{ Auth::user()->fullname }}</span>
+            @else
+                <x-custom-button :text="__('shop.navigation.login_register')" :icon="'account'" :link="'/shop/checkout'" width="!w-full" />
+            @endauth
         </div>
 
         <!-- Responsive Settings Options -->

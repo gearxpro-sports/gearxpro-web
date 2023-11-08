@@ -16,7 +16,7 @@
         <ul>
            @foreach ($options as $option )
                <li wire:click="action('type', 'element')" class="py-4 text-[13px] font-medium leading-[16px] text-color-18181a hover:text-color-323a46 flex items-center gap-4 group">
-                    <img class="group-hover:opacity-50" src="{{ Vite::asset('resources/images/icons/ellisse.svg')}}" alt="">
+                    <x-icons name="ellisse" />
                    {{$option}}
                </li>
            @endforeach
