@@ -20,7 +20,7 @@
                     <td>{{ $product->name }}</td>
                     <td>
                         <div class="flex items-center space-x-2 justify-end">
-                            <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="{{ route('products.edit', ['product' => $product->id]) }}">
+                            <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="{{ route('products.edit', ['product' => $product->slug]) }}">
                                 <x-icons name="edit" class="w-4 h-4" />
                             </a>
                             <button type="button" class="flex items-center justify-center bg-color-e54f33 text-white w-8 h-8 text-center rounded-sm" wire:click="deleteProduct({{ $product->id }})" wire:confirm="{{ __('products.index.alert.delete_product') }}">
