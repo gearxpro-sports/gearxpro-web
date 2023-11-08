@@ -201,7 +201,6 @@ class Show extends Component
         }
 
         $this->variants = $variants->get();
-        ray($this->variants);
         if ($this->variants->count() === 1) {
             $this->selectedVariant = $this->variants->first();
             $this->selectedLength = $this->selectedVariant->length->id;
