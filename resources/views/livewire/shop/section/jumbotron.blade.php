@@ -18,7 +18,7 @@
 
         <div class="owl-carousel carousel_jumbotron">
             @foreach ($slides as $slide )
-                <img class="!w-[100vw]" src="{{ Vite::asset('resources/images/gear/'.$slide)}}" alt="">
+                <img src="{{ Vite::asset('resources/images/gear/'.$slide)}}" alt="">
             @endforeach
         </div>
 
@@ -41,7 +41,7 @@
                 items: 1,
                 margin: 0,
                 loop: true,
-                autoWidth: true,
+                autoWidth: false,
                 autoplay: true,
                 autoplayTimeout: 8000,
                 autoplayHoverPause: false,

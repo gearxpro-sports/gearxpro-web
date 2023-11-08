@@ -27,6 +27,8 @@ class Index extends Component
 
     public function updated($property) {
         if ($property === 'password') {
+            $this->keyFormat= [];
+
             $password = str_split($this->password);
             if (count($password) > 7) {
                 $this->keyFormat[2] = 2;

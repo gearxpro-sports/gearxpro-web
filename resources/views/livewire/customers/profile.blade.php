@@ -1,4 +1,4 @@
-<div x-data="handler()" class="h-[743px] bg-color-f2f0eb px-48 py-16">
+<div x-data="handler()" class="min-h-[743px] bg-color-f2f0eb px-48 py-16">
     {{-- title --}}
     <div>
         <h1 class="text-3xl font-semibold text-color-18181a leading-10">{{__('customers.profile')}}</h1>
@@ -29,7 +29,7 @@
                     <div>
                         <div class="flex items-center justify-between py-5 relative">
                             <div class="grow flex flex-col gap-5">
-                                <div class="w-full flex items-center ">
+                                <div class="w-full flex items-center">
                                     <x-box-data label="{{__('customers.edit.firstname.label')}}" content="{{$customer->firstname}}" width="w-1/2" />
                                     <x-box-data label="{{__('customers.edit.lastname.label')}}" content="{{$customer->lastname}}" width="w-1/2"/>
                                 </div>
@@ -69,11 +69,14 @@
                     </div>
                 </template>
 
-                <template x-if="currentTab == '{{__('customers.tabs.delivery_address')}}'">
+                <template x-if="currentTab == '{{__('customers.tabs.addresses')}}'">
                     <div class="flex items-center justify-between py-5 relative">
-                        <div class="grow space-y-5">
-                            <x-box-data label="{{__('customers.show.data.address')}}" content="{{$shipping_address->address_1}}" width="w-full"/>
-                            <x-box-data label="{{__('customers.edit.phone.label')}}" content="{{$shipping_address->phone}}" width="w-full"/>
+                        <div class="grow flex flex-col gap-5">
+                            <div class="w-full flex items-center gap-5">
+                                <x-box-data label="{{__('customers.edit.addresses.shipping')}}" content="{{$shipping_address->address_1}}" width="w-1/2"/>
+                                <x-box-data label="{{__('customers.edit.phone.label')}}" content="{{$shipping_address->phone}}" width="w-1/2"/>
+                            </div>
+                            <x-box-data label="{{__('customers.edit.addresses.billing')}}" content="{{$billing_address->address_1}}" width="w-full"/>
                         </div>
 
                         <button wire:click="selectEditData('shipping')" class="w-36 px-3 text-xs font-medium text-color-6c757d flex items-center justify-end gap-1 hover:underline">
@@ -135,6 +138,23 @@
                 </div>
             @elseif ($modify === 'password')
                 <div class="space-y-5 pt-5">
+                    <div class="w-full flex flex-col gap-1 relative">
+                        <label for="current_password" class="text-[12px] font-medium leading-[15px] text-color-18181a">{{ __('shop.payment.current_password') }}*</label>
+                        <div class="w-full flex flex-col gap-1 relative">
+                            <input wire:model.live="current_password" x-bind:type="current_password ? 'text' : 'password'" name="current_password" id="current_password" class="h-[48px] px-4 rounded-md bg-color-edebe5 p-0 border-color-e0e0df focus:border-transparent focus:ring-0">
+                            <div @click="current_password = !current_password"
+                                class="flex items-center justify-center absolute z-[1] inset-y-1 right-3 top-[5px] bg-no-repeat bg-center aspect-square rounded-sm cursor-pointer">
+                                <template x-if="current_password">
+                                    <x-icons name="eye-gray" class="w-4 h-4"></x-icons>
+                                </template>
+                                <template x-if="!current_password">
+                                    <x-icons name="eye-off-gray" class="w-4 h-4"></x-icons>
+                                </template>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-[-20px] right-0">@error('current_password') <span class="text-[12px] text-color-f4432c">{{ $message }}</span> @enderror</div>
+                    </div>
+
                     <div>
                         <div class="w-full flex flex-col gap-1 relative">
                             <label for="password" class="text-[12px] font-medium leading-[15px] text-color-18181a">{{ __('auth.login.password.label') }}*</label>
@@ -208,12 +228,17 @@
                 <div>
                     <div class="flex items-center justify-between py-5 relative">
                         <div class="grow flex flex-col gap-5">
-                            <x-input-text wire:model="shipping_address.address_1" placeholder="{{$shipping_address->address_1}}" width="w-full" name="address_1" label="address_civic" required="true" />
-                            <x-input-text wire:model="shipping_address.company" width="w-full" name="company" label="company" />
-
-                            <div class="flex items-center gap-5">
-                                <x-input-text wire:model="shipping_address.email" width="w-1/2" name="shipping_email" label="email" required="true"/>
-                                <x-input-text wire:model="shipping_address.phone" width="w-1/2" name="company" label="phone" required="true"/>
+                            <div class="relative flex flex-col gap-5 p-5 border rounded-md shadow">
+                                <span class="absolute px-1 bg-color-f2f0eb top-[-15px] left-[14px] text-color-18181a font-medium">{{__('customers.edit.addresses.shipping')}}</span>
+                                <x-input-text wire:model="shipping_address.address_1" placeholder="{{$shipping_address->address_1}}" width="w-full" name="address_1" label="address_civic" required="true" />
+                                <x-input-text wire:model="shipping_address.company" width="w-full" name="company" label="company" />
+                                <x-input-text x-mask="{{ __('masks.phone') }}" wire:model="shipping_address.phone" width="w-full" name="phone" label="phone" required="true"/>
+                            </div>
+                            <div class="relative flex flex-col gap-5 p-5 border rounded-md shadow">
+                                <span class="absolute px-1 bg-color-f2f0eb top-[-15px] left-[14px] text-color-18181a font-medium">{{__('customers.edit.addresses.billing')}}</span>
+                                <span wire:click="copyFromShipping()" class="absolute right-5 top-2 text-sm font-semibold text-color-707070 hover:text-color-18181a hover:underline cursor-pointer">{{ __('customers.buttons.copy_shipping') }}</span>
+                                <x-input-text wire:model="billing_address.address_1" placeholder="{{$billing_address->address_1}}" width="w-full" name="address_1" label="address_civic" required="true" />
+                                <x-input-text wire:model="billing_address.company" width="w-full" name="company" label="company" />
                             </div>
                         </div>
                     </div>
@@ -239,12 +264,13 @@
     <script>
         function handler() {
             return {
+                current_password: false,
                 showPassword: false,
                 password_confirmation: false,
                 currentTab: @json(__('customers.tabs.personal_data')),
                 tabs: [
                     @json(__('customers.tabs.personal_data')),
-                    @json(__('customers.tabs.delivery_address')),
+                    @json(__('customers.tabs.addresses')),
                     @json(__('customers.tabs.orders')),
                 ]
             }

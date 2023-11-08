@@ -50,8 +50,8 @@
                                         <x-dropdown align="right" width="48">
                                             <x-slot name="trigger">
                                                 <button class="flex flex-col items-start">
-                                                    <span
-                                                        class="text-lg font-medium text-color-b6b9bb">{{ Auth::user()->fullname }}</span>
+                                                    <span class="hidden xl:block text-lg font-medium text-color-b6b9bb">{{ Auth::user()->fullname }}</span>
+                                                    <span class="xl:hidden text-lg font-medium text-color-b6b9bb">{{ Auth::user()->initial_letters }}</span>
                                                 </button>
                                             </x-slot>
 
