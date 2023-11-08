@@ -9,6 +9,7 @@ return [
             'cols'  => [
                 'name'              => 'Nome Cliente',
                 'email'             => 'Indirizzo Email',
+                'reseller'          => 'Rivenditore',
                 'registration_date' => 'Data di Registrazione',
                 'last_order_date'   => 'Data Ultimo Ordine',
             ],

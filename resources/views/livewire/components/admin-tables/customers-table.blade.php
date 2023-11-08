@@ -13,9 +13,12 @@
                         <table
                             class="table-auto border-collapse w-full text-xs text-black-1 border border-color-eff0f0 font-medium">
                             <thead>
-                            <tr class="text-left [&>th]:py-4 [&>th]:px-7 [&>th]:font-medium [&>th]:w-1/5 border-b-color-eff0f0">
+                            <tr class="text-left [&>th]:py-4 [&>th]:px-7 [&>th]:font-medium @role(App\Models\User::SUPERADMIN) [&>th]:w-1/6 @else [&>th]:w-1/5 @endrole border-b-color-eff0f0">
                                 <th class="whitespace-nowrap">{{ __('customers.index.table.cols.name') }}</th>
                                 <th class="whitespace-nowrap">{{ __('customers.index.table.cols.email') }}</th>
+                                @role(App\Models\User::SUPERADMIN)
+                                <th class="whitespace-nowrap">{{ __('customers.index.table.cols.reseller') }}</th>
+                                @endrole
                                 <th class="whitespace-nowrap">{{ __('customers.index.table.cols.registration_date') }}</th>
                                 <th class="whitespace-nowrap">{{ __('customers.index.table.cols.last_order_date') }}</th>
                                 <th></th>
@@ -26,6 +29,16 @@
                                 <tr class="text-left [&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
                                     <td class="whitespace-nowrap">{{ $customer->firstname }} {{ $customer->lastname }}</td>
                                     <td class="whitespace-nowrap">{{ $customer->email }}</td>
+                                    @role(App\Models\User::SUPERADMIN)
+                                    <td class="whitespace-nowrap">
+                                        @if ($customer->country->reseller)
+                                        <a target="_blank" class="inline-block hover:underline" href="{{ route('resellers.show', ['reseller' => $customer->country->reseller->id]) }}}">
+                                            <img class="inline-block w-5 mr-2 rounded-sm" src="https://flagcdn.com/w320/{{ strtolower($customer->country->iso2_code) }}.png" alt="{{ $customer->country->name }}">
+                                            {{ $customer->country->reseller->fullname }}
+                                        </a>
+                                        @endif
+                                    </td>
+                                    @endrole
                                     <td class="whitespace-nowrap">{{ $customer->created_at->format('d/m/Y') }}</td>
                                     <td class="whitespace-nowrap">-</td>
                                     <td class="text-right">
