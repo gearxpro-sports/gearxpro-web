@@ -144,7 +144,6 @@ class Show extends Component
                 'id' => $l->id,
                 'value' => $l->value,
                 'color' => $l->color,
-                'available' => true
             ];
         });
         $this->allColors = $this->terms[2]->sortBy('position')->keyBy('id')->map(function ($c) {
@@ -152,7 +151,6 @@ class Show extends Component
                 'id' => $c->id,
                 'value' => $c->value,
                 'color' => $c->color,
-                'available' => true
             ];
         });
         $this->allSizes = $this->terms[3]->sortBy('position')->keyBy('id')->map(function ($s) {
@@ -160,7 +158,6 @@ class Show extends Component
                 'id' => $s->id,
                 'value' => $s->value,
                 'color' => $s->color,
-                'available' => true
             ];
         });
 
@@ -171,9 +168,9 @@ class Show extends Component
 
     protected function filterVariantsByTerm($type, $id)
     {
-        //        $this->selectedLength = null;
-        //        $this->selectedColor = null;
-        //        $this->selectedSize = null;
+        $this->selectedLength = $this->selectedLength ?? null;
+        $this->selectedColor = $this->selectedColor ?? null;
+        $this->selectedSize = $this->selectedSize ?? null;
 
         if ($type === 'length') {
             $this->selectedLength = $id;
@@ -204,6 +201,7 @@ class Show extends Component
         }
 
         $this->variants = $variants->get();
+        ray($this->variants);
         if ($this->variants->count() === 1) {
             $this->selectedVariant = $this->variants->first();
             $this->selectedLength = $this->selectedVariant->length->id;
@@ -219,7 +217,6 @@ class Show extends Component
                 'id' => $term->id,
                 'value' => $term->value,
                 'color' => $term->color,
-                'available' => true,
             ];
         })->toArray();
     }
@@ -272,6 +269,27 @@ class Show extends Component
         $this->sizes = $this->processTerms($terms, 3);
     }
 
+    public function resetAll() {
+        $this->reset(['selectedColor', 'selectedSize', 'selectedLength']);
+        $this->filterVariantsByTerm('length', $this->selectedLength);
+        $this->filterVariantsByTerm('color', $this->selectedColor);
+        $this->filterVariantsByTerm('size', $this->selectedSize);
+
+        $terms = collect();
+
+        foreach ($this->variants as $variant) {
+            $terms = $terms->merge($variant->terms);
+        }
+
+        $terms = $terms->groupBy('attribute_id');
+
+        $this->lengths = $this->processTerms($terms, 1);
+        $this->colors = $this->processTerms($terms, 2);
+        $this->sizes = $this->processTerms($terms, 3);
+
+        $this->dispatch('reset-colors');
+    }
+
     #[On('selectMoney')]
     public function selectMoney($money)
     {
@@ -312,6 +330,7 @@ class Show extends Component
         //TODO
     }
 
+    #[On('reset-colors')]
     public function render()
     {
         return view('livewire.shop.products.show');

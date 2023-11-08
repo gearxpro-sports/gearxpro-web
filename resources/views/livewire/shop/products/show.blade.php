@@ -2,7 +2,8 @@
     <div class="p-[39px] grid grid-cols-12 gap-[30px]">
         {{-- image --}}
         <div class="col-span-7 h-[1104px] overflow-y-auto scrollBar flex flex-col gap-4 pb-4">
-            @if ($selectedLength == 1) {{-- Corto --}}
+            @if ($selectedLength == 1)
+                {{-- Corto --}}
                 <img src="{{ Vite::asset('resources/images/SOXPro-1.png')}}" alt="">
                 <img src="{{ Vite::asset('resources/images/SOXPro-2.png')}}" alt="">
                 <img src="{{ Vite::asset('resources/images/SOXPro-3.png')}}" alt="">
@@ -21,6 +22,10 @@
                 <p class="text-[21px] font-medium leading-[38px] text-color-18181a">@money($product->price)</p>
             </div>
 
+            @if($selectedLength || $selectedColor || $selectedSize)
+                <x-primary-button type="button" wire:click="resetAll()" class="mt-10">Resetta selezione</x-primary-button>
+            @endif
+
             <div class="mt-10 space-y-10">
                 @if($allLengths)
                     <div wire:key="lengths" class="space-y-5">
@@ -29,16 +34,29 @@
                             <div
                                 class="w-96 grid grid-cols-2 gap-x-1 rounded-md p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200 bg-color-edebe5">
                                 @foreach($allLengths as $id => $length)
+                                    @if(in_array($id, array_keys($lengths)))
+                                        <div
+                                            wire:key="length-{{$id}}"
+                                            wire:click="setLength({{ $id }})"
+                                            @class([
+                                             'cursor-pointer',
+                                            'h-14 text-sm flex items-center justify-center rounded-md px-2.5 py-1',
+                                            $selectedLength == $length['id'] ? 'bg-color-18181a text-white' : 'text-color-6c757d'])
+                                        >
+                                            <span>{{ $length['value'] }}</span>
+                                        </div>
+                                    @else
                                     <div
                                         wire:key="length-{{$id}}"
-                                        wire:click="setLength({{ $id }})"
+                                        wire:click="resetAll('length', {{ $id }})"
                                         @class([
-                                        in_array($id, array_keys($lengths)) ? '' : 'opacity-30',
-                                        'h-14 text-sm flex items-center justify-center cursor-pointer rounded-md px-2.5 py-1',
+                                        'opacity-10 pointer-events-none',
+                                        'h-14 text-sm flex items-center justify-center rounded-md px-2.5 py-1',
                                         $selectedLength == $length['id'] ? 'bg-color-18181a text-white' : 'text-color-6c757d'])
                                     >
                                         <span>{{ $length['value'] }}</span>
                                     </div>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
@@ -49,18 +67,30 @@
                         <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.color')}}</p>
                         <div>
                             <div class="flex items-center space-x-4">
-{{--                                @dd($colors)--}}
                                 @foreach($allColors as $id => $color)
+                                    @if(in_array($id, array_keys($colors)))
+                                        <div
+                                            wire:key="color-{{$id}}"
+                                            wire:click="setColor({{ $color['id'] }})"
+                                            @class([
+                                                 'cursor-pointer',
+                                                'h-12 w-12 relative -m-0.5 flex items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent',
+                                                $selectedColor == $color['id'] ? 'ring ring-offset-2' : 'ring-2'])
+                                            style="background-color: {{ $color['color'] }}; --tw-ring-color: {{$color['color']}}"
+                                        >
+                                        </div>
+                                    @else
                                     <div
                                         wire:key="color-{{$id}}"
-                                        wire:click="setColor({{ $color['id'] }})"
+                                        wire:click="resetAll('color', {{ $id }})"
                                         @class([
-                                            in_array($id, array_keys($colors)) ? '' : 'opacity-30 cursor-not-allowed',
-                                            'h-12 w-12 relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent',
+                                            'opacity-10 pointer-events-none',
+                                            'h-12 w-12 relative -m-0.5 flex items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent',
                                             $selectedColor == $color['id'] ? 'ring ring-offset-2' : 'ring-2'])
                                         style="background-color: {{ $color['color'] }}; --tw-ring-color: {{$color['color']}}"
                                     >
                                     </div>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
@@ -72,16 +102,29 @@
                         <div>
                             <div class="w-96 grid grid-cols-3 gap-3 sm:grid-cols-4">
                                 @foreach($allSizes as $id => $size)
+                                    @if(in_array($id, array_keys($sizes)))
+                                        <div
+                                            wire:key="size-{{$id}}"
+                                            wire:click="setSize({{ $size['id'] }})"
+                                            @class([
+                                                'cursor-pointer',
+                                                'flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1 focus:outline-none',
+                                                $selectedSize == $size['id'] ? 'bg-color-18181a text-white' : 'border-gray-200 bg-color-edebe5 text-gray-900 hover:bg-color-18181a hover:text-white'])
+                                        >
+                                            <span id="size-choice-0-label">{{ $size['value'] }}</span>
+                                        </div>
+                                    @else
                                     <div
                                         wire:key="size-{{$id}}"
-                                        wire:click="setSize({{ $size['id'] }})"
+                                        wire:click="resetAll('size', {{ $id }})"
                                         @class([
-                                            in_array($id, array_keys($sizes)) ? '' : 'opacity-30',
-                                            'flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1 cursor-pointer focus:outline-none',
+                                            'opacity-10 pointer-events-none',
+                                            'flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1 focus:outline-none',
                                             $selectedSize == $size['id'] ? 'bg-color-18181a text-white' : 'border-gray-200 bg-color-edebe5 text-gray-900 hover:bg-color-18181a hover:text-white'])
                                     >
                                         <span id="size-choice-0-label">{{ $size['value'] }}</span>
                                     </div>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
