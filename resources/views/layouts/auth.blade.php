@@ -19,8 +19,8 @@
 </head>
 <body class="antialiased text-color-6c757d">
 <div class="grid grid-cols-1 bg-white h-full min-h-screen lg:grid-cols-3 lg:bg-color-dee2e6 2xl:grid-cols-4">
-    <div class="bg-white flex w-full max-w-xl mx-auto items-center justify-center">
-        <div class="w-full p-10 2xl:p-20">
+    <div class="bg-white flex w-full max-w-xl mx-auto items-center justify-center lg:max-w-full">
+        <div class="w-full p-10">
             <x-auth-session-status class="mb-12 text-center" :status="session('status')"/>
             <x-application-logo class="mx-auto mb-12"/>
             @yield('content')
