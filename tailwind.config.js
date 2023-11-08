@@ -19,10 +19,11 @@ export default {
     ],
 
     theme: {
+        fontFamily: {
+            'app': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            'shop': ['Montserrat', 'system-ui', 'sans-serif']
+        },
         extend: {
-            fontFamily: {
-                sans: ['Plus Jakarta Sans', ...defaultTheme.fontFamily.sans],
-            },
             colors: {
                 'color-ff9d60': '#FF9D60',
                 'color-ffa76c': '#FFA76C',
