@@ -22,38 +22,43 @@
             </div>
 
             <div class="mt-10 space-y-10">
-                @if($lengths)
-                    <div class="space-y-5">
+                @if($allLengths)
+                    <div wire:key="lengths" class="space-y-5">
                         <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.height_leg')}}</p>
                         <div>
                             <div
                                 class="w-96 grid grid-cols-2 gap-x-1 rounded-md p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200 bg-color-edebe5">
-                                @foreach($lengths as $length)
+                                @foreach($allLengths as $id => $length)
                                     <div
-                                        wire:click="$set('selectedLength', '{{ $length->id }}')"
+                                        wire:key="length-{{$id}}"
+                                        wire:click="setLength({{ $id }})"
                                         @class([
+                                        in_array($id, array_keys($lengths)) ? '' : 'opacity-30',
                                         'h-14 text-sm flex items-center justify-center cursor-pointer rounded-md px-2.5 py-1',
-                                        $selectedLength == $length->id ? 'bg-color-18181a text-white' : 'text-color-6c757d'])
+                                        $selectedLength == $length['id'] ? 'bg-color-18181a text-white' : 'text-color-6c757d'])
                                     >
-                                        <span>{{ $length->value }}</span>
+                                        <span>{{ $length['value'] }}</span>
                                     </div>
                                 @endforeach
                             </div>
                         </div>
                     </div>
                 @endif
-                @if($colors)
-                    <div class="space-y-5">
+                @if($allColors)
+                    <div wire:key="colors" class="space-y-5">
                         <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.color')}}</p>
                         <div>
                             <div class="flex items-center space-x-4">
-                                @foreach($colors as $color)
+{{--                                @dd($colors)--}}
+                                @foreach($allColors as $id => $color)
                                     <div
-                                        wire:click="$set('selectedColor', '{{$color->id}}')"
+                                        wire:key="color-{{$id}}"
+                                        wire:click="setColor({{ $color['id'] }})"
                                         @class([
+                                            in_array($id, array_keys($colors)) ? '' : 'opacity-30 cursor-not-allowed',
                                             'h-12 w-12 relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent',
-                                            $selectedColor == $color->id ? 'ring ring-offset-2' : 'ring-2'])
-                                        style="background-color: {{ $color->color }}; --tw-ring-color: {{$color->color}}"
+                                            $selectedColor == $color['id'] ? 'ring ring-offset-2' : 'ring-2'])
+                                        style="background-color: {{ $color['color'] }}; --tw-ring-color: {{$color['color']}}"
                                     >
                                     </div>
                                 @endforeach
@@ -61,19 +66,21 @@
                         </div>
                     </div>
                 @endif
-                @if($sizes)
-                    <div class="space-y-5">
+                @if($allSizes)
+                    <div wire:key="sizes" class="space-y-5">
                         <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.size')}}</p>
                         <div>
                             <div class="w-96 grid grid-cols-3 gap-3 sm:grid-cols-4">
-                                @foreach($sizes as $size)
+                                @foreach($allSizes as $id => $size)
                                     <div
-                                        wire:click="$set('selectedSize', '{{ $size->id }}')"
+                                        wire:key="size-{{$id}}"
+                                        wire:click="setSize({{ $size['id'] }})"
                                         @class([
+                                            in_array($id, array_keys($sizes)) ? '' : 'opacity-30',
                                             'flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1 cursor-pointer focus:outline-none',
-                                            $selectedSize == $size->id ? 'bg-color-18181a text-white' : 'border-gray-200 bg-color-edebe5 text-gray-900 hover:bg-color-18181a hover:text-white'])
+                                            $selectedSize == $size['id'] ? 'bg-color-18181a text-white' : 'border-gray-200 bg-color-edebe5 text-gray-900 hover:bg-color-18181a hover:text-white'])
                                     >
-                                        <span id="size-choice-0-label">{{ $size->value }}</span>
+                                        <span id="size-choice-0-label">{{ $size['value'] }}</span>
                                     </div>
                                 @endforeach
                             </div>
