@@ -5,6 +5,7 @@ namespace App\Livewire\Shop\Products;
 use App\Livewire\Modals\Cart as ModalCart;
 use App\Livewire\Shop\Navigation as ShopNavigation;
 use App\Models\Product;
+use App\Models\ProductVariant;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -14,36 +15,40 @@ use Livewire\Attributes\On;
 #[Layout('layouts.guest')]
 class Show extends Component
 {
-    public $product;
-    public $format = 'short';
-    public $selectedColor;
-    public $selectedSize;
+    public Product $product;
+    public ProductVariant $default;
+
+    public $selectedLength = null;
+    public $selectedColor = null;
+    public $selectedSize = null;
     public $quantity = 1;
     public $selectedMoney = 0;
     public $cart;
 
-    public $colors = [
-        [
-            'code' => 'black',
-            'image-short' => 'resources/images/icons/SOXPro-mini-1.svg',
-            'image-long' => 'resources/images/icons/SOXPro-mini-1-long.svg',
-        ],
-        [
-            'code' => 'green',
-            'image-short' => 'resources/images/icons/SOXPro-mini-1.svg',
-            'image-long' => 'resources/images/icons/SOXPro-mini-1-long.svg',
-        ],
-        [
-            'code' => 'blue',
-            'image-short' => 'resources/images/icons/SOXPro-mini-1.svg',
-            'image-long' => 'resources/images/icons/SOXPro-mini-1-long.svg',
-        ],
-
-    ];
-
-    public $sizes = [
-        'xs', 's', 'm', 'l', 'xl', 'xxl'
-    ];
+    public $lengths = [];
+    public $colors = [];
+    public $sizes = [];
+//    public $colors = [
+//        [
+//            'code' => 'black',
+//            'image-short' => 'resources/images/icons/SOXPro-mini-1.svg',
+//            'image-long' => 'resources/images/icons/SOXPro-mini-1-long.svg',
+//        ],
+//        [
+//            'code' => 'green',
+//            'image-short' => 'resources/images/icons/SOXPro-mini-1.svg',
+//            'image-long' => 'resources/images/icons/SOXPro-mini-1-long.svg',
+//        ],
+//        [
+//            'code' => 'blue',
+//            'image-short' => 'resources/images/icons/SOXPro-mini-1.svg',
+//            'image-long' => 'resources/images/icons/SOXPro-mini-1-long.svg',
+//        ],
+//
+//    ];
+//    public $sizes = [
+//        'xs', 's', 'm', 'l', 'xl', 'xxl'
+//    ];
 
     public $mostPurchased = [
         0 => [
@@ -108,20 +113,30 @@ class Show extends Component
         ],
     ];
 
-    public function mount($product) {
-        $this->product = Product::find($product);
-    }
+    public function mount() {
+        $this->default = $this->product->variants->firstWhere('position', 1);
+        $this->selectedLength = $this->default->length->value;
+        $this->selectedColor = $this->default->color->value;
+        $this->selectedSize = $this->default->size->value;
 
-    public function changeFormat($type) {
-        $this->format = $type;
-    }
+        // Carica tutte le varianti associate a quel prodotto
+        $this->product->load('variants');
 
-    public function selectColor($color) {
-        $this->selectedColor = $color;
-    }
+        // Recupera i termini da ciascuna variante
+        $terms = collect();
+        foreach ($this->product->variants as $variant) {
+            $terms = $terms->merge($variant->terms);
+        }
 
-    public function selectSize($size) {
-        $this->selectedSize = $size;
+        $terms = $terms->groupBy('attribute_id');
+        $terms = $terms->map(function($t) {
+            return $t->unique('id');
+        });
+        $this->lengths = $terms[1];
+        $this->colors = $terms[2];
+        $this->sizes = $terms[3];
+
+//        dd($this->lengths, $this->colors, $this->sizes);
     }
 
     #[On('selectMoney')]

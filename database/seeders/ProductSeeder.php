@@ -22,14 +22,15 @@ class ProductSeeder extends Seeder
 
 
         foreach (range(1, 5) as $n) {
+            $name = 'Prodotto Test '.Str::random(3);
             $product = Product::create([
-                'name' => 'Prodotto Test '.Str::random(3),
+                'name' => $name,
                 'main_desc' => fake()->paragraphs(2, true),
                 'features_desc' => fake()->paragraphs(2, true),
                 'pros_desc' => fake()->paragraphs(2, true),
                 'technical_desc' => fake()->paragraphs(2, true),
                 'washing_desc' => fake()->paragraphs(2, true),
-                'slug' => Str::kebab('Prodotto di Test'),
+                'slug' => Str::kebab($name),
                 'active' => 1,
             ]);
 

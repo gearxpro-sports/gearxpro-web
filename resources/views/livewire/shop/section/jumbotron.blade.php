@@ -15,7 +15,7 @@
 
         <div class="owl-carousel carousel_jumbotron">
             @foreach ($slides as $slide )
-                <img src="{{ Vite::asset('resources/images/gear/'.$slide)}}" alt="">
+                {{ Vite::asset('resources/images/gear/'.$slide)}}
             @endforeach
         </div>
 
