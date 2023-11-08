@@ -32,14 +32,14 @@ class AddProduct extends ModalComponent
     public function save()
     {
         $this->validate();
-        
+
         rescue(function() {
             $product = Product::create([
-                'name' => $this->name, 
+                'name' => $this->name,
                 'slug' => Str::kebab($this->name),
             ]);
 
-            return redirect()->route('products.edit', ['product' => $product->id]);
+            return redirect()->route('products.edit', ['product' => $product->slug]);
 
         }, function () {
             session()->flash('error', __('Error!'));
