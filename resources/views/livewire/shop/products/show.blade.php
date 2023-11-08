@@ -2,7 +2,7 @@
     <div class="p-[39px] grid grid-cols-12 gap-[30px]">
         {{-- image --}}
         <div class="col-span-7 h-[1104px] overflow-y-auto scrollBar flex flex-col gap-4 pb-4">
-            @if ($selectedLength == 'Corto')
+            @if ($selectedLength == 1) {{-- Corto --}}
                 <img src="{{ Vite::asset('resources/images/SOXPro-1.png')}}" alt="">
                 <img src="{{ Vite::asset('resources/images/SOXPro-2.png')}}" alt="">
                 <img src="{{ Vite::asset('resources/images/SOXPro-3.png')}}" alt="">
@@ -30,10 +30,10 @@
                                 class="w-96 grid grid-cols-2 gap-x-1 rounded-md p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200 bg-color-edebe5">
                                 @foreach($lengths as $length)
                                     <div
-                                        wire:click="$set('selectedLength', '{{ $length->value }}')"
+                                        wire:click="$set('selectedLength', '{{ $length->id }}')"
                                         @class([
                                         'h-14 text-sm flex items-center justify-center cursor-pointer rounded-md px-2.5 py-1',
-                                        $selectedLength == $length->value ? 'bg-color-18181a text-white' : 'text-color-6c757d'])
+                                        $selectedLength == $length->id ? 'bg-color-18181a text-white' : 'text-color-6c757d'])
                                     >
                                         <span>{{ $length->value }}</span>
                                     </div>
@@ -49,10 +49,10 @@
                             <div class="flex items-center space-x-4">
                                 @foreach($colors as $color)
                                     <div
-                                        wire:click="$set('selectedColor', '{{$color->value}}')"
+                                        wire:click="$set('selectedColor', '{{$color->id}}')"
                                         @class([
                                             'h-12 w-12 relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent',
-                                            $selectedColor == $color->value ? 'ring ring-offset-2' : 'ring-2'])
+                                            $selectedColor == $color->id ? 'ring ring-offset-2' : 'ring-2'])
                                         style="background-color: {{ $color->color }}; --tw-ring-color: {{$color->color}}"
                                     >
                                     </div>
@@ -68,10 +68,10 @@
                             <div class="w-96 grid grid-cols-3 gap-3 sm:grid-cols-4">
                                 @foreach($sizes as $size)
                                     <div
-                                        wire:click="$set('selectedSize', '{{ $size->value }}')"
+                                        wire:click="$set('selectedSize', '{{ $size->id }}')"
                                         @class([
                                             'flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1 cursor-pointer focus:outline-none',
-                                            $selectedSize == $size->value ? 'bg-color-18181a text-white' : 'border-gray-200 bg-color-edebe5 text-gray-900 hover:bg-color-18181a hover:text-white'])
+                                            $selectedSize == $size->id ? 'bg-color-18181a text-white' : 'border-gray-200 bg-color-edebe5 text-gray-900 hover:bg-color-18181a hover:text-white'])
                                     >
                                         <span id="size-choice-0-label">{{ $size->value }}</span>
                                     </div>

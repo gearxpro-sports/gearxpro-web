@@ -6,6 +6,7 @@ use App\Livewire\Modals\Cart as ModalCart;
 use App\Livewire\Shop\Navigation as ShopNavigation;
 use App\Models\Product;
 use App\Models\ProductVariant;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -114,10 +115,11 @@ class Show extends Component
     ];
 
     public function mount() {
+//        dd($this->product->variants()->with('terms')->where('terms.id', 1)->pluck('id'));
         $this->default = $this->product->variants->firstWhere('position', 1);
-        $this->selectedLength = $this->default->length->value;
-        $this->selectedColor = $this->default->color->value;
-        $this->selectedSize = $this->default->size->value;
+//        $this->selectedLength = $this->default->length->id;
+//        $this->selectedColor = $this->default->color->id;
+//        $this->selectedSize = $this->default->size->id;
 
         // Carica tutte le varianti associate a quel prodotto
         $this->product->load('variants');
@@ -132,11 +134,10 @@ class Show extends Component
         $terms = $terms->map(function($t) {
             return $t->unique('id');
         });
-        $this->lengths = $terms[1];
-        $this->colors = $terms[2];
-        $this->sizes = $terms[3];
 
-//        dd($this->lengths, $this->colors, $this->sizes);
+        $this->lengths = $terms[1]->sortBy('position');
+        $this->colors = $terms[2]->sortBy('position');
+        $this->sizes = $terms[3]->sortBy('position');
     }
 
     #[On('selectMoney')]
