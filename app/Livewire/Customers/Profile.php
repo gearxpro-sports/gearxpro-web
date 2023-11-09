@@ -38,13 +38,7 @@ class Profile extends Component
     public $password = '';
     public $password_confirmation = '';
     public $keyFormat = [];
-    public $formatPassword = [
-        'Un carattere in MAIUSCOLO',
-        'Un numero',
-        '8 caratteri',
-        'Un carattere in minuscolo',
-        'Un carattere speciale (&*€%)'
-    ];
+    public $formatPassword = [];
 
     public function updated($property) {
         if ($property === 'password') {
@@ -75,6 +69,13 @@ class Profile extends Component
         $this->customer = auth()->user();
         $this->customerPhone = $this->customer->phone;
         $this->customer_shipping_address = $this->customer->shipping_address ?? '';
+        $this->formatPassword = [
+            __('customers.format_password.uppercase'),
+            __('customers.format_password.number'),
+            __('customers.format_password.length'),
+            __('customers.format_password.lowercase'),
+            __('customers.format_password.special_character')
+        ];
 
         if ($this->customer_shipping_address) {
             $this->shipping_phone = $this->customer_shipping_address->phone;

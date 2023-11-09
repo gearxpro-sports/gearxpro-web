@@ -100,6 +100,13 @@ return [
     ],
     'edit_data' => 'Modifica',
     'password' => 'Password',
+    'format_password' => [
+        'uppercase' => 'Un carattere in MAIUSCOLO',
+        'lowercase' => 'Un carattere in minuscolo',
+        'number' => 'Un numero',
+        'length' => '8 caratteri',
+        'special_character' => 'Un carattere speciale (&*€%)'
+    ],
     'buttons' => [
         'cancel' => 'Annulla',
         'save' => 'Salva',
