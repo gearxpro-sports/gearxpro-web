@@ -3,7 +3,6 @@
 namespace App\Livewire\Customers;
 
 use Illuminate\Support\Facades\Hash;
-use App\Models\Address;
 use App\Models\User;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -12,9 +11,28 @@ use Livewire\Component;
 class Profile extends Component
 {
     public User $customer;
-    public Address $shipping_address;
-    public Address $billing_address;
+    public $customerPhone;
+    public $customer_shipping_address;
+    public $customer_billing_address;
+    //Shipping Address
+    public $full_shipping_address;
+    public $shipping_address;
+    public $shipping_civic = null;
+    public $shipping_postcode;
+    public $shipping_city;
+    public $shipping_state;
+    public $shipping_company;
+    public $shipping_phone;
+    //Shipping Address
+    public $full_billing_address;
+    public $billing_address;
+    public $billing_civic = null;
+    public $billing_postcode;
+    public $billing_city;
+    public $billing_state;
+    public $billing_company;
 
+    public $streetClicked = false;
     public $modify = false;
     public $current_password = '';
     public $password = '';
@@ -55,8 +73,30 @@ class Profile extends Component
 
     public function mount() {
         $this->customer = auth()->user();
-        $this->shipping_address = $this->customer->shipping_address;
-        $this->billing_address = $this->customer->billing_address;
+        $this->customerPhone = $this->customer->phone;
+        $this->customer_shipping_address = $this->customer->shipping_address ?? '';
+
+        if ($this->customer_shipping_address) {
+            $this->shipping_phone = $this->customer_shipping_address->phone;
+            $this->full_shipping_address = $this->customer_shipping_address->address_1.' '.$this->customer_shipping_address->city.' '.$this->customer_shipping_address->postcode;
+
+            $this->shipping_address = $this->customer_shipping_address->address_1;
+            $this->shipping_postcode = $this->customer_shipping_address->postcode;
+            $this->shipping_city = $this->customer_shipping_address->city;
+            $this->shipping_state = $this->customer_shipping_address->state;
+            $this->shipping_company = $this->customer_shipping_address->company;
+            $this->shipping_phone = $this->customer_shipping_address->phone;
+        }
+
+        $this->customer_billing_address = $this->customer->billing_address;
+        if ($this->customer_billing_address) {
+            $this->full_billing_address = $this->customer_billing_address->address_1.' '.$this->customer_billing_address->city.' '.$this->customer_billing_address->postcode;
+            $this->billing_address = $this->customer_billing_address->address_1;
+            $this->billing_postcode = $this->customer_billing_address->postcode;
+            $this->billing_city = $this->customer_billing_address->city;
+            $this->billing_state = $this->customer_billing_address->state;
+            $this->billing_company = $this->customer_billing_address->company;
+        }
     }
 
     public function selectEditData($data) {
@@ -68,7 +108,7 @@ class Profile extends Component
             return [
                 'customer.firstname' => 'required',
                 'customer.lastname' => 'required',
-                'customer.phone' => 'required',
+                'customerPhone' => 'required',
             ];
         }
         if ($this->modify == 'email') {
@@ -84,11 +124,21 @@ class Profile extends Component
         }
         if ($this->modify == 'shipping') {
             return [
-                'shipping_address.address_1' => 'required',
-                'shipping_address.company' => 'nullable',
-                'billing_address.address_1' => 'required',
-                'billing_address.company' => 'nullable',
-                'shipping_address.phone' => 'required',
+                //shipping
+                'shipping_address' => 'required',
+                'shipping_civic' => 'nullable',
+                'shipping_postcode' => 'required',
+                'shipping_city' => 'required',
+                'shipping_state' => 'required',
+                'shipping_company' => 'nullable',
+                'shipping_phone' => 'required',
+                //billing
+                'billing_address' => 'required',
+                'billing_civic' => 'nullable',
+                'billing_postcode' => 'required',
+                'billing_city' => 'required',
+                'billing_state' => 'required',
+                'billing_company' => 'nullable',
             ];
         }
         return [];
@@ -99,6 +149,7 @@ class Profile extends Component
             return [
                 'customer.firstname.required' => __('shop.payment.required'),
                 'customer.lastname.required' => __('shop.payment.required'),
+                'customerPhone.required' => __('shop.payment.required'),
             ];
         }
         if ($this->modify === 'email') {
@@ -116,9 +167,13 @@ class Profile extends Component
         }
         if ($this->modify === 'shipping') {
             return [
-                'shipping_address.address_1.required' => __('shop.payment.required'),
-                'billing_address.address_1.required' => __('shop.payment.required'),
-                'shipping_address.phone.required' => __('shop.payment.required'),
+                // shipping
+                'shipping_address.required' => __('shop.payment.required'),
+                'shipping_civic.required' => __('shop.payment.required'),
+                'shipping_phone.required' => __('shop.payment.required'),
+                // billing
+                'billing_address.required' => __('shop.payment.required'),
+                'billing_civic.required' => __('shop.payment.required'),
             ];
         }
         return [];
@@ -126,15 +181,39 @@ class Profile extends Component
 
     public function copyFromShipping()
     {
-        $this->billing_address->address_1 = $this->shipping_address->address_1;
-        $this->billing_address->company = $this->shipping_address->company;
+        if ($this->shipping_civic != null) {
+            $this->full_billing_address = $this->shipping_address.' '.$this->shipping_civic.' '.$this->shipping_city.' '.$this->shipping_state;
+            $this->billing_address = $this->shipping_address;
+            $this->billing_civic = $this->shipping_civic;
+            $this->billing_postcode = $this->shipping_postcode;
+            $this->billing_city = $this->shipping_city;
+            $this->billing_state = $this->shipping_state;
+            $this->billing_company = $this->shipping_company;
+        } else {
+            return  $this->dispatch('open-notification',
+                title: __('notifications.customer.error.address.title'),
+                subtitle: __('notifications.customer.error.address.description'),
+                type: 'error'
+            );
+        }
     }
 
     public function edit() {
+        if (!$this->streetClicked OR $this->shipping_civic === null OR $this->billing_civic === null) {
+            return  $this->dispatch('open-notification',
+                title: __('notifications.customer.error.address.title'),
+                subtitle: __('notifications.customer.error.address.description'),
+                type: 'error'
+            );
+        }
+
         $this->validate();
 
         if ($this->modify === 'data' OR $this->modify === 'email') {
             $this->customer->update($this->validate()['customer']);
+            $this->customer->update([
+                'phone' => $this->customerPhone
+            ]);
 
             $this->dispatch('open-notification',
                 title: __('notifications.titles.updating'),
@@ -160,8 +239,27 @@ class Profile extends Component
                 );
             }
         } elseif ($this->modify === 'shipping') {
-            $this->shipping_address->update($this->validate()['shipping_address']);
-            $this->billing_address->update($this->validate()['billing_address']);
+            \App\Models\Address::updateOrCreate(['user_id'   => $this->customer->id, 'type' => 'shipping'],
+                [
+                    'country_id' => $this->customer->country_id,
+                    'address_1' => ($this->shipping_address . ' ' . $this->shipping_civic),
+                    'postcode' => $this->shipping_postcode,
+                    'city' => $this->shipping_city,
+                    'state' => $this->shipping_state,
+                    'phone' => $this->shipping_phone,
+                    'company' => $this->shipping_company
+                ]
+            );
+            \App\Models\Address::updateOrCreate(['user_id'   => $this->customer->id, 'type' => 'billing'],
+                [
+                    'country_id' => $this->customer->country_id,
+                    'address_1' => ($this->billing_address . ' ' . $this->billing_civic),
+                    'postcode' => $this->billing_postcode,
+                    'city' => $this->billing_city,
+                    'state' => $this->billing_state,
+                    'company' => $this->billing_company
+                ]
+            );
 
             $this->dispatch('open-notification',
                 title: __('notifications.titles.updating'),
@@ -169,6 +267,7 @@ class Profile extends Component
                 type: 'success'
             );
             $this->cancel();
+            $this->mount();
         }
     }
 

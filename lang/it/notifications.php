@@ -103,6 +103,10 @@ return [
                 'title' => 'Passord non valida',
                 'description' => 'La password deve rispettare il formato richiesto.'
             ],
+            'address' => [
+                'title' => 'Indirizzo non valido',
+                'description' => 'Assicurati che entrambi gli indirizzi siano corretti!'
+            ]
         ],
         'success' => [
             'password' => [
