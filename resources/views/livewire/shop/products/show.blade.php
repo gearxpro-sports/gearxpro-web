@@ -26,21 +26,20 @@
                 <x-primary-button type="button" wire:click="resetAll()" class="mt-10">Resetta selezione</x-primary-button>
             @endif
 
-            <div class="mt-10 space-y-10">
+            <div class="w-full max-w-md mt-10 space-y-10">
                 @if($allLengths)
                     <div wire:key="lengths" class="space-y-5">
-                        <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.height_leg')}}</p>
+                        <p class="text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.height_leg')}}</p>
                         <div>
                             <div
-                                class="w-96 grid grid-cols-2 gap-x-1 rounded-md p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200 bg-color-edebe5">
+                                class="grid grid-cols-2 gap-x-1 rounded-md p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200 bg-color-edebe5">
                                 @foreach($allLengths as $id => $length)
                                     @if(in_array($id, array_keys($lengths)))
                                         <div
                                             wire:key="length-{{$id}}"
                                             wire:click="setLength({{ $id }})"
                                             @class([
-                                             'cursor-pointer',
-                                            'h-14 text-sm flex items-center justify-center rounded-md px-2.5 py-1',
+                                            'cursor-pointer h-14 text-sm flex items-center justify-center rounded-md px-2.5 py-1',
                                             $selectedLength == $length['id'] ? 'bg-color-18181a text-white' : 'text-color-6c757d'])
                                         >
                                             <span>{{ $length['value'] }}</span>
@@ -50,8 +49,7 @@
                                         wire:key="length-{{$id}}"
                                         wire:click="resetAll('length', {{ $id }})"
                                         @class([
-                                        'opacity-10 pointer-events-none',
-                                        'h-14 text-sm flex items-center justify-center rounded-md px-2.5 py-1',
+                                        'opacity-10 pointer-events-none h-14 text-sm flex items-center justify-center rounded-md px-2.5 py-1',
                                         $selectedLength == $length['id'] ? 'bg-color-18181a text-white' : 'text-color-6c757d'])
                                     >
                                         <span>{{ $length['value'] }}</span>
@@ -64,17 +62,16 @@
                 @endif
                 @if($allColors)
                     <div wire:key="colors" class="space-y-5">
-                        <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.color')}}</p>
+                        <p class="text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.color')}}</p>
                         <div>
-                            <div class="flex items-center space-x-4">
+                            <div class="flex flex-wrap items-center gap-4">
                                 @foreach($allColors as $id => $color)
                                     @if(in_array($id, array_keys($colors)))
                                         <div
                                             wire:key="color-{{$id}}"
                                             wire:click="setColor({{ $color['id'] }})"
                                             @class([
-                                                 'cursor-pointer',
-                                                'h-12 w-12 relative -m-0.5 flex items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent',
+                                                'flex-shrink-0 cursor-pointer h-12 w-12 relative flex items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent',
                                                 $selectedColor == $color['id'] ? 'ring ring-offset-2' : 'ring-2'])
                                             style="background-color: {{ $color['color'] }}; --tw-ring-color: {{$color['color']}}"
                                         >
@@ -84,8 +81,7 @@
                                         wire:key="color-{{$id}}"
                                         wire:click="resetAll('color', {{ $id }})"
                                         @class([
-                                            'opacity-10 pointer-events-none',
-                                            'h-12 w-12 relative -m-0.5 flex items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent',
+                                            'flex-shrink-0 opacity-10 pointer-events-none h-12 w-12 relative flex items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent',
                                             $selectedColor == $color['id'] ? 'ring ring-offset-2' : 'ring-2'])
                                         style="background-color: {{ $color['color'] }}; --tw-ring-color: {{$color['color']}}"
                                     >
@@ -98,17 +94,23 @@
                 @endif
                 @if($allSizes)
                     <div wire:key="sizes" class="space-y-5">
-                        <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.size')}}</p>
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-medium text-color-18181a uppercase">{{__('shop.products.size')}}</p>
+                            <div class="flex items-center space-x-2">
+                                <span
+                                    class="text-xs font-medium text-color-18181a uppercase">{{__('shop.options.size_guide')}}</span>
+                                <img src="{{ Vite::asset('resources/images/icons/metro.svg')}}" class="w-5" alt="">
+                            </div>
+                        </div>
                         <div>
-                            <div class="w-96 grid grid-cols-3 gap-3 sm:grid-cols-4">
+                            <div class="grid grid-cols-3 gap-3 sm:grid-cols-4">
                                 @foreach($allSizes as $id => $size)
                                     @if(in_array($id, array_keys($sizes)))
                                         <div
                                             wire:key="size-{{$id}}"
                                             wire:click="setSize({{ $size['id'] }})"
                                             @class([
-                                                'cursor-pointer',
-                                                'flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1 focus:outline-none',
+                                                'cursor-pointer flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1 focus:outline-none',
                                                 $selectedSize == $size['id'] ? 'bg-color-18181a text-white' : 'border-gray-200 bg-color-edebe5 text-gray-900 hover:bg-color-18181a hover:text-white'])
                                         >
                                             <span id="size-choice-0-label">{{ $size['value'] }}</span>
@@ -118,8 +120,7 @@
                                         wire:key="size-{{$id}}"
                                         wire:click="resetAll('size', {{ $id }})"
                                         @class([
-                                            'opacity-10 pointer-events-none',
-                                            'flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1 focus:outline-none',
+                                            'opacity-10 pointer-events-none flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1 focus:outline-none',
                                             $selectedSize == $size['id'] ? 'bg-color-18181a text-white' : 'border-gray-200 bg-color-edebe5 text-gray-900 hover:bg-color-18181a hover:text-white'])
                                     >
                                         <span id="size-choice-0-label">{{ $size['value'] }}</span>
@@ -134,7 +135,7 @@
 
             {{-- quantita --}}
             <div class="mt-10">
-                <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.amount')}}</p>
+                <p class="text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.amount')}}</p>
 
                 <div
                     class="w-[185px] h-[48px] rounded-md flex items-center border border-color-b6b9bb mt-5 shadow-shadow-2">
@@ -166,16 +167,10 @@
 
             {{-- other --}}
             <div class="mt-[26px] ">
-                <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">COD: N / A</p>
-                <p class="mt-5 mb-[15px] text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.options.currency')}}</p>
+                <p class="text-sm font-medium leading-[19px] text-color-18181a uppercase">COD: N / A</p>
+                <p class="mt-5 mb-[15px] text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.options.currency')}}</p>
 
                 <livewire:components.select-money :selected="$selectedMoney" :options="$currency"/>
-
-                <div class="mt-10 flex items-center gap-2">
-                    <span
-                        class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.options.size_guide')}}</span>
-                    <img src="{{ Vite::asset('resources/images/icons/metro.svg')}}" alt="">
-                </div>
             </div>
         </div>
 
@@ -186,7 +181,7 @@
                 <template x-for="tab in tabs" :key="tab">
                     <button x-text="tab" x-on:click="currentTab = tab"
                             :class="tab == currentTab ? '!bg-color-18181a !text-white' : ''"
-                            class="w-[235px] h-[48px] rounded-md bg-transparent flex items-center justify-center text-[15px] font-medium leading-[19px] text-color-6c757d capitalize"
+                            class="w-[235px] h-[48px] rounded-md bg-transparent flex items-center justify-center text-sm font-medium leading-[19px] text-color-6c757d capitalize"
                     >
                     </button>
                 </template>
