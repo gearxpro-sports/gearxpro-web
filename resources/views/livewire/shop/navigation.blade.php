@@ -118,7 +118,7 @@
                 </div>
 
                 <!-- Hamburger -->
-                <div class="-mr-2 flex items-center sm:hidden">
+                <div class="-mr-2 flex items-center xl:hidden">
                     <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:bg-none transition duration-150 ease-in-out">
                         <div :class="{'hidden': open, 'inline-flex': ! open }">
                             <x-icons name="hamburger" />
