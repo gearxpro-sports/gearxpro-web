@@ -106,8 +106,8 @@
                                             wire:key="size-{{$id}}"
                                             wire:click="setSize({{ $size['id'] }})"
                                             @class([
-                                                'cursor-pointer flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1 focus:outline-none',
-                                                $selectedSize == $size['id'] ? 'bg-color-18181a text-white' : 'border-gray-200 bg-color-edebe5 text-gray-900 hover:bg-color-18181a hover:text-white'])
+                                                'cursor-pointer flex items-center justify-center rounded-md py-3 px-3 text-sm font-medium uppercase sm:flex-1 focus:outline-none',
+                                                $selectedSize == $size['id'] ? 'bg-color-18181a text-white' : 'border border-black/10 bg-color-edebe5 text-gray-900 hover:bg-color-18181a hover:text-white'])
                                         >
                                             <span id="size-choice-0-label">{{ $size['value'] }}</span>
                                         </div>
@@ -116,8 +116,8 @@
                                             wire:key="size-{{$id}}"
                                             wire:click="resetAll('size', {{ $id }})"
                                             @class([
-                                                'opacity-10 pointer-events-none flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1 focus:outline-none',
-                                                $selectedSize == $size['id'] ? 'bg-color-18181a text-white' : 'border-gray-200 bg-color-edebe5 text-gray-900 hover:bg-color-18181a hover:text-white'])
+                                                'opacity-10 pointer-events-none flex items-center justify-center rounded-md border border-black/50 py-3 px-3 text-sm font-medium uppercase sm:flex-1 focus:outline-none',
+                                                ])
                                         >
                                             <span id="size-choice-0-label">{{ $size['value'] }}</span>
                                         </div>
