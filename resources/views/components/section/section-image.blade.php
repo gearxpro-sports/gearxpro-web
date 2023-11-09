@@ -1,10 +1,10 @@
-<div class="w-[calc(100%-1px)] h-[1115px] flex bg-color-e6e7e9  px-[195px] py-[90px]">
-    <div class="h-full w-1/2">
+<div class="w-[calc(100%-1px)] h-[1115px] flex items-center justify-center bg-color-e6e7e9  px-[195px] py-[90px]">
+    <div class="h-full flex">
         <img class="h-full" src="{{ Vite::asset('resources/images/gear/reminder_left.jpg') }}" alt="">
+        <img class="h-full" src="{{ Vite::asset('resources/images/gear/reminder_right.jpg') }}" alt="">
     </div>
-    <div class="h-full w-1/2 relative">
+    <div class="h-full">
         {{-- <div class="z-10 absolute top-0 right-0 w-full h-full bg-[#0F2674]/40"></div> --}}
-        <img class="h-full absolute top-0 right-0" src="{{ Vite::asset('resources/images/gear/reminder_right.jpg') }}" alt="">
 
         {{-- <div class="absolute left-[140px] top-[205px] z-20 w-[506px]">
             <h2 class="text-[63px] font-bold leading-[76px] text-white mb-[30px]">Are Hidden In Buildings</h2>
