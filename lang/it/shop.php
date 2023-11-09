@@ -40,6 +40,7 @@ return [
         'advantages' => 'vantaggi',
         'technicality' => 'tecnicità',
         'wash' => 'istruzioni di lavaggio',
+        'reset_selection' => 'Cancella selezione',
     ],
     'button' => [
         'pay_link' => 'Paga con link',

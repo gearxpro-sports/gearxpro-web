@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Modals;
 
+use App\Models\ProductVariant;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
 class Cart extends Component
 {
+    public ProductVariant $productVariant;
     public $money;
     public $cart = [];
     public $showModalCart = false;

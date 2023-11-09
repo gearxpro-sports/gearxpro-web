@@ -35,90 +35,69 @@ class Show extends Component
     public $lengths = [];
     public $colors = [];
     public $sizes = [];
-    //    public $colors = [
-    //        [
-    //            'code' => 'black',
-    //            'image-short' => 'resources/images/icons/SOXPro-mini-1.svg',
-    //            'image-long' => 'resources/images/icons/SOXPro-mini-1-long.svg',
+
+    //    public $mostPurchased = [
+    //        0 => [
+    //            'name' => 'SoXPro',
+    //            'image' => 'SOXPro.png',
+    //            'description' => 'SOXPro Trekking - Green',
+    //            'availableColor' => '1',
+    //            'price' => '29,00 - € 35,00'
     //        ],
-    //        [
-    //            'code' => 'green',
-    //            'image-short' => 'resources/images/icons/SOXPro-mini-1.svg',
-    //            'image-long' => 'resources/images/icons/SOXPro-mini-1-long.svg',
+    //        1 => [
+    //            'name' => 'SoXPro',
+    //            'image' => 'SOXPro.png',
+    //            'description' => 'SOXPro Trekking - Green',
+    //            'availableColor' => '1',
+    //            'price' => '29,00 - € 35,00'
     //        ],
-    //        [
-    //            'code' => 'blue',
-    //            'image-short' => 'resources/images/icons/SOXPro-mini-1.svg',
-    //            'image-long' => 'resources/images/icons/SOXPro-mini-1-long.svg',
+    //        2 => [
+    //            'name' => 'SoXPro',
+    //            'image' => 'SOXPro.png',
+    //            'description' => 'SOXPro Trekking - Green',
+    //            'availableColor' => '1',
+    //            'price' => '29,00 - € 35,00'
     //        ],
-    //
-    //    ];
-    //    public $sizes = [
-    //        'xs', 's', 'm', 'l', 'xl', 'xxl'
+    //        3 => [
+    //            'name' => 'SoXPro',
+    //            'image' => 'SOXPro.png',
+    //            'description' => 'SOXPro Trekking - Green',
+    //            'availableColor' => '1',
+    //            'price' => '29,00 - € 35,00'
+    //        ],
+    //        4 => [
+    //            'name' => 'SoXPro',
+    //            'image' => 'SOXPro.png',
+    //            'description' => 'SOXPro Trekking - Green',
+    //            'availableColor' => '1',
+    //            'price' => '29,00 - € 35,00'
+    //        ],
+    //        5 => [
+    //            'name' => 'SoXPro',
+    //            'image' => 'SOXPro.png',
+    //            'description' => 'SOXPro Trekking - Green',
+    //            'availableColor' => '1',
+    //            'price' => '29,00 - € 35,00'
+    //        ],
+    //        6 => [
+    //            'name' => 'SoXPro',
+    //            'image' => 'SOXPro.png',
+    //            'description' => 'SOXPro Trekking - Green',
+    //            'availableColor' => '1',
+    //            'price' => '29,00 - € 35,00'
+    //        ],
     //    ];
 
-    public $mostPurchased = [
-        0 => [
-            'name' => 'SoXPro',
-            'image' => 'SOXPro.png',
-            'description' => 'SOXPro Trekking - Green',
-            'availableColor' => '1',
-            'price' => '29,00 - € 35,00'
-        ],
-        1 => [
-            'name' => 'SoXPro',
-            'image' => 'SOXPro.png',
-            'description' => 'SOXPro Trekking - Green',
-            'availableColor' => '1',
-            'price' => '29,00 - € 35,00'
-        ],
-        2 => [
-            'name' => 'SoXPro',
-            'image' => 'SOXPro.png',
-            'description' => 'SOXPro Trekking - Green',
-            'availableColor' => '1',
-            'price' => '29,00 - € 35,00'
-        ],
-        3 => [
-            'name' => 'SoXPro',
-            'image' => 'SOXPro.png',
-            'description' => 'SOXPro Trekking - Green',
-            'availableColor' => '1',
-            'price' => '29,00 - € 35,00'
-        ],
-        4 => [
-            'name' => 'SoXPro',
-            'image' => 'SOXPro.png',
-            'description' => 'SOXPro Trekking - Green',
-            'availableColor' => '1',
-            'price' => '29,00 - € 35,00'
-        ],
-        5 => [
-            'name' => 'SoXPro',
-            'image' => 'SOXPro.png',
-            'description' => 'SOXPro Trekking - Green',
-            'availableColor' => '1',
-            'price' => '29,00 - € 35,00'
-        ],
-        6 => [
-            'name' => 'SoXPro',
-            'image' => 'SOXPro.png',
-            'description' => 'SOXPro Trekking - Green',
-            'availableColor' => '1',
-            'price' => '29,00 - € 35,00'
-        ],
-    ];
-
-    public $currency = [
-        [
-            'simbol' => '€',
-            'name' => '(€) Euro'
-        ],
-        [
-            'simbol' => '$',
-            'name' => '($) Dollaro'
-        ],
-    ];
+    //    public $currency = [
+    //        [
+    //            'simbol' => '€',
+    //            'name' => '(€) Euro'
+    //        ],
+    //        [
+    //            'simbol' => '$',
+    //            'name' => '($) Dollaro'
+    //        ],
+    //    ];
 
     public function mount()
     {
@@ -247,7 +226,7 @@ class Show extends Component
 
         $this->recalculateTerms();
 
-        $this->dispatch('reset-colors');
+        $this->dispatch('reset-selection');
     }
 
     private function recalculateTerms(): void
@@ -265,11 +244,11 @@ class Show extends Component
         $this->sizes = $this->processTerms($terms, 3);
     }
 
-    #[On('selectMoney')]
-    public function selectMoney($money)
-    {
-        $this->selectedMoney = $money;
-    }
+    //    #[On('selectMoney')]
+    //    public function selectMoney($money)
+    //    {
+    //        $this->selectedMoney = $money;
+    //    }
 
     public function addProduct()
     {
@@ -283,29 +262,39 @@ class Show extends Component
         }
     }
 
-    #[On('addToCart')]
     public function addToCart()
     {
-        $this->cart[$this->product->id] = [
-            'name' => $this->product->name,
-            'format' => $this->format,
-            'color' => $this->selectedColor,
-            'size' => $this->selectedSize,
+        $this->cart = [
+            'variant_id' => $this->selectedVariant->id,
             'quantity' => $this->quantity,
-            'price' => ($this->product->price * $this->quantity)
+            'price' => ($this->product->price * $this->quantity),
         ];
+        //        $this->cart[$this->selectedVariant->product->id] = [
+        //            'variant_id' => $this->selectedVariant->id,
+        //            'quantity' => $this->quantity,
+        //            'price' => ($this->product->price * $this->quantity),
+        //            'name' => $this->product->name,
+        //            'format' => $this->format,
+        //            'color' => $this->selectedColor,
+        //            'size' => $this->selectedSize,
+        //            'quantity' => $this->quantity,
+        //            'price' => ($this->product->price * $this->quantity)
+        //        ];
 
-        $this->dispatch('modalInfoCart', $this->currency[$this->selectedMoney]['simbol'], $this->cart)->to(ModalCart::class);
+        //        dd($this->cart);
+
+        //        $this->dispatch('modalInfoCart', $this->currency[$this->selectedMoney]['simbol'], $this->cart)->to(ModalCart::class);
+        $this->dispatch('modalInfoCart', '€', $this->cart)->to(ModalCart::class);
         $this->dispatch('addProducts', $this->quantity)->to(ShopNavigation::class);
     }
 
-    #[On('payForLink')]
-    public function payForLink()
+    // TODO: Pay with Link
+    public function payWithLink()
     {
-        //TODO
+        dd("Pay with Link");
     }
 
-    #[On('reset-colors')]
+    #[On('reset-selection')]
     public function render()
     {
         return view('livewire.shop.products.show');

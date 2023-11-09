@@ -21,12 +21,6 @@
                 <h1 class="text-[33px] font-semibold leading-[40px] text-color-18181a">{{$product->name}}</h1>
                 <p class="text-[21px] font-medium leading-[38px] text-color-18181a">@money($product->price)</p>
             </div>
-
-            @if($selectedLength || $selectedColor || $selectedSize)
-                <x-primary-button type="button" wire:click="resetAll()" class="mt-10">Resetta selezione
-                </x-primary-button>
-            @endif
-
             <div class="w-full max-w-md mt-10 space-y-10">
                 @if($allLengths)
                     <div wire:key="lengths" class="space-y-5">
@@ -98,9 +92,10 @@
                         <div class="flex items-center justify-between">
                             <p class="text-sm font-medium text-color-18181a uppercase">{{__('shop.products.size')}}</p>
                             <div class="flex items-center space-x-2">
+                                {{-- TODO: modale per guida taglie --}}
                                 <span
                                     class="text-xs font-medium text-color-18181a uppercase">{{__('shop.options.size_guide')}}</span>
-                                <img src="{{ Vite::asset('resources/images/icons/metro.svg')}}" class="w-5" alt="">
+                                <x-icons name="meter" class="w-5 h-5"></x-icons>
                             </div>
                         </div>
                         <div>
@@ -130,6 +125,9 @@
                                 @endforeach
                             </div>
                         </div>
+                        @if($selectedLength || $selectedColor || $selectedSize)
+                            <div wire:click="resetAll()" class="mt-10 text-color-6c757d text-xs cursor-pointer hover:underline">{{ __('shop.products.reset_selection') }}</div>
+                        @endif
                     </div>
                 @endif
 
@@ -138,7 +136,7 @@
                     <p class="text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.amount')}}</p>
 
                     <div
-                        class="w-[185px] h-[48px] rounded-md flex items-center border border-color-b6b9bb mt-5 shadow-shadow-2">
+                        class="w-[185px] h-[48px] rounded-md flex items-center border border-color-b6b9bb mt-5">
                         <div wire:click="removeProduct"
                              class="w-[60px] h-full flex items-center justify-center bg-transparent border-r border-color-b6b9bb">
                             <x-heroicon-o-minus class="h-5 w-5"></x-heroicon-o-minus>
@@ -154,7 +152,8 @@
 
                 {{-- actions --}}
                 <div class="mt-[30px]">
-                    <x-shop.shopping-button :disabled="!$selectedVariant" wire:click="payForLink" color="green" icon="arrow-right-xl">
+                    <x-shop.shopping-button :disabled="!$selectedVariant" wire:click="payWithLink" color="green"
+                                            icon="arrow-right-xl">
                         {{ __('shop.button.pay_link') }}
                     </x-shop.shopping-button>
                     <div class="w-[438px] relative p-6">
@@ -171,9 +170,9 @@
                 <div class="mt-[26px] ">
                     <p class="text-sm font-medium leading-[19px] text-color-18181a uppercase">
                         COD: {{ $selectedVariant ? $selectedVariant->sku : 'N/A' }}</p>
-                    <p class="mt-5 mb-[15px] text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.options.currency')}}</p>
+                    {{--                    <p class="mt-5 mb-[15px] text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.options.currency')}}</p>--}}
 
-                    <livewire:components.select-money :selected="$selectedMoney" :options="$currency"/>
+                    {{--                    <livewire:components.select-money :selected="$selectedMoney" :options="$currency"/>--}}
                 </div>
             </div>
         </div>
@@ -193,177 +192,71 @@
 
             <template x-if="currentTab == '{{$product->name}}'">
                 <p class="text-[13px] leading-[24px] text-color-323a46">
-                    La SOXPro Trekking Sock è la nuova calza sportiva grip progettata da GEARXPro Sports per soddisfare
-                    al meglio le esigenze degli atleti. SOXPro Trekking è essenzialmente dedicato agli escursionisti e
-                    agli amanti delle avventure all’aria aperta, ma adatto anche a tutte le attività sportive all’aria
-                    aperta.
-
-                    La novità assoluta è l’introduzione della tecnologia GRIP:IN (nel mondo del trekking), che unita
-                    alla composizione multimateriale della calza, riduce il rischio di distorsioni e lo stress delle
-                    articolazioni, garantendo maggiore stabilità, velocità e precisione. L’innovativa struttura della
-                    calza è stata studiata per garantire il massimo comfort anche per escursioni impegnative e di più
-                    giorni: un supporto ottimale che, a partire dalla pianta del piede, è in grado di favorire il
-                    benessere di tutto il corpo durante l’intera prestazione sportiva. Libero di muoversi, saltare e
-                    cambiare direzione su qualsiasi superficie: un perfetto connubio tra comfort e performance che
-                    permetterà all’atleta di prendere pieno possesso del corpo.
-
-                    Ispirandoci alla Kinetic Chain, abbiamo progettato una calza in grado di facilitare gli atleti in
-                    tutti i movimenti dinamici e complessi, in termini di prevenzione degli infortuni e miglioramento
-                    delle prestazioni attraverso comfort, stabilità e precisione. Oggi, soprattutto tra i
-                    professionisti, siamo arrivati all’idea che il piede abbia davvero bisogno di essere all’interno di
-                    una calza grip che non solo non deve permettere di scivolare, ma deve essere comoda e perfettamente
-                    aderente al tipo di scarpa utilizzata. Libertà di movimento, traspirabilità, stabilità, rinforzo in
-                    punti particolari, comfort e il giusto grip sono le parole essenziali per fare la scelta giusta.
-
-                    Il massimo supporto alla caviglia è garantito dall’X-Cage, parte che costituisce l’intera zona della
-                    caviglia, grazie alla sua composizione multimateriale e alla presenza di fasce di rinforzo
-                    strategiche, diminuisce drasticamente il rischio di distorsioni e lo stress delle articolazioni. Un
-                    vero e proprio supporto per la caviglia dell’atleta che permette una significativa riduzione del
-                    carico muscolare e un’ottimizzazione del dispendio energetico durante tutta la durata dell’attività.
-
-                    Grazie al ridotto scivolamento tra il piede e la scarpa, il sistema nervoso centrale riduce la
-                    necessità di attivare le unità motorie. Inoltre, l’azione Grip: IN sul tallone previene le vesciche
-                    causate dallo scivolamento della calza sulla pelle umida. Il perfetto mix di fasce contenitive e
-                    elastici traspiranti, unito alla presenza della tecnologia Grip: IN, aiuterà l’atleta nella corretta
-                    postura e ridurrà lo stress fisico dovuto ai micro-movimenti. Il rinforzo totale del piede, dal
-                    tallone alla punta, è garantito dalla presenza di una leggera spugna a 360 gradi che, oltre a
-                    prevenire la formazione di vesciche, assicura il massimo comfort proteggendo le parti più sensibili
-                    del piede. La microtecnologia Cushion, estesa a tutta la pianta del piede, garantisce un importante
-                    assorbimento degli urti.
+                    {{ $product->main_desc }}
                 </p>
             </template>
 
             <template x-if="currentTab == '{{__('shop.products.characteristics')}}'">
-                <div class="flex flex-wrap gap-10">
-                    <div class="w-[calc(50%-40px)]">
-                        <h5 class=" text-[13px] font-semibold leading-[24px] text-color-323a46 uppercase">DISPOSITIVO
-                            MEDICO CLASSE 1</h5>
-                        <p class=" text-[13px] leading-[24px] text-color-323a46">Prevenzione degli infortuni dovuti a un
-                            ridotto stress sulle articolazioni e al risparmio muscolare.</p>
-                    </div>
-                    <div class="w-[calc(50%-40px)]">
-                        <h5 class=" text-[13px] font-semibold leading-[24px] text-color-323a46 uppercase">DISPOSITIVO
-                            MEDICO CLASSE 1</h5>
-                        <p class=" text-[13px] leading-[24px] text-color-323a46">Prevenzione degli infortuni dovuti a un
-                            ridotto stress sulle articolazioni e al risparmio muscolare.</p>
-                    </div>
-                </div>
+                <p class="text-[13px] leading-[24px] text-color-323a46">
+                    {{ $product->features_desc }}
+                </p>
             </template>
 
             <template x-if="currentTab == '{{__('shop.products.advantages')}}'">
-                <div class="flex gap-[31px]">
-                    <div class="w-[530px]">
-                        <ul class="list-disc pl-[18px]">
-                            <li class="text-[13px] font-medium leading-[24px] text-color-323a46 pb-[18px]">Massima
-                                stabilità
-                            </li>
-                            <li class="text-[13px] font-medium leading-[24px] text-color-323a46 pb-[18px]">Massima
-                                stabilità
-                            </li>
-                            <li class="text-[13px] font-medium leading-[24px] text-color-323a46 pb-[18px]">Massima
-                                stabilità
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="grow flex items-center justify-center overflow-hidden">
-                        <img src="{{ Vite::asset('resources/images/vantaggi-img.png')}}" alt="">
-                    </div>
-                </div>
+                <p class="text-[13px] leading-[24px] text-color-323a46">
+                    {{ $product->pros_desc }}
+                </p>
             </template>
 
             <template x-if="currentTab == '{{__('shop.products.technicality')}}'">
-                <div>
-                    <div class="mb-[30px]">
-                        <h5 class="text-[13px] font-semibold leading-[24px] text-color-323a46 uppercase">CATENA
-                            CINETICA</h5>
-                        <p class=" text-[13px] leading-[24px] text-color-323a46">Ispirandoci alla Kinetic Chain, una
-                            sequenza coordinata di attivazione, mobilizzazione e stabilizzazione dei segmenti corporei
-                            per produrre un’attività dinamica, abbiamo progettato una calza in grado di facilitare gli
-                            atleti in tutti i movimenti dinamici e complessi, in termini di prevenzione degli infortuni
-                            e miglioramento delle prestazioni attraverso comfort, stabilità e precisione. Il perfetto
-                            mix di fasce contenitive e elastici traspiranti, unito alla presenza della tecnologia Grip:
-                            IN, aiuterà l’atleta nella corretta postura e ridurrà lo stress fisico dovuto ai
-                            micro-movimenti.</p>
-                    </div>
-                    <div class="mb-[30px]">
-                        <h5 class="text-[13px] font-semibold leading-[24px] text-color-323a46 uppercase">CATENA
-                            CINETICA</h5>
-                        <p class=" text-[13px] leading-[24px] text-color-323a46">Ispirandoci alla Kinetic Chain, una
-                            sequenza coordinata di attivazione, mobilizzazione e stabilizzazione dei segmenti corporei
-                            per produrre un’attività dinamica, abbiamo progettato una calza in grado di facilitare gli
-                            atleti in tutti i movimenti dinamici e complessi, in termini di prevenzione degli infortuni
-                            e miglioramento delle prestazioni attraverso comfort, stabilità e precisione. Il perfetto
-                            mix di fasce contenitive e elastici traspiranti, unito alla presenza della tecnologia Grip:
-                            IN, aiuterà l’atleta nella corretta postura e ridurrà lo stress fisico dovuto ai
-                            micro-movimenti.</p>
-                    </div>
-                </div>
+                <p class="text-[13px] leading-[24px] text-color-323a46">
+                    {{ $product->technical_desc }}
+                </p>
             </template>
 
             <template x-if="currentTab == '{{__('shop.products.wash')}}'">
-                <div>
-                    <div
-                        class="h-[55px] px-9 flex items-center gap-3 border-b border-color-b6b9bb even:bg-color-edebe5">
-                        <img src="{{ Vite::asset('resources/images/icons/lav-mano.svg')}}" alt="">
-                        <img src="{{ Vite::asset('resources/images/icons/gradi.svg')}}" alt="">
-                        <p class=" text-[13px] leading-[24px] text-color-323a46">Lavarli in acqua fredda a mano o al
-                            massimo a 30° in lavatrice</p>
-                    </div>
-                    <div
-                        class="h-[55px] px-9 flex items-center gap-3 border-b border-color-b6b9bb even:bg-color-edebe5">
-                        <img src="{{ Vite::asset('resources/images/icons/no-cand.svg')}}" alt="">
-                        <p class=" text-[13px] leading-[24px] text-color-323a46">Non usare candeggina</p>
-                    </div>
-                    <div
-                        class="h-[55px] px-9 flex items-center gap-3 border-b border-color-b6b9bb even:bg-color-edebe5">
-                        <img src="{{ Vite::asset('resources/images/icons/asciug.svg')}}" alt="">
-                        <p class=" text-[13px] leading-[24px] text-color-323a46">Asciugare solo all’aria aperta</p>
-                    </div>
-                    <div
-                        class="h-[55px] px-9 flex items-center gap-3 border-b border-color-b6b9bb even:bg-color-edebe5">
-                        <img src="{{ Vite::asset('resources/images/icons/no-hot.svg')}}" alt="">
-                        <p class=" text-[13px] leading-[24px] text-color-323a46">Non esporre al calore</p>
-                    </div>
-                </div>
+                <p class="text-[13px] leading-[24px] text-color-323a46">
+                    {{ $product->washing_desc }}
+                </p>
             </template>
         </div>
     </div>
 
     {{-- carousel --}}
-    <div class="col-span-12 pb-[100px] mt-5">
-        <div class="mx-[89px] border-t-2 border-color-18181a shadow-shadow-4 mb-[50px]"></div>
+{{--    <div class="col-span-12 pb-[100px] mt-5">--}}
+{{--        <div class="mx-[89px] border-t-2 border-color-18181a shadow-shadow-4 mb-[50px]"></div>--}}
 
-        <div class="relative">
-            <h2 class="px-[39px] mb-[27px] text-[33px] font-semibold leading-[40px] text-color-18181a">{{__('shop.most_purchased_title')}}</h2>
+{{--        <div class="relative">--}}
+{{--            <h2 class="px-[39px] mb-[27px] text-[33px] font-semibold leading-[40px] text-color-18181a">{{__('shop.most_purchased_title')}}</h2>--}}
 
-            <div class="pl-[39px] group-custom-button">
-                <button
-                    class="customPrevBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] z-10 hover:border">
-                    <img class="rotate-180" src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}"
-                         alt="">
-                </button>
+{{--            <div class="pl-[39px] group-custom-button">--}}
+{{--                <button--}}
+{{--                    class="customPrevBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] z-10 hover:border">--}}
+{{--                    <img class="rotate-180" src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}"--}}
+{{--                         alt="">--}}
+{{--                </button>--}}
 
-                {{--                <div wire:ignore class="owl-carousel carousel_most_purchased">--}}
-                {{--                    @foreach ($mostPurchased as $key => $prod )--}}
-                {{--                        <x-card-purchased--}}
-                {{--                            :key="$key"--}}
-                {{--                            :image="$prod['image']"--}}
-                {{--                            :name="$prod['name']"--}}
-                {{--                            :description="$prod['description']"--}}
-                {{--                            :availableColor="$prod['availableColor']"--}}
-                {{--                            :price="$prod['price']"--}}
-                {{--                        />--}}
-                {{--                    @endforeach--}}
-                {{--                </div>--}}
+{{--                <div wire:ignore class="owl-carousel carousel_most_purchased">--}}
+{{--                    @foreach ($mostPurchased as $key => $prod )--}}
+{{--                        <x-card-purchased--}}
+{{--                            :key="$key"--}}
+{{--                            :image="$prod['image']"--}}
+{{--                            :name="$prod['name']"--}}
+{{--                            :description="$prod['description']"--}}
+{{--                            :availableColor="$prod['availableColor']"--}}
+{{--                            :price="$prod['price']"--}}
+{{--                        />--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
 
-                <button
-                    class="customNextBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] right-[39px] z-10 hover:border">
-                    <img src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}" alt="">
-                </button>
-            </div>
+{{--                <button--}}
+{{--                    class="customNextBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] right-[39px] z-10 hover:border">--}}
+{{--                    <img src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}" alt="">--}}
+{{--                </button>--}}
+{{--            </div>--}}
 
-        </div>
-    </div>
+{{--        </div>--}}
+{{--    </div>--}}
 
     {{-- modalInfoCart --}}
     <livewire:modals.cart/>

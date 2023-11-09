@@ -18,6 +18,6 @@
     </div>
     <div
         class="h-full border-l border-white group-hover:border-color-18181a px-4 flex items-center justify-center group-hover:bg-white rounded-r-md">
-        <x-icons :name="$icon" class="w-5 h-5 text-white group-hover:text-color-18181a"></x-icons>
+        <x-icons :name="$icon" class="w-4 h-4 text-white group-hover:text-color-18181a"></x-icons>
     </div>
 </button>
