@@ -223,49 +223,19 @@ class Show extends Component
     public function setLength($id)
     {
         $this->filterVariantsByTerm('length', $id);
-        $terms = collect();
-
-        foreach ($this->variants as $variant) {
-            $terms = $terms->merge($variant->terms);
-        }
-
-        $terms = $terms->groupBy('attribute_id');
-
-        $this->lengths = $this->processTerms($terms, 1);
-        $this->colors = $this->processTerms($terms, 2);
-        $this->sizes = $this->processTerms($terms, 3);
+        $this->recalculateTerms();
     }
 
     public function setColor($id)
     {
         $this->filterVariantsByTerm('color', $id);
-        $terms = collect();
-
-        foreach ($this->variants as $variant) {
-            $terms = $terms->merge($variant->terms);
-        }
-
-        $terms = $terms->groupBy('attribute_id');
-
-        $this->lengths = $this->processTerms($terms, 1);
-        $this->colors = $this->processTerms($terms, 2);
-        $this->sizes = $this->processTerms($terms, 3);
+        $this->recalculateTerms();
     }
 
     public function setSize($id)
     {
         $this->filterVariantsByTerm('size', $id);
-        $terms = collect();
-
-        foreach ($this->variants as $variant) {
-            $terms = $terms->merge($variant->terms);
-        }
-
-        $terms = $terms->groupBy('attribute_id');
-
-        $this->lengths = $this->processTerms($terms, 1);
-        $this->colors = $this->processTerms($terms, 2);
-        $this->sizes = $this->processTerms($terms, 3);
+        $this->recalculateTerms();
     }
 
     public function resetAll() {
@@ -274,6 +244,13 @@ class Show extends Component
         $this->filterVariantsByTerm('color', $this->selectedColor);
         $this->filterVariantsByTerm('size', $this->selectedSize);
 
+        $this->recalculateTerms();
+
+        $this->dispatch('reset-colors');
+    }
+
+    private function recalculateTerms(): void
+    {
         $terms = collect();
 
         foreach ($this->variants as $variant) {
@@ -285,8 +262,6 @@ class Show extends Component
         $this->lengths = $this->processTerms($terms, 1);
         $this->colors = $this->processTerms($terms, 2);
         $this->sizes = $this->processTerms($terms, 3);
-
-        $this->dispatch('reset-colors');
     }
 
     #[On('selectMoney')]
