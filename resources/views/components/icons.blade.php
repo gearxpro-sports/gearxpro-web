@@ -383,41 +383,73 @@
         </svg>
         @break
     @case('filter_products')
-        <svg id="icona_filtri_B" data-name="icona filtri_B" xmlns="http://www.w3.org/2000/svg" width="14" height="13.997" viewBox="0 0 14 13.997">
-            <path id="Tracciato_232" data-name="Tracciato 232" d="M5043.73,11431.376v-6.513h-1.1a.517.517,0,0,1-.515-.518v-3.241a.518.518,0,0,1,.515-.518h1.1v-2.175a.517.517,0,1,1,1.033,0v2.175h1.106a.518.518,0,0,1,.515.518v3.241a.517.517,0,0,1-.515.518h-1.106v6.513a.517.517,0,1,1-1.033,0Zm-.585-7.548h2.207v-2.207h-2.207Zm-4.276,7.548v-1.1h-1.1a.513.513,0,0,1-.515-.518v-3.241a.513.513,0,0,1,.515-.515h1.1v-7.587a.518.518,0,0,1,1.036,0V11426h1.1a.516.516,0,0,1,.518.515v3.241a.516.516,0,0,1-.518.518h-1.1v1.1a.518.518,0,1,1-1.036,0Zm-.585-2.136h2.207v-2.208h-2.207Zm-4.276,2.136v-5.965h-1.1a.515.515,0,0,1-.515-.517v-3.241a.515.515,0,0,1,.515-.519h1.1v-2.723a.518.518,0,0,1,1.036,0v2.723h1.1a.518.518,0,0,1,.516.519v3.241a.517.517,0,0,1-.516.517h-1.1v5.965a.518.518,0,1,1-1.036,0Zm-.585-7h2.207v-2.206h-2.207Z" transform="translate(-11417.895 5046.385) rotate(-90)" fill="#18181a"/>
+        <svg id="icona_filtri_B" data-name="icona filtri_B" xmlns="http://www.w3.org/2000/svg" width="14"
+             height="13.997" viewBox="0 0 14 13.997">
+            <path id="Tracciato_232" data-name="Tracciato 232"
+                  d="M5043.73,11431.376v-6.513h-1.1a.517.517,0,0,1-.515-.518v-3.241a.518.518,0,0,1,.515-.518h1.1v-2.175a.517.517,0,1,1,1.033,0v2.175h1.106a.518.518,0,0,1,.515.518v3.241a.517.517,0,0,1-.515.518h-1.106v6.513a.517.517,0,1,1-1.033,0Zm-.585-7.548h2.207v-2.207h-2.207Zm-4.276,7.548v-1.1h-1.1a.513.513,0,0,1-.515-.518v-3.241a.513.513,0,0,1,.515-.515h1.1v-7.587a.518.518,0,0,1,1.036,0V11426h1.1a.516.516,0,0,1,.518.515v3.241a.516.516,0,0,1-.518.518h-1.1v1.1a.518.518,0,1,1-1.036,0Zm-.585-2.136h2.207v-2.208h-2.207Zm-4.276,2.136v-5.965h-1.1a.515.515,0,0,1-.515-.517v-3.241a.515.515,0,0,1,.515-.519h1.1v-2.723a.518.518,0,0,1,1.036,0v2.723h1.1a.518.518,0,0,1,.516.519v3.241a.517.517,0,0,1-.516.517h-1.1v5.965a.518.518,0,1,1-1.036,0Zm-.585-7h2.207v-2.206h-2.207Z"
+                  transform="translate(-11417.895 5046.385) rotate(-90)" fill="#18181a"/>
         </svg>
         @break
     @case('chevron_down')
         <svg xmlns="http://www.w3.org/2000/svg" width="14.582" height="8.201" viewBox="0 0 14.582 8.201">
-            <path id="Tracciato_421" data-name="Tracciato 421" d="M0,0,6.391,6.39,0,12.461" transform="translate(13.522 1.061) rotate(90)" fill="none" stroke="#18181a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+            <path id="Tracciato_421" data-name="Tracciato 421" d="M0,0,6.391,6.39,0,12.461"
+                  transform="translate(13.522 1.061) rotate(90)" fill="none" stroke="#18181a" stroke-linecap="round"
+                  stroke-linejoin="round" stroke-width="1.5"/>
         </svg>
         @break
     @case('hamburger')
         <svg xmlns="http://www.w3.org/2000/svg" width="18.394" height="13.888" viewBox="0 0 18.394 13.888">
             <g id="Raggruppa_144" data-name="Raggruppa 144" transform="translate(-232.658 -105.75)">
-            <line id="Linea_47" data-name="Linea 47" x1="16.894" transform="translate(233.408 106.5)" fill="none" stroke="#18181a" stroke-linecap="round" stroke-width="1.5"/>
-            <line id="Linea_48" data-name="Linea 48" x1="16.894" transform="translate(233.408 112.694)" fill="none" stroke="#18181a" stroke-linecap="round" stroke-width="1.5"/>
-            <line id="Linea_49" data-name="Linea 49" x1="16.894" transform="translate(233.408 118.888)" fill="none" stroke="#18181a" stroke-linecap="round" stroke-width="1.5"/>
+                <line id="Linea_47" data-name="Linea 47" x1="16.894" transform="translate(233.408 106.5)" fill="none"
+                      stroke="#18181a" stroke-linecap="round" stroke-width="1.5"/>
+                <line id="Linea_48" data-name="Linea 48" x1="16.894" transform="translate(233.408 112.694)" fill="none"
+                      stroke="#18181a" stroke-linecap="round" stroke-width="1.5"/>
+                <line id="Linea_49" data-name="Linea 49" x1="16.894" transform="translate(233.408 118.888)" fill="none"
+                      stroke="#18181a" stroke-linecap="round" stroke-width="1.5"/>
             </g>
         </svg>
         @break
     @case('x-close')
         <svg xmlns="http://www.w3.org/2000/svg" width="13.477" height="13.472" viewBox="0 0 13.477 13.472">
-            <path id="Tracciato_420" data-name="Tracciato 420" d="M-19990.049,6223.686l-5.215-5.21-5.207,5.21a.9.9,0,0,1-.635.264.9.9,0,0,1-.633-.264.887.887,0,0,1,0-1.259l5.213-5.213-5.213-5.215a.888.888,0,0,1,0-1.26.9.9,0,0,1,1.268,0l5.207,5.213,5.217-5.213a.9.9,0,0,1,1.264,0,.9.9,0,0,1,0,1.26l-5.217,5.214,5.217,5.215a.894.894,0,0,1,0,1.259.9.9,0,0,1-.633.264A.9.9,0,0,1-19990.049,6223.686Z" transform="translate(20002 -6210.478)" fill="#18181a"/>
+            <path id="Tracciato_420" data-name="Tracciato 420"
+                  d="M-19990.049,6223.686l-5.215-5.21-5.207,5.21a.9.9,0,0,1-.635.264.9.9,0,0,1-.633-.264.887.887,0,0,1,0-1.259l5.213-5.213-5.213-5.215a.888.888,0,0,1,0-1.26.9.9,0,0,1,1.268,0l5.207,5.213,5.217-5.213a.9.9,0,0,1,1.264,0,.9.9,0,0,1,0,1.26l-5.217,5.214,5.217,5.215a.894.894,0,0,1,0,1.259.9.9,0,0,1-.633.264A.9.9,0,0,1-19990.049,6223.686Z"
+                  transform="translate(20002 -6210.478)" fill="#18181a"/>
         </svg>
         @break
     @case('ellisse')
         <svg xmlns="http://www.w3.org/2000/svg" width="5" height="5" viewBox="0 0 5 5">
             <g id="Ellisse_17" data-name="Ellisse 17" fill="none" stroke="#18181a" stroke-width="1">
-            <circle cx="2.5" cy="2.5" r="2.5" stroke="none"/>
-            <circle cx="2.5" cy="2.5" r="2" fill="none"/>
+                <circle cx="2.5" cy="2.5" r="2.5" stroke="none"/>
+                <circle cx="2.5" cy="2.5" r="2" fill="none"/>
             </g>
         </svg>
         @break
     @case('edit_data')
         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10">
             <g id="edit" transform="translate(-6.401 -5.4)">
-            <path id="Tracciato_350" data-name="Tracciato 350" d="M4262.563-3854.643a.563.563,0,0,1-.563-.564.563.563,0,0,1,.563-.563h8.873a.564.564,0,0,1,.564.563.564.564,0,0,1-.564.564Zm.986-1.972a.563.563,0,0,1-.563-.563v-1.795a.558.558,0,0,1,.166-.4l5.1-5.107a.562.562,0,0,1,.4-.165.566.566,0,0,1,.4.165l1.8,1.8a.565.565,0,0,1,0,.8l-5.1,5.1a.56.56,0,0,1-.4.166Zm.564-2.124v1h1.006l4.534-4.536-1-1Z" transform="translate(-4255.6 3870.043)" fill="#6c757d"/>
+                <path id="Tracciato_350" data-name="Tracciato 350"
+                      d="M4262.563-3854.643a.563.563,0,0,1-.563-.564.563.563,0,0,1,.563-.563h8.873a.564.564,0,0,1,.564.563.564.564,0,0,1-.564.564Zm.986-1.972a.563.563,0,0,1-.563-.563v-1.795a.558.558,0,0,1,.166-.4l5.1-5.107a.562.562,0,0,1,.4-.165.566.566,0,0,1,.4.165l1.8,1.8a.565.565,0,0,1,0,.8l-5.1,5.1a.56.56,0,0,1-.4.166Zm.564-2.124v1h1.006l4.534-4.536-1-1Z"
+                      transform="translate(-4255.6 3870.043)" fill="#6c757d"/>
+            </g>
+        </svg>
+        @break
+
+    @case('bag')
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="12.32" height="14"
+             viewBox="0 0 12.32 14" {{ $attributes->merge(['class']) }}>
+            <path
+                d="M19.261,8.751h-2.38v-.28a3.22,3.22,0,0,0-6.44,0v.28H8.061a.559.559,0,0,0-.56.56v9.38a.559.559,0,0,0,.56.56h11.2a.559.559,0,0,0,.56-.56V9.311A.559.559,0,0,0,19.261,8.751Zm-7.56-.28a1.96,1.96,0,0,1,3.92,0v.28H11.7Zm6.86,9.52h-9.8v-7.98h1.68v1.54a.14.14,0,0,0,.14.14h.98a.14.14,0,0,0,.14-.14v-1.54h3.92v1.54a.14.14,0,0,0,.14.14h.98a.14.14,0,0,0,.14-.14v-1.54h1.68Z"
+                transform="translate(-7.501 -5.251)"/>
+        </svg>
+        @break
+
+    @case('arrow-right-xl')
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="15.216" height="13.5"
+             viewBox="0 0 15.216 13.5" {{ $attributes->merge(['class']) }}>
+            <g transform="translate(22.417 23.7) rotate(180)">
+                <path
+                    d="M-5343.512,10962.535l-6.012-5.933a.746.746,0,0,1-.3-.565c0-.013,0-.024,0-.037s0-.024,0-.036a.75.75,0,0,1,.3-.567l6.012-5.931a.751.751,0,0,1,1.053,0,.731.731,0,0,1,0,1.04l-4.813,4.75h11.927a.738.738,0,0,1,.735.744.739.739,0,0,1-.735.743h-11.93l4.816,4.752a.731.731,0,0,1,0,1.04.747.747,0,0,1-.527.215A.743.743,0,0,1-5343.512,10962.535Z"
+                    transform="translate(5357.027 -10939.05)"/>
             </g>
         </svg>
         @break

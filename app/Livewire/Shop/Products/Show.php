@@ -124,7 +124,7 @@ class Show extends Component
     {
         ray()->clearAll();
         $this->product->load('variants');
-        $this->selectedVariant = $this->product->variants->firstWhere('position', 1);
+        //        $this->selectedVariant = $this->product->variants->firstWhere('position', 1);
         //        $this->selectedLength = $this->selectedVariant->length->id;
         //        $this->selectedColor = $this->selectedVariant->color->id;
         //        $this->selectedSize = $this->selectedVariant->size->id;
@@ -238,7 +238,8 @@ class Show extends Component
         $this->recalculateTerms();
     }
 
-    public function resetAll() {
+    public function resetAll()
+    {
         $this->reset(['selectedColor', 'selectedSize', 'selectedLength']);
         $this->filterVariantsByTerm('length', $this->selectedLength);
         $this->filterVariantsByTerm('color', $this->selectedColor);
