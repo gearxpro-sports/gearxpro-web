@@ -67,7 +67,7 @@
                                             wire:click="setColor({{ $color['id'] }})"
                                             @class([
                                                 'flex-shrink-0 cursor-pointer h-12 w-12 relative flex items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent',
-                                                $selectedColor == $color['id'] ? 'ring ring-offset-2' : 'ring-2'])
+                                                $selectedColor == $color['id'] ? 'ring ring-offset-2 ring-offset-color-f2f0eb' : 'ring-2'])
                                             style="background-color: {{ $color['color'] }}; --tw-ring-color: {{$color['color']}}"
                                         >
                                         </div>
@@ -77,7 +77,7 @@
                                             wire:click="resetAll('color', {{ $id }})"
                                             @class([
                                                 'flex-shrink-0 opacity-10 pointer-events-none h-12 w-12 relative flex items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent',
-                                                $selectedColor == $color['id'] ? 'ring ring-offset-2' : 'ring-2'])
+                                                $selectedColor == $color['id'] ? 'ring ring-offset-2' : 'border border-gray-800'])
                                             style="background-color: {{ $color['color'] }}; --tw-ring-color: {{$color['color']}}"
                                         >
                                         </div>

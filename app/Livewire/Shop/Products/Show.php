@@ -254,7 +254,7 @@ class Show extends Component
 
     public function increment()
     {
-        if($this->quantity < $this->selectedVariant->quantity) {
+        if(isset($this->selectedVariant) && $this->quantity < $this->selectedVariant->quantity) {
             $this->quantity++;
         }
     }
