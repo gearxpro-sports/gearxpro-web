@@ -99,7 +99,7 @@
                     <h3 class="text-[15px] font-semibold leading-[19px] text-color-18181a">{{__('shop.payment.address')}}</h3>
                 </div>
 
-                <h3 class="text-[13px] font-semibold leading-[24px] text-color-323a46 mt-[25px] mb-[5px]">Giancarlo Ferraro</h3>
+                <h3 class="text-[13px] font-semibold leading-[24px] text-color-323a46 mt-[25px] mb-[5px]">{{$firstname}} {{$lastname}}</h3>
 
                 <div class="text-[13px] font-medium flex gap-[15px]">
                     <div class="flex flex-col gap-[5px] min-w-[60px] text-color-6c757d">
