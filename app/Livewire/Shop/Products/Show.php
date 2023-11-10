@@ -284,8 +284,7 @@ class Show extends Component
 
         //        dd($this->cart);
 
-        //        $this->dispatch('modalInfoCart', $this->currency[$this->selectedMoney]['simbol'], $this->cart)->to(ModalCart::class);
-        $this->dispatch('modalInfoCart', $this->selectedVariant->id, $this->quantity)->to(ModalCart::class);
+        $this->dispatch('product-added-to-cart', $this->selectedVariant->id, $this->quantity)->to(ModalCart::class);
         $this->dispatch('addProducts', $this->quantity)->to(ShopNavigation::class);
     }
 
