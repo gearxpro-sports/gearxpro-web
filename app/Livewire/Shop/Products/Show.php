@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Shop\Products;
 
-use App\Livewire\Modals\Cart as ModalCart;
+use App\Livewire\Modals\ProductAddedToCart;
 use App\Livewire\Shop\Navigation as ShopNavigation;
 use App\Models\Product;
 use App\Models\ProductVariant;
@@ -265,27 +265,10 @@ class Show extends Component
 
     public function addToCart()
     {
-//        $this->cart = [
-//            'variant_id' => $this->selectedVariant->id,
-//            'quantity' => $this->quantity,
-//            'price' => ($this->product->price * $this->quantity),
-//        ];
-        //        $this->cart[$this->selectedVariant->product->id] = [
-        //            'variant_id' => $this->selectedVariant->id,
-        //            'quantity' => $this->quantity,
-        //            'price' => ($this->product->price * $this->quantity),
-        //            'name' => $this->product->name,
-        //            'format' => $this->format,
-        //            'color' => $this->selectedColor,
-        //            'size' => $this->selectedSize,
-        //            'quantity' => $this->quantity,
-        //            'price' => ($this->product->price * $this->quantity)
-        //        ];
-
-        //        dd($this->cart);
-
-        $this->dispatch('product-added-to-cart', $this->selectedVariant->id, $this->quantity)->to(ModalCart::class);
+        $this->dispatch('product-added-to-cart', $this->selectedVariant->id, $this->quantity)->to(ProductAddedToCart::class);
         $this->dispatch('addProducts', $this->quantity)->to(ShopNavigation::class);
+
+        $this->resetAll();
     }
 
     // TODO: Pay with Link

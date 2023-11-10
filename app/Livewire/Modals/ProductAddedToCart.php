@@ -6,7 +6,7 @@ use App\Models\ProductVariant;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
-class Cart extends Component
+class ProductAddedToCart extends Component
 {
     public ProductVariant $productVariant;
     public $quantity = 0;
@@ -25,6 +25,6 @@ class Cart extends Component
 
     public function render()
     {
-        return view('livewire.modals.cart');
+        return view('livewire.modals.product-added-to-cart');
     }
 }

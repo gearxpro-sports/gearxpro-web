@@ -258,8 +258,7 @@
 {{--        </div>--}}
 {{--    </div>--}}
 
-    {{-- modalInfoCart --}}
-    <livewire:modals.cart/>
+    <livewire:modals.product-added-to-cart/>
 </div>
 
 @push('scripts')
