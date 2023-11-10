@@ -22,8 +22,10 @@ class Show extends Component
     public $selectedLength = null;
     public $selectedColor = null;
     public $selectedSize = null;
+
     public $quantity = 1;
-    public $selectedMoney = 0;
+//    public $selectedMoney = 0;
+
     public $cart;
 
     public $terms;
@@ -219,7 +221,7 @@ class Show extends Component
 
     public function resetAll()
     {
-        $this->reset(['selectedColor', 'selectedSize', 'selectedLength', 'selectedVariant']);
+        $this->reset(['selectedColor', 'selectedSize', 'selectedLength', 'selectedVariant', 'quantity']);
         $this->filterVariantsByTerm('length', $this->selectedLength);
         $this->filterVariantsByTerm('color', $this->selectedColor);
         $this->filterVariantsByTerm('size', $this->selectedSize);
@@ -250,12 +252,14 @@ class Show extends Component
     //        $this->selectedMoney = $money;
     //    }
 
-    public function addProduct()
+    public function increment()
     {
-        $this->quantity++;
+        if($this->quantity < $this->selectedVariant->quantity) {
+            $this->quantity++;
+        }
     }
 
-    public function removeProduct()
+    public function decrement()
     {
         if ($this->quantity > 1) {
             $this->quantity--;
@@ -264,8 +268,22 @@ class Show extends Component
 
     public function addToCart()
     {
+        $cart = auth()->user()->cart ?? auth()->user()->cart()->create();
+
+        $variant_in_cart = $cart->items()->where('product_variant_id', $this->selectedVariant->id)->first();
+
+        if($variant_in_cart) {
+            $variant_in_cart->increment('quantity', $this->quantity);
+        } else {
+            $cart->items()->create([
+                'product_variant_id' => $this->selectedVariant->id,
+                'price' => $this->selectedVariant->product->price,
+                'quantity' => $this->quantity
+            ]);
+        }
+
         $this->dispatch('product-added-to-cart', $this->selectedVariant->id, $this->quantity)->to(ProductAddedToCart::class);
-        $this->dispatch('addProducts', $this->quantity)->to(ShopNavigation::class);
+        $this->dispatch('product-added-to-cart')->to(ShopNavigation::class);
 
         $this->resetAll();
     }

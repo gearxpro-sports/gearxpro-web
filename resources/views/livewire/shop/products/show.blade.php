@@ -132,20 +132,19 @@
                 @endif
 
                 {{-- quantita --}}
-                <div class="mt-10">
+                <div class="space-y-5">
                     <p class="text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.amount')}}</p>
-
                     <div
-                        class="w-[185px] h-[48px] rounded-md flex items-center border border-color-b6b9bb mt-5">
-                        <div wire:click="removeProduct"
-                             class="w-[60px] h-full flex items-center justify-center bg-transparent border-r border-color-b6b9bb">
-                            <x-heroicon-o-minus class="h-5 w-5"></x-heroicon-o-minus>
+                        class="w-[185px] h-[48px] rounded-md flex items-center border border-color-b6b9bb">
+                        <div wire:click="decrement"
+                             class="{{ $quantity === 1 ? 'cursor-not-allowed text-gray-300' : 'cursor-pointer' }} w-[60px] h-full flex items-center justify-center bg-transparent border-r border-color-b6b9bb">
+                            <x-icons name="minus" class="h-3 w-3"></x-icons>
                         </div>
                         <div
-                            class="w-[65px] h-full flex items-center justify-center text-[13px] font-medium leading-[16px] text-color-18181a">{{ $quantity }}</div>
-                        <div wire:click="addProduct"
-                             class="w-[60px] h-full flex items-center justify-center bg-transparent border-l border-color-b6b9bb">
-                            <x-heroicon-o-plus class="h-5 w-5"></x-heroicon-o-plus>
+                            class="w-[65px] h-full flex items-center justify-center text-[13px] font-medium leading-[16px] text-color-18181a font-mono select-none">{{ $quantity }}</div>
+                        <div wire:click="increment"
+                             class="{{ $quantity >= $selectedVariant?->quantity ? 'cursor-not-allowed text-gray-300' : 'cursor-pointer' }} w-[60px] h-full flex items-center justify-center bg-transparent border-l border-color-b6b9bb">
+                            <x-icons name="plus" class="h-3 w-3"></x-icons>
                         </div>
                     </div>
                 </div>
