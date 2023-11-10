@@ -9,14 +9,16 @@ use Livewire\Attributes\On;
 class Cart extends Component
 {
     public ProductVariant $productVariant;
-    public $money;
-    public $cart = [];
+    public $quantity = 0;
+//    public $cart = [];
     public $showModalCart = false;
 
     #[On('modalInfoCart')]
-    public function modalInfoCart($money, $cart) {
-        $this->money = $money;
-        $this->cart = $cart;
+    public function modalInfoCart($variant_id, $quantity) {
+        $this->productVariant = ProductVariant::find($variant_id);
+        $this->quantity = $quantity;
+//        $this->money = $money;
+//        $this->cart = $cart;
         $this->showModalCart = true;
     }
 

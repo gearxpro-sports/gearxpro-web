@@ -220,6 +220,7 @@ class Show extends Component
     public function resetAll()
     {
         $this->reset(['selectedColor', 'selectedSize', 'selectedLength']);
+        $this->reset('selectedVariant');
         $this->filterVariantsByTerm('length', $this->selectedLength);
         $this->filterVariantsByTerm('color', $this->selectedColor);
         $this->filterVariantsByTerm('size', $this->selectedSize);
@@ -264,11 +265,11 @@ class Show extends Component
 
     public function addToCart()
     {
-        $this->cart = [
-            'variant_id' => $this->selectedVariant->id,
-            'quantity' => $this->quantity,
-            'price' => ($this->product->price * $this->quantity),
-        ];
+//        $this->cart = [
+//            'variant_id' => $this->selectedVariant->id,
+//            'quantity' => $this->quantity,
+//            'price' => ($this->product->price * $this->quantity),
+//        ];
         //        $this->cart[$this->selectedVariant->product->id] = [
         //            'variant_id' => $this->selectedVariant->id,
         //            'quantity' => $this->quantity,
@@ -284,7 +285,7 @@ class Show extends Component
         //        dd($this->cart);
 
         //        $this->dispatch('modalInfoCart', $this->currency[$this->selectedMoney]['simbol'], $this->cart)->to(ModalCart::class);
-        $this->dispatch('modalInfoCart', '€', $this->cart)->to(ModalCart::class);
+        $this->dispatch('modalInfoCart', $this->selectedVariant->id, $this->quantity)->to(ModalCart::class);
         $this->dispatch('addProducts', $this->quantity)->to(ShopNavigation::class);
     }
 

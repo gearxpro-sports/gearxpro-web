@@ -1,46 +1,43 @@
 <div>
     @if ($showModalCart)
-        <div wire:click="closeModal" class="z-50 fixed top-0 left-0 h-[100vh] w-full bg-black/40"></div>
+        <div wire:click="closeModal" class="z-50 fixed inset-0 bg-black/40"></div>
 
-        <div class="w-[438px] absolute top-[100px] right-[39px] bg-white z-[100] px-[45px] py-[30px] rounded-md">
-            <img wire:click="closeModal" src="{{ Vite::asset('resources/images/icons/x-close.svg')}}" class="absolute top-[30px] right-[30px] cursor-pointer" alt="">
+        <div class="w-full max-w-md fixed top-10 right-10 bg-white z-[60] p-10 rounded-md">
+            <x-icons name="x-mark" wire:click="closeModal"
+                     class="w-3 h-3 text-color-6c757d absolute top-7 right-7 cursor-pointer"></x-icons>
 
-            <div class="flex items-center gap-[10px] mb-5">
-                <div class="w-[28px] h-[28px] rounded-full bg-color-8be599 shadow flex items-center justify-center">
-                    <img class="mt-1" src="{{ Vite::asset('resources/images/icons/check-product.svg')}}" alt="">
+            <div class="flex items-center space-x-2.5 mb-5">
+                <div class="w-7 h-7 rounded-full bg-color-8be599 flex items-center justify-center">
+                    <x-icons name="check" class="w-3 h-3 text-white"></x-icons>
                 </div>
-                <h3 class="text-[15px] font-medium leading-[19px] text-color-18181a">{{__('shop.modal_cart.add_product')}}</h3>
+                <h3 class="text-sm font-medium text-color-18181a">{{__('shop.modal_cart.add_product')}}</h3>
             </div>
 
-            @foreach ($cart as $product)
-                <div class="flex gap-5 border border-color-f2f0eb p-1">
-                    <div class="w-[116px] h-[120px] overflow-hidden bg-color-edebe5">
-                        <img src="" alt="">
-                    </div>
-                    <div class="my-auto">
-                        <h4 class="text-[13px] font-semibold leading-[24px] text-color-18181a">Nome prodotto</h4>
-                        <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">{{__('shop.products.color')}}: colore</p>
-                        <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">{{__('shop.products.size')}}: taglia</p>
-                        <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">{{__('shop.products.amount')}}: quantità</p>
-                        <p class="text-[13px] font-medium leading-[24px] text-color-18181a">@money(0)</p>
-                    </div>
+            <div class="flex space-x-5 border border-color-f2f0eb p-1">
+                <div class="w-28 h-28 overflow-hidden bg-color-edebe5"></div>
+                <div class="flex flex-col">
+                    <h4 class="text-sm font-semibold text-color-18181a">{{ $productVariant->product->name }}</h4>
+                    <span class="text-xs font-medium text-color-6c757d">{{__('shop.products.height_leg')}}: {{ $productVariant->length->value }}</span>
+                    <span class="text-xs font-medium text-color-6c757d">{{__('shop.products.color')}}: {{ $productVariant->color->value }}</span>
+                    <span class="text-xs font-medium text-color-6c757d">{{__('shop.products.size')}}: {{ $productVariant->size->value }}</span>
+                    <span class="text-xs font-medium text-color-6c757d">{{__('shop.products.amount')}}: {{ $quantity }}</span>
+                    <span class="text-sm font-medium text-color-18181a">@money($productVariant->product->price)</span>
                 </div>
-            @endforeach
+            </div>
 
-            <div class="flex items-center justify-between mt-[43px]">
-                <a href="{{ route('shop.cart', ['country_code' => session('country_code')]) }}" class="px-[25px] h-[45px] flex items-center justify-center rounded-md text-white text-[13px] font-semibold leading-[32px] bg-color-ff7f6e hover:bg-white hover:text-color-18181a border border-transparent hover:border-color-18181a">
+            <div class="flex items-center mt-10 space-x-5">
+                <x-primary-button href="{{ route('shop.cart', ['country_code' => session('country_code')]) }}" class="w-full bg-color-ff7f6e hover:bg-white hover:text-color-18181a border border-transparent hover:border-color-18181a">
                     {{__('shop.modal_cart.button_show')}}
-                </a>
+                </x-primary-button>
                 @auth
-                    <a href="{{ route('shop.payment', ['country_code' => session('country_code')]) }}" class="px-[25px] h-[45px] flex items-center justify-center rounded-md text-white text-[13px] font-semibold leading-[32px] bg-color-18181a hover:bg-black">
+                    <x-primary-button href="{{ route('shop.payment', ['country_code' => session('country_code')]) }}" class="w-full">
                         {{__('shop.modal_cart.button_pay')}}
-                    </a>
+                    </x-primary-button>
                 @else
-                    <a href="{{ route('shop.checkout', ['country_code' => session('country_code')]) }}" class="px-[25px] h-[45px] flex items-center justify-center rounded-md text-white text-[13px] font-semibold leading-[32px] bg-color-18181a hover:bg-black">
+                    <x-primary-button href="{{ route('shop.checkout', ['country_code' => session('country_code')]) }}" class="w-full">
                         {{__('shop.modal_cart.button_pay')}}
-                    </a>
+                    </x-primary-button>
                 @endauth
-
             </div>
         </div>
     @endif
