@@ -6,7 +6,7 @@
             <p class="text-[14px] text-white mt-[20px]">{{ __('shop.jumbotron.description') }}</p>
         </div>
 
-        <img class="col-span-4 absolute right-[-50px] bottom-20 scale-110" src="{{Vite::asset('/resources/images/prodotto_slider.png')}}" alt="">
+        <img class="col-span-4 absolute right-[-50px] bottom-20 scale-110" src="{{Vite::asset('resources/images/prodotto_slider.png')}}" alt="">
 
         <div class="col-start-1 col-span-4 pt-20 z-10">
             <x-custom-button :text="__('shop.jumbotron.button')" :icon="'double_arrow_right'" :link="'/shop'" width="w-full" />
