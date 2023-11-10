@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Shop\Cart;
 
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
 #[Layout('layouts.guest')]
 class Index extends Component
 {
-    public $cart = [''];
     public $promoCode;
     public $productsRecommended = [
         0 => [
@@ -62,16 +62,16 @@ class Index extends Component
         ],
     ];
 
-    // public function mount($cart) {
-    //     $this->cart = $cart;
-    // }
-
     public function applyCode() {
-
+        // TODO: Coupon Code
     }
 
+    #[On('item-updated')]
+    #[On('item-removed')]
     public function render()
     {
-        return view('livewire.shop.cart.index');
+        return view('livewire.shop.cart.index', [
+            'cart' => auth()->user()->cart
+        ]);
     }
 }
