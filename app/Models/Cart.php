@@ -11,6 +11,15 @@ class Cart extends Model
 
     public $timestamps = false;
 
+    public function getSubtotalAttribute() {
+        $subtotal = 0;
+        foreach ($this->items as $item) {
+            $subtotal += $item->price * $item->quantity;
+        }
+
+        return $subtotal;
+    }
+
     public function user() {
         return $this->belongsTo(User::class);
     }
