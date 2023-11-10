@@ -31,6 +31,7 @@
             </div>
 
         </div>
+        <x-notification></x-notification>
         @stack('scripts')
         @livewireScriptConfig
         @livewire('wire-elements-modal')
