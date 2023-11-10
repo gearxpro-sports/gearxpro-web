@@ -25,7 +25,7 @@
     @livewireStyles
     @mediaLibraryStyles
 </head>
-<body class="font-sans antialiased bg-color-f3f7f9">
+<body class="antialiased bg-color-f3f7f9">
 <div x-cloak x-data="{ sidebarOpen: false }">
     <div x-show="sidebarOpen" class="relative z-40 xl:hidden" role="dialog" aria-modal="true">
         <div x-show="sidebarOpen" class="fixed inset-0 bg-gray-600 bg-opacity-75"></div>
