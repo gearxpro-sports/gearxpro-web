@@ -219,8 +219,7 @@ class Show extends Component
 
     public function resetAll()
     {
-        $this->reset(['selectedColor', 'selectedSize', 'selectedLength']);
-        $this->reset('selectedVariant');
+        $this->reset(['selectedColor', 'selectedSize', 'selectedLength', 'selectedVariant']);
         $this->filterVariantsByTerm('length', $this->selectedLength);
         $this->filterVariantsByTerm('color', $this->selectedColor);
         $this->filterVariantsByTerm('size', $this->selectedSize);
