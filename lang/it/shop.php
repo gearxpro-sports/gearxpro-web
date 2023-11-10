@@ -40,6 +40,8 @@ return [
         'advantages' => 'vantaggi',
         'technicality' => 'tecnicità',
         'wash' => 'istruzioni di lavaggio',
+        'price_low' => 'Prezzo più basso',
+        'price_high' => 'Prezzo più alto',
     ],
     'button' => [
         'pay_link' => 'Paga con link',

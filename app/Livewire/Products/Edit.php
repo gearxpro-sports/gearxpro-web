@@ -82,6 +82,7 @@ class Edit extends Component
             $this->images['var_'.$variant->id] = [];
         }
 
+        // TODO: fermarsi al secondo livello?
         $this->categories = Category::with('children')->whereNull('parent_id')->get();
     }
 
