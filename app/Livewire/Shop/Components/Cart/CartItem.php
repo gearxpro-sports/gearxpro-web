@@ -32,6 +32,9 @@ class CartItem extends Component
 
     public function remove() {
         $this->item->delete();
+        if(auth()->user()->cart->items->count() === 0) {
+            auth()->user()->cart->delete();
+        }
         $this->dispatch('item-removed');
     }
 

@@ -1,6 +1,6 @@
 <div class="px-10 py-24 bg-color-f2f0eb">
     {{-- carrello --}}
-    @if ($cart->items->count())
+    @if ($cart?->items->count())
         {{-- info carrello --}}
         <div>
             <h2 class="text-3xl font-semibold text-color-18181a">{{ __('shop.cart.your_cart')}}</h2>

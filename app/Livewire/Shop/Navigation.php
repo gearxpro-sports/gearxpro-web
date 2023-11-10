@@ -13,6 +13,7 @@ class Navigation extends Component
     public $user;
     public $languages = ["it", "en", "fr", "de", "es"];
 
+    #[On('item-updated')]
     #[On('product-added-to-cart')]
     public function render()
     {
