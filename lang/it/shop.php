@@ -120,6 +120,7 @@ return [
         'ccv' => 'CVC / CCV',
         'accountHolder' => 'Nome sulla carta',
         'pay' => 'Paga ora',
+        'current_password' => 'Password attuale',
         'confirmPassword' => 'Conferma Password',
         'password_confirmation' => 'La password non corrisponde',
     ],
@@ -132,5 +133,5 @@ return [
         'brands' => 'BRANDS',
         'my_account' => 'Il MIO ACCOUNT',
         'privacy' => 'PRIVACY'
-    ]
+    ],
 ];

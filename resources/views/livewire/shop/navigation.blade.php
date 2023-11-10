@@ -50,8 +50,8 @@
                                         <x-dropdown align="right" width="48">
                                             <x-slot name="trigger">
                                                 <button class="flex flex-col items-start">
-                                                    <span
-                                                        class="text-lg font-medium text-color-b6b9bb">{{ Auth::user()->fullname }}</span>
+                                                    <span class="hidden xl:block text-lg font-medium text-color-b6b9bb">{{ Auth::user()->fullname }}</span>
+                                                    <span class="xl:hidden text-lg font-medium text-color-b6b9bb">{{ Auth::user()->initial_letters }}</span>
                                                 </button>
                                             </x-slot>
 
@@ -118,7 +118,7 @@
                 </div>
 
                 <!-- Hamburger -->
-                <div class="-mr-2 flex items-center sm:hidden">
+                <div class="-mr-2 flex items-center xl:hidden">
                     <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:bg-none transition duration-150 ease-in-out">
                         <div :class="{'hidden': open, 'inline-flex': ! open }">
                             <x-icons name="hamburger" />

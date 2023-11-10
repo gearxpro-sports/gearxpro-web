@@ -16,17 +16,23 @@ class Index extends Component
     public $email;
     public $password;
     public $password_confirmation;
-    public $formatPassword = [
-        'Un carattere in MAIUSCOLO',
-        'Un numero',
-        '8 caratteri',
-        'Un carattere in minuscolo',
-        'Un carattere speciale (&*€%)'
-    ];
+    public $formatPassword = [];
     public $keyFormat = [];
+
+    public function mount() {
+        $this->formatPassword = [
+            __('customers.format_password.uppercase'),
+            __('customers.format_password.number'),
+            __('customers.format_password.length'),
+            __('customers.format_password.lowercase'),
+            __('customers.format_password.special_character')
+        ];
+    }
 
     public function updated($property) {
         if ($property === 'password') {
+            $this->keyFormat= [];
+
             $password = str_split($this->password);
             if (count($password) > 7) {
                 $this->keyFormat[2] = 2;

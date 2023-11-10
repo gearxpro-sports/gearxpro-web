@@ -1,12 +1,14 @@
-<div class="bg-black relative">
+<div class="bg-black relative overflow-hidden">
 
-    <div class="w-full h-[667px] px-4 pt-11 bg-texture grid grid-cols-4 gap-[10px] xl:hidden">
-        <div class="h-fit col-start-1 col-span-4">
+    <div class="relative w-full h-[667px] px-4 pt-11 bg-texture grid grid-cols-4 gap-[10px] xl:hidden">
+        <div class="h-fit col-start-1 col-span-4 z-10">
             <h1 class="text-[30px] font-bold text-white leading-[40px] m-0 p-0">{{ __('shop.jumbotron.title') }}</h1>
-            <p class="text-[21px] text-white my-[40px]">{{ __('shop.jumbotron.description') }}</p>
+            <p class="text-[14px] text-white mt-[20px]">{{ __('shop.jumbotron.description') }}</p>
         </div>
 
-        <div class="col-start-1 col-span-4">
+        <img class="col-span-4 absolute right-[-50px] bottom-20 scale-110" src="{{Vite::asset('/resources/images/prodotto_slider.png')}}" alt="">
+
+        <div class="col-start-1 col-span-4 pt-20 z-10">
             <x-custom-button :text="__('shop.jumbotron.button')" :icon="'double_arrow_right'" :link="'/shop'" width="w-full" />
         </div>
     </div>
@@ -18,7 +20,7 @@
 
         <div class="owl-carousel carousel_jumbotron">
             @foreach ($slides as $slide )
-                <img class="!w-[100vw]" src="{{ Vite::asset('resources/images/gear/'.$slide)}}" alt="">
+                <img src="{{ Vite::asset('resources/images/gear/'.$slide)}}" alt="">
             @endforeach
         </div>
 
@@ -41,7 +43,7 @@
                 items: 1,
                 margin: 0,
                 loop: true,
-                autoWidth: true,
+                autoWidth: false,
                 autoplay: true,
                 autoplayTimeout: 8000,
                 autoplayHoverPause: false,
