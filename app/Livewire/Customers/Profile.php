@@ -78,7 +78,6 @@ class Profile extends Component
         ];
 
         if ($this->customer_shipping_address) {
-            $this->shipping_phone = $this->customer_shipping_address->phone;
             $this->full_shipping_address = $this->customer_shipping_address->address_1.' '.$this->customer_shipping_address->city.' '.$this->customer_shipping_address->postcode;
 
             $this->shipping_address = $this->customer_shipping_address->address_1;
@@ -200,15 +199,15 @@ class Profile extends Component
     }
 
     public function edit() {
-        if (!$this->streetClicked OR $this->shipping_civic === null OR $this->billing_civic === null) {
+        $this->validate();
+
+        if ($this->shipping_civic === null AND !$this->customer_shipping_address OR $this->billing_civic === null AND !$this->customer_billing_address) {
             return  $this->dispatch('open-notification',
                 title: __('notifications.customer.error.address.title'),
                 subtitle: __('notifications.customer.error.address.description'),
                 type: 'error'
             );
         }
-
-        $this->validate();
 
         if ($this->modify === 'data' OR $this->modify === 'email') {
             $this->customer->update($this->validate()['customer']);
@@ -240,33 +239,39 @@ class Profile extends Component
                 );
             }
         } elseif ($this->modify === 'shipping') {
-            \App\Models\Address::updateOrCreate(['user_id'   => $this->customer->id, 'type' => 'shipping'],
-                [
-                    'country_id' => $this->customer->country_id,
-                    'address_1' => ($this->shipping_address . ' ' . $this->shipping_civic),
-                    'postcode' => $this->shipping_postcode,
-                    'city' => $this->shipping_city,
-                    'state' => $this->shipping_state,
-                    'phone' => $this->shipping_phone,
-                    'company' => $this->shipping_company
-                ]
-            );
-            \App\Models\Address::updateOrCreate(['user_id'   => $this->customer->id, 'type' => 'billing'],
-                [
-                    'country_id' => $this->customer->country_id,
-                    'address_1' => ($this->billing_address . ' ' . $this->billing_civic),
-                    'postcode' => $this->billing_postcode,
-                    'city' => $this->billing_city,
-                    'state' => $this->billing_state,
-                    'company' => $this->billing_company
-                ]
-            );
+            if (!$this->customer_shipping_address OR $this->shipping_address != $this->customer_shipping_address->address_1) {
+                \App\Models\Address::updateOrCreate(['user_id'   => $this->customer->id, 'type' => 'shipping'],
+                    [
+                        'country_id' => $this->customer->country_id,
+                        'address_1' => ($this->shipping_address . ' ' . $this->shipping_civic),
+                        'postcode' => $this->shipping_postcode,
+                        'city' => $this->shipping_city,
+                        'state' => $this->shipping_state,
+                        'phone' => $this->shipping_phone,
+                        'company' => $this->shipping_company
+                    ]
+                );
+            }
+            if (!$this->customer_billing_address OR $this->billing_address != $this->customer_billing_address->address_1) {
+                \App\Models\Address::updateOrCreate(['user_id'   => $this->customer->id, 'type' => 'billing'],
+                    [
+                        'country_id' => $this->customer->country_id,
+                        'address_1' => ($this->billing_address . ' ' . $this->billing_civic),
+                        'postcode' => $this->billing_postcode,
+                        'city' => $this->billing_city,
+                        'state' => $this->billing_state,
+                        'company' => $this->billing_company
+                    ]
+                );
+            }
 
-            $this->dispatch('open-notification',
-                title: __('notifications.titles.updating'),
-                subtitle: __('notifications.profile.updating.success'),
-                type: 'success'
-            );
+            if (!$this->customer_shipping_address OR !$this->customer_billing_address OR ($this->shipping_address) != $this->customer_shipping_address->address_1 OR ($this->billing_address) != $this->customer_billing_address->address_1) {
+                $this->dispatch('open-notification',
+                    title: __('notifications.titles.updating'),
+                    subtitle: __('notifications.profile.updating.success'),
+                    type: 'success'
+                );
+            }
             $this->cancel();
             $this->mount();
         }
