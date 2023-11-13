@@ -2,7 +2,7 @@
     <div class="relative h-[48px] w-[206px]">
       <button wire:click="toggle" class="w-full h-full flex items-center justify-between bg-transparent border border-color-b6b9bb rounded-md px-[22px] text-[15px] font-medium leading-[19px] text-color-18181a capitalize">
         {{ $options[$selected]['name'] }}
-        <img src="{{ Vite::asset('resources/images/icons/arrow-down.svg')}}" alt="">
+        <x-icons name="arrow-down" />
       </button>
 
       @if ($open)
