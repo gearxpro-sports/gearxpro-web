@@ -222,40 +222,34 @@
     </div>
 
     {{-- carousel --}}
-{{--    <div class="col-span-12 pb-[100px] mt-5">--}}
-{{--        <div class="mx-[89px] border-t-2 border-color-18181a shadow-shadow-4 mb-[50px]"></div>--}}
+    <div class="col-span-12 pb-[100px] mt-5">
+        <div class="mx-[89px] border-t-2 border-color-18181a shadow-shadow-4 mb-[50px]"></div>
 
-{{--        <div class="relative">--}}
-{{--            <h2 class="px-[39px] mb-[27px] text-[33px] font-semibold leading-[40px] text-color-18181a">{{__('shop.most_purchased_title')}}</h2>--}}
+        <div class="relative">
+            <h2 class="px-[39px] mb-[27px] text-[33px] font-semibold leading-[40px] text-color-18181a">{{__('shop.most_purchased_title')}}</h2>
 
-{{--            <div class="pl-[39px] group-custom-button">--}}
-{{--                <button--}}
-{{--                    class="customPrevBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] z-10 hover:border">--}}
-{{--                    <img class="rotate-180" src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}"--}}
-{{--                         alt="">--}}
-{{--                </button>--}}
+            <div class="pl-[39px] group-custom-button">
+                <button
+                    class="customPrevBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] z-10 hover:border">
+                    <img class="rotate-180" src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}"
+                         alt="">
+                </button>
 
 {{--                <div wire:ignore class="owl-carousel carousel_most_purchased">--}}
-{{--                    @foreach ($mostPurchased as $key => $prod )--}}
-{{--                        <x-card-purchased--}}
-{{--                            :key="$key"--}}
-{{--                            :image="$prod['image']"--}}
-{{--                            :name="$prod['name']"--}}
-{{--                            :description="$prod['description']"--}}
-{{--                            :availableColor="$prod['availableColor']"--}}
-{{--                            :price="$prod['price']"--}}
-{{--                        />--}}
+{{--                    @dd($mostPurchased)--}}
+{{--                    @foreach ($mostPurchased as $product )--}}
+{{--                        <x-card-purchased :product="$product" />--}}
 {{--                    @endforeach--}}
 {{--                </div>--}}
 
-{{--                <button--}}
-{{--                    class="customNextBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] right-[39px] z-10 hover:border">--}}
-{{--                    <img src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}" alt="">--}}
-{{--                </button>--}}
-{{--            </div>--}}
+                <button
+                    class="customNextBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] right-[39px] z-10 hover:border">
+                    <img src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}" alt="">
+                </button>
+            </div>
 
-{{--        </div>--}}
-{{--    </div>--}}
+        </div>
+    </div>
 
     <livewire:modals.product-added-to-cart/>
 </div>
