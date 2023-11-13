@@ -1,11 +1,10 @@
 <div class="w-full px-1 pt-[16px]">
     <div wire:click="dropOpen" class="flex justify-between items-center pb-[16px] border-b border-color-e0e0df">
         <h5 class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.size')}}</h5>
-        <img src="{{ Vite::asset('resources/images/icons/minus_menu.svg')}}" alt=""
-            @class([
+        <x-icons name="minus_menu" @class([
             'invisible transition-all duration-300 ease-out opacity-20',
             $open ? '!visible !opacity-100' : '',
-        ])>
+        ])/>
     </div>
 
     <div

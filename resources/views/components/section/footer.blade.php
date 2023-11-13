@@ -32,16 +32,16 @@
 
             <div class="flex items-end gap-[22px]">
                 <a href="">
-                    <img src="{{ Vite::asset('resources/images/icons/facebook.svg')}}" alt="">
+                    <x-icons name="facebook" />
                 </a>
                 <a href="">
-                    <img src="{{ Vite::asset('resources/images/icons/linkedin.svg')}}" alt="">
+                    <x-icons name="linkedin" />
                 </a>
                 <a href="">
-                    <img src="{{ Vite::asset('resources/images/icons/youTube.svg')}}" alt="">
+                    <x-icons name="youTube" />
                 </a>
                 <a href="">
-                    <img src="{{ Vite::asset('resources/images/icons/instagram.svg')}}" alt="">
+                    <x-icons name="instagram" />
                 </a>
             </div>
         </div>
@@ -91,16 +91,16 @@
 
         <div class="flex items-end justify-between">
             <a href="">
-                <img src="{{ Vite::asset('resources/images/icons/facebook.svg')}}" alt="">
+                <x-icons name="facebook" />
             </a>
             <a href="">
-                <img src="{{ Vite::asset('resources/images/icons/linkedin.svg')}}" alt="">
+                <x-icons name="linkedin" />
             </a>
             <a href="">
-                <img src="{{ Vite::asset('resources/images/icons/youTube.svg')}}" alt="">
+                <x-icons name="youTube" />
             </a>
             <a href="">
-                <img src="{{ Vite::asset('resources/images/icons/instagram.svg')}}" alt="">
+                <x-icons name="instagram" />
             </a>
         </div>
     </div>

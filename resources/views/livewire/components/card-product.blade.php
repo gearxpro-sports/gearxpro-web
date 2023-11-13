@@ -16,7 +16,7 @@
             <div class="h-full absolute top-0 left-0 w-0 bg-color-edebe5 group-hover:animate-line_slow group-hover:w-full rounded-bl-md"></div>
         </div>
         <a href="{{route('shop.show', ['product' => $slug, 'country_code' => session('country_code')])}}" class="h-full min-w-[88px] flex items-center justify-center border-l rounded-br-md border-white group-hover:border-white group-hover:bg-color-edebe5 transition-all duration-500">
-            <img class="!hidden group-hover:!block !w-5" src="{{ Vite::asset('resources/images/icons/vedi_dettaglio.svg')}}" alt="">
+            <x-icons name="detail" />
         </a>
     </div>
 </div>

@@ -8,6 +8,6 @@
         <div class="h-full absolute top-0 w-0 bg-white group-hover:animate-line group-hover:w-full rounded-l-md"></div>
     </div>
     <div class="h-full border-l border-white group-hover:border-black w-[47px] flex items-center justify-center group-hover:bg-white rounded-r-md">
-        <img class="group-hover:invert" src="{{ Vite::asset('resources/images/icons/'.$icon.'.svg')}}" alt="">
+        <x-icons class="group-hover:invert" name="{{$icon}}" />
     </div>
 </button>

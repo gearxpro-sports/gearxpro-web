@@ -236,15 +236,9 @@
 {{--                </button>--}}
 
 {{--                <div wire:ignore class="owl-carousel carousel_most_purchased">--}}
-{{--                    @foreach ($mostPurchased as $key => $prod )--}}
-{{--                        <x-card-purchased--}}
-{{--                            :key="$key"--}}
-{{--                            :image="$prod['image']"--}}
-{{--                            :name="$prod['name']"--}}
-{{--                            :description="$prod['description']"--}}
-{{--                            :availableColor="$prod['availableColor']"--}}
-{{--                            :price="$prod['price']"--}}
-{{--                        />--}}
+{{--                    @dd($mostPurchased)--}}
+{{--                    @foreach ($mostPurchased as $product )--}}
+{{--                        <x-card-purchased :product="$product" />--}}
 {{--                    @endforeach--}}
 {{--                </div>--}}
 

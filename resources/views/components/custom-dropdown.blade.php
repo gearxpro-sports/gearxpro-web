@@ -8,9 +8,9 @@
         @close.stop="dropOpen = false"
         class="group"
     >
-        <div class="flex space-x-1">
+        <div class="flex items-center space-x-1">
             <span class="text-[15px] font-semibold leading-[19px] text-color-18181a focus:outline-none">{{ $title }}</span>
-            <img src="{{ Vite::asset('resources/images/icons/arrow-down-bold.svg')}}" alt="">
+            <x-icons name="arrow-down-bold" />
         </div>
 
         <div class="h-[2px] w-0 bg-color-18181a group-hover:animate-line group-hover:w-full"></div>

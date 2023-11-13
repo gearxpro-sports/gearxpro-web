@@ -5,7 +5,7 @@
             :class="isOpen ? 'bg-color-dee2e6' : 'bg-color-f3f7f9'"
     >
         <span class="font-medium text-[13px] uppercase">{{ $current }}</span>
-        <img src="{{ Vite::asset('resources/images/icons/arrow-down-bold.svg')}}" alt="">
+        <x-icons name="arrow-down-bold" />
     </button>
 
     <ul x-cloak x-show="isOpen" @click.away="isOpen = false"

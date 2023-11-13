@@ -154,6 +154,13 @@
 </div>
 
 @push('scripts')
+    <script>
+        function creditCardMask(input) {
+            return input.startsWith('34') || input.startsWith('37')
+                ? '9999 999999 99999'
+                : '9999 9999 9999 9999'
+        }
+    </script>
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initAutocomplete"
         type="text/javascript"
         async defer>
