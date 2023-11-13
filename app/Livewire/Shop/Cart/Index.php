@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Shop\Cart;
 
+use App\Models\Cart;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -70,8 +71,14 @@ class Index extends Component
     #[On('item-removed')]
     public function render()
     {
+        if(auth()->check()) {
+            $cart = auth()->user()->cart;
+        } else {
+            $cart = Cart::where('user_id', session('cart_user_token'))->first();
+        }
+
         return view('livewire.shop.cart.index', [
-            'cart' => auth()->user()->cart
+            'cart' => $cart
         ]);
     }
 }

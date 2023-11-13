@@ -85,6 +85,12 @@ return [
         'pay_to_guest' => 'Effettua il pagamento come ospite. Ricordati che puoi registrarti in qualsiasi momento.',
         'privacy' => 'Dichiaro di aver preso visione dell’informativa sul trattamento dei dati e di voler rimanere aggiornato da GearXPro su tutte le novità e iniziative promozionali acconsentendo al trattamento dei dati per finalità di marketing.',
         'button_next' => 'Continua',
+        'existing_cart' => [
+            'title' => 'Carrello esistente',
+            'paragraph' => 'Attualmente esiste un altro carrello associato a questo account.<br>Vuoi <strong>unire</strong> i due carrelli oppure <strong>sostituire</strong> il vecchio carrello con quello nuovo?',
+            'merge' => 'Unisci',
+            'override' => 'Sostituisci'
+        ]
     ],
     'payment' => [
         'tab_delivery' => 'Recapiti e consegna',
