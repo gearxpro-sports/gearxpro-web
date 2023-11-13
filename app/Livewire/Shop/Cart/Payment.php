@@ -10,6 +10,7 @@ use Livewire\Attributes\Layout;
 #[Layout('layouts.checkout')]
 class Payment extends Component
 {
+    public $cart;
     public $customer;
     public $firstname;
     public $lastname;
@@ -34,18 +35,7 @@ class Payment extends Component
     public $ccv;
     public $accountHolder;
 
-    public $money = '€';
     public $currentTab = 0;
-    public $cart = [
-        [
-            'name' => 'SOXPro Trekking',
-            'format' => 'short',
-            'color' => 'green',
-            'size' => 'M',
-            'quantity' => 2,
-            'price' => 70
-        ]
-    ];
     public $tabs = [
         [
             'text' => 'tab_delivery',
@@ -60,6 +50,10 @@ class Payment extends Component
     ];
 
     public function mount() {
+        $this->cart = auth()->user()?->cart;
+        if (!auth()->check() || !$this->cart) {
+            return redirect()->route('shop.index');
+        }
         if (auth()->user()) {
             $this->customer = auth()->user();
             $this->firstname = $this->customer->firstname;

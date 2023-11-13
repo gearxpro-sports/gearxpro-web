@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class)->nullable()->constrained();
+            $table->string('user_id');
         });
     }
 

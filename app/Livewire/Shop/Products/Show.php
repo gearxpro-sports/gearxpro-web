@@ -4,10 +4,12 @@ namespace App\Livewire\Shop\Products;
 
 use App\Livewire\Modals\ProductAddedToCart;
 use App\Livewire\Shop\Navigation as ShopNavigation;
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\Stock;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -25,7 +27,7 @@ class Show extends Component
     public $selectedSize = null;
 
     public $quantity = 1;
-//    public $selectedMoney = 0;
+    //    public $selectedMoney = 0;
 
     public $cart;
 
@@ -203,7 +205,7 @@ class Show extends Component
 
     public function increment()
     {
-        if(isset($this->selectedVariant) && $this->quantity < $this->selectedVariant->quantity) {
+        if (isset($this->selectedVariant) && $this->quantity < $this->selectedVariant->quantity) {
             $this->quantity++;
         }
     }
@@ -217,11 +219,21 @@ class Show extends Component
 
     public function addToCart()
     {
-        $cart = auth()->user()->cart ?? auth()->user()->cart()->create();
+        if (auth()->check()) {
+            $cart = auth()->user()->cart ?? auth()->user()->cart()->create();
+        } else {
+            if (!session()->get('cart_user_token')) {
+                session()->put('cart_user_token', Str::random(10));
+            }
+            $cart = Cart::firstOrCreate([
+                'user_id' => session('cart_user_token')
+            ]);
+        }
+
 
         $variant_in_cart = $cart->items()->where('product_variant_id', $this->selectedVariant->id)->first();
 
-        if($variant_in_cart) {
+        if ($variant_in_cart) {
             $variant_in_cart->increment('quantity', $this->quantity);
         } else {
             $cart->items()->create([
@@ -247,7 +259,7 @@ class Show extends Component
     public function render()
     {
         return view('livewire.shop.products.show', [
-//            'mostPurchased' => Stock::with('productVariant')->get()->shuffle()->take(1)
+            //            'mostPurchased' => Stock::with('productVariant')->get()->shuffle()->take(1)
         ]);
     }
 }
