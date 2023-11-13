@@ -26,17 +26,22 @@
             <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a mb-[15px]">{{__('shop.payment.in_to_cart')}}</h2>
 
             <div class="flex items-center justify-between mb-5">
-                <span class="text-[13px] font-medium leading-[16px] text-color-18181a">{{__('shop.payment.subtotal')}}</span>
-                <span class="text-[13px] font-medium leading-[16px] text-color-18181a">{{$money}} {{number_format(70, 2, ',', '.')}}</span>
+                <span
+                    class="text-[13px] font-medium leading-[16px] text-color-18181a">{{__('shop.payment.subtotal')}}</span>
+                <span class="text-[13px] font-medium leading-[16px] text-color-18181a">@money($cart->subtotal)</span>
             </div>
             <div class="flex items-center justify-between">
-                <span class="text-[13px] font-medium leading-[16px] text-color-18181a">{{__('shop.payment.shipment_cost')}}</span>
-                <span class="text-[13px] font-medium leading-[16px] text-color-18181a">{{__('shop.payment.free')}}</span>
+                <span
+                    class="text-[13px] font-medium leading-[16px] text-color-18181a">{{__('shop.payment.shipment_cost')}}</span>
+                <span
+                    class="text-[13px] font-medium leading-[16px] text-color-18181a">{{__('shop.payment.free')}}</span>
             </div>
 
             <div class="border-y border-color-18181a h-[61px] flex items-center justify-between mt-[25px]">
-                <span class="text-[15px] font-medium leading-[16px] text-color-18181a">{{__('shop.payment.total')}}</span>
-                <span class="text-[15px] font-semibold  leading-[16px] text-color-18181a">{{$money}} {{number_format(70, 2, ',', '.')}}</span>
+                <span
+                    class="text-[15px] font-medium leading-[16px] text-color-18181a">{{__('shop.payment.total')}}</span>
+                {{-- TODO: Totale = Subtotale + Spese di spedizione --}}
+                <span class="text-[15px] font-semibold  leading-[16px] text-color-18181a">@money($cart->subtotal)</span>
             </div>
         </div>
 
@@ -44,18 +49,31 @@
         <div>
             <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a mb-[15px]">{{__('shop.payment.articols')}}</h2>
 
-            @foreach ($cart as $product )
+            @foreach ($cart->items as $item)
                 <div class="flex gap-5 border border-color-f2f0eb bg-color-f2f0eb shadow p-1">
                     <div class="w-[116px] h-[120px] overflow-hidden bg-color-edebe5">
                         <img src="" alt="">
                     </div>
 
                     <div class="my-auto">
-                        <h4 class="text-[13px] font-semibold leading-[24px] text-color-18181a">{{$product['name']}}</h4>
-                        <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">{{__('shop.products.color')}}: {{$product['color']}}</p>
-                        <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">{{__('shop.products.size')}}: {{$product['size']}}</p>
-                        <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">{{__('shop.products.amount')}}: {{$product['quantity']}}</p>
-                        <p class="text-[13px] font-medium leading-[24px] text-color-18181a">{{$money}} {{number_format($product['price'], 2, ',', '.')}}</p>
+                        <h4 class="text-[13px] font-semibold leading-[24px] text-color-18181a">
+                            {{$item->variant->product->name}}
+                        </h4>
+                        <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">
+                            {{__('shop.products.height_leg')}}: {{$item->variant->length->value}}
+                        </p>
+                        <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">
+                            {{__('shop.products.color')}}: {{$item->variant->color->value}}
+                        </p>
+                        <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">
+                            {{__('shop.products.size')}}: {{$item->variant->size->value}}
+                        </p>
+                        <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">
+                            {{__('shop.products.amount')}}: {{$item->quantity}}
+                        </p>
+                        <p class="text-[13px] font-medium leading-[24px] text-color-18181a">
+                            @money($item->price)
+                        </p>
                     </div>
                 </div>
             @endforeach

@@ -9,16 +9,10 @@ use Livewire\Component;
 class CartItem extends Component
 {
     public $item;
-    public $variant;
-
-    public function mount()
-    {
-        $this->variant = ProductVariant::find($this->item->product_variant_id);
-    }
 
     public function increment()
     {
-        if (isset($this->variant) && $this->item->quantity < $this->variant->quantity) {
+        if (isset($this->item->variant) && $this->item->quantity < $this->item->variant->quantity) {
             $this->item->increment('quantity');
         }
         $this->dispatch('item-updated');
