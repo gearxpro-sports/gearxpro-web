@@ -3,6 +3,7 @@
 namespace App\Livewire\Shop\Cart;
 
 use App\Models\Cart;
+use App\Models\Country;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
@@ -28,7 +29,7 @@ class Checkout extends Component
         }
         if ($this->optionAccess == 'guest') {
             return [
-                'emailGuest' => 'required',
+                'emailGuest' => 'required|unique:users,email',
                 'privacy' => 'required'
             ];
         }
@@ -56,8 +57,24 @@ class Checkout extends Component
 
         $this->validate();
 
-        if ($this->emailGuest and $this->privacy) {
-            $this->redirect('/shop/payment');
+        if ($this->emailGuest && $this->privacy) {
+            $password = 'password'; // TODO: Str::password(10)
+            $user = User::create([
+                'email' => $this->emailGuest,
+                'password' => bcrypt($password),
+                'country_id' => Country::where('iso2_code', session('country_code'))->first()->id
+            ]);
+            $user->assignRole(User::CUSTOMER);
+            // TODO: Inviare email a reseller con i dati di login
+            if(Auth::attempt(['email' => $user->email, 'password' => $password])) {
+                $cart = Cart::where('user_id', session('cart_user_token'))->first();
+                $cart->update([
+                    'user_id' => $user->id
+                ]);
+
+                return redirect()->intended(route('shop.payment', ['country_code' => session('country_code')]));
+            }
+
         }
     }
 
@@ -75,7 +92,7 @@ class Checkout extends Component
                         'user_id' => auth()->user()->id
                     ]);
                     session()->remove('cart_user_token');
-                    return redirect()->route('shop.payment', ['country_code' => session('country_code')]);
+                    return redirect()->intended(route('shop.payment', ['country_code' => session('country_code')]));
                 }
             } else {
                 $this->dispatch('openModal', 'modals.existing-cart');

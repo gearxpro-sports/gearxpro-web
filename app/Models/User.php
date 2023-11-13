@@ -56,6 +56,10 @@ class User extends Authenticatable
     }
 
     public function getFullnameAttribute() {
+        if(!$this->firstname && !$this->lastname) {
+            return 'Guest';
+        }
+
         return "$this->firstname $this->lastname";
     }
 
