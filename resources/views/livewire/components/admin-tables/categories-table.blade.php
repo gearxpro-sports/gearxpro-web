@@ -9,14 +9,16 @@
         </div>
         <table class="table-auto border-collapse w-full text-xs text-black-1 border border-color-eff0f0 font-medium">
             <thead>
-                <tr class="[&>th]:py-4 [&>th]:px-7 [&>th]:font-medium [&>th]:w-1/5 border-b-color-eff0f0">
-                    <th class="text-left font-bold">{{ __('categories.index.table.cols.name') }}</th>
+                <tr class="[&>th]:py-4 [&>th]:px-7 [&>th]:font-medium border-b-color-eff0f0">
+                    <th class="w-1 uppercase text-center">{{ __('categories.index.table.cols.id') }}</th>
+                    <th class="w-1/5 text-left font-bold">{{ __('categories.index.table.cols.name') }}</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($categories as $category)
                 <tr class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
+                    <td class="text-color-6c757d text-center">{{ $category->id }}</td>
                     <td>{{ $category->name }}</td>
                     <td class="text-right">
                         <div class="flex items-center space-x-2 justify-end">

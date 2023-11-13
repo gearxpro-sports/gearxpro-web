@@ -50,7 +50,40 @@
                         <div>
                             @if ($categories->count())
                                 <h3 class="mb-4 font-bold">{{ __('products.edit.categories_title') }}</h3>
-                                <x-category-tree :categories="$categories" />
+                                <ul>
+                                    @foreach ($categories as $category)
+                                        <li wire:key="cat_{{ $category->id }}">
+                                            <label class="inline-flex text-xs font-bold uppercase cursor-pointer">
+                                                <input
+                                                    class="cursor-pointer mr-2"
+                                                    x-bind:checked="$wire.productForm.categories.includes({{ $category->id }})"
+                                                    wire:change="updateCategories({{ $category->id }})"
+                                                    type="radio"
+                                                    class="mr-2"
+                                                >
+                                                    {{ $category->name }}
+                                            </label>
+                                            @if ($category->children->count() && in_array($category->id, $productForm->categories))
+                                            <div wire:key="subcategories_of_{{ $category->id }}" class="my-2 py-2 px-6 border border-color-dee2e6">
+                                                <ul>
+                                                    @foreach ($category->children as $child)
+                                                    <li wire:key="subcat_{{ $child->id }}">
+                                                        <x-checkbox
+                                                            wire:model.change="productForm.categories"
+                                                            class="my-1.5 text-base cursor-pointer [&+span]:font-bold [&+span]:cursor-pointer [&+span:hover]:text-color-18181a"
+                                                            label="{{ $child->name }}"
+                                                            value="{{ $child->id }}"
+                                                            name="child_cat_[{{ $child->id  }}]"
+                                                            wire:change="updateCategories({{ $child->id }})"
+                                                        />
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                </ul>
                             @endif
                         </div>
                     </div>
