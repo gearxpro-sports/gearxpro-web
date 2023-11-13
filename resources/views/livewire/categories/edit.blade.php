@@ -22,6 +22,7 @@
                     </x-danger-button>
                 </div>
             </div>
+            @if ($category->parent_id === null)
             <div class="p-8 bg-color-f3f7f9">
                 <h3 class="mb-4 font-bold">{{ __('categories.edit.child_categories_title') }}</h3>
                 <div class="flex items-center space-x-4">
@@ -60,6 +61,7 @@
                     @endforeach
                 </div>
             </div>
+            @endif
         </div>
     </form>
 </div>

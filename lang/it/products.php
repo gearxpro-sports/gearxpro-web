@@ -11,7 +11,8 @@ return [
         'table' => [
             'title' => 'Prodotti',
             'cols'  => [
-                'name'              => 'Nome Prodotto',
+                'id'   => 'ID',
+                'name' => 'Nome Prodotto',
             ],
         ],
         'alert' => [

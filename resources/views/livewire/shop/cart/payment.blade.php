@@ -63,112 +63,139 @@
         </div>
     </div>
 
-    @if ($currentTab == 0)
-        <form wire:submit="getDataUser" class="pt-[90px] w-[750px]">
-            <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a mb-[15px]">{{__('shop.payment.address')}}</h2>
+    {{-- Recapiti e consegna --}}
+    <form wire:submit="getDataUser" @class(["pt-[90px] w-[750px]",$currentTab === 1 ? 'hidden' : ''])>
+        <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a mb-[15px]">{{__('shop.payment.address')}}</h2>
 
-            <div class="flex gap-5">
-                <x-input-text wire:model="firstname" width="w-1/2" name="firstname" label="firstname" required="true" />
-                <x-input-text wire:model="lastname" width="w-1/2" name="lastname" label="lastname" required="true" />
-            </div>
+        <div class="flex gap-5">
+            <x-input-text wire:model="firstname" width="w-1/2" name="firstname" label="firstname" required="true" />
+            <x-input-text wire:model="lastname" width="w-1/2" name="lastname" label="lastname" required="true" />
+        </div>
 
-            <div class="flex gap-5 my-[23px]">
-                <x-input-text wire:model="address" width="w-[494px]" name="address" label="address_civic" required="true" />
-                <x-input-text x-mask="{{ __('masks.postcode') }}" wire:model="postcode" width="grow" name="postcode" label="postcode" required="true" />
-            </div>
+        <div class="flex flex-col gap-5 mt-5">
+            <x-input-text placeholder="{{str_replace('\'', ' ',$full_shipping_address)}}" autocomplete="autocomplete" width="w-full" name="shipping_address" label="address_civic" required="true" />
+            <x-input-text wire:model="shipping_company" width="w-full" name="company" label="company" />
+        </div>
 
-            <x-input-text wire:model="company" width="w-full" name="company" label="company" required="" />
+        <div class="flex gap-5 mt-5">
+            <x-input-text wire:model="email" type="email" width="w-1/2" name="email" label="email" required="true" />
+            <x-input-text x-mask="{{ __('masks.phone') }}" wire:model="phone" width="w-1/2" name="phone" label="phone" required="true" />
+        </div>
 
-            <div class="flex gap-5 mt-[23px]">
-                <x-input-text wire:model="city" width="w-1/3" name="city" label="city" required="true" />
-                <x-select-custom wire:model="province" width="w-1/3" name="province" label="province" required="true">
-                    <option selected value=""></option>
-                    <option value="pr-a">a</option>
-                    <option value="pr-n">n</option>
-                </x-select-custom>
-                <x-select-custom wire:model="country" width="w-1/3" name="country" label="country" required="true">
-                    <option selected value=""></option>
-                    @foreach ($countries as $country )
-                        <option value="{{$country->id}}">{{$country->name}}</option>
-                    @endforeach
-                </x-select-custom>
-            </div>
+        <div class="mt-[42px] flex items-center justify-between">
+            <x-custom-button-2 :text="__('shop.payment.button_back')" :icon="'back'" :link="'/shop/cart'" width="w-[221px]"/>
+            <x-custom-button-4 :text="__('shop.payment.button_next_pay')" :icon="'pay'" width="w-[275px]" />
+        </div>
+    </form>
 
-            <div class="flex gap-5 mt-[23px]">
-                <x-input-text wire:model="email" type="email" width="w-1/2" name="email" label="email" required="true" />
-                <x-input-text x-mask="{{ __('masks.phone') }}" wire:model="phone" width="w-1/2" name="phone" label="phone" required="true" />
-            </div>
+    {{-- Info pagamento --}}
+    <div @class(["pt-[90px] w-[750px]", $currentTab === 0 ? 'hidden' : ''])>
 
-            <div class="mt-[42px] flex items-center justify-between">
-                <x-custom-button-2 :text="__('shop.payment.button_back')" :icon="'back'" :link="'/shop/cart'" width="w-[221px]"/>
-                <x-custom-button-4 :text="__('shop.payment.button_next_pay')" :icon="'pay'" width="w-[275px]" />
-            </div>
-        </form>
-    @endif
-
-    @if ($currentTab == 1)
-        <div class="pt-[90px] w-[750px]">
-
-            <div class="w-full space-y-[15px]">
-                {{-- Indirizzo --}}
-                <div class="w-full h-[197px] py-[24px] px-[21px] border border-color-e0e0df rounded-md">
-                    <div class="flex items-center gap-2">
-                        <x-icons name="flag_ON"/>
-                        <h3 class="text-[15px] font-semibold leading-[19px] text-color-18181a">{{__('shop.payment.address')}}</h3>
-                    </div>
-
-                    <h3 class="text-[13px] font-semibold leading-[24px] text-color-323a46 mt-[25px] mb-[5px]">Giancarlo Ferraro</h3>
-
-                    <div class="text-[13px] font-medium flex gap-[15px]">
-                        <div class="flex flex-col gap-[5px] min-w-[60px] text-color-6c757d">
-                            <span>{{__('shop.payment.address')}}:</span>
-                            <span>{{__('shop.payment.email')}}:</span>
-                            <span>{{__('shop.payment.phone')}}:</span>
-                        </div>
-                        <div class="flex flex-col gap-[5px]  text-color-323a46">
-                            <span>Via Jacopino da Tradate 47,  20155, Milano, Milano, Italia</span>
-                            <span>giancarloferraro@gmail.com</span>
-                            <span>+39 338 412 2887</span>
-                        </div>
-                    </div>
+        <div class="w-full space-y-[15px]">
+            {{-- Indirizzo --}}
+            <div class="w-full h-[197px] py-[24px] px-[21px] border border-color-e0e0df rounded-md">
+                <div class="flex items-center gap-2">
+                    <x-icons name="flag_ON"/>
+                    <h3 class="text-[15px] font-semibold leading-[19px] text-color-18181a">{{__('shop.payment.address')}}</h3>
                 </div>
 
-                {{-- spedizione --}}
-                <div class="w-full h-[99px] py-[24px] px-[21px] border border-color-e0e0df rounded-md">
-                    <div class="flex items-center gap-2">
-                        <x-icons name="flag_ON"/>
-                        <h3 class="text-[15px] font-semibold leading-[19px] text-color-18181a">{{__('shop.payment.shipment_free')}}</h3>
-                    </div>
+                <h3 class="text-[13px] font-semibold leading-[24px] text-color-323a46 mt-[25px] mb-[5px]">{{$firstname}} {{$lastname}}</h3>
 
-                    <p class="text-[13px] font-medium text-color-6c757d mt-[15px]">{{__('shop.payment.shipment_time')}}</p>
+                <div class="text-[13px] font-medium flex gap-[15px]">
+                    <div class="flex flex-col gap-[5px] min-w-[60px] text-color-6c757d">
+                        <span>{{__('shop.payment.address')}}:</span>
+                        <span>{{__('shop.payment.email')}}:</span>
+                        <span>{{__('shop.payment.phone')}}:</span>
+                    </div>
+                    <div class="flex flex-col gap-[5px]  text-color-323a46">
+                        <span>{{$full_shipping_address}}</span>
+                        <span>{{$email}}</span>
+                        <span>{{$phone}}</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="w-full mt-[30px]">
-                <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a">{{__('shop.payment.method_payment')}}</h2>
-
-                <div class="w-full h-[73px] mt-[15px] bg-color-f5e3d7 py-[18px] px-[21px] flex items-center justify-between gap-[35px] rounded-md">
-                    <p class="text-[13px] font-medium leading-[20px] text-color-6c757d">{{__('shop.payment.ssl')}}</p>
-                    <x-icons name="trust" />
+            {{-- spedizione --}}
+            <div class="w-full h-[99px] py-[24px] px-[21px] border border-color-e0e0df rounded-md">
+                <div class="flex items-center gap-2">
+                    <x-icons name="flag_ON"/>
+                    <h3 class="text-[15px] font-semibold leading-[19px] text-color-18181a">{{__('shop.payment.shipment_free')}}</h3>
                 </div>
 
-                <form wire:submit="getDataPayment" class="mt-5">
-                    <x-input-text x-mask:dynamic="creditCardMask" wire:model="creditCard" width="w-full" name="creditCard" label="creditCard" required="true" />
-
-                    <div class="flex gap-5 my-5">
-                        <x-input-text x-mask="99/99" wire:model="expiration" width="w-1/2" name="expiration" label="expiration" required="true" />
-                        <x-input-text x-mask="999" wire:model="ccv" width="w-1/2" name="ccv" label="ccv" required="true" />
-                    </div>
-
-                    <x-input-text wire:model="accountHolder" width="w-full" name="accountHolder" label="accountHolder" required="true" />
-
-                    <div class="mt-[42px] flex items-center justify-between">
-                        <x-custom-button-2 :text="__('shop.payment.button_back')" :icon="'back'" :link="'/shop/cart'" width="w-[221px]"/>
-                        <x-custom-button-4 :text="__('shop.payment.pay')" :icon="'pay'" width="w-[165px]" />
-                    </div>
-                </form>
+                <p class="text-[13px] font-medium text-color-6c757d mt-[15px]">{{__('shop.payment.shipment_time')}}</p>
             </div>
         </div>
-    @endif
+
+        <div class="w-full mt-[30px]">
+            <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a">{{__('shop.payment.method_payment')}}</h2>
+
+            <div class="w-full h-[73px] mt-[15px] bg-color-f5e3d7 py-[18px] px-[21px] flex items-center justify-between gap-[35px] rounded-md">
+                <p class="text-[13px] font-medium leading-[20px] text-color-6c757d">{{__('shop.payment.ssl')}}</p>
+                <x-icons name="trust" />
+            </div>
+
+            <form wire:submit="getDataUser" class="mt-5">
+                <x-input-text x-mask:dynamic="creditCardMask" wire:model="creditCard" width="w-full" name="creditCard" label="creditCard" required="true" />
+
+                <div class="flex gap-5 my-5">
+                    <x-input-text x-mask="99/99" wire:model="expiration" width="w-1/2" name="expiration" label="expiration" required="true" />
+                    <x-input-text x-mask="999" wire:model="ccv" width="w-1/2" name="ccv" label="ccv" required="true" />
+                </div>
+
+                <x-input-text wire:model="accountHolder" width="w-full" name="accountHolder" label="accountHolder" required="true" />
+
+                <div class="mt-[42px] flex items-center justify-between">
+                    <x-custom-button-2 :text="__('shop.payment.button_back')" :icon="'back'" :link="'/shop/cart'" width="w-[221px]"/>
+                    <x-custom-button-4 :text="__('shop.payment.pay')" :icon="'pay'" width="w-[165px]" />
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+@push('scripts')
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initAutocomplete"
+        type="text/javascript"
+        async defer>
+    </script>
+
+    <script>
+        let autocomplete_shipping_address;
+
+        function initAutocomplete() {
+            const input_shipping_address = document.getElementsByName("shipping_address")[0];
+
+            const options = {
+                componentRestrictions: { country: @json(config('app.locale')) }
+            }
+
+            autocomplete_shipping_address = new google.maps.places.Autocomplete(input_shipping_address, options);
+
+            autocomplete_shipping_address.addListener("place_changed", onPlaceChange)
+        }
+
+        function onPlaceChange() {
+            @this.set('streetClicked', true);
+            const place_shipping_address = autocomplete_shipping_address.getPlace();
+
+            if (place_shipping_address) {
+                if (place_shipping_address.address_components.length > 0) {
+                    place_shipping_address.address_components.forEach(element => {
+                        if (element.types[0] === 'street_number') {
+                            @this.set('shipping_civic', place_shipping_address.address_components[0]['long_name']);
+                        } else if (element.types[0] === 'route') {
+                            @this.set('shipping_address', place_shipping_address.address_components[1]['long_name']);
+                        } else if (element.types[0] === 'postal_code') {
+                            @this.set('shipping_postcode', place_shipping_address.address_components[7]['long_name']);
+                        } else if (element.types[0] === 'locality') {
+                            @this.set('shipping_city', place_shipping_address.address_components[2]['long_name']);
+                        } else if (element.types[0] === 'country') {
+                            @this.set('shipping_state', place_shipping_address.address_components[6]['short_name']);
+                        }
+                    });
+                }
+            }
+        }
+    </script>
+@endpush
 

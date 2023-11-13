@@ -62,6 +62,7 @@ class Edit extends Component
 
     public function mount()
     {
+        $this->categories = Category::with('children')->whereNull('parent_id')->get();
         $this->productForm->setProduct($this->product);
         $this->countriesAvailable = User::role(User::RESELLER)
                     ->with('country')
@@ -81,9 +82,6 @@ class Edit extends Component
         foreach ($this->productVariants as $variant) {
             $this->images['var_'.$variant->id] = [];
         }
-
-        // TODO: fermarsi al secondo livello?
-        $this->categories = Category::with('children')->whereNull('parent_id')->get();
     }
 
     /**

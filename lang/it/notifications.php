@@ -96,5 +96,22 @@ return [
             'success' => 'Lo stato dell\'ordine è stato modificato con successo',
             'error' => 'Non é possibile modificare lo stato dell\'ordine',
         ]
+    ],
+    'customer' => [
+        'error' => [
+            'password' => [
+                'title' => 'Passord non valida',
+                'description' => 'La password deve rispettare il formato richiesto.'
+            ],
+            'address' => [
+                'title' => 'Indirizzo non valido',
+                'description' => 'Assicurati che entrambi gli indirizzi siano corretti!'
+            ]
+        ],
+        'success' => [
+            'password' => [
+                'title' => 'Passord modificata correttamente',
+            ],
+        ]
     ]
 ];

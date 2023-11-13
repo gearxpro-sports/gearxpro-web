@@ -11,15 +11,10 @@ use Livewire\Attributes\On;
 class Navigation extends Component
 {
     public $user;
-    public $products = 0;
     public $languages = ["it", "en", "fr", "de", "es"];
 
-
-    #[On('addProducts')]
-    public function addProducts($quantity) {
-        $this->products += $quantity;
-    }
-
+    #[On('item-updated')]
+    #[On('product-added-to-cart')]
     public function render()
     {
         return view('livewire.shop.navigation');

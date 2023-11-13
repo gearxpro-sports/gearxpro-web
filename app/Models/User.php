@@ -66,6 +66,13 @@ class User extends Authenticatable
         return $this->addresses()->firstWhere('type', 'shipping');
     }
 
+    public function getInitialLettersAttribute() {
+        $name = strtoupper(substr($this->firstname, 0, 1));
+        $lastName = strtoupper(substr($this->lastname, 0, 1));
+        $Initials = $name . ' ' . $lastName;
+        return $Initials;
+    }
+
     public function getCountryCodeAttribute() {
         return strtolower($this->country->iso2_code) ?? 'it';
     }
@@ -104,5 +111,9 @@ class User extends Authenticatable
 
     public function invoices() {
         return $this->hasManyThrough(Invoice::class, Supply::class);
+    }
+
+    public function cart() {
+        return $this->hasOne(Cart::class);
     }
 }

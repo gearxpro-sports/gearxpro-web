@@ -29,18 +29,16 @@ class AddChildCategory extends ModalComponent
 
     public function store()
     {
-        $this->validate();
-
-        $this->childCategoryForm->store($this->category->id);
+        if ($this->category->parent_id === null) {
+            $this->childCategoryForm->store($this->category->id);
+            $this->dispatch('open-notification',
+                title: __('notifications.titles.saving'),
+                subtitle: __('notifications.categories.saving.success'),
+                type: 'success',
+            );
+        }
 
         $this->dispatch('closeModal');
-
-        $this->dispatch('open-notification',
-            title: __('notifications.titles.saving'),
-            subtitle: __('notifications.categories.saving.success'),
-            type: 'success',
-        );
-
         $this->dispatch('reload-child-categories');
     }
 }
