@@ -127,8 +127,6 @@ class Payment extends Component
     }
 
     public function getDataUser() {
-        $this->validate();
-
         if ($this->streetClicked AND $this->shipping_civic === null AND !$this->customer_shipping_address) {
             return  $this->dispatch('open-notification',
                 title: __('notifications.customer.error.address.title'),
@@ -136,6 +134,8 @@ class Payment extends Component
                 type: 'error'
             );
         }
+
+        $this->validate();
 
         if ($this->currentTab === 0) {
             if (auth()->user()) {
