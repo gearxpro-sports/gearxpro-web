@@ -27,7 +27,7 @@
 
         <div class="flex justify-center mt-[130px]">
             <div class="w-[594px] h-[580px] bg-color-edebe5 pt-[70px] px-[88px] flex flex-col items-center rounded-md">
-                <img src="{{ Vite::asset('resources/images/icons/check_confirm.svg') }}" class="mb-[50px] w-[131px] h-[131px]" alt="">
+                <x-icons name="check_confirm" />
                 <h2 class="text-[33px] font-semibold leading-[40px] text-color-18181a mb-[25px]">{{ __('shop.confirm.title') }}</h2>
                 <p class="text-[15px] font-medium leading-[21px] text-color-6c757d mb-[60px] text-center">{{ __('shop.confirm.message') }}</p>
                 <a href="/shop" class="relative flex items-center justify-center h-[48px] w-fit px-[40px] rounded-md bg-color-18181a border border-color-18181a group">

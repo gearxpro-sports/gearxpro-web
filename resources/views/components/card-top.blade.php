@@ -12,7 +12,7 @@
             <div class="h-full absolute top-0 left-0 w-0 bg-color-f3f7f9 group-hover:animate-line group-hover:w-full rounded-bl-md"></div>
         </div>
         <div class="h-full w-[60px] flex items-center justify-center border-l border-color-18181a bg-color-f3f7f9">
-            <img class="!w-[10px]" src="{{ Vite::asset('resources/images/icons/double_arrow_right.svg')}}" alt="">
+            <x-icons name="double_arrow_right" />
         </div>
     </div>
 </div>

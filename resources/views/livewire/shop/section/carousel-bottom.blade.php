@@ -10,10 +10,10 @@
 
     <div class="mt-[40px] hidden xl:flex gap-5 ">
         <button class="customPrevBtn">
-            <img src="{{ Vite::asset('resources/images/icons/round_arrow.svg')}}" alt="">
+            <x-icons name="round_arrow" />
         </button>
         <button class="customNextBtn">
-            <img src="{{ Vite::asset('resources/images/icons/round_arrow_active.svg')}}" alt="">
+            <x-icons name="round_arrow_active" />
         </button>
     </div>
 
