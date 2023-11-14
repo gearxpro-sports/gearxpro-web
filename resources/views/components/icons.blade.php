@@ -366,7 +366,7 @@
         </svg>
         @break
     @case('pay')
-        <svg xmlns="http://www.w3.org/2000/svg" width="16.25" height="13" viewBox="0 0 16.25 13"
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16.25" height="13" viewBox="0 0 16.25 13"
             {{ $attributes->merge(['class']) }}>
             <g id="money" transform="translate(-0.141 -0.563)">
                 <g id="Raggruppa_184" data-name="Raggruppa 184" transform="translate(0.141 0.563)">
