@@ -9,7 +9,7 @@
                 <div class="absolute -top-2 -right-2 flex items-center justify-center bg-color-f55b3f text-white font-semibold rounded-full text-xxs w-4 h-4">12</div>
             </div>
             <a href="#" class="text-sm text-white uppercase">{{ __('common.faq') }}</a>
-            <!-- Settings Dropdown -->
+            <!-- Settings FilterDropdown -->
             <div class="relative">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">

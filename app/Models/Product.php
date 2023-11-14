@@ -89,4 +89,12 @@ class Product extends Model
 
         return $prices;
     }
+
+    /**
+     * @return HasMany
+     */
+    public function stocks(): HasMany
+    {
+        return $this->hasMany(Stock::class);
+    }
 }

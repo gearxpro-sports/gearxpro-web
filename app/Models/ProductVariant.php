@@ -91,7 +91,6 @@ class ProductVariant extends Model implements HasMedia
     }
 
     /**
-     *
      * @return HasMany
      */
     public function stocks(): HasMany
