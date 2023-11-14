@@ -4,6 +4,7 @@ namespace App\Livewire\Shop\Cart;
 
 use App\Models\Address;
 use App\Models\Country;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
@@ -48,33 +49,6 @@ class Payment extends Component
             'icon-off' => 'payment-off',
         ]
     ];
-
-    public function mount()
-    {
-        $this->cart = auth()->user()?->cart;
-        if (!auth()->check() || !$this->cart) {
-            return redirect()->route('shop.index');
-        }
-        if (auth()->user()) {
-            $this->customer = auth()->user();
-            $this->firstname = $this->customer->firstname;
-            $this->lastname = $this->customer->lastname;
-            $this->customer_shipping_address = $this->customer->shipping_address ?? null;
-        }
-
-        if ($this->customer_shipping_address) {
-            $this->full_shipping_address = $this->customer_shipping_address->address_1.' '.$this->customer_shipping_address->city.' '.$this->customer_shipping_address->postcode;
-
-            $this->pec = $this->customer->shipping_address->pec;
-            $this->phone = $this->customer->shipping_address->phone;
-            $this->shipping_address = $this->customer_shipping_address->address_1;
-            // $this->shipping_civic = $this->customer_shipping_address->address_1;
-            $this->shipping_postcode = $this->customer_shipping_address->postcode;
-            $this->shipping_city = $this->customer_shipping_address->city;
-            $this->shipping_state = $this->customer_shipping_address->state;
-            $this->shipping_company = $this->customer_shipping_address->company;
-        }
-    }
 
     public function rules()
     {
@@ -125,12 +99,40 @@ class Payment extends Component
         }
     }
 
+    #[On('shipping-data-updated')]
+    public function mount()
+    {
+        $this->cart = auth()->user()?->cart;
+        if (!auth()->check() || !$this->cart) {
+            return redirect()->route('shop.index');
+        }
+        if (auth()->user()) {
+            $this->customer = auth()->user();
+            $this->firstname = $this->customer->firstname;
+            $this->lastname = $this->customer->lastname;
+            $this->customer_shipping_address = $this->customer->shipping_address ?? null;
+        }
+
+        if ($this->customer_shipping_address) {
+            $this->full_shipping_address = trim($this->customer_shipping_address->address_1) . ' ' . trim($this->customer_shipping_address->city) . ' ' . trim($this->customer_shipping_address->postcode);
+
+            $this->pec = $this->customer->shipping_address->pec;
+            $this->phone = $this->customer->shipping_address->phone;
+            $this->shipping_address = $this->customer_shipping_address->address_1;
+            // $this->shipping_civic = $this->customer_shipping_address->address_1;
+            $this->shipping_postcode = $this->customer_shipping_address->postcode;
+            $this->shipping_city = $this->customer_shipping_address->city;
+            $this->shipping_state = $this->customer_shipping_address->state;
+            $this->shipping_company = $this->customer_shipping_address->company;
+        }
+    }
+
     public function changeTab($tab)
     {
         $this->currentTab = $tab;
     }
 
-    public function getDataUser()
+    public function next()
     {
         if ($this->streetClicked && $this->shipping_civic === null) {
             return $this->dispatch('open-notification',
@@ -143,43 +145,38 @@ class Payment extends Component
         $this->validate();
 
         if ($this->currentTab === 0) {
-            if (auth()->user()) {
-                $this->customer->update([
-                    'firstname' => $this->firstname,
-                    'lastname' => $this->lastname,
-                ]);
+            $this->customer->update([
+                'firstname' => $this->firstname,
+                'lastname' => $this->lastname,
+            ]);
 
-                Address::updateOrCreate([
-                    'user_id' => $this->customer->id,
-                    'type' => 'shipping'
-                ],
-                    [
-                        'country_id' => $this->customer->country_id,
-                        'address_1' => ($this->shipping_address.' '.$this->shipping_civic),
-                        'postcode' => $this->shipping_postcode,
-                        'city' => $this->shipping_city,
-                        'state' => $this->shipping_state,
-                        'company' => $this->shipping_company,
-                        'pec' => $this->pec,
-                        'phone' => $this->phone,
-                    ]
-                );
+            Address::updateOrCreate([
+                'user_id' => $this->customer->id,
+                'type' => 'shipping'
+            ],
+                [
+                    'country_id' => $this->customer->country_id,
+                    'address_1' => trim($this->shipping_address) . ' ' . trim($this->shipping_civic),
+                    'postcode' => $this->shipping_postcode,
+                    'city' => $this->shipping_city,
+                    'state' => $this->shipping_state,
+                    'company' => $this->shipping_company,
+                    'pec' => $this->pec,
+                    'phone' => $this->phone,
+                ]
+            );
 
-                $this->dispatch('open-notification',
-                    title: __('notifications.titles.updating'),
-                    subtitle: __('notifications.profile.updating.success'),
-                    type: 'success'
-                );
-
-                $this->mount();
-            } else {
-                $this->full_shipping_address = $this->shipping_address.' '.$this->shipping_civic.' '.$this->shipping_city.' '.$this->shipping_postcode;
-            }
+            $this->dispatch('open-notification',
+                title: __('notifications.titles.updating'),
+                subtitle: __('notifications.profile.updating.success'),
+                type: 'success'
+            );
+            $this->dispatch('shipping-data-updated');
 
             $this->currentTab = 1;
             $this->dataUser = true;
         } elseif ($this->currentTab === 1) {
-            $this->redirect('/confirm');
+            return redirect()->route('confirm');
         }
     }
 

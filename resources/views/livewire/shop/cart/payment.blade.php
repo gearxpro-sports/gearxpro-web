@@ -6,10 +6,10 @@
         <div class="mb-[40px] flex flex-col gap-[10px]">
             @foreach ($tabs as $key => $tab )
                 <button wire:click="changeTab({{$key}})"
-                @if ($key != 0 AND !$dataUser) disabled @endif
+                @if ($key != 0 && !$dataUser) disabled @endif
                 @class([
                     "w-[365px] h-[80px] rounded-md flex flex-col items-center justify-center gap-1 text-[15px] font-medium leading-[19px] text-color-6c757d capitalize",
-                    $key == $currentTab ? '!bg-color-18181a !text-white' : 'text-color-6c757d bg-color-edebe5',])
+                    $key == $currentTab ? '!bg-color-18181a !text-white' : 'text-color-6c757d bg-color-edebe5'])
                 >
                     @if ($key == $currentTab)
                         <x-icons :name="$tab['icon-on']"/>
@@ -82,7 +82,7 @@
     </div>
 
     {{-- Recapiti e consegna --}}
-    <form wire:submit="getDataUser" @class(["pt-[90px] w-[750px]",$currentTab === 1 ? 'hidden' : ''])>
+    <form wire:submit="next" @class(["pt-[90px] w-[750px]",$currentTab === 1 ? 'hidden' : ''])>
         <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a mb-[15px]">{{__('shop.payment.address')}}</h2>
 
         <div class="flex gap-5">
@@ -152,7 +152,7 @@
                 <x-icons name="trust" />
             </div>
 
-            <form wire:submit="getDataUser" class="mt-5">
+            <form wire:submit="next" class="mt-5">
                 <x-input-text x-mask:dynamic="creditCardMask" wire:model="creditCard" width="w-full" name="creditCard" label="creditCard" required="true" />
 
                 <div class="flex gap-5 my-5">
@@ -191,7 +191,7 @@
             const input_shipping_address = document.getElementsByName("shipping_address")[0];
 
             const options = {
-                componentRestrictions: { country: @json(config('app.locale')) }
+                componentRestrictions: { country: @json(session('country_code')) }
             }
 
             autocomplete_shipping_address = new google.maps.places.Autocomplete(input_shipping_address, options);
@@ -200,6 +200,7 @@
         }
 
         function onPlaceChange() {
+            @this.set('shipping_civic', null);
             @this.set('streetClicked', true);
             const place_shipping_address = autocomplete_shipping_address.getPlace();
 
