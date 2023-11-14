@@ -30,6 +30,9 @@ use App\Livewire\Shop\Cart\Index as CartIndex;
 use App\Livewire\Shop\Cart\Checkout as CartCheckout;
 use App\Livewire\Shop\Cart\Payment as CartPayment;
 use App\Livewire\Register\Index as RegisterIndex;
+use App\Livewire\AboutUs\WhoWeARe;
+use App\Livewire\AboutUs\Values;
+use App\Livewire\AboutUs\Development;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +69,12 @@ Route::middleware('country')->domain('{country_code}.'.env('APP_URL'))->group(fu
     Route::get('/confirm', function() {
         return view('confirm');
     })->name('confirm');
+
+    Route::name('about_us.')->group(function () {
+        Route::get('/whoWeAre', [WhoWeAre::class, '__invoke'])->name('whoWeAre');
+        Route::get('/values', [Values::class, '__invoke'])->name('values');
+        Route::get('/development', [Development::class, '__invoke'])->name('development');
+    });
 });
 
 Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->group(function() {
