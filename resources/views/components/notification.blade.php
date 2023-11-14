@@ -70,7 +70,7 @@ $this->dispatch('open-notification',
 							</template>
 							<button x-on:click="open = false"
 							        class="ml-6 text-sm font-medium text-gray-400 bg-white rounded-md hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-								{{ __('notifications.close') }}
+								{{ __('notifications.actions.close') }}
 							</button>
 						</div>
 					</template>
