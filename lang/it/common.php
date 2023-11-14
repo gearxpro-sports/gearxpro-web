@@ -50,4 +50,5 @@ return [
     'available' => 'Disponibile',
     'close' => 'Chiudi',
     'default' => 'Default',
+    'free_shipping' => 'Gratuita',
 ];

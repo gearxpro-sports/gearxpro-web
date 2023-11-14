@@ -29,15 +29,19 @@
             <div class="flex items-center justify-between">
                 <span
                     class="text-sm font-medium text-color-18181a">{{__('shop.payment.shipment_cost')}}</span>
-                <span
-                    class="text-sm font-medium text-color-18181a">{{__('shop.payment.free')}}</span>
+                <span class="text-sm font-medium text-color-18181a">
+                    @if(config('app.shipping_cost') <= 0)
+                        {{ __('common.free_shipping') }}
+                    @else
+                        @money(config('app.shipping_cost'))
+                    @endif
+                </span>
             </div>
 
             <div class="border-y border-color-18181a py-3 flex items-center justify-between mt-7">
                 <span
                     class="font-medium text-color-18181a">{{__('shop.payment.total')}}</span>
-                {{-- TODO: Totale = Subtotale + Spese di spedizione --}}
-                <span class="font-semibold  text-color-18181a">@money($cart->subtotal)</span>
+                <span class="font-semibold  text-color-18181a">@money($cart->total)</span>
             </div>
         </div>
 

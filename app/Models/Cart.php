@@ -20,6 +20,12 @@ class Cart extends Model
         return $subtotal;
     }
 
+    public function getTotalAttribute() {
+        $total = $this->subtotal + config('app.shipping_cost');
+
+        return $total;
+    }
+
     public function user() {
         return $this->belongsTo(User::class);
     }
