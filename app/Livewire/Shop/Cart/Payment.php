@@ -40,13 +40,11 @@ class Payment extends Component
     public $tabs = [
         [
             'text' => 'tab_delivery',
-            'icon-on' => 'delivery',
-            'icon-off' => 'delivery-off'
+            'icon' => 'delivery'
         ],
         [
             'text' => 'tab_payment',
-            'icon-on' => 'payment',
-            'icon-off' => 'payment-off',
+            'icon' => 'payment',
         ]
     ];
 

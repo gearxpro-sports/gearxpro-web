@@ -1,77 +1,73 @@
-<div class="pt-[66px] pb-[222px] pl-[351px] pr-[384px] flex gap-[70px]">
-    <div class="w-[365px]">
-        <h1 class="text-[33px] font-semibold leading-[40px] text-color-18181a capitalize mb-[30px]">{{__('shop.payment.payment')}}</h1>
+<div class="flex gap-16 py-20">
+    <div class="space-y-12">
+        <h1 class="text-3xl font-semibold text-color-18181a capitalize">{{__('shop.payment.payment')}}</h1>
 
         {{-- tabs --}}
-        <div class="mb-[40px] flex flex-col gap-[10px]">
+        <div class="mb-10 flex flex-col space-y-2.5">
             @foreach ($tabs as $key => $tab )
                 <button wire:click="changeTab({{$key}})"
                 @if ($key != 0 && !$dataUser) disabled @endif
                 @class([
-                    "w-[365px] h-[80px] rounded-md flex flex-col items-center justify-center gap-1 text-[15px] font-medium leading-[19px] text-color-6c757d capitalize",
+                    "w-[365px] h-20 rounded-md flex flex-col items-center justify-center gap-1 font-medium text-color-6c757d capitalize",
                     $key == $currentTab ? '!bg-color-18181a !text-white' : 'text-color-6c757d bg-color-edebe5'])
                 >
-                    @if ($key == $currentTab)
-                        <x-icons :name="$tab['icon-on']"/>
-                    @else
-                        <x-icons :name="$tab['icon-off']"/>
-                    @endif
+                    <x-icons :name="$tab['icon']"/>
                     <span>{{__('shop.payment.'.$tab['text'])}}</span>
                 </button>
             @endforeach
         </div>
 
         {{-- dettaglio carrello --}}
-        <div class="mb-[30px]">
-            <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a mb-[15px]">{{__('shop.payment.in_to_cart')}}</h2>
+        <div>
+            <h2 class="text-xl font-semibold text-color-18181a mb-3.5">{{__('shop.payment.in_to_cart')}}</h2>
 
             <div class="flex items-center justify-between mb-5">
                 <span
-                    class="text-[13px] font-medium leading-[16px] text-color-18181a">{{__('shop.payment.subtotal')}}</span>
-                <span class="text-[13px] font-medium leading-[16px] text-color-18181a">@money($cart->subtotal)</span>
+                    class="text-sm font-medium text-color-18181a">{{__('shop.payment.subtotal')}}</span>
+                <span class="text-sm font-medium text-color-18181a">@money($cart->subtotal)</span>
             </div>
             <div class="flex items-center justify-between">
                 <span
-                    class="text-[13px] font-medium leading-[16px] text-color-18181a">{{__('shop.payment.shipment_cost')}}</span>
+                    class="text-sm font-medium text-color-18181a">{{__('shop.payment.shipment_cost')}}</span>
                 <span
-                    class="text-[13px] font-medium leading-[16px] text-color-18181a">{{__('shop.payment.free')}}</span>
+                    class="text-sm font-medium text-color-18181a">{{__('shop.payment.free')}}</span>
             </div>
 
-            <div class="border-y border-color-18181a h-[61px] flex items-center justify-between mt-[25px]">
+            <div class="border-y border-color-18181a py-3 flex items-center justify-between mt-7">
                 <span
-                    class="text-[15px] font-medium leading-[16px] text-color-18181a">{{__('shop.payment.total')}}</span>
+                    class="font-medium text-color-18181a">{{__('shop.payment.total')}}</span>
                 {{-- TODO: Totale = Subtotale + Spese di spedizione --}}
-                <span class="text-[15px] font-semibold  leading-[16px] text-color-18181a">@money($cart->subtotal)</span>
+                <span class="font-semibold  text-color-18181a">@money($cart->subtotal)</span>
             </div>
         </div>
 
         {{-- prodotti in carrello --}}
         <div>
-            <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a mb-[15px]">{{__('shop.payment.articols')}}</h2>
+            <h2 class="text-xl font-semibold text-color-18181a mb-3.5">{{__('shop.payment.articols')}}</h2>
 
             @foreach ($cart->items as $item)
                 <div class="flex gap-5 border border-color-f2f0eb bg-color-f2f0eb shadow p-1">
-                    <div class="w-[116px] h-[120px] overflow-hidden bg-color-edebe5">
+                    <div class="w-28 h-28 overflow-hidden bg-color-edebe5">
                         <img src="" alt="">
                     </div>
 
                     <div class="my-auto">
-                        <h4 class="text-[13px] font-semibold leading-[24px] text-color-18181a">
+                        <h4 class="text-sm font-semibold text-color-18181a">
                             {{$item->variant->product->name}}
                         </h4>
-                        <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">
+                        <p class="text-xs font-medium text-color-6c757d">
                             {{__('shop.products.height_leg')}}: {{$item->variant->length->value}}
                         </p>
-                        <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">
+                        <p class="text-xs font-medium text-color-6c757d">
                             {{__('shop.products.color')}}: {{$item->variant->color->value}}
                         </p>
-                        <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">
+                        <p class="text-xs font-medium text-color-6c757d">
                             {{__('shop.products.size')}}: {{$item->variant->size->value}}
                         </p>
-                        <p class="text-[12px] font-medium leading-[15px] text-color-6c757d">
+                        <p class="text-xs font-medium text-color-6c757d">
                             {{__('shop.products.amount')}}: {{$item->quantity}}
                         </p>
-                        <p class="text-[13px] font-medium leading-[24px] text-color-18181a">
+                        <p class="text-sm font-medium text-color-18181a">
                             @money($item->price)
                         </p>
                     </div>
@@ -82,8 +78,8 @@
     </div>
 
     {{-- Recapiti e consegna --}}
-    <form wire:submit="next" @class(["pt-[90px] w-[750px]",$currentTab === 1 ? 'hidden' : ''])>
-        <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a mb-[15px]">{{__('shop.payment.address')}}</h2>
+    <form wire:submit="next" @class(["pt-20 w-full", $currentTab === 1 ? 'hidden' : ''])>
+        <h2 class="text-xl font-semibold text-color-18181a mb-3.5">{{__('shop.payment.address')}}</h2>
 
         <div class="flex gap-5">
             <x-input-text wire:model="firstname" width="w-1/2" name="firstname" label="firstname" required="true" />
@@ -100,56 +96,55 @@
             <x-input-text x-mask="{{ __('masks.phone') }}" wire:model="phone" width="w-1/2" name="phone" label="phone" required="true" />
         </div>
 
-        <div class="mt-[42px] flex items-center justify-between">
-            <x-custom-button-2 :text="__('shop.payment.button_back')" :icon="'back'" :link="'/shop/cart'" width="w-[221px]"/>
-            <x-custom-button-4 :text="__('shop.payment.button_next_pay')" :icon="'pay'" width="w-[275px]" />
+        <div class="mt-10 flex items-center justify-between">
+            <div class="w-full max-w-xs">
+                <x-shop.shopping-button href="{{ route('shop.cart', ['country_code' => session('country_code')]) }}" color="transparent" icon="back">{{ __('shop.payment.button_back') }}</x-shop.shopping-button>
+            </div>
+            <div class="w-full max-w-xs">
+                <x-shop.shopping-button type="submit" color="orange" icon="pay">{{ __('shop.payment.button_next_pay') }}</x-shop.shopping-button>
+            </div>
         </div>
     </form>
 
     {{-- Info pagamento --}}
-    <div @class(["pt-[90px] w-[750px]", $currentTab === 0 ? 'hidden' : ''])>
+    <div @class(["pt-20 w-full space-y-7", $currentTab === 0 ? 'hidden' : ''])>
 
-        <div class="w-full space-y-[15px]">
+        <div class="w-full space-y-3.5">
             {{-- Indirizzo --}}
-            <div class="w-full h-[197px] py-[24px] px-[21px] border border-color-e0e0df rounded-md">
+            <div class="w-full p-6 border border-color-e0e0df rounded-md">
                 <div class="flex items-center gap-2">
                     <x-icons name="flag_ON"/>
-                    <h3 class="text-[15px] font-semibold leading-[19px] text-color-18181a">{{__('shop.payment.address')}}</h3>
+                    <h3 class="font-semibold text-color-18181a">{{__('shop.payment.address')}}</h3>
                 </div>
 
-                <h3 class="text-[13px] font-semibold leading-[24px] text-color-323a46 mt-[25px] mb-[5px]">{{$firstname}} {{$lastname}}</h3>
+                <h3 class="text-sm font-semibold text-color-323a46 mt-4 mb-1">{{$firstname}} {{$lastname}}</h3>
 
-                <div class="text-[13px] font-medium flex gap-[15px]">
-                    <div class="flex flex-col gap-[5px] min-w-[60px] text-color-6c757d">
-                        <span>{{__('shop.payment.address')}}:</span>
-                        <span>{{__('shop.payment.email')}}:</span>
-                        <span>{{__('shop.payment.phone')}}:</span>
-                    </div>
-                    <div class="flex flex-col gap-[5px]  text-color-323a46">
-                        <span>{{$full_shipping_address}}</span>
-                        <span>{{$pec}}</span>
-                        <span>{{$phone}}</span>
+                <div class="text-sm font-medium flex gap-3.5">
+                    <div class="flex flex-col gap-1 text-color-6c757d">
+                        <p>{{__('shop.payment.address')}}: <span class="text-color-323a46">{{$full_shipping_address}}</span></p>
+                        <p>{{__('shop.payment.email')}}: <span class="text-color-323a46">{{$pec}}</span></p>
+                        <p>{{__('shop.payment.phone')}}: <span class="text-color-323a46">{{$phone}}</span></p>
                     </div>
                 </div>
             </div>
 
             {{-- spedizione --}}
-            <div class="w-full h-[99px] py-[24px] px-[21px] border border-color-e0e0df rounded-md">
+            <div class="w-full p-6 border border-color-e0e0df rounded-md">
                 <div class="flex items-center gap-2">
                     <x-icons name="flag_ON"/>
-                    <h3 class="text-[15px] font-semibold leading-[19px] text-color-18181a">{{__('shop.payment.shipment_free')}}</h3>
+                    <h3 class="font-semibold text-color-18181a">{{__('shop.payment.shipment_free')}}</h3>
                 </div>
 
-                <p class="text-[13px] font-medium text-color-6c757d mt-[15px]">{{__('shop.payment.shipment_time')}}</p>
+                <p class="text-sm font-medium text-color-6c757d mt-4">{{__('shop.payment.shipment_time')}}</p>
             </div>
         </div>
 
-        <div class="w-full mt-[30px]">
-            <h2 class="text-[21px] font-semibold leading-[38px] text-color-18181a">{{__('shop.payment.method_payment')}}</h2>
+        <div class="w-full">
+            <h2 class="text-xl font-semibold text-color-18181a">{{__('shop.payment.method_payment')}}</h2>
 
-            <div class="w-full h-[73px] mt-[15px] bg-color-f5e3d7 py-[18px] px-[21px] flex items-center justify-between gap-[35px] rounded-md">
-                <p class="text-[13px] font-medium leading-[20px] text-color-6c757d">{{__('shop.payment.ssl')}}</p>
-                <x-icons name="trust" />
+            <div class="w-full mt-3.5 bg-color-f5e3d7 p-6 flex items-center justify-between gap-8 rounded-md">
+                <p class="text-sm font-medium text-color-6c757d">{{__('shop.payment.ssl')}}</p>
+                <x-icons name="trust" class="flex-shrink-0" />
             </div>
 
             <form wire:submit="next" class="mt-5">
@@ -162,9 +157,13 @@
 
                 <x-input-text wire:model="accountHolder" width="w-full" name="accountHolder" label="accountHolder" required="true" />
 
-                <div class="mt-[42px] flex items-center justify-between">
-                    <x-custom-button-2 :text="__('shop.payment.button_back')" :icon="'back'" :link="'/shop/cart'" width="w-[221px]"/>
-                    <x-custom-button-4 :text="__('shop.payment.pay')" :icon="'pay'" width="w-[165px]" />
+                <div class="mt-10 flex items-center justify-between">
+                    <div class="w-full max-w-xs">
+                        <x-shop.shopping-button href="{{ route('shop.cart', ['country_code' => session('country_code')]) }}" color="transparent" icon="back">{{ __('shop.payment.button_back') }}</x-shop.shopping-button>
+                    </div>
+                    <div class="w-full max-w-xs">
+                        <x-shop.shopping-button type="submit" color="orange" icon="pay">{{ __('shop.payment.pay') }}</x-shop.shopping-button>
+                    </div>
                 </div>
             </form>
         </div>
