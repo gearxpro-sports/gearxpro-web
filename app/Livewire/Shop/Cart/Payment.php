@@ -14,8 +14,8 @@ class Payment extends Component
     public $customer;
     public $firstname;
     public $lastname;
+    public $pec;
     public $phone;
-    public $email;
     public $customer_shipping_address;
 
     //Shipping Address
@@ -49,7 +49,8 @@ class Payment extends Component
         ]
     ];
 
-    public function mount() {
+    public function mount()
+    {
         $this->cart = auth()->user()?->cart;
         if (!auth()->check() || !$this->cart) {
             return redirect()->route('shop.index');
@@ -58,14 +59,14 @@ class Payment extends Component
             $this->customer = auth()->user();
             $this->firstname = $this->customer->firstname;
             $this->lastname = $this->customer->lastname;
-            $this->email = $this->customer->email;
-            $this->phone = $this->customer->phone;
             $this->customer_shipping_address = $this->customer->shipping_address ?? null;
         }
 
         if ($this->customer_shipping_address) {
             $this->full_shipping_address = $this->customer_shipping_address->address_1.' '.$this->customer_shipping_address->city.' '.$this->customer_shipping_address->postcode;
 
+            $this->pec = $this->customer->shipping_address->pec;
+            $this->phone = $this->customer->shipping_address->phone;
             $this->shipping_address = $this->customer_shipping_address->address_1;
             // $this->shipping_civic = $this->customer_shipping_address->address_1;
             $this->shipping_postcode = $this->customer_shipping_address->postcode;
@@ -75,12 +76,13 @@ class Payment extends Component
         }
     }
 
-    public function rules() {
+    public function rules()
+    {
         if ($this->currentTab == 0) {
             return [
                 'firstname' => 'required',
                 'lastname' => 'required',
-                'email' => 'required',
+                'pec' => 'required',
                 'phone' => 'required',
                 'shipping_address' => 'required',
                 'shipping_civic' => 'nullable',
@@ -101,12 +103,13 @@ class Payment extends Component
         return [];
     }
 
-    public function messages() {
+    public function messages()
+    {
         if ($this->currentTab == 0) {
             return [
                 'firstname.required' => __('shop.payment.required'),
                 'lastname.required' => __('shop.payment.required'),
-                'email.required' => __('shop.payment.required'),
+                'pec.required' => __('shop.payment.required'),
                 'phone.required' => __('shop.payment.required'),
                 'shipping_address.required' => __('shop.payment.required'),
                 'shipping_civic.required' => __('shop.payment.required'),
@@ -122,13 +125,15 @@ class Payment extends Component
         }
     }
 
-    public function changeTab($tab) {
+    public function changeTab($tab)
+    {
         $this->currentTab = $tab;
     }
 
-    public function getDataUser() {
-        if ($this->streetClicked AND $this->shipping_civic === null AND !$this->customer_shipping_address) {
-            return  $this->dispatch('open-notification',
+    public function getDataUser()
+    {
+        if ($this->streetClicked && $this->shipping_civic === null) {
+            return $this->dispatch('open-notification',
                 title: __('notifications.customer.error.address.title'),
                 subtitle: __('notifications.customer.error.address.description'),
                 type: 'error'
@@ -142,30 +147,30 @@ class Payment extends Component
                 $this->customer->update([
                     'firstname' => $this->firstname,
                     'lastname' => $this->lastname,
-                    'email' => $this->email,
-                    'phone' => $this->phone,
                 ]);
 
-                if (!$this->customer_shipping_address OR $this->shipping_address != $this->customer_shipping_address->address_1) {
-                    \App\Models\Address::updateOrCreate(['user_id'   => $this->customer->id, 'type' => 'shipping'],
-                        [
-                            'country_id' => $this->customer->country_id,
-                            'address_1' => ($this->shipping_address . ' ' . $this->shipping_civic),
-                            'postcode' => $this->shipping_postcode,
-                            'city' => $this->shipping_city,
-                            'state' => $this->shipping_state,
-                            'company' => $this->shipping_company
-                        ]
-                    );
-                }
+                Address::updateOrCreate([
+                    'user_id' => $this->customer->id,
+                    'type' => 'shipping'
+                ],
+                    [
+                        'country_id' => $this->customer->country_id,
+                        'address_1' => ($this->shipping_address.' '.$this->shipping_civic),
+                        'postcode' => $this->shipping_postcode,
+                        'city' => $this->shipping_city,
+                        'state' => $this->shipping_state,
+                        'company' => $this->shipping_company,
+                        'pec' => $this->pec,
+                        'phone' => $this->phone,
+                    ]
+                );
 
-                if (!$this->customer_shipping_address OR $this->shipping_address != $this->customer_shipping_address->address_1) {
-                    $this->dispatch('open-notification',
-                        title: __('notifications.titles.updating'),
-                        subtitle: __('notifications.profile.updating.success'),
-                        type: 'success'
-                    );
-                }
+                $this->dispatch('open-notification',
+                    title: __('notifications.titles.updating'),
+                    subtitle: __('notifications.profile.updating.success'),
+                    type: 'success'
+                );
+
                 $this->mount();
             } else {
                 $this->full_shipping_address = $this->shipping_address.' '.$this->shipping_civic.' '.$this->shipping_city.' '.$this->shipping_postcode;

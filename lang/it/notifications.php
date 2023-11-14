@@ -105,7 +105,7 @@ return [
             ],
             'address' => [
                 'title' => 'Indirizzo non valido',
-                'description' => 'Assicurati che entrambi gli indirizzi siano corretti!'
+                'description' => 'Assicurati che l\'indirizzo inserito sia corretto e comprensivo di numero civico!'
             ]
         ],
         'success' => [

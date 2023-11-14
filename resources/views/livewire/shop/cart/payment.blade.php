@@ -92,11 +92,11 @@
 
         <div class="flex flex-col gap-5 mt-5">
             <x-input-text placeholder="{{str_replace('\'', ' ',$full_shipping_address)}}" autocomplete="autocomplete" width="w-full" name="shipping_address" label="address_civic" required="true" />
-            <x-input-text wire:model="shipping_company" width="w-full" name="company" label="company" />
+            <x-input-text wire:model="shipping_company" width="w-full" name="shipping_company" label="company" />
         </div>
 
         <div class="flex gap-5 mt-5">
-            <x-input-text wire:model="email" type="email" width="w-1/2" name="email" label="email" required="true" />
+            <x-input-text wire:model="pec" type="email" width="w-1/2" name="pec" label="email" required="true" />
             <x-input-text x-mask="{{ __('masks.phone') }}" wire:model="phone" width="w-1/2" name="phone" label="phone" required="true" />
         </div>
 
@@ -127,7 +127,7 @@
                     </div>
                     <div class="flex flex-col gap-[5px]  text-color-323a46">
                         <span>{{$full_shipping_address}}</span>
-                        <span>{{$email}}</span>
+                        <span>{{$pec}}</span>
                         <span>{{$phone}}</span>
                     </div>
                 </div>
