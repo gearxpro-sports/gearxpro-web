@@ -45,6 +45,7 @@ return [
         'price_high' => 'Prezzo più alto',
         'results' => 'risultati',
         'remove_filters' => 'Rimuovi filtri',
+        'not_found' => 'Nessun prodotto trovato',
     ],
     'button' => [
         'pay_link' => 'Paga con link',

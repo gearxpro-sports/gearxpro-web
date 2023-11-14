@@ -67,9 +67,9 @@
                         @endphp
                         @foreach ($filterCategories as $filterCategory)
                             <div wire:key="cat_filter_{{ $category->id }}" class="w-full px-1 pt-4">
-                                <div class="flex justify-between items-center pb-[16px] border-b border-color-e0e0df cursor-pointer">
+                                <div class="flex justify-between items-center pb-4 border-b border-color-e0e0df cursor-pointer">
                                     <h5 class="font-medium text-color-18181a uppercase">{{ $filterCategory->name }}</h5>
-                                    <img src="{{ Vite::asset('resources/images/icons/minus_menu.svg')}}" alt="">
+                                    <x-icons name="minus_menu" />
                                 </div>
                                 <div class="transition-all duration-1000 ease-out overflow-hidden">
                                     <ul>
@@ -96,7 +96,9 @@
                     <div x-data="{opened: false}" class="w-full px-1 pt-4">
                         <div @click="opened = !opened" class="flex justify-between items-center pb-4 border-b border-color-e0e0df cursor-pointer">
                             <h5 class="font-medium text-color-18181a uppercase">{{__('shop.products.color')}}</h5>
-                            <img src="{{ Vite::asset('resources/images/icons/minus_menu.svg')}}" alt="" class="invisible transition-all duration-300 ease-out opacity-20" :class="opened && '!visible !opacity-100'">
+                            <span class="invisible transition-all duration-300 ease-out opacity-20" :class="opened && '!visible !opacity-100'">
+                                <x-icons name="minus_menu" />
+                            </span>
                         </div>
 
                         <div class="h-0 transition-all duration-1000 ease-out overflow-hidden" :class="opened && '!h-fit overflow-visible'">
@@ -117,10 +119,12 @@
                     </div>
 
                     {{-- SIZES FILTERS --}}
-                    <div x-data="{opened: false}" class="w-full px-1 pt-[16px]">
+                    <div x-data="{opened: false}" class="w-full px-1 pt-4">
                         <div @click="opened = !opened" class="flex justify-between items-center pb-4 border-b border-color-e0e0df cursor-pointer">
                             <h5 class="font-medium text-color-18181a uppercase">{{__('shop.products.size')}}</h5>
-                            <img src="{{ Vite::asset('resources/images/icons/minus_menu.svg')}}" alt="" class="invisible transition-all duration-300 ease-out opacity-20" :class="opened && '!visible !opacity-100'">
+                            <span class="invisible transition-all duration-300 ease-out opacity-20" :class="opened && '!visible !opacity-100'">
+                                <x-icons name="minus_menu" />
+                            </span>
                         </div>
 
                         <div class="h-0 transition-all duration-1000 ease-out overflow-hidden" :class="opened && '!h-fit overflow-visible'">
@@ -159,7 +163,7 @@
                     @endforeach
                 </div>
             @else
-                <div class="p-10 bg-white text-center font-bold">Nessun prodotto trovato</div>
+                <div class="p-10 bg-white text-center font-bold">{{ __('shop.products.not_found') }}</div>
             @endif
         </div>
     </div>
