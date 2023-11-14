@@ -65,6 +65,7 @@ export default {
                 'color-010101': '#010101',
                 'color-e6e7e9': '#e6e7e9',
                 'color-19181d': '#19181d',
+                'color-15AF74': '#15AF74',
             },
             fontSize: {
                 'xxs': '0.625rem'

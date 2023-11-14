@@ -146,4 +146,9 @@ return [
         'my_account' => 'Il MIO ACCOUNT',
         'privacy' => 'PRIVACY'
     ],
+    'order' => [
+        'working' => 'In lavorazione',
+        'delivered' => 'Consegnato',
+        'product_delivered' => 'I tuoi articoli sono stati consegnati.'
+    ]
 ];

@@ -110,6 +110,7 @@ return [
     'buttons' => [
         'cancel' => 'Annulla',
         'save' => 'Salva',
-        'copy_shipping' => 'Uguale a Spedizione'
+        'copy_shipping' => 'Uguale a Spedizione',
+        'back' => 'Indietro',
     ]
 ];

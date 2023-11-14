@@ -22,7 +22,9 @@
 
         {{-- Content Tabs --}}
         <div class="w-[654px]">
-            <h2 x-text="currentTab" class="text-xl font-semibold text-color-18181a"></h2>
+            @if ($modify != 'orders')
+                <h2 x-text="currentTab" class="text-xl font-semibold text-color-18181a"></h2>
+            @endif
 
             @if (!$modify)
                 <template x-if="currentTab == '{{__('customers.tabs.personal_data')}}'">
@@ -90,6 +92,22 @@
                 </template>
 
                 <template x-if="currentTab == '{{__('customers.tabs.orders')}}'">
+                    <div wire:click="selectEditData('orders')" class="h-36 w-full px-6 py-4 border bg-color-edebe5 mt-7 flex gap-5 cursor-pointer">
+                        <div class="h-full flex flex-col justify-between">
+                            <div class="flex flex-col items-start justify-start">
+                                <span class="text-base font-semibold text-color-18181a">05/10/2023</span>
+                                <span class="text-sm font-medium text-color-18181a">€ 70,00</span>
+                            </div>
+                            <div class="flex flex-col items-start justify-start">
+                                <span class="text-sm font-semibold text-color-18181a">{{__('shop.order.working')}}</span>
+                                <span class="text-xs font-medium text-color-6c757d ">2609YCC2A22028</span>
+                            </div>
+                        </div>
+
+                        <div class="grow overflow-x-hidden scrollBar flex gap-5">
+                            {{-- Products --}}
+                        </div>
+                    </div>
                 </template>
             @endif
 
@@ -251,6 +269,37 @@
                         <span class="z-10 text-[15px] font-semibold text-white leading-[19px] group-hover:text-color-18181a">{{ __('customers.buttons.save') }}</span>
                         <div class="h-full absolute top-0 left-0 w-0 bg-white group-hover:animate-line group-hover:w-full rounded-md"></div>
                     </button>
+                </div>
+            </div>
+
+            <div x-show="modify === 'orders'" class="relative">
+                <button wire:click="selectEditData(null)" class="absolute top-5 right-0 flex items-center gap-2 group">
+                    <x-icons name="arrow-right-xl" class="rotate-180 group-hover:translate-x-[-8px] duration-300 transition-all"/>
+                    <span class="capitalize font-medium group-hover:underline">{{__('customers.buttons.back')}}</span>
+                </button>
+                <h2 class="text-xl font-semibold text-color-18181a leading-9">Ordine 0807YF15D22020</h2>
+                <span class="text-base font-semibold text-color-18181a leading-5">30/08/2023</span>
+
+                <div class="mt-5">
+                    <div class="w-fit text-xs font-semibold text-white py-2 px-4 bg-color-15AF74 rounded-full">{{__('shop.order.delivered')}}</div>
+                    <p class="mt-6 text-sm text-color-18181a">{{__('shop.order.product_delivered')}}</p>
+                </div>
+
+                <div class="h-52 w-full mt-7 border p-1 flex">
+                    <div class="h-full w-48 bg-color-edebe5">
+                        {{-- img Product --}}
+                    </div>
+                    <div class="h-full grow px-14 py-16 flex flex-col items-start justify-center gap-2">
+                        <div>
+                            <h3 class="text-base font-semibold text-color-18181a leading-5">SOXPro Sprint - White</h3>
+                            <p class="text-xs font-medium text-color-6c757d leading-4">
+                                {{__('shop.products.color')}} White,
+                                {{__('shop.products.size')}} M,
+                                {{__('shop.products.amount')}} 2
+                            </p>
+                        </div>
+                        <span class="text-sm font-medium text-color-18181a">€ 58,00</span>
+                    </div>
                 </div>
             </div>
 

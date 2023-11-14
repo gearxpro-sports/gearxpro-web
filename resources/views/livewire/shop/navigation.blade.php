@@ -113,7 +113,7 @@
                             </svg>
                         </a>
                         @endif
-                        <livewire:shop.components.language-switch/>
+                        <livewire:shop.components.language-switch />
                     </div>
                 </div>
 
