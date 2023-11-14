@@ -219,6 +219,8 @@ class Index extends Component
     public function clearFilters()
     {
         $this->selectedCategory = null;
+        $this->selectedColors = [];
+        $this->selectedSizes = [];
         $this->loadProducts();
     }
 }
