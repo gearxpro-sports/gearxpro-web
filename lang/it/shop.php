@@ -43,6 +43,8 @@ return [
         'reset_selection' => 'Cancella selezione',
         'price_low' => 'Prezzo più basso',
         'price_high' => 'Prezzo più alto',
+        'results' => 'risultati',
+        'remove_filters' => 'Rimuovi filtri',
     ],
     'button' => [
         'pay_link' => 'Paga con link',

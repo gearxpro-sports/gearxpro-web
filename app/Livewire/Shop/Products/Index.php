@@ -2,14 +2,11 @@
 
 namespace App\Livewire\Shop\Products;
 
-use App\Livewire\Components\SectionButton;
 use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Product;
-use App\Models\Stock;
 use App\Models\Term;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -20,11 +17,6 @@ use Livewire\Attributes\On;
 #[Layout('layouts.guest')]
 class Index extends Component
 {
-    //public $product;
-    public $color;
-    public $size;
-
-
     /**
      * @var Model
      */
@@ -61,24 +53,33 @@ class Index extends Component
     public Collection $productAttributes;
 
     /**
-     * @var int|null
-     */
-    public ?int $selectedCategory;
-
-    /**
      * @var bool
      */
     public bool $filtersOpen = false;
 
+    /**
+     * @var Category|null
+     */
+    public ?Category $selectedCategory = null;
+
+    /**
+     * @var array
+     */
+    public array $selectedColors = [];
+
+    /**
+     * @var array
+     */
+    public array $selectedSizes = [];
+
     public function mount()
     {
+        $this->categories = Category::with('children')->whereNull('parent_id')->get();
         $this->currentCountry = Country::with('reseller')->where('iso2_code', session('country_code'))->first();
         $this->orderOptions = [
             'price_low'  => __('shop.products.price_low'),
             'price_high' => __('shop.products.price_high'),
         ];
-        // TODO: fermarsi al secondo livello?
-        $this->categories = Category::with('children')->whereNull('parent_id')->get();
         $this->productAttributes = Attribute::with('terms')->get()->groupBy('id')->toBase();
         $this->loadProducts();
     }
@@ -88,7 +89,7 @@ class Index extends Component
         return view('livewire.shop.products.index');
     }
 
-    public function loadProducts(array $filter = [])
+    public function loadProducts()
     {
         $this->productColorCounts = [];
         $products = Product::with([
@@ -101,7 +102,6 @@ class Index extends Component
                         ->with(['terms' => function($query) {
                             $query->whereNotNUll('color')->select('terms.id');
                         }])
-
                     ;
                 }
             ])
@@ -126,23 +126,27 @@ class Index extends Component
             })
         ;
 
-        if ($filter) {
-            switch ($filter['type']) {
-                case 'category':
-                    $products->whereHas('categories', function(Builder $query) use ($filter) {
-                        $query->where('id', $filter['value']);
-                    });
-                    break;
-            }
+        if ($this->selectedCategory) {
+            $products->whereHas('categories', function(Builder $query) {
+                $query->where('id', $this->selectedCategory->id);
+            });
+        }
+
+        if ($this->selectedColors) {
+            $products->whereHas('variants.terms', function(Builder $query) {
+                $query->whereIn('id', $this->selectedColors);
+            });
+        }
+
+        if ($this->selectedSizes) {
+            $products->whereHas('variants.terms', function(Builder $query) {
+                $query->whereIn('id', $this->selectedSizes);
+            });
         }
 
         $products->select('products.*');
 
         $this->products = $products->get();
-
-//        if ($filter) {
-//            dd($this->products);
-//        }
 
         foreach ($this->products as $product) {
             if ($product->variants->count() > 0) {
@@ -159,14 +163,51 @@ class Index extends Component
     }
 
     #[On('selectCategory')]
-    public function selectCategory(int $categoryId) {
-        $this->loadProducts(['type' => 'category', 'value' => $categoryId]);
-        $this->selectedCategory = $categoryId;
+    public function selectCategory(Category $category) {
+        if ($this->selectedCategory && $category->id === $this->selectedCategory->id) {
+            if ($category->parent_id !== null) {
+                $parent = $category->parent;
+                $this->selectedCategory = $parent;
+            } else {
+                $this->resetCategory();
+                return;
+            }
+        } else {
+            $this->selectedCategory = $category;
+        }
+        $this->loadProducts();
     }
 
     public function resetCategory()
     {
-        $this->selectedCategory = null;
+        $this->clearFilters();
+    }
+
+    /**
+     * @param Term $color
+     */
+    public function selectColors(Term $color)
+    {
+        if (in_array($color->id, $this->selectedColors)) {
+            $this->selectedColors = array_diff($this->selectedColors, [$color->id]);
+        } else {
+            $this->selectedColors[] = $color->id;
+        }
+
+        $this->loadProducts();
+    }
+
+    /**
+     * @param Term $size
+     */
+    public function selectSizes(Term $size)
+    {
+        if (in_array($size->id, $this->selectedSizes)) {
+            $this->selectedSizes = array_diff($this->selectedSizes, [$size->id]);
+        } else {
+            $this->selectedSizes[] = $size->id;
+        }
+
         $this->loadProducts();
     }
 
@@ -175,35 +216,9 @@ class Index extends Component
         $this->filtersOpen = !$this->filtersOpen;
     }
 
-    /*
-    #[On('selectOrder')]
-    public function selectOrder($index) {
-        $this->selectedOrder = $index;
+    public function clearFilters()
+    {
+        $this->selectedCategory = null;
+        $this->loadProducts();
     }
-
-    #[On('filterOn')]
-    public function filterOn() {
-        $this->filter = !$this->filter;
-    }
-
-    #[On('setFilter')]
-    public function setFilter($type, $element) {
-        $this->product = $element;
-    }
-
-    #[On('setColor')]
-    public function setColor($color) {
-        $this->color = $color;
-    }
-
-    #[On('setSize')]
-    public function setSize($size) {
-        $this->size = $size;
-    }
-
-    public function clearFilter() {
-        $this->color = null;
-        $this->size = null;
-    }
-    */
 }
