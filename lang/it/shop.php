@@ -50,6 +50,10 @@ return [
     'button' => [
         'pay_link' => 'Paga con link',
         'add_to_cart' => 'Aggiungi al carrello',
+        'go_shop' => 'Vai allo Shop',
+        'show_line' => 'Scopri le nostre linee',
+        'all_products' => 'Tutti i nostri prodotti innovativi',
+        'show_last' => 'Guarda le ultime creazioni'
     ],
     'options' => [
         'or' => 'oppure',

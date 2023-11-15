@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="z-50 w-full sticky top-0 xl:static">
+<nav x-data="{ open: false }" class="z-50 w-full sticky top-0 xl:relative">
     <!-- Header -->
     <div class="h-[36px] bg-color-19181d flex justify-center items-center border-b-color-707070">
         <p class="text-white font-medium text-[13px] leading-4">
@@ -22,19 +22,18 @@
                     <x-nav-link :href="route('home', ['country_code' => session('country_code')])" :active="request()->routeIs('home')">
                         {{ __('shop.navigation.home') }}
                     </x-nav-link>
+
                     <x-nav-link :href="route('shop.index', ['country_code' => session('country_code')])" :active="request()->routeIs('shop.*')">
                         {{ __('shop.navigation.shop') }}
                     </x-nav-link>
 
-                    <x-custom-dropdown title="{{ __('shop.navigation.about_us') }}"
-                                       :options='["opzione 1", "opzione 2", "opzione 3"]'/>
+                    <x-custom-dropdown title="{{ __('shop.navigation.about_us') }}" :active="request()->routeIs('about_us.*')" :options="$about_us"/>
 
                     <x-nav-link :href="route('home', ['country_code' => session('country_code')])" :active="request()->routeIs('dashboard')">
                         {{ __('shop.navigation.journal') }}
                     </x-nav-link>
 
-                    <x-custom-dropdown title="{{ __('shop.navigation.assistance') }}"
-                                       :options='["opzione 1", "opzione 2", "opzione 3"]'/>
+                    <x-custom-dropdown title="{{ __('shop.navigation.assistance') }}" :active="request()->routeIs('assistance.*')" :options="[]"/>
                 </div>
             </div>
 
