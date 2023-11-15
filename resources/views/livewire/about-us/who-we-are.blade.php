@@ -137,7 +137,7 @@
         </div>
 
 
-        <div class="z-20 w-fit absolute bottom-[250px] right-[370px] flex gap-5 opacity-0 transition-all duration-700">
+        <div class="z-20 w-fit absolute bottom-[250px] right-[290px] flex gap-5 opacity-0 transition-all duration-700">
             <h3 class="text-3xl font-semibold text-white">SOXPro <br/> Fast Break</h3>
             <x-about-us.icon-product width="w-14" border_color="border-color-bfd8ed" color_1="bg-color-bfd8ed" color_2="bg-color-71a3cf" color_3="bg-color-2271b5" left="false" />
         </div>
@@ -248,7 +248,7 @@
 
                 sectionContainer[4].childNodes[3].childNodes[3].classList.add("!opacity-100", "translate-x-10")
                 sectionContainer[4].childNodes[3].childNodes[5].classList.add("!opacity-100", "translate-x-10")
-                sectionContainer[4].childNodes[3].childNodes[7].classList.add("!opacity-100", "translate-x-10")
+                sectionContainer[4].childNodes[3].childNodes[7].classList.add("!opacity-100", "translate-x-[-40px]")
             } else {
                 sectionContainer[4].childNodes[1].classList.remove('!sticky')
                 sectionContainer[4].childNodes[3].childNodes[1].classList.remove('!sticky')
@@ -256,7 +256,7 @@
 
                 sectionContainer[4].childNodes[3].childNodes[3].classList.remove("!opacity-100", "translate-x-10")
                 sectionContainer[4].childNodes[3].childNodes[5].classList.remove("!opacity-100", "translate-x-10")
-                sectionContainer[4].childNodes[3].childNodes[7].classList.remove("!opacity-100", "translate-x-10")
+                sectionContainer[4].childNodes[3].childNodes[7].classList.remove("!opacity-100", "translate-x-[-40px]")
             }
             // 2023
             if (scrollPosition >= 9720) {
