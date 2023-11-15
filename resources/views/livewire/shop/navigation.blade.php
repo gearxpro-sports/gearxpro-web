@@ -33,7 +33,7 @@
                         {{ __('shop.navigation.journal') }}
                     </x-nav-link>
 
-                    <x-custom-dropdown title="{{ __('shop.navigation.assistance') }}" :active="request()->routeIs('assistance.*')" :options="$about_us"/>
+                    <x-custom-dropdown title="{{ __('shop.navigation.assistance') }}" :active="request()->routeIs('assistance.*')" :options="[]"/>
                 </div>
             </div>
 
