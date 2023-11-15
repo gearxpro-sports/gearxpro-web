@@ -121,6 +121,13 @@ export default {
                 about_us_7: "url('/resources/images/about_us_7.png')",
                 about_us_8: "url('/resources/images/about_us_8.png')",
                 about_us_9: "url('/resources/images/about_us_9.png')",
+
+                about_us_10: "url('/resources/images/about_us_10.jpg')",
+                about_us_11: "url('/resources/images/about_us_11.jpg')",
+                about_us_12: "url('/resources/images/about_us_12.jpg')",
+                about_us_13: "url('/resources/images/about_us_13.jpg')",
+                about_us_14: "url('/resources/images/about_us_14.jpg')",
+
                 about_us_values_1: "url('/resources/images/about_us_values_1.png')",
                 about_us_values_2: "url('/resources/images/about_us_values_2.png')",
                 about_us_values_3: "url('/resources/images/about_us_values_3.png')",
@@ -136,7 +143,6 @@ export default {
 
     plugins: [
         require('tailwindcss-labeled-groups')(['custom-button']),
-        require("@xpd/tailwind-3dtransforms"),
         forms
     ],
 };
