@@ -22,7 +22,7 @@
 
 
     <div x-cloak x-show="dropOpen" @click.away="dropOpen = false"
-        class="absolute top-11 left-0 z-20 min-w-[240px] py-2 text-sm font-medium bg-white shadow overflow-hidden rounded flex flex-col gap-1"
+        class="absolute top-11 left-[-30px] z-20 min-w-[240px] py-2 text-sm font-medium bg-white shadow overflow-hidden rounded flex flex-col gap-1"
     >
         @foreach ($options as $option )
             <a href="{{route($option['route'], ['country_code' => session('country_code')])}}" class="w-full text-color-6c757d px-4 py-3 hover:bg-color-18181a hover:text-white cursor-pointer whitespace-nowrap group">
