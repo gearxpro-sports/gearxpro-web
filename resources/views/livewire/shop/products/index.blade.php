@@ -153,12 +153,9 @@
                     @foreach ($products as $product )
                         <livewire:components.card-product
                           wire:key="prod_{{ $product->id }}"
-                          :slug="$product->slug"
+                          :product="$product"
                           :image="'SOXPro.png'"
-                          :category="$product->categories->first()"
-                          :name="$product->name"
-                          :availableColors="$productColorCounts[$product->id] ?? null"
-                          :price="$product->price"
+                          :availableColors="$productColors[$product->id] ?? []"
                         />
                     @endforeach
                 </div>

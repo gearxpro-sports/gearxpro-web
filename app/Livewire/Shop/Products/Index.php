@@ -35,7 +35,7 @@ class Index extends Component
     /**
      * @var array
      */
-    public array $productColorCounts;
+    public array $productColors;
 
     /**
      * @var array
@@ -91,7 +91,7 @@ class Index extends Component
 
     public function loadProducts()
     {
-        $this->productColorCounts = [];
+        $this->productColors = [];
         $products = Product::with([
                 'categories' => function($query) {
                     $query->whereNull('parent_id');
@@ -99,11 +99,11 @@ class Index extends Component
                 'variants' => function($query) {
                     $query
                         ->without(['product', 'attributes'])
-                        ->with(['terms' => function($query) {
-                            $query->whereNotNUll('color')->select('terms.id');
+                        ->with(['media', 'terms' => function($query) {
+                            $query->whereNotNUll('color');
                         }])
                     ;
-                }
+                },
             ])
             ->whereHas('stocks', function(Builder $query) {
                 $query
@@ -132,32 +132,23 @@ class Index extends Component
             });
         }
 
-        if ($this->selectedColors) {
-            $products->whereHas('variants.terms', function(Builder $query) {
-                $query->whereIn('id', $this->selectedColors);
-            });
+        if ($this->selectedColors || $this->selectedSizes) {
+            $terms = array_merge($this->selectedColors, $this->selectedSizes);
+            $products->whereHas('variants.terms', function(Builder $query) use ($terms) {
+                $query->whereIn('id', $terms);
+            }, '>=', count($terms));
         }
-
-        if ($this->selectedSizes) {
-            $products->whereHas('variants.terms', function(Builder $query) {
-                $query->whereIn('id', $this->selectedSizes);
-            });
-        }
-
-        $products->select('products.*');
 
         $this->products = $products->get();
+
+//        dd($this->products->toArray());
 
         foreach ($this->products as $product) {
             if ($product->variants->count() > 0) {
                 foreach ($product->variants as $variant) {
-                    if ($variant->terms->count() > 0) {
-                        $this->productColorCounts[$product->id][] = $variant->terms->first()->id;
-                    }
+                    $this->productColors[$product->id][] = $variant->color->color;
                 }
-                if (isset($this->productColorCounts[$product->id])) {
-                    $this->productColorCounts[$product->id] = count(array_unique($this->productColorCounts[$product->id]));
-                }
+                $this->productColors[$product->id] = array_unique($this->productColors[$product->id]);
             }
         }
     }
