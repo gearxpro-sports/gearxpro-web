@@ -2,9 +2,9 @@
     <h1 class="text-7xl font-bold text-color-18181a">{{__('shop.products.title')}}</h1>
     <p class="text-4xl font-semibold text-color-18181a mt-3.5 mb-9">{{__('shop.products.description')}}</p>
 
-    <div
+    <div id="action"
         @class([
-            'px-12 py-8 z-50 bg-color-f2f0eb w-full rounded-md flex items-center mb-8 cursor-pointer',
+            'w-fit px-12 py-8 z-50 bg-color-f2f0eb rounded-md flex items-center mb-8 cursor-pointer',
             $filtersOpen ? '!shadow-none' : 'sticky top-10',
         ])
     >
@@ -39,9 +39,6 @@
                     {{ $category->name }}
                 </button>
             @endforeach
-        </div>
-        <div class="ml-auto px-12 py-8">
-            <livewire:components.select label="{{ __('shop.products.order') }}" :selected="$selectedOrder" :options="$orderOptions" />
         </div>
     </div>
 
@@ -147,7 +144,11 @@
                 </div>
             </div>
         @endif
-        <div class="w-full" wire:loading.class="opacity-25">
+        <div class="w-full relative" wire:loading.class="opacity-25">
+            <div class="absolute top-[-110px] right-0">
+                <livewire:components.select label="{{ __('shop.products.order') }}" :selected="$selectedOrder" :options="$orderOptions" />
+            </div>
+
             @if($products->count() > 0)
                 <div class="w-full grid grid-cols-4 gap-5 relative">
                     @foreach ($products as $product )
@@ -169,7 +170,7 @@
     </div>
 </div>
 
-{{-- @push('scripts')
+@push('scripts')
     <script>
         var scrollPosition = window.scrollY;
         var actionContainer = document.getElementById('action');
@@ -184,4 +185,4 @@
             }
         })
     </script>
-@endpush --}}
+@endpush
