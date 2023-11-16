@@ -30,7 +30,7 @@ use App\Livewire\Shop\Cart\Index as CartIndex;
 use App\Livewire\Shop\Cart\Checkout as CartCheckout;
 use App\Livewire\Shop\Cart\Payment as CartPayment;
 use App\Livewire\Register\Index as RegisterIndex;
-use App\Livewire\AboutUs\WhoWeARe;
+use App\Livewire\AboutUs\WhoWeAre;
 use App\Livewire\AboutUs\Values;
 use App\Livewire\AboutUs\Development;
 

@@ -39,11 +39,18 @@
 </div> --}}
 
 <div id="pagepiling">
-    <img class="section" src="{{ Vite::asset('resources/images/about_us_10.jpg')}}" alt="">
-    <img class="section" src="{{ Vite::asset('resources/images/about_us_11.jpg')}}" alt="">
-    <img class="section" src="{{ Vite::asset('resources/images/about_us_12.jpg')}}" alt="">
-    <img class="section" src="{{ Vite::asset('resources/images/about_us_13.jpg')}}" alt="">
-    <img class="section" src="{{ Vite::asset('resources/images/about_us_14.jpg')}}" alt="">
+    <div class="section relative grid grid-cols-12 grid-rows-6">
+        <div class="absolute top-0 left-0 w-full h-[100vh] bg-about_us_10 bg-center bg-cover bg-no-repeat"></div>
+
+        <div class="z-10 row-start-4 col-start-2 col-span-10 pt-10">
+            <h3 class="text-center text-[59px] font-bold leading-[124px] tracking-[0px] text-white mb-3">Uniqueness, Integrity, Environment and Respect.</h3>
+            <p class="text-center text-[44px] leading-[1px] tracking-[0px] text-white">Our values are clear and govern our work.</p>
+        </div>
+    </div>
+
+    @foreach ($slides as $slide )
+        <x-slide_values bg_image="{{$slide['image']}}" title="{{$slide['title']}}" text="{{$slide['text']}}" />
+    @endforeach
 </div>
 
 @push('scripts')
