@@ -16,7 +16,7 @@
             {{-- Prodotti inseriti --}}
             <div class="col-span-6 xl:col-span-4 mt-12 xl:mt-14">
                 @foreach($cart->items as $item)
-                    <livewire:shop.components.cart.cart-item :$item/>
+                    <livewire:shop.components.cart.cart-item wire:key="{{$item}}" :$item/>
                 @endforeach
 
                 <div class="w-full h-px bg-color-ff7f6e my-11 xl:my-6"></div>
