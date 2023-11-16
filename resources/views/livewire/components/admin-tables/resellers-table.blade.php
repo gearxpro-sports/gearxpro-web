@@ -21,7 +21,12 @@
             <tbody>
                 @foreach ($resellers as $reseller)
                 <tr class="text-left [&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
-                    <td>{{ $reseller->firstname }} {{ $reseller->lastname }}</td>
+                    <td class="flex flex-col">
+                        <span>{{ $reseller->firstname }} {{ $reseller->lastname }}</span>
+                        @if($reseller->deleted_at)
+                            <span class="text-xxs text-color-e54f33">{{ __('resellers.index.table.disabled') }}</span>
+                        @endif
+                    </td>
                     <td>{{ $reseller->email }}</td>
                     <td>{{ $reseller->created_at->format('d/m/Y') }}</td>
                     <td>{{ $reseller->country->name ?? '-' }}</td>

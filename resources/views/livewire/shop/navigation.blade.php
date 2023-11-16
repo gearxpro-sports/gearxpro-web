@@ -95,9 +95,9 @@
                         </div>
 
                         <a href="{{ route('shop.cart', ['country_code' => session('country_code')]) }}" class="relative">
-                            @if (auth()->check() && auth()->user()->cart?->items->count())
+                            @if ($cart?->items->count() > 0)
                                 <div
-                                    class="absolute top-[-9px] right-[-13px] w-5 h-5 bg-color-ff7f6e rounded-full text-white flex items-center justify-center text-[11px] font-semibold leading-[14px]">{{auth()->user()->cart->items->count()}}</div>
+                                    class="absolute top-[-9px] right-[-13px] w-5 h-5 bg-color-ff7f6e rounded-full text-white flex items-center justify-center text-[11px] font-semibold leading-[14px]">{{$cart->items->count()}}</div>
                             @endif
                             <x-icons name="shopping-bag" />
                         </a>

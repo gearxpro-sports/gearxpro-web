@@ -3,18 +3,18 @@
         <div class="w-48 h-48 bg-white"></div>
         <div class="my-auto">
             <div>
-                <h3 class="text-lg font-semibold text-color-18181a">{{ $variant->product->name }}</h3>
+                <h3 class="text-lg font-semibold text-color-18181a">{{ $item->variant->product->name }}</h3>
                 <p class="text-sm text-color-18181a mb-[20px]">
-                    {{ $variant->product->categories->first()?->name }}
+                    {{ $item->variant->product->categories->first()?->name }}
                 </p>
             </div>
             <div class="space-y-1">
                 <p class="text-sm font-medium text-color-18181a">
-                    {{ __('shop.products.height_leg')}}: {{ $variant->length->value }}</p>
+                    {{ __('shop.products.height_leg')}}: {{ $item->variant->length->value }}</p>
                 <p class="text-sm font-medium text-color-18181a">
-                    {{ __('shop.products.color')}}: {{ $variant->color->value }}</p>
+                    {{ __('shop.products.color')}}: {{ $item->variant->color->value }}</p>
                 <p class="text-sm font-medium text-color-18181a">
-                    {{ __('shop.products.size')}}: {{ $variant->size->value }}
+                    {{ __('shop.products.size')}}: {{ $item->variant->size->value }}
             </div>
             </p>
         </div>
@@ -30,7 +30,7 @@
             <div
                 class="w-[65px] h-full flex items-center justify-center text-[13px] font-medium leading-[16px] text-color-18181a font-mono select-none">{{ $item->quantity }}</div>
             <div wire:click="increment"
-                 class="{{ $item->quantity >= $variant?->quantity ? 'cursor-not-allowed text-gray-300' : 'cursor-pointer' }} w-[60px] h-full flex items-center justify-center bg-transparent border-l border-color-b6b9bb">
+                 class="{{ $item->quantity >= $item->variant?->quantity ? 'cursor-not-allowed text-gray-300' : 'cursor-pointer' }} w-[60px] h-full flex items-center justify-center bg-transparent border-l border-color-b6b9bb">
                 <x-icons name="plus" class="h-3 w-3"></x-icons>
             </div>
         </div>

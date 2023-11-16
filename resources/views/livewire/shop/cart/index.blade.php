@@ -8,7 +8,7 @@
                 <span>
                     ({{ trans_choice('shop.cart.product', $cart->items->count(), ['value' => $cart->items->count()]) }})
                 </span>
-                <span class="font-semibold">@money($cart->items->sum('price'))</span>
+{{--                <span class="font-semibold">@money($cart->subtotal)</span>--}}
             </p>
             <p class="text-color-18181a font-normal">{{ __('shop.cart.shop_complete')}}</p>
         </div>
@@ -50,15 +50,19 @@
                 <div class="flex justify-between items-center mb-6">
                     <span
                         class="text-xs font-medium text-color-18181a">{{ __('shop.cart.shipping_cost')}}</span>
-                    <span
-                        class="text-xs font-medium text-color-18181a">{{ __('shop.cart.free')}}</span>
+                    <span class="text-xs font-medium text-color-18181a">
+                        @if(config('app.shipping_cost') <= 0)
+                            {{ __('common.free_shipping') }}
+                        @else
+                            @money(config('app.shipping_cost'))
+                        @endif
+                    </span>
                 </div>
                 {{-- totale --}}
                 <div class="w-full py-3.5 border-y border-color-ff7f6e flex items-center justify-between mb-[47px]">
                     <span
                         class="font-medium text-color-18181a">{{ __('shop.cart.total')}}</span>
-                    {{-- TODO: Totale = Subtotale + Spese di spedizione --}}
-                    <span class="font-semibold text-color-18181a">@money($cart->subtotal)</span>
+                    <span class="font-semibold text-color-18181a">@money($cart->total)</span>
                 </div>
 
                 @auth

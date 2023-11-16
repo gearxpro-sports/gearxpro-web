@@ -56,15 +56,19 @@ class User extends Authenticatable
     }
 
     public function getFullnameAttribute() {
+        if(!$this->firstname && !$this->lastname) {
+            return 'Guest';
+        }
+
         return "$this->firstname $this->lastname";
     }
 
-    public function getBillingAddressAttribute() {
-        return $this->addresses()->firstWhere('type', 'billing');
-    }
-    public function getShippingAddressAttribute() {
-        return $this->addresses()->firstWhere('type', 'shipping');
-    }
+//    public function getBillingAddressAttribute() {
+//        return $this->addresses()->firstWhere('type', 'billing');
+//    }
+//    public function getShippingAddressAttribute() {
+//        return $this->addresses()->firstWhere('type', 'shipping');
+//    }
 
     public function getInitialLettersAttribute() {
         $name = strtoupper(substr($this->firstname, 0, 1));
@@ -83,6 +87,14 @@ class User extends Authenticatable
     public function addresses(): HasMany
     {
         return $this->hasMany(Address::class);
+    }
+
+    public function shipping_address() {
+        return $this->hasOne(Address::class)->where('type', 'shipping');
+    }
+
+    public function billing_address() {
+        return $this->hasOne(Address::class)->where('type', 'billing');
     }
 
     /**

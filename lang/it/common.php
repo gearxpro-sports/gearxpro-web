@@ -16,6 +16,8 @@ return [
     'add' => 'Aggiungi',
     'send' => 'Invia',
     'print' => 'Stampa',
+    'disable' => 'Disabilita',
+    'enable' => 'Abilita',
     'saving' => 'Salvataggio',
     'select' => 'Seleziona',
     'filter' => 'Filtra',
@@ -48,4 +50,5 @@ return [
     'available' => 'Disponibile',
     'close' => 'Chiudi',
     'default' => 'Default',
+    'free_shipping' => 'Gratuita',
 ];

@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/css/shop.css',
                 'resources/css/auth.css',
                 'resources/css/owl.carousel.css',
+                'resources/css/pagepiling.min.css',
                 'resources/js/app.js',
                 'resources/js/auth.js',
                 'resources/js/owl.carousel.min.js'

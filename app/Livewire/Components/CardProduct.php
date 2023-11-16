@@ -2,23 +2,41 @@
 
 namespace App\Livewire\Components;
 
+use App\Models\Category;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
 class CardProduct extends Component
 {
-    public $slug;
-    public $cardSmall = false;
-    public $image;
-    public $name;
-    public $description;
-    public $availableColor;
-    public $price;
+    /**
+     * @var string
+     */
+    public string $slug;
 
-    #[On('filterOn')]
-    public function filterOn() {
-        $this->cardSmall = !$this->cardSmall;
-    }
+    /**
+     * @var string|null
+     */
+    public ?string $image;
+
+    /**
+     * @var string
+     */
+    public string $name;
+
+    /**
+     * @var Category|null
+     */
+    public ?Category $category;
+
+    /**
+     * @var int|null
+     */
+    public ?int $availableColors;
+
+    /**
+     * @var float
+     */
+    public float $price;
 
     public function render()
     {

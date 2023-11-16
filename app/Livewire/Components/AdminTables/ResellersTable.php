@@ -18,6 +18,7 @@ class ResellersTable extends BaseTable
                 'lastname',
                 'email',
             ])
+            ->withTrashed()
             ->orderByDesc('id');
 
         foreach($this->filters as $k => $filter) {

@@ -1,4 +1,4 @@
-<div class="bg-color-f2f0eb px-[195px] pt-[70px] pb-[284px] flex gap-[126px]">
+<div class="bg-color-f2f0eb pt-[70px] pb-[284px] flex gap-[126px]">
     <div class="w-[624px]">
         <div class="mb-[30px]">
             <h2 class="text-[33px] font-semibold leading-[40px] text-color-18181a mb-[10px]">{{ __('shop.checkout.option_next') }}</h2>

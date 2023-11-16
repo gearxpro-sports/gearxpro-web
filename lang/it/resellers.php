@@ -13,6 +13,7 @@ return [
                 'creation_date' => 'Data di Creazione',
                 'last_login_date' => 'Data Ultimo Accesso',
             ],
+            'disabled' => 'Disabilitato',
         ],
         'filter' => [
             'select_registration_date' => 'Seleziona Data Registrazione',
@@ -95,8 +96,13 @@ return [
     'edit' => [
         'title' => 'Modifica Rivenditore',
     ],
-    'delete' => [
-        'title' => 'Sei sicuro di voler eliminare questo Rivenditore?',
-        'confirm' => 'Cancella Rivenditore'
+    'disable' => [
+        'title' => 'Sei sicuro di voler disabilitare questo Rivenditore?',
+        'confirm' => 'Disabilita'
+    ],
+    'enable' => [
+        'title' => 'Sei sicuro di voler abilitare questo Rivenditore?',
+        'already_exist' => "Attualmente esiste un altro Rivenditore legato alla nazione ':country'.<br>Abilitando questo Rivenditore, disabiliterai l'altro!",
+        'confirm' => 'Abilita'
     ]
 ];
