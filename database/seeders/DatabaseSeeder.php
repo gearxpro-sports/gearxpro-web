@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
             ResellerSeeder::class,
             CustomerSeeder::class,
             GroupAttributeWithAttributeSeeder::class,
+            CategorySeeder::class,
             ProductSeeder::class,
             StockSeeder::class,
-            CategorySeeder::class,
         ]);
     }
 }

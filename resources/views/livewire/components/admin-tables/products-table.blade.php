@@ -11,14 +11,22 @@
             <thead>
                 <tr class="[&>th]:py-4 [&>th]:px-7 [&>th]:font-medium border-b-color-eff0f0">
                     <th class="w-1 uppercase text-center">{{ __('categories.index.table.cols.id') }}</th>
+                    <th class="w-24"></th>
                     <th class="text-left w-1/5 ">{{ __('products.index.table.cols.name') }}</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($products as $product)
-                <tr class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
+                <tr class="[&>td]:py-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
                     <td class="text-color-6c757d text-center">{{ $product->id }}</td>
+                    <td class="!p-4">
+                        @if ($product->defaultVariantWithMedia)
+                        <img class="p-1 bg-white border border-color-dee2e6/50 rounded-sm" src="{{ $product->defaultVariantWithMedia->getThumbUrl('preview') }}" alt="{{ $product->name }}">
+                        @else
+                        <div class="w-16 h-16 bg-color-f3f7f9"></div>
+                        @endif
+                    </td>
                     <td>{{ $product->name }}</td>
                     <td>
                         <div class="flex items-center space-x-2 justify-end">
