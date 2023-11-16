@@ -38,20 +38,89 @@
     </div>
 </div> --}}
 
-<div id="pagepiling">
-    <div class="section relative grid grid-cols-12 grid-rows-6">
-        <div class="absolute top-0 left-0 w-full h-[100vh] bg-about_us_10 bg-center bg-cover bg-no-repeat"></div>
+<div>
+    <div class="bg-about_us_10 invisible"></div>
+    <div class="bg-about_us_11 invisible"></div>
+    <div class="bg-about_us_12 invisible"></div>
+    <div class="bg-about_us_13 invisible"></div>
+    <div class="bg-about_us_14 invisible"></div>
 
-        <div class="z-10 row-start-4 col-start-2 col-span-10 pt-10">
-            <h3 class="text-center text-[59px] font-bold leading-[124px] tracking-[0px] text-white mb-3">Uniqueness, Integrity, Environment and Respect.</h3>
-            <p class="text-center text-[44px] leading-[1px] tracking-[0px] text-white">Our values are clear and govern our work.</p>
+    <div id="pagepiling">
+        <div class="section relative grid grid-cols-12 grid-rows-6">
+            <div class="absolute top-0 left-0 w-full h-[100vh] bg-about_us_10 bg-center bg-cover bg-no-repeat"></div>
+
+            <div class="z-10 row-start-4 col-start-2 col-span-10 pt-10">
+                <h3 class="text-center text-[59px] font-bold leading-[124px] tracking-[0px] text-white mb-3">Uniqueness, Integrity, Environment and Respect.</h3>
+                <p class="text-center text-[44px] leading-[1px] tracking-[0px] text-white">Our values are clear and govern our work.</p>
+            </div>
         </div>
-    </div>
 
-    @foreach ($slides as $slide )
-        <x-slide_values bg_image="{{$slide['image']}}" title="{{$slide['title']}}" text="{{$slide['text']}}" />
-    @endforeach
+        @foreach ($slides as $slide )
+            <x-slide_values bg_image="{{$slide['image']}}" title="{{$slide['title']}}" text="{{$slide['text']}}" />
+        @endforeach
+
+        {{-- <div class="section relative grid grid-cols-12 grid-rows-6">
+            <div class="absolute top-0 left-0 w-full h-[100vh] bg-about_us_11 bg-center bg-cover bg-no-repeat"></div>
+
+            <div class="z-10 col-span-6 row-span-6 pl-[92px] pt-[13px]">
+                <h3 class="text-[285px] font-extrabold leading-[227px] tracking-[-3px] uppercase text-white mb-5">uni que ness</h3>
+                <p class="pl-5 text-[29px] font-medium leading-[36px] tracking-[2px] text-white">
+                    We value our diverse workforce.
+                    Convinced that uniqueness is a strength,
+                    we strive to maintaining a working climate
+                    that promotes the growth and well-being
+                    of our employees by stimulating
+                    boldness and creativity.
+                </p>
+            </div>
+        </div>
+        <div class="section relative grid grid-cols-12 grid-rows-6">
+            <div class="absolute top-0 left-0 w-full h-[100vh] bg-about_us_12 bg-center bg-cover bg-no-repeat"></div>
+
+            <div class="z-10 col-span-6 row-span-6 pl-[92px] pt-[13px]">
+                <h3 class="text-[285px] font-extrabold leading-[227px] tracking-[-3px] uppercase text-white mb-5">int egr ity</h3>
+                <p class="pl-5 text-[29px] font-medium leading-[36px] tracking-[2px] text-white">
+                    We operate in an honestly and transparently
+                    by providing our customers with clear
+                    and accurate communication about our
+                    products and manufacturing activities.
+                </p>
+            </div>
+        </div>
+        <div class="section relative grid grid-cols-12 grid-rows-6">
+            <div class="absolute top-0 left-0 w-full h-[100vh] bg-about_us_13 bg-center bg-cover bg-no-repeat"></div>
+
+            <div class="z-10 col-span-6 row-span-6 pl-[92px] pt-[13px]">
+                <h3 class="text-[285px] font-extrabold leading-[227px] tracking-[-3px] uppercase text-white mb-5">envi ron ment</h3>
+                <p class="pl-5 text-[29px] font-medium leading-[36px] tracking-[2px] text-white">
+                    We are staunch allies of environmenta sustainability,
+                    in line with the goalsd the 2030 Agenda promoted
+                    by the UN
+                    We promote sustainable production models that
+                    adopt the best possible practicesfor Waste reduction
+                    and respec€for the environment.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="section relative grid grid-cols-12 grid-rows-6">
+            <div class="absolute top-0 left-0 w-full h-[100vh] bg-about_us_14 bg-center bg-cover bg-no-repeat"></div>
+
+            <div class="z-10 col-span-6 row-span-6 pl-[92px] pt-[13px]">
+                <h3 class="text-[285px] font-extrabold leading-[227px] tracking-[-3px] uppercase text-white mb-5">re spe ct</h3>
+                <p class="pl-5 text-[29px] font-medium leading-[36px] tracking-[2px] text-white">
+                    We approach the market with
+                    absolute loyalty, taking into
+                    account our corporate philosophy
+                    which is based on respect for others,
+                    from colleagues to stakeholders.
+                </p>
+            </div>
+        </div> --}}
+    </div>
 </div>
+
 
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pagePiling.js/1.5.6/jquery.pagepiling.min.js"

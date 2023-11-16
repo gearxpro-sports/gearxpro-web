@@ -67,7 +67,7 @@
     </div>
 
     {{-- responsive mobile footer --}}
-    <div class="xl:hidden col-start-1 col-span-4 px-4 mb-14">
+    <div class="xl:hidden col-start-1 col-span-4 px-4 pt-16 mb-14">
         <h3 class="text-base font-semibold text-white mb-7">SQUADRE E GRANDI GRUPPI</h3>
         <p class="text-sm font-medium text-white mb-6">Richiedi il GEARXPro B2B</p>
         <x-custom-button :text="'B2B GearXPro'" :icon="'airplain'" :link="'/'" width="w-full" />

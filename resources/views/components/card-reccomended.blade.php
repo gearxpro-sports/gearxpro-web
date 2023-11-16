@@ -1,6 +1,6 @@
 @props(['key','image', 'name', 'description', 'availableColor', 'price'])
 
-<div wire:key='{{$key}}' class="grow rounded-b-md overflow-hidden min-w-[434px] max-w-[434px] h-[561px]">
+<div wire:key='{{$key}}' class="grow rounded-b-md overflow-hidden w-[293px] h-456px xl:min-w-[434px] xl:max-w-[434px] xl:h-[561px]">
     <div class="h-[calc(100%-114px)] bg-white flex items-center justify-center overflow-hidden">
         <img src="{{ Vite::asset('resources/images/'. $image)}}" alt="">
     </div>

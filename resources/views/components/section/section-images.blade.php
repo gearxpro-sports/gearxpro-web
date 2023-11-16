@@ -1,4 +1,4 @@
-<div class="w-full bg-black px-4 xl:px-[39px] pt-10 pb-24 xl:py-[140px] flex flex-col xl:flex-row">
+<div class="w-full bg-black px-4 xl:px-[39px] py-10 xl:py-[140px] flex flex-col xl:flex-row">
 
     <div class="xl:h-full w-full xl:w-1/3 relative">
         <div class="xl:absolute left-[100px] top-[229px] z-20 w-full xl:w-[325px]">
