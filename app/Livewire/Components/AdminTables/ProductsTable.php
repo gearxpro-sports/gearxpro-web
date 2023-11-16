@@ -12,9 +12,10 @@ class ProductsTable extends BaseTable
      */
     public function render()
     {
-        $products = Product::search($this->search, [
-            'name'
-        ])
+        $products = Product::with('defaultVariantWithMedia')
+            ->search($this->search, [
+                'name'
+            ])
             ->orderBy('created_at')
             ->paginate();
 

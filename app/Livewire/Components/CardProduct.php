@@ -3,15 +3,16 @@
 namespace App\Livewire\Components;
 
 use App\Models\Category;
+use App\Models\Product;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
 class CardProduct extends Component
 {
     /**
-     * @var string
+     * @var Product|null
      */
-    public string $slug;
+    public ?Product $product;
 
     /**
      * @var string|null
@@ -19,24 +20,9 @@ class CardProduct extends Component
     public ?string $image;
 
     /**
-     * @var string
+     * @var array
      */
-    public string $name;
-
-    /**
-     * @var Category|null
-     */
-    public ?Category $category;
-
-    /**
-     * @var int|null
-     */
-    public ?int $availableColors;
-
-    /**
-     * @var float
-     */
-    public float $price;
+    public array $availableColors = [];
 
     public function render()
     {
