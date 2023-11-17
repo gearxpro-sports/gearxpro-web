@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="z-50 w-full sticky top-0 xl:static">
+<nav x-data="{ open: false }" class="z-50 w-full sticky top-0 xl:relative">
     <!-- Header -->
     <div class="h-[36px] bg-color-19181d flex justify-center items-center border-b-color-707070">
         <p class="text-white font-medium text-[13px] leading-4">
@@ -22,19 +22,18 @@
                     <x-nav-link :href="route('home', ['country_code' => session('country_code')])" :active="request()->routeIs('home')">
                         {{ __('shop.navigation.home') }}
                     </x-nav-link>
+
                     <x-nav-link :href="route('shop.index', ['country_code' => session('country_code')])" :active="request()->routeIs('shop.*')">
                         {{ __('shop.navigation.shop') }}
                     </x-nav-link>
 
-                    <x-custom-dropdown title="{{ __('shop.navigation.about_us') }}"
-                                       :options='["opzione 1", "opzione 2", "opzione 3"]'/>
+                    <x-custom-dropdown title="{{ __('shop.navigation.about_us') }}" :active="request()->routeIs('about_us.*')" :options="$about_us"/>
 
                     <x-nav-link :href="route('home', ['country_code' => session('country_code')])" :active="request()->routeIs('dashboard')">
                         {{ __('shop.navigation.journal') }}
                     </x-nav-link>
 
-                    <x-custom-dropdown title="{{ __('shop.navigation.assistance') }}"
-                                       :options='["opzione 1", "opzione 2", "opzione 3"]'/>
+                    <x-custom-dropdown title="{{ __('shop.navigation.assistance') }}" :active="request()->routeIs('assistance.*')" :options="[]"/>
                 </div>
             </div>
 
@@ -50,20 +49,27 @@
                                         <x-dropdown align="right" width="48">
                                             <x-slot name="trigger">
                                                 <button class="flex flex-col items-start">
-                                                    <span
-                                                        class="text-lg font-medium text-color-b6b9bb">{{ Auth::user()->fullname }}</span>
+                                                    <span class="hidden xl:block text-lg font-medium text-color-b6b9bb">{{ Auth::user()->fullname }}</span>
+                                                    <span class="xl:hidden text-lg font-medium text-color-b6b9bb">{{ Auth::user()->initial_letters }}</span>
                                                 </button>
                                             </x-slot>
 
-                                    <x-slot name="content">
-                                        @hasanyrole([App\Models\User::RESELLER, App\Models\User::SUPERADMIN])
-                                        <x-dropdown-link href="{{ route('dashboard') }}">
-                                            {{ __('Dashboard') }}
-                                        </x-dropdown-link>
-                                        @endrole
-                                        <x-dropdown-link href="{{ route('profile.edit') }}">
-                                            {{ __('Profile') }}
-                                        </x-dropdown-link>
+                                            <x-slot name="content">
+                                                @hasanyrole([App\Models\User::RESELLER, App\Models\User::SUPERADMIN])
+                                                <x-dropdown-link href="{{ route('dashboard') }}">
+                                                    {{ __('Dashboard') }}
+                                                </x-dropdown-link>
+                                                @endrole
+
+                                                @if (request()->route()->getName() != 'customer.profile')
+                                                    <x-dropdown-link href="{{ route('customer.profile') }}">
+                                                        {{ __('Profile') }}
+                                                    </x-dropdown-link>
+                                                @else
+                                                    <x-dropdown-link href="{{ route('home', ['country_code' => session('country_code')]) }}">
+                                                        {{ __('Home') }}
+                                                    </x-dropdown-link>
+                                                @endif
 
                                                 <div class="border-t border-gray-100"></div>
 
@@ -72,7 +78,7 @@
                                                     @csrf
 
                                                     <x-dropdown-link href="{{ route('logout') }}"
-                                                                     @click.prevent="$root.submit();">
+                                                                    @click.prevent="$root.submit();">
                                                         {{ __('Log Out') }}
                                                     </x-dropdown-link>
                                                 </form>
@@ -82,18 +88,18 @@
                                 @else
                                     <a href="{{ route('login') }}"
                                        class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-                                        <img src="{{ Vite::asset('resources/images/icons/account.svg')}}" alt="">
+                                        <x-icons name="account" />
                                     </a>
                                 @endauth
                             </div>
                         </div>
 
                         <a href="{{ route('shop.cart', ['country_code' => session('country_code')]) }}" class="relative">
-                            @if ($products)
+                            @if ($cart?->items->count() > 0)
                                 <div
-                                    class="absolute top-[-9px] right-[-13px] w-5 h-5 bg-color-ff7f6e rounded-full text-white flex items-center justify-center text-[11px] font-semibold leading-[14px]">{{$products}}</div>
+                                    class="absolute top-[-9px] right-[-13px] w-5 h-5 bg-color-ff7f6e rounded-full text-white flex items-center justify-center text-[11px] font-semibold leading-[14px]">{{$cart->items->count()}}</div>
                             @endif
-                            <img src="{{ Vite::asset('resources/images/icons/shopping-bag.svg')}}" alt="">
+                            <x-icons name="shopping-bag" />
                         </a>
                     </div>
 
@@ -106,12 +112,12 @@
                             </svg>
                         </a>
                         @endif
-                        <livewire:shop.components.language-switch/>
+                        <livewire:shop.components.language-switch />
                     </div>
                 </div>
 
                 <!-- Hamburger -->
-                <div class="-mr-2 flex items-center sm:hidden">
+                <div class="-mr-2 flex items-center xl:hidden">
                     <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:bg-none transition duration-150 ease-in-out">
                         <div :class="{'hidden': open, 'inline-flex': ! open }">
                             <x-icons name="hamburger" />
@@ -128,10 +134,14 @@
     <!-- Responsive Navigation Menu -->
     <div x-cloak
         :class="{'fixed': open, 'hidden': ! open}"
-        class="z-50 w-[100vw] px-[16px] inset-0 top-[96px] left-0 bg-white"
+        class="z-50 w-full px-[16px] inset-0 top-[96px] left-0 bg-white"
     >
         <div class="mt-5 mb-10">
-            <x-custom-button :text="__('shop.navigation.login_register')" :icon="'account'" :link="'/shop/checkout'" width="!w-full" />
+            @auth
+                <span class="text-lg font-medium text-color-b6b9bb">{{ Auth::user()->fullname }}</span>
+            @else
+                <x-custom-button :text="__('shop.navigation.login_register')" :icon="'account'" :link="'/shop/checkout'" width="!w-full" />
+            @endauth
         </div>
 
         <!-- Responsive Settings Options -->

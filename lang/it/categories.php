@@ -7,6 +7,7 @@ return [
         'table' => [
             'title' => 'Categorie',
             'cols'  => [
+                'id'   => 'ID',
                 'name' => 'Nome',
             ],
         ],

@@ -27,6 +27,10 @@ class Show extends Component
         }
     }
 
+    /**
+     * @param string $status
+     * @return false|void
+     */
     public function changeStatus(string $status)
     {
         if (
@@ -50,7 +54,9 @@ class Show extends Component
             $exists = $this->supply->reseller->stocks()->where('product_id', $product_id)->where('product_variant_id', $variant_id)->first();
 
             if ($exists) {
-                $exists->increment('quantity', $row->quantity);
+                if ($status === 'delivered') {
+                    $exists->increment('quantity', $row->quantity);
+                }
             } else {
                 Stock::updateOrCreate([
                     'user_id' => $this->supply->reseller->id,
@@ -71,7 +77,7 @@ class Show extends Component
             $this->supply->status = $status;
             $this->supply->save();
 
-            if($status === 'delivered') {
+            if ($status === 'delivered') {
                 $invoice = $this->supply->invoice()->create();
                 $invoice->update([
                     'updated_at' => now(),

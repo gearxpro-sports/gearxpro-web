@@ -20,6 +20,10 @@ class CustomersTable extends BaseTable
             ])
             ->orderByDesc('id');
 
+        if (auth()->user()->hasRole(User::SUPERADMIN)) {
+            $customers->with('country.reseller');
+        }
+
         foreach ($this->filters as $k => $filter) {
             if ($k === 'date') {
                 if ($filter['mode'] === 'single') {

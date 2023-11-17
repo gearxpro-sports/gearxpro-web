@@ -4,10 +4,12 @@ namespace App\Models;
 
 use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use stdClass;
 
 class Product extends Model
 {
@@ -28,6 +30,14 @@ class Product extends Model
         'meta_description',
     ];
 
+    /**
+     * @return string
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug->'. session('country_code');
+    }
+
     public function getWholesalePriceAttribute()
     {
         $country_code = auth()->user() ? auth()->user()->country_code : session('country_code');
@@ -38,6 +48,19 @@ class Product extends Model
     {
         $country_code = auth()->user() ? auth()->user()->country_code : session('country_code');
         return $this->countries()->where('iso2_code', $country_code)->first()->prices->price;
+    }
+
+    /**
+     * @return stdClass
+     */
+    public function getDefaultImagesAttribute(): stdClass
+    {
+        $defaultVariant = $this->variants->first();
+
+        return (object) [
+            'thumb'  => $defaultVariant->getThumbUrl(),
+            'medium' => $defaultVariant->getThumbUrl('medium'),
+        ];
     }
 
     /**
@@ -58,6 +81,18 @@ class Product extends Model
     public function variants(): HasMany
     {
         return $this->hasMany(ProductVariant::class);
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function defaultVariantWithMedia(): HasOne
+    {
+        return $this
+            ->hasOne(ProductVariant::class)
+            ->with('media')
+            ->without(['product', 'attributes'])
+            ->has('media');
     }
 
     /**
@@ -83,5 +118,13 @@ class Product extends Model
         }
 
         return $prices;
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function stocks(): HasMany
+    {
+        return $this->hasMany(Stock::class);
     }
 }

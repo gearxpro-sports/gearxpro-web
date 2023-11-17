@@ -9,6 +9,7 @@ return [
             'cols'  => [
                 'name'              => 'Nome Cliente',
                 'email'             => 'Indirizzo Email',
+                'reseller'          => 'Rivenditore',
                 'registration_date' => 'Data di Registrazione',
                 'last_order_date'   => 'Data Ultimo Ordine',
             ],
@@ -84,6 +85,32 @@ return [
         ],
         'payment_method' => [
             'label' => 'Metodo di Pagamento',
-        ]
+        ],
+        'addresses' => [
+            'shipping' => 'Indirizzo spedizione',
+            'billing' => 'Indirizzo fatturazione'
+        ],
     ],
+    'profile' => 'Profilo',
+    'profile_description' => 'Visualizza i tuoi dati, le impostazioni di accesso e password, i tuoi ordini.',
+    'tabs' => [
+        'personal_data' => 'Dati personali',
+        'addresses' => 'Indirizzi',
+        'orders' => 'Ordini',
+    ],
+    'edit_data' => 'Modifica',
+    'password' => 'Password',
+    'format_password' => [
+        'uppercase' => 'Un carattere in MAIUSCOLO',
+        'lowercase' => 'Un carattere in minuscolo',
+        'number' => 'Un numero',
+        'length' => '8 caratteri',
+        'special_character' => 'Un carattere speciale (&*€%)'
+    ],
+    'buttons' => [
+        'cancel' => 'Annulla',
+        'save' => 'Salva',
+        'copy_shipping' => 'Uguale a Spedizione',
+        'back' => 'Indietro',
+    ]
 ];

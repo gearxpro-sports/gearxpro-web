@@ -3,6 +3,7 @@
 use App\Livewire\Customers\Index as CustomersIndex;
 use App\Livewire\Customers\Show as CustomerShow;
 use App\Livewire\Customers\Edit as CustomerEdit;
+use App\Livewire\Customers\Profile as CustomerProfile;
 use App\Livewire\Invoices\Show as InvoiceShow;
 use App\Livewire\Invoices\Index as InvoicesIndex;
 use App\Livewire\Profile\Edit as ProfileEdit;
@@ -29,6 +30,9 @@ use App\Livewire\Shop\Cart\Index as CartIndex;
 use App\Livewire\Shop\Cart\Checkout as CartCheckout;
 use App\Livewire\Shop\Cart\Payment as CartPayment;
 use App\Livewire\Register\Index as RegisterIndex;
+use App\Livewire\AboutUs\WhoWeAre;
+use App\Livewire\AboutUs\Values;
+use App\Livewire\AboutUs\Development;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,14 +45,14 @@ use App\Livewire\Register\Index as RegisterIndex;
 |
 */
 
-Route::domain(env('APP_URL'))->group(function() {
-    Route::get('/', function() {
+Route::domain(env('APP_URL'))->group(function () {
+    Route::get('/', function () {
         return redirect()->route('splash');
     });
     Route::get('/welcome', Splash::class)->name('splash');
 });
 
-Route::middleware('country')->domain('{country_code}.'.env('APP_URL'))->group(function() {
+Route::middleware('country')->domain('{country_code}.'.env('APP_URL'))->group(function () {
     Route::get('/', [ShopIndex::class, '__invoke'])->name('home');
 
     Route::name('shop.')->group(function () {
@@ -62,12 +66,22 @@ Route::middleware('country')->domain('{country_code}.'.env('APP_URL'))->group(fu
     });
 
     // TODO: check se vista accessibile sempre o solo se c'è un ordine effettuato in precedenza
-    Route::get('/confirm', function() {
+    Route::get('/confirm', function () {
         return view('confirm');
     })->name('confirm');
+
+    Route::name('about_us.')->group(function () {
+        Route::get('/whoWeAre', [WhoWeAre::class, '__invoke'])->name('whoWeAre');
+        Route::get('/values', [Values::class, '__invoke'])->name('values');
+        Route::get('/development', [Development::class, '__invoke'])->name('development');
+    });
 });
 
-Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->prefix('dashboard')->group(function() {
+Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->group(function () {
+    Route::get('customer/profile', CustomerProfile::class, '__invoke')->name('customer.profile');
+});
+
+Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->prefix('dashboard')->group(function () {
     Route::middleware(['role:superadmin|reseller'])->group(function () {
         Route::get('/', function () {
             return view('dashboard');
@@ -79,7 +93,7 @@ Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->prefix('dashboa
             Route::get('/{customer}/edit', CustomerEdit::class)->name('customers.edit')->middleware(['role:superadmin']);
         });
 
-        Route::prefix('resellers')->middleware(['role:superadmin'])->group(function() {
+        Route::prefix('resellers')->middleware(['role:superadmin'])->group(function () {
             Route::get('/', ResellersIndex::class)->name('resellers.index');
             Route::get('/create', ResellerCreate::class)->name('resellers.create');
             Route::get('/{reseller}', ResellerShow::class)->name('resellers.show');
@@ -97,27 +111,28 @@ Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->prefix('dashboa
             Route::get('/{category}/edit', CategoriesEdit::class)->name('categories.edit');
         });
 
-        Route::prefix('supply')->middleware(['role:reseller'])->group(function() {
+        Route::prefix('supply')->middleware(['role:reseller'])->group(function () {
             Route::get('/', SupplyIndex::class)->name('supply.index');
             Route::get('/recap', SupplyRecap::class)->name('supply.recap');
         });
 
-        Route::prefix('purchases')->group(function() {
+        Route::prefix('purchases')->group(function () {
             Route::get('/', SupplyPurchasesIndex::class)->name('supply.purchases.index');
             Route::get('/{supply}', SupplyPurchaseShow::class)->name('supply.purchases.show')->middleware(['role:superadmin|reseller']);
             Route::get('/{supply}/invoice', InvoiceShow::class)->name('supply.purchases.invoice');
         });
 
-        Route::prefix('invoices')->group(function() {
+        Route::prefix('invoices')->group(function () {
             Route::get('/', InvoicesIndex::class)->name('invoices.index');
         });
 
-        Route::prefix('stocks')->middleware(['role:reseller'])->group(function() {
+        Route::prefix('stocks')->middleware(['role:reseller'])->group(function () {
             Route::get('/', StocksIndex::class)->name('stocks.index');
         });
     });
 
     Route::get('/profile', ProfileEdit::class)->name('profile.edit');
 });
+
 
 require __DIR__.'/auth.php';

@@ -11,7 +11,11 @@ class Show extends Component
     /**
      * @var User
      */
-    public User $reseller;
+    public $reseller;
+
+    public function mount($reseller) {
+        $this->reseller = User::withTrashed()->find($reseller);
+    }
 
     /**
      * @return View

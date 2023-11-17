@@ -4,8 +4,13 @@
 <x-slot name="actions">
     <x-primary-button
         href="{{ route('resellers.edit', ['reseller' => $reseller]) }}">{{ __('common.edit') }}</x-primary-button>
+    @if($reseller->deleted_at)
+        <x-secondary-button
+            x-on:click="Livewire.dispatch('openModal', { component: 'resellers.modals.enable', arguments: { reseller: {{ $reseller->id }} }})">{{ __('common.enable') }}</x-secondary-button>
+    @else
     <x-danger-button
-        x-on:click="Livewire.dispatch('openModal', { component: 'resellers.modals.delete', arguments: { reseller: {{ $reseller->id }} }})">{{ __('common.delete') }}</x-danger-button>
+        x-on:click="Livewire.dispatch('openModal', { component: 'resellers.modals.disable', arguments: { reseller: {{ $reseller->id }} }})">{{ __('common.disable') }}</x-danger-button>
+    @endif
 </x-slot>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">

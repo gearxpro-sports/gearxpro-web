@@ -133,7 +133,7 @@ class Create extends Component
         ]);
 
         $this->dispatch('open-notification',
-            title: __('notifications.saving'),
+            title: __('notifications.titles.saving'),
             subtitle: __('notifications.resellers.saving.success'),
             type: 'success',
             actions: [

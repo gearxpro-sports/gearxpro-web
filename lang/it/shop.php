@@ -32,18 +32,28 @@ return [
         'order' => 'Ordina per',
         'mid_calf' => 'Metà polpaccio',
         'above_calf' => 'Sopra il polpaccio',
-        'height_leg' => 'altezza gamba',
+        'height_leg' => 'Altezza gamba',
         'color' => 'Colore',
         'size' => 'Taglia',
-        'amount' => 'quantità',
-        'characteristics' => 'caratteristiche',
-        'advantages' => 'vantaggi',
-        'technicality' => 'tecnicità',
-        'wash' => 'istruzioni di lavaggio',
+        'amount' => 'Quantità',
+        'characteristics' => 'Caratteristiche',
+        'advantages' => 'Vantaggi',
+        'technicality' => 'Tecnicità',
+        'wash' => 'Istruzioni di lavaggio',
+        'reset_selection' => 'Cancella selezione',
+        'price_low' => 'Prezzo più basso',
+        'price_high' => 'Prezzo più alto',
+        'results' => 'risultati',
+        'remove_filters' => 'Rimuovi filtri',
+        'not_found' => 'Nessun prodotto trovato',
     ],
     'button' => [
         'pay_link' => 'Paga con link',
         'add_to_cart' => 'Aggiungi al carrello',
+        'go_shop' => 'Vai allo Shop',
+        'show_line' => 'Scopri le nostre linee',
+        'all_products' => 'Tutti i nostri prodotti innovativi',
+        'show_last' => 'Guarda le ultime creazioni'
     ],
     'options' => [
         'or' => 'oppure',
@@ -61,15 +71,15 @@ return [
         'back_to_shopping' => 'Torna allo shopping',
         'go_to_pay' => 'Vai al pagamento',
         'your_cart' => 'Il tuo carrello',
-        'total' => 'totale',
-        'product' => 'prodotti',
+        'total' => 'Totale',
+        'product' => '[1] :value Prodotto|[2,*] :value Prodotti',
         'shop_complete' => 'Completa l’acquisto per non perdere gli articoli da te inseriti.',
         'summary' => 'Riepilogo ordine',
         'apply' => 'Applica',
         'subtotal' => 'Subtotale',
         'shipping_cost' => 'Costi di spedizione',
         'free' => 'Gratuita',
-        'remove' => 'rimuovi',
+        'remove' => 'Rimuovi',
         'promo_code' => 'Inserisci codice promo',
         'product_recommended' => 'Aggiungi questi articoli per performance al TOP',
     ],
@@ -84,6 +94,12 @@ return [
         'pay_to_guest' => 'Effettua il pagamento come ospite. Ricordati che puoi registrarti in qualsiasi momento.',
         'privacy' => 'Dichiaro di aver preso visione dell’informativa sul trattamento dei dati e di voler rimanere aggiornato da GearXPro su tutte le novità e iniziative promozionali acconsentendo al trattamento dei dati per finalità di marketing.',
         'button_next' => 'Continua',
+        'existing_cart' => [
+            'title' => 'Carrello esistente',
+            'paragraph' => 'Attualmente esiste un altro carrello associato a questo account.<br>Vuoi <strong>unire</strong> i due carrelli oppure <strong>sostituire</strong> il vecchio carrello con quello nuovo?',
+            'merge' => 'Unisci',
+            'override' => 'Sostituisci'
+        ]
     ],
     'payment' => [
         'tab_delivery' => 'Recapiti e consegna',
@@ -120,6 +136,7 @@ return [
         'ccv' => 'CVC / CCV',
         'accountHolder' => 'Nome sulla carta',
         'pay' => 'Paga ora',
+        'current_password' => 'Password attuale',
         'confirmPassword' => 'Conferma Password',
         'password_confirmation' => 'La password non corrisponde',
     ],
@@ -127,5 +144,15 @@ return [
         'title' => 'Conferma ordine!',
         'message' => 'Ordine effettuato con successo. Il tuo ordine verrà spedito a breve. Nel frattempo puoi monitorare il tuo ordine nella sezione i miei ordini.',
         'button' => 'Torna allo shopping'
+    ],
+    'footer' => [
+        'brands' => 'BRANDS',
+        'my_account' => 'Il MIO ACCOUNT',
+        'privacy' => 'PRIVACY'
+    ],
+    'order' => [
+        'working' => 'In lavorazione',
+        'delivered' => 'Consegnato',
+        'product_delivered' => 'I tuoi articoli sono stati consegnati.'
     ]
 ];

@@ -109,12 +109,7 @@ class ProductForm extends Form
     public function updateCategories(Category $category)
     {
         if ($category->parent_id === null) {
-            $childrenToRemove = [];
-            foreach ($category->children as $child) {
-                $childrenToRemove[] = $child->id;
-            }
-
-            $this->categories = array_diff($this->categories, $childrenToRemove);
+            $this->categories = [$category->id];
         }
     }
 

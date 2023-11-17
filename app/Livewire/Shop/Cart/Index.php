@@ -2,13 +2,14 @@
 
 namespace App\Livewire\Shop\Cart;
 
+use App\Models\Cart;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
 #[Layout('layouts.guest')]
 class Index extends Component
 {
-    public $cart = [''];
     public $promoCode;
     public $productsRecommended = [
         0 => [
@@ -62,16 +63,22 @@ class Index extends Component
         ],
     ];
 
-    // public function mount($cart) {
-    //     $this->cart = $cart;
-    // }
-
     public function applyCode() {
-
+        // TODO: Coupon Code
     }
 
+    #[On('item-updated')]
+    #[On('item-removed')]
     public function render()
     {
-        return view('livewire.shop.cart.index');
+        if(auth()->check()) {
+            $cart = auth()->user()->cart;
+        } else {
+            $cart = Cart::where('user_id', session('cart_user_token'))->first();
+        }
+
+        return view('livewire.shop.cart.index', [
+            'cart' => $cart
+        ]);
     }
 }

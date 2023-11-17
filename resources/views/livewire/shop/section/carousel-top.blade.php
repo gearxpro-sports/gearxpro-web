@@ -1,5 +1,5 @@
-<div class="w-full h-[947px] bg-white pt-[60px] pb-[70px] px-[0px] overflow-hidden pl-[39px]">
-    <h2 class="text-[33px] font-bold leading-[86px]">{{ __('shop.carousel-top.title') }}</h2>
+<div class="w-full xl:h-[947px] bg-white pt-5 pb-10 xl:pt-[60px] xl:pb-[70px] px-[0px] overflow-hidden pl-4 xl:pl-[39px]">
+    <h2 class="text-2xl xl:text-[33px] font-bold leading-[86px]">{{ __('shop.carousel-top.title') }}</h2>
 
     <div class="owl-carousel carousel_top">
         @foreach ($categories as $category )

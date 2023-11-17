@@ -62,7 +62,18 @@ class ProductVariantForm extends Form
         $this->validate();
 
         $this->productVariant->update($this->only(['barcode', 'sku', 'quantity']));
-        $this->productVariant->syncFromMediaLibraryRequest($this->images)->toMediaCollection('default');
+
+        $count = 1;
+        foreach($this->images as &$image) {
+            $image['file_name'] = $this->productVariant->product->slug.'_'.$this->productVariant->sku.'_'.$count.'.'.$image['extension'];
+            $count++;
+        }
+
+        $this->productVariant
+            ->syncFromMediaLibraryRequest($this->images)
+            //->usingFileName($this->productVariant->product->slug.'-'.$this->productVariant->sku)
+            ->toMediaCollection('products')
+        ;
 
         return true;
     }

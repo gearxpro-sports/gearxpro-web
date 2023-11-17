@@ -33,7 +33,7 @@
                                 @if (in_array($key, $keyFormat))
                                     <div @class(["flex justify-between text-color-15af2d"])>
                                         {{ $format }}
-                                        <img src="{{ Vite::asset('resources/images/icons/check.svg')}}" alt="">
+                                        <x-icons name="check-format" />
                                     </div>
                                 @else
                                     <div @class(["flex justify-between"])>

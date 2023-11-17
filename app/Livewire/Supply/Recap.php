@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Supply;
 
+use App\Models\ProductVariant;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -21,6 +22,11 @@ class Recap extends Component
             'confirmed' => true,
             'payment_method' => $this->supply->reseller->payment_method
         ]);
+
+        foreach ($this->supply->rows as $row) {
+            $productVariant = ProductVariant::find($row->product->id);
+            $productVariant->decrement('quantity', $row->quantity);
+        }
 
         return redirect()->route('supply.purchases.index');
     }

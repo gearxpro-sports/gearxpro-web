@@ -1,6 +1,5 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
-import colors from 'tailwindcss/colors';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -19,10 +18,11 @@ export default {
     ],
 
     theme: {
+        fontFamily: {
+            'app': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            'shop': ['Montserrat', 'system-ui', 'sans-serif']
+        },
         extend: {
-            fontFamily: {
-                sans: ['Plus Jakarta Sans', ...defaultTheme.fontFamily.sans],
-            },
             colors: {
                 'color-ff9d60': '#FF9D60',
                 'color-ffa76c': '#FFA76C',
@@ -65,6 +65,24 @@ export default {
                 'color-010101': '#010101',
                 'color-e6e7e9': '#e6e7e9',
                 'color-19181d': '#19181d',
+                'color-15AF74': '#15AF74',
+                'color-5D5D5D': '#5D5D5D',
+                'color-bfd8ed': '#bfd8ed',
+                'color-71a3cf': '#71a3cf',
+                'color-2271b5': '#2271b5',
+                'color-deb79f': '#deb79f',
+                'color-e7a072': '#e7a072',
+                'color-d76f2d': '#d76f2d',
+                'color-b8b2d9': '#b8b2d9',
+                'color-9d97b7': '#9d97b7',
+                'color-766bad': '#766bad',
+                'color-9a9fa7': '#9a9fa7',
+                'color-5a6472': '#5a6472',
+                'color-323a46': '#323a46',
+                'color-bde2b6': '#bde2b6',
+                'color-89d079': '#89d079',
+                'color-65af54': '#65af54',
+
             },
             fontSize: {
                 'xxs': '0.625rem'
@@ -89,10 +107,36 @@ export default {
                 line: 'line 300ms',
                 line_slow: 'line 600ms',
                 opacity: 'opacity 1000ms',
+                spin_slow: 'spin 7s linear infinite',
             },
             backgroundImage: {
                 texture: "url('/resources/images/texture.svg')",
                 jumbotron: "url('/resources/images/product.svg')",
+                about_us_1: "url('/resources/images/about_us_1.png')",
+                about_us_2: "url('/resources/images/about_us_2.png')",
+                about_us_3: "url('/resources/images/about_us_3.png')",
+                about_us_4: "url('/resources/images/about_us_4.png')",
+                about_us_5: "url('/resources/images/about_us_5.png')",
+                about_us_6: "url('/resources/images/about_us_6.png')",
+                about_us_7: "url('/resources/images/about_us_7.png')",
+                about_us_8: "url('/resources/images/about_us_8.png')",
+                about_us_9: "url('/resources/images/about_us_9.png')",
+
+                about_us_10: "url('/resources/images/about_us_10.jpg')",
+                about_us_11: "url('/resources/images/about_us_11.jpg')",
+                about_us_12: "url('/resources/images/about_us_12.jpg')",
+                about_us_13: "url('/resources/images/about_us_13.jpg')",
+                about_us_14: "url('/resources/images/about_us_14.jpg')",
+
+                about_us_values_1: "url('/resources/images/about_us_values_1.png')",
+                about_us_values_2: "url('/resources/images/about_us_values_2.png')",
+                about_us_values_3: "url('/resources/images/about_us_values_3.png')",
+                about_us_dev_1: "url('/resources/images/about_us_dev_1.png')",
+                about_us_dev_2: "url('/resources/images/about_us_dev_2.png')",
+                about_us_dev_3: "url('/resources/images/about_us_dev_3.png')",
+                about_us_dev_4: "url('/resources/images/about_us_dev_4.png')",
+                about_us_dev_5: "url('/resources/images/about_us_dev_5.png')",
+                about_us_dev_6: "url('/resources/images/about_us_dev_6.png')",
             }
         },
     },

@@ -2,11 +2,12 @@
     <div class="p-[39px] grid grid-cols-12 gap-[30px]">
         {{-- image --}}
         <div class="col-span-7 h-[1104px] overflow-y-auto scrollBar flex flex-col gap-4 pb-4">
-            @if ($format == 'short')
+            @if ($selectedLength == 1)
+                {{-- Corto --}}
                 <img src="{{ Vite::asset('resources/images/SOXPro-1.png')}}" alt="">
                 <img src="{{ Vite::asset('resources/images/SOXPro-2.png')}}" alt="">
                 <img src="{{ Vite::asset('resources/images/SOXPro-3.png')}}" alt="">
-                @else
+            @else
                 <img src="{{ Vite::asset('resources/images/SOXPro-1-long.png')}}" alt="">
                 <img src="{{ Vite::asset('resources/images/SOXPro-2-long.png')}}" alt="">
             @endif
@@ -16,102 +17,161 @@
         <div class="col-span-5 col-start-8 py-10">
             {{-- detail --}}
             <div>
-                <span class=" text-[17px] leading-[28px] text-color-6c757d">{{$product->name}}</span>
+                {{--                <span class="text-[17px] leading-[28px] text-color-6c757d">{{$product->name}}</span>--}}
                 <h1 class="text-[33px] font-semibold leading-[40px] text-color-18181a">{{$product->name}}</h1>
-                <p class="text-[21px] font-medium leading-[38px] text-color-18181a">€ {{$product->price}}</p>
+                <p class="text-[21px] font-medium leading-[38px] text-color-18181a">@money($product->price)</p>
             </div>
-
-            {{-- format --}}
-            <div class="mt-[50px]">
-                <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.height_leg')}}</p>
-
-                <div class="w-[353px] h-[58px] flex justify-between bg-color-edebe5 px-[6px] py-[5px] rounded-md mt-5">
-                    <button wire:click="changeFormat('short')" @class(['px-5 h-full text-[15px] bg-transparent rounded-md font-medium leading-[19px] text-color-6c757d',
-                        $format == 'short' ? '!bg-color-18181a !text-white' : '',
-                    ])>{{__('shop.products.mid_calf')}}</button>
-                    <button wire:click="changeFormat('long')" @class(['px-5 h-full text-[15px] bg-transparent rounded-md font-medium leading-[19px] text-color-6c757d',
-                        $format == 'long' ? '!bg-color-18181a !text-white' : '',
-                    ])>{{__('shop.products.above_calf')}}</button>
-                </div>
-            </div>
-
-            {{-- color --}}
-            <div class="mt-10">
-                <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.color')}}</p>
-
-                <div class="flex items-center gap-4 mt-5">
-                    @foreach ($colors as $color )
-                        <div wire:click="selectColor('{{$color['code']}}')"
-                            @class(['w-[62px] h-[62px] rounded-full border border-color-e0e0df p-1 flex items-center justify-between',
-                            $selectedColor == $color['code'] ? '!border-color-18181a' : '',
-                        ])>
-                        @if ($format == 'short')
-                            <div class="w-full h-full rounded-full shadow-md overflow-hidden flex items-center justify-between">
-                                <img class="scale-150" src="{{ Vite::asset($color['image-short'])}}" alt="">
+            <div class="w-full max-w-md mt-10 space-y-10">
+                @if($allLengths)
+                    <div wire:key="lengths" class="space-y-5">
+                        <p class="text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.height_leg')}}</p>
+                        <div>
+                            <div
+                                class="grid grid-cols-2 gap-x-1 rounded-md p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200 bg-color-edebe5">
+                                @foreach($allLengths as $id => $length)
+                                    @if(in_array($id, array_keys($lengths)))
+                                        <div
+                                            wire:key="length-{{$id}}"
+                                            wire:click="setLength({{ $id }})"
+                                            @class([
+                                            'cursor-pointer h-14 text-sm flex items-center justify-center rounded-md px-2.5 py-1',
+                                            $selectedLength == $length['id'] ? 'bg-color-18181a text-white' : 'text-color-6c757d'])
+                                        >
+                                            <span>{{ $length['value'] }}</span>
+                                        </div>
+                                    @else
+                                        <div
+                                            wire:key="length-{{$id}}"
+                                            wire:click="resetAll('length', {{ $id }})"
+                                            @class([
+                                            'opacity-10 pointer-events-none h-14 text-sm flex items-center justify-center rounded-md px-2.5 py-1',
+                                            $selectedLength == $length['id'] ? 'bg-color-18181a text-white' : 'text-color-6c757d'])
+                                        >
+                                            <span>{{ $length['value'] }}</span>
+                                        </div>
+                                    @endif
+                                @endforeach
                             </div>
-                            @else
-                            <div class="w-full h-full rounded-full shadow-md overflow-hidden flex items-center justify-between">
-                                <img class="scale-150" src="{{ Vite::asset($color['image-long'])}}" alt="">
+                        </div>
+                    </div>
+                @endif
+                @if($allColors)
+                    <div wire:key="colors" class="space-y-5">
+                        <p class="text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.color')}}</p>
+                        <div>
+                            <div class="flex flex-wrap items-center gap-4">
+                                @foreach($allColors as $id => $color)
+                                    @if(in_array($id, array_keys($colors)))
+                                        <div
+                                            wire:key="color-{{$id}}"
+                                            wire:click="setColor({{ $color['id'] }})"
+                                            @class([
+                                                'flex-shrink-0 cursor-pointer h-12 w-12 relative flex items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent',
+                                                $selectedColor == $color['id'] ? 'ring ring-offset-2 ring-offset-color-f2f0eb' : 'ring-2'])
+                                            style="background-color: {{ $color['color'] }}; --tw-ring-color: {{$color['color']}}"
+                                        >
+                                        </div>
+                                    @else
+                                        <div
+                                            wire:key="color-{{$id}}"
+                                            wire:click="resetAll('color', {{ $id }})"
+                                            @class([
+                                                'flex-shrink-0 opacity-10 pointer-events-none h-12 w-12 relative flex items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent',
+                                                $selectedColor == $color['id'] ? 'ring ring-offset-2' : 'border border-gray-800'])
+                                            style="background-color: {{ $color['color'] }}; --tw-ring-color: {{$color['color']}}"
+                                        >
+                                        </div>
+                                    @endif
+                                @endforeach
                             </div>
+                        </div>
+                    </div>
+                @endif
+                @if($allSizes)
+                    <div wire:key="sizes" class="space-y-5">
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-medium text-color-18181a uppercase">{{__('shop.products.size')}}</p>
+                            <div class="flex items-center space-x-2">
+                                {{-- TODO: modale per guida taglie --}}
+                                <span
+                                    class="text-xs font-medium text-color-18181a uppercase">{{__('shop.options.size_guide')}}</span>
+                                <x-icons name="meter" class="w-5 h-5"></x-icons>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="grid grid-cols-3 gap-3 sm:grid-cols-4">
+                                @foreach($allSizes as $id => $size)
+                                    @if(in_array($id, array_keys($sizes)))
+                                        <div
+                                            wire:key="size-{{$id}}"
+                                            wire:click="setSize({{ $size['id'] }})"
+                                            @class([
+                                                'cursor-pointer flex items-center justify-center rounded-md py-3 px-3 text-sm font-medium uppercase sm:flex-1 focus:outline-none',
+                                                $selectedSize == $size['id'] ? 'bg-color-18181a text-white' : 'border border-black/10 bg-color-edebe5 text-gray-900 hover:bg-color-18181a hover:text-white'])
+                                        >
+                                            <span id="size-choice-0-label">{{ $size['value'] }}</span>
+                                        </div>
+                                    @else
+                                        <div
+                                            wire:key="size-{{$id}}"
+                                            wire:click="resetAll('size', {{ $id }})"
+                                            @class([
+                                                'opacity-10 pointer-events-none flex items-center justify-center rounded-md border border-black/50 py-3 px-3 text-sm font-medium uppercase sm:flex-1 focus:outline-none',
+                                                ])
+                                        >
+                                            <span id="size-choice-0-label">{{ $size['value'] }}</span>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                        @if($selectedLength || $selectedColor || $selectedSize)
+                            <div wire:click="resetAll()" class="mt-10 text-color-6c757d text-xs cursor-pointer hover:underline">{{ __('shop.products.reset_selection') }}</div>
                         @endif
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-
-            {{-- taglia --}}
-            <div class="mt-10">
-                <p class=" text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.size')}}</p>
-
-                <div class="flex flex-wrap items-center gap-[18px] mt-5">
-                    @foreach ($sizes as $size )
-                        <div wire:click="selectSize('{{ $size }}')" @class(['w-[48px] h-[46px] bg-color-edebe5 border border-color-e0e0df rounded-sm flex items-center justify-center',
-                            $selectedSize == $size ? '!bg-color-18181a !text-white' : '' ,
-                        ])>
-                            <span @class(['text-[13px] font-medium leading-[16px] text-color-6c757d uppercase',
-                            $selectedSize == $size ? '!text-white' : '' ,])>
-                                {{$size}}
-                            </span>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-
-            {{-- quantita --}}
-            <div class="mt-10">
-                <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.amount')}}</p>
-
-                <div class="w-[185px] h-[48px] rounded-md flex items-center border border-color-b6b9bb mt-5 shadow-shadow-2">
-                    <div wire:click="removeProduct" class="w-[60px] h-full flex items-center justify-center bg-transparent border-r border-color-b6b9bb">
-                        <x-heroicon-o-minus class="h-5 w-5"></x-heroicon-o-minus>
                     </div>
-                    <div class="w-[65px] h-full flex items-center justify-center text-[13px] font-medium leading-[16px] text-color-18181a">{{ $quantity }}</div>
-                    <div wire:click="addProduct" class="w-[60px] h-full flex items-center justify-center bg-transparent border-l border-color-b6b9bb">
-                        <x-heroicon-o-plus class="h-5 w-5"></x-heroicon-o-plus>
+                @endif
+
+                {{-- quantita --}}
+                <div class="space-y-5">
+                    <p class="text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.amount')}}</p>
+                    <div
+                        class="w-[185px] h-[48px] rounded-md flex items-center border border-color-b6b9bb">
+                        <div wire:click="decrement"
+                             class="{{ $quantity === 1 ? 'cursor-not-allowed text-gray-300' : 'cursor-pointer' }} w-[60px] h-full flex items-center justify-center bg-transparent border-r border-color-b6b9bb">
+                            <x-icons name="minus" class="h-3 w-3"></x-icons>
+                        </div>
+                        <div
+                            class="w-[65px] h-full flex items-center justify-center text-[13px] font-medium leading-[16px] text-color-18181a font-mono select-none">{{ $quantity }}</div>
+                        <div wire:click="increment"
+                             class="{{ $quantity >= $selectedVariant?->quantity ? 'cursor-not-allowed text-gray-300' : 'cursor-pointer' }} w-[60px] h-full flex items-center justify-center bg-transparent border-l border-color-b6b9bb">
+                            <x-icons name="plus" class="h-3 w-3"></x-icons>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {{-- actions --}}
-            <div class="mt-[30px]">
-                <livewire:components.button :wireAction="'payForLink'" :text="__('shop.button.pay_link')" :icon="'arrow-right-xl'" :color="'#33DDB3'" />
-                <div class="w-[438px] relative p-6">
-                    <div class="h-[1px] bg-color-6c757d w-full"></div>
-                    <span class="absolute top-[15px] left-[calc(50%-36px)] px-[10px] bg-color-f2f0eb text-[13px] font-medium leading-[16px] text-color-6c757d">{{__('shop.options.or')}}</span>
+                {{-- actions --}}
+                <div class="mt-[30px]">
+                    <x-shop.shopping-button :disabled="!$selectedVariant" wire:click="payWithLink" color="green"
+                                            icon="arrow-right-xl">
+                        {{ __('shop.button.pay_link') }}
+                    </x-shop.shopping-button>
+                    <div class="w-[438px] relative p-6">
+                        <div class="h-[1px] bg-color-6c757d w-full"></div>
+                        <span
+                            class="absolute top-[15px] left-[calc(50%-36px)] px-[10px] bg-color-f2f0eb text-[13px] font-medium leading-[16px] text-color-6c757d">{{__('shop.options.or')}}</span>
+                    </div>
+                    <x-shop.shopping-button :disabled="!$selectedVariant" wire:click="addToCart" icon="bag">
+                        {{ __('shop.button.add_to_cart') }}
+                    </x-shop.shopping-button>
                 </div>
-                <livewire:components.button :wireAction="'addToCart'" :text="__('shop.button.add_to_cart')" :icon="'bag'" :color="'#FF7F6E'" />
-            </div>
 
-            {{-- other --}}
-            <div class="mt-[26px] ">
-                <p class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">COD:  N / A</p>
-                <p class="mt-5 mb-[15px] text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.options.currency')}}</p>
+                {{-- other --}}
+                <div class="mt-[26px] ">
+                    <p class="text-sm font-medium leading-[19px] text-color-18181a uppercase">
+                        COD: {{ $selectedVariant ? $selectedVariant->sku : 'N/A' }}</p>
+                    {{--                    <p class="mt-5 mb-[15px] text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.options.currency')}}</p>--}}
 
-                <livewire:components.select-money :selected="$selectedMoney" :options="$currency" />
-
-                <div class="mt-10 flex items-center gap-2">
-                    <span class="text-[15px] font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.options.size_guide')}}</span>
-                    <img src="{{ Vite::asset('resources/images/icons/metro.svg')}}" alt="">
+                    {{--                    <livewire:components.select-money :selected="$selectedMoney" :options="$currency"/>--}}
                 </div>
             </div>
         </div>
@@ -122,8 +182,8 @@
             <div class="w-full h-[58px] rounded-md bg-color-edebe5 flex items-center gap-[10px] mb-[50px]">
                 <template x-for="tab in tabs" :key="tab">
                     <button x-text="tab" x-on:click="currentTab = tab"
-                        :class="tab == currentTab ? '!bg-color-18181a !text-white' : ''"
-                        class="w-[235px] h-[48px] rounded-md bg-transparent flex items-center justify-center text-[15px] font-medium leading-[19px] text-color-6c757d capitalize"
+                            :class="tab == currentTab ? '!bg-color-18181a !text-white' : ''"
+                            class="w-[235px] h-[48px] rounded-md bg-transparent flex items-center justify-center text-sm font-medium leading-[19px] text-color-6c757d capitalize"
                     >
                     </button>
                 </template>
@@ -131,118 +191,67 @@
 
             <template x-if="currentTab == '{{$product->name}}'">
                 <p class="text-[13px] leading-[24px] text-color-323a46">
-                    La SOXPro Trekking Sock è la nuova calza sportiva grip progettata da GEARXPro Sports per soddisfare al meglio le esigenze degli atleti. SOXPro Trekking è essenzialmente dedicato agli escursionisti e agli amanti delle avventure all’aria aperta, ma adatto anche a tutte le attività sportive all’aria aperta.
-
-                    La novità assoluta è l’introduzione della tecnologia GRIP:IN (nel mondo del trekking), che unita alla composizione multimateriale della calza, riduce il rischio di distorsioni e lo stress delle articolazioni, garantendo maggiore stabilità, velocità e precisione. L’innovativa struttura della calza è stata studiata per garantire il massimo comfort anche per escursioni impegnative e di più giorni: un supporto ottimale che, a partire dalla pianta del piede, è in grado di favorire il benessere di tutto il corpo durante l’intera prestazione sportiva. Libero di muoversi, saltare e cambiare direzione su qualsiasi superficie: un perfetto connubio tra comfort e performance che permetterà all’atleta di prendere pieno possesso del corpo.
-
-                    Ispirandoci alla Kinetic Chain, abbiamo progettato una calza in grado di facilitare gli atleti in tutti i movimenti dinamici e complessi, in termini di prevenzione degli infortuni e miglioramento delle prestazioni attraverso comfort, stabilità e precisione. Oggi, soprattutto tra i professionisti, siamo arrivati all’idea che il piede abbia davvero bisogno di essere all’interno di una calza grip che non solo non deve permettere di scivolare, ma deve essere comoda e perfettamente aderente al tipo di scarpa utilizzata. Libertà di movimento, traspirabilità, stabilità, rinforzo in punti particolari, comfort e il giusto grip sono le parole essenziali per fare la scelta giusta.
-
-                    Il massimo supporto alla caviglia è garantito dall’X-Cage, parte che costituisce l’intera zona della caviglia, grazie alla sua composizione multimateriale e alla presenza di fasce di rinforzo strategiche, diminuisce drasticamente il rischio di distorsioni e lo stress delle articolazioni. Un vero e proprio supporto per la caviglia dell’atleta che permette una significativa riduzione del carico muscolare e un’ottimizzazione del dispendio energetico durante tutta la durata dell’attività.
-
-                    Grazie al ridotto scivolamento tra il piede e la scarpa, il sistema nervoso centrale riduce la necessità di attivare le unità motorie. Inoltre, l’azione Grip: IN sul tallone previene le vesciche causate dallo scivolamento della calza sulla pelle umida. Il perfetto mix di fasce contenitive e elastici traspiranti, unito alla presenza della tecnologia Grip: IN, aiuterà l’atleta nella corretta postura e ridurrà lo stress fisico dovuto ai micro-movimenti. Il rinforzo totale del piede, dal tallone alla punta, è garantito dalla presenza di una leggera spugna a 360 gradi che, oltre a prevenire la formazione di vesciche, assicura il massimo comfort proteggendo le parti più sensibili del piede. La microtecnologia Cushion, estesa a tutta la pianta del piede, garantisce un importante assorbimento degli urti.
+                    {{ $product->main_desc }}
                 </p>
             </template>
 
             <template x-if="currentTab == '{{__('shop.products.characteristics')}}'">
-                <div class="flex flex-wrap gap-10">
-                    <div class="w-[calc(50%-40px)]">
-                        <h5 class=" text-[13px] font-semibold leading-[24px] text-color-323a46 uppercase">DISPOSITIVO MEDICO CLASSE 1</h5>
-                        <p class=" text-[13px] leading-[24px] text-color-323a46">Prevenzione degli infortuni dovuti a un ridotto stress sulle articolazioni e al risparmio muscolare.</p>
-                    </div>
-                    <div class="w-[calc(50%-40px)]">
-                        <h5 class=" text-[13px] font-semibold leading-[24px] text-color-323a46 uppercase">DISPOSITIVO MEDICO CLASSE 1</h5>
-                        <p class=" text-[13px] leading-[24px] text-color-323a46">Prevenzione degli infortuni dovuti a un ridotto stress sulle articolazioni e al risparmio muscolare.</p>
-                    </div>
-                </div>
+                <p class="text-[13px] leading-[24px] text-color-323a46">
+                    {{ $product->features_desc }}
+                </p>
             </template>
 
             <template x-if="currentTab == '{{__('shop.products.advantages')}}'">
-                <div class="flex gap-[31px]">
-                    <div class="w-[530px]">
-                        <ul class="list-disc pl-[18px]">
-                            <li class="text-[13px] font-medium leading-[24px] text-color-323a46 pb-[18px]">Massima stabilità</li>
-                            <li class="text-[13px] font-medium leading-[24px] text-color-323a46 pb-[18px]">Massima stabilità</li>
-                            <li class="text-[13px] font-medium leading-[24px] text-color-323a46 pb-[18px]">Massima stabilità</li>
-                        </ul>
-                    </div>
-                    <div class="grow flex items-center justify-center overflow-hidden">
-                        <img src="{{ Vite::asset('resources/images/vantaggi-img.png')}}" alt="">
-                    </div>
-                </div>
+                <p class="text-[13px] leading-[24px] text-color-323a46">
+                    {{ $product->pros_desc }}
+                </p>
             </template>
 
             <template x-if="currentTab == '{{__('shop.products.technicality')}}'">
-                <div>
-                    <div class="mb-[30px]">
-                        <h5 class="text-[13px] font-semibold leading-[24px] text-color-323a46 uppercase">CATENA CINETICA</h5>
-                        <p class=" text-[13px] leading-[24px] text-color-323a46">Ispirandoci alla Kinetic Chain, una sequenza coordinata di attivazione, mobilizzazione e stabilizzazione dei segmenti corporei per produrre un’attività dinamica, abbiamo progettato una calza in grado di facilitare gli atleti in tutti i movimenti dinamici e complessi, in termini di prevenzione degli infortuni e miglioramento delle prestazioni attraverso comfort, stabilità e precisione. Il perfetto mix di fasce contenitive e elastici traspiranti, unito alla presenza della tecnologia Grip: IN, aiuterà l’atleta nella corretta postura e ridurrà lo stress fisico dovuto ai micro-movimenti.</p>
-                    </div>
-                    <div class="mb-[30px]">
-                        <h5 class="text-[13px] font-semibold leading-[24px] text-color-323a46 uppercase">CATENA CINETICA</h5>
-                        <p class=" text-[13px] leading-[24px] text-color-323a46">Ispirandoci alla Kinetic Chain, una sequenza coordinata di attivazione, mobilizzazione e stabilizzazione dei segmenti corporei per produrre un’attività dinamica, abbiamo progettato una calza in grado di facilitare gli atleti in tutti i movimenti dinamici e complessi, in termini di prevenzione degli infortuni e miglioramento delle prestazioni attraverso comfort, stabilità e precisione. Il perfetto mix di fasce contenitive e elastici traspiranti, unito alla presenza della tecnologia Grip: IN, aiuterà l’atleta nella corretta postura e ridurrà lo stress fisico dovuto ai micro-movimenti.</p>
-                    </div>
-                </div>
+                <p class="text-[13px] leading-[24px] text-color-323a46">
+                    {{ $product->technical_desc }}
+                </p>
             </template>
 
             <template x-if="currentTab == '{{__('shop.products.wash')}}'">
-                <div>
-                    <div class="h-[55px] px-9 flex items-center gap-3 border-b border-color-b6b9bb even:bg-color-edebe5">
-                        <img src="{{ Vite::asset('resources/images/icons/lav-mano.svg')}}" alt="">
-                        <img src="{{ Vite::asset('resources/images/icons/gradi.svg')}}" alt="">
-                        <p class=" text-[13px] leading-[24px] text-color-323a46">Lavarli in acqua fredda a mano o al massimo a 30° in lavatrice</p>
-                    </div>
-                    <div class="h-[55px] px-9 flex items-center gap-3 border-b border-color-b6b9bb even:bg-color-edebe5">
-                        <img src="{{ Vite::asset('resources/images/icons/no-cand.svg')}}" alt="">
-                        <p class=" text-[13px] leading-[24px] text-color-323a46">Non usare candeggina</p>
-                    </div>
-                    <div class="h-[55px] px-9 flex items-center gap-3 border-b border-color-b6b9bb even:bg-color-edebe5">
-                        <img src="{{ Vite::asset('resources/images/icons/asciug.svg')}}" alt="">
-                        <p class=" text-[13px] leading-[24px] text-color-323a46">Asciugare solo all’aria aperta</p>
-                    </div>
-                    <div class="h-[55px] px-9 flex items-center gap-3 border-b border-color-b6b9bb even:bg-color-edebe5">
-                        <img src="{{ Vite::asset('resources/images/icons/no-hot.svg')}}" alt="">
-                        <p class=" text-[13px] leading-[24px] text-color-323a46">Non esporre al calore</p>
-                    </div>
-                </div>
+                <p class="text-[13px] leading-[24px] text-color-323a46">
+                    {{ $product->washing_desc }}
+                </p>
             </template>
         </div>
     </div>
 
     {{-- carousel --}}
-    <div class="col-span-12 pb-[100px] mt-5">
-        <div class="mx-[89px] border-t-2 border-color-18181a shadow-shadow-4 mb-[50px]"></div>
+{{--    <div class="col-span-12 pb-[100px] mt-5">--}}
+{{--        <div class="mx-[89px] border-t-2 border-color-18181a shadow-shadow-4 mb-[50px]"></div>--}}
 
-        <div class="relative">
-            <h2 class="px-[39px] mb-[27px] text-[33px] font-semibold leading-[40px] text-color-18181a">{{__('shop.most_purchased_title')}}</h2>
+{{--        <div class="relative">--}}
+{{--            <h2 class="px-[39px] mb-[27px] text-[33px] font-semibold leading-[40px] text-color-18181a">{{__('shop.most_purchased_title')}}</h2>--}}
 
-            <div class="pl-[39px] group-custom-button">
-                <button class="customPrevBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] z-10 hover:border">
-                    <img class="rotate-180" src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}" alt="">
-                </button>
+{{--            <div class="pl-[39px] group-custom-button">--}}
+{{--                <button--}}
+{{--                    class="customPrevBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] z-10 hover:border">--}}
+{{--                    <img class="rotate-180" src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}"--}}
+{{--                         alt="">--}}
+{{--                </button>--}}
 
-                <div wire:ignore class="owl-carousel carousel_most_purchased">
-                    @foreach ($mostPurchased as $key => $prod )
-                        <x-card-purchased
-                            :key="$key"
-                            :image="$prod['image']"
-                            :name="$prod['name']"
-                            :description="$prod['description']"
-                            :availableColor="$prod['availableColor']"
-                            :price="$prod['price']"
-                        />
-                    @endforeach
-                </div>
+{{--                <div wire:ignore class="owl-carousel carousel_most_purchased">--}}
+{{--                    @dd($mostPurchased)--}}
+{{--                    @foreach ($mostPurchased as $product )--}}
+{{--                        <x-card-purchased :product="$product" />--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
 
-                <button class="customNextBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] right-[39px] z-10 hover:border">
-                    <img src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}" alt="">
-                </button>
-            </div>
+{{--                <button--}}
+{{--                    class="customNextBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] right-[39px] z-10 hover:border">--}}
+{{--                    <img src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}" alt="">--}}
+{{--                </button>--}}
+{{--            </div>--}}
 
-        </div>
-    </div>
+{{--        </div>--}}
+{{--    </div>--}}
 
-    {{-- modalInfoCart --}}
-    <livewire:modals.cart />
+    <livewire:modals.product-added-to-cart/>
 </div>
 
 @push('scripts')
@@ -262,7 +271,7 @@
     </script>
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             var carousel = new $(".carousel_most_purchased").owlCarousel({
                 items: 4,
                 margin: 15,
@@ -275,11 +284,11 @@
                 infinite: true,
             });
 
-            $('.customNextBtn').click(function() {
+            $('.customNextBtn').click(function () {
                 carousel.trigger('next.owl.carousel', [2000]);
             })
 
-            $('.customPrevBtn').click(function() {
+            $('.customPrevBtn').click(function () {
                 carousel.trigger('prev.owl.carousel', [2000]);
             })
         });

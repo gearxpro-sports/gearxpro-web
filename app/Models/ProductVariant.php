@@ -23,23 +23,35 @@ class ProductVariant extends Model implements HasMedia
      */
     protected $with = [
         'attributes',
-        'product'
+        'product',
     ];
 
     public function inStock() {
         return $this->quantity > 0;
     }
 
-    public function getLengthAttribute() {
+    public function getLengthAttribute()
+    {
         return $this->terms->where('attribute_id', 1)->first();
     }
 
-    public function getColorAttribute() {
+    public function getColorAttribute()
+    {
         return $this->terms->where('attribute_id', 2)->first();
     }
 
-    public function getSizeAttribute() {
+    public function getSizeAttribute()
+    {
         return $this->terms->where('attribute_id', 3)->first();
+    }
+
+    /**
+     * @param string $conversion
+     * @return string
+     */
+    public function getThumbUrl(string $conversion = 'thumb'): string
+    {
+        return $this->getFirstMediaUrl('products', $conversion);
     }
 
     /**
@@ -86,12 +98,27 @@ class ProductVariant extends Model implements HasMedia
     {
         $this
             ->addMediaConversion('preview')
-            ->fit(Manipulations::FIT_CROP, 300, 300)
-            ->nonQueued();
+            ->fit(Manipulations::FIT_FILL, 150, 150)
+            ->background('FFFFFF')
+            ->nonQueued()
+        ;
+
+        $this
+            ->addMediaConversion('thumb')
+            ->fit(Manipulations::FIT_FILL, 300, 300)
+            ->background('FFFFFF')
+            ->nonQueued()
+        ;
+
+        $this
+            ->addMediaConversion('medium')
+            ->fit(Manipulations::FIT_FILL, 650, 650)
+            ->background('FFFFFF')
+            ->nonQueued()
+        ;
     }
 
     /**
-     *
      * @return HasMany
      */
     public function stocks(): HasMany

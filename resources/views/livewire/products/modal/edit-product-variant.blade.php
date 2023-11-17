@@ -18,8 +18,8 @@
                 <livewire:media-library
                     :model="$productVariant"
                     wire:model="productVariantForm.images"
-                    collection="*"
-                    multiple rules="mimes:jpeg"
+                    collection="products"
+                    multiple rules="mimes:jpeg,png"
                     :sortable="false"
                 />
             </div>

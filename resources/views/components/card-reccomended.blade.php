@@ -1,6 +1,6 @@
 @props(['key','image', 'name', 'description', 'availableColor', 'price'])
 
-<div wire:key='{{$key}}' class="grow rounded-b-md overflow-hidden min-w-[434px] max-w-[434px] h-[561px]">
+<div wire:key='{{$key}}' class="grow rounded-b-md overflow-hidden w-[293px] h-456px xl:min-w-[434px] xl:max-w-[434px] xl:h-[561px]">
     <div class="h-[calc(100%-114px)] bg-white flex items-center justify-center overflow-hidden">
         <img src="{{ Vite::asset('resources/images/'. $image)}}" alt="">
     </div>
@@ -13,7 +13,7 @@
             <div class="h-full absolute top-0 left-0 w-0 bg-color-edebe5 group-hover:animate-line_slow group-hover:w-full rounded-bl-md"></div>
         </div>
         <a href="{{route('shop.show', $name)}}" class="h-full w-[88px] flex items-center justify-center border-l rounded-br-md border-white group-hover:border-white group-hover:bg-color-edebe5 transition-all duration-500 hover:!transition-none hover:!bg-color-f2f0eb">
-            <img class="!hidden group-hover:!block !w-5" src="{{ Vite::asset('resources/images/icons/vedi_dettaglio.svg')}}" alt="">
+            <x-icons name="detail" />
         </a>
     </div>
 </div>
