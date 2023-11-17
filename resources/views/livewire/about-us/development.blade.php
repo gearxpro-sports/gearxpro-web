@@ -21,30 +21,14 @@
 
     <div class="col-span-12 py-20 px-[30px] flex flex-col justify-center items-center">
         <div class="owl-carousel carousel_top mb-10">
-            <livewire:components.card-product
-                :slug="'SOXPro'"
-                :image="'SOXPro.png'"
-                :name="'SOXPro'"
-                :description="'SOXPro Ultra Light - White'"
-                :availableColor="5"
-                :price="'34.90'"
-            />
-            <livewire:components.card-product
-                :slug="'SOXPro'"
-                :image="'SOXPro.png'"
-                :name="'SOXPro'"
-                :description="'SOXPro Ultra Light - White'"
-                :availableColor="5"
-                :price="'34.90'"
-            />
-            <livewire:components.card-product
-                :slug="'SOXPro'"
-                :image="'SOXPro.png'"
-                :name="'SOXPro'"
-                :description="'SOXPro Ultra Light - White'"
-                :availableColor="5"
-                :price="'34.90'"
-            />
+            @foreach ($products as $product )
+                <livewire:components.card-product
+                    wire:key="prod_{{ $product->id }}"
+                    :product="$product"
+                    :image="'SOXPro.png'"
+                    :availableColors="$productColors[$product->id] ?? []"
+                />
+            @endforeach
         </div>
 
         <x-custom-button :text="__('shop.button.all_products')" :icon="'double_arrow_right'" :link="'/shop'" />
@@ -59,30 +43,14 @@
 
     <div class="col-span-12 py-20 px-[30px] flex flex-col justify-center items-center">
         <div class="owl-carousel carousel_bottom mb-10">
-            <livewire:components.card-product
-                :slug="'SOXPro'"
-                :image="'SOXPro.png'"
-                :name="'SOXPro'"
-                :description="'SOXPro Ultra Light - White'"
-                :availableColor="5"
-                :price="'34.90'"
-            />
-            <livewire:components.card-product
-                :slug="'SOXPro'"
-                :image="'SOXPro.png'"
-                :name="'SOXPro'"
-                :description="'SOXPro Ultra Light - White'"
-                :availableColor="5"
-                :price="'34.90'"
-            />
-            <livewire:components.card-product
-                :slug="'SOXPro'"
-                :image="'SOXPro.png'"
-                :name="'SOXPro'"
-                :description="'SOXPro Ultra Light - White'"
-                :availableColor="5"
-                :price="'34.90'"
-            />
+            @foreach ($products as $product )
+                <livewire:components.card-product
+                    wire:key="prod_{{ $product->id }}"
+                    :product="$product"
+                    :image="'SOXPro.png'"
+                    :availableColors="$productColors[$product->id] ?? []"
+                />
+            @endforeach
         </div>
 
         <x-custom-button :text="__('shop.button.show_last')" :icon="'double_arrow_right'" :link="'/shop'" />

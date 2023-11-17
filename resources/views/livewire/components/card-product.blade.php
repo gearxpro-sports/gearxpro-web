@@ -1,4 +1,4 @@
-<div class="rounded-b-md overflow-hidden">
+<div class="rounded-b-md overflow-hidden max-w-[594px]">
     <div class="bg-white flex items-center justify-center overflow-hidden">
         <img class="w-full p-10" src="{{ $product->defaultImages->medium ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $product->name }}">
     </div>
@@ -7,9 +7,9 @@
             <span class="z-10 text-[15px] font-semibold text-color-18181a leading-[19px]">{!! $product->categories?->first()->name ?? '&nbsp;' !!}</span>
             <h3 class="z-10 text-[12px] font-medium text-color-6c757d line-clamp-1">{{ $product->name }}</h3>
             @if ($availableColors)
-                <div class="relative flex space-x-1 my-3 z-10">
+                <div class="relative flex space-x-1 my-2 z-10">
                     @foreach($availableColors as $color)
-                        <span style="background-color: {{ $color }}" class="inline-block w-3 h-3 rounded-full"></span>
+                        <span style="background-color: {{ $color }}" class="inline-block w-3 h-3 border rounded-full"></span>
                     @endforeach
                 </div>
             @endif
