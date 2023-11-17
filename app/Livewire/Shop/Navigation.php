@@ -9,10 +9,11 @@ use Livewire\Attributes\On;
 class Navigation extends Component
 {
     public $user;
-    public $languages = ["it", "en", "fr", "de", "es"];
+    public $languages = [];
     public $about_us = [];
 
     public function mount() {
+        $this->languages = config('gearxpro.languages');
         $this->about_us = [
             [
                 'route' => 'about_us.whoWeAre',
