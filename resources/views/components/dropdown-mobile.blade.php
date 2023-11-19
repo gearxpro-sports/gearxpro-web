@@ -2,7 +2,7 @@
 
 <div x-data="{ open: false }">
     <div @click="open = ! open" class="flex justify-between items-center">
-        <h5 @class(["text-[17px] font-semibold leading-[20px]", $color === 'black' ? 'text-color-18181a' : 'text-white'])>
+        <h5 @class(["text-[17px] font-semibold leading-[20px]", $color === 'black' ? 'text-color-18181a' : 'text-white', $type != 'route' ? 'uppercase' : 'capitalize'])>
             {{$title}}
         </h5>
         <div :class="{'rotate-180': open}" @class(["transition-all duration-300", $color === 'black' ? '' : 'invert'])>
@@ -21,7 +21,7 @@
                     {{isset($option['name']) ? $option['name'] : '---'}}
                 </a>
             @else
-                <button wire:key='{{$key}}' wire:click="$dispatch('changeLanguage', {{$option}})"
+                <button wire:key='{{$key}}' wire:click="$dispatch('changeLanguage', {language: '{{$option}}'})"
                     class="text-color-6c757d text-start hover:text-color-323a46 px-2 py-3 hover:bg-color-f3f7f9 cursor-pointer uppercase">
                     {{ $option }}
                 </button>

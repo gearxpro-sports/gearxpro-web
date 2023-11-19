@@ -150,7 +150,7 @@
             <a href="{{ route('shop.index', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.shop') }}</a>
             <x-dropdown-mobile title="{{ __('shop.navigation.about_us') }}" :options="$about_us" />
             <a href="{{ route('shop.index', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.journal') }}</a>
-            <x-dropdown-mobile title="{{ __('shop.navigation.assistance') }}" :options="$about_us" />
+            <x-dropdown-mobile title="{{ __('shop.navigation.assistance') }}" :options="[]" />
             <x-dropdown-mobile type="select" title="{{ session()->get('language', app()->getLocale()) }}" :options="$languages" />
          </div>
     </div>

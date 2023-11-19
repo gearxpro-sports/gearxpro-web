@@ -70,8 +70,6 @@
                     @endif --}}
                 </div>
 
-                {{-- TODO insert select order for mobile --}}
-
                 <div class="hidden xl:flex w-full pb-5 justify-between items-center border-b border-color-18181a">
                     <h4 class="text-xl font-semibold text-color-18181a ">{{ $products->count() }} {{ __('shop.products.results') }}</h4>
                     @if ($selectedCategory || $selectedColors || $selectedSizes)
@@ -79,7 +77,30 @@
                     @endif
                 </div>
 
-                <div class="w-full h-[1000px] overflow-y-auto scrollBar px-4 xl:px-0">
+                {{-- SELECT ORDER MOBILE --}}
+                <div x-data="{opened: false}" class="xl:hidden w-full px-4 pt-4">
+                    <div @click="opened = !opened" class="flex justify-between items-center pb-4 border-b border-color-e0e0df cursor-pointer">
+                        <h5 class="font-medium text-color-18181a uppercase">{{__('shop.products.order')}}</h5>
+                        <span class="invisible transition-all duration-300 ease-out opacity-20" :class="opened && '!visible !opacity-100'">
+                            <x-icons name="minus_menu" />
+                        </span>
+                    </div>
+
+                    <div class="h-0 transition-all duration-1000 ease-out overflow-hidden" :class="opened && '!h-fit overflow-visible'">
+                        <div class="flex flex-col flex-wrap items-start gap-4 px-1 py-5">
+                            @foreach ($orderOptions as $id => $option )
+                                <button wire:click="$dispatch('selectColors', {{ $id }})"
+                                    @class(["grow py-4 text-sm font-medium text-color-18181a hover:text-color-323a46 flex items-center gap-4 group",
+                                    '!font-bold' => $id == $selectedOrder])
+                                > <x-icons name="ellisse" />
+                                    {{$option}}
+                                </button>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full xl:h-[1000px] overflow-y-auto scrollBar px-4 xl:px-0">
 
                     {{-- SUBCATEGORIES FILTERS --}}
                     @if ($selectedCategory)
@@ -172,8 +193,34 @@
             </div>
         @endif
         <div class="w-full relative" wire:loading.class="opacity-25">
+            {{-- SELECT ORDER --}}
             <div class="hidden lg:block absolute top-[-120px] right-0">
-                <livewire:components.select label="{{ __('shop.products.order') }}" :selected="$selectedOrder" :options="$orderOptions" />
+                <div x-data="{opened: false}" class="flex gap-2 items-center">
+                    <label class="text-[15px] font-medium text-color-6c757d">{{ __('shop.products.order') }}</label>
+                    <div class="relative h-[48px] w-[206px]">
+                        <button @click="opened = !opened" class="w-full h-full flex items-center justify-between bg-transparent border border-color-b6b9bb rounded-md px-[22px] text-[15px] font-medium leading-[19px] text-color-18181a capitalize">
+                            {{ $orderOptions[$selectedOrder] }}
+                            <div :class="opened && 'rotate-180'" class="transition-all duration-300">
+                                <x-icons name="arrow-down" />
+                            </div>
+                        </button>
+
+                        <ul :class="opened && '!h-fit p-1 border overflow-visible transition-all duration-300'"
+                            class="w-full h-0 bg-white absolute mt-1 z-10 rounded-md overflow-hidden">
+                            @foreach($orderOptions as $key => $option)
+                            <li wire:click="selectOrder('{{ $key }}')"
+                                @class([
+                                    'px-3 py-2 cursor-pointer capitalize',
+                                    'bg-color-f3f7f9' => $selectedOrder === $key,
+                                    'hover:bg-color-f3f7f9 hover:text-color-323a46',
+                                ])
+                            >
+                                {{ $option }}
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             @if($products->count() > 0)
