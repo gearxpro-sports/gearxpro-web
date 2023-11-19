@@ -174,7 +174,7 @@ class Payment extends Component
             $this->currentTab = 1;
             $this->dataUser = true;
         } elseif ($this->currentTab === 1) {
-            return redirect()->route('confirm');
+            return redirect()->route('confirm', ['country_code' => session('country_code')]);
         }
     }
 

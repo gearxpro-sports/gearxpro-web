@@ -28,7 +28,7 @@
 </head>
 <body class="text-gray-900 antialiased">
 <div>
-    <livewire:shop.navigation/>
+    <livewire:shop.navigation />
 
     <div>
         {{ $slot }}

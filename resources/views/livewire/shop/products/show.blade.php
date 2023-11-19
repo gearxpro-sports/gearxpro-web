@@ -1,7 +1,7 @@
 <div class="bg-color-f2f0eb">
     <div class="xl:p-[39px] grid grid-cols-12 xl:gap-[30px] relative">
         {{-- image --}}
-        <a href="{{route('shop.index', ['country_code' => session('country_code')])}}" class="xl:hidden absolute top-4 left-4">
+        <a href="{{route('shop.index', ['country_code' => session('country_code')])}}" class="xl:hidden z-10 absolute top-4 left-4">
             <x-icons name="chevron-left-xl" />
         </a>
 
@@ -344,8 +344,17 @@
     </script>
 
     <script>
-        $(document).ready(function () {
-            var image_carousel = new $(".product_images").owlCarousel({
+        var images = @json($images);
+        var image_carousel;
+
+        $(document).ready(function(){
+            // $.each(images, function(length) {
+            //     $.each(images.short, function(index, img) {
+            //         $('<img>').attr('src', img ).appendTo(".product_images");
+            //     });
+            // });
+
+            image_carousel = new $(".product_images").owlCarousel({
                 items: 1,
                 margin: 0,
                 loop: true,
@@ -355,5 +364,22 @@
                 infinite: false,
             });
         });
+
+        // document.addEventListener("DOMContentLoaded", () => {
+        //     Livewire.hook('morph.updated', ({el, component}) => {
+
+        //         $(document).ready(function () {
+        //             image_carousel = new $(".product_images").owlCarousel({
+        //                 items: 1,
+        //                 margin: 0,
+        //                 loop: true,
+        //                 autoWidth: false,
+        //                 autoplay: false,
+        //                 autoplayHoverPause: false,
+        //                 infinite: false,
+        //             });
+        //         });
+        //     });
+        // });
     </script>
 @endpush
