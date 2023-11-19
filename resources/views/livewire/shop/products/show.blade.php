@@ -1,7 +1,10 @@
 <div class="bg-color-f2f0eb">
-    <div class="p-[39px] grid grid-cols-12 gap-[30px]">
+    <div class="xl:p-[39px] grid grid-cols-12 xl:gap-[30px] relative">
         {{-- image --}}
-        <div class="col-span-7 h-[1104px] overflow-y-auto scrollBar flex flex-col gap-4 pb-4">
+        <a href="{{route('shop.index', ['country_code' => session('country_code')])}}" class="xl:hidden absolute top-4 left-4">
+            <x-icons name="chevron-left-xl" />
+        </a>
+        <div class="col-span-12 xl:col-span-7 xl:h-[1104px] overflow-auto scrollBar flex xl:flex-col xl:gap-4 pb-4">
             @if ($selectedLength == 1)
                 {{-- Corto --}}
                 <img src="{{ Vite::asset('resources/images/SOXPro-1.png')}}" alt="">
@@ -14,14 +17,15 @@
         </div>
 
         {{-- options --}}
-        <div class="col-span-5 col-start-8 py-10">
+        <div class="col-span-12 px-4 xl:col-span-5 xl:col-start-8 xl:py-10">
             {{-- detail --}}
             <div>
-                {{--                <span class="text-[17px] leading-[28px] text-color-6c757d">{{$product->name}}</span>--}}
-                <h1 class="text-[33px] font-semibold leading-[40px] text-color-18181a">{{$product->name}}</h1>
-                <p class="text-[21px] font-medium leading-[38px] text-color-18181a">@money($product->price)</p>
+                <span class="text-sm xl:text-[17px] leading-[28px] text-color-6c757d">{{$product->name}}</span>
+                <h1 class="text-xl xl:text-3xl font-semibold leading-[40px] text-color-18181a">{{$product->name}}</h1>
+                <p class="text-base xl:text-[21px] font-medium leading-[38px] text-color-18181a">@money($product->price)</p>
             </div>
-            <div class="w-full max-w-md mt-10 space-y-10">
+
+            <div class="w-full max-w-md mt-6 xl:mt-10 space-y-10">
                 @if($allLengths)
                     <div wire:key="lengths" class="space-y-5">
                         <p class="text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.height_leg')}}</p>
@@ -55,6 +59,7 @@
                         </div>
                     </div>
                 @endif
+
                 @if($allColors)
                     <div wire:key="colors" class="space-y-5">
                         <p class="text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.color')}}</p>
@@ -87,6 +92,7 @@
                         </div>
                     </div>
                 @endif
+
                 @if($allSizes)
                     <div wire:key="sizes" class="space-y-5">
                         <div class="flex items-center justify-between">
@@ -94,12 +100,12 @@
                             <div class="flex items-center space-x-2">
                                 {{-- TODO: modale per guida taglie --}}
                                 <span
-                                    class="text-xs font-medium text-color-18181a uppercase">{{__('shop.options.size_guide')}}</span>
+                                    class="text-xs font-semibold xl:font-medium text-color-18181a uppercase">{{__('shop.options.size_guide')}}</span>
                                 <x-icons name="meter" class="w-5 h-5"></x-icons>
                             </div>
                         </div>
                         <div>
-                            <div class="grid grid-cols-3 gap-3 sm:grid-cols-4">
+                            <div class="grid grid-cols-6 xl:grid-cols-3 gap-3">
                                 @foreach($allSizes as $id => $size)
                                     @if(in_array($id, array_keys($sizes)))
                                         <div
@@ -135,13 +141,13 @@
                 <div class="space-y-5">
                     <p class="text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.amount')}}</p>
                     <div
-                        class="w-[185px] h-[48px] rounded-md flex items-center border border-color-b6b9bb">
+                        class="w-full xl:w-[185px] h-[48px] rounded-md flex items-center border border-color-b6b9bb">
                         <div wire:click="decrement"
                              class="{{ $quantity === 1 ? 'cursor-not-allowed text-gray-300' : 'cursor-pointer' }} w-[60px] h-full flex items-center justify-center bg-transparent border-r border-color-b6b9bb">
                             <x-icons name="minus" class="h-3 w-3"></x-icons>
                         </div>
                         <div
-                            class="w-[65px] h-full flex items-center justify-center text-[13px] font-medium leading-[16px] text-color-18181a font-mono select-none">{{ $quantity }}</div>
+                            class="grow xl:w-[65px] h-full flex items-center justify-center text-sm font-medium leading-[16px] text-color-18181a font-mono select-none">{{ $quantity }}</div>
                         <div wire:click="increment"
                              class="{{ $quantity >= $selectedVariant?->quantity ? 'cursor-not-allowed text-gray-300' : 'cursor-pointer' }} w-[60px] h-full flex items-center justify-center bg-transparent border-l border-color-b6b9bb">
                             <x-icons name="plus" class="h-3 w-3"></x-icons>
@@ -155,7 +161,7 @@
                                             icon="arrow-right-xl">
                         {{ __('shop.button.pay_link') }}
                     </x-shop.shopping-button>
-                    <div class="w-[438px] relative p-6">
+                    <div class="xl:w-[438px] relative py-6 xl:p-6">
                         <div class="h-[1px] bg-color-6c757d w-full"></div>
                         <span
                             class="absolute top-[15px] left-[calc(50%-36px)] px-[10px] bg-color-f2f0eb text-[13px] font-medium leading-[16px] text-color-6c757d">{{__('shop.options.or')}}</span>
@@ -177,7 +183,7 @@
         </div>
 
         {{-- info product --}}
-        <div x-data="handler()" class="col-start-3 col-span-8 mt-[65px]">
+        <div x-data="handler()" class="hidden xl:block col-start-3 col-span-8 mt-[65px]">
             {{-- section button --}}
             <div class="w-full h-[58px] rounded-md bg-color-edebe5 flex items-center gap-[10px] mb-[50px]">
                 <template x-for="tab in tabs" :key="tab">
@@ -219,37 +225,66 @@
                 </p>
             </template>
         </div>
+
+        <!-- Responsive info product -->
+        <div class="xl:hidden col-span-12 flex flex-col gap-6 px-[16px] pt-10 pb-16">
+            <x-drop-info-product title="{{$product->name}}">
+                <p class="text-[13px] leading-[24px] text-color-323a46">
+                    {{ $product->main_desc }}
+                </p>
+            </x-drop-info-product>
+            <x-drop-info-product title="{{__('shop.products.characteristics')}}">
+                <p class="text-[13px] leading-[24px] text-color-323a46">
+                    {{ $product->features_desc }}
+                </p>
+            </x-drop-info-product>
+            <x-drop-info-product title="{{__('shop.products.advantages')}}">
+                <p class="text-[13px] leading-[24px] text-color-323a46">
+                    {{ $product->pros_desc }}
+                </p>
+            </x-drop-info-product>
+            <x-drop-info-product title="{{__('shop.products.technicality')}}">
+                <p class="text-[13px] leading-[24px] text-color-323a46">
+                    {{ $product->technical_desc }}
+                </p>
+            </x-drop-info-product>
+            <x-drop-info-product title="{{__('shop.products.wash')}}">
+                <p class="text-[13px] leading-[24px] text-color-323a46">
+                    {{ $product->washing_desc }}
+                </p>
+            </x-drop-info-product>
+        </div>
+
     </div>
 
     {{-- carousel --}}
-{{--    <div class="col-span-12 pb-[100px] mt-5">--}}
-{{--        <div class="mx-[89px] border-t-2 border-color-18181a shadow-shadow-4 mb-[50px]"></div>--}}
+    {{-- <div class="col-span-12 pb-[100px] mt-5">
+        <div class="mx-[89px] border-t-2 border-color-18181a shadow-shadow-4 mb-[50px]"></div>
 
-{{--        <div class="relative">--}}
-{{--            <h2 class="px-[39px] mb-[27px] text-[33px] font-semibold leading-[40px] text-color-18181a">{{__('shop.most_purchased_title')}}</h2>--}}
+        <div class="relative">
+            <h2 class="px-[39px] mb-[27px] text-[33px] font-semibold leading-[40px] text-color-18181a">{{__('shop.most_purchased_title')}}</h2>
 
-{{--            <div class="pl-[39px] group-custom-button">--}}
-{{--                <button--}}
-{{--                    class="customPrevBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] z-10 hover:border">--}}
-{{--                    <img class="rotate-180" src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}"--}}
-{{--                         alt="">--}}
-{{--                </button>--}}
+            <div class="pl-[39px] group-custom-button">
+                <button
+                    class="customPrevBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] z-10 hover:border">
+                    <img class="rotate-180" src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}"
+                            alt="">
+                </button>
 
-{{--                <div wire:ignore class="owl-carousel carousel_most_purchased">--}}
-{{--                    @dd($mostPurchased)--}}
-{{--                    @foreach ($mostPurchased as $product )--}}
-{{--                        <x-card-purchased :product="$product" />--}}
-{{--                    @endforeach--}}
-{{--                </div>--}}
+                <div wire:ignore class="owl-carousel carousel_most_purchased">
+                    @foreach ($mostPurchased as $product )
+                        <x-card-purchased :product="$product" />
+                    @endforeach
+                </div>
 
-{{--                <button--}}
-{{--                    class="customNextBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] right-[39px] z-10 hover:border">--}}
-{{--                    <img src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}" alt="">--}}
-{{--                </button>--}}
-{{--            </div>--}}
+                <button
+                    class="customNextBtn w-[76px] h-[76px] rounded-full bg-white shadow-md hidden group-custom-button-hover:flex justify-center items-center absolute top-[calc(50%-97px)] right-[39px] z-10 hover:border">
+                    <img src="{{ Vite::asset('resources/images/icons/arrow-left-button.svg')}}" alt="">
+                </button>
+            </div>
 
-{{--        </div>--}}
-{{--    </div>--}}
+        </div>
+    </div> --}}
 
     <livewire:modals.product-added-to-cart/>
 </div>

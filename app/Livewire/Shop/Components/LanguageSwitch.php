@@ -5,6 +5,8 @@ namespace App\Livewire\Shop\Components;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\On;
+
 use Livewire\Component;
 
 class LanguageSwitch extends Component
@@ -18,6 +20,7 @@ class LanguageSwitch extends Component
         session()->put('language', $this->current);
     }
 
+    #[On('changeLanguage')]
     public function changeLanguage($language)
     {
         $this->current = $language;

@@ -100,6 +100,14 @@
                 d="m4.464 9.828-4.291-4.4a.607.607 0 0 1 0-.85l4.291-4.4a.574.574 0 0 1 .409-.173.575.575 0 0 1 .41.173.588.588 0 0 1 0 .824l-3.9 4 3.9 4a.594.594 0 0 1 0 .825.575.575 0 0 1-.41.173.574.574 0 0 1-.409-.172Z"/>
         </svg>
         @break
+    @case('chevron-left-xl')
+        <svg xmlns="http://www.w3.org/2000/svg" width="10.85" height="19.279" viewBox="0 0 10.85 19.279"
+            {{ $attributes->merge(['class']) }}>
+            <g id="Raggruppa_281" data-name="Raggruppa 281" transform="translate(-16 -178.306)">
+                <path id="Tracciato_418" data-name="Tracciato 418" d="M0,16.451,8.435,8.015,0,0" transform="translate(25.435 196.172) rotate(180)" fill="none" stroke="#323a46" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+            </g>
+        </svg>
+        @break
     @case('chevron-right')
         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="5.5" height="10"
              viewbox="0 0 5.5 10" {{ $attributes->merge(['class']) }}>

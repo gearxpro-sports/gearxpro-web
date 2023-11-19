@@ -70,6 +70,8 @@
                     @endif --}}
                 </div>
 
+                {{-- TODO insert select order for mobile --}}
+
                 <div class="hidden xl:flex w-full pb-5 justify-between items-center border-b border-color-18181a">
                     <h4 class="text-xl font-semibold text-color-18181a ">{{ $products->count() }} {{ __('shop.products.results') }}</h4>
                     @if ($selectedCategory || $selectedColors || $selectedSizes)
@@ -170,7 +172,7 @@
             </div>
         @endif
         <div class="w-full relative" wire:loading.class="opacity-25">
-            <div class="hidden lg:block absolute top-[-110px] right-0">
+            <div class="hidden lg:block absolute top-[-120px] right-0">
                 <livewire:components.select label="{{ __('shop.products.order') }}" :selected="$selectedOrder" :options="$orderOptions" />
             </div>
 
