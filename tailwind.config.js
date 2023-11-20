@@ -15,6 +15,9 @@ export default {
             pattern: /max-w-(sm|md|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl)/,
             variants: ['sm', 'md', 'lg', 'xl', '2xl'],
         },
+        'animate-pulse',
+        'h-[294px]',
+        'h-[468px]'
     ],
 
     theme: {
@@ -78,7 +81,6 @@ export default {
                 'color-766bad': '#766bad',
                 'color-9a9fa7': '#9a9fa7',
                 'color-5a6472': '#5a6472',
-                'color-323a46': '#323a46',
                 'color-bde2b6': '#bde2b6',
                 'color-89d079': '#89d079',
                 'color-65af54': '#65af54',

@@ -4,6 +4,7 @@ use App\Livewire\Customers\Index as CustomersIndex;
 use App\Livewire\Customers\Show as CustomerShow;
 use App\Livewire\Customers\Edit as CustomerEdit;
 use App\Livewire\Customers\Profile as CustomerProfile;
+use App\Livewire\Dashboard\Index as Dashboard;
 use App\Livewire\Invoices\Show as InvoiceShow;
 use App\Livewire\Invoices\Index as InvoicesIndex;
 use App\Livewire\Profile\Edit as ProfileEdit;
@@ -83,9 +84,7 @@ Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->group(function 
 
 Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->prefix('dashboard')->group(function () {
     Route::middleware(['role:superadmin|reseller'])->group(function () {
-        Route::get('/', function () {
-            return view('dashboard');
-        })->name('dashboard');
+        Route::get('/', Dashboard::class)->name('dashboard');
 
         Route::prefix('customers')->group(function () {
             Route::get('/', CustomersIndex::class)->name('customers.index');
