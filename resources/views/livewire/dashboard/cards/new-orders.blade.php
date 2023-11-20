@@ -2,7 +2,7 @@
     <div class="flex items-center justify-between border-b pb-4">
         <div class="flex items-center space-x-4">
             <h3 class="text-sm font-medium">{{ __('dashboard.cards.new-orders.title') }}</h3>
-            <x-badge color="green">3245</x-badge>
+            <x-badge color="green">{{ $new_orders_count }}</x-badge>
         </div>
 {{--        <x-secondary-button href="{{ route('stocks.index') }}" class="!h-8">{{ __('dashboard.cards.new-orders.cta') }}</x-secondary-button>--}}
     </div>

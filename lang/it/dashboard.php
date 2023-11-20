@@ -4,7 +4,8 @@ return [
     'title' => 'Dashboard',
     'cards' => [
         'stocks' => [
-            'title' => 'N. Prodotti in Magazzino',
+            'admin_title' => 'N. Prodotti',
+            'reseller_title' => 'N. Prodotti in Magazzino',
             'total_available' => 'Totale Disponibili',
             'cta' => 'Visualizza'
         ],
