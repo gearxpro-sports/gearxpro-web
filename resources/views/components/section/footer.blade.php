@@ -1,4 +1,4 @@
-<footer class="w-full xl:pt-[85px] xl:pb-[67px] bg-color-010101 grid grid-cols-4 xl:grid-cols-12 xl:grid-rows-6 gap-[10px] xl:gap-[30px]">
+<footer class="w-full relative z-[-1] xl:pt-[85px] xl:pb-[67px] bg-color-010101 grid grid-cols-4 xl:grid-cols-12 xl:grid-rows-6 gap-[10px] xl:gap-[30px]">
 
     <div class="hidden col-start-3 col-span-3 row-start-1 row-span-6 pr-[86px] xl:flex flex-col justify-between items-center text-white">
         <div class="flex flex-col gap-[28px] text-[13px] font-medium leading-[16px]">
