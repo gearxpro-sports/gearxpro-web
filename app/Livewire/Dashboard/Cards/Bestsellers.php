@@ -2,6 +2,10 @@
 
 namespace App\Livewire\Dashboard\Cards;
 
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\ProductVariant;
+use App\Models\User;
 use Livewire\Component;
 
 class Bestsellers extends Component
@@ -15,9 +19,38 @@ class Bestsellers extends Component
 
     public function render()
     {
-        $items = auth()->user()->stocks()->with('productVariant')->get()->take(5);
+        $items = collect();
+
+        if(auth()->user()->hasRole(User::SUPERADMIN)) {
+            $orders = Order::all();
+        } elseif(auth()->user()->hasRole(User::RESELLER)) {
+            $orders = auth()->user()->resellerOrders;
+        }
+
+        $productQuantities = [];
+
+        foreach ($orders as $order) {
+            foreach ($order->items as $item) {
+                $productId = $item->product_id;
+
+                if (!isset($productQuantities[$productId])) {
+                    $productQuantities[$productId] = 0;
+                }
+
+                $productQuantities[$productId] += $item->quantity;
+            }
+        }
+
+        arsort($productQuantities);
+
+        $mostSoldProductIds = array_keys($productQuantities);
+
+        foreach ($mostSoldProductIds as $mostSoldProductId) {
+            $items->push(ProductVariant::with('product')->where('product_id', $mostSoldProductId)->first());
+        }
+
         return view('livewire.dashboard.cards.bestsellers', [
-            'items' => $items
+            'items' => $items->take(5)
         ]);
     }
 }

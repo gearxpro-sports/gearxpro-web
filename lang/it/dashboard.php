@@ -27,7 +27,8 @@ return [
             ]
         ],
         'new-orders' => [
-            'title' => 'Nuovi Ordini',
+            'admin_title' => 'Nuovi Ordini',
+            'reseller_title' => 'Ultimi Ordini',
             'cta' => 'Vedi tutti',
             'table' => [
                 'cols' => [

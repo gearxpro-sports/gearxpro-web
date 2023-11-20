@@ -18,13 +18,14 @@ class NewOrders extends Component
     public function render()
     {
         if (auth()->user()->hasRole(User::SUPERADMIN)) {
-            $new_orders_count = Supply::where('status', 'new')->count();
+            $orders_count = Supply::where('status', 'new')->count();
+            $items = Supply::latest()->get()->take(5);
         } else if (auth()->user()->hasRole(User::RESELLER)) {
-            $new_orders_count = 14; // TODO: Inserire numero corretto da query Orders
+            $orders_count = auth()->user()->resellerOrders->count();
+            $items = auth()->user()->resellerOrders()->latest()->get()->take(5);
         }
-        $items = auth()->user()->stocks()->with('productVariant')->get()->take(5);
         return view('livewire.dashboard.cards.new-orders', [
-            'new_orders_count' => $new_orders_count,
+            'orders_count' => $orders_count,
             'items' => $items
         ]);
     }

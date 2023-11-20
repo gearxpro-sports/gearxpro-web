@@ -78,8 +78,8 @@
                 <h3 class="mb-4 text-color-18181a font-medium">{{ __('supply.purchases.show.boxes.shipping_data') }}</h3>
                 <ul class="grow-0 text-sm">
                     <li class="mt-2 text-color-323a46">{{ $supply->reseller->fullname }}</li>
-                    <li class="mt-2 text-color-6c757d">{{ $supply->reseller->shippingAddress->inlineFormat }}</li>
-                    <li class="mt-2 text-color-6c757d">{{ $supply->reseller->shippingAddress->country->name }}</li>
+                    <li class="mt-2 text-color-6c757d">{{ $supply->reseller->shipping_address->inlineFormat }}</li>
+                    <li class="mt-2 text-color-6c757d">{{ $supply->reseller->shipping_address->country->name }}</li>
                 </ul>
             </div>
             <div class="grow-0">
@@ -91,8 +91,8 @@
                 <h3 class="mb-4 text-color-18181a font-medium">{{ __('supply.purchases.show.boxes.billing_data') }}</h3>
                 <ul class="grow-0 text-sm">
                     <li class="mt-2 text-color-323a46">{{ $supply->reseller->fullname }}</li>
-                    <li class="mt-2 text-color-6c757d">{{ $supply->reseller->billingAddress->inlineFormat }}</li>
-                    <li class="mt-2 text-color-6c757d">{{ $supply->reseller->billingAddress->country->name }}</li>
+                    <li class="mt-2 text-color-6c757d">{{ $supply->reseller->billing_address->inlineFormat }}</li>
+                    <li class="mt-2 text-color-6c757d">{{ $supply->reseller->billing_address->country->name }}</li>
                 </ul>
             </div>
             <div class="grow-0">
