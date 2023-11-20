@@ -4,6 +4,8 @@ namespace App\Livewire\Shop\Cart;
 
 use App\Models\Address;
 use App\Models\Country;
+use App\Models\Order;
+use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -174,7 +176,39 @@ class Payment extends Component
             $this->currentTab = 1;
             $this->dataUser = true;
         } elseif ($this->currentTab === 1) {
-            return redirect()->route('confirm');
+
+            $addressHiddenFields = ['id', 'user_id', 'country_id', 'type', 'default', 'created_at', 'updated_at'];
+            $country = $this->customer->country;
+            $orderItems = [];
+            $total = 0;
+            foreach ($this->cart->items as $cartItem) {
+                $orderItems[] = [
+                    'product_id' => $cartItem->variant->product->id,
+                    'variant_id' => $cartItem->product_variant_id,
+                    'name'       => sprintf('%s : %s', $cartItem->variant->product->name, $cartItem->variant->terms->map(fn($term) => $term->value)->join(' - ')),
+                    'price'      => $cartItem->price,
+                    'quantity'   => $cartItem->quantity,
+                ];
+                $total = $total + $cartItem->price;
+            }
+
+            $order = Order::create([
+                'reference' => Str::uuid(),
+                'user_id' => $this->customer->id,
+                'reseller_id' => $country->reseller->id,
+                'country_id' => $country->id,
+                'status' => Order::PAID_STATUS,
+                'payment_method' => Order::STRIPE_PAYMENT,
+                'billing_address' => $this->customer->billing_address->makeHidden($addressHiddenFields)->attributesToArray(),
+                'shipping_address' => $this->customer->billing_address->makeHidden([...$addressHiddenFields, ...[ 'sdi', 'pec']])->attributesToArray(),
+                'items' => $orderItems,
+                'paid_at' => now(),
+                'total' => $total,
+            ]);
+
+            $this->cart->delete();
+
+            return redirect()->route('confirm', ['country_code' => session('country_code')])->with(['order_reference' => $order->reference]);
         }
     }
 

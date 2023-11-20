@@ -23,6 +23,7 @@ use App\Livewire\Supply\Index as SupplyIndex;
 use App\Livewire\Supply\Recap as SupplyRecap;
 use App\Livewire\Supply\Purchases\Index as SupplyPurchasesIndex;
 use App\Livewire\Supply\Purchases\Show as SupplyPurchaseShow;
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Shop\Index as ShopIndex;
 use App\Livewire\Shop\Products\Index as ProductIndex;
@@ -68,7 +69,12 @@ Route::middleware('country')->domain('{country_code}.'.env('APP_URL'))->group(fu
 
     // TODO: check se vista accessibile sempre o solo se c'è un ordine effettuato in precedenza
     Route::get('/confirm', function () {
-        return view('confirm');
+        if (Order::where('reference', session('order_reference'))->exists()) {
+            session()->remove('order_reference');
+            return view('confirm');
+        }
+        return redirect()->route('home');
+
     })->name('confirm');
 
     Route::name('about_us.')->group(function () {
