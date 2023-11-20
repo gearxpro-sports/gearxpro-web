@@ -58,140 +58,139 @@
     </div>
 
     <div class="relative flex">
-        @if ($filtersOpen)
-            <div class="z-50 bg-color-f2f0eb fixed xl:relative w-full inset-0 xl:min-w-[231px] xl:max-w-[360px] xl:ml-12 xl:mr-20">
-                <div class="xl:hidden w-full bg-white py-5 flex justify-between items-center px-4 xl:px-0">
-                    <h4 class="text-xl font-semibold text-color-18181a ">{{__('shop.products.button_filter_off')}}</h4>
-                    <div wire:click="toggleFilters" class="p-2">
-                        <x-icons name="x-close" />
+        <div @class(["z-50 h-[100vh] max-w-0 xl:h-fit bg-color-f2f0eb overflow-auto xl:overflow-hidden scrollBar transition-all duration-700 fixed xl:relative w-full inset-0", 'xl:min-w-[231px] xl:max-w-[360px] xl:ml-12 xl:mr-20' => $filtersOpen])>
+            <div class="xl:hidden w-full bg-white py-5 flex justify-between items-center px-4 xl:px-0">
+                <h4 class="text-xl font-semibold text-color-18181a ">{{__('shop.products.button_filter_off')}}</h4>
+                <div wire:click="toggleFilters" class="p-2">
+                    <x-icons name="x-close" />
+                </div>
+                {{-- @if ($selectedCategory || $selectedColors || $selectedSizes)
+                <a href="#" wire:click.prevent="clearFilters" class="text-xs font-medium text-color-6c757d">{{ __('shop.products.remove_filters') }}</a>
+                @endif --}}
+            </div>
+
+            <div class="hidden xl:flex w-full pb-5 justify-between items-center border-b border-color-18181a">
+                <h4 class="text-xl font-semibold text-color-18181a ">{{ $products->count() }} {{ __('shop.products.results') }}</h4>
+                @if ($selectedCategory || $selectedColors || $selectedSizes)
+                <a href="#" wire:click.prevent="clearFilters" class="text-xs font-medium text-color-6c757d">{{ __('shop.products.remove_filters') }} x</a>
+                @endif
+            </div>
+
+            {{-- SELECT ORDER MOBILE --}}
+            <div x-data="{opened: false}" class="xl:hidden w-full px-4 pt-4">
+                <div @click="opened = !opened" class="flex justify-between items-center pb-4 border-b border-color-e0e0df cursor-pointer">
+                    <h5 class="font-medium text-color-18181a uppercase">{{__('shop.products.order')}}</h5>
+                    <span class="invisible transition-all duration-300 ease-out opacity-20" :class="opened && '!visible !opacity-100'">
+                        <x-icons name="minus_menu" />
+                    </span>
+                </div>
+
+                <div class="max-h-0 transition-all duration-500 ease-in-out overflow-hidden" :class="opened && 'max-h-96'">
+                    <div class="flex flex-col flex-wrap items-start gap-4 px-1 py-5">
+                        @foreach ($orderOptions as $id => $option )
+                            <button wire:click="$dispatch('selectColors', {{ $id }})"
+                                @class(["grow py-4 text-sm font-medium text-color-18181a hover:text-color-323a46 flex items-center gap-4 group",
+                                '!font-bold' => $id == $selectedOrder])
+                            > <x-icons name="ellisse" />
+                                {{$option}}
+                            </button>
+                        @endforeach
                     </div>
-                    {{-- @if ($selectedCategory || $selectedColors || $selectedSizes)
-                    <a href="#" wire:click.prevent="clearFilters" class="text-xs font-medium text-color-6c757d">{{ __('shop.products.remove_filters') }}</a>
-                    @endif --}}
                 </div>
+            </div>
 
-                <div class="hidden xl:flex w-full pb-5 justify-between items-center border-b border-color-18181a">
-                    <h4 class="text-xl font-semibold text-color-18181a ">{{ $products->count() }} {{ __('shop.products.results') }}</h4>
-                    @if ($selectedCategory || $selectedColors || $selectedSizes)
-                    <a href="#" wire:click.prevent="clearFilters" class="text-xs font-medium text-color-6c757d">{{ __('shop.products.remove_filters') }} x</a>
-                    @endif
-                </div>
+            <div class="w-full xl:h-[1000px] overflow-y-auto scrollBar px-4 xl:px-0">
 
-                {{-- SELECT ORDER MOBILE --}}
-                <div x-data="{opened: false}" class="xl:hidden w-full px-4 pt-4">
-                    <div @click="opened = !opened" class="flex justify-between items-center pb-4 border-b border-color-e0e0df cursor-pointer">
-                        <h5 class="font-medium text-color-18181a uppercase">{{__('shop.products.order')}}</h5>
+                {{-- SUBCATEGORIES FILTERS --}}
+                @if ($selectedCategory)
+                    @php
+                        $filterCategories = $this->selectedCategory ?
+                            $this->categories->where('id', ($this->selectedCategory->parent_id !== null ? $this->selectedCategory->parent_id : $this->selectedCategory->id)) :
+                            $this->categories
+                        ;
+                    @endphp
+                    @foreach ($filterCategories as $filterCategory)
+                        <div wire:key="cat_filter_{{ $category->id }}" class="w-full px-1 pt-4">
+                            <div class="flex justify-between items-center pb-4 border-b border-color-e0e0df cursor-pointer">
+                                <h5 class="font-medium text-color-18181a uppercase">{{ $filterCategory->name }}</h5>
+                                <x-icons name="minus_menu" />
+                            </div>
+                            <div class="transition-all duration-1000 ease-out overflow-hidden">
+                                <ul>
+                                    @foreach ($filterCategory->children as $child )
+                                        <li class="py-4 text-sm font-medium text-color-18181a hover:text-color-323a46 flex items-center gap-4 group">
+                                            <x-icons name="ellisse" />
+                                            <a
+                                                wire:click.prevent="selectCategory({{ $child->id }})"
+                                                href="#"
+                                                @class([
+                                                    'inline-block',
+                                                    'font-bold py-2 px-4 bg-color-18181a text-white rounded' => $selectedCategory && $selectedCategory->id === $child->id
+                                                ])
+                                            >{{ $child->name }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+
+                {{-- COLOR FILTERS --}}
+                <div x-data="{opened: false}" class="w-full px-1 pt-4">
+                    <div @click="opened = !opened" class="flex justify-between items-center pb-4 cursor-pointer">
+                        <h5 class="font-medium text-color-18181a uppercase">{{__('shop.products.color')}}</h5>
                         <span class="invisible transition-all duration-300 ease-out opacity-20" :class="opened && '!visible !opacity-100'">
                             <x-icons name="minus_menu" />
                         </span>
                     </div>
 
-                    <div class="h-0 transition-all duration-1000 ease-out overflow-hidden" :class="opened && '!h-fit overflow-visible'">
-                        <div class="flex flex-col flex-wrap items-start gap-4 px-1 py-5">
-                            @foreach ($orderOptions as $id => $option )
-                                <button wire:click="$dispatch('selectColors', {{ $id }})"
-                                    @class(["grow py-4 text-sm font-medium text-color-18181a hover:text-color-323a46 flex items-center gap-4 group",
-                                    '!font-bold' => $id == $selectedOrder])
-                                > <x-icons name="ellisse" />
-                                    {{$option}}
+                    <div class="max-h-0 border-b border-color-e0e0df transition-all duration-500 ease-in-out overflow-hidden" :class="opened && 'max-h-96'">
+                        <div class="flex flex-wrap items-center gap-4 px-1 py-5">
+                            @foreach ($productAttributes[2]->first()->terms->pluck('color', 'id') as $id => $color )
+                                <button
+                                    class="cursor-pointer h-8 w-8 rounded-full p-0.5 focus:outline-none ring-transparent ring ring-offset-2 ring-offset-color-f2f0eb"
+                                    @style([
+                                        'background-color : '.$color,
+                                        '--tw-ring-color: '.$color => in_array($id, $selectedColors)
+                                    ])
+                                    wire:click="selectColors('{{ $id }}')"
+                                >
                                 </button>
                             @endforeach
                         </div>
                     </div>
                 </div>
 
-                <div class="w-full xl:h-[1000px] overflow-y-auto scrollBar px-4 xl:px-0">
-
-                    {{-- SUBCATEGORIES FILTERS --}}
-                    @if ($selectedCategory)
-                        @php
-                            $filterCategories = $this->selectedCategory ?
-                                $this->categories->where('id', ($this->selectedCategory->parent_id !== null ? $this->selectedCategory->parent_id : $this->selectedCategory->id)) :
-                                $this->categories
-                            ;
-                        @endphp
-                        @foreach ($filterCategories as $filterCategory)
-                            <div wire:key="cat_filter_{{ $category->id }}" class="w-full px-1 pt-4">
-                                <div class="flex justify-between items-center pb-4 border-b border-color-e0e0df cursor-pointer">
-                                    <h5 class="font-medium text-color-18181a uppercase">{{ $filterCategory->name }}</h5>
-                                    <x-icons name="minus_menu" />
-                                </div>
-                                <div class="transition-all duration-1000 ease-out overflow-hidden">
-                                    <ul>
-                                        @foreach ($filterCategory->children as $child )
-                                            <li class="py-4 text-sm font-medium text-color-18181a hover:text-color-323a46 flex items-center gap-4 group">
-                                                <x-icons name="ellisse" />
-                                                <a
-                                                    wire:click.prevent="selectCategory({{ $child->id }})"
-                                                    href="#"
-                                                    @class([
-                                                        'inline-block',
-                                                        'font-bold py-2 px-4 bg-color-18181a text-white rounded' => $selectedCategory && $selectedCategory->id === $child->id
-                                                    ])
-                                                >{{ $child->name }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
-
-                    {{-- COLOR FILTERS --}}
-                    <div x-data="{opened: false}" class="w-full px-1 pt-4">
-                        <div @click="opened = !opened" class="flex justify-between items-center pb-4 border-b border-color-e0e0df cursor-pointer">
-                            <h5 class="font-medium text-color-18181a uppercase">{{__('shop.products.color')}}</h5>
-                            <span class="invisible transition-all duration-300 ease-out opacity-20" :class="opened && '!visible !opacity-100'">
-                                <x-icons name="minus_menu" />
-                            </span>
-                        </div>
-
-                        <div class="h-0 transition-all duration-1000 ease-out overflow-hidden" :class="opened && '!h-fit overflow-visible'">
-                            <div class="flex flex-wrap items-center gap-4 px-1 py-5">
-                                @foreach ($productAttributes[2]->first()->terms->pluck('color', 'id') as $id => $color )
-                                    <button
-                                        class="cursor-pointer h-8 w-8 rounded-full p-0.5 focus:outline-none ring-transparent ring ring-offset-2 ring-offset-color-f2f0eb"
-                                        @style([
-                                            'background-color : '.$color,
-                                            '--tw-ring-color: '.$color => in_array($id, $selectedColors)
-                                        ])
-                                        wire:click="selectColors('{{ $id }}')"
-                                    >
-                                    </button>
-                                @endforeach
-                            </div>
-                        </div>
+                {{-- SIZES FILTERS --}}
+                <div x-data="{opened: false}" class="w-full px-1 pt-4">
+                    <div @click="opened = !opened" class="flex justify-between items-center pb-4 cursor-pointer">
+                        <h5 class="font-medium text-color-18181a uppercase">{{__('shop.products.size')}}</h5>
+                        <span class="invisible transition-all duration-300 ease-out opacity-20" :class="opened && '!visible !opacity-100'">
+                            <x-icons name="minus_menu" />
+                        </span>
                     </div>
 
-                    {{-- SIZES FILTERS --}}
-                    <div x-data="{opened: false}" class="w-full px-1 pt-4">
-                        <div @click="opened = !opened" class="flex justify-between items-center pb-4 border-b border-color-e0e0df cursor-pointer">
-                            <h5 class="font-medium text-color-18181a uppercase">{{__('shop.products.size')}}</h5>
-                            <span class="invisible transition-all duration-300 ease-out opacity-20" :class="opened && '!visible !opacity-100'">
-                                <x-icons name="minus_menu" />
-                            </span>
-                        </div>
-
-                        <div class="h-0 transition-all duration-1000 ease-out overflow-hidden" :class="opened && '!h-fit overflow-visible'">
-                            <div class="flex flex-wrap items-center gap-4 px-1 py-5">
-                                @foreach ($productAttributes[3]->first()->terms->pluck('value', 'id') as $id => $size )
-                                    <button
-                                        wire:click="selectSizes('{{ $id }}')"
-                                        @class([
-                                            'w-12 h-11 bg-color-edebe5 border border-color-e0e0df rounded flex items-center justify-center text-sm font-medium uppercase cursor-pointer hover:bg-color-18181a hover:text-white',
-                                            '!bg-color-18181a !text-white' => in_array($id, $selectedSizes)
-                                        ])
-                                    >
-                                        {{ $size }}
-                                    </button>
-                                @endforeach
-                            </div>
+                    <div class="max-h-0 border-b border-color-e0e0df transition-all duration-500 ease-in-out overflow-hidden" :class="opened && 'max-h-96'">
+                        <div class="flex flex-wrap items-center gap-4 px-1 py-5">
+                            @foreach ($productAttributes[3]->first()->terms->pluck('value', 'id') as $id => $size )
+                                <button
+                                    wire:click="selectSizes('{{ $id }}')"
+                                    @class([
+                                        'w-12 h-11 bg-color-edebe5 border border-color-e0e0df rounded flex items-center justify-center text-sm font-medium uppercase cursor-pointer hover:bg-color-18181a hover:text-white',
+                                        '!bg-color-18181a !text-white' => in_array($id, $selectedSizes)
+                                    ])
+                                >
+                                    {{ $size }}
+                                </button>
+                            @endforeach
                         </div>
                     </div>
-
                 </div>
+
             </div>
-        @endif
+        </div>
+
         <div class="w-full relative" wire:loading.class="opacity-25">
             {{-- SELECT ORDER --}}
             <div class="hidden lg:block absolute top-[-120px] right-0">
@@ -205,14 +204,14 @@
                             </div>
                         </button>
 
-                        <ul :class="opened && '!h-fit p-1 border overflow-visible transition-all duration-300'"
+                        <ul :class="opened && '!h-fit border transition-all duration-300'"
                             class="w-full h-0 bg-white absolute mt-1 z-10 rounded-md overflow-hidden">
                             @foreach($orderOptions as $key => $option)
                             <li wire:click="selectOrder('{{ $key }}')"
                                 @class([
-                                    'px-3 py-2 cursor-pointer capitalize',
-                                    'bg-color-f3f7f9' => $selectedOrder === $key,
-                                    'hover:bg-color-f3f7f9 hover:text-color-323a46',
+                                    'px-3 py-2 cursor-pointer capitalize m-1',
+                                    'bg-color-18181a/80 text-white' => $selectedOrder === $key,
+                                    'hover:bg-color-18181a hover:text-white',
                                 ])
                             >
                                 {{ $option }}
@@ -224,7 +223,7 @@
             </div>
 
             @if($products->count() > 0)
-                <div id="cards" class="w-full px-4 xl:px-0 grid grid-cols-2 xl:grid-cols-4 gap-3 xl:gap-5 relative">
+                <div id="cards" @class(["w-full px-4 xl:px-0 grid grid-cols-2 xl:grid-cols-4 gap-3 xl:gap-5 relative",'xl:!grid-cols-3' => $filtersOpen])>
                     @foreach ($products as $product )
                         <livewire:components.card-product
                           wire:key="prod_{{ $product->id }}"
@@ -283,9 +282,9 @@
             scrollPosition = window.scrollY;
 
             if (scrollPosition >= 300) {
-                actionContainer.classList.add('xl:shadow-lg');
+                actionContainer.classList.add('xl:shadow-md');
             } else {
-                actionContainer.classList.remove('xl:shadow-lg');
+                actionContainer.classList.remove('xl:shadow-md');
             }
 
             if (window.matchMedia("(max-width: 820px)").matches) {

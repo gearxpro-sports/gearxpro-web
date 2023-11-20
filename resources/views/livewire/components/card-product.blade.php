@@ -1,4 +1,4 @@
-<div class="rounded-b-md overflow-hidden max-w-[594px]">
+<div class="rounded-b-md overflow-hidden">
     <div class="bg-white flex items-center justify-center overflow-hidden">
         <img class="w-full p-10" src="{{ $product->defaultImages->medium ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $product->name }}">
     </div>
