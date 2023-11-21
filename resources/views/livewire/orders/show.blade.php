@@ -130,12 +130,17 @@
                     @php($variant = \App\Models\ProductVariant::find($item->variant_id))
                     <tr class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
                         <td class="text-left">
-                            <div class="flex flex-col">
-                                {{ $variant->product->name }}
-                                <div class="flex divide-x text-xxs mt-1">
-                                    @foreach($variant->terms as $term)
-                                        <span class="first:pl-0 px-1">{{ $term->value }}</span>
-                                    @endforeach
+                            <div class="flex items-center space-x-4">
+                                <div>
+                                    <img class="w-10" src="{{ $variant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $variant->product->name }}">
+                                </div>
+                                <div>
+                                    {{ $variant->product->name }}
+                                    <div class="flex divide-x text-xxs mt-1">
+                                        @foreach($variant->terms as $term)
+                                            <span class="first:pl-0 px-1">{{ $term->value }}</span>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </td>
@@ -169,6 +174,38 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div>
+            <div class="bg-white rounded-sm">
+                <div class="p-8">
+                    <h3 class="text-color-18181a font-medium">{{ __('orders.show.order_total') }}</h3>
+                    <div class="text-sm">
+                        <div class="flex items-center text-color-6c757d pt-5">
+                            <span>{{ __('orders.show.summary.subtotal') }}</span><span class="ml-auto">@money($order->total)</span>
+                        </div>
+                        <div class="flex items-center text-color-6c757d pt-5">
+                            <span>{{ __('orders.show.summary.shipping_costs') }}:</span><span class="ml-auto">@money(env('SHIPPING_COST'))</span>
+                        </div>
+                        <div class="flex items-center text-color-6c757d pt-5">
+                            <span>{{ __('orders.show.summary.tax') }}</span><span class="ml-auto">@money(0)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-8 border-t border-color-eff0f0">
+                    <div class="flex items-center">
+                        <span>{{ __('orders.show.summary.total') }}</span><span class="ml-auto">@money($order->total + env('SHIPPING_COST'))</span>
+                    </div>
+                </div>
+            </div>
+            @if ($order->shipped_at)
+            <div class="mt-4">
+                <div class="bg-white rounded-sm">
+                    <div class="p-8">
+                        <h3 class="text-color-18181a font-medium">{{ __('orders.show.shipping_details') }}</h3>
+                    </div>
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 </div>
