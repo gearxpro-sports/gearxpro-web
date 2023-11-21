@@ -193,7 +193,7 @@ class Payment extends Component
             }
 
             $order = Order::create([
-                'reference' => Str::uuid(),
+                'reference' => Str::random(10),
                 'user_id' => $this->customer->id,
                 'reseller_id' => $country->reseller->id,
                 'country_id' => $country->id,

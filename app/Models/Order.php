@@ -11,22 +11,20 @@ class Order extends Model
 {
     use HasFactory, Searchable;
 
-    const CANCELLED_STATUS      = 'canceled';
+    const CANCELED_STATUS      = 'canceled';
     const PAID_STATUS           = 'paid';
     const IN_PREPARATION_STATUS = 'in_preparation';
     const SHIPPED_STATUS        = 'shipped';
     const DELIVERED_STATUS      = 'delivered';
-    const COMPLETED_STATUS      = 'completed';
     const REFUNDED_STATUS       = 'refunded';
 
     const STATUSES = [
-        self::CANCELLED_STATUS,
-        self::PAID_STATUS,
-        self::IN_PREPARATION_STATUS,
-        self::SHIPPED_STATUS,
-        self::DELIVERED_STATUS,
-        self::COMPLETED_STATUS,
-        self::REFUNDED_STATUS,
+        self::CANCELED_STATUS      => 'gray',
+        self::PAID_STATUS           => 'blue',
+        self::IN_PREPARATION_STATUS => 'lightblue',
+        self::SHIPPED_STATUS        => 'blue',
+        self::DELIVERED_STATUS      => 'green',
+        self::REFUNDED_STATUS       => 'gray',
     ];
 
     const STRIPE_PAYMENT = 'stripe';

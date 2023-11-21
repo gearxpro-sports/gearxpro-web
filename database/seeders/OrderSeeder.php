@@ -44,7 +44,7 @@ class OrderSeeder extends Seeder
             }
 
             Order::create([
-                'reference' => Str::uuid(),
+                'reference' => Str::random(10),
                 'user_id' => $customer->id,
                 'reseller_id' => $reseller->id,
                 'country_id' => $countryId,
