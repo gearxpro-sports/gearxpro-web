@@ -65,7 +65,10 @@
             <div class="grow">
                 <h3 class="mb-4 text-color-18181a font-medium">{{ __('supply.purchases.show.boxes.reseller_data') }}</h3>
                 <ul class="grow-0 text-sm">
-                    <li class="mt-2 text-color-323a46">{{ $supply->reseller->fullname }}</li>
+                    <li class="mt-2 text-color-323a46">
+                        <img class="inline-block w-5 mr-2 rounded-sm" src="https://flagcdn.com/w320/{{ strtolower($supply->reseller->country->iso2_code) }}.png" alt="{{ $supply->reseller->country->name }}">
+                        {{ $supply->reseller->fullname }}
+                    </li>
                     <li class="mt-2 text-color-6c757d">{{ $supply->reseller->email }}</li>
                 </ul>
             </div>
@@ -79,7 +82,10 @@
                 <ul class="grow-0 text-sm">
                     <li class="mt-2 text-color-323a46">{{ $supply->reseller->fullname }}</li>
                     <li class="mt-2 text-color-6c757d">{{ $supply->reseller->shipping_address->inlineFormat }}</li>
-                    <li class="mt-2 text-color-6c757d">{{ $supply->reseller->shipping_address->country->name }}</li>
+                    <li class="mt-2 text-color-6c757d">
+                        <img class="inline-block w-5 mr-2 rounded-sm" src="https://flagcdn.com/w320/{{ strtolower($supply->reseller->shipping_address->country->iso2_code) }}.png" alt="{{ $supply->reseller->shipping_address->country->name }}">
+                        {{ $supply->reseller->shipping_address->country->name }}
+                    </li>
                 </ul>
             </div>
             <div class="grow-0">
@@ -92,7 +98,10 @@
                 <ul class="grow-0 text-sm">
                     <li class="mt-2 text-color-323a46">{{ $supply->reseller->fullname }}</li>
                     <li class="mt-2 text-color-6c757d">{{ $supply->reseller->billing_address->inlineFormat }}</li>
-                    <li class="mt-2 text-color-6c757d">{{ $supply->reseller->billing_address->country->name }}</li>
+                    <li class="mt-2 text-color-6c757d">
+                        <img class="inline-block w-5 mr-2 rounded-sm" src="https://flagcdn.com/w320/{{ strtolower($supply->reseller->billing_address->country->iso2_code) }}.png" alt="{{ $supply->reseller->billing_address->country->name }}">
+                        {{ $supply->reseller->billing_address->country->name }}
+                    </li>
                 </ul>
             </div>
             <div class="grow-0">

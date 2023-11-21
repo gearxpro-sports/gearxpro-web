@@ -30,7 +30,12 @@
                             <tr class="text-left [&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
                                 <td class="whitespace-nowrap uppercase">#{{ $item->uuid }}</td>
                                 <td class="whitespace-nowrap">{{ $item->created_at->format('d/m/Y') }}</td>
-                                <td class="whitespace-nowrap">{{ $item->reseller->fullname }}</td>
+                                <td class="whitespace-nowrap">
+                                    <div>
+                                        <img class="inline-block w-5 mr-2 rounded-sm" src="https://flagcdn.com/w320/{{ strtolower($item->reseller->country->iso2_code) }}.png" alt="{{ $item->reseller->country->name }}">
+                                        {{ $item->reseller->fullname }}
+                                    </div>
+                                </td>
                                 <td class="whitespace-nowrap">@money($item->amount)</td>
                                 <td class="text-right">
                                     <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm"
