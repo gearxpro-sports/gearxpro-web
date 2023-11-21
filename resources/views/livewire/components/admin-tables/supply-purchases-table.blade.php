@@ -1,6 +1,6 @@
 <div class="relative">
     <div wire:loading wire:target="send" class="absolute inset-0 bg-white/50 z-10"></div>
-    <x-admin-table-search-bars.supply-purchases-search-bar/>
+    <x-admin-table-search-bars.supply-purchases-search-bar />
     <div class="p-8 bg-white rounded space-y-8">
         @if ($orders->count() > 0)
             <div class="flex items-center space-x-4">

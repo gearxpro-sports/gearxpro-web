@@ -51,6 +51,7 @@ return [
             'filter' => [
                 'status' => 'Seleziona stato',
                 'date' => 'Seleziona data',
+                'select_order_date' => 'Seleziona Data Ordine'
             ],
         ],
         'show' => [

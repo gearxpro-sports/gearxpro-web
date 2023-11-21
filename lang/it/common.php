@@ -52,4 +52,5 @@ return [
     'default' => 'Default',
     'free_shipping' => 'Gratuita',
     'pz' => 'Pezzi',
+    'all' => 'Tutti'
 ];
