@@ -5,28 +5,14 @@
             <x-icons name="chevron-left-xl" />
         </a>
 
-        <div class="hidden xl:flex flex-col col-span-12 xl:col-span-7 xl:h-[1104px] overflow-auto scrollBar xl:gap-4 pb-4">
+        <div dir="ltr" class="flex xl:flex-col col-span-12 xl:col-span-7 xl:h-[1104px] overflow-auto scrollBar xl:gap-4 pb-4 snap-x xl:snap-y">
             @if ($selectedLength == 1)
-                {{-- Corto --}}
-                <img src="{{ Vite::asset('resources/images/SOXPro-1.png')}}" alt="">
-                <img src="{{ Vite::asset('resources/images/SOXPro-2.png')}}" alt="">
-                <img src="{{ Vite::asset('resources/images/SOXPro-3.png')}}" alt="">
+                <img class="snap-start scroll-ms-6 shrink-0" src="{{ Vite::asset('resources/images/SOXPro-1.png')}}" alt="">
+                <img class="snap-start scroll-ms-6 shrink-0" src="{{ Vite::asset('resources/images/SOXPro-2.png')}}" alt="">
+                <img class="snap-start scroll-ms-6 shrink-0" src="{{ Vite::asset('resources/images/SOXPro-3.png')}}" alt="">
             @else
-                <img src="{{ Vite::asset('resources/images/SOXPro-1-long.png')}}" alt="">
-                <img src="{{ Vite::asset('resources/images/SOXPro-2-long.png')}}" alt="">
-            @endif
-        </div>
-
-        {{-- CAROUSEL MOBILE --}}
-        <div class="xl:!hidden col-span-12 owl-carousel product_images">
-            @if ($selectedLength == 1)
-            {{-- Corto --}}
-                <img src="{{ Vite::asset('resources/images/SOXPro-1.png')}}" alt="">
-                <img src="{{ Vite::asset('resources/images/SOXPro-2.png')}}" alt="">
-                <img src="{{ Vite::asset('resources/images/SOXPro-3.png')}}" alt="">
-            @else
-                <img src="{{ Vite::asset('resources/images/SOXPro-1-long.png')}}" alt="">
-                <img src="{{ Vite::asset('resources/images/SOXPro-2-long.png')}}" alt="">
+                <img class="snap-start scroll-ms-6 shrink-0" src="{{ Vite::asset('resources/images/SOXPro-1-long.png')}}" alt="">
+                <img class="snap-start scroll-ms-6 shrink-0" src="{{ Vite::asset('resources/images/SOXPro-2-long.png')}}" alt="">
             @endif
         </div>
 
@@ -341,45 +327,5 @@
                 most_purchased_carousel.trigger('prev.owl.carousel', [2000]);
             })
         });
-    </script>
-
-    <script>
-        var images = @json($images);
-        var image_carousel;
-
-        $(document).ready(function(){
-            // $.each(images, function(length) {
-            //     $.each(images.short, function(index, img) {
-            //         $('<img>').attr('src', img ).appendTo(".product_images");
-            //     });
-            // });
-
-            image_carousel = new $(".product_images").owlCarousel({
-                items: 1,
-                margin: 0,
-                loop: true,
-                autoWidth: false,
-                autoplay: false,
-                autoplayHoverPause: false,
-                infinite: false,
-            });
-        });
-
-        // document.addEventListener("DOMContentLoaded", () => {
-        //     Livewire.hook('morph.updated', ({el, component}) => {
-
-        //         $(document).ready(function () {
-        //             image_carousel = new $(".product_images").owlCarousel({
-        //                 items: 1,
-        //                 margin: 0,
-        //                 loop: true,
-        //                 autoWidth: false,
-        //                 autoplay: false,
-        //                 autoplayHoverPause: false,
-        //                 infinite: false,
-        //             });
-        //         });
-        //     });
-        // });
     </script>
 @endpush
