@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class, 'user_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(User::class, 'reseller_id');
             $table->foreignIdFor(Country::class, 'country_id')->nullable()->constrained()->nullOnDelete();
-            $table->enum('status', Order::STATUSES)->nullable();
+            $table->enum('status', array_keys(Order::STATUSES))->nullable();
             $table->enum('payment_method', Order::PAYMENT_METHODS)->nullable();
             $table->json('billing_address')->nullable();
             $table->json('shipping_address')->nullable();
@@ -28,6 +28,7 @@ return new class extends Migration
             $table->decimal('shipping_cost')->default(0);
             $table->text('notes')->nullable();
             $table->timestamp('paid_at')->nullable();
+            $table->timestamp('shipped_at')->nullable();
             $table->decimal('total')->nullable();
             $table->string('tracking')->nullable();
             $table->timestamps();

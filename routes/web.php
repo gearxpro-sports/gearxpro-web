@@ -7,6 +7,8 @@ use App\Livewire\Customers\Profile as CustomerProfile;
 use App\Livewire\Dashboard\Index as Dashboard;
 use App\Livewire\Invoices\Show as InvoiceShow;
 use App\Livewire\Invoices\Index as InvoicesIndex;
+use App\Livewire\Order\Index as OrdersIndex;
+use App\Livewire\Order\Show as OrderShow;
 use App\Livewire\Profile\Edit as ProfileEdit;
 use App\Livewire\Resellers\Index as ResellersIndex;
 use App\Livewire\Resellers\Show as ResellerShow;
@@ -125,6 +127,11 @@ Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->prefix('dashboa
             Route::get('/', SupplyPurchasesIndex::class)->name('supply.purchases.index');
             Route::get('/{supply}', SupplyPurchaseShow::class)->name('supply.purchases.show')->middleware(['role:superadmin|reseller']);
             Route::get('/{supply}/invoice', InvoiceShow::class)->name('supply.purchases.invoice');
+        });
+
+        Route::prefix('orders')->middleware(['role:reseller'])->group(function () {
+            Route::get('/', OrdersIndex::class)->name('orders.index');
+            Route::get('/{order}', OrderShow::class)->name('orders.show');
         });
 
         Route::prefix('invoices')->group(function () {

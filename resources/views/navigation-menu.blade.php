@@ -23,9 +23,17 @@
         @role(App\Models\User::RESELLER)
         <a href="{{ route('stocks.index') }}"
            class="{{ request()->is('dashboard/stocks*') ? 'text-color-323a46' : 'text-color-6c757d hover:text-color-323a46' }} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-            <x-icons name="box"
+            <x-icons name="boxes"
                      class="{{ request()->is('dashboard/stocks*') ? 'text-color-323a46' : 'text-color-6c757d group-hover:text-color-323a46' }} mr-3 flex-shrink-0 h-5 w-5"/>
             {{ __('navigation.stocks') }}
+        </a>
+        @endrole
+        @role(App\Models\User::RESELLER)
+        <a href="{{ route('orders.index') }}"
+           class="{{ request()->is('dashboard/orders*') ? 'text-color-323a46' : 'text-color-6c757d hover:text-color-323a46' }} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+            <x-icons name="box"
+                     class="{{ request()->is('dashboard/orders*') ? 'text-color-323a46' : 'text-color-6c757d group-hover:text-color-323a46' }} mr-3 flex-shrink-0 h-5 w-5"/>
+            {{ __('navigation.orders') }}
         </a>
         @endrole
         @role(App\Models\User::SUPERADMIN)

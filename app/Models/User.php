@@ -152,6 +152,6 @@ class User extends Authenticatable
      */
     public function resellerOrders(): HasMany
     {
-        return $this->hasMany(Order::class, 'reseller_id');
+        return $this->hasMany(Order::class, 'reseller_id')->with('customer');
     }
 }
