@@ -14,6 +14,8 @@ class OrdersTable extends BaseTable
         $orders = auth()->user()->resellerOrders()
             ->search($this->search, [
                 'reference',
+                'customer.firstname',
+                'customer.lastname',
             ])
             ->orderByDesc('created_at')
         ;
