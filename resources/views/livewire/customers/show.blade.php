@@ -78,5 +78,10 @@
     </div>
     <div class="p-7 bg-white lg:col-span-2">
         <h2 class="flex items-center mb-5">{{ __('customers.show.orders.title') }}</h2>
+        @if($customer->customerOrders->count() === 0)
+            <p>Nessun ordine presente</p>
+        @else
+            Lista ordini
+        @endif
     </div>
 </div>

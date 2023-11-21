@@ -116,7 +116,7 @@ class Payment extends Component
         if ($this->customer_shipping_address) {
             $this->full_shipping_address = trim($this->customer_shipping_address->address_1) . ' ' . trim($this->customer_shipping_address->city) . ' ' . trim($this->customer_shipping_address->postcode);
 
-            $this->pec = $this->customer->shipping_address->pec;
+            $this->pec = $this->customer->shipping_address->pec ?? $this->customer->email;
             $this->phone = $this->customer->shipping_address->phone;
             $this->shipping_address = $this->customer_shipping_address->address_1;
             // $this->shipping_civic = $this->customer_shipping_address->address_1;
