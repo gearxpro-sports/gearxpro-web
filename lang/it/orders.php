@@ -60,6 +60,12 @@ return [
         'ship_date' => 'Data Spedizione',
         'order_total' => 'Totale Ordine',
         'order_state' => 'Stato Ordine',
-
+        'summary' => [
+            'subtotal' => 'Subtotale:',
+            'shipping_costs' => 'Spedizione:',
+            'tax' => 'Iva:',
+            'total' => 'Totale (Euro):',
+        ],
+        'shipping_details' => 'Dettagli Spedizione',
     ],
 ];
