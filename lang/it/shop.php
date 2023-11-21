@@ -64,7 +64,9 @@ return [
     'modal_cart' => [
         'add_product' => 'Articolo aggiunto al carrello',
         'button_show' => 'Visualizza carrello',
-        'button_pay' => 'Vai al pagamento'
+        'button_pay' => 'Vai al pagamento',
+        'cart' => 'Carrello',
+        'checkout' => 'Checkout'
     ],
     'cart' => [
         'cart_empty' => 'Nessun prodotto in carrello!',

@@ -62,10 +62,10 @@
         </svg>
         @break
     @case('check-format')
-        <svg xmlns="http://www.w3.org/2000/svg" width="12.069" height="9" viewBox="0 0 12.069 9"
+        <svg xmlns="http://www.w3.org/2000/svg" width="12.069" height="9" viewBox="0 0 12.069 9" fill="currentColor"
             {{ $attributes->merge(['class']) }}>
             <g id="check" transform="translate(0 -6.103)">
-            <path id="Tracciato_254" data-name="Tracciato 254" d="M4.1,14.926.177,11a.6.6,0,0,1,0-.853L1.03,9.3a.6.6,0,0,1,.853,0l2.642,2.642,5.66-5.66a.6.6,0,0,1,.853,0l.853.853a.6.6,0,0,1,0,.853l-6.94,6.94a.6.6,0,0,1-.853,0Z" transform="translate(0 0)"/>
+                <path id="Tracciato_254" data-name="Tracciato 254" d="M4.1,14.926.177,11a.6.6,0,0,1,0-.853L1.03,9.3a.6.6,0,0,1,.853,0l2.642,2.642,5.66-5.66a.6.6,0,0,1,.853,0l.853.853a.6.6,0,0,1,0,.853l-6.94,6.94a.6.6,0,0,1-.853,0Z" transform="translate(0 0)"/>
             </g>
         </svg>
         @break
@@ -98,6 +98,14 @@
              viewbox="0 0 5.5 10" {{ $attributes->merge(['class']) }}>
             <path
                 d="m4.464 9.828-4.291-4.4a.607.607 0 0 1 0-.85l4.291-4.4a.574.574 0 0 1 .409-.173.575.575 0 0 1 .41.173.588.588 0 0 1 0 .824l-3.9 4 3.9 4a.594.594 0 0 1 0 .825.575.575 0 0 1-.41.173.574.574 0 0 1-.409-.172Z"/>
+        </svg>
+        @break
+    @case('chevron-left-xl')
+        <svg xmlns="http://www.w3.org/2000/svg" width="10.85" height="19.279" viewBox="0 0 10.85 19.279"
+            {{ $attributes->merge(['class']) }}>
+            <g id="Raggruppa_281" data-name="Raggruppa 281" transform="translate(-16 -178.306)">
+                <path id="Tracciato_418" data-name="Tracciato 418" d="M0,16.451,8.435,8.015,0,0" transform="translate(25.435 196.172) rotate(180)" fill="none" stroke="#323a46" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+            </g>
         </svg>
         @break
     @case('chevron-right')
@@ -345,11 +353,10 @@
         </svg>
         @break
     @case('flag_ON')
-        <svg id="flag_ON" data-name="flag ON" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="17" height="17"
-             viewBox="0 0 17 17" {{ $attributes->merge(['class']) }}>
-            <circle id="Ellisse_52" data-name="Ellisse 52" cx="8.5" cy="8.5" r="8.5"/>
-            <circle id="Ellisse_53" data-name="Ellisse 53" cx="4" cy="4" r="4" transform="translate(4.5 4.5)"
-            />
+        <svg id="flag_ON" data-name="flag ON" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+        viewBox="0 0 17 17" {{ $attributes->merge(['class']) }}>
+            <circle id="Ellisse_52" data-name="Ellisse 52" cx="8.5" cy="8.5" r="8.5" fill="#ff7f6e"/>
+            <circle id="Ellisse_53" data-name="Ellisse 53" cx="4" cy="4" r="4" transform="translate(4.5 4.5)" fill="#f2f0eb"/>
         </svg>
         @break
     @case('trust')
@@ -625,38 +632,38 @@
         </svg>
         @break
     @case('check_confirm')
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="131" height="131" viewBox="0 0 131 131"
-            {{ $attributes->merge(['class']) }}>
-            <defs>
-            <filter id="Tracciato_354">
-                <feOffset dx="2" dy="4" input="SourceAlpha"/>
-                <feGaussianBlur stdDeviation="3" result="blur"/>
-                <feFlood flood-opacity="0.161" result="color"/>
-                <feComposite operator="out" in="SourceGraphic" in2="blur"/>
-                <feComposite operator="in" in="color"/>
-                <feComposite operator="in" in2="SourceGraphic"/>
-            </filter>
-            <filter id="Tracciato_268" x="29.847" y="39.51" width="75.971" height="58.981" filterUnits="userSpaceOnUse">
-                <feOffset dx="4" dy="6" input="SourceAlpha"/>
-                <feGaussianBlur stdDeviation="3" result="blur-2"/>
-                <feFlood flood-opacity="0.161"/>
-                <feComposite operator="in" in2="blur-2"/>
-                <feComposite in="SourceGraphic"/>
-            </filter>
-            </defs>
-            <g id="Raggruppa_198" data-name="Raggruppa 198" transform="translate(-895 -270)">
-            <g data-type="innerShadowGroup">
-                <path id="Tracciato_354-2" data-name="Tracciato 354" d="M65.5,0A65.5,65.5,0,1,1,0,65.5,65.5,65.5,0,0,1,65.5,0Z" transform="translate(895 270)"/>
-                <g transform="matrix(1, 0, 0, 1, 895, 270)" filter="url(#Tracciato_354)">
-                <path id="Tracciato_354-3" data-name="Tracciato 354" d="M65.5,0A65.5,65.5,0,1,1,0,65.5,65.5,65.5,0,0,1,65.5,0Z"/>
-                </g>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="70" height="70" viewBox="0 0 70 70"
+        {{ $attributes->merge(['class']) }}>
+        <defs>
+          <filter id="Tracciato_354">
+            <feOffset dx="2" dy="4" input="SourceAlpha"/>
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feFlood flood-opacity="0.161" result="color"/>
+            <feComposite operator="out" in="SourceGraphic" in2="blur"/>
+            <feComposite operator="in" in="color"/>
+            <feComposite operator="in" in2="SourceGraphic"/>
+          </filter>
+          <filter id="Tracciato_268" x="13.62" y="19.715" width="48.977" height="39.898" filterUnits="userSpaceOnUse">
+            <feOffset dx="4" dy="6" input="SourceAlpha"/>
+            <feGaussianBlur stdDeviation="3" result="blur-2"/>
+            <feFlood flood-opacity="0.161"/>
+            <feComposite operator="in" in2="blur-2"/>
+            <feComposite in="SourceGraphic"/>
+          </filter>
+        </defs>
+        <g id="Raggruppa_198" data-name="Raggruppa 198" transform="translate(-895 -270)">
+          <g data-type="innerShadowGroup">
+            <path id="Tracciato_354-2" data-name="Tracciato 354" d="M35,0A35,35,0,1,1,0,35,35,35,0,0,1,35,0Z" transform="translate(895 270)" fill="#15af74"/>
+            <g transform="matrix(1, 0, 0, 1, 895, 270)" filter="url(#Tracciato_354)">
+              <path id="Tracciato_354-3" data-name="Tracciato 354" d="M35,0A35,35,0,1,1,0,35,35,35,0,0,1,35,0Z" fill="#fff"/>
             </g>
-            <g transform="matrix(1, 0, 0, 1, 895, 270)" filter="url(#Tracciato_268)">
-                <path id="Tracciato_268-2" data-name="Tracciato 268" d="M32.99,55.481a3.489,3.489,0,0,1-2.475-1.025l-16.99-16.99a3.5,3.5,0,1,1,4.95-4.95L32.99,47.031,64.5,15.525a3.5,3.5,0,1,1,4.95,4.95L35.465,54.455A3.489,3.489,0,0,1,32.99,55.481Z" transform="translate(22.35 28.01)"/>
-            </g>
-            </g>
-        </svg>
-        @break
+          </g>
+          <g transform="matrix(1, 0, 0, 1, 895, 270)" filter="url(#Tracciato_268)">
+            <path id="Tracciato_268-2" data-name="Tracciato 268" d="M23.449,36.4a1.864,1.864,0,0,1-1.322-.548l-9.079-9.079a1.87,1.87,0,0,1,2.645-2.645l7.756,7.756L40.284,15.048a1.87,1.87,0,1,1,2.645,2.645L24.771,35.85A1.864,1.864,0,0,1,23.449,36.4Z" transform="translate(6.12 8.22)" fill="#fff"/>
+          </g>
+        </g>
+      </svg>
+    @break
     @case('double_arrow_right')
         <svg id="Raggruppa_40" data-name="Raggruppa 40" xmlns="http://www.w3.org/2000/svg" width="9.986" height="9.999" viewBox="0 0 9.986 9.999"
             {{ $attributes->merge(['class']) }}>

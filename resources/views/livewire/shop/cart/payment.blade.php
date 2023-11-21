@@ -1,6 +1,6 @@
-<div class="flex gap-16 py-20">
-    <div class="space-y-12">
-        <h1 class="text-3xl font-semibold text-color-18181a capitalize">{{__('shop.payment.payment')}}</h1>
+<div class="flex flex-col xl:flex-row px-4 pt-8 pb-20 xl:px-0 xl:gap-16 xl:py-20">
+    <div class="space-y-6 xl:space-y-12">
+        <h1 class="text-xl xl:text-3xl font-semibold text-color-18181a capitalize">{{__('shop.payment.payment')}}</h1>
 
         {{-- tabs --}}
         <div class="mb-10 flex flex-col space-y-2.5">
@@ -8,7 +8,7 @@
                 <button wire:click="changeTab({{$key}})"
                 @if ($key != 0 && !$dataUser) disabled @endif
                 @class([
-                    "w-[365px] h-20 rounded-md flex flex-col items-center justify-center gap-1 font-medium text-color-6c757d capitalize",
+                    "w-[232px] m-auto xl:w-[365px] xl:h-20 py-2 rounded-md flex flex-col items-center justify-center gap-1 font-medium text-color-6c757d capitalize",
                     $key == $currentTab ? '!bg-color-18181a !text-white' : 'text-color-6c757d bg-color-edebe5'])
                 >
                     <x-icons :name="$tab['icon']"/>
@@ -17,77 +17,88 @@
             @endforeach
         </div>
 
-        {{-- dettaglio carrello --}}
-        <div>
-            <h2 class="text-xl font-semibold text-color-18181a mb-3.5">{{__('shop.payment.in_to_cart')}}</h2>
+        <div class="space-y-6 xl:space-y-12 flex flex-col-reverse xl:flex-col">
+            {{-- dettaglio carrello --}}
+            <div>
+                <h2 class="hidden xl:block text-xl font-semibold text-color-18181a mb-3.5">{{__('shop.payment.in_to_cart')}}</h2>
 
-            <div class="flex items-center justify-between mb-5">
-                <span
-                    class="text-sm font-medium text-color-18181a">{{__('shop.payment.subtotal')}}</span>
-                <span class="text-sm font-medium text-color-18181a">@money($cart->subtotal)</span>
-            </div>
-            <div class="flex items-center justify-between">
-                <span
-                    class="text-sm font-medium text-color-18181a">{{__('shop.payment.shipment_cost')}}</span>
-                <span class="text-sm font-medium text-color-18181a">
-                    @if(config('app.shipping_cost') <= 0)
-                        {{ __('common.free_shipping') }}
-                    @else
-                        @money(config('app.shipping_cost'))
-                    @endif
-                </span>
-            </div>
-
-            <div class="border-y border-color-18181a py-3 flex items-center justify-between mt-7">
-                <span
-                    class="font-medium text-color-18181a">{{__('shop.payment.total')}}</span>
-                <span class="font-semibold  text-color-18181a">@money($cart->total)</span>
-            </div>
-        </div>
-
-        {{-- prodotti in carrello --}}
-        <div>
-            <h2 class="text-xl font-semibold text-color-18181a mb-3.5">{{__('shop.payment.articols')}}</h2>
-
-            @foreach ($cart->items as $item)
-                <div class="flex gap-5 border border-color-f2f0eb bg-color-f2f0eb shadow p-1">
-                    <div class="w-28 h-28 overflow-hidden bg-color-edebe5">
-                        <img src="" alt="">
+                <div class="border-y py-2 mt-2 xl:mt-0 xl:py-0 xl:border-none">
+                    <div class="flex items-center justify-between mb-1 xl:mb-5">
+                        <span
+                            class="text-sm font-medium text-color-18181a">{{__('shop.payment.subtotal')}}</span>
+                        <span class="text-sm font-medium text-color-18181a">@money($cart->subtotal)</span>
                     </div>
-
-                    <div class="my-auto">
-                        <h4 class="text-sm font-semibold text-color-18181a">
-                            {{$item->variant->product->name}}
-                        </h4>
-                        <p class="text-xs font-medium text-color-6c757d">
-                            {{__('shop.products.height_leg')}}: {{$item->variant->length->value}}
-                        </p>
-                        <p class="text-xs font-medium text-color-6c757d">
-                            {{__('shop.products.color')}}: {{$item->variant->color->value}}
-                        </p>
-                        <p class="text-xs font-medium text-color-6c757d">
-                            {{__('shop.products.size')}}: {{$item->variant->size->value}}
-                        </p>
-                        <p class="text-xs font-medium text-color-6c757d">
-                            {{__('shop.products.amount')}}: {{$item->quantity}}
-                        </p>
-                        <p class="text-sm font-medium text-color-18181a">
-                            @money($item->price)
-                        </p>
+                    <div class="flex items-center justify-between">
+                        <span
+                            class="text-sm font-medium text-color-18181a">{{__('shop.payment.shipment_cost')}}</span>
+                        <span class="text-sm font-medium text-color-18181a">
+                            @if(config('app.shipping_cost') <= 0)
+                                {{ __('common.free_shipping') }}
+                            @else
+                                @money(config('app.shipping_cost'))
+                            @endif
+                        </span>
                     </div>
                 </div>
-            @endforeach
 
+                <div class="xl:border-y border-color-18181a py-3 flex items-center justify-between xl:mt-7">
+                    <span
+                        class="font-medium text-color-18181a">{{__('shop.payment.total')}}</span>
+                    <span class="font-semibold  text-color-18181a">@money($cart->total)</span>
+                </div>
+            </div>
+
+            {{-- prodotti in carrello --}}
+            <div>
+                <div class="hidden xl:block">
+                    <h2 class="text-xl font-semibold text-color-18181a mb-3.5">{{__('shop.payment.articols')}}</h2>
+                </div>
+
+                <div class="xl:hidden">
+                    <h2 class=" text-base font-semibold text-color-18181a mb-3.5">Il tuo ordine</h2>
+                </div>
+
+                @foreach ($cart->items as $item)
+                    <div class="flex gap-5 xl:border border-color-f2f0eb bg-color-f2f0eb xl:shadow p-1">
+                        <div class="w-20 h-20 xl:w-28 xl:h-28 overflow-hidden bg-color-edebe5">
+                            <img src="" alt="">
+                        </div>
+
+                        <div class="my-auto">
+                            <h4 class="text-sm font-semibold text-color-18181a">
+                                {{$item->variant->product->name}}
+                            </h4>
+                            <p class="text-xs font-medium text-color-6c757d">
+                                {{__('shop.products.height_leg')}}: {{$item->variant->length->value}}
+                            </p>
+                            <p class="text-xs inline xl:block mr-2 xl:mr-0 font-medium text-color-6c757d">
+                                {{__('shop.products.color')}}: {{$item->variant->color->value}}
+                            </p>
+                            <p class="text-xs inline xl:block font-medium text-color-6c757d">
+                                {{__('shop.products.size')}}: {{$item->variant->size->value}}
+                            </p>
+                            <br class="xl:hidden">
+                            <p class="text-xs inline xl:block mr-2 xl:mr-0 font-medium text-color-6c757d">
+                                {{__('shop.products.amount')}}: {{$item->quantity}}
+                            </p>
+                            <p class="text-sm inline xl:block font-medium text-color-18181a">
+                                @money($item->price)
+                            </p>
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
         </div>
     </div>
 
     {{-- Recapiti e consegna --}}
-    <form wire:submit="next" @class(["pt-20 w-full", $currentTab === 1 ? 'hidden' : ''])>
+    <form wire:submit="next" @class(["pt-8 xl:pt-20 w-full", $currentTab === 1 ? 'hidden' : ''])>
         <h2 class="text-xl font-semibold text-color-18181a mb-3.5">{{__('shop.payment.address')}}</h2>
 
-        <div class="flex gap-5">
-            <x-input-text wire:model="firstname" width="w-1/2" name="firstname" label="firstname" required="true" />
-            <x-input-text wire:model="lastname" width="w-1/2" name="lastname" label="lastname" required="true" />
+        <div class="flex flex-col xl:flex-row gap-5">
+            <x-input-text wire:model="firstname" width="w-full xl:w-1/2" name="firstname" label="firstname" required="true" />
+            <x-input-text wire:model="lastname" width="w-full xl:w-1/2" name="lastname" label="lastname" required="true" />
         </div>
 
         <div class="flex flex-col gap-5 mt-5">
@@ -95,12 +106,12 @@
             <x-input-text wire:model="shipping_company" width="w-full" name="shipping_company" label="company" />
         </div>
 
-        <div class="flex gap-5 mt-5">
-            <x-input-text wire:model="pec" type="email" width="w-1/2" name="pec" label="email" required="true" />
-            <x-input-text x-mask="{{ __('masks.phone') }}" wire:model="phone" width="w-1/2" name="phone" label="phone" required="true" />
+        <div class="flex flex-col xl:flex-row gap-5 mt-5">
+            <x-input-text wire:model="pec" type="email" width="w-full xl:w-1/2" name="pec" label="email" required="true" />
+            <x-input-text x-mask="{{ __('masks.phone') }}" wire:model="phone" width="w-full xl:w-1/2" name="phone" label="phone" required="true" />
         </div>
 
-        <div class="mt-10 flex items-center justify-between">
+        <div class="mt-10 flex flex-col xl:flex-row gap-5 xl:gap-0 items-center justify-between px-9 xl:px-0">
             <div class="w-full max-w-xs">
                 <x-shop.shopping-button href="{{ route('shop.cart', ['country_code' => session('country_code')]) }}" color="transparent" icon="back">{{ __('shop.payment.button_back') }}</x-shop.shopping-button>
             </div>
@@ -111,7 +122,7 @@
     </form>
 
     {{-- Info pagamento --}}
-    <div @class(["pt-20 w-full space-y-7", $currentTab === 0 ? 'hidden' : ''])>
+    <div @class(["pt-8 xl:pt-20 w-full space-y-7", $currentTab === 0 ? 'hidden' : ''])>
 
         <div class="w-full space-y-3.5">
             {{-- Indirizzo --}}
@@ -144,9 +155,9 @@
         </div>
 
         <div class="w-full">
-            <h2 class="text-xl font-semibold text-color-18181a">{{__('shop.payment.method_payment')}}</h2>
+            <h2 class="text-base xl:text-xl font-semibold text-color-18181a">{{__('shop.payment.method_payment')}}</h2>
 
-            <div class="w-full mt-3.5 bg-color-f5e3d7 p-6 flex items-center justify-between gap-8 rounded-md">
+            <div class="w-full mt-3.5 bg-color-f5e3d7 p-6 flex flex-col-reverse xl:flex-row items-center justify-between gap-2 xl:gap-8 rounded-md">
                 <p class="text-sm font-medium text-color-6c757d">{{__('shop.payment.ssl')}}</p>
                 <x-icons name="trust" class="flex-shrink-0" />
             </div>
@@ -154,14 +165,14 @@
             <form wire:submit="next" class="mt-5">
                 <x-input-text x-mask:dynamic="creditCardMask" wire:model="creditCard" width="w-full" name="creditCard" label="creditCard" required="true" />
 
-                <div class="flex gap-5 my-5">
-                    <x-input-text x-mask="99/99" wire:model="expiration" width="w-1/2" name="expiration" label="expiration" required="true" />
-                    <x-input-text x-mask="999" wire:model="ccv" width="w-1/2" name="ccv" label="ccv" required="true" />
+                <div class="flex flex-col xl:flex-row gap-5 mt-5 my-5">
+                    <x-input-text x-mask="99/99" wire:model="expiration" width="w-full xl:w-1/2" name="expiration" label="expiration" required="true" />
+                    <x-input-text x-mask="999" wire:model="ccv" width="w-full xl:w-1/2" name="ccv" label="ccv" required="true" />
                 </div>
 
                 <x-input-text wire:model="accountHolder" width="w-full" name="accountHolder" label="accountHolder" required="true" />
 
-                <div class="mt-10 flex items-center justify-between">
+                <div class="mt-10 flex flex-col xl:flex-row gap-5 xl:gap-0 items-center justify-between px-9 xl:px-0">
                     <div class="w-full max-w-xs">
                         <x-shop.shopping-button href="{{ route('shop.cart', ['country_code' => session('country_code')]) }}" color="transparent" icon="back">{{ __('shop.payment.button_back') }}</x-shop.shopping-button>
                     </div>

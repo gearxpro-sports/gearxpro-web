@@ -25,6 +25,7 @@
             var carousel_bottom = new $(".carousel_bottom").owlCarousel({
                 items: 3,
                 margin: 30,
+                dots: false,
                 loop: true,
                 autoWidth: true,
                 autoplay: false,

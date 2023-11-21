@@ -35,7 +35,13 @@
 }
 
 .owl-dots {
-    @apply h-0;
+    @apply  w-full absolute bottom-5 flex items-center justify-center gap-2
+}
+.owl-dot {
+    @apply h-2 w-2 rounded-full z-30 !bg-color-b6b9bb;
+}
+.owl-dots .active {
+    @apply !bg-color-323a46
 }
 
 [x-cloak] {

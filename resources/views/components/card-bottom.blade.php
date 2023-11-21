@@ -1,6 +1,6 @@
 @props(['image','title', 'description', 'color', 'price'])
 
-<div class="max-w-[294px] xl:min-w-[594px] xl:max-w-[594px] xl:h-[727px] rounded-b-md overflow-hidden swiper-slide">
+<div class="max-w-[294px] xl:min-w-[594px] xl:max-w-[594px] xl:h-[727px] rounded-b-md overflow-hidden">
     <div class="w-full h-[calc(100%-108px)] bg-white flex items-center justify-center overflow-hidden">
         <img src="{{ Vite::asset('resources/images/'. $image)}}" alt="">
     </div>

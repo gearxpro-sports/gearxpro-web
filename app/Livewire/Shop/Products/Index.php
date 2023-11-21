@@ -89,8 +89,7 @@ class Index extends Component
         return view('livewire.shop.products.index');
     }
 
-    public function loadProducts()
-    {
+    public function loadProducts() {
         $this->productColors = [];
         $products = Product::with([
                 'categories' => function($query) {
@@ -141,8 +140,6 @@ class Index extends Component
 
         $this->products = $products->get();
 
-//        dd($this->products->toArray());
-
         foreach ($this->products as $product) {
             if ($product->variants->count() > 0) {
                 foreach ($product->variants as $variant) {
@@ -151,6 +148,10 @@ class Index extends Component
                 $this->productColors[$product->id] = array_unique($this->productColors[$product->id]);
             }
         }
+    }
+
+    public function selectOrder($order) {
+        $this->selectedOrder = $order;
     }
 
     #[On('selectCategory')]

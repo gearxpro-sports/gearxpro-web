@@ -42,6 +42,7 @@
                 animateIn: 'fadeIn',
                 items: 1,
                 margin: 0,
+                dots: false,
                 loop: true,
                 autoWidth: false,
                 autoplay: true,

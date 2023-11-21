@@ -22,16 +22,16 @@
         @stack('styles')
         @livewireStyles
     </head>
-    <body class="antialiased h-[100vh] bg-color-f2f0eb">
+    <body class="antialiased xl:h-[100vh] bg-color-f2f0eb">
         <livewire:shop.header-checkout />
 
-        <div class="flex justify-center mt-32">
-            <div class="w-[32rem] bg-color-edebe5 p-20 flex flex-col items-center rounded-md">
-                <x-icons name="check" class="w-10 h-10" />
-                <h2 class="text-3xl font-semibold text-color-18181a my-6">{{ __('shop.confirm.title') }}</h2>
-                <p class="font-mediumtext-color-6c757d mb-14 text-center">{{ __('shop.confirm.message') }}</p>
-                <a href="{{ route('shop.index') }}" class="relative flex items-center justify-center h-12 w-fit px-10 rounded-md bg-color-18181a border border-color-18181a group">
-                    <span class="z-10 font-semibold text-white group-hover:text-color-18181a">{{ __('shop.confirm.button') }}</span>
+        <div class="flex justify-center px-4 xl:px-0 mt-32">
+            <div class="w-[594px] xl:h-[580px] mt-20 xl:mt-0 bg-color-edebe5 py-10 xl:py-0 xl:pt-[70px] px-4 xl:px-[88px] flex flex-col items-center rounded-md">
+                <x-icons class="w-20 h-20 text-color-0c9d87 " name="check_confirm" />
+                <h2 class="text-xl xl:text-[33px] font-semibold leading-[40px] text-color-18181a mt-10 xl:mt-0 mb-[25px]">{{ __('shop.confirm.title') }}</h2>
+                <p class="text-sm font-medium leading-[21px] text-color-6c757d mb-[60px] text-center">{{ __('shop.confirm.message') }}</p>
+                <a href="/shop" class="relative flex items-center justify-center h-[48px] w-fit px-[40px] rounded-md bg-color-18181a border border-color-18181a group">
+                    <span class="z-10 text-[15px] font-semibold text-white leading-[19px] group-hover:text-color-18181a">{{ __('shop.confirm.button') }}</span>
                     <div class="h-full absolute top-0 left-0 w-0 bg-white group-hover:animate-line group-hover:w-full rounded-md"></div>
                 </a>
             </div>

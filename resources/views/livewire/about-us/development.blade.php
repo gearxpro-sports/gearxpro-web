@@ -1,98 +1,59 @@
 <div class="bg-black grid grid-cols-12">
-    <div class="col-span-12 h-[984px] grid grid-cols-12 grid-rows-6 bg-about_us_dev_1 bg-fixed bg-cover bg-center bg-no-repeat relative">
-        <div class="absolute top-0 left-0 w-full h-full bg-black/50"></div>
-        <h1 class="z-10 text-7xl font-bold text-white leading-[86px] col-start-2 col-span-5 row-start-3 row-span-3">Consectetur adipiscing elit sed do eiusmod tempor</h1>
+    <div class="col-span-12 h-[984px] bg-about_us_dev_1 bg-top bg-no-repeat relative">
+        <h2 class="w-full z-10 absolute top-[50%] text-4xl leading-10 font-bold text-white text-center">
+            products are designed with professional expertise <br>
+            under the watchful eye of professionals <br>
+            in the apparel and sportswear industry. <br>
+        </h2>
     </div>
 
-    <div class="col-start-2 col-span-10 flex items-center py-52">
-        <h2 class="text-6xl font-bold text-white leading-[76px]">I prodotti di GEARXPro Sports sono disegnati con competenza professionale sotto l’occhio attento di professionisti del settore abbigliamento e sportivo.</h2>
-    </div>
+    <div class="col-span-12 h-[1080px] relative bg-about_us_dev_2 bg-fixed bg-cover bg-center bg-no-repeat"></div>
 
-    <div class="col-span-12 h-[1080px] relative bg-about_us_dev_2 bg-fixed bg-cover bg-center bg-no-repeat">
-        <div class="absolute top-0 left-0 w-full h-full bg-black/50"></div>
-    </div>
-
-    <div class="col-span-12 h-[1080px] grid grid-cols-12 grid-rows-6 relative bg-about_us_dev_3 bg-fixed bg-cover bg-center bg-no-repeat">
-        <div class="absolute top-0 left-0 w-full h-full bg-black/70"></div>
-        <p class="z-10 text-[43px] font-bold text-white leading-[56px] col-start-2 col-span-10 row-start-4 row-span-2">
-            Investiamo con costanza nelle nostre aree creative per garantire prodotti sempre più all’avanguardia attraverso l’individuazione di tecniche di produzione singolari, consapevoli dell’importanza della continua innovazione per stare al passo in un mercato in continua evoluzione.
-        </p>
+    <div class="h-[100vh] col-span-12 flex items-center justify-center py-52">
+        <h2 class="text-4xl text-center font-medium text-white leading-10">
+            We constantly invest in our creative areas <br>
+            to guarantee increasingly cutting-edge products through the identification <br>
+            of unique production techniques, aware of the importance <br>
+            of continuous innovation to keep up in a constantly evolving market. <br>
+        </h2>
     </div>
 
     <div class="col-span-12 py-20 px-[30px] flex flex-col justify-center items-center">
         <div class="owl-carousel carousel_top mb-10">
-            <livewire:components.card-product
-                :slug="'SOXPro'"
-                :image="'SOXPro.png'"
-                :name="'SOXPro'"
-                :description="'SOXPro Ultra Light - White'"
-                :availableColor="5"
-                :price="'34.90'"
-            />
-            <livewire:components.card-product
-                :slug="'SOXPro'"
-                :image="'SOXPro.png'"
-                :name="'SOXPro'"
-                :description="'SOXPro Ultra Light - White'"
-                :availableColor="5"
-                :price="'34.90'"
-            />
-            <livewire:components.card-product
-                :slug="'SOXPro'"
-                :image="'SOXPro.png'"
-                :name="'SOXPro'"
-                :description="'SOXPro Ultra Light - White'"
-                :availableColor="5"
-                :price="'34.90'"
-            />
+            @foreach ($products as $product )
+                <livewire:components.card-product
+                    wire:key="prod_{{ $product->id }}"
+                    :product="$product"
+                    :image="'SOXPro.png'"
+                    :availableColors="$productColors[$product->id] ?? []"
+                />
+            @endforeach
         </div>
-
-        <x-custom-button :text="__('shop.button.all_products')" :icon="'double_arrow_right'" :link="'/shop'" />
     </div>
 
-    <div class="col-span-12 h-[1080px] grid grid-cols-12 grid-rows-6 relative bg-about_us_dev_4 bg-fixed bg-cover bg-center bg-no-repeat">
-        <div class="absolute top-0 left-0 w-full h-full bg-black/70"></div>
-        <p class="z-10 text-[43px] font-bold text-white leading-[56px] col-start-2 col-span-10 row-start-5 row-span-2">
-            La chiave del nostro successo si completa con la capacità di gestione e controllo dell’intero processo di realizzazione di ogni nuovo prodotto, dal brevetto al suo rilascio ufficiale.
+    <div class="col-span-12 h-[1080px] bg-about_us_dev_3 bg-fixed bg-cover bg-center bg-no-repeat flex items-center justify-center">
+        <p class="z-10 text-4xl font-medium text-white leading-10  text-center">
+            The key to our success is completed by the <br>
+            ability to manage and control the entire process <br>
+            of creating each new product, <br>
+            from the patent to its official release. <br>
         </p>
     </div>
 
     <div class="col-span-12 py-20 px-[30px] flex flex-col justify-center items-center">
         <div class="owl-carousel carousel_bottom mb-10">
-            <livewire:components.card-product
-                :slug="'SOXPro'"
-                :image="'SOXPro.png'"
-                :name="'SOXPro'"
-                :description="'SOXPro Ultra Light - White'"
-                :availableColor="5"
-                :price="'34.90'"
-            />
-            <livewire:components.card-product
-                :slug="'SOXPro'"
-                :image="'SOXPro.png'"
-                :name="'SOXPro'"
-                :description="'SOXPro Ultra Light - White'"
-                :availableColor="5"
-                :price="'34.90'"
-            />
-            <livewire:components.card-product
-                :slug="'SOXPro'"
-                :image="'SOXPro.png'"
-                :name="'SOXPro'"
-                :description="'SOXPro Ultra Light - White'"
-                :availableColor="5"
-                :price="'34.90'"
-            />
+            @foreach ($products as $product )
+                <livewire:components.card-product
+                    wire:key="prod_{{ $product->id }}"
+                    :product="$product"
+                    :image="'SOXPro.png'"
+                    :availableColors="$productColors[$product->id] ?? []"
+                />
+            @endforeach
         </div>
-
-        <x-custom-button :text="__('shop.button.show_last')" :icon="'double_arrow_right'" :link="'/shop'" />
     </div>
 
-    <div class="col-span-12 h-[1080px] grid grid-cols-12 relative ">
-        <div class="absolute top-0 left-0 w-full h-full bg-black/50"></div>
-        <div class="col-span-6 h-full bg-about_us_dev_5"></div>
-        <div class="col-span-6 h-full bg-about_us_dev_6"></div>
-    </div>
+    <div class="col-span-12 h-[1080px] grid grid-cols-12 grid-rows-6 relative bg-about_us_dev_4 bg-fixed bg-cover bg-center bg-no-repeat"></div>
 </div>
 
 
@@ -103,7 +64,8 @@
                 items: 3,
                 margin: 30,
                 loop: true,
-                autoWidth: true,
+                dots: false,
+                autoWidth: false,
                 autoplay: false,
                 autoplayTimeout: 4000,
                 autoplaySpeed: 2000,
@@ -115,7 +77,8 @@
                 items: 3,
                 margin: 30,
                 loop: true,
-                autoWidth: true,
+                dots: false,
+                autoWidth: false,
                 autoplay: false,
                 autoplayTimeout: 4000,
                 autoplaySpeed: 2000,
