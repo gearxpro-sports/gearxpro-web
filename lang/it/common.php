@@ -51,4 +51,5 @@ return [
     'close' => 'Chiudi',
     'default' => 'Default',
     'free_shipping' => 'Gratuita',
+    'pz' => 'Pezzi',
 ];

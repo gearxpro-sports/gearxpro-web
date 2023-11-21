@@ -10,7 +10,7 @@
         {{ $variant->size->value }}
     </td>
     <td>{{ $variant->length->value }}</td>
-    <td>unit_of_measurement</td>
+    <td>{{ __('common.pz') }}</td>
     <td>@money($variant->product->wholesale_price)</td>
     <td>@money($variant->product->price)</td>
     <td>

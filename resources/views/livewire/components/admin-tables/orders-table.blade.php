@@ -34,7 +34,7 @@
                                         #{{ $order->reference }}
                                     </td>
                                     <td>{{ $order->created_at->format('d/m/Y') }}</td>
-                                    <td>{{ $order->customer->fullName }}</td>
+                                    <td>{{ $order->customer?->fullname }}</td>
                                     <td>@money($order->total)</td>
                                     <td class="whitespace-nowrap">
                                         <x-badge color="{{ \App\Models\Order::STATUSES[$order->status] }}">{{ __('orders.statuses.' . $order->status) }}</x-badge>

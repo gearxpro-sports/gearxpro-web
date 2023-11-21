@@ -63,7 +63,7 @@
             <div class="grow">
                 <h3 class="mb-4 text-color-18181a font-medium">{{ __('orders.show.boxes.customer_data') }}</h3>
                 <ul class="grow-0 text-sm">
-                    <li class="mt-2 text-color-323a46">{{ $order->customer->fullname }}</li>
+                    <li class="mt-2 text-color-323a46">{{ $order->customer?->fullname }}</li>
                     <li class="mt-2 text-color-6c757d">{{ $order->customer->email }}</li>
                 </ul>
             </div>
