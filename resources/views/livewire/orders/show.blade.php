@@ -76,8 +76,8 @@
                 <h3 class="mb-4 text-color-18181a font-medium">{{ __('orders.show.boxes.shipping_data') }}</h3>
                 <ul class="grow-0 text-sm">
                     <li class="mt-2 text-color-323a46">{{ $order->customer->fullname }}</li>
-                    <li class="mt-2 text-color-6c757d">{{ $order->customer->shippingAddress?->first->inlineFormat }}</li>
-                    <li class="mt-2 text-color-6c757d">{{ $order->customer->shippingAddress?->first->country->name }}</li>
+                    <li class="mt-2 text-color-6c757d">{{ $order->customer->shipping_address?->inlineFormat }}</li>
+                    <li class="mt-2 text-color-6c757d">{{ $order->customer->shipping_address?->country->name }}</li>
                 </ul>
             </div>
             <div class="grow-0">
@@ -89,8 +89,8 @@
                 <h3 class="mb-4 text-color-18181a font-medium">{{ __('orders.show.boxes.billing_data') }}</h3>
                 <ul class="grow-0 text-sm">
                     <li class="mt-2 text-color-323a46">{{ $order->customer->fullname }}</li>
-                    <li class="mt-2 text-color-6c757d">{{ $order->customer->billingAddress?->inlineFormat }}</li>
-                    <li class="mt-2 text-color-6c757d">{{ $order->customer->billingAddress?->country->name }}</li>
+                    <li class="mt-2 text-color-6c757d">{{ $order->customer->billing_address?->inlineFormat }}</li>
+                    <li class="mt-2 text-color-6c757d">{{ $order->customer->billing_address?->country->name }}</li>
                 </ul>
             </div>
             <div class="grow-0">
