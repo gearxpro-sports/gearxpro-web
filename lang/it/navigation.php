@@ -15,4 +15,5 @@ return [
     'supply.purchases.invoices' => 'Fatture Acquisto',
     'selling' => 'Vendita',
     'stocks' => 'Magazzino',
+    'orders' => 'Gestione Ordini',
 ];

@@ -8,9 +8,9 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="https://use.typekit.net/fgj8iic.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
         <!-- Scripts -->
         @vite(
@@ -22,10 +22,10 @@
         @stack('styles')
         @livewireStyles
     </head>
-    <body class="xl:h-[100vh] bg-color-f2f0eb">
+    <body class="antialiased xl:h-[100vh] bg-color-f2f0eb">
         <livewire:shop.header-checkout />
 
-        <div class="flex justify-center px-4 xl:px-0 mt-[130px]">
+        <div class="flex justify-center px-4 xl:px-0 mt-32">
             <div class="w-[594px] xl:h-[580px] mt-20 xl:mt-0 bg-color-edebe5 py-10 xl:py-0 xl:pt-[70px] px-4 xl:px-[88px] flex flex-col items-center rounded-md">
                 <x-icons class="w-20 h-20 text-color-0c9d87 " name="check_confirm" />
                 <h2 class="text-xl xl:text-[33px] font-semibold leading-[40px] text-color-18181a mt-10 xl:mt-0 mb-[25px]">{{ __('shop.confirm.title') }}</h2>

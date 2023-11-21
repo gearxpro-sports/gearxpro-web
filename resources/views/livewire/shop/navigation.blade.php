@@ -57,7 +57,7 @@
                                             <x-slot name="content">
                                                 @hasanyrole([App\Models\User::RESELLER, App\Models\User::SUPERADMIN])
                                                 <x-dropdown-link href="{{ route('dashboard') }}">
-                                                    {{ __('Dashboard') }}
+                                                    {{ __('dashboard.title') }}
                                                 </x-dropdown-link>
                                                 @endrole
 

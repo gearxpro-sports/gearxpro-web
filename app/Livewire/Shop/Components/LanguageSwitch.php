@@ -11,11 +11,12 @@ use Livewire\Component;
 
 class LanguageSwitch extends Component
 {
-    public $languages = ["it", "en", "fr", "de", "es"];
+    public $languages = [];
     public $current;
 
     public function mount()
     {
+        $this->languages = config('gearxpro.languages');
         $this->current = session()->get('language', app()->getLocale());
         session()->put('language', $this->current);
     }

@@ -6,6 +6,8 @@ namespace App\Models;
 
 use App\Traits\HasCountryScope;
 use App\Traits\Searchable;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
@@ -121,11 +123,35 @@ class User extends Authenticatable
         return $this->hasMany(Stock::class);
     }
 
-    public function invoices() {
+    /**
+     * @return HasManyThrough
+     */
+    public function invoices(): HasManyThrough
+    {
         return $this->hasManyThrough(Invoice::class, Supply::class);
     }
 
-    public function cart() {
+    /**
+     * @return HasOne
+     */
+    public function cart(): HasOne
+    {
         return $this->hasOne(Cart::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function customerOrders(): HasMany
+    {
+        return $this->hasMany(Order::class, 'user_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function resellerOrders(): HasMany
+    {
+        return $this->hasMany(Order::class, 'reseller_id')->with('customer');
     }
 }
