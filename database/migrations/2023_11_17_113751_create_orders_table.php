@@ -25,8 +25,9 @@ return new class extends Migration
             $table->json('billing_address')->nullable();
             $table->json('shipping_address')->nullable();
             $table->json('items')->nullable();
+            $table->decimal('shipping_cost')->default(0);
             $table->text('notes')->nullable();
-            $table->dateTime('paid_at')->nullable();
+            $table->timestamp('paid_at')->nullable();
             $table->decimal('total')->nullable();
             $table->string('tracking')->nullable();
             $table->timestamps();

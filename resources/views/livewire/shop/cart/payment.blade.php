@@ -61,7 +61,7 @@
                 @foreach ($cart->items as $item)
                     <div class="flex gap-5 xl:border border-color-f2f0eb bg-color-f2f0eb xl:shadow p-1">
                         <div class="w-20 h-20 xl:w-28 xl:h-28 overflow-hidden bg-color-edebe5">
-                            <img src="" alt="">
+                            <img src="{{ $item->variant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $item->variant->product->name }}">
                         </div>
 
                         <div class="my-auto">

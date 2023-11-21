@@ -189,19 +189,20 @@ class Payment extends Component
                     'price'      => $cartItem->price,
                     'quantity'   => $cartItem->quantity,
                 ];
-                $total = $total + $cartItem->price;
+                $total += ($cartItem->quantity * $cartItem->price);
             }
 
             $order = Order::create([
-                'reference' => Str::uuid(),
+                'reference' => Str::random(10),
                 'user_id' => $this->customer->id,
                 'reseller_id' => $country->reseller->id,
                 'country_id' => $country->id,
                 'status' => Order::PAID_STATUS,
                 'payment_method' => Order::STRIPE_PAYMENT,
                 'billing_address' => $this->customer->billing_address->makeHidden($addressHiddenFields)->attributesToArray(),
-                'shipping_address' => $this->customer->billing_address->makeHidden([...$addressHiddenFields, ...[ 'sdi', 'pec']])->attributesToArray(),
+                'shipping_address' => $this->customer->shipping_address->makeHidden([...$addressHiddenFields, ...[ 'sdi', 'pec']])->attributesToArray(),
                 'items' => $orderItems,
+                'shipping_cost' => env('SHIPPING_COST'),
                 'paid_at' => now(),
                 'total' => $total,
             ]);

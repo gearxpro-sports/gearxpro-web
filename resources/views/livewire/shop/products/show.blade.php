@@ -5,7 +5,7 @@
             <x-icons name="chevron-left-xl" />
         </a>
 
-        <div class="hidden xl:flex flex-col col-span-12 xl:col-span-7 xl:h-[1104px] overflow-auto scrollBar xl:gap-4 pb-4">
+        <div class="flex xl:flex-col col-span-12 xl:col-span-7 xl:h-[1104px] overflow-auto scrollBar xl:gap-4 pb-4">
             @if ($selectedLength == 1)
                 {{-- Corto --}}
                 <img src="{{ Vite::asset('resources/images/SOXPro-1.png')}}" alt="">
@@ -18,17 +18,17 @@
         </div>
 
         {{-- CAROUSEL MOBILE --}}
-        <div class="xl:!hidden col-span-12 owl-carousel product_images">
-            @if ($selectedLength == 1)
-            {{-- Corto --}}
-                <img src="{{ Vite::asset('resources/images/SOXPro-1.png')}}" alt="">
-                <img src="{{ Vite::asset('resources/images/SOXPro-2.png')}}" alt="">
-                <img src="{{ Vite::asset('resources/images/SOXPro-3.png')}}" alt="">
-            @else
-                <img src="{{ Vite::asset('resources/images/SOXPro-1-long.png')}}" alt="">
-                <img src="{{ Vite::asset('resources/images/SOXPro-2-long.png')}}" alt="">
-            @endif
-        </div>
+{{--        <div class="xl:!hidden col-span-12 owl-carousel product_images">--}}
+{{--            @if ($selectedLength == 1)--}}
+{{--            --}}{{-- Corto --}}
+{{--                <img src="{{ Vite::asset('resources/images/SOXPro-1.png')}}" alt="">--}}
+{{--                <img src="{{ Vite::asset('resources/images/SOXPro-2.png')}}" alt="">--}}
+{{--                <img src="{{ Vite::asset('resources/images/SOXPro-3.png')}}" alt="">--}}
+{{--            @else--}}
+{{--                <img src="{{ Vite::asset('resources/images/SOXPro-1-long.png')}}" alt="">--}}
+{{--                <img src="{{ Vite::asset('resources/images/SOXPro-2-long.png')}}" alt="">--}}
+{{--            @endif--}}
+{{--        </div>--}}
 
         {{-- options --}}
         <div class="col-span-12 px-4 xl:col-span-5 xl:col-start-8 xl:py-10">

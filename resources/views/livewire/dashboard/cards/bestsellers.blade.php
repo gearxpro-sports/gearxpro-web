@@ -25,7 +25,9 @@
                             <td class="whitespace-nowrap">#{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</td>
                             <td class="whitespace-nowrap">{{ $item->id }}</td>
                             <td class="whitespace-nowrap">
-                                <div class="w-10 h-10 bg-gray-300 mx-auto"></div>
+                                <div class="w-10 h-10 mx-auto">
+                                    <img src="{{ $item->product->defaultImages->thumb ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $item->product->name }}">
+                                </div>
                             </td>
                             <td class="whitespace-nowrap">{{ $item->product->name }}</td>
                             <td class="whitespace-nowrap">@money($item->product->price)</td>
