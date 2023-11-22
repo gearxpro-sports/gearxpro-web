@@ -45,7 +45,7 @@
             {{-- mobile --}}
             <div class="xl:hidden flex items-center mt-10 space-x-5">
                 <x-primary-button href="{{ route('shop.cart', ['country_code' => session('country_code')]) }}" class="w-full bg-color-18181a text-sm font-semibold hover:bg-white hover:text-color-18181a border border-white  hover:border-color-18181a">
-                    {{__('shop.modal_cart.cart')}}
+                    {{__('shop.modal_cart.cart')}} ({{$cart?->items->count()}})
                 </x-primary-button>
                 @auth
                     <x-primary-button href="{{ route('shop.payment', ['country_code' => session('country_code')]) }}" class="w-full bg-white text-sm font-semibold !text-color-18181a">
