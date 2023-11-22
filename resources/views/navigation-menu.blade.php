@@ -71,14 +71,14 @@
             {{ __('navigation.supply.purchases') }}
             @endrole
         </a>
-        @role(App\Models\User::RESELLER)
+{{--        @role(App\Models\User::RESELLER)--}}
         <a href="{{ route('invoices.index') }}"
            class="{{ request()->is('dashboard/invoices*') ? 'text-color-323a46' : 'text-color-6c757d hover:text-color-323a46' }} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
             <x-icons name="ticket-w-percentage"
                      class="{{ request()->is('dashboard/invoices*') ? 'text-color-323a46' : 'text-color-6c757d group-hover:text-color-323a46' }} mr-3 flex-shrink-0 h-5 w-5"/>
             {{ __('navigation.supply.purchases.invoices') }}
         </a>
-        @endrole
+{{--        @endrole--}}
         <h3 class="!mt-6 !mb-2 px-3 text-xs font-medium text-color-b6b9bb uppercase">{{ __('navigation.selling') }}</h3>
         <a href="{{ route('profile.edit') }}"
            class="{{ request()->is('dashboard/profile*') ? 'text-color-323a46' : 'text-color-6c757d hover:text-color-323a46' }} group flex items-center px-2 py-2 text-sm font-medium rounded-md">

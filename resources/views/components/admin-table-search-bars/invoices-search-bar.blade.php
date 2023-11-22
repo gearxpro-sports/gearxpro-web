@@ -10,21 +10,21 @@
             </x-input>
         </div>
     </div>
-{{--    <div class="flex items-end gap-2">--}}
-{{--        <div class="mx-0 w-80 md:mx-2.5">--}}
-{{--            <x-flatpickr datepickerId="{{ Str::random(9) }}" name="filter[created_at]" label="{{ __('common.filter_by') }}" placeholder="{{ __('invoice.index.filter.dates') }}">--}}
-{{--                <x-slot:append>--}}
-{{--                    <span class="search-btn absolute z-[1] inset-y-1 right-1 flex items-center justify-center w-9 bg-color-eff0f0 rounded-sm">--}}
-{{--                        <x-icons name="calendar" class="w-4 h-4"/>--}}
-{{--                    </span>--}}
-{{--                </x-slot:append>--}}
-{{--            </x-flatpickr>--}}
-{{--        </div>--}}
+    <div class="flex items-end gap-2">
+        <div class="mx-0 w-80 md:mx-2.5">
+            <x-flatpickr datepickerId="{{ Str::random(9) }}" name="filter[created_at]" label="{{ __('common.filter_by') }}" placeholder="{{ __('supply.purchases.index.filter.select_order_date') }}">
+                <x-slot:append>
+                    <span class="search-btn absolute z-[1] inset-y-1 right-1 flex items-center justify-center w-9 bg-color-eff0f0 rounded-sm">
+                        <x-icons name="calendar" class="w-4 h-4"/>
+                    </span>
+                </x-slot:append>
+            </x-flatpickr>
+        </div>
 {{--        <x-primary-button>--}}
 {{--            <x-slot:prepend>--}}
 {{--                <x-icons name="filter" class="w-3.5 h-3.5"></x-icons>--}}
 {{--            </x-slot:prepend>--}}
 {{--            {{ __('common.filter') }}--}}
 {{--        </x-primary-button>--}}
-{{--    </div>--}}
+    </div>
 </div>

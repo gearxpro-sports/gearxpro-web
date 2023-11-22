@@ -16,6 +16,7 @@
                             <tr class="text-left [&>th]:py-4 [&>th]:px-7 [&>th]:font-medium [&>th]:w-1/5 border-b-color-eff0f0">
                                 <th class="whitespace-nowrap">{{ __('invoice.index.table.cols.invoice_code') }}</th>
                                 <th class="whitespace-nowrap">{{ __('invoice.index.table.cols.invoice_date') }}</th>
+                                <th class="whitespace-nowrap">{{ __('invoice.index.table.cols.user') }}</th>
                                 <th class="whitespace-nowrap">{{ __('invoice.index.table.cols.amount') }}</th>
                                 <th class="whitespace-nowrap">{{ __('invoice.index.table.cols.payment_status') }}</th>
                                 <th></th>
@@ -26,6 +27,7 @@
                                 <tr class="text-left [&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
                                     <td class="whitespace-nowrap">{{ $invoice->code }}</td>
                                     <td class="whitespace-nowrap">{{ $invoice->created_at->format('d/m/Y') }}</td>
+                                    <td class="whitespace-nowrap">{{ $invoice->supply->reseller->fullname }}</td>
                                     <td class="whitespace-nowrap">@money($invoice->supply->amount)</td>
                                     <td class="whitespace-nowrap">
                                         <x-badge class="justify-center" color="{{ \App\Models\Invoice::STATUSES[$invoice->status] }}">
