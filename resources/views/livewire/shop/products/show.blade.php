@@ -5,15 +5,10 @@
             <x-icons name="chevron-left-xl" />
         </a>
 
-        <div dir="ltr" class="flex xl:flex-col col-span-12 xl:col-span-7 xl:h-[1104px] overflow-auto scrollBar xl:gap-4 pb-4 snap-x xl:snap-y">
-            @if ($selectedLength == 1)
-                <img class="snap-start scroll-ms-6 shrink-0" src="{{ Vite::asset('resources/images/SOXPro-1.png')}}" alt="">
-                <img class="snap-start scroll-ms-6 shrink-0" src="{{ Vite::asset('resources/images/SOXPro-2.png')}}" alt="">
-                <img class="snap-start scroll-ms-6 shrink-0" src="{{ Vite::asset('resources/images/SOXPro-3.png')}}" alt="">
-            @else
-                <img class="snap-start scroll-ms-6 shrink-0" src="{{ Vite::asset('resources/images/SOXPro-1-long.png')}}" alt="">
-                <img class="snap-start scroll-ms-6 shrink-0" src="{{ Vite::asset('resources/images/SOXPro-2-long.png')}}" alt="">
-            @endif
+        <div dir="ltr" class="flex xl:flex-col col-span-12 xl:col-span-7 xl:h-[1104px] overflow-auto scrollBar xl:gap-4 pb-4 snap-mandatory snap-x xl:snap-y relative">
+            @foreach ($selectedLength == 1 ? $images['short'] : $images['long'] as $key =>  $image )
+                <img class="snap-center scroll-ms-6 shrink-0" src="{{ $image }}" alt="">
+            @endforeach
         </div>
 
         {{-- options --}}
@@ -25,7 +20,7 @@
                 <p class="text-base xl:text-[21px] font-medium leading-[38px] text-color-18181a">@money($product->price)</p>
             </div>
 
-            <div class="w-full max-w-md mt-6 xl:mt-10 space-y-10">
+            <div class="w-full xl:max-w-md mt-6 xl:mt-10 space-y-10">
                 @if($allLengths)
                     <div wire:key="lengths" class="space-y-5">
                         <p class="text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.height_leg')}}</p>

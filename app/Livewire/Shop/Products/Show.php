@@ -100,13 +100,13 @@ class Show extends Component
         $this->sizes = $this->allSizes->toArray();
         $this->images = [
             "long" => [
-                "path" => Vite::asset('resources/images/SOXPro-1-long.png'),
-                "path" => Vite::asset('resources/images/SOXPro-2-long.png')
+                Vite::asset('resources/images/SOXPro-1-long.png'),
+                Vite::asset('resources/images/SOXPro-2-long.png')
             ],
             "short" => [
-                "path" => Vite::asset('resources/images/SOXPro-1.png'),
-                "path" => Vite::asset('resources/images/SOXPro-2.png'),
-                "path" => Vite::asset('resources/images/SOXPro-3.png'),
+                Vite::asset('resources/images/SOXPro-1.png'),
+                Vite::asset('resources/images/SOXPro-2.png'),
+                Vite::asset('resources/images/SOXPro-3.png'),
             ],
         ];
     }
