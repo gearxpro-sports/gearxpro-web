@@ -32,9 +32,12 @@
             $lastAttribute = array_pop($path);
 
             $query->orWhereHas($path[0], function (Builder $query) use ($path, $searchTerm, $lastAttribute) {
-                $query->whereHas($path[1], function (Builder $query) use ($searchTerm, $lastAttribute) {
-                    $query->where(DB::raw('LOWER(' . $lastAttribute . ')'), 'LIKE', "%{$searchTerm}%");
-                });
+                $query->where(DB::raw('LOWER(' . $lastAttribute . ')'), 'LIKE', "%{$searchTerm}%");
+                if(isset($path[1])) {
+                    $query->whereHas($path[1], function (Builder $query) use ($searchTerm, $lastAttribute) {
+                        $query->where(DB::raw('LOWER(' . $lastAttribute . ')'), 'LIKE', "%{$searchTerm}%");
+                    });
+                }
             });
         }
 
