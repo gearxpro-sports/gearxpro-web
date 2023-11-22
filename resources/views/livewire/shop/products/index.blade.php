@@ -7,7 +7,7 @@
 
     <div id="action"
         @class([
-            'w-[100vw] pt-9 pb-5 xl:py-9 xl:w-fit xl:my-9 xl:px-12 z-20 bg-color-f2f0eb rounded-md flex items-center cursor-pointer overflow-x-auto scrollBar',
+            'w-full pt-9 pb-5 xl:py-9 xl:w-fit xl:my-9 xl:px-12 z-20 bg-color-f2f0eb rounded-md flex items-center cursor-pointer overflow-x-auto scrollBar',
             $filtersOpen ? '!shadow-none' : 'xl:sticky xl:top-10',
         ])
     >
@@ -23,7 +23,7 @@
         </div>
 
         <div wire:click="toggleFilters"
-        @class(["w-full xl:w-72 h-11 xl:h-12 bg-transparent rounded-md flex justify-between items-center border border-black hover:border-white group transition-all duration-300", 'hidden xl:flex' => !$selectedCategory])>
+            @class(["w-full xl:w-72 h-11 xl:h-12 bg-transparent rounded-md flex justify-between items-center border border-black hover:border-white group transition-all duration-300", 'hidden xl:flex' => !$selectedCategory])>
             <div class="h-full rounded-l-md bg-white xl:bg-transparent flex items-center grow relative group-hover:text-white">
                 <span class="z-10 text-sm xl:text-base font-semibold xl:m-auto px-5 xl:pr-8">
                     @if ($filtersOpen)
@@ -58,7 +58,7 @@
     </div>
 
     <div class="relative flex">
-        <div @class(["z-50 h-[100vh] max-w-0 xl:h-fit bg-color-f2f0eb overflow-auto xl:overflow-hidden scrollBar transition-all duration-700 fixed xl:relative w-full inset-0", 'xl:min-w-[231px] xl:max-w-[360px] xl:ml-12 xl:mr-20' => $filtersOpen])>
+        <div @class(["z-50 h-[100vh] max-w-0 xl:h-fit bg-color-f2f0eb overflow-auto xl:overflow-hidden scrollBar transition-all duration-700 fixed xl:relative w-full inset-0", 'xl:min-w-[231px] max-w-[100%] xl:max-w-[360px] xl:ml-12 xl:mr-20' => $filtersOpen])>
             <div class="xl:hidden w-full bg-white py-5 flex justify-between items-center px-4 xl:px-0">
                 <h4 class="text-xl font-semibold text-color-18181a ">{{__('shop.products.button_filter_off')}}</h4>
                 <div wire:click="toggleFilters" class="p-2">

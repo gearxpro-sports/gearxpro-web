@@ -149,12 +149,19 @@ return [
     ],
     'footer' => [
         'brands' => 'BRANDS',
-        'my_account' => 'Il MIO ACCOUNT',
+        'my_account' => [
+            'title' => 'Il MIO ACCOUNT',
+            'dashboard' => 'Dashboard',
+            'cart' => 'Carrello',
+            'checkout' => 'Checkout',
+            'orders' => 'Ordini',
+            'shipment' => 'Spedizioni'
+        ],
         'privacy' => 'PRIVACY'
     ],
     'order' => [
         'working' => 'In lavorazione',
         'delivered' => 'Consegnato',
         'product_delivered' => 'I tuoi articoli sono stati consegnati.'
-    ]
+    ],
 ];

@@ -1,4 +1,4 @@
-<footer class="w-full relative z-[-1] xl:pt-[85px] xl:pb-[67px] bg-color-010101 grid grid-cols-4 xl:grid-cols-12 xl:grid-rows-6 gap-[10px] xl:gap-[30px]">
+<footer class="w-full relative xl:pt-[85px] xl:pb-[67px] bg-color-010101 grid grid-cols-4 xl:grid-cols-12 xl:grid-rows-6 gap-[10px] xl:gap-[30px]">
 
     <div class="hidden col-start-3 col-span-3 row-start-1 row-span-6 pr-[86px] xl:flex flex-col justify-between items-center text-white">
         <div class="flex flex-col gap-[28px] text-[13px] font-medium leading-[16px]">
@@ -32,16 +32,16 @@
 
             <div class="flex items-end gap-[22px]">
                 <a href="">
-                    <x-icons name="facebook" />
+                    <x-icons class="text-white" name="facebook" />
                 </a>
                 <a href="">
-                    <x-icons name="linkedin" />
+                    <x-icons class="text-white" name="linkedin" />
                 </a>
                 <a href="">
-                    <x-icons name="youTube" />
+                    <x-icons class="text-white" name="youTube" />
                 </a>
                 <a href="">
-                    <x-icons name="instagram" />
+                    <x-icons class="text-white" name="instagram" />
                 </a>
             </div>
         </div>
@@ -74,9 +74,9 @@
     </div>
 
     <div class="xl:hidden col-start-1 col-span-4 px-4 space-y-7">
-        <x-dropdown-mobile title="{{ __('shop.footer.brands') }}" :options="['Chi siamo', 'GEARXPro Values', 'Ricerca e Sviluppo']" color="white" />
-        <x-dropdown-mobile title="{{ __('shop.footer.my_account') }}" :options="['Chi siamo', 'GEARXPro Values', 'Ricerca e Sviluppo']" color="white" />
-        <x-dropdown-mobile title="{{ __('shop.footer.privacy') }}" :options="['Chi siamo', 'GEARXPro Values', 'Ricerca e Sviluppo']" color="white" />
+        <x-dropdown-mobile title="{{ __('shop.footer.brands') }}" :options="$brands" color="white" />
+        <x-dropdown-mobile title="{{ __('shop.footer.my_account.title') }}" :options="$account" color="white" />
+        <x-dropdown-mobile title="{{ __('shop.footer.privacy') }}" :options="[]" color="white" />
     </div>
 
     <div class="xl:hidden col-start-1 col-span-4 px-14 mt-20">
@@ -91,16 +91,16 @@
 
         <div class="flex items-end justify-between">
             <a href="">
-                <x-icons name="facebook" />
+                <x-icons class="text-white" name="facebook" />
             </a>
             <a href="">
-                <x-icons name="linkedin" />
+                <x-icons class="text-white" name="linkedin" />
             </a>
             <a href="">
-                <x-icons name="youTube" />
+                <x-icons class="text-white" name="youTube" />
             </a>
             <a href="">
-                <x-icons name="instagram" />
+                <x-icons class="text-white" name="instagram" />
             </a>
         </div>
     </div>
