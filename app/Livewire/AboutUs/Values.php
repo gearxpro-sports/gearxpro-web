@@ -5,7 +5,7 @@ namespace App\Livewire\AboutUs;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout('layouts.guest')]
+#[Layout('layouts.checkout')]
 class Values extends Component
 {
     public $slides = [];

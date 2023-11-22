@@ -38,7 +38,7 @@
     </div>
 </div> --}}
 
-<div>
+<div class="z-10 relative w-full h-[100vh] overflow-y-auto">
     <div class="bg-about_us_10 invisible"></div>
     <div class="bg-about_us_11 invisible"></div>
     <div class="bg-about_us_12 invisible"></div>
