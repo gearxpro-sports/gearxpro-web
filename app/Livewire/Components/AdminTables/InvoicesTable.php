@@ -8,16 +8,18 @@ use Illuminate\Contracts\View\View;
 
 class InvoicesTable extends BaseTable
 {
+    public $selected_status = null;
     /**
      * @return View
      */
     public function render()
     {
         if(auth()->user()->hasRole(User::RESELLER)) {
-            $invoices = auth()->user()->invoices()->with('supply')
+            $invoices = auth()->user()->invoices()->with('supply.reseller')
                 ->search($this->search, [
                     'code',
-                    'supply.reseller.firstname'
+                    'supply.reseller.firstname',
+                    'supply.reseller.lastname'
                 ])
                 ->orderByDesc('created_at');
         } elseif(auth()->user()->hasRole(User::SUPERADMIN)) {
@@ -30,20 +32,15 @@ class InvoicesTable extends BaseTable
                 ->orderByDesc('created_at');
         }
 
-        foreach ($this->filters as $k => $filter) {
-            if ($k === 'date') {
-                if ($filter['mode'] === 'single') {
-                    $invoices->whereDate($filter['column'], $filter['operator'], $filter['value']);
-                } elseif ($filter['mode'] === 'range') {
-                    $invoices->whereBetween($filter['column'], $filter['value']);
-                }
-            } else {
-                $invoices->where($filter['column'], $filter['operator'], $filter['value']);
-            }
+        $this->filterByDate($invoices);
+
+        if($this->selected_status) {
+            $invoices->where('invoices.status', $this->selected_status);
         }
 
         return view('livewire.components.admin-tables.invoices-table', [
-            'invoices' => $invoices->paginate()
+            'invoices' => $invoices->paginate(),
+            'statuses' => array_keys(Invoice::STATUSES)
         ]);
     }
 }
