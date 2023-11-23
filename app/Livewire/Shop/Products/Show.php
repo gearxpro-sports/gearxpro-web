@@ -56,7 +56,6 @@ class Show extends Component
 
     public function mount()
     {
-        ray()->clearAll();
         $this->product->load('variants');
         //        $this->selectedVariant = $this->product->variants->firstWhere('position', 1);
         //        $this->selectedLength = $this->selectedVariant->length->id;
@@ -98,17 +97,11 @@ class Show extends Component
         $this->lengths = $this->allLengths->toArray();
         $this->colors = $this->allColors->toArray();
         $this->sizes = $this->allSizes->toArray();
-        $this->images = [
-            "long" => [
-                Vite::asset('resources/images/SOXPro-1-long.png'),
-                Vite::asset('resources/images/SOXPro-2-long.png')
-            ],
-            "short" => [
-                Vite::asset('resources/images/SOXPro-1.png'),
-                Vite::asset('resources/images/SOXPro-2.png'),
-                Vite::asset('resources/images/SOXPro-3.png'),
-            ],
-        ];
+
+        $this->getProductVariantImages();
+    }
+    protected function getProductVariantImages() {
+        $this->images[$this->product->id] = $this->product->variants->firstWhere('position', 1)->getMedia('products');
     }
 
     protected function filterVariantsByTerm($type, $id)
@@ -146,6 +139,14 @@ class Show extends Component
         }
 
         $this->variants = $variants->get();
+        $this->images = [];
+        foreach ($this->variants as $variant) {
+            foreach ($variant->getMedia('products') as $media) {
+                if(!array_key_exists($variant->product->id, $this->images)) {
+                    $this->images[$variant->product->id] = $variant->getMedia('products');
+                }
+            }
+        }
         if ($this->variants->count() === 1) {
             $this->selectedVariant = $this->variants->first();
             $this->selectedLength = $this->selectedVariant->length->id;
@@ -191,6 +192,8 @@ class Show extends Component
         $this->filterVariantsByTerm('size', $this->selectedSize);
 
         $this->recalculateTerms();
+
+        $this->getProductVariantImages();
 
         $this->dispatch('reset-selection');
     }

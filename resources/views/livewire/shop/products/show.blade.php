@@ -6,8 +6,10 @@
         </a>
 
         <div dir="ltr" class="flex xl:flex-col col-span-12 xl:col-span-7 xl:h-[1104px] overflow-auto scrollBar xl:gap-4 pb-4 snap-mandatory snap-x xl:snap-y relative">
-            @foreach ($selectedLength == 1 ? $images['short'] : $images['long'] as $key =>  $image )
-                <img class="snap-center scroll-ms-6 shrink-0" src="{{ $image }}" alt="">
+            @foreach ($images as $k => $media_collection)
+                @foreach($media_collection as $image)
+                    <img class="snap-center scroll-ms-6 shrink-0" src="{{ $image->getUrl() }}" alt="">
+                @endforeach
             @endforeach
         </div>
 
