@@ -63,7 +63,7 @@
                                     </td>
                                     @endrole
                                     <td class="whitespace-nowrap">{{ $customer->created_at->format('d/m/Y') }}</td>
-                                    <td class="whitespace-nowrap">-</td>
+                                    <td class="whitespace-nowrap">{{ $customer->customerOrders()->latest()->first()->created_at->format('d/m/Y') ?? '-' }}</td>
                                     <td class="text-right">
                                         <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm"
                                            href="{{ route('customers.show', ['customer' => $customer->id]) }}">
