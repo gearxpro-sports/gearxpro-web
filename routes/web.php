@@ -129,6 +129,7 @@ Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->prefix('dashboa
             Route::get('/{supply}/invoice', InvoiceShow::class)->name('supply.purchases.invoice');
         });
 
+        // TODO: Inserire accesso superadmin
         Route::prefix('orders')->middleware(['role:reseller'])->group(function () {
             Route::get('/', OrdersIndex::class)->name('orders.index');
             Route::get('/{order}', OrderShow::class)->name('orders.show');

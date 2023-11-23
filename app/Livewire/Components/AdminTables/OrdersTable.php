@@ -20,11 +20,12 @@ class OrdersTable extends BaseTable
         $orders = auth()->user()->resellerOrders()
             ->search($this->search, [
                 'reference',
-                'customer.firstname',
-                'customer.lastname',
+//                'customer.firstname',
+//                'customer.lastname',
             ])
-            ->orderByDesc('id')
-        ;
+            ->orderByDesc('id');
+
+        $this->filterByDate($orders);
 
         return view('livewire.components.admin-tables.orders-table', [
             'orders' => $orders->paginate()
