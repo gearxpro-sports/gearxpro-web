@@ -1,7 +1,6 @@
 <x-slot name="title">
     {{ __('Profile') }}
 </x-slot>
-
 <div class="space-y-6">
     <div x-data>
         <form wire:submit="save" class="bg-white rounded-lg space-y-10 p-4 sm:p-8">

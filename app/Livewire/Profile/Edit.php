@@ -49,8 +49,8 @@ class Edit extends Component
     public function mount()
     {
         $this->reseller = auth()->user();
-        $this->billing_address = $this->reseller->billing_address;
-        $this->shipping_address = $this->reseller->shipping_address;
+        $this->billing_address = $this->reseller->billing_address ?? new Address();
+        $this->shipping_address = $this->reseller->shipping_address ?? new Address();
     }
 
     public function copyFromBilling()
@@ -78,7 +78,10 @@ class Edit extends Component
             'tax' => $this->reseller->tax,
         ]);
 
-        $this->billing_address->update([
+        $this->billing_address->updateOrCreate([
+            'user_id' => $this->reseller->id,
+            'type' => 'billing'
+        ], [
             'country_id' => $this->billing_address->country_id,
             'address_1' => $this->billing_address->address_1,
             'postcode' => $this->billing_address->postcode,
@@ -93,7 +96,10 @@ class Edit extends Component
             'default' => true
         ]);
 
-        $this->shipping_address->update([
+        $this->shipping_address->updateOrCreate([
+            'user_id' => $this->reseller->id,
+            'type' => 'shipping'
+        ], [
             'country_id' => $this->shipping_address->country_id,
             'address_1' => $this->shipping_address->address_1,
             'postcode' => $this->shipping_address->postcode,

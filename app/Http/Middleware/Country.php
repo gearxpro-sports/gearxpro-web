@@ -20,11 +20,20 @@ class Country
         $available_countries = User::role(User::RESELLER)->with('country')->get()->pluck('country.iso2_code');
         $available_countries = array_map('strtolower', $available_countries->toArray());
 
+
+        if(!in_array($request->country_code, $available_countries)) {
+            if(auth()->check() && auth()->user()->hasRole(User::SUPERADMIN)) {
+                session()->remove('country_code');
+            }
+        }
+
         if (!session('country_code') || !in_array($request->country_code, $available_countries)) {
             return redirect()->route('splash');
         }
 
-        URL::defaults(['country_code' => session('country_code', 'it')]);
+        if($available_countries) {
+            URL::defaults(['country_code' => session('country_code', $available_countries[0])]);
+        }
 
         return $next($request);
     }
