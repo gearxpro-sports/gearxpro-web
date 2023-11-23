@@ -52,7 +52,10 @@
                     </td>
                     <td>{{ $reseller->email }}</td>
                     <td>{{ $reseller->created_at->format('d/m/Y') }}</td>
-                    <td>{{ $reseller->country->name ?? '-' }}</td>
+                    <td>
+                        <img class="inline-block w-5 mr-2 rounded-sm" src="https://flagcdn.com/w320/{{ strtolower($reseller->country->iso2_code) }}.png" alt="{{ $reseller->country->name }}">
+                        {{ $reseller->country->name ?? '-' }}
+                    </td>
                     <td>{{ optional($reseller->last_login)->format('d/m/Y H:i:s') ?? '-' }}</td>
                     <td class="text-right">
                         <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="{{ route('resellers.show', ['reseller' => $reseller->id]) }}">
