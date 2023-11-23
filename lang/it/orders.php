@@ -1,13 +1,16 @@
 <?php
 
+use App\Models\Order;
+
 return [
     'statuses' => [
-        'canceled' => 'Cancellato',
-        'paid' => 'Pagato',
-        'in_preparation' => 'In Preparazione',
-        'shipped' => 'Spedito',
-        'delivered' => 'Consegnato',
-        'refunded' => 'Rimborsato',
+        Order::PAID_STATUS => 'Pagato',
+        Order::IN_PROCESS_STATUS => 'In Lavorazione',
+        Order::IN_SHIPPING_STATUS => 'In Spedizione',
+        Order::SHIPPED_STATUS => 'Spedito',
+        Order::DELIVERED_STATUS => 'Consegnato',
+        Order::CANCELED_STATUS => 'Cancellato',
+        Order::REFUNDED_STATUS => 'Rimborsato',
     ],
     'title' => 'Gestione Ordini',
     'index' => [
@@ -25,6 +28,11 @@ return [
         'filter' => [
             'status' => 'Seleziona stato',
             'date' => 'Seleziona data',
+        ],
+        'status_switcher' => [
+            'selected_items' => 'Elementi selezionati:',
+            'deselect_all' => 'Deselaziona tutto',
+            'change_state' => 'Cambia Stato:',
         ],
     ],
     'show' => [
@@ -51,9 +59,10 @@ return [
         ],
         'alert' => [
             'changing_status' => [
-                'delivered' => 'Confermi di contrassegnare l\'ordine come consegnato? L\'operazione non potrà essere annullata.',
-                'canceled' => 'Confermi di annullare l\'ordine? L\'operazione non potrà essere annullata.',
-                'refunded' => 'Confermi di contrassegnare l\'ordine come rimborsato? L\'operazione non potrà essere annullata.',
+                Order::SHIPPED_STATUS => 'Confermi di contrassegnare l\'ordine come spedito? L\'operazione non potrà essere annullata.',
+                Order::DELIVERED_STATUS => 'Confermi di contrassegnare l\'ordine come consegnato? L\'operazione non potrà essere annullata.',
+                Order::CANCELED_STATUS => 'Confermi di annullare l\'ordine? L\'operazione non potrà essere annullata.',
+                Order::REFUNDED_STATUS => 'Confermi di contrassegnare l\'ordine come rimborsato? L\'operazione non potrà essere annullata.',
             ],
         ],
         'order_date' => 'Data Ordine',
