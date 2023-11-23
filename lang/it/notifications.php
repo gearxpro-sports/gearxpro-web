@@ -113,5 +113,15 @@ return [
                 'title' => 'Passord modificata correttamente',
             ],
         ]
-    ]
+    ],
+    'orders' => [
+        'statuses_changed' => [
+            'success' => 'Gli stati degli ordini selezionati sono stati modificati con successo',
+            'error' => 'Non é possibile modificare gli stati degli ordini selezionati',
+        ],
+        'status_changed' => [
+            'success' => 'Lo stato dell\'ordine è stato modificato con successo',
+            'error' => 'Non é possibile modificare lo stato dell\'ordine',
+        ]
+    ],
 ];

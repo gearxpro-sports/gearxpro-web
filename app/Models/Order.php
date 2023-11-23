@@ -11,20 +11,22 @@ class Order extends Model
 {
     use HasFactory, Searchable;
 
-    const CANCELED_STATUS      = 'canceled';
-    const PAID_STATUS           = 'paid';
-    const IN_PREPARATION_STATUS = 'in_preparation';
-    const SHIPPED_STATUS        = 'shipped';
-    const DELIVERED_STATUS      = 'delivered';
-    const REFUNDED_STATUS       = 'refunded';
+    const PAID_STATUS        = 'paid';
+    const IN_PROCESS_STATUS  = 'in_process';
+    const IN_SHIPPING_STATUS = 'in_shipping';
+    const SHIPPED_STATUS     = 'shipped';
+    const DELIVERED_STATUS   = 'delivered';
+    const REFUNDED_STATUS    = 'refunded';
+    const CANCELED_STATUS    = 'canceled';
 
     const STATUSES = [
-        self::CANCELED_STATUS      => 'gray',
-        self::PAID_STATUS           => 'blue',
-        self::IN_PREPARATION_STATUS => 'lightblue',
-        self::SHIPPED_STATUS        => 'blue',
-        self::DELIVERED_STATUS      => 'green',
-        self::REFUNDED_STATUS       => 'gray',
+        self::PAID_STATUS         => 'blue',
+        self::IN_PROCESS_STATUS   => 'lightblue',
+        self::IN_SHIPPING_STATUS  => 'orange',
+        self::SHIPPED_STATUS      => 'lightgreen',
+        self::DELIVERED_STATUS    => 'green',
+        self::REFUNDED_STATUS     => 'black',
+        self::CANCELED_STATUS     => 'red',
     ];
 
     const STRIPE_PAYMENT = 'stripe';
@@ -37,6 +39,8 @@ class Order extends Model
      * @var array
      */
     protected $casts = [
+        'total'            => 'float',
+        'shipped_at'       => 'datetime',
         'billing_address'  => 'object',
         'shipping_address' => 'object',
         'items'            => 'object',
