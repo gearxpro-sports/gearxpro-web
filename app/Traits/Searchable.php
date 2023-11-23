@@ -7,30 +7,39 @@
 
     trait Searchable
 	{
-		protected function scopeSearch($query) {
-			[
-				$searchTerm,
-				$attributes
-			] = $this->parseArguments(func_get_args());
-			if (!$searchTerm || !$attributes) {
-				return $query;
-			}
-			return $query->where(function (Builder $query) use ($searchTerm, $attributes) {
-				foreach ($attributes as $attribute) {
-					$query->when(str_contains($attribute, '.'), function (Builder $query) use ($searchTerm, $attribute) {
-						[
-							$relationName,
-							$relationAttribute
-						] = explode('.', $attribute);
-						$query->orWhereHas($relationName, function (Builder $query) use ($searchTerm, $relationAttribute) {
-							$query->where(DB::raw('LOWER(' . $relationAttribute . ')'), 'LIKE', "%{$searchTerm}%");
-						});
-					}, function (Builder $query) use ($searchTerm, $attribute) {
-						$query->orWhere(DB::raw('LOWER(' . $attribute . ')'), 'LIKE', "%{$searchTerm}%");
-					});
-				}
-			});
-		}
+        protected function scopeSearch($query)
+        {
+            [$searchTerm, $attributes] = $this->parseArguments(func_get_args());
+
+            if (!$searchTerm || !$attributes) {
+                return $query;
+            }
+
+            return $query->where(function (Builder $query) use ($searchTerm, $attributes) {
+                foreach ($attributes as $attribute) {
+                    $query->when(str_contains($attribute, '.'), function (Builder $query) use ($searchTerm, $attribute) {
+                        $this->applyNestedSearch($query, $searchTerm, $attribute);
+                    }, function (Builder $query) use ($searchTerm, $attribute) {
+                        $query->orWhere(DB::raw('LOWER(' . $attribute . ')'), 'LIKE', "%{$searchTerm}%");
+                    });
+                }
+            });
+        }
+
+        private function applyNestedSearch(Builder $query, $searchTerm, $attribute)
+        {
+            $path = explode('.', $attribute);
+            $lastAttribute = array_pop($path);
+
+            $query->orWhereHas($path[0], function (Builder $query) use ($path, $searchTerm, $lastAttribute) {
+                $query->where(DB::raw('LOWER(' . $lastAttribute . ')'), 'LIKE', "%{$searchTerm}%");
+                if(isset($path[1])) {
+                    $query->whereHas($path[1], function (Builder $query) use ($searchTerm, $lastAttribute) {
+                        $query->where(DB::raw('LOWER(' . $lastAttribute . ')'), 'LIKE', "%{$searchTerm}%");
+                    });
+                }
+            });
+        }
 
 		private function parseArguments(array $arguments) {
 			$args_count = count($arguments);

@@ -15,9 +15,9 @@ class SupplyPurchasesTable extends BaseTable
     public function render()
     {
         if (auth()->user()->hasRole(User::RESELLER)) {
-            $orders = Supply::where('user_id', auth()->user()->id);
+            $orders = Supply::with('reseller')->where('user_id', auth()->user()->id);
         } else {
-            $orders = Supply::with(['reseller']);
+            $orders = Supply::with('reseller');
         }
 
         $orders
@@ -25,9 +25,11 @@ class SupplyPurchasesTable extends BaseTable
             ->search($this->search, [
                 'uuid',
                 'reseller.firstname',
+                'reseller.lastname',
             ])
-            ->orderByDesc('created_at')
-        ;
+            ->orderByDesc('created_at');
+
+        $this->filterByDate($orders);
 
         return view('livewire.components.admin-tables.supply-purchases-table', [
             'orders' => $orders->paginate()

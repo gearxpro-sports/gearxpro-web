@@ -13,6 +13,7 @@ return [
             'cols' => [
                 'invoice_code' => 'Numero Fattura',
                 'invoice_date' => 'Data Fattura',
+                'user' => 'Nome',
                 'amount' => 'Importo',
                 'payment_status' => 'Stato Pagamento',
             ],

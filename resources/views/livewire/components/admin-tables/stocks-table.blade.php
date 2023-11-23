@@ -33,7 +33,7 @@
                         </div>
                     </td>
                     <td>{{ $stock->productVariant->sku }}</td>
-                    <td class="text-center">unit_of_measurement</td>
+                    <td class="text-center">{{ __('common.pz') }}</td>
                     <td class="text-center">{{ $stock->quantity }}</td>
                     <td class="text-right">@money($stock->productVariant->product->countries[0]->prices->price)</td>
                     <td>
