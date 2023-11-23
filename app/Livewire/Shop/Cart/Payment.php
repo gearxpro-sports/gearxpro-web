@@ -207,6 +207,10 @@ class Payment extends Component
                 'total' => $total,
             ]);
 
+            foreach($order->items as $item) {
+                $country->reseller->stocks()->where('product_id', $item->product_id)->where('product_variant_id', $item->variant_id)->decrement('quantity', $item->quantity);
+            }
+
             $this->cart->delete();
 
             return redirect()->route('confirm', ['country_code' => session('country_code')])->with(['order_reference' => $order->reference]);

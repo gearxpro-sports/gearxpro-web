@@ -10,6 +10,24 @@ class BaseTable extends Component
 {
     use WithPagination;
 
+    /**
+     * @var string
+     */
+    public string $search = '';
+
+    /**
+     * @var array
+     */
+    public array $filters = [];
+
+    /**
+     * @var array
+     */
+    protected $queryString = [
+        'search' => ['except' => '', 'as' => 's'],
+        'page' => ['except' => 1, 'as' => 'p'],
+    ];
+
     protected $paginationTheme = 'tailwind';
 
     protected $listeners = [
@@ -46,21 +64,18 @@ class BaseTable extends Component
         }
     }
 
-    /**
-     * @var string
-     */
-    public string $search = '';
-
-    /**
-     * @var array
-     */
-    public array $filters = [];
-
-    /**
-     * @var array
-     */
-    protected $queryString = [
-        'search' => ['except' => '', 'as' => 's'],
-        'page' => ['except' => 1, 'as' => 'p'],
-    ];
+    protected function filterByDate($items)
+    {
+        foreach ($this->filters as $k => $filter) {
+            if ($k === 'date') {
+                if ($filter['mode'] === 'single') {
+                    $items->whereDate($filter['column'], $filter['operator'], $filter['value']);
+                } elseif ($filter['mode'] === 'range') {
+                    $items->whereBetween($filter['column'], $filter['value']);
+                }
+            } else {
+                $items->where($filter['column'], $filter['operator'], $filter['value']);
+            }
+        }
+    }
 }

@@ -30,7 +30,8 @@ return new class extends Migration
             $table->timestamp('paid_at')->nullable();
             $table->timestamp('shipped_at')->nullable();
             $table->decimal('total')->nullable();
-            $table->string('tracking')->nullable();
+            $table->string('stripe_id')->nullable();
+            $table->string('tracking_id')->nullable();
             $table->timestamps();
         });
     }

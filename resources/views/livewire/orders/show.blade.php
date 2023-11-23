@@ -160,7 +160,7 @@
                 <div class="flex flex-col text-center space-y-4 p-8 border-dashed border-2 border-color-dee2e6">
                     <span class="text-xs text-color-6c757d">{{ __('orders.show.ship_date') }}</span>
                     <span class="text-color-18181a font-medium">
-                        {{ $order->shipped_at ? $order->shipped_at->format('d M Y') : '-' }}
+                        {{ $order->shipped_at ? $order->shipped_at?->format('d M Y') : '-' }}
                     </span>
                 </div>
                 <div class="flex flex-col text-center space-y-4 p-8 border-dashed border-2 border-color-dee2e6">

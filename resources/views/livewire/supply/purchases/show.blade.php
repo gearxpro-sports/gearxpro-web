@@ -141,12 +141,17 @@
                     @php($variant = \App\Models\ProductVariant::find($row->product->id))
                     <tr class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
                         <td class="text-left">
-                            <div class="flex flex-col">
-                                {{ $variant->product->name }}
-                                <div class="flex divide-x text-xxs mt-1">
-                                    @foreach($variant->terms as $term)
-                                        <span class="first:pl-0 px-1">{{ $term->value }}</span>
-                                    @endforeach
+                            <div class="flex items-center space-x-4">
+                                <div>
+                                    <img class="w-10" src="{{ $variant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $variant->product->name }}">
+                                </div>
+                                <div>
+                                    {{ $variant->product->name }}
+                                    <div class="flex divide-x text-xxs mt-1">
+                                        @foreach($variant->terms as $term)
+                                            <span class="first:pl-0 px-1">{{ $term->value }}</span>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </td>

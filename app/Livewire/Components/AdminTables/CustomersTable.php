@@ -12,7 +12,7 @@ class CustomersTable extends BaseTable
      */
     public function render()
     {
-        $customers = User::role(User::CUSTOMER)
+        $customers = User::role(User::CUSTOMER)->with('customerOrders')
             ->search($this->search, [
                 'firstname',
                 'lastname',
@@ -21,7 +21,7 @@ class CustomersTable extends BaseTable
             ->orderByDesc('id');
 
         if (auth()->user()->hasRole(User::SUPERADMIN)) {
-            $customers->with('country.reseller');
+            $customers->with(['country.reseller', 'customerOrders']);
         }
 
         foreach ($this->filters as $k => $filter) {
