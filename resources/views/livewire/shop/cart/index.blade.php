@@ -12,7 +12,7 @@
             </p>
             <p class="text-sm xl:text-base text-color-18181a font-normal mt-2 xl:mt-0">{{ __('shop.cart.shop_complete')}}</p>
         </div>
-        <div class="grid grid-cols-6 xl:gap-14 border-b border-color-ff7f6e xl:border-0 pb-5 xl:pb-0 xl:mb-36">
+        <div class="grid grid-cols-6 xl:gap-14 border-color-ff7f6e xl:border-0 pb-5 xl:pb-0 xl:mb-36">
             {{-- Prodotti inseriti --}}
             <div class="col-span-6 xl:col-span-4 mt-12 xl:mt-14">
                 @foreach($cart->items as $item)
@@ -59,23 +59,25 @@
                     </span>
                 </div>
                 {{-- totale --}}
-                <div class="w-full xl:py-3.5 xl:border-y border-color-ff7f6e flex items-center justify-between mb-5 xl:mb-[47px]">
+                <div class="w-full py-3.5 border-y border-color-ff7f6e flex items-center justify-between mb-5 xl:mb-[47px]">
                     <span
                         class="font-medium text-color-18181a">{{ __('shop.cart.total')}}</span>
                     <span class="font-semibold text-color-18181a">@money($cart->total)</span>
                 </div>
 
-                @auth
-                    <x-shop.shopping-button href="{{ route('shop.payment', ['country_code' => session('country_code')]) }}" color="orange"
-                                            icon="arrow-right-xl">
-                        {{ __('shop.cart.go_to_pay') }}
-                    </x-shop.shopping-button>
-                @else
-                    <x-shop.shopping-button href="{{ route('shop.checkout', ['country_code' => session('country_code')]) }}" color="orange"
-                                            icon="arrow-right-xl">
-                        {{ __('shop.cart.go_to_pay') }}
-                    </x-shop.shopping-button>
-                @endauth
+                <div class="sticky bottom-10 left-0">
+                    @auth
+                        <x-shop.shopping-button href="{{ route('shop.payment', ['country_code' => session('country_code')]) }}" color="orange"
+                                                icon="arrow-right-xl">
+                            {{ __('shop.cart.go_to_pay') }}
+                        </x-shop.shopping-button>
+                    @else
+                        <x-shop.shopping-button href="{{ route('shop.checkout', ['country_code' => session('country_code')]) }}" color="orange"
+                                                icon="arrow-right-xl">
+                            {{ __('shop.cart.go_to_pay') }}
+                        </x-shop.shopping-button>
+                    @endauth
+                </div>
             </div>
         </div>
 

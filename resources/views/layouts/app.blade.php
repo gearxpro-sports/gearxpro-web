@@ -28,6 +28,7 @@
 <body class="antialiased bg-color-f3f7f9">
 <div x-cloak x-data="{ sidebarOpen: false }">
     <div x-show="sidebarOpen" class="relative z-40 xl:hidden" role="dialog" aria-modal="true">
+
         <div x-show="sidebarOpen" class="fixed inset-0 bg-gray-600 bg-opacity-75"></div>
 
         <div class="fixed inset-0 flex z-40">
@@ -42,6 +43,10 @@
                 </div>
 
                 <div class="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
+                    @if (!auth()->user()->tax && auth()->user()->firstname != 'Superadmin')
+                        <div class="w-full h-full absolute top-0 left-0 z-10 bg-black/20"></div>
+                    @endif
+
                     <div class="flex-shrink-0 flex items-center">
                         <a href="{{ route('dashboard') }}" class="flex items-center flex-shrink-0 px-4">
                             <img src="{{ Vite::asset('resources/images/logo.svg') }}" alt="{{ env('APP_NAME') }}"
@@ -82,6 +87,10 @@
     <div x-data="{ open: $persist(true) }"
          x-init="$watch('open', (val) => val)">
         <div :class="{'hidden xl:flex xl:fixed xl:inset-y-0' : open}" class="relative xl:w-64 xl:flex-col">
+            @if (!auth()->user()->tax && auth()->user()->firstname != 'Superadmin')
+                <div class="w-full h-full absolute top-0 left-0 z-10 bg-black/20"></div>
+            @endif
+
             <div x-on:click="open = true"
                  x-show="!open"
                  class="absolute top-5">

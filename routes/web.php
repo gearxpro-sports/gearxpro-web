@@ -4,8 +4,11 @@ use App\Livewire\Customers\Index as CustomersIndex;
 use App\Livewire\Customers\Show as CustomerShow;
 use App\Livewire\Customers\Edit as CustomerEdit;
 use App\Livewire\Customers\Profile as CustomerProfile;
+use App\Livewire\Dashboard\Index as Dashboard;
 use App\Livewire\Invoices\Show as InvoiceShow;
 use App\Livewire\Invoices\Index as InvoicesIndex;
+use App\Livewire\Order\Index as OrdersIndex;
+use App\Livewire\Order\Show as OrderShow;
 use App\Livewire\Profile\Edit as ProfileEdit;
 use App\Livewire\Resellers\Index as ResellersIndex;
 use App\Livewire\Resellers\Show as ResellerShow;
@@ -22,6 +25,7 @@ use App\Livewire\Supply\Index as SupplyIndex;
 use App\Livewire\Supply\Recap as SupplyRecap;
 use App\Livewire\Supply\Purchases\Index as SupplyPurchasesIndex;
 use App\Livewire\Supply\Purchases\Show as SupplyPurchaseShow;
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Shop\Index as ShopIndex;
 use App\Livewire\Shop\Products\Index as ProductIndex;
@@ -67,7 +71,12 @@ Route::middleware('country')->domain('{country_code}.'.env('APP_URL'))->group(fu
 
     // TODO: check se vista accessibile sempre o solo se c'è un ordine effettuato in precedenza
     Route::get('/confirm', function () {
-        return view('confirm');
+        if (Order::where('reference', session('order_reference'))->exists()) {
+            session()->remove('order_reference');
+            return view('confirm');
+        }
+        return redirect()->route('home');
+
     })->name('confirm');
 
     Route::name('about_us.')->group(function () {
@@ -83,9 +92,7 @@ Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->group(function 
 
 Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->prefix('dashboard')->group(function () {
     Route::middleware(['role:superadmin|reseller'])->group(function () {
-        Route::get('/', function () {
-            return view('dashboard');
-        })->name('dashboard');
+        Route::get('/', Dashboard::class)->name('dashboard');
 
         Route::prefix('customers')->group(function () {
             Route::get('/', CustomersIndex::class)->name('customers.index');
@@ -120,6 +127,12 @@ Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->prefix('dashboa
             Route::get('/', SupplyPurchasesIndex::class)->name('supply.purchases.index');
             Route::get('/{supply}', SupplyPurchaseShow::class)->name('supply.purchases.show')->middleware(['role:superadmin|reseller']);
             Route::get('/{supply}/invoice', InvoiceShow::class)->name('supply.purchases.invoice');
+        });
+
+        // TODO: Inserire accesso superadmin
+        Route::prefix('orders')->middleware(['role:reseller'])->group(function () {
+            Route::get('/', OrdersIndex::class)->name('orders.index');
+            Route::get('/{order}', OrderShow::class)->name('orders.show');
         });
 
         Route::prefix('invoices')->group(function () {

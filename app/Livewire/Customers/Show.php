@@ -18,10 +18,12 @@ class Show extends Component
     public function render()
     {
         $addresses = $this->customer->addresses;
+        $orders = $this->customer->customerOrders();
 
         return view('livewire.customers.show', [
             'billing_address' => $addresses->firstWhere('type', 'billing'),
-            'shipping_address' => $addresses->firstWhere('type', 'shipping')
+            'shipping_address' => $addresses->firstWhere('type', 'shipping'),
+            'orders' => $orders->paginate()
         ]);
     }
 }

@@ -1,53 +1,96 @@
 <div class="w-full h-fit bg-color-18181a grid grid-cols-12">
-
-    <div class="col-span-12 h-[984px] grid grid-cols-12 grid-rows-6 relative overflow-hidden">
-        <div class="absolute w-full h-full row-span-6 bg-fixed bg-cover bg-center bg-no-repeat"></div>
-        <div class="z-10 col-start-2 col-span-5 row-start-2 row-span-4 flex flex-col items-start justify-center gap-9">
-            <h1 class="text-7xl text-white font-bold">Just play. Have fun. Enjoy the game.</h1>
-            <p class="w-4/5 text-xl text-white">Passion, motivation, and the desire to improve performance are goals that go beyond trophies.</p>
-            <x-custom-button :text="__('shop.button.go_shop')" :icon="'double_arrow_right'" :link="'/shop'" />
+    <div class="col-span-12 h-[1080px] relative overflow-hidden">
+        <div class="absolute w-full h-full bg-about_us_1 bg-cover bg-center bg-no-repeat"></div>
+        <div class="w-full absolute top-[60%] text-center  z-10">
+            <h2 class="text-6xl text-white font-bold leading-[76px] mb-5">
+                A products manufacturer of <br>
+                ultra-modern sporting goods.
+            </h2>
         </div>
     </div>
 
-    <div class="col-span-12 h-[1080px] grid grid-cols-12 grid-rows-6 relative overflow-hidden">
-        <div class="absolute w-full h-full row-span-6 bg-about_us_1 bg-fixed bg-cover bg-center bg-no-repeat"></div>
-        <div class="absolute w-full h-full row-span-6 bg-black/60"></div>
-        <div class="relative z-10 col-start-2 col-span-10 row-start-3 row-span-4">
-            <h2 class="text-6xl text-white font-bold leading-[76px] mb-5">GEARXPro Sports è un marchio produttore di ultramoderni articoli sportivi.</h2>
-            <p class="text-xl text-white leading-9">
-                Fondata nel febbraio del 2018 da una intuizione geniale dei fratelli Di Leo, Andrea e Cristian, GEARXPro Sports è oggi una realtà internazionale leader nella produzione manifatturiera di prodotti sportivi ultramoderni ed all’avanguardia.
-                Un’avventura di successo ispirata da una grande passione per il mondo dello sport e frutto di un’intensa e radicale conoscenza del settore maturata in anni di esperienza sul campo reale.
-                L’idea embrionale, evolutasi brillantemente nel corso degli anni, fu quella di pensare ad un concetto di calzatura sportiva moderno capace di garantire protezione massima ed un netto miglioramento della performance all’atleta sportivo. Da qui l’affermazione di una realtà imprenditoriale capace di rispondere alle singole esigenze degli atleti, con una visione in grado di coniugare creatività ed efficienza, unita ad un’alta attenzione alla ricerca di nuove tecniche di produzione e allo sviluppo di linee di prodotto New to the world.
-            </p>
-        </div>
-    </div>
-
-    <div class="col-span-12 h-[1080px] grid grid-cols-12 grid-rows-6 relative">
+    <div class="col-span-12 h-[1080px] relative">
         <div class="absolute w-full h-full row-span-6 bg-about_us_2 bg-fixed bg-cover bg-center bg-no-repeat"></div>
-        <div class="absolute w-full h-full row-span-6 bg-black/60"></div>
-        <div class="relative z-10 col-start-2 col-span-10 row-start-4 row-span-3">
-            <h2 class="text-6xl text-white font-bold leading-[76px] mb-5">GEARXPro Sports è la concretizzazione di un’idea singolare, italiana, che con costanza, dedizione e passione ha portato alla nascita di una realtà solida e ambiziosa che ha completamente stravolto le regole del gioco.</h2>
-            <p class="text-xl text-white leading-9">
-                Una crescita esponenziale, resa possibile dalla capacità di immaginare soluzioni visionarie e di sviluppare nuovi prodotti e lavorazioni ad un alto standard qualitativo.
+        <div class="w-full h-full absolute z-10 flex flex-col items-center justify-center">
+            <h2 class="text-6xl text-white text-center font-bold leading-[60px] mb-5">
+                An entrepreneurial reality capable. <br>
+                of responding <br>
+                to the individual needs of athletes.
+            </h2>
+            <p class="text-3xl text-center text-white leading-9">
+                A vision that combines creativity and efficiency, <br>
+                combined with a high focus on research for new production techniques <br>
+                and the development of new-to-the-world product lines.
             </p>
         </div>
     </div>
 
-    <div class="col-span-12 h-[1080px] grid grid-cols-12 grid-rows-6 relative">
-        <div class="absolute w-full h-full row-span-6 bg-about_us_3 bg-fixed bg-cover bg-center bg-no-repeat"></div>
-        <div class="absolute w-full h-full row-span-6 bg-black/60"></div>
-        <div class="relative z-10 col-start-2 col-span-10 row-start-3 row-span-4">
-            <h2 class="text-6xl text-white font-bold leading-[76px] mb-5">La vision</h2>
-            <p class="text-xl text-white leading-9">
-                Cuore pulsante dell’essenza del nostro brand è rappresentata dal desiderio di realizzare innovazione nello sport portando l’appassionato ad un livello più avanzato, con la fortissima consapevolezza che chiunque dedichi il suo tempo e la sua vita allo sport debba avere l’opportunità di sentirsi protagonista.
-                Crediamo fermamente che ogni atleta, da sempre al centro delle nostre scelte, indipendentemente dal suo livello debba avere la possibilità di godere appieno dell’esperienza sportiva. È per questo che ci impegniamo nella miglioria dell’esperienza sportiva e della performance degli atleti di tutto il mondo attraverso innovazione, qualità e attenzione al dettaglio dei nostri prodotti.
-                L’obiettivo perseguito è quello di trascinare l’appassionato sportivo ad un livello più avanzato. Soddisfare le esigenze degli atleti di tutto il mondo, offrendo loro prodotti all’avanguardia di alta qualità capaci di migliorare la performance e l’intera esperienza sportiva. Impegnati a rafforzare assiduamente i nostri marchi per migliorare il posizionamento competitivo della nostra azienda.
+    <div class="col-span-12 h-[1080px] relative">
+        <div class="absolute w-full h-full row-span-6 bg-about_us_3 bg-cover bg-center bg-no-repeat"></div>
+        <div class="absolute w-full h-full z-10 flex items-center justify-center">
+            <p class="text-4xl text-center text-white leading-10">
+                GEARXPro is the embodiment of a singular, Italian idea, <br>
+                which with perseverance, dedication and passion has led to the birth of a solid <br>
+                and ambitious reality that has completely overturned the rules of the game.
             </p>
         </div>
     </div>
+
+    <div class="col-span-12 h-[1080px] relative">
+        <div class="absolute w-full h-full row-span-6 bg-about_us_4 bg-fixed bg-cover bg-center bg-no-repeat"></div>
+        <div class="absolute w-full h-full z-10 flex items-center justify-center">
+            <div class="absolute w-full h-full z-10 flex flex-col items-center justify-center mt-[-20px]">
+                <h2 class="text-[280px] leading-[320px] text-white/60 bg-clip-text font-black brightness-200 uppercase">vision</h2>
+                <h3 class="text text-6xl text-white font-bold mb-5">Innovating in Sport.</h3>
+                <p class="text-4xl text-center text-white leading-10 mb-8">
+                    Every athlete, who has always been at the center of our choices, <br>
+                    must have the <span class="font-bold">oppprtunity to fully enjoy the sporting experience.</span>
+                </p>
+                <p class="text-4xl text-center text-white leading-10">
+                    We are committed <br>
+                    <span class="font-bold">to improving the sports experience and performance of athletes</span> <br>
+                    around the world through innovation, <br>
+                    quality and attention to detail in our products
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-span-12 h-[1080px] relative">
+        <div class="absolute w-full h-full row-span-6 bg-about_us_5 bg-cover bg-center bg-no-repeat"></div>
+        <div class="absolute w-full h-full z-10 flex items-center justify-center">
+            <p class="text-4xl text-center text-white leading-10">
+                A brilliant intuition of the <span class="font-bold">Di Leo brothers</span>, <span class="font-bold">Andrea</span> and <span class="font-bold">Cristian</span>. <br>
+                <br>
+                A successful adventure inspired by a great passion for the world of sport <br>
+                and the result of an intense and radical knowledge of the sector gained <br>
+                over years of experience in the field.
+            </p>
+        </div>
+    </div>
+
+    <div class="col-span-12 h-[1080px] relative">
+        <div class="absolute w-full h-full row-span-6 bg-about_us_6 bg-fixed bg-cover bg-center bg-no-repeat"></div>
+        <div class="absolute w-full h-full z-10 flex items-center justify-center">
+            <div class="absolute w-full h-full z-10 flex flex-col items-center justify-center mt-[-90px]">
+                <h2 class="text-[280px] leading-[320px] text-color-217285/40 font-black brightness-200 uppercase">mission</h2>
+                <h3 class="text text-7xl text-white text-center font-bold mb-5">
+                    Drag the sports enthusiast <br>
+                    to a more advanced level.
+                </h3>
+                <p class="text-4xl text-center text-white leading-10 mb-8">
+                    <span class="font-bold">To meet the needs of athletes around the world,</span> <br>
+                    offering them state-of-the-art, high-quality products that improve performance <br>
+                    and the entire sports experience.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
 
     {{-- year --}}
-    <x-about-us.year height="h-[1080px]" bg_image="bg-about_us_4" year="2018">
+    <x-about-us.year height="h-[1080px]" bg_image="bg-about_us_2018" year="2018">
         <div class="z-20 w-fit absolute top-56 left-9 flex flex-col gap-5">
             <img class="w-fit" src="{{ Vite::asset('resources/images/logo_soxpro.png')}}" alt="">
         </div>
@@ -63,7 +106,7 @@
         </div>
     </x-about-us.year>
 
-    <x-about-us.year height="h-[1080px]" bg_image="bg-about_us_5" year="2019">
+    <x-about-us.year height="h-[1080px]" bg_image="bg-about_us_2019" year="2019">
         <div class="z-20 w-fit absolute top-56 left-9 flex flex-col gap-5">
             <img class="w-fit" src="{{ Vite::asset('resources/images/logo_lacexpro.png')}}" alt="">
             <img class="w-fit" src="{{ Vite::asset('resources/images/logo_tubexpro.png')}}" alt="">
@@ -80,7 +123,7 @@
         </div>
     </x-about-us.year>
 
-    <x-about-us.year height="h-[1080px]" bg_image="bg-about_us_6" year="2020">
+    <x-about-us.year height="h-[1080px]" bg_image="bg-about_us_2020" year="2020">
         <div class="z-20 w-fit absolute top-56 left-9 flex flex-col gap-5">
             <img class="w-fit" src="{{ Vite::asset('resources/images/logo_gearxpro.png')}}" alt="">
             <img class="w-fit" src="{{ Vite::asset('resources/images/logo_flex-gxpro.png')}}" alt="">
@@ -97,7 +140,7 @@
         </div>
     </x-about-us.year>
 
-    <x-about-us.year height="h-[1080px]" bg_image="bg-about_us_7" year="2021">
+    <x-about-us.year height="h-[1080px]" bg_image="bg-about_us_2021" year="2021">
         <div class="z-20 w-fit absolute top-56 left-9 flex flex-col gap-5">
             <img class="w-fit" src="{{ Vite::asset('resources/images/logo_soxpro.png')}}" alt="">
             <img class="w-fit" src="{{ Vite::asset('resources/images/logo_quality.png')}}" alt="">
@@ -120,7 +163,7 @@
         </div>
     </x-about-us.year>
 
-    <x-about-us.year height="h-[1080px]" bg_image="bg-about_us_8" year="2022">
+    <x-about-us.year height="h-[1080px]" bg_image="bg-about_us_2022" year="2022">
         <div class="z-20 w-fit absolute top-56 left-9 flex flex-col gap-5">
             <img class="w-fit" src="{{ Vite::asset('resources/images/logo_soxpro.png')}}" alt="">
             <img class="w-fit" src="{{ Vite::asset('resources/images/logo_geraxpro_recovery.png')}}" alt="">
@@ -143,7 +186,7 @@
         </div>
     </x-about-us.year>
 
-    <x-about-us.year height="h-[1178px]" bg_image="bg-about_us_9" year="2023">
+    <x-about-us.year height="h-[1178px]" bg_image="bg-about_us_2023" year="2023">
         <div class="z-20 w-fit absolute top-56 left-9 flex flex-col gap-5">
             <img class="w-fit" src="{{ Vite::asset('resources/images/logo_soxpro.png')}}" alt="">
         </div>
@@ -179,7 +222,7 @@
             scrollPosition = window.scrollY;
 
             // 2018
-            if (scrollPosition >= 4320) {
+            if (scrollPosition >= 6576) {
                 sectionContainer[0].childNodes[1].classList.add('!sticky')
                 sectionContainer[0].childNodes[3].childNodes[1].classList.add('!sticky')
 
@@ -193,7 +236,7 @@
                 sectionContainer[0].childNodes[3].childNodes[5].classList.remove("!opacity-100", "translate-x-10")
             }
             // 2019
-            if (scrollPosition >= 5400) {
+            if (scrollPosition >= 7656) {
                 sectionContainer[1].childNodes[1].classList.add('!sticky')
                 sectionContainer[1].childNodes[3].childNodes[1].classList.add('!sticky')
                 sectionContainer[0].childNodes[1].classList.add('hidden')
@@ -209,7 +252,7 @@
                 sectionContainer[1].childNodes[3].childNodes[5].classList.remove("!opacity-100", "translate-x-[-40px]")
             }
             // 2020
-            if (scrollPosition >= 6480) {
+            if (scrollPosition >= 8736) {
                 sectionContainer[2].childNodes[1].classList.add('!sticky')
                 sectionContainer[2].childNodes[3].childNodes[1].classList.add('!sticky')
                 sectionContainer[1].childNodes[1].classList.add('hidden')
@@ -225,7 +268,7 @@
                 sectionContainer[2].childNodes[3].childNodes[5].classList.remove("!opacity-100", "translate-x-[-40px]")
             }
             // 2021
-            if (scrollPosition >= 7560) {
+            if (scrollPosition >= 9816) {
                 sectionContainer[3].childNodes[1].classList.add('!sticky')
                 sectionContainer[3].childNodes[3].childNodes[1].classList.add('!sticky')
                 sectionContainer[2].childNodes[1].classList.add('hidden')
@@ -241,7 +284,7 @@
                 sectionContainer[3].childNodes[3].childNodes[5].classList.remove("!opacity-100", "translate-x-10")
             }
             // 2022
-            if (scrollPosition >= 8640) {
+            if (scrollPosition >= 10896) {
                 sectionContainer[4].childNodes[1].classList.add('!sticky')
                 sectionContainer[4].childNodes[3].childNodes[1].classList.add('!sticky')
                 sectionContainer[3].childNodes[1].classList.add('hidden')
@@ -259,7 +302,7 @@
                 sectionContainer[4].childNodes[3].childNodes[7].classList.remove("!opacity-100", "translate-x-[-40px]")
             }
             // 2023
-            if (scrollPosition >= 9720) {
+            if (scrollPosition >= 11976) {
                 sectionContainer[5].childNodes[1].classList.add('!sticky')
                 sectionContainer[5].childNodes[3].childNodes[1].classList.add('!sticky')
                 sectionContainer[4].childNodes[1].classList.add('hidden')

@@ -3,10 +3,9 @@
 
     <div class="owl-carousel carousel_top">
         @foreach ($categories as $category )
-            <x-card-top title="{{$category['name']}}" description="{{$category['description']}}" image="gear/{{$category['image']}}"/>
+            <x-card-top id_cat="{{$category['id']}}" title="{{$category['name']}}" description="{{$category['description']}}" image="gear/{{$category['image']}}"/>
         @endforeach
     </div>
-
 </div>
 
 @push('scripts')
@@ -15,6 +14,7 @@
             var carousel_top = new $(".carousel_top").owlCarousel({
                 items: 4,
                 margin: 30,
+                dots: false,
                 loop: true,
                 autoWidth: true,
                 autoplay: true,

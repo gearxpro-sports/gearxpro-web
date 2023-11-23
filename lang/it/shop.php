@@ -64,7 +64,9 @@ return [
     'modal_cart' => [
         'add_product' => 'Articolo aggiunto al carrello',
         'button_show' => 'Visualizza carrello',
-        'button_pay' => 'Vai al pagamento'
+        'button_pay' => 'Vai al pagamento',
+        'cart' => 'Carrello',
+        'checkout' => 'Checkout'
     ],
     'cart' => [
         'cart_empty' => 'Nessun prodotto in carrello!',
@@ -147,12 +149,19 @@ return [
     ],
     'footer' => [
         'brands' => 'BRANDS',
-        'my_account' => 'Il MIO ACCOUNT',
+        'my_account' => [
+            'title' => 'Il MIO ACCOUNT',
+            'dashboard' => 'Dashboard',
+            'cart' => 'Carrello',
+            'checkout' => 'Checkout',
+            'orders' => 'Ordini',
+            'shipment' => 'Spedizioni'
+        ],
         'privacy' => 'PRIVACY'
     ],
     'order' => [
         'working' => 'In lavorazione',
         'delivered' => 'Consegnato',
         'product_delivered' => 'I tuoi articoli sono stati consegnati.'
-    ]
+    ],
 ];

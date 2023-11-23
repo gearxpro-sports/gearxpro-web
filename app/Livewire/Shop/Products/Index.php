@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Term;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -72,7 +73,7 @@ class Index extends Component
      */
     public array $selectedSizes = [];
 
-    public function mount()
+    public function mount(Request $request)
     {
         $this->categories = Category::with('children')->whereNull('parent_id')->get();
         $this->currentCountry = Country::with('reseller')->where('iso2_code', session('country_code'))->first();
@@ -81,7 +82,12 @@ class Index extends Component
             'price_high' => __('shop.products.price_high'),
         ];
         $this->productAttributes = Attribute::with('terms')->get()->groupBy('id')->toBase();
-        $this->loadProducts();
+
+        if ($request->get('categoryId')) {
+            $this->selectCategory($request->get('categoryId'));
+        } else {
+            $this->loadProducts();
+        }
     }
 
     public function render()
@@ -89,8 +95,7 @@ class Index extends Component
         return view('livewire.shop.products.index');
     }
 
-    public function loadProducts()
-    {
+    public function loadProducts() {
         $this->productColors = [];
         $products = Product::with([
                 'categories' => function($query) {
@@ -141,8 +146,6 @@ class Index extends Component
 
         $this->products = $products->get();
 
-//        dd($this->products->toArray());
-
         foreach ($this->products as $product) {
             if ($product->variants->count() > 0) {
                 foreach ($product->variants as $variant) {
@@ -153,8 +156,14 @@ class Index extends Component
         }
     }
 
+    public function selectOrder($order) {
+        $this->selectedOrder = $order;
+    }
+
     #[On('selectCategory')]
-    public function selectCategory(Category $category) {
+    public function selectCategory($id) {
+        $category = Category::find($id);
+
         if ($this->selectedCategory && $category->id === $this->selectedCategory->id) {
             if ($category->parent_id !== null) {
                 $parent = $category->parent;

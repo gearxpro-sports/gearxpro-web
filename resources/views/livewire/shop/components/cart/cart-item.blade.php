@@ -1,7 +1,9 @@
 <div class="flex flex-col xl:flex-row border-b xl:border border-color-e0e0df relative mb-5 pb-5 xl:pb-0 xl:mb-1">
 
     <div class="flex flex-1 xl:p-1 gap-7">
-        <div class="w-20 h-20 xl:w-48 xl:h-48 bg-white"></div>
+        <div class="w-20 h-20 xl:w-48 xl:h-48">
+            <img src="{{ $item->variant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $item->variant->product->name }}">
+        </div>
         <div class="my-auto">
             <div class="flex flex-col gap-2 xl:gap-1 mb-2 xl:mb-1">
                 <h3 class="text-sm font-bold xl:text-lg xl:font-semibold text-color-18181a">{{ $item->variant->product->name }}</h3>

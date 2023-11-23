@@ -38,7 +38,10 @@
             </li>
             <li class="flex space-x-2">
                 <span class="inline-block text-color-6c757d">{{ __('resellers.show.data.country') }}</span>
-                <span>{{ $reseller->country->name }}</span>
+                <span>
+                    <img class="inline-block w-5 mr-2 rounded-sm" src="https://flagcdn.com/w320/{{ strtolower($reseller->country->iso2_code) }}.png" alt="{{ $reseller->country->name }}">
+                    {{ $reseller->country->name }}
+                </span>
             </li>
             <li class="flex space-x-2">
                 <span class="inline-block text-color-6c757d">{{ __('resellers.show.data.last_login') }}</span>
@@ -60,7 +63,10 @@
                 </li>
                 <li class="flex space-x-2">
                     <span class="inline-block text-color-6c757d">{{ __('resellers.show.data.country') }}</span>
-                    <span>{{ $billing_address->country->name }}</span>
+                    <span>
+                        <img class="inline-block w-5 mr-2 rounded-sm" src="https://flagcdn.com/w320/{{ strtolower($billing_address->country->iso2_code) }}.png" alt="{{ $billing_address->country->name }}">
+                        {{ $billing_address->country->name }}
+                    </span>
                 </li>
             @endif
             @if($shipping_address)
@@ -79,7 +85,10 @@
                 </li>
                 <li class="flex space-x-2">
                     <span class="inline-block text-color-6c757d">{{ __('resellers.show.data.country') }}</span>
-                    <span>{{ $shipping_address->country->name }}</span>
+                    <span>
+                        <img class="inline-block w-5 mr-2 rounded-sm" src="https://flagcdn.com/w320/{{ strtolower($shipping_address->country->iso2_code) }}.png" alt="{{ $shipping_address->country->name }}">
+                        {{ $shipping_address->country->name }}
+                    </span>
                 </li>
             @endif
             <h3 class="font-bold">{{ __('resellers.show.titles.payment') }}</h3>

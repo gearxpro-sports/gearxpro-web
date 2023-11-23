@@ -1,6 +1,29 @@
 <div class="relative">
     <div wire:loading class="absolute inset-0 bg-white/50 z-10"></div>
-    <x-admin-table-search-bars.resellers-search-bar />
+    <div class="grid grid-cols-1 gap-4 items-end mb-2.5 bg-white py-4 px-4 text-xs rounded shadow-shadow-1 md:grid-cols-2 md:px-7">
+        <div>
+            <div class="relative">
+                <x-input wire:model.live.debounce.500ms="search" name="search" placeholder="{{ __('common.search') }}" class="h-10 py-0">
+                    <x-slot:append>
+                    <span class="search-btn absolute z-[1] inset-y-1 right-1 flex items-center justify-center w-9 bg-color-eff0f0 rounded-sm">
+                        <x-icons name="search" class="w-4 h-4" />
+                    </span>
+                    </x-slot:append>
+                </x-input>
+            </div>
+        </div>
+        <div class="flex items-end gap-2">
+            <div class="mx-0 w-80 md:mx-2.5">
+                <x-flatpickr datepickerId="{{ Str::random(9) }}" name="filter[created_at]" label="{{ __('common.filter_by') }}" placeholder="{{ __('customers.index.filter.select_registration_date') }}">
+                    <x-slot:append>
+                    <span class="search-btn absolute z-[1] inset-y-1 right-1 flex items-center justify-center w-9 bg-color-eff0f0 rounded-sm">
+                        <x-icons name="calendar" class="w-4 h-4"/>
+                    </span>
+                    </x-slot:append>
+                </x-flatpickr>
+            </div>
+        </div>
+    </div>
     <div class="p-8 bg-white rounded space-y-8">
         @if ($resellers->count() > 0)
         <div class="flex items-center space-x-4">
@@ -29,7 +52,12 @@
                     </td>
                     <td>{{ $reseller->email }}</td>
                     <td>{{ $reseller->created_at->format('d/m/Y') }}</td>
-                    <td>{{ $reseller->country->name ?? '-' }}</td>
+                    <td>
+                        <div>
+                            <img class="inline-block w-5 mr-2 rounded-sm" src="https://flagcdn.com/w320/{{ strtolower($reseller->country->iso2_code) }}.png" alt="{{ $reseller->country->name }}">
+                            {{ $reseller->country->name ?? '-' }}
+                        </div>
+                    </td>
                     <td>{{ optional($reseller->last_login)->format('d/m/Y H:i:s') ?? '-' }}</td>
                     <td class="text-right">
                         <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="{{ route('resellers.show', ['reseller' => $reseller->id]) }}">

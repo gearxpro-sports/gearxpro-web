@@ -5,7 +5,7 @@ namespace App\Livewire\AboutUs;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout('layouts.guest')]
+#[Layout('layouts.checkout')]
 class Values extends Component
 {
     public $slides = [];
@@ -33,12 +33,12 @@ class Values extends Component
             [
                 'image' => 'bg-about_us_13',
                 'title' => 'envi ron ment',
-                'text' => 'We are staunch allies of environmenta sustainability,
-                in line with the goalsd the 2030 Agenda promoted
-                by the UN
+                'text' => 'We are staunch allies of environment a sustainability,
+                in line with the goals the 2030 Agenda promoted
+                by the UN.
                 We promote sustainable production models that
-                adopt the best possible practicesfor Waste reduction
-                and respec€for the environment.'
+                adopt the best possible practices for Waste reduction
+                and respect for the environment.'
             ],
             [
                 'image' => 'bg-about_us_14',

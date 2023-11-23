@@ -8,7 +8,7 @@
 
     <!-- Navigation Menu -->
     <div class="mx-auto px-[16px] xl:px-[39px] bg-white">
-        <div class="flex justify-between items-center h-[60px]">
+        <div class="flex justify-between items-center h-[70px] xl:h-[60px]">
             <!-- Logo -->
             <div class="shrink-0 flex items-center">
                 <a href="{{ route('home', ['country_code' => session('country_code')]) }}">
@@ -57,7 +57,7 @@
                                             <x-slot name="content">
                                                 @hasanyrole([App\Models\User::RESELLER, App\Models\User::SUPERADMIN])
                                                 <x-dropdown-link href="{{ route('dashboard') }}">
-                                                    {{ __('Dashboard') }}
+                                                    {{ __('dashboard.title') }}
                                                 </x-dropdown-link>
                                                 @endrole
 
@@ -134,7 +134,7 @@
     <!-- Responsive Navigation Menu -->
     <div x-cloak
         :class="{'fixed': open, 'hidden': ! open}"
-        class="z-50 w-full px-[16px] inset-0 top-[96px] left-0 bg-white"
+        class="z-[100] h-[100vh] w-full px-[16px] inset-0 overflow-auto scrollBar top-[96px] left-0 bg-white"
     >
         <div class="mt-5 mb-10">
             @auth
@@ -148,10 +148,10 @@
         <div class="flex flex-col gap-6">
             <a href="{{ route('home', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.home') }}</a>
             <a href="{{ route('shop.index', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.shop') }}</a>
-            <x-dropdown-mobile title="{{ __('shop.navigation.about_us') }}" :options="['Chi siamo', 'GEARXPro Values', 'Ricerca e Sviluppo']" />
+            <x-dropdown-mobile title="{{ __('shop.navigation.about_us') }}" :options="$about_us" />
             <a href="{{ route('shop.index', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.journal') }}</a>
-            <x-dropdown-mobile title="{{ __('shop.navigation.assistance') }}" :options="['contattaci']" />
-            <x-dropdown-mobile title="{{ session()->get('language', app()->getLocale()) }}" :options="$languages" uppercase="uppercase" />
+            <x-dropdown-mobile title="{{ __('shop.navigation.assistance') }}" :options="[]" />
+            <x-dropdown-mobile type="select" title="{{ session()->get('language', app()->getLocale()) }}" :options="$languages" />
          </div>
     </div>
 </nav>

@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\Stock;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -20,6 +21,7 @@ class Show extends Component
 {
     public Product $product;
     public ProductVariant $selectedVariant;
+    public $images;
     public $variants = null;
 
     public $selectedLength = null;
@@ -96,6 +98,17 @@ class Show extends Component
         $this->lengths = $this->allLengths->toArray();
         $this->colors = $this->allColors->toArray();
         $this->sizes = $this->allSizes->toArray();
+        $this->images = [
+            "long" => [
+                Vite::asset('resources/images/SOXPro-1-long.png'),
+                Vite::asset('resources/images/SOXPro-2-long.png')
+            ],
+            "short" => [
+                Vite::asset('resources/images/SOXPro-1.png'),
+                Vite::asset('resources/images/SOXPro-2.png'),
+                Vite::asset('resources/images/SOXPro-3.png'),
+            ],
+        ];
     }
 
     protected function filterVariantsByTerm($type, $id)

@@ -38,7 +38,7 @@
     </div>
 </div> --}}
 
-<div>
+<div class="z-10 relative w-full h-[100vh] overflow-y-auto">
     <div class="bg-about_us_10 invisible"></div>
     <div class="bg-about_us_11 invisible"></div>
     <div class="bg-about_us_12 invisible"></div>
@@ -46,7 +46,7 @@
     <div class="bg-about_us_14 invisible"></div>
 
     <div id="pagepiling">
-        <div class="section relative grid grid-cols-12 grid-rows-6">
+        <div class="section relative grid grid-cols-12 grid-rows-6 overflow-hidden">
             <div class="absolute top-0 left-0 w-full h-[100vh] bg-about_us_10 bg-center bg-cover bg-no-repeat"></div>
 
             <div class="z-10 row-start-4 col-start-2 col-span-10 pt-10">

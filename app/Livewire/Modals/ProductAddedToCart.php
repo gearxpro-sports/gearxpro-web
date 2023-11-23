@@ -3,6 +3,7 @@
 namespace App\Livewire\Modals;
 
 use App\Models\ProductVariant;
+use App\Models\Cart;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
@@ -25,6 +26,8 @@ class ProductAddedToCart extends Component
 
     public function render()
     {
-        return view('livewire.modals.product-added-to-cart');
+        return view('livewire.modals.product-added-to-cart', [
+            'cart' => Cart::where('user_id', auth()->user()?->id)->orWhere('user_id', session('cart_user_token'))->first()
+        ]);
     }
 }

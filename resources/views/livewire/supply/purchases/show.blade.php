@@ -65,7 +65,10 @@
             <div class="grow">
                 <h3 class="mb-4 text-color-18181a font-medium">{{ __('supply.purchases.show.boxes.reseller_data') }}</h3>
                 <ul class="grow-0 text-sm">
-                    <li class="mt-2 text-color-323a46">{{ $supply->reseller->fullname }}</li>
+                    <li class="mt-2 text-color-323a46">
+                        <img class="inline-block w-5 mr-2 rounded-sm" src="https://flagcdn.com/w320/{{ strtolower($supply->reseller->country->iso2_code) }}.png" alt="{{ $supply->reseller->country->name }}">
+                        {{ $supply->reseller->fullname }}
+                    </li>
                     <li class="mt-2 text-color-6c757d">{{ $supply->reseller->email }}</li>
                 </ul>
             </div>
@@ -78,8 +81,11 @@
                 <h3 class="mb-4 text-color-18181a font-medium">{{ __('supply.purchases.show.boxes.shipping_data') }}</h3>
                 <ul class="grow-0 text-sm">
                     <li class="mt-2 text-color-323a46">{{ $supply->reseller->fullname }}</li>
-                    <li class="mt-2 text-color-6c757d">{{ $supply->reseller->shippingAddress->inlineFormat }}</li>
-                    <li class="mt-2 text-color-6c757d">{{ $supply->reseller->shippingAddress->country->name }}</li>
+                    <li class="mt-2 text-color-6c757d">{{ $supply->reseller->shipping_address->inlineFormat }}</li>
+                    <li class="mt-2 text-color-6c757d">
+                        <img class="inline-block w-5 mr-2 rounded-sm" src="https://flagcdn.com/w320/{{ strtolower($supply->reseller->shipping_address->country->iso2_code) }}.png" alt="{{ $supply->reseller->shipping_address->country->name }}">
+                        {{ $supply->reseller->shipping_address->country->name }}
+                    </li>
                 </ul>
             </div>
             <div class="grow-0">
@@ -91,8 +97,11 @@
                 <h3 class="mb-4 text-color-18181a font-medium">{{ __('supply.purchases.show.boxes.billing_data') }}</h3>
                 <ul class="grow-0 text-sm">
                     <li class="mt-2 text-color-323a46">{{ $supply->reseller->fullname }}</li>
-                    <li class="mt-2 text-color-6c757d">{{ $supply->reseller->billingAddress->inlineFormat }}</li>
-                    <li class="mt-2 text-color-6c757d">{{ $supply->reseller->billingAddress->country->name }}</li>
+                    <li class="mt-2 text-color-6c757d">{{ $supply->reseller->billing_address->inlineFormat }}</li>
+                    <li class="mt-2 text-color-6c757d">
+                        <img class="inline-block w-5 mr-2 rounded-sm" src="https://flagcdn.com/w320/{{ strtolower($supply->reseller->billing_address->country->iso2_code) }}.png" alt="{{ $supply->reseller->billing_address->country->name }}">
+                        {{ $supply->reseller->billing_address->country->name }}
+                    </li>
                 </ul>
             </div>
             <div class="grow-0">
@@ -132,12 +141,17 @@
                     @php($variant = \App\Models\ProductVariant::find($row->product->id))
                     <tr class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
                         <td class="text-left">
-                            <div class="flex flex-col">
-                                {{ $variant->product->name }}
-                                <div class="flex divide-x text-xxs mt-1">
-                                    @foreach($variant->terms as $term)
-                                        <span class="first:pl-0 px-1">{{ $term->value }}</span>
-                                    @endforeach
+                            <div class="flex items-center space-x-4">
+                                <div>
+                                    <img class="w-10" src="{{ $variant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $variant->product->name }}">
+                                </div>
+                                <div>
+                                    {{ $variant->product->name }}
+                                    <div class="flex divide-x text-xxs mt-1">
+                                        @foreach($variant->terms as $term)
+                                            <span class="first:pl-0 px-1">{{ $term->value }}</span>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </td>

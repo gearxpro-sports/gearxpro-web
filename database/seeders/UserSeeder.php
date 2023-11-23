@@ -59,6 +59,7 @@ class UserSeeder extends Seeder
                 'lastname' => null,
                 'email' => 'reseller@example.test',
                 'password' => bcrypt(env('SEEDER_USER_DEFAULT_PASSWORD', 'password')),
+                'payment_method' => '30_60_days',
                 'created_at' => now(),
                 'updated_at' => now()
             ]);

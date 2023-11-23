@@ -3,8 +3,8 @@
 
     <div class="owl-carousel carousel_bottom">
         <x-card-bottom image="Recovery-Long-T_1.svg" title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
-        <x-card-bottom image="Recovery-Long-T_1.svg" title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
-        <x-card-bottom image="Recovery-Long-T_1.svg" title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
+        <x-card-bottom image="SOXPro-1-long.png" title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
+        <x-card-bottom image="SOXPro-1.png" title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
         <x-card-bottom image="Recovery-Long-T_1.svg" title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
     </div>
 
@@ -25,6 +25,7 @@
             var carousel_bottom = new $(".carousel_bottom").owlCarousel({
                 items: 3,
                 margin: 30,
+                dots: false,
                 loop: true,
                 autoWidth: true,
                 autoplay: false,

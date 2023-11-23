@@ -1,7 +1,7 @@
 <tr class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
     <td>
-        <div class="flex items-center space-x-2">
-            <div class="w-10 h-10 bg-gray-100 flex-shrink-0"></div>
+        <div class="flex items-center space-x-4">
+            <img class="w-10" src="{{ $variant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $variant->product->name }}">
             <span class="whitespace-nowrap">{{ $variant->product->name }} - {{ $variant->color->value }}</span>
         </div>
     </td>
@@ -10,7 +10,7 @@
         {{ $variant->size->value }}
     </td>
     <td>{{ $variant->length->value }}</td>
-    <td>unit_of_measurement</td>
+    <td>{{ __('common.pz') }}</td>
     <td>@money($variant->product->wholesale_price)</td>
     <td>@money($variant->product->price)</td>
     <td>
