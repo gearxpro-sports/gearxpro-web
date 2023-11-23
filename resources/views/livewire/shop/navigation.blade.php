@@ -122,7 +122,7 @@
                         <div :class="{'hidden': open, 'inline-flex': ! open }">
                             <x-icons name="hamburger" />
                         </div>
-                        <div :class="{'hidden': ! open, 'inline-flex': open }">
+                        <div x-cloak :class="{'hidden': ! open, 'inline-flex': open }">
                             <x-icons name="x-close" />
                         </div>
                     </button>

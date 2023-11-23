@@ -83,11 +83,13 @@
                          label="{{ __('resellers.create.pec.label') }}"></x-input>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <h3 class="col-span-1 sm:col-span-2">{{ __('resellers.create.titles.tax') }}</h3>
-                <x-input x-mask="99" type="text" wire:model="reseller.tax" name="tax"
-                        label="{{ __('resellers.create.tax') }}" required></x-input>
-            </div>
+            @if (auth()->user()->firstname != 'Superadmin')
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <h3 class="col-span-1 sm:col-span-2">{{ __('resellers.create.titles.tax') }}</h3>
+                    <x-input x-mask="99" type="text" wire:model="reseller.tax" name="tax"
+                            label="{{ __('resellers.create.tax') }}" required></x-input>
+                </div>
+            @endif
 
             <div class="flex items-center justify-between">
                 <x-primary-button>

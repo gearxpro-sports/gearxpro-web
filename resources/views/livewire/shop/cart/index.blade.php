@@ -19,7 +19,7 @@
                     <livewire:shop.components.cart.cart-item wire:key="{{$item}}" :$item/>
                 @endforeach
 
-                <div class="w-full h-px bg-color-ff7f6e my-11 xl:my-6"></div>
+                <div class="w-full h-px bg-color-ff7f6e -mt-5 mb-11 xl:my-6"></div>
                 <div class="w-72 hidden xl:block">
                     <x-shop.shopping-button href="{{ route('shop.index', ['country_code' => session('country_code')]) }}" color="transparent"
                                             icon="back">
