@@ -2,7 +2,7 @@
     {{ __('dashboard.title') }}
 </x-slot>
 
-@if (!$this->reseller->tax)
+@if (!$this->reseller->tax && auth()->user()->firstname != 'Superadmin')
     <div class="w-full flex items-center justify-center">
         <div class="border max-w-xl h-fit px-8 py-12 pb-14 rounded-md flex flex-col gap-8 items-center shadow-md bg-white">
             <div>
