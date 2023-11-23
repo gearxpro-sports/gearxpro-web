@@ -8,33 +8,16 @@ use Livewire\Component;
 class Index extends Component
 {
     public User $reseller;
-    public $tax;
 
     public function mount() {
         $this->reseller = auth()->user();
     }
 
-    public function rules() {
-        return [
-            'tax' => 'required',
-        ];
+    public function checkTax() {
+        if(!$this->reseller->tax && !auth()->user()->hasRole(\App\Models\User::SUPERADMIN)) {
+            $this->dispatch('openModal', 'modals.tax');
+        }
     }
-
-    public function messages() {
-        return [
-            'tax.required' => __('shop.payment.required')
-        ];
-    }
-
-    public function setTax() {
-        $this->validate();
-        $this->reseller->update([
-            'tax' => $this->tax,
-        ]);
-
-        return redirect('dashboard');
-    }
-
 
     public function render()
     {
