@@ -19,6 +19,7 @@
                 'resources/js/app.js',
             ]
         )
+
         @stack('styles')
         @livewireStyles
     </head>
