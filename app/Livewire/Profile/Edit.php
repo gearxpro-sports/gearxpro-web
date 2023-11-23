@@ -22,6 +22,7 @@ class Edit extends Component
             'reseller.email' => 'required|email|unique:users,email,'.$this->reseller->id,
             'billing_address.company' => 'required',
             'reseller.phone' => 'required',
+            'reseller.tax' => 'required',
             // Billing
             'billing_address.address_1' => 'required',
             'billing_address.city' => 'required',
@@ -67,12 +68,14 @@ class Edit extends Component
 
     public function save()
     {
+        // dd($this->validate());
         $this->validate();
         $this->reseller->update([
             'firstname' => $this->reseller->firstname,
             'lastname' => $this->reseller->lastname,
             'email' => $this->reseller->email,
             'phone' => $this->reseller->phone,
+            'tax' => $this->reseller->tax,
         ]);
 
         $this->billing_address->update([

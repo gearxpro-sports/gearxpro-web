@@ -53,8 +53,10 @@
                     <td>{{ $reseller->email }}</td>
                     <td>{{ $reseller->created_at->format('d/m/Y') }}</td>
                     <td>
-                        <img class="inline-block w-5 mr-2 rounded-sm" src="https://flagcdn.com/w320/{{ strtolower($reseller->country->iso2_code) }}.png" alt="{{ $reseller->country->name }}">
-                        {{ $reseller->country->name ?? '-' }}
+                        <div>
+                            <img class="inline-block w-5 mr-2 rounded-sm" src="https://flagcdn.com/w320/{{ strtolower($reseller->country->iso2_code) }}.png" alt="{{ $reseller->country->name }}">
+                            {{ $reseller->country->name ?? '-' }}
+                        </div>
                     </td>
                     <td>{{ optional($reseller->last_login)->format('d/m/Y H:i:s') ?? '-' }}</td>
                     <td class="text-right">

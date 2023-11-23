@@ -61,6 +61,7 @@
                                         <a href="{{ route('resellers.show', ['reseller' => $order->reseller->id]) }}"
                                            target="_blank">
                                             <span class="text-color-6c757d underline">
+                                                <img class="inline-block w-5 mr-2 rounded-sm" src="https://flagcdn.com/w320/{{ strtolower($order->reseller->country->iso2_code) }}.png" alt="{{ $order->reseller->country->name }}">
                                                 {{ $order->reseller->fullname}}
                                             </span>
                                             @if($order->reseller->trashed())

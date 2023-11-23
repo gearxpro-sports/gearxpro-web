@@ -5,30 +5,11 @@
             <x-icons name="chevron-left-xl" />
         </a>
 
-        <div class="flex xl:flex-col col-span-12 xl:col-span-7 xl:h-[1104px] overflow-auto scrollBar xl:gap-4 pb-4">
-            @if ($selectedLength == 1)
-                {{-- Corto --}}
-                <img src="{{ Vite::asset('resources/images/SOXPro-1.png')}}" alt="">
-                <img src="{{ Vite::asset('resources/images/SOXPro-2.png')}}" alt="">
-                <img src="{{ Vite::asset('resources/images/SOXPro-3.png')}}" alt="">
-            @else
-                <img src="{{ Vite::asset('resources/images/SOXPro-1-long.png')}}" alt="">
-                <img src="{{ Vite::asset('resources/images/SOXPro-2-long.png')}}" alt="">
-            @endif
+        <div dir="ltr" class="flex xl:flex-col col-span-12 xl:col-span-7 xl:h-[1104px] overflow-auto scrollBar xl:gap-4 pb-4 snap-mandatory snap-x xl:snap-y relative">
+            @foreach ($selectedLength == 1 ? $images['short'] : $images['long'] as $key =>  $image )
+                <img class="snap-center scroll-ms-6 shrink-0" src="{{ $image }}" alt="">
+            @endforeach
         </div>
-
-        {{-- CAROUSEL MOBILE --}}
-{{--        <div class="xl:!hidden col-span-12 owl-carousel product_images">--}}
-{{--            @if ($selectedLength == 1)--}}
-{{--            --}}{{-- Corto --}}
-{{--                <img src="{{ Vite::asset('resources/images/SOXPro-1.png')}}" alt="">--}}
-{{--                <img src="{{ Vite::asset('resources/images/SOXPro-2.png')}}" alt="">--}}
-{{--                <img src="{{ Vite::asset('resources/images/SOXPro-3.png')}}" alt="">--}}
-{{--            @else--}}
-{{--                <img src="{{ Vite::asset('resources/images/SOXPro-1-long.png')}}" alt="">--}}
-{{--                <img src="{{ Vite::asset('resources/images/SOXPro-2-long.png')}}" alt="">--}}
-{{--            @endif--}}
-{{--        </div>--}}
 
         {{-- options --}}
         <div class="col-span-12 px-4 xl:col-span-5 xl:col-start-8 xl:py-10">
@@ -39,7 +20,7 @@
                 <p class="text-base xl:text-[21px] font-medium leading-[38px] text-color-18181a">@money($product->price)</p>
             </div>
 
-            <div class="w-full max-w-md mt-6 xl:mt-10 space-y-10">
+            <div class="w-full xl:max-w-md mt-6 xl:mt-10 space-y-10">
                 @if($allLengths)
                     <div wire:key="lengths" class="space-y-5">
                         <p class="text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.height_leg')}}</p>
@@ -341,45 +322,5 @@
                 most_purchased_carousel.trigger('prev.owl.carousel', [2000]);
             })
         });
-    </script>
-
-    <script>
-        var images = @json($images);
-        var image_carousel;
-
-        $(document).ready(function(){
-            // $.each(images, function(length) {
-            //     $.each(images.short, function(index, img) {
-            //         $('<img>').attr('src', img ).appendTo(".product_images");
-            //     });
-            // });
-
-            image_carousel = new $(".product_images").owlCarousel({
-                items: 1,
-                margin: 0,
-                loop: true,
-                autoWidth: false,
-                autoplay: false,
-                autoplayHoverPause: false,
-                infinite: false,
-            });
-        });
-
-        // document.addEventListener("DOMContentLoaded", () => {
-        //     Livewire.hook('morph.updated', ({el, component}) => {
-
-        //         $(document).ready(function () {
-        //             image_carousel = new $(".product_images").owlCarousel({
-        //                 items: 1,
-        //                 margin: 0,
-        //                 loop: true,
-        //                 autoWidth: false,
-        //                 autoplay: false,
-        //                 autoplayHoverPause: false,
-        //                 infinite: false,
-        //             });
-        //         });
-        //     });
-        // });
     </script>
 @endpush

@@ -25,6 +25,7 @@ return [
             'general_data' => 'Dati generali',
             'billing_data' => 'Dati di Fatturazione',
             'shipping_data' => 'Dati di Spedizione',
+            'tax' => 'Tassazione',
             'payment' => 'Pagamento',
         ],
         'firstname' => [
@@ -69,7 +70,8 @@ return [
         ],
         'payment_method' => [
             'label' => 'Metodo di Pagamento',
-        ]
+        ],
+        'tax' => 'IVA %'
     ],
     'show' => [
         'titles' => [
