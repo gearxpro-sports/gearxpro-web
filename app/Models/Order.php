@@ -69,4 +69,14 @@ class Order extends Model
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function getProducts() {
+        $products = [];
+
+        foreach ($this->items as $item) {
+            $products[] = Product::find($item->product_id);
+        }
+
+        return $this->items;
+    }
 }

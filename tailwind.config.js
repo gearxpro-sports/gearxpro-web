@@ -116,13 +116,18 @@ export default {
                 texture: "url('/resources/images/texture.svg')",
                 jumbotron: "url('/resources/images/product.svg')",
 
-                // Chi Siamo
+                // Azienda
                 about_us_1: "url('/resources/images/about_us/who_we_are/we_are_1.jpg')",
                 about_us_2: "url('/resources/images/about_us/who_we_are/we_are_2.jpg')",
                 about_us_3: "url('/resources/images/about_us/who_we_are/we_are_3.jpg')",
                 about_us_4: "url('/resources/images/about_us/who_we_are/we_are_4.jpg')",
                 about_us_5: "url('/resources/images/about_us/who_we_are/we_are_5.jpg')",
                 about_us_6: "url('/resources/images/about_us/who_we_are/we_are_6.jpg')",
+                about_us_1_mb: "url('/resources/images/about_us/who_we_are/aziendamobile.png')",
+                about_us_2_mb: "url('/resources/images/about_us/who_we_are/aziendamobile2.jpg')",
+                about_us_3_mb: "url('/resources/images/about_us/who_we_are/aziendamobile3.jpg')",
+                about_us_4_mb: "url('/resources/images/about_us/who_we_are/aziendamobile4.jpg')",
+                //time year
                 about_us_2018: "url('/resources/images/about_us/who_we_are/we_are_2018.png')",
                 about_us_2019: "url('/resources/images/about_us/who_we_are/we_are_2019.png')",
                 about_us_2020: "url('/resources/images/about_us/who_we_are/we_are_2020.png')",
@@ -135,11 +140,20 @@ export default {
                 about_us_12: "url('/resources/images/about_us/values/value_3.jpg')",
                 about_us_13: "url('/resources/images/about_us/values/value_4.jpg')",
                 about_us_14: "url('/resources/images/about_us/values/value_5.jpg')",
+                about_us_10_mb: "url('/resources/images/about_us/values/valori1.jpg')",
+                about_us_11_mb: "url('/resources/images/about_us/values/valori2.jpg')",
+                about_us_12_mb: "url('/resources/images/about_us/values/valori3.jpg')",
+                about_us_13_mb: "url('/resources/images/about_us/values/valori4.jpg')",
+                about_us_14_mb: "url('/resources/images/about_us/values/valori5.jpg')",
                 // Sviluppo
                 about_us_dev_1: "url('/resources/images/about_us/development/dev_1.jpg')",
                 about_us_dev_2: "url('/resources/images/about_us/development/dev_2.jpg')",
                 about_us_dev_3: "url('/resources/images/about_us/development/dev_3.jpg')",
                 about_us_dev_4: "url('/resources/images/about_us/development/dev_4.jpg')",
+                about_us_dev_1_mb: "url('/resources/images/about_us/development/sviluppo1.jpg')",
+                about_us_dev_2_mb: "url('/resources/images/about_us/development/sviluppo2.jpg')",
+                about_us_dev_3_mb: "url('/resources/images/about_us/development/sviluppo3.jpg')",
+                about_us_dev_4_mb: "url('/resources/images/about_us/development/sviluppo4.jpg')",
             }
         },
     },

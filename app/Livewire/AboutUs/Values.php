@@ -13,7 +13,7 @@ class Values extends Component
     public function mount() {
         $this->slides = [
             [
-                'image' => 'bg-about_us_11',
+                'image' => 'bg-about_us_11_mb xl:bg-about_us_11',
                 'title' => 'uni que ness',
                 'text' => 'We value our diverse workforce.
                 Convinced that uniqueness is a strength,
@@ -23,7 +23,7 @@ class Values extends Component
                 boldness and creativity.'
             ],
             [
-                'image' => 'bg-about_us_12',
+                'image' => 'bg-about_us_12_mb xl:bg-about_us_12',
                 'title' => 'int egr ity',
                 'text' => 'We operate in an honestly and transparently
                 by providing our customers with clear
@@ -31,7 +31,7 @@ class Values extends Component
                 products and manufacturing activities.'
             ],
             [
-                'image' => 'bg-about_us_13',
+                'image' => 'bg-about_us_13_mb xl:bg-about_us_13',
                 'title' => 'envi ron ment',
                 'text' => 'We are staunch allies of environment a sustainability,
                 in line with the goals the 2030 Agenda promoted
@@ -41,7 +41,7 @@ class Values extends Component
                 and respect for the environment.'
             ],
             [
-                'image' => 'bg-about_us_14',
+                'image' => 'bg-about_us_14_mb xl:bg-about_us_14',
                 'title' => 're spe ct',
                 'text' => 'We approach the market with
                 absolute loyalty, taking into
