@@ -40,13 +40,13 @@ class Product extends Model
 
     public function getWholesalePriceAttribute()
     {
-        $country_code = auth()->user() ? auth()->user()->country_code : session('country_code');
+        $country_code = auth()->check() ? auth()->user()->country_code : session('country_code');
         return $this->countries()->where('iso2_code', $country_code)->first()->prices->wholesale_price;
     }
 
     public function getPriceAttribute()
     {
-        $country_code = auth()->user() ? auth()->user()->country_code : session('country_code');
+        $country_code = auth()->check() ? auth()->user()->country_code : session('country_code');
         return $this->countries()->where('iso2_code', $country_code)->first()->prices->price;
     }
 

@@ -56,7 +56,6 @@ class Show extends Component
 
     public function mount()
     {
-        ray()->clearAll();
         $this->product->load('variants');
         //        $this->selectedVariant = $this->product->variants->firstWhere('position', 1);
         //        $this->selectedLength = $this->selectedVariant->length->id;
@@ -73,42 +72,42 @@ class Show extends Component
             return $t->unique('id');
         });
 
-        $this->allLengths = $this->terms[1]->sortBy('position')->keyBy('id')->map(function ($l) {
-            return [
-                'id' => $l->id,
-                'value' => $l->value,
-                'color' => $l->color,
-            ];
-        });
-        $this->allColors = $this->terms[2]->sortBy('position')->keyBy('id')->map(function ($c) {
-            return [
-                'id' => $c->id,
-                'value' => $c->value,
-                'color' => $c->color,
-            ];
-        });
-        $this->allSizes = $this->terms[3]->sortBy('position')->keyBy('id')->map(function ($s) {
-            return [
-                'id' => $s->id,
-                'value' => $s->value,
-                'color' => $s->color,
-            ];
-        });
+        if(isset($this->terms[1])) {
+            $this->allLengths = $this->terms[1]->sortBy('position')->keyBy('id')->map(function ($l) {
+                return [
+                    'id' => $l->id,
+                    'value' => $l->value,
+                    'color' => $l->color,
+                ];
+            });
+        }
+        if(isset($this->terms[2])) {
+            $this->allColors = $this->terms[2]->sortBy('position')->keyBy('id')->map(function ($c) {
+                return [
+                    'id' => $c->id,
+                    'value' => $c->value,
+                    'color' => $c->color,
+                ];
+            });
+        }
+        if(isset($this->terms[3])) {
+            $this->allSizes = $this->terms[3]->sortBy('position')->keyBy('id')->map(function ($s) {
+                return [
+                    'id' => $s->id,
+                    'value' => $s->value,
+                    'color' => $s->color,
+                ];
+            });
+        }
 
-        $this->lengths = $this->allLengths->toArray();
-        $this->colors = $this->allColors->toArray();
-        $this->sizes = $this->allSizes->toArray();
-        $this->images = [
-            "long" => [
-                Vite::asset('resources/images/SOXPro-1-long.png'),
-                Vite::asset('resources/images/SOXPro-2-long.png')
-            ],
-            "short" => [
-                Vite::asset('resources/images/SOXPro-1.png'),
-                Vite::asset('resources/images/SOXPro-2.png'),
-                Vite::asset('resources/images/SOXPro-3.png'),
-            ],
-        ];
+        $this->lengths = count($this->allLengths) ? $this->allLengths->toArray() : [];
+        $this->colors = count($this->allColors) ? $this->allColors->toArray() : [];
+        $this->sizes = count($this->allSizes) ? $this->allSizes->toArray() : [];
+
+        $this->getProductVariantImages();
+    }
+    protected function getProductVariantImages() {
+        $this->images[$this->product->id] = $this->product->variants->firstWhere('position', 1)->getMedia('products');
     }
 
     protected function filterVariantsByTerm($type, $id)
@@ -146,23 +145,33 @@ class Show extends Component
         }
 
         $this->variants = $variants->get();
+        $this->images = [];
+        foreach ($this->variants as $variant) {
+            foreach ($variant->getMedia('products') as $media) {
+                if(!array_key_exists($variant->product->id, $this->images)) {
+                    $this->images[$variant->product->id] = $variant->getMedia('products');
+                }
+            }
+        }
         if ($this->variants->count() === 1) {
             $this->selectedVariant = $this->variants->first();
-            $this->selectedLength = $this->selectedVariant->length->id;
-            $this->selectedColor = $this->selectedVariant->color->id;
-            $this->selectedSize = $this->selectedVariant->size->id;
+            $this->selectedLength = $this->selectedVariant->length?->id;
+            $this->selectedColor = $this->selectedVariant->color?->id;
+            $this->selectedSize = $this->selectedVariant->size?->id;
         }
     }
 
     protected function processTerms($terms, $id)
     {
-        return $terms[$id]->sortBy('position')->keyBy('id')->map(function ($term) {
-            return [
-                'id' => $term->id,
-                'value' => $term->value,
-                'color' => $term->color,
-            ];
-        })->toArray();
+        if(isset($terms[$id])) {
+            return $terms[$id]->sortBy('position')->keyBy('id')->map(function ($term) {
+                return [
+                    'id' => $term->id,
+                    'value' => $term->value,
+                    'color' => $term->color,
+                ];
+            })->toArray();
+        }
     }
 
     public function setLength($id)
@@ -191,6 +200,8 @@ class Show extends Component
         $this->filterVariantsByTerm('size', $this->selectedSize);
 
         $this->recalculateTerms();
+
+        $this->getProductVariantImages();
 
         $this->dispatch('reset-selection');
     }

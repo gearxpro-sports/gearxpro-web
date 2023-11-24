@@ -31,6 +31,18 @@ class Country
             return redirect()->route('splash');
         }
 
+        if(auth()->check() && auth()->user()->hasRole(User::RESELLER) && $request->country_code !== auth()->user()->country_code) {
+            return redirect()->back();
+        }
+
+        if(auth()->check() && auth()->user()->hasRole(User::SUPERADMIN) && $request->country_code !== session('country_code')) {
+            session()->put('country_code', $request->country_code);
+        }
+
+        if(!auth()->check() && $request->country_code !== session('country_code')) {
+            session()->put('country_code', $request->country_code);
+        }
+
         if($available_countries) {
             URL::defaults(['country_code' => session('country_code', $available_countries[0])]);
         }
