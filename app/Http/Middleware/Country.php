@@ -24,6 +24,7 @@ class Country
         if(!in_array($request->country_code, $available_countries)) {
             if(auth()->check() && auth()->user()->hasRole(User::SUPERADMIN)) {
                 session()->remove('country_code');
+                session()->remove('reseller_id');
             }
         }
 
@@ -37,10 +38,14 @@ class Country
 
         if(auth()->check() && auth()->user()->hasRole(User::SUPERADMIN) && $request->country_code !== session('country_code')) {
             session()->put('country_code', $request->country_code);
+            $reseller = \App\Models\Country::where('iso2_code', $request->country_code)->first()->reseller;
+            session()->put('reseller_id', $reseller->id);
         }
 
         if(!auth()->check() && $request->country_code !== session('country_code')) {
             session()->put('country_code', $request->country_code);
+            $reseller = \App\Models\Country::where('iso2_code', $request->country_code)->first()->reseller;
+            session()->put('reseller_id', $reseller->id);
         }
 
         if($available_countries) {

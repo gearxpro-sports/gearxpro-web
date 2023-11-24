@@ -5,6 +5,7 @@ namespace App\Livewire\Shop\Products;
 use App\Livewire\Modals\ProductAddedToCart;
 use App\Livewire\Shop\Navigation as ShopNavigation;
 use App\Models\Cart;
+use App\Models\Country;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\Stock;
@@ -28,6 +29,7 @@ class Show extends Component
     public $selectedColor = null;
     public $selectedSize = null;
 
+    public $selectedVariantQuantity;
     public $quantity = 1;
     //    public $selectedMoney = 0;
 
@@ -62,10 +64,13 @@ class Show extends Component
         //        $this->selectedColor = $this->selectedVariant->color->id;
         //        $this->selectedSize = $this->selectedVariant->size->id;
 
+        $this->variants = Country::where('iso2_code', session('country_code'))->first()->reseller->stocks()->with('productVariant')->where('product_id', $this->product->id)->get();
+
         $this->terms = collect();
-        foreach ($this->product->variants as $variant) {
-            $this->terms = $this->terms->merge($variant->terms);
+        foreach ($this->variants as $stock) {
+            $this->terms = $this->terms->merge($stock->productVariant->terms);
         }
+
 
         $this->terms = $this->terms->groupBy('attribute_id');
         $this->terms = $this->terms->map(function ($t) {
@@ -100,11 +105,11 @@ class Show extends Component
             });
         }
 
-        foreach ($this->product->variants as $variant) {
-            foreach ($variant->getMedia('products') as $media) {
-                $this->images[$this->product->id] = $variant->getMedia('products');
-                $this->allColors->put($variant->color->id, [
-                    ...$this->allColors[$variant->color->id], 'image' => $variant->getFirstMediaUrl('products')
+        foreach ($this->variants as $stock) {
+            foreach ($stock->productVariant->getMedia('products') as $media) {
+                $this->images[$stock->product->id] = $stock->productVariant->getMedia('products');
+                $this->allColors->put($stock->productVariant->color->id, [
+                    ...$this->allColors[$stock->productVariant->color->id], 'image' => $stock->productVariant->getFirstMediaUrl('products')
                 ]);
             }
         }
@@ -118,7 +123,7 @@ class Show extends Component
 
     protected function getProductVariantImages()
     {
-        $this->images[$this->product->id] = $this->product->variants->firstWhere('position', 1)->getMedia('products');
+        $this->images[$this->product->id] = $this->variants->where('productVariant.position', 1)->first()->productVariant->getMedia('products');
     }
 
     protected function filterVariantsByTerm($type, $id)
@@ -137,38 +142,39 @@ class Show extends Component
             $this->selectedSize = $id;
         }
 
-        $variants = $this->product->variants();
+        $variants = Country::where('iso2_code', session('country_code'))->first()->reseller->stocks()->with('productVariant')->where('product_id', $this->product->id);
 
         if ($this->selectedColor) {
-            $variants->whereHas('terms', function (Builder $query) {
+            $variants->whereHas('productVariant.terms', function (Builder $query) {
                 $query->where('terms.id', $this->selectedColor);
             });
         }
         if ($this->selectedSize) {
-            $variants->whereHas('terms', function (Builder $query) {
+            $variants->whereHas('productVariant.terms', function (Builder $query) {
                 $query->where('terms.id', $this->selectedSize);
             });
         }
         if ($this->selectedLength) {
-            $variants->whereHas('terms', function (Builder $query) {
+            $variants->whereHas('productVariant.terms', function (Builder $query) {
                 $query->where('terms.id', $this->selectedLength);
             });
         }
 
         $this->variants = $variants->get();
         $this->images = [];
-        foreach ($this->variants as $variant) {
-            foreach ($variant->getMedia('products') as $media) {
-                if (!array_key_exists($variant->product->id, $this->images)) {
-                    $this->images[$variant->product->id] = $variant->getMedia('products');
-                    $this->allColors->put($variant->color->id, [
-                        ...$this->allColors[$variant->color->id], 'image' => $variant->getFirstMediaUrl('products')
+        foreach ($this->variants as $stock) {
+            foreach ($stock->productVariant->getMedia('products') as $media) {
+                if (!array_key_exists($stock->productVariant->product->id, $this->images)) {
+                    $this->images[$stock->productVariant->product->id] = $stock->productVariant->getMedia('products');
+                    $this->allColors->put($stock->productVariant->color->id, [
+                        ...$this->allColors[$stock->productVariant->color->id], 'image' => $stock->productVariant->getFirstMediaUrl('products')
                     ]);
                 }
             }
         }
         if ($this->variants->count() === 1) {
-            $this->selectedVariant = $this->variants->first();
+            $this->selectedVariant = $this->variants->first()->productVariant;
+            $this->selectedVariantQuantity = $this->selectedVariant->stocks()->where('user_id', session('reseller_id'))->first()->quantity;
             $this->selectedLength = $this->selectedVariant->length?->id;
             $this->selectedColor = $this->selectedVariant->color?->id;
             $this->selectedSize = $this->selectedVariant->size?->id;
@@ -208,7 +214,7 @@ class Show extends Component
 
     public function resetAll()
     {
-        $this->reset(['selectedColor', 'selectedSize', 'selectedLength', 'selectedVariant', 'quantity']);
+        $this->reset(['selectedColor', 'selectedSize', 'selectedLength', 'selectedVariant', 'quantity', 'selectedVariantQuantity']);
         $this->filterVariantsByTerm('length', $this->selectedLength);
         $this->filterVariantsByTerm('color', $this->selectedColor);
         $this->filterVariantsByTerm('size', $this->selectedSize);
@@ -224,8 +230,8 @@ class Show extends Component
     {
         $terms = collect();
 
-        foreach ($this->variants as $variant) {
-            $terms = $terms->merge($variant->terms);
+        foreach ($this->variants as $stock) {
+            $terms = $terms->merge($stock->productVariant->terms);
         }
 
         $terms = $terms->groupBy('attribute_id');
@@ -241,18 +247,9 @@ class Show extends Component
     //        $this->selectedMoney = $money;
     //    }
 
-    /* TODO: La quantità viene presa dal magazzino SUPERADMIN, non dallo Stock del RESELLER
-     * di conseguenza l'utente può incrementare il contatore fino alla quantità che il SUPERADMIN
-     * ha in magazzino, non fino a quella presente nello Stock RESELLER.
-     *
-     * Altro problema è che nel FE (pagina dettaglio prodotto) si visualizzano termini che non sono
-     * presenti nello Stock RESELLER (ad esempio una taglia che il RESELLER non ha in stock, si
-     * vede lo stesso).
-    */
-
     public function increment()
     {
-        if (isset($this->selectedVariant) && $this->quantity < $this->selectedVariant->quantity) {
+        if (isset($this->selectedVariant) && $this->quantity < $this->selectedVariantQuantity) {
             $this->quantity++;
         }
     }

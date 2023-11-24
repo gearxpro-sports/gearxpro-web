@@ -31,15 +31,15 @@
                         <p class="text-sm font-medium leading-[19px] text-color-18181a uppercase">{{__('shop.products.height_leg')}}</p>
                         <div>
                             <div
-                                class="grid grid-cols-2 gap-x-1 rounded-md p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200 bg-color-edebe5">
+                                class="grid grid-cols-2 gap-x-1 rounded-md p-1 text-center text-xs font-semibold leading-5">
                                 @foreach($allLengths as $id => $length)
                                     @if(in_array($id, array_keys($lengths)))
                                         <div
                                             wire:key="length-{{$id}}"
                                             wire:click="setLength({{ $id }})"
                                             @class([
-                                            'cursor-pointer h-14 text-sm flex items-center justify-center rounded-md px-2.5 py-1',
-                                            $selectedLength == $length['id'] ? 'bg-color-18181a text-white' : 'text-color-6c757d'])
+                                            'ring-1 ring-inset ring-gray-200 cursor-pointer h-14 text-sm flex items-center justify-center rounded-md px-2.5 py-1',
+                                            $selectedLength == $length['id'] ? 'bg-color-18181a text-white' : 'bg-color-edebe5 text-color-6c757d'])
                                         >
                                             <span>{{ $length['value'] }}</span>
                                         </div>
@@ -48,7 +48,7 @@
                                             wire:key="length-{{$id}}"
                                             @class([
                                             'opacity-10 pointer-events-none h-14 text-sm flex items-center justify-center rounded-md px-2.5 py-1',
-                                            $selectedLength == $length['id'] ? 'bg-color-18181a text-white' : 'text-color-6c757d'])
+                                            $selectedLength == $length['id'] ? 'bg-color-18181a text-white' : 'border border-black/50 text-color-6c757d'])
                                         >
                                             <span>{{ $length['value'] }}</span>
                                         </div>
@@ -144,13 +144,13 @@
                     <div
                         class="w-full xl:w-[185px] h-[48px] rounded-md flex items-center border border-color-b6b9bb">
                         <div wire:click="decrement"
-                             class="{{ $quantity === 1 ? 'cursor-not-allowed text-gray-300' : 'cursor-pointer' }} w-[60px] h-full flex items-center justify-center bg-transparent border-r border-color-b6b9bb">
+                             class="{{ $quantity === 1 ? 'pointer-events-none text-gray-300' : 'pointer-events-auto cursor-pointer' }} w-[60px] h-full flex items-center justify-center bg-transparent border-r border-color-b6b9bb">
                             <x-icons name="minus" class="h-3 w-3"></x-icons>
                         </div>
                         <div
                             class="grow xl:w-[65px] h-full flex items-center justify-center text-sm font-medium leading-[16px] text-color-18181a font-mono select-none">{{ $quantity }}</div>
                         <div wire:click="increment"
-                             class="{{ $quantity >= $selectedVariant?->quantity ? 'cursor-not-allowed text-gray-300' : 'cursor-pointer' }} w-[60px] h-full flex items-center justify-center bg-transparent border-l border-color-b6b9bb">
+                             class="{{ $quantity >= $this->selectedVariantQuantity ? 'pointer-events-none text-gray-300' : 'pointer-events-auto cursor-pointer' }} w-[60px] h-full flex items-center justify-center bg-transparent border-l border-color-b6b9bb">
                             <x-icons name="plus" class="h-3 w-3"></x-icons>
                         </div>
                     </div>
