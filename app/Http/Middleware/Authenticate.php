@@ -14,8 +14,8 @@ class Authenticate extends Middleware
         if(auth()->check()) {
             $country_code = auth()->user()->country_code;
             session()->put('country_code', $country_code);
-            $reseller = \App\Models\Country::where('iso2_code', $country_code)->first()->reseller;
-            session()->put('reseller_id', $reseller->id);
+//            $reseller = \App\Models\Country::where('iso2_code', $country_code)->first()->reseller;
+//            session()->put('reseller_id', $reseller->id);
         }
 
         return parent::handle($request, $next, $guards);
