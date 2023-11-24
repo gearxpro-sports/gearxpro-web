@@ -54,7 +54,7 @@ class Checkout extends Component
     public function mount() {
         $cart = Cart::where('user_id', auth()->user()?->id)->orWhere('user_id', session('cart_user_token'))->first();
         if(!$cart) {
-            return redirect()->route('shop.index');
+            return redirect()->route('shop.register');
         }
     }
 
