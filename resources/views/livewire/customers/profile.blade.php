@@ -40,7 +40,7 @@
                                 <x-box-data label="{{__('customers.edit.phone.label')}}" content="{{$customerPhone ?? '---'}}" width="w-full"/>
                             </div>
 
-                            <button wire:click="selectEditData('{{ __('customers.tabs.personal_data.user') }}')" type="button" class="w-full xl:w-36 px-3 text-xs font-semibold xl:font-medium text-color-6c757d flex items-center justify-end gap-1 hover:underline">
+                            <button wire:click="selectEditData('{{ __('customers.tabs.personal_data.user') }}', null)" type="button" class="w-full xl:w-36 px-3 text-xs font-semibold xl:font-medium text-color-6c757d flex items-center justify-end gap-1 hover:underline">
                                 {{__('customers.edit_data')}}
                                 <x-icons name="edit_data" />
                             </button>
@@ -51,7 +51,7 @@
                         <div class="flex flex-col-reverse xl:flex-row items-center justify-between py-5 relative">
                             <x-box-data label="{{__('customers.edit.email.label')}}" content="{{$customer->email ?? '---'}}" width="w-full"/>
 
-                            <button wire:click="selectEditData('{{ __('customers.tabs.personal_data.email') }}')" type="button" class="w-full xl:w-36 px-3 text-xs font-semibold xl:font-medium text-color-6c757d flex items-center justify-end gap-1 hover:underline">
+                            <button wire:click="selectEditData('{{ __('customers.tabs.personal_data.email') }}', null)" type="button" class="w-full xl:w-36 px-3 text-xs font-semibold xl:font-medium text-color-6c757d flex items-center justify-end gap-1 hover:underline">
                                 {{__('customers.edit_data')}}
                                 <x-icons name="edit_data" />
                             </button>
@@ -62,7 +62,7 @@
                         <div class="flex flex-col-reverse xl:flex-row items-center justify-between py-5 relative">
                             <x-box-data label="{{__('customers.password')}}" content="••••••••••••••••" width="w-full"/>
 
-                            <button wire:click="selectEditData('{{ __('customers.tabs.personal_data.password') }}')" type="button" class="w-full xl:w-36 px-3 text-xs font-semibold xl:font-medium text-color-6c757d flex items-center justify-end gap-1 hover:underline">
+                            <button wire:click="selectEditData('{{ __('customers.tabs.personal_data.password') }}', null)" type="button" class="w-full xl:w-36 px-3 text-xs font-semibold xl:font-medium text-color-6c757d flex items-center justify-end gap-1 hover:underline">
                                 {{__('customers.edit_data')}}
                                 <x-icons name="edit_data" />
                             </button>
@@ -76,13 +76,13 @@
                     <div class="flex flex-col-reverse xl:flex-row items-center justify-between py-5 relative">
                         <div class="w-full xl:grow flex flex-col gap-5">
                             <div class="w-full flex flex-col xl:flex-row items-start gap-5">
-                                <x-box-data label="{{__('customers.edit.addresses.shipping')}}" content="{{str_replace('\'', ' ',$full_shipping_address) ?? '---'}}" width="w-1/2"/>
+                                <x-box-data label="{{__('customers.edit.addresses.shipping')}}" content="{{str_replace('\'', ' ',$full_shipping_address) ?? '---'}}" width="w-full xl:w-1/2"/>
                                 <x-box-data label="{{__('customers.edit.phone.label')}}" content="{{$customer_shipping_address->phone ?? '---'}}" width="w-1/2"/>
                             </div>
                             <x-box-data label="{{__('customers.edit.addresses.billing')}}" content="{{str_replace('\'', ' ',$full_billing_address) ?? '---'}}" width="w-full"/>
                         </div>
 
-                        <button wire:click="selectEditData('{{ __('customers.tabs.addresses.address') }}')" type="button" class="w-full xl:w-36 px-3 text-xs font-semibold xl:font-medium text-color-6c757d flex items-center justify-end gap-1 hover:underline">
+                        <button wire:click="selectEditData('{{ __('customers.tabs.addresses.address') }}', null)" type="button" class="w-full xl:w-36 px-3 text-xs font-semibold xl:font-medium text-color-6c757d flex items-center justify-end gap-1 hover:underline">
                             {{__('customers.edit_data')}}
                             <x-icons name="edit_data" />
                         </button>
@@ -95,20 +95,24 @@
                 <template x-if="currentTab == '{{__('customers.tabs.orders.title')}}'">
                     <div>
                         @foreach($orders as $order)
-                            <div wire: click="selectEditData('orders')" class="h-36 w-full px-6 py-4 border bg-color-edebe5 mb-7 xl:mb-0 xl:mt-7 flex gap-5 cursor-pointer">
-                                <div class="h-full flex flex-col justify-between">
+                            <div wire:click="selectEditData('orders', {{$order->id}})" class="h-36 w-full px-6 py-4 border bg-color-edebe5 mb-7 xl:mb-0 xl:mt-7 flex gap-5 cursor-pointer">
+                                <div class="h-full w-fit flex flex-col justify-between">
                                     <div class="flex flex-col items-start justify-start">
                                         <span class="text-base font-semibold text-color-18181a">{{date_format($order->created_at,"d/m/Y ")}}</span>
                                         <span class="text-sm font-medium text-color-18181a">@money(($order->total + $order->shipping_cost))</span>
                                     </div>
                                     <div class="flex flex-col items-start justify-start">
-                                        <span class="text-sm font-semibold text-color-18181a">{{__('customers.tabs.orders.status.'. $order->status)}}</span>
+                                        <span class="text-sm font-semibold text-color-18181a whitespace-nowrap">{{__('customers.tabs.orders.status.'. $order->status)}}</span>
                                         <span class="text-xs font-medium text-color-6c757d ">{{$order->reference}}</span>
                                     </div>
                                 </div>
 
-                                <div class="grow overflow-x-hidden scrollBar flex gap-5">
-                                    {{-- @dump($order->getProducts) --}}
+                                <div class="overflow-auto scrollBar flex gap-5">
+                                    @foreach ($order->items as $item)
+                                        @php($variant = \App\Models\ProductVariant::find($item->variant_id))
+                                        <img class="w-fit" src="{{ $variant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $variant->product->name }}">
+                                        <img class="w-fit" src="{{ $variant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $variant->product->name }}">
+                                    @endforeach
                                 </div>
                             </div>
                         @endforeach
@@ -280,37 +284,45 @@
             </div>
 
             <div x-show="modify === 'orders'" class="relative">
-                <button wire:click="selectEditData(null)" class="xl:absolute top-5 right-0 ml-auto mb-5 flex items-center gap-2 group">
+                <button wire:click="selectEditData(null, null)" class="xl:absolute top-5 right-0 ml-auto mb-5 flex items-center gap-2 group">
                     <x-icons name="arrow-right-xl" class="rotate-180 group-hover:translate-x-[-8px] duration-300 transition-all"/>
                     <span class="capitalize font-medium group-hover:underline">{{__('customers.buttons.back')}}</span>
                 </button>
-                <h2 class="text-xl font-semibold text-color-18181a leading-9">{{__('customers.tabs.orders.order')}} 0807YF15D22020</h2>
-                <span class="text-base font-semibold text-color-18181a leading-5">30/08/2023</span>
 
-                <div class="mt-5">
-                    <div class="w-fit text-xs font-semibold text-white py-2 px-4 bg-color-15AF74 rounded-full">{{__('customers.tabs.orders.status.processing')}}</div>
-                    <p class="mt-6 text-sm text-color-18181a">{{__('shop.order.product_delivered')}}</p>
-                </div>
+                @if ($showOrder)
+                    <h2 class="text-xl font-semibold text-color-18181a leading-9">{{__('customers.tabs.orders.order')}} {{$showOrder->reference}}</h2>
+                    <span class="text-base font-semibold text-color-18181a leading-5">{{date_format($showOrder->created_at,"d/m/Y ")}}</span>
 
-                <div class="h-40 xl:h-52 w-full mt-7 border p-1 flex">
-                    <div class="h-full w-40 xl:w-48 bg-color-edebe5">
-                        {{-- img Product --}}
+                    <div class="mt-5">
+                        <div class="w-fit text-xs font-semibold text-white py-2 px-4 bg-color-15AF74 rounded-full">{{__('customers.tabs.orders.status.'. $showOrder->status)}}</div>
+                        @if ($showOrder->status == 'delivered')
+                            <p class="mt-6 text-sm text-color-18181a">{{__('shop.order.product_delivered')}}</p>
+                        @endif
                     </div>
-                    <div class="h-full grow px-3 xl:px-14 xl:py-16 flex flex-col items-start justify-center gap-2">
-                        <h3 class="text-base font-semibold text-color-18181a leading-5">SOXPro Sprint - White</h3>
-                        <div>
-                            <p class="text-xs font-medium text-color-6c757d leading-4">
-                                {{ __('shop.products.height_leg')}}: Lungo
-                            </p>
-                            <p class="text-xs font-medium text-color-6c757d leading-4">
-                                {{__('shop.products.color')}} White,
-                                {{__('shop.products.size')}} M,
-                                {{__('shop.products.amount')}} 2
-                            </p>
+
+                    @foreach ($showOrder->items as $item)
+                        @php($variant = \App\Models\ProductVariant::find($item->variant_id))
+                        <div class="h-40 xl:h-fit w-full mt-7 border p-1 flex items-center">
+                            <div class="h-full xl:w-48 bg-color-edebe5">
+                                <img class="h-full max-w-[135px] xl:max-w-none w-full" src="{{ $variant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $variant->product->name }}">
+                            </div>
+                            <div class="h-full grow px-3 xl:px-14 flex flex-col items-start justify-center gap-2">
+                                <h3 class="text-base font-semibold text-color-18181a leading-5">{{ $variant->product->name }}</h3>
+                                <div>
+                                    {{-- <p class="text-xs font-medium text-color-6c757d leading-4">
+                                        {{ __('shop.products.height_leg')}}: Lungo
+                                    </p> --}}
+                                    <p class="text-xs font-medium text-color-6c757d leading-4">
+                                        {{-- {{__('shop.products.color')}} {{$item->color}},
+                                        {{__('shop.products.size')}} {{$item->size}}, --}}
+                                        {{__('shop.products.amount')}} {{ $item->quantity }}
+                                    </p>
+                                </div>
+                                <span class="text-sm font-medium text-color-18181a">@money($item->quantity * $item->price)</span>
+                            </div>
                         </div>
-                        <span class="text-sm font-medium text-color-18181a">€ 58,00</span>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
             </div>
 
         </div>
