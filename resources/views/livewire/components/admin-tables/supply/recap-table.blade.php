@@ -30,10 +30,10 @@
                                         <div class="flex items-center space-x-2">
                                             <div class="w-10 h-10 bg-gray-100 flex-shrink-0"></div>
                                             <span
-                                                class="whitespace-nowrap">{{ $variant->product->name }} - {{ $variant->color->value }}</span>
+                                                class="whitespace-nowrap">{{ $variant->product->name }} - {{ $variant->color?->value }}</span>
                                         </div>
                                     </td>
-                                    <td>{{ $variant->size->value }} - {{ $variant->length->value }}</td>
+                                    <td>{{ $variant->size?->value }} - {{ $variant->length?->value }}</td>
                                     <td>@money($row->price)</td>
                                     <td>{{ $row->quantity }}</td>
                                     <td>@money($row->price * $row->quantity)</td>

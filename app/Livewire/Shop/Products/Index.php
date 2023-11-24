@@ -149,7 +149,7 @@ class Index extends Component
         foreach ($this->products as $product) {
             if ($product->variants->count() > 0) {
                 foreach ($product->variants as $variant) {
-                    $this->productColors[$product->id][] = $variant->color->color;
+                    $this->productColors[$product->id][] = $variant->color?->color;
                 }
                 $this->productColors[$product->id] = array_unique($this->productColors[$product->id]);
             }

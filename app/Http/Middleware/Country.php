@@ -35,6 +35,10 @@ class Country
             return redirect()->back();
         }
 
+        if(auth()->check() && auth()->user()->hasRole(User::SUPERADMIN) && $request->country_code !== session('country_code')) {
+            session()->put('country_code', $request->country_code);
+        }
+
         if(!auth()->check() && $request->country_code !== session('country_code')) {
             session()->put('country_code', $request->country_code);
         }

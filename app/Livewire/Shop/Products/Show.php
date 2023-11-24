@@ -72,31 +72,37 @@ class Show extends Component
             return $t->unique('id');
         });
 
-        $this->allLengths = $this->terms[1]->sortBy('position')->keyBy('id')->map(function ($l) {
-            return [
-                'id' => $l->id,
-                'value' => $l->value,
-                'color' => $l->color,
-            ];
-        });
-        $this->allColors = $this->terms[2]->sortBy('position')->keyBy('id')->map(function ($c) {
-            return [
-                'id' => $c->id,
-                'value' => $c->value,
-                'color' => $c->color,
-            ];
-        });
-        $this->allSizes = $this->terms[3]->sortBy('position')->keyBy('id')->map(function ($s) {
-            return [
-                'id' => $s->id,
-                'value' => $s->value,
-                'color' => $s->color,
-            ];
-        });
+        if(isset($this->terms[1])) {
+            $this->allLengths = $this->terms[1]->sortBy('position')->keyBy('id')->map(function ($l) {
+                return [
+                    'id' => $l->id,
+                    'value' => $l->value,
+                    'color' => $l->color,
+                ];
+            });
+        }
+        if(isset($this->terms[2])) {
+            $this->allColors = $this->terms[2]->sortBy('position')->keyBy('id')->map(function ($c) {
+                return [
+                    'id' => $c->id,
+                    'value' => $c->value,
+                    'color' => $c->color,
+                ];
+            });
+        }
+        if(isset($this->terms[3])) {
+            $this->allSizes = $this->terms[3]->sortBy('position')->keyBy('id')->map(function ($s) {
+                return [
+                    'id' => $s->id,
+                    'value' => $s->value,
+                    'color' => $s->color,
+                ];
+            });
+        }
 
-        $this->lengths = $this->allLengths->toArray();
-        $this->colors = $this->allColors->toArray();
-        $this->sizes = $this->allSizes->toArray();
+        $this->lengths = count($this->allLengths) ? $this->allLengths->toArray() : [];
+        $this->colors = count($this->allColors) ? $this->allColors->toArray() : [];
+        $this->sizes = count($this->allSizes) ? $this->allSizes->toArray() : [];
 
         $this->getProductVariantImages();
     }
@@ -149,21 +155,23 @@ class Show extends Component
         }
         if ($this->variants->count() === 1) {
             $this->selectedVariant = $this->variants->first();
-            $this->selectedLength = $this->selectedVariant->length->id;
-            $this->selectedColor = $this->selectedVariant->color->id;
-            $this->selectedSize = $this->selectedVariant->size->id;
+            $this->selectedLength = $this->selectedVariant->length?->id;
+            $this->selectedColor = $this->selectedVariant->color?->id;
+            $this->selectedSize = $this->selectedVariant->size?->id;
         }
     }
 
     protected function processTerms($terms, $id)
     {
-        return $terms[$id]->sortBy('position')->keyBy('id')->map(function ($term) {
-            return [
-                'id' => $term->id,
-                'value' => $term->value,
-                'color' => $term->color,
-            ];
-        })->toArray();
+        if(isset($terms[$id])) {
+            return $terms[$id]->sortBy('position')->keyBy('id')->map(function ($term) {
+                return [
+                    'id' => $term->id,
+                    'value' => $term->value,
+                    'color' => $term->color,
+                ];
+            })->toArray();
+        }
     }
 
     public function setLength($id)

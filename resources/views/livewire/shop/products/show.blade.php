@@ -1,11 +1,13 @@
 <div class="bg-color-f2f0eb">
     <div class="xl:p-[39px] grid grid-cols-12 xl:gap-[30px] relative">
         {{-- image --}}
-        <a href="{{route('shop.index', ['country_code' => session('country_code')])}}" class="xl:hidden z-10 absolute top-4 left-4">
-            <x-icons name="chevron-left-xl" />
+        <a href="{{route('shop.index', ['country_code' => session('country_code')])}}"
+           class="xl:hidden z-10 absolute top-4 left-4">
+            <x-icons name="chevron-left-xl"/>
         </a>
 
-        <div dir="ltr" class="flex xl:flex-col col-span-12 xl:col-span-7 xl:h-[1104px] overflow-auto scrollBar xl:gap-4 pb-4 snap-mandatory snap-x xl:snap-y relative">
+        <div dir="ltr"
+             class="flex xl:flex-col col-span-12 xl:col-span-7 xl:h-[1104px] overflow-auto scrollBar xl:gap-4 pb-4 snap-mandatory snap-x xl:snap-y relative">
             @foreach ($images as $k => $media_collection)
                 @foreach($media_collection as $image)
                     <img class="snap-center scroll-ms-6 shrink-0" src="{{ $image->getUrl() }}" alt="">
@@ -19,7 +21,8 @@
             <div>
                 <span class="text-sm xl:text-[17px] leading-[28px] text-color-6c757d">{{$product->name}}</span>
                 <h1 class="text-xl xl:text-3xl font-semibold leading-[40px] text-color-18181a">{{$product->name}}</h1>
-                <p class="text-base xl:text-[21px] font-medium leading-[38px] text-color-18181a">@money($product->price)</p>
+                <p class="text-base xl:text-[21px] font-medium leading-[38px] text-color-18181a">
+                    @money($product->price)</p>
             </div>
 
             <div class="w-full xl:max-w-md mt-6 xl:mt-10 space-y-10">
@@ -128,10 +131,12 @@
                                 @endforeach
                             </div>
                         </div>
-                        @if($selectedLength || $selectedColor || $selectedSize)
-                            <div wire:click="resetAll()" class="mt-10 text-color-6c757d text-xs cursor-pointer hover:underline">{{ __('shop.products.reset_selection') }}</div>
-                        @endif
                     </div>
+                @endif
+
+                @if($selectedLength || $selectedColor || $selectedSize)
+                    <div wire:click="resetAll()"
+                         class="!mt-5 text-color-6c757d text-xs cursor-pointer hover:underline">{{ __('shop.products.reset_selection') }}</div>
                 @endif
 
                 {{-- quantita --}}
