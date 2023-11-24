@@ -46,7 +46,6 @@
                                     @else
                                         <div
                                             wire:key="length-{{$id}}"
-                                            wire:click="resetAll('length', {{ $id }})"
                                             @class([
                                             'opacity-10 pointer-events-none h-14 text-sm flex items-center justify-center rounded-md px-2.5 py-1',
                                             $selectedLength == $length['id'] ? 'bg-color-18181a text-white' : 'text-color-6c757d'])
@@ -79,7 +78,6 @@
                                     @else
                                         <div
                                             wire:key="color-{{$id}}"
-                                            wire:click="resetAll('color', {{ $id }})"
                                             @class([
                                                 'flex-shrink-0 opacity-10 pointer-events-none h-12 w-12 relative flex items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent',
                                                 $selectedColor == $color['id'] ? 'ring ring-offset-2' : 'border border-gray-800'])
@@ -120,7 +118,6 @@
                                     @else
                                         <div
                                             wire:key="size-{{$id}}"
-                                            wire:click="resetAll('size', {{ $id }})"
                                             @class([
                                                 'opacity-10 pointer-events-none flex items-center justify-center rounded-md border border-black/50 py-3 px-3 text-sm font-medium uppercase sm:flex-1 focus:outline-none',
                                                 ])
