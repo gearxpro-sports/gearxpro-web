@@ -54,6 +54,9 @@ Route::domain(env('APP_URL'))->group(function () {
         return redirect()->route('splash');
     });
     Route::get('/welcome', Splash::class)->name('splash');
+    Route::get('/{page}', function() {
+        return redirect()->route('splash');
+    });
 });
 
 Route::middleware('country')->domain('{country_code}.'.env('APP_URL'))->group(function () {
