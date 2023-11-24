@@ -288,6 +288,10 @@ class Profile extends Component
 
     public function render()
     {
-        return view('livewire.customers.profile');
+        $orders = auth()->user()->customerOrders;
+
+        return view('livewire.customers.profile', [
+            'orders' => $orders
+        ]);
     }
 }

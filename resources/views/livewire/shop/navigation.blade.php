@@ -50,7 +50,8 @@
                                             <x-slot name="trigger">
                                                 <button class="flex flex-col items-start">
                                                     <span class="hidden xl:block text-lg font-medium text-color-b6b9bb">{{ Auth::user()->fullname }}</span>
-                                                    <span class="xl:hidden text-lg font-medium text-color-b6b9bb">{{ Auth::user()->initial_letters }}</span>
+                                                    <x-icons class="xl:hidden" name="account" />
+                                                    {{-- <span class="xl:hidden text-lg font-medium text-color-b6b9bb">{{ Auth::user()->initial_letters }}</span> --}}
                                                 </button>
                                             </x-slot>
 

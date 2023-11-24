@@ -94,9 +94,29 @@ return [
     'profile' => 'Profilo',
     'profile_description' => 'Visualizza i tuoi dati, le impostazioni di accesso e password, i tuoi ordini.',
     'tabs' => [
-        'personal_data' => 'Dati personali',
-        'addresses' => 'Indirizzi',
-        'orders' => 'Ordini',
+        'personal_data' => [
+            'title' => 'Dati personali',
+            'user' => 'Modifica utente',
+            'email' => 'Modifica Email',
+            'password' => 'Modifica Password'
+        ],
+        'addresses' => [
+            'title' => 'Indirizzi',
+            'address' => 'Modifica Indirizzi'
+        ],
+        'orders' => [
+            'title' => 'Ordini',
+            'order' => 'Ordine',
+            'status' => [
+                'paid' => 'Ordine confermato',
+                'in_process' => 'In lavorazione',
+                'in_shipping' => 'In transito',
+                'shipped' => 'Spedito',
+                'delivered' => 'Consegnato',
+                'refunded' => 'Rimborsato',
+                'canceled' => 'cancellato'
+            ]
+        ],
     ],
     'edit_data' => 'Modifica',
     'password' => 'Password',
