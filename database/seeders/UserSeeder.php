@@ -27,35 +27,23 @@ class UserSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
         $superadmin->assignRole(User::SUPERADMIN);
 
+        // Reseller
+        $reseller = User::factory()
+            ->create([
+                'firstname' => 'Reseller IT',
+                'lastname' => null,
+                'email' => 'resellerit@example.test',
+                'password' => bcrypt(env('SEEDER_USER_DEFAULT_PASSWORD', 'password')),
+                'payment_method' => 'delivery',
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
+        $reseller->assignRole(User::RESELLER);
+
         if (app()->environment() === 'local') {
-            // Reseller
-            $reseller = User::factory()
-                ->has(
-                    Address::factory()
-                        ->count(2)
-                        ->state(new Sequence(
-                            ['type' => 'billing'],
-                            ['type' => 'shipping'],
-                        ))
-                        ->state(function (array $attributes) {
-                            return ['tax_code' => 'shipping' === $attributes['type'] ? null : $attributes['tax_code']];
-                        })
-                )
-                ->create([
-                    'firstname' => 'Reseller',
-                    'lastname' => null,
-                    'email' => 'reseller@example.test',
-                    'password' => bcrypt(env('SEEDER_USER_DEFAULT_PASSWORD', 'password')),
-                    'payment_method' => '30_60_days',
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ]);
-
-            $reseller->assignRole(User::RESELLER);
-
             // Customer
             $customer = User::factory()
                 ->has(
