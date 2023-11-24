@@ -40,7 +40,6 @@ class UserSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
-
         $reseller->assignRole(User::RESELLER);
 
         if (app()->environment() === 'local') {
