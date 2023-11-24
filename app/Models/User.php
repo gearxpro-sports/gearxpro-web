@@ -9,6 +9,7 @@ use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Crypt;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -51,6 +52,8 @@ class User extends Authenticatable
         'last_login' => 'datetime:d-m-Y H:i:s',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'stripe_public_key' => 'encrypted',
+        'stripe_private_key' => 'encrypted',
     ];
 
     public function getRoleAttribute() {

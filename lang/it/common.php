@@ -53,5 +53,5 @@ return [
     'free_shipping' => 'Gratuita',
     'pz' => 'Pezzi',
     'all' => 'Tutti',
-    'no_resellers' => 'Nessun rivenditore presente'
+    'taxation' => 'Fiscalità',
 ];

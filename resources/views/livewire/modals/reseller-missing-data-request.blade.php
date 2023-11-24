@@ -1,4 +1,4 @@
-<div class="w-full flex flex-col items-center justify-center p-6 space-y-3">
+<div class="w-full flex flex-col items-center justify-center p-8 space-y-4">
     <div>
         <svg class="w-14 h-14 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none"
              viewBox="0 0 24 24" stroke="currentColor">
@@ -7,14 +7,32 @@
         </svg>
     </div>
 
-    <h1 class="text-2xl font-semibold text-color-18181a text-center">Indica il valore di tassazione per il tuo paese</h1>
+    <h2 class="text-2xl font-semibold text-color-18181a text-center">{{ __('resellers.missing_data_modal.title') }}</h2>
+    <p>{{ __('resellers.missing_data_modal.intro') }}</p>
 
-    <form wire:submit="setTax" class="flex items-end gap-5">
-        <div x-data>
-            <x-input x-mask="99" type="text" wire:model="tax" name="tax"
-                     label="{{ __('resellers.create.tax') }}" required></x-input>
-        </div>
-
+    @dump($tax, $stripePublicKey, $stripePrivateKey)
+    {{ $errors }}
+    <form wire:submit.prevent="save" class="flex flex-col space-y-4 w-full">
+        @csrf
+        @if (!$tax)
+        <fieldset class="flex flex-col space-y-2">
+            <legend class="text-sm font-bold text-color-6c757d">{{ __('common.taxation') }}</legend>
+            <div x-data class="w-1/3">
+                <x-input x-mask="99" type="text" wire:model="tax" name="tax" label="{{ __('resellers.create.tax.label') }}"></x-input>
+            </div>
+        </fieldset>
+        @endif
+        @if (!$stripePublicKey || !$stripePrivateKey)
+        <fieldset class="flex flex-col space-y-2">
+            <legend class="text-sm font-bold text-color-6c757d">{{ __('payment_methods.stripe') }}</legend>
+            @if (!$stripePublicKey)
+            <x-input type="text" wire:model="stripePublicKey" name="stripePublicKey" label="{{ __('resellers.create.stripe_public_key.label') }}"></x-input>
+            @endif
+            @if (!$stripePrivateKey)
+            <x-input type="text" wire:model="stripePrivateKey" name="stripePrivateKey" label="{{ __('resellers.create.stripe_private_key.label') }}"></x-input>
+            @endif
+        </fieldset>
+        @endif
         <div class="flex items-center justify-between">
             <x-primary-button>
                 {{ __('common.save') }}

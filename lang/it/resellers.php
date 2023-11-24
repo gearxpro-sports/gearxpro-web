@@ -71,7 +71,15 @@ return [
         'payment_method' => [
             'label' => 'Metodo di Pagamento',
         ],
-        'tax' => 'IVA %'
+        'tax' => [
+            'label' => 'Iva %',
+        ],
+        'stripe_public_key' => [
+            'label' => 'Chiave pubblica',
+        ],
+        'stripe_private_key' => [
+            'label' => 'Chiave privata',
+        ],
     ],
     'show' => [
         'titles' => [
@@ -106,5 +114,9 @@ return [
         'title' => 'Sei sicuro di voler abilitare questo Rivenditore?',
         'already_exist' => "Attualmente esiste un altro Rivenditore legato alla nazione ':country'.<br>Abilitando questo Rivenditore, disabiliterai l'altro!",
         'confirm' => 'Abilita'
-    ]
+    ],
+    'missing_data_modal' => [
+        'title' => 'Completa il profilo',
+        'intro' => 'Prima di proseguire compila e conferma i seguenti dati:',
+    ],
 ];

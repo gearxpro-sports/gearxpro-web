@@ -44,6 +44,10 @@ return [
             'success' => 'Il rivenditore è stato eliminato con successo!',
             'error' => 'Errore durante l\'eliminazione del rivenditore!',
         ],
+        'updating_missing_data' => [
+            'success' => 'Dati profilo aggiornati con successo!',
+            'error' => 'Errore durante l\'aggiornamento dei daati profilo!',
+        ],
     ],
     'products' => [
         'saving' => [
