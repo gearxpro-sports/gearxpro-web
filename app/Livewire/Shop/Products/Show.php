@@ -72,7 +72,7 @@ class Show extends Component
             return $t->unique('id');
         });
 
-        if(isset($this->terms[1])) {
+        if (isset($this->terms[1])) {
             $this->allLengths = $this->terms[1]->sortBy('position')->keyBy('id')->map(function ($l) {
                 return [
                     'id' => $l->id,
@@ -81,7 +81,7 @@ class Show extends Component
                 ];
             });
         }
-        if(isset($this->terms[2])) {
+        if (isset($this->terms[2])) {
             $this->allColors = $this->terms[2]->sortBy('position')->keyBy('id')->map(function ($c) {
                 return [
                     'id' => $c->id,
@@ -90,7 +90,7 @@ class Show extends Component
                 ];
             });
         }
-        if(isset($this->terms[3])) {
+        if (isset($this->terms[3])) {
             $this->allSizes = $this->terms[3]->sortBy('position')->keyBy('id')->map(function ($s) {
                 return [
                     'id' => $s->id,
@@ -100,13 +100,24 @@ class Show extends Component
             });
         }
 
+        foreach ($this->product->variants as $variant) {
+            foreach ($variant->getMedia('products') as $media) {
+                $this->images[$this->product->id] = $variant->getMedia('products');
+                $this->allColors->put($variant->color->id, [
+                    ...$this->allColors[$variant->color->id], 'image' => $variant->getFirstMediaUrl('products')
+                ]);
+            }
+        }
+
         $this->lengths = count($this->allLengths) ? $this->allLengths->toArray() : [];
         $this->colors = count($this->allColors) ? $this->allColors->toArray() : [];
         $this->sizes = count($this->allSizes) ? $this->allSizes->toArray() : [];
 
         $this->getProductVariantImages();
     }
-    protected function getProductVariantImages() {
+
+    protected function getProductVariantImages()
+    {
         $this->images[$this->product->id] = $this->product->variants->firstWhere('position', 1)->getMedia('products');
     }
 
@@ -148,8 +159,11 @@ class Show extends Component
         $this->images = [];
         foreach ($this->variants as $variant) {
             foreach ($variant->getMedia('products') as $media) {
-                if(!array_key_exists($variant->product->id, $this->images)) {
+                if (!array_key_exists($variant->product->id, $this->images)) {
                     $this->images[$variant->product->id] = $variant->getMedia('products');
+                    $this->allColors->put($variant->color->id, [
+                        ...$this->allColors[$variant->color->id], 'image' => $variant->getFirstMediaUrl('products')
+                    ]);
                 }
             }
         }
@@ -163,7 +177,7 @@ class Show extends Component
 
     protected function processTerms($terms, $id)
     {
-        if(isset($terms[$id])) {
+        if (isset($terms[$id])) {
             return $terms[$id]->sortBy('position')->keyBy('id')->map(function ($term) {
                 return [
                     'id' => $term->id,
@@ -226,6 +240,15 @@ class Show extends Component
     //    {
     //        $this->selectedMoney = $money;
     //    }
+
+    /* TODO: La quantità viene presa dal magazzino SUPERADMIN, non dallo Stock del RESELLER
+     * di conseguenza l'utente può incrementare il contatore fino alla quantità che il SUPERADMIN
+     * ha in magazzino, non fino a quella presente nello Stock RESELLER.
+     *
+     * Altro problema è che nel FE (pagina dettaglio prodotto) si visualizzano termini che non sono
+     * presenti nello Stock RESELLER (ad esempio una taglia che il RESELLER non ha in stock, si
+     * vede lo stesso).
+    */
 
     public function increment()
     {

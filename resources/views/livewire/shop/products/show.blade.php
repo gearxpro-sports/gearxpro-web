@@ -70,19 +70,21 @@
                                             wire:key="color-{{$id}}"
                                             wire:click="setColor({{ $color['id'] }})"
                                             @class([
-                                                'flex-shrink-0 cursor-pointer h-12 w-12 relative flex items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent',
+                                                'flex-shrink-0 cursor-pointer h-12 w-12 relative flex items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent overflow-hidden bg-white',
                                                 $selectedColor == $color['id'] ? 'ring ring-offset-2 ring-offset-color-f2f0eb' : 'ring-2'])
-                                            style="background-color: {{ $color['color'] }}; --tw-ring-color: {{$color['color']}}"
+                                            style="--tw-ring-color: {{$color['color']}}"
                                         >
+                                            <img src="{{ $color['image'] }}" alt="" class="p-[3px] object-contain aspect-square">
                                         </div>
                                     @else
                                         <div
                                             wire:key="color-{{$id}}"
                                             @class([
-                                                'flex-shrink-0 opacity-10 pointer-events-none h-12 w-12 relative flex items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent',
+                                                'flex-shrink-0 opacity-10 pointer-events-none h-12 w-12 relative flex items-center justify-center rounded-full p-0.5 focus:outline-none ring-transparent overflow-hidden bg-white',
                                                 $selectedColor == $color['id'] ? 'ring ring-offset-2' : 'border border-gray-800'])
-                                            style="background-color: {{ $color['color'] }}; --tw-ring-color: {{$color['color']}}"
+                                            style="--tw-ring-color: {{$color['color']}}"
                                         >
+                                            <img src="{{ $color['image'] }}" alt="" class="p-[3px] object-contain aspect-square">
                                         </div>
                                     @endif
                                 @endforeach
