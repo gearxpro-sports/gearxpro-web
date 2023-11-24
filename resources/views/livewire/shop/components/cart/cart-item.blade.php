@@ -2,7 +2,8 @@
 
     <div class="flex flex-1 xl:p-1 gap-7">
         <div class="w-20 h-20 xl:w-48 xl:h-48">
-            <img src="{{ $item->variant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $item->variant->product->name }}">
+            <img src="{{ $item->variant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg') }}"
+                 alt="{{ $item->variant->product->name }}">
         </div>
         <div class="my-auto">
             <div class="flex flex-col gap-2 xl:gap-1 mb-2 xl:mb-1">
@@ -12,18 +13,25 @@
                 </p>
             </div>
             <div class="flex flex-col gap-2 xl:gap-1">
-                <p class="text-sm font-normal xl:font-medium text-color-18181a">
-                    {{ __('shop.products.height_leg')}}: {{ $item->variant->length->value }}</p>
-                <p class="text-sm font-normal xl:font-medium text-color-18181a">
-                    {{ __('shop.products.color')}}: {{ $item->variant->color->value }}</p>
-                <p class="text-sm font-normal xl:font-medium text-color-18181a">
+                @if($item->variant->length)
+                    <p class="text-sm font-normal xl:font-medium text-color-18181a">
+                        {{ __('shop.products.height_leg')}}: {{ $item->variant->length->value }}</p>
+                @endif
+                @if($item->variant->color)
+                    <p class="text-sm font-normal xl:font-medium text-color-18181a">
+                        {{ __('shop.products.color')}}: {{ $item->variant->color->value }}</p>
+                @endif
+                @if($item->variant->size)
+                    <p class="text-sm font-normal xl:font-medium text-color-18181a">
                     {{ __('shop.products.size')}}: {{ $item->variant->size->value }}</p>
+                @endif
                 <span class="xl:hidden font-medium text-color-18181a">@money(($item->price * $item->quantity))</span>
             </div>
         </div>
     </div>
 
-    <div class="w-[248px] pl-11 xl:pl-0 mx-auto mt-4 xl:mt-0 xl:m-0 xl:border-x border-color-e0e0df flex items-center justify-center">
+    <div
+        class="w-[248px] pl-11 xl:pl-0 mx-auto mt-4 xl:mt-0 xl:m-0 xl:border-x border-color-e0e0df flex items-center justify-center">
         <div
             class="w-[185px] h-[48px] rounded-md flex items-center border border-color-b6b9bb">
             <div wire:click="decrement"

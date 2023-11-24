@@ -5,6 +5,7 @@ namespace App\Livewire\Shop\Products;
 use App\Livewire\Modals\ProductAddedToCart;
 use App\Livewire\Shop\Navigation as ShopNavigation;
 use App\Models\Cart;
+use App\Models\Country;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\Stock;
@@ -28,6 +29,7 @@ class Show extends Component
     public $selectedColor = null;
     public $selectedSize = null;
 
+    public $selectedVariantQuantity;
     public $quantity = 1;
     //    public $selectedMoney = 0;
 
@@ -56,59 +58,72 @@ class Show extends Component
 
     public function mount()
     {
-        ray()->clearAll();
         $this->product->load('variants');
         //        $this->selectedVariant = $this->product->variants->firstWhere('position', 1);
         //        $this->selectedLength = $this->selectedVariant->length->id;
         //        $this->selectedColor = $this->selectedVariant->color->id;
         //        $this->selectedSize = $this->selectedVariant->size->id;
 
+        $this->variants = Country::where('iso2_code', session('country_code'))->first()->reseller->stocks()->with('productVariant')->where('product_id', $this->product->id)->get();
+
         $this->terms = collect();
-        foreach ($this->product->variants as $variant) {
-            $this->terms = $this->terms->merge($variant->terms);
+        foreach ($this->variants as $stock) {
+            $this->terms = $this->terms->merge($stock->productVariant->terms);
         }
+
 
         $this->terms = $this->terms->groupBy('attribute_id');
         $this->terms = $this->terms->map(function ($t) {
             return $t->unique('id');
         });
 
-        $this->allLengths = $this->terms[1]->sortBy('position')->keyBy('id')->map(function ($l) {
-            return [
-                'id' => $l->id,
-                'value' => $l->value,
-                'color' => $l->color,
-            ];
-        });
-        $this->allColors = $this->terms[2]->sortBy('position')->keyBy('id')->map(function ($c) {
-            return [
-                'id' => $c->id,
-                'value' => $c->value,
-                'color' => $c->color,
-            ];
-        });
-        $this->allSizes = $this->terms[3]->sortBy('position')->keyBy('id')->map(function ($s) {
-            return [
-                'id' => $s->id,
-                'value' => $s->value,
-                'color' => $s->color,
-            ];
-        });
+        if (isset($this->terms[1])) {
+            $this->allLengths = $this->terms[1]->sortBy('position')->keyBy('id')->map(function ($l) {
+                return [
+                    'id' => $l->id,
+                    'value' => $l->value,
+                    'color' => $l->color,
+                ];
+            });
+        }
+        if (isset($this->terms[2])) {
+            $this->allColors = $this->terms[2]->sortBy('position')->keyBy('id')->map(function ($c) {
+                return [
+                    'id' => $c->id,
+                    'value' => $c->value,
+                    'color' => $c->color,
+                ];
+            });
+        }
+        if (isset($this->terms[3])) {
+            $this->allSizes = $this->terms[3]->sortBy('position')->keyBy('id')->map(function ($s) {
+                return [
+                    'id' => $s->id,
+                    'value' => $s->value,
+                    'color' => $s->color,
+                ];
+            });
+        }
 
-        $this->lengths = $this->allLengths->toArray();
-        $this->colors = $this->allColors->toArray();
-        $this->sizes = $this->allSizes->toArray();
-        $this->images = [
-            "long" => [
-                Vite::asset('resources/images/SOXPro-1-long.png'),
-                Vite::asset('resources/images/SOXPro-2-long.png')
-            ],
-            "short" => [
-                Vite::asset('resources/images/SOXPro-1.png'),
-                Vite::asset('resources/images/SOXPro-2.png'),
-                Vite::asset('resources/images/SOXPro-3.png'),
-            ],
-        ];
+        foreach ($this->variants as $stock) {
+            foreach ($stock->productVariant->getMedia('products') as $media) {
+                $this->images[$stock->product->id] = $stock->productVariant->getMedia('products');
+                $this->allColors->put($stock->productVariant->color->id, [
+                    ...$this->allColors[$stock->productVariant->color->id], 'image' => $stock->productVariant->getFirstMediaUrl('products')
+                ]);
+            }
+        }
+
+        $this->lengths = count($this->allLengths) ? $this->allLengths->toArray() : [];
+        $this->colors = count($this->allColors) ? $this->allColors->toArray() : [];
+        $this->sizes = count($this->allSizes) ? $this->allSizes->toArray() : [];
+
+        $this->getProductVariantImages();
+    }
+
+    protected function getProductVariantImages()
+    {
+        $this->images[$this->product->id] = $this->variants->where('productVariant.position', 1)->first()->productVariant->getMedia('products');
     }
 
     protected function filterVariantsByTerm($type, $id)
@@ -127,42 +142,56 @@ class Show extends Component
             $this->selectedSize = $id;
         }
 
-        $variants = $this->product->variants();
+        $variants = Country::where('iso2_code', session('country_code'))->first()->reseller->stocks()->with('productVariant')->where('product_id', $this->product->id);
 
         if ($this->selectedColor) {
-            $variants->whereHas('terms', function (Builder $query) {
+            $variants->whereHas('productVariant.terms', function (Builder $query) {
                 $query->where('terms.id', $this->selectedColor);
             });
         }
         if ($this->selectedSize) {
-            $variants->whereHas('terms', function (Builder $query) {
+            $variants->whereHas('productVariant.terms', function (Builder $query) {
                 $query->where('terms.id', $this->selectedSize);
             });
         }
         if ($this->selectedLength) {
-            $variants->whereHas('terms', function (Builder $query) {
+            $variants->whereHas('productVariant.terms', function (Builder $query) {
                 $query->where('terms.id', $this->selectedLength);
             });
         }
 
         $this->variants = $variants->get();
+        $this->images = [];
+        foreach ($this->variants as $stock) {
+            foreach ($stock->productVariant->getMedia('products') as $media) {
+                if (!array_key_exists($stock->productVariant->product->id, $this->images)) {
+                    $this->images[$stock->productVariant->product->id] = $stock->productVariant->getMedia('products');
+                    $this->allColors->put($stock->productVariant->color->id, [
+                        ...$this->allColors[$stock->productVariant->color->id], 'image' => $stock->productVariant->getFirstMediaUrl('products')
+                    ]);
+                }
+            }
+        }
         if ($this->variants->count() === 1) {
-            $this->selectedVariant = $this->variants->first();
-            $this->selectedLength = $this->selectedVariant->length->id;
-            $this->selectedColor = $this->selectedVariant->color->id;
-            $this->selectedSize = $this->selectedVariant->size->id;
+            $this->selectedVariant = $this->variants->first()->productVariant;
+            $this->selectedVariantQuantity = $this->selectedVariant->stocks()->where('user_id', session('reseller_id'))->first()->quantity;
+            $this->selectedLength = $this->selectedVariant->length?->id;
+            $this->selectedColor = $this->selectedVariant->color?->id;
+            $this->selectedSize = $this->selectedVariant->size?->id;
         }
     }
 
     protected function processTerms($terms, $id)
     {
-        return $terms[$id]->sortBy('position')->keyBy('id')->map(function ($term) {
-            return [
-                'id' => $term->id,
-                'value' => $term->value,
-                'color' => $term->color,
-            ];
-        })->toArray();
+        if (isset($terms[$id])) {
+            return $terms[$id]->sortBy('position')->keyBy('id')->map(function ($term) {
+                return [
+                    'id' => $term->id,
+                    'value' => $term->value,
+                    'color' => $term->color,
+                ];
+            })->toArray();
+        }
     }
 
     public function setLength($id)
@@ -185,12 +214,14 @@ class Show extends Component
 
     public function resetAll()
     {
-        $this->reset(['selectedColor', 'selectedSize', 'selectedLength', 'selectedVariant', 'quantity']);
+        $this->reset(['selectedColor', 'selectedSize', 'selectedLength', 'selectedVariant', 'quantity', 'selectedVariantQuantity']);
         $this->filterVariantsByTerm('length', $this->selectedLength);
         $this->filterVariantsByTerm('color', $this->selectedColor);
         $this->filterVariantsByTerm('size', $this->selectedSize);
 
         $this->recalculateTerms();
+
+        $this->getProductVariantImages();
 
         $this->dispatch('reset-selection');
     }
@@ -199,8 +230,8 @@ class Show extends Component
     {
         $terms = collect();
 
-        foreach ($this->variants as $variant) {
-            $terms = $terms->merge($variant->terms);
+        foreach ($this->variants as $stock) {
+            $terms = $terms->merge($stock->productVariant->terms);
         }
 
         $terms = $terms->groupBy('attribute_id');
@@ -218,7 +249,7 @@ class Show extends Component
 
     public function increment()
     {
-        if (isset($this->selectedVariant) && $this->quantity < $this->selectedVariant->quantity) {
+        if (isset($this->selectedVariant) && $this->quantity < $this->selectedVariantQuantity) {
             $this->quantity++;
         }
     }

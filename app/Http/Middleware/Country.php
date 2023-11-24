@@ -20,11 +20,37 @@ class Country
         $available_countries = User::role(User::RESELLER)->with('country')->get()->pluck('country.iso2_code');
         $available_countries = array_map('strtolower', $available_countries->toArray());
 
+
+        if(!in_array($request->country_code, $available_countries)) {
+            if(auth()->check() && auth()->user()->hasRole(User::SUPERADMIN)) {
+                session()->remove('country_code');
+                session()->remove('reseller_id');
+            }
+        }
+
         if (!session('country_code') || !in_array($request->country_code, $available_countries)) {
             return redirect()->route('splash');
         }
 
-        URL::defaults(['country_code' => session('country_code', 'it')]);
+        if(auth()->check() && auth()->user()->hasRole(User::RESELLER) && $request->country_code !== auth()->user()->country_code) {
+            return redirect()->back();
+        }
+
+        if(auth()->check() && auth()->user()->hasRole(User::SUPERADMIN) && $request->country_code !== session('country_code')) {
+            session()->put('country_code', $request->country_code);
+            $reseller = \App\Models\Country::where('iso2_code', $request->country_code)->first()->reseller;
+            session()->put('reseller_id', $reseller->id);
+        }
+
+        if(!auth()->check() && $request->country_code !== session('country_code')) {
+            session()->put('country_code', $request->country_code);
+            $reseller = \App\Models\Country::where('iso2_code', $request->country_code)->first()->reseller;
+            session()->put('reseller_id', $reseller->id);
+        }
+
+        if($available_countries) {
+            URL::defaults(['country_code' => session('country_code', $available_countries[0])]);
+        }
 
         return $next($request);
     }

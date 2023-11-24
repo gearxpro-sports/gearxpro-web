@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Register;
 
+use App\Models\Country;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -77,7 +78,13 @@ class Index extends Component
         $this->validate();
 
         if (count($this->keyFormat) > 4 AND $this->password === $this->password_confirmation) {
-            $user = User::create($this->validate());
+            $user = User::create([
+                'firstname' => $this->firstname,
+                'lastname' => $this->lastname,
+                'email' => $this->email,
+                'password' => $this->password,
+                'country_id' => Country::where('iso2_code', session('country_code'))->first()->id
+            ]);
             // $this->dispatch('user', $user);
             Auth::login($user);
 

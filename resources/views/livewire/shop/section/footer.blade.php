@@ -31,16 +31,16 @@
             <x-custom-button :text="'B2B GearXPro'" :icon="'airplain'" :link="'/'" />
 
             <div class="flex items-end gap-[22px]">
-                <a href="">
+                <a href="https://www.facebook.com/gearxprosportsofficial">
                     <x-icons class="text-white" name="facebook" />
                 </a>
-                <a href="">
+                <a href="https://www.linkedin.com/company/gearxpro-sports/">
                     <x-icons class="text-white" name="linkedin" />
                 </a>
-                <a href="">
+                <a href="https://www.youtube.com/@gearxprosports5301">
                     <x-icons class="text-white" name="youTube" />
                 </a>
-                <a href="">
+                <a href="https://www.instagram.com/gearxpro_sports/">
                     <x-icons class="text-white" name="instagram" />
                 </a>
             </div>
@@ -80,7 +80,7 @@
     </div>
 
     <div class="xl:hidden col-start-1 col-span-4 px-14 mt-20">
-        <div class="flex item-center justify-between mb-[30px]">
+        <div class="hidden xl:flex item-center justify-between mb-[30px]">
             <div class="w-[30px] h-5 bg-white rounded-sm"></div>
             <div class="w-[30px] h-5 bg-white rounded-sm"></div>
             <div class="w-[30px] h-5 bg-white rounded-sm"></div>
@@ -90,16 +90,16 @@
         </div>
 
         <div class="flex items-end justify-between">
-            <a href="">
+            <a href="https://www.facebook.com/gearxprosportsofficial">
                 <x-icons class="text-white" name="facebook" />
             </a>
-            <a href="">
+            <a href="https://www.linkedin.com/company/gearxpro-sports/">
                 <x-icons class="text-white" name="linkedin" />
             </a>
-            <a href="">
+            <a href="https://www.youtube.com/@gearxprosports5301">
                 <x-icons class="text-white" name="youTube" />
             </a>
-            <a href="">
+            <a href="https://www.instagram.com/gearxpro_sports/">
                 <x-icons class="text-white" name="instagram" />
             </a>
         </div>

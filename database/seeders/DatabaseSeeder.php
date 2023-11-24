@@ -16,13 +16,18 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
             CountrySeeder::class,
             UserSeeder::class,
-            ResellerSeeder::class,
-            CustomerSeeder::class,
             GroupAttributeWithAttributeSeeder::class,
-            CategorySeeder::class,
-            ProductSeeder::class,
-            StockSeeder::class,
-            OrderSeeder::class
         ]);
+
+        if(app()->environment() === 'local' || app()->environment() === 'staging') {
+            $this->call([
+                ResellerSeeder::class,
+                CustomerSeeder::class,
+                CategorySeeder::class,
+                ProductSeeder::class,
+                StockSeeder::class,
+                OrderSeeder::class
+            ]);
+        }
     }
 }

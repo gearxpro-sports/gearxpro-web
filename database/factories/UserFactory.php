@@ -26,7 +26,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password'          => bcrypt('password'),
             'remember_token'    => Str::random(10),
-            'country_id'        => Country::where('iso2_code', 'IT')->first()->id,
+            'country_id'        => Country::where('iso2_code', config('app.country'))->first()->id,
         ];
     }
 

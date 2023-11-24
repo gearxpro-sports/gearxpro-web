@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->foreignId('country_id')->nullable()->constrained();
-            $table->tinyInteger('tax')->nullable();
+            $table->string('tax', 2)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

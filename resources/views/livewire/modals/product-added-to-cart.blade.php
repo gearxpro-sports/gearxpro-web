@@ -19,9 +19,15 @@
                 </div>
                 <div class="flex flex-col gap-1 xl:gap-0">
                     <h4 class="text-sm font-bold xl:font-semibold text-white xl:text-color-18181a">{{ $productVariant->product->name }}</h4>
-                    <span class="text-xs xl:font-medium text-color-b6b9bb xl:text-color-6c757d">{{__('shop.products.height_leg')}}: {{ $productVariant->length->value }}</span>
-                    <span class="text-xs xl:font-medium text-color-b6b9bb xl:text-color-6c757d">{{__('shop.products.color')}}: {{ $productVariant->color->value }}</span>
-                    <span class="text-xs xl:font-medium text-color-b6b9bb xl:text-color-6c757d">{{__('shop.products.size')}}: {{ $productVariant->size->value }}</span>
+                    @if($productVariant->length)
+                        <span class="text-xs xl:font-medium text-color-b6b9bb xl:text-color-6c757d">{{__('shop.products.height_leg')}}: {{ $productVariant->length->value }}</span>
+                    @endif
+                    @if($productVariant->color)
+                        <span class="text-xs xl:font-medium text-color-b6b9bb xl:text-color-6c757d">{{__('shop.products.color')}}: {{ $productVariant->color->value }}</span>
+                    @endif
+                    @if($productVariant->size)
+                        <span class="text-xs xl:font-medium text-color-b6b9bb xl:text-color-6c757d">{{__('shop.products.size')}}: {{ $productVariant->size->value }}</span>
+                    @endif
                     <span class="text-xs xl:font-medium text-color-b6b9bb xl:text-color-6c757d">{{__('shop.products.amount')}}: {{ $quantity }}</span>
                     <span class="text-sm font-bold xl:font-medium text-white xl:text-color-18181a">@money($productVariant->product->price)</span>
                 </div>

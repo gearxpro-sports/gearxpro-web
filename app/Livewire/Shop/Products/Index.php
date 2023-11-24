@@ -113,7 +113,7 @@ class Index extends Component
             ->whereHas('stocks', function(Builder $query) {
                 $query
                     ->select('product_id')
-                    ->where('user_id', $this->currentCountry->reseller->id)
+                    ->where('user_id', session('reseller_id'))
                     ->havingRaw('SUM(quantity) > 0')
                     ->groupBy('product_id')
                 ;
@@ -149,7 +149,7 @@ class Index extends Component
         foreach ($this->products as $product) {
             if ($product->variants->count() > 0) {
                 foreach ($product->variants as $variant) {
-                    $this->productColors[$product->id][] = $variant->color->color;
+                    $this->productColors[$product->id][] = $variant->color?->color;
                 }
                 $this->productColors[$product->id] = array_unique($this->productColors[$product->id]);
             }

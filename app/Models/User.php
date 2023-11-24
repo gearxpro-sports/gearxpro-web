@@ -80,7 +80,7 @@ class User extends Authenticatable
     }
 
     public function getCountryCodeAttribute() {
-        return strtolower($this->country->iso2_code) ?? 'it';
+        return strtolower($this->country?->iso2_code) ?: config('app.country');
     }
 
     /**

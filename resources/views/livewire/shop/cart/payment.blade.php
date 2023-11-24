@@ -71,15 +71,21 @@
                                 <h4 class="text-sm font-semibold text-color-18181a">
                                     {{$item->variant->product->name}}
                                 </h4>
-                                <p class="text-xs font-medium text-color-6c757d">
-                                    {{__('shop.products.height_leg')}}: {{$item->variant->length->value}}
-                                </p>
-                                <p class="text-xs inline xl:block mr-2 xl:mr-0 font-medium text-color-6c757d">
-                                    {{__('shop.products.color')}}: {{$item->variant->color->value}}
-                                </p>
-                                <p class="text-xs inline xl:block font-medium text-color-6c757d">
-                                    {{__('shop.products.size')}}: {{$item->variant->size->value}}
-                                </p>
+                                @if($item->variant->length)
+                                    <p class="text-xs font-medium text-color-6c757d">
+                                        {{__('shop.products.height_leg')}}: {{$item->variant->length->value}}
+                                    </p>
+                                @endif
+                                @if($item->variant->color)
+                                    <p class="text-xs inline xl:block mr-2 xl:mr-0 font-medium text-color-6c757d">
+                                        {{__('shop.products.color')}}: {{$item->variant->color->value}}
+                                    </p>
+                                @endif
+                                @if($item->variant->size)
+                                    <p class="text-xs inline xl:block font-medium text-color-6c757d">
+                                        {{__('shop.products.size')}}: {{$item->variant->size->value}}
+                                    </p>
+                                @endif
                                 <br class="xl:hidden">
                                 <p class="text-xs inline xl:block mr-2 xl:mr-0 font-medium text-color-6c757d">
                                     {{__('shop.products.amount')}}: {{$item->quantity}}
@@ -107,7 +113,8 @@
             </div>
 
             <div class="flex flex-col gap-5 mt-5">
-                <x-input-text placeholder="{{str_replace('\'', ' ',$full_shipping_address)}}" autocomplete="autocomplete"
+                <x-input-text placeholder="{{str_replace('\'', ' ',$full_shipping_address)}}"
+                              autocomplete="autocomplete"
                               width="w-full" name="shipping_address" label="address_civic" required="true"/>
                 <x-input-text wire:model="shipping_company" width="w-full" name="shipping_company" label="company"/>
             </div>
@@ -178,7 +185,8 @@
                 </div>
 
                 <form wire:submit="next" class="mt-5">
-                    <x-input-text x-mask:dynamic="creditCardMask" wire:model="creditCard" width="w-full" name="creditCard"
+                    <x-input-text x-mask:dynamic="creditCardMask" wire:model="creditCard" width="w-full"
+                                  name="creditCard"
                                   label="creditCard" required="true"/>
 
                     <div class="flex flex-col xl:flex-row gap-5 mt-5 my-5">
@@ -191,7 +199,8 @@
                     <x-input-text wire:model="accountHolder" width="w-full" name="accountHolder" label="accountHolder"
                                   required="true"/>
 
-                    <div class="mt-10 flex flex-col xl:flex-row gap-5 xl:gap-0 items-center justify-between px-9 xl:px-0">
+                    <div
+                        class="mt-10 flex flex-col xl:flex-row gap-5 xl:gap-0 items-center justify-between px-9 xl:px-0">
                         <div class="w-full max-w-xs">
                             <x-shop.shopping-button
                                 href="{{ route('shop.cart', ['country_code' => session('country_code')]) }}"

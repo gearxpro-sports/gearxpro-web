@@ -58,7 +58,7 @@
     </div>
 
     <div class="relative flex">
-        <div @class(["z-50 h-[100vh] max-w-0 xl:h-fit bg-color-f2f0eb overflow-auto xl:overflow-hidden scrollBar transition-all duration-700 fixed xl:relative w-full inset-0", 'xl:min-w-[231px] max-w-[100%] xl:max-w-[360px] xl:ml-12 xl:mr-20' => $filtersOpen])>
+        <div @class(["z-50 h-[100vh] max-w-0 xl:h-fit bg-color-f2f0eb overflow-auto xl:overflow-hidden scrollBar transition-all delay-150 duration-500 fixed xl:relative w-full inset-0", 'xl:min-w-[231px] !max-w-[100%] xl:max-w-[360px] xl:ml-12 xl:mr-20' => $filtersOpen])>
             <div class="xl:hidden w-full bg-white py-5 flex justify-between items-center px-4 xl:px-0">
                 <h4 class="text-xl font-semibold text-color-18181a ">{{__('shop.products.button_filter_off')}}</h4>
                 <div wire:click="toggleFilters" class="p-2">

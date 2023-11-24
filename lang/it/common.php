@@ -52,5 +52,6 @@ return [
     'default' => 'Default',
     'free_shipping' => 'Gratuita',
     'pz' => 'Pezzi',
-    'all' => 'Tutti'
+    'all' => 'Tutti',
+    'no_resellers' => 'Nessun rivenditore presente'
 ];

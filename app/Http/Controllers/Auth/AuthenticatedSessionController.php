@@ -46,7 +46,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $country_code = $request->user()->country_code;
+        if($request->user()->hasRole(User::SUPERADMIN)) {
+            $country_code = config('app.country');
+        } else {
+            $country_code = $request->user()->country_code ?: session('country_code');
+        }
 
         Auth::guard('web')->logout();
 
