@@ -20,6 +20,6 @@
         <img src="{{ Vite::asset('resources/images/gear/collage_footer.jpg')}}" alt="">
     </div>
     <div class="w-full xl:hidden">
-        <img class="w-full" src="{{ Vite::asset('resources/images/collage_vertical.png')}}" alt="">
+        <img class="w-full" src="{{ Vite::asset('resources/images/homeimgam.png')}}" alt="">
     </div>
 </div>
