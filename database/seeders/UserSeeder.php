@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
             'lastname' => null,
             'email' => 'admin@example.test',
             'password' => bcrypt(env('SEEDER_USER_DEFAULT_PASSWORD', 'password')),
+            'country_id' => NULL,
             'created_at' => now(),
             'updated_at' => now()
         ]);

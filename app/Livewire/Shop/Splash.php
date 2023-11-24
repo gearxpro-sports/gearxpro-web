@@ -11,6 +11,9 @@ class Splash extends Component
     #[Layout('layouts.blank')]
 
     public function mount() {
+        if(session('country_code') && auth()->check() && auth()->user()->hasRole(User::SUPERADMIN)) {
+            return true;
+        }
         if(session('country_code') && auth()->check()){
             return redirect()->route('home', ['country_code' => session('country_code')]);
         }
