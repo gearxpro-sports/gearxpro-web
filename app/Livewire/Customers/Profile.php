@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Customers;
 
+use App\Models\Order;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Livewire\Attributes\Layout;
@@ -39,6 +40,8 @@ class Profile extends Component
     public $password_confirmation = '';
     public $keyFormat = [];
     public $formatPassword = [];
+
+    public $showOrder = null;
 
     public function updated($property) {
         if ($property === 'password') {
@@ -99,30 +102,34 @@ class Profile extends Component
         }
     }
 
-    public function selectEditData($data) {
+    public function selectEditData($data, $id) {
+        if ($id) {
+            $this->showOrder = Order::find($id);
+        }
+
         $this->modify = $data;
     }
 
     public function rules() {
-        if ($this->modify == 'data') {
+        if ($this->modify == __('customers.tabs.personal_data.user')) {
             return [
                 'customer.firstname' => 'required',
                 'customer.lastname' => 'required',
                 'customerPhone' => 'required',
             ];
         }
-        if ($this->modify == 'email') {
+        if ($this->modify == __('customers.tabs.personal_data.email')) {
             return [
                 'customer.email' => 'required|email|unique:users,email,'.$this->customer->id,
             ];
         }
-        if ($this->modify == 'password') {
+        if ($this->modify == __('customers.tabs.personal_data.password')) {
             return [
                 'current_password' => ['required', 'current_password'],
                 'password' => ['required', 'confirmed'],
             ];
         }
-        if ($this->modify == 'shipping') {
+        if ($this->modify == __('customers.tabs.addresses.address')) {
             return [
                 //shipping
                 'shipping_address' => 'required',
@@ -288,6 +295,10 @@ class Profile extends Component
 
     public function render()
     {
-        return view('livewire.customers.profile');
+        $orders = auth()->user()->customerOrders;
+
+        return view('livewire.customers.profile', [
+            'orders' => $orders
+        ]);
     }
 }

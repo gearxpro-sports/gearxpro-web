@@ -24,11 +24,28 @@ class Country
         if(!in_array($request->country_code, $available_countries)) {
             if(auth()->check() && auth()->user()->hasRole(User::SUPERADMIN)) {
                 session()->remove('country_code');
+                session()->remove('reseller_id');
             }
         }
 
         if (!session('country_code') || !in_array($request->country_code, $available_countries)) {
             return redirect()->route('splash');
+        }
+
+        if(auth()->check() && auth()->user()->hasRole(User::RESELLER) && $request->country_code !== auth()->user()->country_code) {
+            return redirect()->back();
+        }
+
+        if(auth()->check() && auth()->user()->hasRole(User::SUPERADMIN) && $request->country_code !== session('country_code')) {
+            session()->put('country_code', $request->country_code);
+            $reseller = \App\Models\Country::where('iso2_code', $request->country_code)->first()->reseller;
+            session()->put('reseller_id', $reseller->id);
+        }
+
+        if(!auth()->check() && $request->country_code !== session('country_code')) {
+            session()->put('country_code', $request->country_code);
+            $reseller = \App\Models\Country::where('iso2_code', $request->country_code)->first()->reseller;
+            session()->put('reseller_id', $reseller->id);
         }
 
         if($available_countries) {

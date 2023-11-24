@@ -17,7 +17,7 @@ class Navigation extends Component
         $this->about_us = [
             [
                 'route' => 'about_us.whoWeAre',
-                'name' =>  __('shop.navigation.about_us'),
+                'name' =>  'Azienda',
             ],
             [
                 'route' => 'about_us.values',
