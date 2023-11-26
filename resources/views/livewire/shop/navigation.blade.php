@@ -35,16 +35,15 @@
                         {{ __('shop.navigation.values') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('home', ['country_code' => session('country_code')])" :active="request()->routeIs('dashboard')">
+                        {{ __('shop.navigation.journal') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('about_us.development', ['country_code' => session('country_code')])" :active="request()->routeIs('about_us.development')">
                         {{ __('shop.navigation.production') }}
                     </x-nav-link>
 
                     {{-- <x-custom-dropdown title="{{ __('shop.navigation.about_us') }}" :active="request()->routeIs('about_us.*')" :options="$about_us"/>--}}
-
-                    <x-nav-link :href="route('home', ['country_code' => session('country_code')])" :active="request()->routeIs('dashboard')">
-                        {{ __('shop.navigation.journal') }}
-                    </x-nav-link>
-
                     {{--<x-custom-dropdown title="{{ __('shop.navigation.assistance') }}" :active="request()->routeIs('assistance.*')" :options="[]"/>--}}
                 </div>
             </div>
@@ -163,11 +162,11 @@
             <a href="{{ route('shop.index', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.shop') }}</a>
             <a href="{{ route('about_us.whoWeAre', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.about_us') }}</a>
             <a href="{{ route('about_us.values', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.values') }}</a>
+            <a href="{{ route('home', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.journal') }}</a>
             <a href="{{ route('about_us.development', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.production') }}</a>
 
             {{-- <x-dropdown-mobile title="{{ __('shop.navigation.about_us') }}" :options="$about_us" /> --}}
 
-            <a href="{{ route('home', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.journal') }}</a>
             {{--  <x-dropdown-mobile title="{{ __('shop.navigation.assistance') }}" :options="[]" /> --}}
             {{--  <x-dropdown-mobile type="select" title="{{ session()->get('language', app()->getLocale()) }}" :options="$languages" /> --}}
 </div>
