@@ -110,14 +110,14 @@ class Index extends Component
                     ;
                 },
             ])
-            /*->whereHas('stocks', function(Builder $query) {
+            ->whereHas('stocks', function(Builder $query) {
                 $query
                     ->select('product_id')
                     ->where('user_id', session('reseller_id'))
                     ->havingRaw('SUM(quantity) > 0')
                     ->groupBy('product_id')
                 ;
-            })*/
+            })
             ->whereHas('countries', function(Builder $query) {
                 $query
                     ->where('country_id', $this->currentCountry->id)
