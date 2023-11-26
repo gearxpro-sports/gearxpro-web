@@ -161,10 +161,15 @@
         <div class="flex flex-col gap-6">
             <a href="{{ route('home', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.home') }}</a>
             <a href="{{ route('shop.index', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.shop') }}</a>
-            <x-dropdown-mobile title="{{ __('shop.navigation.about_us') }}" :options="$about_us" />
+            <a href="{{ route('about_us.whoWeAre', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.about_us') }}</a>
+            <a href="{{ route('about_us.values', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.values') }}</a>
+            <a href="{{ route('about_us.development', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.production') }}</a>
+
+            {{-- <x-dropdown-mobile title="{{ __('shop.navigation.about_us') }}" :options="$about_us" /> --}}
+
             <a href="{{ route('shop.index', ['country_code' => session('country_code')]) }}" class="text-[17px] font-semibold leading-[20px] text-color-18181a">{{ __('shop.navigation.journal') }}</a>
-            <x-dropdown-mobile title="{{ __('shop.navigation.assistance') }}" :options="[]" />
-            <x-dropdown-mobile type="select" title="{{ session()->get('language', app()->getLocale()) }}" :options="$languages" />
-         </div>
-    </div>
+            {{--  <x-dropdown-mobile title="{{ __('shop.navigation.assistance') }}" :options="[]" /> --}}
+            {{--  <x-dropdown-mobile type="select" title="{{ session()->get('language', app()->getLocale()) }}" :options="$languages" /> --}}
+</div>
+</div>
 </nav>
