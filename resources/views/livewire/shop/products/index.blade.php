@@ -57,8 +57,8 @@
         </div>
     </div>
 
-    <div class="relative flex">
-        <div @class(["z-50 h-[100vh] max-w-0 xl:h-fit bg-color-f2f0eb overflow-auto xl:overflow-hidden scrollBar transition-all delay-150 duration-500 fixed xl:relative w-full inset-0", 'xl:min-w-[231px] !max-w-[100%] xl:max-w-[360px] xl:ml-12 xl:mr-20' => $filtersOpen])>
+    <div class="relative flex gap-10">
+        <div @class(["z-50 h-[100vh] max-w-0 xl:h-fit bg-color-f2f0eb overflow-auto xl:overflow-hidden scrollBar transition-all delay-150 duration-500 fixed xl:relative w-full inset-0", 'xl:min-w-[231px] max-w-[100%] xl:max-w-[360px] xl:ml-12 xl:mr-20' => $filtersOpen])>
             <div class="xl:hidden w-full bg-white py-5 flex justify-between items-center px-4 xl:px-0">
                 <h4 class="text-xl font-semibold text-color-18181a ">{{__('shop.products.button_filter_off')}}</h4>
                 <div wire:click="toggleFilters" class="p-2">
@@ -223,7 +223,7 @@
             </div>
 
             @if($products->count() > 0)
-                <div id="cards" @class(["w-full px-4 xl:px-0 grid grid-cols-2 xl:grid-cols-4 gap-3 xl:gap-5 relative",'xl:!grid-cols-3' => $filtersOpen])>
+                <div id="cards" @class(["w-full px-4 xl:px-0 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 xl:gap-5 relative",'xl:!grid-cols-3' => $filtersOpen])>
                     @foreach ($products as $product )
                         <livewire:components.card-product
                           wire:key="prod_{{ $product->id }}"

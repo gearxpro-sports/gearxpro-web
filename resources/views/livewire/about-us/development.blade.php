@@ -1,6 +1,6 @@
 <div class="bg-black grid grid-cols-12">
-    <div class="col-span-12 h-[calc(100vh-106px)] xl:h-[984px] px-4 xl:p-0 bg-about_us_dev_1_mb xl:bg-about_us_dev_1 bg-cover bg-top bg-no-repeat relative overflow-hidden">
-        <h2 class="w-fit xl:w-full z-10 absolute top-[50%] text-2xl xl:text-4xl leading-10 font-bold text-white text-center">
+    <div class="col-span-12 h-[calc(100vh-106px)] xl:h-[984px] px-4 xl:p-0 bg-about_us_dev_1_mb xl:bg-about_us_dev_1 bg-cover bg-center bg-no-repeat relative overflow-hidden">
+        <h2 class="w-[calc(100%-32px)] xl:w-full z-10 absolute top-[50%] text-2xl xl:text-4xl leading-10 font-bold text-white text-center">
             products are designed with professional expertise <br>
             under the watchful eye of professionals <br>
             in the apparel and sportswear industry. <br>
