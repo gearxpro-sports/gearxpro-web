@@ -2,7 +2,7 @@
 
     <div class="hidden col-start-3 col-span-3 row-start-1 row-span-6 pr-[86px] xl:flex flex-col justify-between items-center text-white">
         <div class="flex flex-col gap-[28px] text-[13px] font-medium leading-[16px]">
-            <h4 class="text-[15px] font-semibold uppercase leading-[19px]">BRANDS</h4>
+            <h4 class="text-[15px] font-semibold uppercase leading-[19px]">PRODUCTS</h4>
             <a href="">SOXPro</a>
             <a href="">FLEXGXPro</a>
             <a href="">LACEXPro</a>
@@ -26,10 +26,10 @@
 
     <div class="hidden col-start-8 col-span-3 row-start-1 row-span-6 xl:flex flex-col justify-between">
         <div class="flex flex-col gap-[28px] text-[13px] font-medium leading-[16px] pl-[86px]">
-            <h4 class="text-[15px] font-semibold uppercase leading-[19px] text-white uppercase">Partnership</h4>
+            <h4 class="text-[15px] font-semibold uppercase leading-[19px] text-white uppercase">Distributors</h4>
             <p class="text-white">Are you a distributor? Contact us</p>
-            <x-custom-button :text="'B2B GearXPro'" :icon="'airplain'" :link="'/'" />
-
+            {{-- <x-custom-button :text="'B2B GearXPro'" :icon="'airplain'" :link="'/'" />--}}
+            <a class="text-white" href="mailto:distributors@gearxpro-sports.com">distributors@gearxpro-sports.com</a>
             <div class="flex items-end gap-[22px]">
                 <a href="https://www.facebook.com/gearxprosportsofficial">
                     <x-icons class="text-white" name="facebook" />

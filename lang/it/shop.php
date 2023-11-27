@@ -22,14 +22,14 @@ return [
         'button' => 'Acquista ora'
     ],
     'carousel-top' => [
-        'title' => 'Linea prodotto'
+        'title' => ''
     ],
     'carousel-bottom' => [
-        'title' => 'Bestseller'
+        'title' => 'Best Seller'
     ],
     'products' => [
-        'title' => 'Non puoi mettere un limite a nulla.',
-        'description' => 'Più sogni, più lontano arrivi.',
+        'title' => 'Improve Your Game',
+        'description' => 'Get Started Today',
         'button_filter_on' => 'Mostra filtri',
         'button_filter_off' => 'Nascondi filtri',
         'order' => 'Ordina per',

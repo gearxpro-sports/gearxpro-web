@@ -35,10 +35,10 @@
                         {{ __('shop.navigation.values') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('home', ['country_code' => session('country_code')])" :active="request()->routeIs('dashboard')">
+                    {{-- <x-nav-link :href="route('home', ['country_code' => session('country_code')])" :active="request()->routeIs('dashboard')">
                         {{ __('shop.navigation.journal') }}
-                    </x-nav-link>
-
+                    </x-nav-link>--}}
+                    <span>Partnership</span>
                     <x-nav-link :href="route('about_us.development', ['country_code' => session('country_code')])" :active="request()->routeIs('about_us.development')">
                         {{ __('shop.navigation.production') }}
                     </x-nav-link>
