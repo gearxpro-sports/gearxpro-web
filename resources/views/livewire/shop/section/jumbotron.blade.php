@@ -1,14 +1,12 @@
 <div id="home-hero" class="bg-black relative overflow-hidden">
 
-    <div class="relative w-full h-[667px] px-4 pt-11  grid grid-cols-4 gap-[10px] xl:hidden">
+    <div class="relative w-full h-[667px] px-4 pt-11 grid grid-cols-4 bg-jumbotron bg-cover bg-center bg-no-repeat gap-[10px] xl:hidden">
         {{-- <div class="h-fit col-start-1 col-span-4 z-10">
             <h1 class="text-[30px] font-bold text-white leading-[40px] m-0 p-0">{{ __('shop.jumbotron.title') }}</h1>
             <p class="text-[14px] text-white mt-[20px]">{{ __('shop.jumbotron.description') }}</p>
         </div>
- --}}
-        <img class="col-span-4 absolute" src="{{Vite::asset('resources/images/homeslide.jpg')}}" alt="">
 
-        {{-- <div class="col-start-1 col-span-4 pt-40 z-10">
+        <div class="col-start-1 col-span-4 pt-40 z-10">
             <x-custom-button :text="__('shop.jumbotron.button')" :icon="'double_arrow_right'" :link="'/shop'" width="w-full" />
         </div> --}}
     </div>
