@@ -48,7 +48,7 @@
                         <div>
                     </td>
                     <td class="text-right">
-                        <a target="_blank" class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="#">
+                        <a target="_blank" class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="{{ route('shop.show', ['product' => $stock->product->slug, 'country_code' => session('country_code')]) }}">
                             <x-icons name="eye" class="w-4 h-4" />
                         </a>
                     </td>

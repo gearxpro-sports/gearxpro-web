@@ -1,4 +1,4 @@
-<div class="bg-black relative overflow-hidden">
+<div id="home-hero" class="bg-black relative overflow-hidden">
 
     <div class="relative w-full h-[667px] px-4 pt-11  grid grid-cols-4 gap-[10px] xl:hidden">
         {{-- <div class="h-fit col-start-1 col-span-4 z-10">
