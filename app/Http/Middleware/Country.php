@@ -17,6 +17,11 @@ class Country
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // TODO: MODIFICARE DOPO MODIFICHE SPLASH
+        if(!session('reseller_id')) {
+            session()->put('reseller_id', 2);
+        }
+
         $available_countries = User::role(User::RESELLER)->with('country')->get()->pluck('country.iso2_code');
         $available_countries = array_map('strtolower', $available_countries->toArray());
 
