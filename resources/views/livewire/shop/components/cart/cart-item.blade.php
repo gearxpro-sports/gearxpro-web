@@ -41,7 +41,7 @@
             <div
                 class="w-[65px] h-full flex items-center justify-center text-[13px] font-medium leading-[16px] text-color-18181a font-mono select-none">{{ $item->quantity }}</div>
             <div wire:click="increment"
-                 class="{{ $item->quantity >= $item->variant?->quantity ? 'cursor-not-allowed text-gray-300' : 'cursor-pointer' }} w-[60px] h-full flex items-center justify-center bg-transparent border-l border-color-b6b9bb">
+                 class="{{ $item->quantity >= $variantQuantity ? 'cursor-not-allowed text-gray-300' : 'cursor-pointer' }} w-[60px] h-full flex items-center justify-center bg-transparent border-l border-color-b6b9bb">
                 <x-icons name="plus" class="h-3 w-3"></x-icons>
             </div>
         </div>

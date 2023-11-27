@@ -17,7 +17,7 @@
         </div>
         <div class="flex items-end gap-2">
             <div class="mx-0 w-80 md:mx-2.5">
-                <x-flatpickr datepickerId="{{ Str::random(9) }}" name="filter[created_at]"
+                <x-flatpickr datepickerId="{{ Str::random(9) }}" by="invoices.created_at|=" name="filter[created_at]"
                              label="{{ __('common.filter_by') }}"
                              placeholder="{{ __('supply.purchases.index.filter.select_order_date') }}">
                     <x-slot:append>

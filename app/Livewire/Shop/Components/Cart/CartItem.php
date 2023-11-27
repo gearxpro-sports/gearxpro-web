@@ -4,15 +4,21 @@ namespace App\Livewire\Shop\Components\Cart;
 
 use App\Models\Cart;
 use App\Models\ProductVariant;
+use App\Models\Stock;
 use Livewire\Component;
 
 class CartItem extends Component
 {
     public $item;
+    public $variantQuantity;
+
+    public function mount() {
+        $this->variantQuantity = Stock::where('user_id', session('reseller_id'))->where('product_variant_id', $this->item->variant->id)->first()->quantity;
+    }
 
     public function increment()
     {
-        if (isset($this->item->variant) && $this->item->quantity < $this->item->variant->quantity) {
+        if (isset($this->item->variant) && $this->item->quantity < $this->variantQuantity) {
             $this->item->increment('quantity');
         }
         $this->dispatch('item-updated');
