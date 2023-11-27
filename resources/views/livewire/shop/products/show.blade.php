@@ -74,7 +74,7 @@
                                                 $selectedColor == $color['id'] ? 'ring ring-offset-2 ring-offset-color-f2f0eb' : 'ring-2'])
                                             style="--tw-ring-color: {{$color['color']}}"
                                         >
-                                            <img src="{{ $color['image'] }}" alt=""
+                                            <img src="{{ $color['image'] ?? Vite::asset('resources/images/placeholder-medium.jpg') }}" alt=""
                                                  class="p-[3px] object-contain aspect-square">
                                         </div>
                                     @else
