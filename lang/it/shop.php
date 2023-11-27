@@ -151,14 +151,14 @@ return [
         'button' => 'Torna allo shopping'
     ],
     'footer' => [
-        'brands' => 'BRANDS',
+        'brands' => 'PRODUCTS',
         'my_account' => [
-            'title' => 'Il MIO ACCOUNT',
+            'title' => 'MY ACCOUNT',
             'dashboard' => 'Dashboard',
-            'cart' => 'Carrello',
+            'cart' => 'Cart',
             'checkout' => 'Checkout',
-            'orders' => 'Ordini',
-            'shipment' => 'Spedizioni'
+            'orders' => 'Orders',
+            'shipment' => 'Shipments'
         ],
         'privacy' => 'PRIVACY'
     ],

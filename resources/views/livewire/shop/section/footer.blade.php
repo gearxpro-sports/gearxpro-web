@@ -69,9 +69,10 @@
 
     {{-- responsive mobile footer --}}
     <div class="xl:hidden col-start-1 col-span-4 px-4 pt-16 mb-14">
-        <h3 class="text-base font-semibold text-white mb-7">Partnership</h3>
+        <h3 class="text-base font-semibold text-white mb-7">Distributors</h3>
         <p class="text-sm font-medium text-white mb-6">Are you a distributor? Contact us</p>
-        <x-custom-button :text="'B2B GearXPro'" :icon="'airplain'" :link="'/'" width="w-full" />
+        {{-- <x-custom-button :text="'B2B GearXPro'" :icon="'airplain'" :link="'/'" width="w-full" />--}}
+        <a class="text-white" href="mailto:distributors@gearxpro-sports.com">distributors@gearxpro-sports.com</a>
     </div>
 
     <div class="xl:hidden col-start-1 col-span-4 px-4 space-y-7">
