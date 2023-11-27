@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <div class="col-span-12 h-[calc(100vh-106px)] xl:h-[1080px] relative bg-about_us_dev_2_mb xl:bg-about_us_dev_2 bg-fixed bg-cover bg-center bg-no-repeat"></div>
+    <div class="col-span-12 h-[calc(100vh-106px)] xl:h-[1080px] relative bg-about_us_dev_2_mb xl:bg-about_us_dev_2 lg:bg-fixed bg-cover bg-center bg-no-repeat"></div>
 
     <div class="h-[100vh] px-4 xl:p-0 col-span-12 flex items-center justify-center py-28 xl:py-52">
         <h2 class="text-2xl xl:text-4xl text-center font-medium text-white leading-10 products-h2">
@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <div class="col-span-12 px-4 xl:p-0 h-[calc(100vh-106px)] xl:h-[1080px] bg-about_us_dev_3_mb xl:bg-about_us_dev_3 bg-fixed bg-cover bg-center bg-no-repeat flex items-center justify-center">
+    <div class="col-span-12 px-4 xl:p-0 h-[calc(100vh-106px)] xl:h-[1080px] bg-about_us_dev_3_mb xl:bg-about_us_dev_3 lg:bg-fixed bg-cover bg-center bg-no-repeat flex items-center justify-center">
         <p class="z-10 text-2xl xl:text-4xl font-medium text-white leading-10  text-center products-p">
             The key to our success is completed by the <br class="hidden xl:block">
             ability to manage and control the entire process <br class="hidden xl:block">
@@ -56,14 +56,14 @@
         </div>
     </div>
 
-    <div class="col-span-12 h-[1080px] grid grid-cols-12 grid-rows-6 relative bg-about_us_dev_4_mb xl:bg-about_us_dev_4 bg-fixed bg-cover bg-center bg-no-repeat"></div>
+    <div class="col-span-12 h-[1080px] grid grid-cols-12 grid-rows-6 relative bg-about_us_dev_4_mb xl:bg-about_us_dev_4 lg:bg-fixed bg-cover bg-center bg-no-repeat"></div>
 </div>
 
 
 @push('scripts')
     <script>
         $(document).ready(function(){
-            var carousel_top = new $(".carousel_top").owlCarousel({
+            var carousel_top = new $(".carousel_top").owlCarousel({g
                 items: 3,
                 margin: 30,
                 loop: true,

@@ -62,13 +62,13 @@
     padding-left: 15px;
     padding-right: 15px;
     max-width: 560px;
-
 }
 
 @media screen and (max-width: 1279px){
     .values-h3 {
         line-height: .9;
         font-size: 75px;
+        padding-top:10px!important;
     }
 
     .values-p {
@@ -114,6 +114,9 @@
     }
     .prod-intro-bg{
         background-size: cover!important;
+    }
+    .values-h3 {
+        padding-top:50px!important;
     }
 
 }

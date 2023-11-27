@@ -1,6 +1,6 @@
 <div id="home-hero" class="bg-black relative overflow-hidden">
 
-    <div class="relative w-full h-[667px] px-4 pt-11  grid grid-cols-4 gap-[10px] xl:hidden">
+    <div class="relative w-full h-[667px] px-4 pt-11  grid grid-cols-4 gap-[10px] lg:hidden">
         {{-- <div class="h-fit col-start-1 col-span-4 z-10">
             <h1 class="text-[30px] font-bold text-white leading-[40px] m-0 p-0">{{ __('shop.jumbotron.title') }}</h1>
             <p class="text-[14px] text-white mt-[20px]">{{ __('shop.jumbotron.description') }}</p>
@@ -13,7 +13,7 @@
         </div> --}}
     </div>
 
-    <div class="hidden xl:block">
+    <div class="hidden lg:block">
         <div class="customPrevBtn w-10 h-10 invert hover:translate-x-[-15px] duration-300 transition-all absolute left-9 top-[calc(50%-97px)] z-10">
             <x-icons name="chevron-left" class="w-full h-full" />
         </div>

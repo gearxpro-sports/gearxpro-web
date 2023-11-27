@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'header' => 'Worldwide shipping i 4 to 7 days',
+    'header' => 'Worldwide shipping in 3 to 7 days',
     'navigation' => [
         'home' => 'Home',
         'shop' => 'Shop',
@@ -14,7 +14,7 @@ return [
         'login_register' => 'Sign in / Register',
     ],
     'splash' => [
-        'title' => 'Select your country'
+        'title' => 'Seleziona il tuo Paese'
     ],
     'jumbotron' => [
         'title' => 'Il negozio che stavi Aspettando',

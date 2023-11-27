@@ -17,7 +17,7 @@
             </div>
 
             <!-- Navigation Links -->
-            <div class="hidden xl:flex">
+            <div class="hidden lg:flex">
                 <div class="hidden space-x-10 sm:-my-px sm:ml-10 sm:flex items-center">
                     <x-nav-link :href="route('home', ['country_code' => session('country_code')])" :active="request()->routeIs('home')">
                         {{ __('shop.navigation.home') }}
@@ -129,7 +129,7 @@
                 </div>
 
                 <!-- Hamburger -->
-                <div class="-mr-2 flex items-center xl:hidden">
+                <div class="-mr-2 flex items-center lg:hidden">
                     <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:bg-none transition duration-150 ease-in-out">
                         <div :class="{'hidden': open, 'inline-flex': ! open }">
                             <x-icons name="hamburger" />
