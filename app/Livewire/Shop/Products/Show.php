@@ -68,6 +68,10 @@ class Show extends Component
 
         $this->variants = Country::where('iso2_code', session('country_code'))->first()->reseller->stocks()->with('productVariant')->where('product_id', $this->product->id)->get();
 
+        if(!$this->variants->count()) {
+            return redirect()->route('shop.index');
+        }
+
         $this->terms = collect();
         foreach ($this->variants as $stock) {
             $this->terms = $this->terms->merge($stock->productVariant->terms);
@@ -133,7 +137,7 @@ class Show extends Component
 
     protected function getProductVariantImages()
     {
-        $this->images[$this->product->id] = $this->variants->where('productVariant.position', 1)->first()->productVariant->getMedia('products');
+        $this->images[$this->product->id] = $this->variants->where('productVariant.position', 1)->first() !== null ? $this->variants->where('productVariant.position', 1)->first()->productVariant->getMedia('products') : $this->variants->first()->productVariant->getMedia('products');
     }
 
     protected function filterVariantsByTerm($type, $id)
