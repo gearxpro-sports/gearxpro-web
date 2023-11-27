@@ -2,7 +2,7 @@
     {{ __('dashboard.title') }}
 </x-slot>
 
-    <div x-init="$wire.checkTax" class="grid grid-cols-6 gap-4 items-stretch">
+    <div x-init="$wire.checkResellerMissingData" class="grid grid-cols-6 gap-4 items-stretch">
         <div class="col-span-6 lg:col-span-2">
             <livewire:dashboard.cards.stocks lazy/>
         </div>

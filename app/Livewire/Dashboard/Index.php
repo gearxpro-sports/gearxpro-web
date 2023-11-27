@@ -13,9 +13,12 @@ class Index extends Component
         $this->reseller = auth()->user();
     }
 
-    public function checkTax() {
-        if(!$this->reseller->tax && !auth()->user()->hasRole(\App\Models\User::SUPERADMIN)) {
-            $this->dispatch('openModal', 'modals.tax');
+    public function checkResellerMissingData() {
+        if (
+            (!$this->reseller->tax || !$this->reseller->stripe_public_key || !$this->reseller->stripe_private_key) &&
+            !auth()->user()->hasRole(\App\Models\User::SUPERADMIN)
+        ) {
+                $this->dispatch('openModal', 'modals.reseller-missing-data-request');
         }
     }
 

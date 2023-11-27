@@ -23,6 +23,8 @@ class Edit extends Component
             'billing_address.company' => 'required',
             'reseller.phone' => 'required',
             'reseller.tax' => $this->reseller->hasRole(User::RESELLER) ? 'required' : 'nullable',
+            'reseller.stripe_public_key' => $this->reseller->hasRole(User::RESELLER) ? 'required|string|alpha_dash' : 'nullable',
+            'reseller.stripe_private_key' => $this->reseller->hasRole(User::RESELLER) ? 'required|string|alpha_dash' : 'nullable',
             // Billing
             'billing_address.address_1' => 'required',
             'billing_address.city' => 'required',

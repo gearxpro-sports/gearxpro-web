@@ -83,10 +83,16 @@
             </div>
 
             @if (!auth()->user()->hasRole(\App\Models\User::SUPERADMIN))
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <h3 class="col-span-1 sm:col-span-2">{{ __('resellers.create.titles.tax') }}</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                    <h3 class="col-span-1 sm:col-span-4">{{ __('resellers.create.titles.tax') }}</h3>
                     <x-input x-mask="99" type="text" wire:model="reseller.tax" name="tax"
-                            label="{{ __('resellers.create.tax') }}" required></x-input>
+                            label="{{ __('resellers.create.tax.label') }}" required></x-input>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <h3 class="col-span-1 sm:col-span-2">{{ __('resellers.create.titles.payment') }}</h3>
+                    <h4 class="col-span-1 sm:col-span-2 text-sm font-bold">{{ __('resellers.create.titles.stripe_account') }}</h4>
+                    <x-input type="text" wire:model="reseller.stripe_public_key" name="stripe_public_key" label="{{ __('resellers.create.stripe_public_key.label') }}" required></x-input>
+                    <x-input type="text" wire:model="reseller.stripe_private_key" name="stripe_private_key" label="{{ __('resellers.create.stripe_private_key.label') }}" required></x-input>
                 </div>
             @endif
 
