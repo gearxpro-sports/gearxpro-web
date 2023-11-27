@@ -24,6 +24,8 @@ class Show extends Component
     public ProductVariant $selectedVariant;
     public $images;
     public $variants = null;
+    public $tabs = [];
+    public $currentTab = 'product';
 
     public $selectedLength = null;
     public $selectedColor = null;
@@ -119,6 +121,14 @@ class Show extends Component
         $this->sizes = count($this->allSizes) ? $this->allSizes->toArray() : [];
 
         $this->getProductVariantImages();
+
+        $this->tabs = [
+            'product' => $this->product->name,
+            'characteristics' => __('shop.products.characteristics'),
+            'advantages' => __('shop.products.advantages'),
+            'technicality' => __('shop.products.technicality'),
+            'wash' => __('shop.products.wash')
+        ];
     }
 
     protected function getProductVariantImages()
