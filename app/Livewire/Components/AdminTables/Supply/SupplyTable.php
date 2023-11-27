@@ -109,8 +109,8 @@ class SupplyTable extends BaseTable
                 ;
             })
             ->search($this->search, [
-                'product.name',
-                'terms.value',
+//                'product.name',
+//                'terms.value',
                 'sku'
             ])
             ->orderBy('product_id');
