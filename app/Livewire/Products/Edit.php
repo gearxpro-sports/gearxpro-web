@@ -145,7 +145,7 @@ class Edit extends Component
         })->toArray();
 
         $newCombinations = [];
-        $positionStart = $this->productVariants->count() > 0 ? $this->productVariants->count() : 1;
+        $positionStart = $this->productVariants->count() + 1;
         foreach ($termsSets as $termSet) {
 
             // SECOND CHECK - Prevent duplicate combinations

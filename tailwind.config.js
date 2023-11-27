@@ -114,7 +114,7 @@ export default {
             },
             backgroundImage: {
                 texture: "url('/resources/images/texture.svg')",
-                jumbotron: "url('/resources/images/product.svg')",
+                jumbotron: "url('/resources/images/homeslide.jpg')",
 
                 // Azienda
                 about_us_1: "url('/resources/images/about_us/who_we_are/we_are_1.jpg')",

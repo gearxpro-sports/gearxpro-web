@@ -1,23 +1,33 @@
-<div class="w-full xl:h-[1002px] bg-black pt-5 pb-10 xl:pt-[60px] xl:pb-[70px] pl-4 xl:pl-[39px]">
-    <h2 class="text-2xl xl:text-[33px] font-bold leading-[86px] text-white">{{ __('shop.carousel-bottom.title') }}</h2>
+@if ($products->count() > 0)
+    <div class="w-full xl:h-[1002px] bg-black pt-5 pb-10 xl:pt-[60px] xl:pb-[70px] pl-4 xl:pl-[39px]">
+        <h2 class="text-2xl xl:text-[33px] font-bold leading-[86px] text-white">{{ __('shop.carousel-bottom.title') }}</h2>
 
-    <div class="owl-carousel carousel_bottom">
-        <x-card-bottom image="Recovery-Long-T_1.svg" title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
-        <x-card-bottom image="SOXPro-1-long.png" title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
-        <x-card-bottom image="SOXPro-1.png" title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
-        <x-card-bottom image="Recovery-Long-T_1.svg" title="Recovery" description="Collant Lunghi Di Recupero" color="1" price="55,00"/>
+        <div class="owl-carousel carousel_bottom">
+            @foreach ($products as $product )
+                <x-card-bottom
+                    slug="{{$product->slug}}"
+                    image="{{ $product->defaultImages->medium ?: Vite::asset('resources/images/placeholder-medium.jpg') }}"
+                    title="{{$product->name}}"
+                    description="{{$product->main_desc}}"
+                    :colors="$productColors[$product->id] ?? []"
+                    price="{{$product->price}}"
+                />
+            @endforeach
+        </div>
+
+        <div class="mt-[40px] hidden xl:flex gap-5 ">
+            <button class="customPrevBtn">
+                <x-icons name="round_arrow" />
+            </button>
+            <button class="customNextBtn">
+                <x-icons name="round_arrow_active" />
+            </button>
+        </div>
+
     </div>
-
-    <div class="mt-[40px] hidden xl:flex gap-5 ">
-        <button class="customPrevBtn">
-            <x-icons name="round_arrow" />
-        </button>
-        <button class="customNextBtn">
-            <x-icons name="round_arrow_active" />
-        </button>
-    </div>
-
-</div>
+    @else
+    <div></div>
+@endif
 
 @push('scripts')
     <script>

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Register;
 
+use App\Models\Cart;
 use App\Models\Country;
 use App\Models\User;
 use Livewire\Component;
@@ -88,7 +89,13 @@ class Index extends Component
             // $this->dispatch('user', $user);
             Auth::login($user);
 
-            $this->redirect('/shop/payment');
+            $cart = Cart::where('user_id', session('cart_user_token'))->first();
+            $cart->update([
+                'user_id' => $user->id
+            ]);
+
+            return redirect()->route('shop.payment', ['country_code' => session('country_code')]);
+//            $this->redirect('/shop/payment');
         }
     }
 

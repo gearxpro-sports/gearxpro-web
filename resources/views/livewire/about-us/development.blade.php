@@ -21,18 +21,20 @@
         </h2>
     </div>
 
-    <div class="col-span-12 py-20 px-[30px] flex flex-col justify-center items-center">
-        <div class="owl-carousel carousel_top mb-10">
-            @foreach ($products as $product )
-                <livewire:components.card-product
-                    wire:key="prod_{{ $product->id }}"
-                    :product="$product"
-                    :image="'SOXPro.png'"
-                    :availableColors="$productColors[$product->id] ?? []"
-                />
-            @endforeach
+    @if ($products->count() > 0)
+        <div class="col-span-12 py-20 px-[30px] flex flex-col justify-center items-center">
+            <div class="owl-carousel carousel_top mb-10">
+                @foreach ($products as $product )
+                    <livewire:components.card-product
+                        wire:key="prod_{{ $product->id }}"
+                        :product="$product"
+                        :image="'SOXPro.png'"
+                        :availableColors="$productColors[$product->id] ?? []"
+                    />
+                @endforeach
+            </div>
         </div>
-    </div>
+    @endif
 
     <div class="col-span-12 px-4 xl:p-0 h-[calc(100vh-106px)] xl:h-[1080px] bg-about_us_dev_3_mb xl:bg-about_us_dev_3 lg:bg-fixed bg-cover bg-center bg-no-repeat flex items-center justify-center">
         <p class="z-10 text-2xl xl:text-4xl font-medium text-white leading-10  text-center products-p">
@@ -43,18 +45,20 @@
         </p>
     </div>
 
-    <div class="col-span-12 py-20 px-[30px] flex flex-col justify-center items-center">
-        <div class="owl-carousel carousel_bottom mb-10">
-            @foreach ($products as $product )
-                <livewire:components.card-product
-                    wire:key="prod_{{ $product->id }}"
-                    :product="$product"
-                    :image="'SOXPro.png'"
-                    :availableColors="$productColors[$product->id] ?? []"
-                />
-            @endforeach
+    @if ($products->count() > 0)
+        <div class="col-span-12 py-20 px-[30px] flex flex-col justify-center items-center">
+            <div class="owl-carousel carousel_bottom mb-10">
+                @foreach ($products as $product )
+                    <livewire:components.card-product
+                        wire:key="prod_{{ $product->id }}"
+                        :product="$product"
+                        :image="'SOXPro.png'"
+                        :availableColors="$productColors[$product->id] ?? []"
+                    />
+                @endforeach
+            </div>
         </div>
-    </div>
+    @endif
 
     <div class="col-span-12 h-[1080px] grid grid-cols-12 grid-rows-6 relative bg-about_us_dev_4_mb xl:bg-about_us_dev_4 lg:bg-fixed bg-cover bg-center bg-no-repeat"></div>
 </div>

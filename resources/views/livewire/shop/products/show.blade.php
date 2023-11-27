@@ -74,7 +74,8 @@
                                                 $selectedColor == $color['id'] ? 'ring ring-offset-2 ring-offset-color-f2f0eb' : 'ring-2'])
                                             style="--tw-ring-color: {{$color['color']}}"
                                         >
-                                            <img src="{{ $color['image'] }}" alt="" class="p-[3px] object-contain aspect-square">
+                                            <img src="{{ $color['image'] ?? Vite::asset('resources/images/placeholder-medium.jpg') }}" alt=""
+                                                 class="p-[3px] object-contain aspect-square">
                                         </div>
                                     @else
                                         <div
@@ -84,7 +85,8 @@
                                                 $selectedColor == $color['id'] ? 'ring ring-offset-2' : 'border border-gray-800'])
                                             style="--tw-ring-color: {{$color['color']}}"
                                         >
-                                            <img src="{{ $color['image'] }}" alt="" class="p-[3px] object-contain aspect-square">
+                                            <img src="{{ $color['image'] }}" alt=""
+                                                 class="p-[3px] object-contain aspect-square">
                                         </div>
                                     @endif
                                 @endforeach
@@ -158,15 +160,15 @@
 
                 {{-- actions --}}
                 <div class="mt-[30px]">
-                    <x-shop.shopping-button :disabled="!$selectedVariant" wire:click="payWithLink" color="green"
-                                            icon="arrow-right-xl">
-                        {{ __('shop.button.pay_link') }}
-                    </x-shop.shopping-button>
-                    <div class="xl:w-[438px] relative py-6 xl:p-6">
-                        <div class="h-[1px] bg-color-6c757d w-full"></div>
-                        <span
-                            class="absolute top-[15px] left-[calc(50%-36px)] px-[10px] bg-color-f2f0eb text-[13px] font-medium leading-[16px] text-color-6c757d">{{__('shop.options.or')}}</span>
-                    </div>
+{{--                    <x-shop.shopping-button :disabled="!$selectedVariant" wire:click="payWithLink" color="green"--}}
+{{--                                            icon="arrow-right-xl">--}}
+{{--                        {{ __('shop.button.pay_link') }}--}}
+{{--                    </x-shop.shopping-button>--}}
+{{--                    <div class="xl:w-[438px] relative py-6 xl:p-6">--}}
+{{--                        <div class="h-[1px] bg-color-6c757d w-full"></div>--}}
+{{--                        <span--}}
+{{--                            class="absolute top-[15px] left-[calc(50%-36px)] px-[10px] bg-color-f2f0eb text-[13px] font-medium leading-[16px] text-color-6c757d">{{__('shop.options.or')}}</span>--}}
+{{--                    </div>--}}
                     <x-shop.shopping-button :disabled="!$selectedVariant" wire:click="addToCart" icon="bag">
                         {{ __('shop.button.add_to_cart') }}
                     </x-shop.shopping-button>
@@ -184,47 +186,47 @@
         </div>
 
         {{-- info product --}}
-        <div x-data="handler()" class="hidden xl:block col-start-3 col-span-8 mt-[65px]">
+        <div class="hidden xl:block col-start-3 col-span-8 mt-[65px]">
             {{-- section button --}}
-            <div class="w-full h-[58px] rounded-md bg-color-edebe5 flex items-center gap-[10px] mb-[50px]">
-                <template x-for="tab in tabs" :key="tab">
-                    <button x-text="tab" x-on:click="currentTab = tab"
-                            :class="tab == currentTab ? '!bg-color-18181a !text-white' : ''"
-                            class="w-[235px] h-[48px] rounded-md bg-transparent flex items-center justify-center text-sm font-medium leading-[19px] text-color-6c757d capitalize"
-                    >
+            <div class="w-full h-[58px] rounded-md bg-color-edebe5 flex items-center gap-[10px] mb-8">
+                @foreach($tabs as $k => $tab)
+                    <button
+                        wire:click="$set('currentTab', '{{ $k }}')"
+                        class="w-[235px] h-[48px] rounded-md bg-transparent flex items-center justify-center text-sm font-medium leading-[19px] text-color-6c757d capitalize {{ $currentTab === $k ? '!bg-color-18181a !text-white' : '' }}">
+                        {{ $tab }}
                     </button>
-                </template>
+                @endforeach
             </div>
 
-            <template x-if="currentTab == '{{$product->name}}'">
+            @if($currentTab === 'product')
                 <p class="text-[13px] leading-[24px] text-color-323a46">
-                    {{ $product->main_desc }}
+                    {!! $product->main_desc !!}
                 </p>
-            </template>
+            @endif
 
-            <template x-if="currentTab == '{{__('shop.products.characteristics')}}'">
+            @if($currentTab === 'characteristics')
                 <p class="text-[13px] leading-[24px] text-color-323a46">
-                    {{ $product->features_desc }}
+                    {!! $product->features_desc !!}
                 </p>
-            </template>
+            @endif
 
-            <template x-if="currentTab == '{{__('shop.products.advantages')}}'">
+            @if($currentTab === 'advantages')
                 <p class="text-[13px] leading-[24px] text-color-323a46">
-                    {{ $product->pros_desc }}
+                    {!! $product->pros_desc !!}
                 </p>
-            </template>
+            @endif
 
-            <template x-if="currentTab == '{{__('shop.products.technicality')}}'">
+            @if($currentTab === 'technicality')
                 <p class="text-[13px] leading-[24px] text-color-323a46">
-                    {{ $product->technical_desc }}
+                    {!! $product->technical_desc !!}
                 </p>
-            </template>
+            @endif
 
-            <template x-if="currentTab == '{{__('shop.products.wash')}}'">
+            @if($currentTab === 'wash')
                 <p class="text-[13px] leading-[24px] text-color-323a46">
-                    {{ $product->washing_desc }}
+                    {!! $product->washing_desc !!}
                 </p>
-            </template>
+            @endif
         </div>
 
         <!-- Responsive info product -->
@@ -292,18 +294,18 @@
 
 @push('scripts')
     <script>
-        function handler() {
-            return {
-                currentTab: @json($product->name),
-                tabs: [
-                    @json($product->name),
-                    @json(__('shop.products.characteristics')),
-                    @json(__('shop.products.advantages')),
-                    @json(__('shop.products.technicality')),
-                    @json(__('shop.products.wash'))
-                ]
-            }
-        }
+        {{--function handler() {--}}
+        {{--    return {--}}
+        {{--        currentTab: @json($product->name),--}}
+        {{--        tabs: [--}}
+        {{--            @json($product->name),--}}
+        {{--            @json(__('shop.products.characteristics')),--}}
+        {{--            @json(__('shop.products.advantages')),--}}
+        {{--            @json(__('shop.products.technicality')),--}}
+        {{--            @json(__('shop.products.wash'))--}}
+        {{--        ]--}}
+        {{--    }--}}
+        {{--}--}}
     </script>
 
     <script>
