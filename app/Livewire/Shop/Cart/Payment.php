@@ -199,7 +199,7 @@ class Payment extends Component
                 'country_id' => $country->id,
                 'status' => Order::PAID_STATUS,
                 'payment_method' => Order::STRIPE_PAYMENT,
-                'billing_address' => $this->customer->billing_address->makeHidden($addressHiddenFields)->attributesToArray(),
+                'billing_address' => $this->customer->billing_address?->makeHidden($addressHiddenFields)->attributesToArray(),
                 'shipping_address' => $this->customer->shipping_address->makeHidden([...$addressHiddenFields, ...[ 'sdi', 'pec']])->attributesToArray(),
                 'items' => $orderItems,
                 'shipping_cost' => env('SHIPPING_COST'),

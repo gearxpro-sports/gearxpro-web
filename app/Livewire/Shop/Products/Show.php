@@ -24,6 +24,8 @@ class Show extends Component
     public ProductVariant $selectedVariant;
     public $images;
     public $variants = null;
+    public $tabs = [];
+    public $currentTab = 'product';
 
     public $selectedLength = null;
     public $selectedColor = null;
@@ -65,6 +67,10 @@ class Show extends Component
         //        $this->selectedSize = $this->selectedVariant->size->id;
 
         $this->variants = Country::where('iso2_code', session('country_code'))->first()->reseller->stocks()->with('productVariant')->where('product_id', $this->product->id)->get();
+
+        if(!$this->variants->count()) {
+            return redirect()->route('shop.index');
+        }
 
         $this->terms = collect();
         foreach ($this->variants as $stock) {
@@ -119,11 +125,19 @@ class Show extends Component
         $this->sizes = count($this->allSizes) ? $this->allSizes->toArray() : [];
 
         $this->getProductVariantImages();
+
+        $this->tabs = [
+            'product' => $this->product->name,
+            'characteristics' => __('shop.products.characteristics'),
+            'advantages' => __('shop.products.advantages'),
+            'technicality' => __('shop.products.technicality'),
+            'wash' => __('shop.products.wash')
+        ];
     }
 
     protected function getProductVariantImages()
     {
-        $this->images[$this->product->id] = $this->variants->where('productVariant.position', 1)->first()->productVariant->getMedia('products');
+        $this->images[$this->product->id] = $this->variants->where('productVariant.position', 1)->first() !== null ? $this->variants->where('productVariant.position', 1)->first()->productVariant->getMedia('products') : $this->variants->first()->productVariant->getMedia('products');
     }
 
     protected function filterVariantsByTerm($type, $id)

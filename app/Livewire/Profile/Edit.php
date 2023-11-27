@@ -22,7 +22,7 @@ class Edit extends Component
             'reseller.email' => 'required|email|unique:users,email,'.$this->reseller->id,
             'billing_address.company' => 'required',
             'reseller.phone' => 'required',
-            'reseller.tax' => 'required',
+            'reseller.tax' => $this->reseller->hasRole(User::RESELLER) ? 'required' : 'nullable',
             // Billing
             'billing_address.address_1' => 'required',
             'billing_address.city' => 'required',

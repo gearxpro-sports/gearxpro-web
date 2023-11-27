@@ -115,6 +115,10 @@ return [
                 'address' => 'Indirizzo',
                 'phone' => 'Telefono',
                 'email' => 'Email',
+                'warning' => [
+                    'missing_shipping_address' => 'Indirizzo di spedizione mancante.',
+                    'cta' => 'Aggiungilo ora!',
+                ]
             ],
             'payment' => [
                 'title' => 'Pagamento',
