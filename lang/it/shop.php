@@ -1,17 +1,20 @@
 <?php
 
 return [
-    'header' => 'Spedizioni in tutto il mondo in 4/7 giorni',
+    'header' => 'Worldwide shipping i 4 to 7 days',
     'navigation' => [
         'home' => 'Home',
         'shop' => 'Shop',
-        'about_us' => 'Chi siamo',
-        'journal' => 'News',
+        'about_us' => 'Who We Are',
+        'journal' => 'Partnership',
         'assistance' => 'Assistenza',
-        'login_register' => 'Accedi / Registrati',
+        'values' => 'Values',
+        'production' => 'Production',
+        'partnership' => 'Partnership',
+        'login_register' => 'Sign in / Register',
     ],
     'splash' => [
-        'title' => 'Seleziona il tuo Paese'
+        'title' => 'Select your country'
     ],
     'jumbotron' => [
         'title' => 'Il negozio che stavi Aspettando',
