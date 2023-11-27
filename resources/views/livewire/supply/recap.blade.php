@@ -65,8 +65,8 @@
                                 </div>
                                 <div class="ml-3">
                                     <div class="text-sm text-yellow-700">
-                                        <p>Indirizzo di spedizione mancante.</p>
-                                        <a href="{{ route('profile.edit') }}" class="block mt-2 underline">Aggiungilo ora</a>
+                                        <p>{{ __('supply.recap.order_review.shipping.warning.missing_shipping_address') }}</p>
+                                        <a href="{{ route('profile.edit') }}" class="block mt-2 underline">{{ __('supply.recap.order_review.shipping.warning.cta') }}</a>
                                     </div>
                                 </div>
                             </div>
