@@ -158,7 +158,7 @@
 
                 {{-- actions --}}
                 <div class="mt-[30px]">
-                    <x-shop.shopping-button :disabled="!$selectedVariant" wire:click="payWithLink" color="green"
+                    {{-- <x-shop.shopping-button :disabled="!$selectedVariant" wire:click="payWithLink" color="green"
                                             icon="arrow-right-xl">
                         {{ __('shop.button.pay_link') }}
                     </x-shop.shopping-button>
@@ -166,7 +166,7 @@
                         <div class="h-[1px] bg-color-6c757d w-full"></div>
                         <span
                             class="absolute top-[15px] left-[calc(50%-36px)] px-[10px] bg-color-f2f0eb text-[13px] font-medium leading-[16px] text-color-6c757d">{{__('shop.options.or')}}</span>
-                    </div>
+                    </div> --}}
                     <x-shop.shopping-button :disabled="!$selectedVariant" wire:click="addToCart" icon="bag">
                         {{ __('shop.button.add_to_cart') }}
                     </x-shop.shopping-button>

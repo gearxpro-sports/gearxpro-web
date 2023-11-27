@@ -113,7 +113,7 @@ class Index extends Component
             ->whereHas('stocks', function(Builder $query) {
                 $query
                     ->select('product_id')
-                    ->where('user_id', session('reseller_id'))
+                    ->where('user_id', $this->currentCountry->reseller->id)
                     ->havingRaw('SUM(quantity) > 0')
                     ->groupBy('product_id')
                 ;
