@@ -3,7 +3,9 @@
         <div class="flex items-center space-x-4">
             @if(auth()->user()->hasRole(App\Models\User::SUPERADMIN))
                 <h3 class="text-sm font-medium">{{ __('dashboard.cards.new-orders.admin_title') }}</h3>
-                <x-badge color="green">{{ $orders_count }}</x-badge>
+                @if($orders_count > 0)
+                    <x-badge color="green">{{ $orders_count }}</x-badge>
+                @endif
             @elseif(auth()->user()->hasRole(App\Models\User::RESELLER))
                 <h3 class="text-sm font-medium">{{ __('dashboard.cards.new-orders.reseller_title') }}</h3>
             @endif
@@ -54,7 +56,7 @@
                                 <td class="whitespace-nowrap">@money($item->total)</td>
                                 <td class="text-right">
                                     <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm"
-                                       href="#">
+                                       href="{{ route('orders.show', $item->id) }}">
                                         <x-icons name="eye" class="w-4 h-4"/>
                                     </a>
                                 </td>
