@@ -27,6 +27,7 @@ return [
             'shipping_data' => 'Dati di Spedizione',
             'tax' => 'Tassazione',
             'payment' => 'Pagamento',
+            'stripe_account' => 'Account Stripe'
         ],
         'firstname' => [
             'label' => 'Nome',
