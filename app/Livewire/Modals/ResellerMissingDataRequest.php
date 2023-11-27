@@ -7,42 +7,35 @@ use LivewireUI\Modal\ModalComponent;
 class ResellerMissingDataRequest extends ModalComponent
 {
     /**
-     * @var int|null
+     * @var array
      */
-    public ?int $tax;
-
-    /**
-     * @var string|null
-     */
-    public ?string $stripePublicKey;
-
-    /**
-     * @var string|null
-     */
-    public ?string $stripePrivateKey;
+    public array $missingData = [];
 
     public function mount()
     {
-        $this->tax = auth()->user()->tax;
-        $this->stripePublicKey = auth()->user()->stripe_public_key;
-        $this->stripePrivateKey = auth()->user()->stripe_private_key;
+        $dataToCheck = ['tax', 'stripe_public_key', 'stripe_private_key'];
+        foreach($dataToCheck as $data) {
+            if (!auth()->user()->{$data}) {
+                $this->missingData[$data] = '';
+            }
+        }
     }
 
     public function rules()
     {
         return [
-            'tax'              => 'nullable|integer',
-            'stripePublicKey'  => 'nullable|string|alpha_dash',
-            'stripePrivateKey' => 'nullable|string|alpha_dash',
+            'missingData.tax'                => 'sometimes|required|integer',
+            'missingData.stripe_public_key'  => 'sometimes|required|string|alpha_dash',
+            'missingData.stripe_private_key' => 'sometimes|required|string|alpha_dash',
         ];
     }
 
     public function messages()
     {
         return [
-            'tax.required' => __('shop.payment.required'),
-            'stripePublicKey.required' => __('shop.payment.required'),
-            'stripePrivateKey.required' => __('shop.payment.required'),
+            'missingData.tax.required' => __('shop.payment.required'),
+            'missingData.stripe_public_key.required' => __('shop.payment.required'),
+            'missingData.stripe_private_key.required' => __('shop.payment.required'),
         ];
     }
 
@@ -59,11 +52,7 @@ class ResellerMissingDataRequest extends ModalComponent
     public function save() {
         $this->validate();
 
-        auth()->user()->update([
-            'tax' => trim($this->tax),
-            'stripe_public_key' => trim($this->stripePublicKey),
-            'stripe_private_key' => trim($this->stripePrivateKey),
-        ]);
+        auth()->user()->update($this->missingData);
 
         $this->dispatch('open-notification',
             title: __('notifications.titles.updating'),
