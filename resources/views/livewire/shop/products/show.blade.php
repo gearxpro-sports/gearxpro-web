@@ -2,21 +2,21 @@
     <div class="xl:p-[39px] grid grid-cols-12 xl:gap-[30px] relative">
         {{-- image --}}
         <a href="{{route('shop.index', ['country_code' => session('country_code')])}}"
-           class="xl:hidden z-10 absolute top-4 left-4">
+           class="lg:hidden z-10 absolute top-4 left-4">
             <x-icons name="chevron-left-xl"/>
         </a>
 
         <div dir="ltr"
-             class="flex xl:flex-col col-span-12 xl:col-span-7 xl:h-[1104px] overflow-auto scrollBar xl:gap-4 pb-4 snap-mandatory snap-x xl:snap-y relative">
+             class="flex lg:flex-col col-span-12 lg:col-span-7 xl:h-[1104px] overflow-auto scrollBar lg:gap-4 p-8 xl:p-0 snap-mandatory snap-x lg:snap-y relative">
             @foreach ($images as $k => $media_collection)
                 @foreach($media_collection as $image)
-                    <img class="snap-center scroll-ms-6 shrink-0" src="{{ $image->getUrl() }}" alt="">
+                    <img class="snap-center w-full scroll-ms-6 shrink-0" src="{{ $image->getUrl() }}" alt="">
                 @endforeach
             @endforeach
         </div>
 
         {{-- options --}}
-        <div class="col-span-12 px-4 xl:col-span-5 xl:col-start-8 xl:py-10">
+        <div class="col-span-12 px-4 md:px-8 lg:col-span-5 xl:col-start-8 lg:py-10">
             {{-- detail --}}
             <div>
                 <span class="text-sm xl:text-[17px] leading-[28px] text-color-6c757d">{{$product->name}}</span>
@@ -186,7 +186,7 @@
         </div>
 
         {{-- info product --}}
-        <div class="hidden xl:block col-start-3 col-span-8 mt-[65px]">
+        <div class="hidden lg:block px-8 xl:p-0 lg:col-span-12 xl:col-start-3 xl:col-span-8 xl:mt-16">
             {{-- section button --}}
             <div class="w-full h-[58px] rounded-md bg-color-edebe5 flex items-center gap-[10px] mb-8">
                 @foreach($tabs as $k => $tab)
@@ -230,7 +230,7 @@
         </div>
 
         <!-- Responsive info product -->
-        <div class="xl:hidden col-span-12 flex flex-col gap-6 px-[16px] pt-10 pb-16">
+        <div class="lg:hidden col-span-12 flex flex-col gap-6 px-4 md:px-8 pt-10 pb-16">
             <x-drop-info-product title="{{$product->name}}">
                 <p class="text-[13px] leading-[24px] text-color-323a46">
                     {{ $product->main_desc }}
@@ -293,20 +293,20 @@
 </div>
 
 @push('scripts')
-    <script>
-        {{--function handler() {--}}
-        {{--    return {--}}
-        {{--        currentTab: @json($product->name),--}}
-        {{--        tabs: [--}}
-        {{--            @json($product->name),--}}
-        {{--            @json(__('shop.products.characteristics')),--}}
-        {{--            @json(__('shop.products.advantages')),--}}
-        {{--            @json(__('shop.products.technicality')),--}}
-        {{--            @json(__('shop.products.wash'))--}}
-        {{--        ]--}}
-        {{--    }--}}
-        {{--}--}}
-    </script>
+    {{-- <script>
+        function handler() {
+            return {
+                currentTab: @json($product->name),
+                tabs: [
+                    @json($product->name),
+                    @json(__('shop.products.characteristics')),
+                    @json(__('shop.products.advantages')),
+                    @json(__('shop.products.technicality')),
+                    @json(__('shop.products.wash'))
+                ]
+            }
+        }
+    </script> --}}
 
     <script>
         $(document).ready(function () {
