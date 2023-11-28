@@ -22,7 +22,7 @@ return [
         'button' => 'Acquista ora'
     ],
     'carousel-top' => [
-        'title' => ''
+        'title' => 'Product line'
     ],
     'carousel-bottom' => [
         'title' => 'Best Seller'
@@ -122,8 +122,8 @@ return [
         'ssl' => 'I pagamenti sono crittografati con SSL per garantire la massima sicurezza della  tua carta di credito
         e dei tuoi dati di pagamento.',
         'articols' => 'Articoli',
-        'firstname' => 'Nome',
-        'lastname' => 'Cognome',
+        'firstname' => 'Name',
+        'lastname' => 'Last name',
         'address_civic' => 'Indirizzo e numero civico',
         'postcode' => 'Codice Postale',
         'company' => 'Interno/nome azienda (Opzionale)',

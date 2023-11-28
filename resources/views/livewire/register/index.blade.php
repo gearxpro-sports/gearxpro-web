@@ -4,8 +4,8 @@
     </a>
 
     <form wire:submit="store" class="w-full xl:w-[594px] px-4 pt-28 pb-16 xl:mt-[70px] m-auto">
-        <h2 class="text-xl xl:text-[33px] font-semibold leading-[40px] text-color-18181a xl:mb-[14px]">Crea il tuo profilo</h2>
-        <p class="text-sm xl:text-[17px] leading-[20px] text-color-18181a mb-4 xl:mb-[30px]">Completa questi piccoli step per continuare il tuo acquisto</p>
+        <h2 class="text-xl xl:text-[33px] font-semibold leading-[40px] text-color-18181a xl:mb-[14px]">Create your profile</h2>
+        <p class="text-sm xl:text-[17px] leading-[20px] text-color-18181a mb-4 xl:mb-[30px]">Complete these small steps to continue your purchase</p>
 
         <div class="flex flex-col gap-[20px] mb-[30px]">
             <x-input-text wire:model="firstname" width="w-full" name="firstname" label="firstname" required="true" />
@@ -30,7 +30,7 @@
                     <div class="absolute bottom-[-20px] right-0">@error('password') <span class="text-[12px] text-color-f4432c">{{ $message }}</span> @enderror</div>
                 </div>
                 <div class="text-[12px] text-color-6c757d mt-[5px]">
-                    <p>Assicurati che la password abbia almeno:</p>
+                    <p>Make sure the password has at least:</p>
                     <ul class="list-disc pl-[15px] pr-[5px]">
                         @foreach ($formatPassword as $key => $format)
                             <li>

@@ -200,7 +200,7 @@
                         <div class="absolute bottom-[-20px] right-0">@error('password') <span class="text-[12px] text-color-f4432c">{{ $message }}</span> @enderror</div>
                     </div>
                     <div class="text-[12px] text-color-6c757d mt-[5px]">
-                        <p>Assicurati che la password abbia almeno:</p>
+                        <p>Make sure the password has at least:</p>
                         <ul class="list-disc pl-[15px] pr-[5px]">
                             @foreach ($formatPassword as $key => $format)
                                 <li>
