@@ -5,12 +5,8 @@
         <div class="owl-carousel carousel_bottom">
             @foreach ($products as $product )
                 <x-card-bottom
-                    slug="{{$product->slug}}"
-                    image="{{ $product->defaultImages->medium ?: Vite::asset('resources/images/placeholder-medium.jpg') }}"
-                    title="{{$product->name}}"
-                    description="{!! html_entity_decode($product->main_desc) !!}"
+                    :product="$product"
                     :colors="$productColors[$product->id] ?? []"
-                    price="{{$product->price}}"
                 />
             @endforeach
         </div>
