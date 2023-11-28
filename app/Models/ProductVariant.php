@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Searchable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProductVariant extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia, Searchable;
+    use HasFactory, InteractsWithMedia, Searchable, SoftDeletes;
 
     /**
      * @var array

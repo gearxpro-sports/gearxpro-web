@@ -138,7 +138,10 @@
                 </thead>
                 <tbody>
                 @foreach ($supply->rows as $row)
-                    @php($variant = \App\Models\ProductVariant::find($row->product->id))
+                    @php($variant = \App\Models\ProductVariant::where('id', $row->product->id)->withTrashed()->first())
+                    @if (!$variant)
+                        @continue
+                    @endif
                     <tr class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
                         <td class="text-left">
                             <div class="flex items-center space-x-4">
