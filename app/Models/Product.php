@@ -6,6 +6,7 @@ use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Vite;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -57,6 +58,13 @@ class Product extends Model
     public function getDefaultImagesAttribute(): stdClass
     {
         $defaultVariant = $this->variants->first();
+
+        if (!$defaultVariant) {
+            return (object) [
+                'thumb'  => Vite::asset('resources/images/placeholder-medium.jpg'),
+                'medium' => Vite::asset('resources/images/placeholder-medium.jpg'),
+            ];
+        }
 
         return (object) [
             'thumb'  => $defaultVariant->getThumbUrl(),

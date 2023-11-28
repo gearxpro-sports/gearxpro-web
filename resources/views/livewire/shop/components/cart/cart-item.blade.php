@@ -2,7 +2,7 @@
 
     <div class="flex flex-1 xl:p-1 gap-7">
         <div class="w-20 h-20 xl:w-48 xl:h-48">
-            <img src="{{ $item->variant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg') }}"
+            <img src="{{ $item->variant->getThumbUrl() }}"
                  alt="{{ $item->variant->product->name }}">
         </div>
         <div class="my-auto">

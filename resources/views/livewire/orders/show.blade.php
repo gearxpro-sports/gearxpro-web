@@ -135,7 +135,7 @@
                         <td class="text-left">
                             <div class="flex items-center space-x-4">
                                 <div>
-                                    <img class="w-10" src="{{ $variant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $variant->product->name }}">
+                                    <img class="w-10" src="{{ $variant->getThumbUrl() }}" alt="{{ $variant->product->name }}">
                                 </div>
                                 <div>
                                     {{ $variant->product->name }}

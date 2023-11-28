@@ -1,6 +1,6 @@
 <div class="rounded-b-md overflow-hidden max-w-[280px] xl:max-w-none">
     <div class="bg-white flex items-center justify-center overflow-hidden">
-        <img class="w-full p-10" src="{{ $product->defaultImages->medium ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $product->name }}">
+        <img class="w-full p-10" src="{{ $product->defaultImages->medium }}" alt="{{ $product->name }}">
     </div>
     <div class="bg-white flex border border-white border-x border-x-white hover:border-y-white rounded-b-md transition-all duration-300 group">
         <a href="{{route('shop.show', ['product' => $product->slug, 'country_code' => session('country_code')])}}"

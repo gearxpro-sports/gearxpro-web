@@ -113,7 +113,7 @@
                                         @if (!$variant)
                                             @continue
                                         @endif
-                                        <img class="w-fit" src="{{ $variant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $variant->product->name }}">
+                                        <img class="w-fit" src="{{ $variant->getThumbUrl() }}" alt="{{ $variant->product?->name }}">
                                     @endforeach
                                 </div>
                             </div>
@@ -309,10 +309,10 @@
                         @endif
                         <div class="h-40 xl:h-fit w-full mt-7 border p-1 flex items-center">
                             <div class="h-full xl:w-48 bg-color-edebe5">
-                                <img class="h-full max-w-[135px] xl:max-w-none w-full" src="{{ $variant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $variant->product->name }}">
+                                <img class="h-full max-w-[135px] xl:max-w-none w-full" src="{{ $variant->getThumbUrl() }}" alt="{{ $variant->product?->name }}">
                             </div>
                             <div class="h-full grow px-3 xl:px-14 flex flex-col items-start justify-center gap-2">
-                                <h3 class="text-base font-semibold text-color-18181a leading-5">{{ $variant->product->name }}</h3>
+                                <h3 class="text-base font-semibold text-color-18181a leading-5">{{ $variant->product?->name }}</h3>
                                 <div>
                                     {{-- <p class="text-xs font-medium text-color-6c757d leading-4">
                                         {{ __('shop.products.height_leg')}}: Lungo

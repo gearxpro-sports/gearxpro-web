@@ -46,7 +46,7 @@ class Bestsellers extends Component
         $mostSoldProductIds = array_keys($productQuantities);
 
         foreach ($mostSoldProductIds as $mostSoldProductId) {
-            $items->push(ProductVariant::with('product')->where('product_id', $mostSoldProductId)->first());
+            $items->push(ProductVariant::with('product')->where('product_id', $mostSoldProductId)->withTrashed()->first());
         }
 
         return view('livewire.dashboard.cards.bestsellers', [

@@ -2,7 +2,7 @@
 
 <div class="max-w-[294px] xl:min-w-[594px] xl:max-w-[594px] xl:h-[727px] rounded-b-md overflow-hidden">
     <div class="w-full h-[calc(100%-108px)] bg-white flex items-center justify-center overflow-hidden">
-        <img src="{{ $product->defaultImages->medium ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="">
+        <img src="{{ $product->defaultImages->medium }}" alt="">
     </div>
     <div class="bg-color-f2f0eb h-[108px] w-full flex border-y border-color-18181a border-x border-x-color-f2f0eb hover:border-y-color-f2f0eb rounded-b-md transition-all duration-300 group">
         <div class="h-full grow flex flex-col pl-3 xl:pl-5 py-4 relative">

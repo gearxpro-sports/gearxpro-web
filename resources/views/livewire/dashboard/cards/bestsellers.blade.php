@@ -26,7 +26,7 @@
                             <td class="whitespace-nowrap">{{ $item->id }}</td>
                             <td class="whitespace-nowrap">
                                 <div class="w-10 h-10 mx-auto">
-                                    <img src="{{ $item->product->defaultImages->thumb ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $item->product->name }}">
+                                    <img src="{{ $item->product->defaultImages->thumb }}" alt="{{ $item->product->name }}">
                                 </div>
                             </td>
                             <td class="whitespace-nowrap">{{ $item->product->name }}</td>
