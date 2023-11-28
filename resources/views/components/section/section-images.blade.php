@@ -6,10 +6,10 @@
                 we carry
                 excellence
                 forward.</h2>
-            <p class="xl:hidden text-[14px] leading-[21px] text-white mb-7">
+            <!-- <p class="xl:hidden text-[14px] leading-[21px] text-white mb-7">
                 Road markings and street furniture. <br>
                 They’re subtle, still, they don’t shout to be heard, but <br> they’re everywhere.
-            </p>
+            </p> -->
             <div class="w-full xl:hidden mb-10">
                 <x-custom-button text="Ambassador" :icon="'shield'" :link="'/' " width="w-full"/>
             </div>

@@ -2,72 +2,72 @@
 
 return [
     'login' => [
-        'title' => 'Accedi',
-        'description' => 'Inserisci il tuo indirizzo email e la password per accedere all’account.',
+        'title' => 'Log in',
+        'description' => 'Insert your credentials to log in.',
         'email' => [
-            'label'       => 'Indirizzo Email',
-            'placeholder' => 'Entra con la tua email',
+            'label'       => 'Email',
+            'placeholder' => 'Log in with your email',
         ],
         'password' => [
             'label'       => 'Password',
-            'placeholder' => 'Inserisci la tua password',
-            'forgetLink'  => 'Password dimenticata?',
+            'placeholder' => 'Insert your password',
+            'forgetLink'  => 'Password forgot?',
         ],
         'rememberme' => [
-            'label' => 'Ricordami',
+            'label' => 'Remember me',
         ],
-        'submit' => 'Accedi',
+        'submit' => 'Login',
     ],
     'forget_password' => [
-        'title' => 'Recupera password',
-        'description' => 'Inserisci il tuo indirizzo email e ti invieremo per email le istruzioni per reimpostare la password.',
+        'title' => 'Recover your password',
+        'description' => 'Enter your email address and we will email you instructions for resetting your password.',
         'email' => [
-            'label'       => 'Indirizzo Email',
-            'placeholder' => 'Inserisci la tua email',
+            'label'       => 'Email',
+            'placeholder' => 'Insert your email',
         ],
-        'submit' => 'Recupera password',
+        'submit' => 'Recover your password',
     ],
     'reset_password' => [
-        'title' => 'Reimposta password',
-        'description' => 'Inserisci il tuo indirizzo email e la nuova password.',
+        'title' => 'Reset your password',
+        'description' => 'Enter your email address and new password.',
         'email' => [
-            'label'       => 'Indirizzo Email',
-            'placeholder' => 'Inserisci la tua email',
+            'label'       => 'Email',
+            'placeholder' => 'Insert your email',
         ],
         'password' => [
-            'label'       => 'Nuova password',
-            'placeholder' => 'Inserisci la tua nuova password',
+            'label'       => 'New password',
+            'placeholder' => 'Insert your new password',
         ],
         'password_confirmation' => [
-            'label'       => 'Conferma password',
-            'placeholder' => 'Reinserisci la tua nuova password per la conferma',
+            'label'       => 'Confirm password',
+            'placeholder' => 'Re-enter your new password for confirmation',
         ],
-        'submit' => 'Reimposta password',
+        'submit' => 'Reset password',
     ],
     'profile' => [
         'update_password' => [
-            'title' => 'Aggiorna Password',
-            'subtitle' => 'Assicuratevi che il vostro account utilizzi una password lunga e casuale per rimanere al sicuro.',
+            'title' => 'Update Password',
+            'subtitle' => 'Make sure your account uses a long, random password to stay safe.',
             'fields' => [
-                'current_password' => 'Password Attuale',
-                'new_password' => 'Nuova Password',
-                'confirm_password' => 'Conferma Password',
+                'current_password' => 'Actual Password',
+                'new_password' => 'New Password',
+                'confirm_password' => 'Confirm Password',
             ]
         ],
         'delete_account' => [
-            'title' => 'Elimina Account',
-            'subtitle' => 'Una volta cancellato l\'account, tutte le risorse e i dati saranno eliminati in modo permanente. Prima di eliminare l\'account, scaricare tutti i dati e le informazioni che si desidera conservare.',
-            'button' => 'Elimina Account',
+            'title' => 'Delete Account',
+            'subtitle' => 'Once you delete your account, all assets and data will be permanently deleted. Before deleting your account, download any data and information you want to keep.',
+            'button' => 'Delete Account',
             'modal' => [
-                'title' => 'Sei sicuro di voler eliminare il tuo account?',
-                'subtitle' => 'Una volta cancellato l\'account, tutte le sue risorse e i suoi dati saranno eliminati in modo permanente. Inserire la password per confermare la volontà di eliminare definitivamente il proprio account.',
-                'button' => 'Cancella Account'
+                'title' => 'Are you sure to delete your account?',
+                'subtitle' => 'Once you delete your account, all of your assets and data will be permanently deleted. Enter your password to confirm your desire to permanently delete your account.',
+                'button' => 'Delete Account'
             ]
         ],
     ],
     'messages' => [
-        'failed'   => 'Credenziali di acesso errate.',
-        'password' => 'Password non corretta',
-        'throttle' => 'Troppi tentativi di accesso. Riprovare tra :seconds secondi.',
+        'failed'   => 'Bad credentials.',
+        'password' => 'Wrong password',
+        'throttle' => 'Too many attemps. Try again in :seconds seconds.',
     ]
 ];

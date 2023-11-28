@@ -22,14 +22,14 @@ return [
         'button' => 'Acquista ora'
     ],
     'carousel-top' => [
-        'title' => 'Linea prodotto'
+        'title' => 'Product line'
     ],
     'carousel-bottom' => [
-        'title' => 'Bestseller'
+        'title' => 'Best Seller'
     ],
     'products' => [
-        'title' => 'Non puoi mettere un limite a nulla.',
-        'description' => 'Più sogni, più lontano arrivi.',
+        'title' => 'Improve Your Game',
+        'description' => 'Get Started Today',
         'button_filter_on' => 'Mostra filtri',
         'button_filter_off' => 'Nascondi filtri',
         'order' => 'Ordina per',
@@ -122,8 +122,8 @@ return [
         'ssl' => 'I pagamenti sono crittografati con SSL per garantire la massima sicurezza della  tua carta di credito
         e dei tuoi dati di pagamento.',
         'articols' => 'Articoli',
-        'firstname' => 'Nome',
-        'lastname' => 'Cognome',
+        'firstname' => 'Name',
+        'lastname' => 'Last name',
         'address_civic' => 'Indirizzo e numero civico',
         'postcode' => 'Codice Postale',
         'company' => 'Interno/nome azienda (Opzionale)',
@@ -151,14 +151,14 @@ return [
         'button' => 'Torna allo shopping'
     ],
     'footer' => [
-        'brands' => 'BRANDS',
+        'brands' => 'PRODUCTS',
         'my_account' => [
-            'title' => 'Il MIO ACCOUNT',
+            'title' => 'MY ACCOUNT',
             'dashboard' => 'Dashboard',
-            'cart' => 'Carrello',
+            'cart' => 'Cart',
             'checkout' => 'Checkout',
-            'orders' => 'Ordini',
-            'shipment' => 'Spedizioni'
+            'orders' => 'Orders',
+            'shipment' => 'Shipments'
         ],
         'privacy' => 'PRIVACY'
     ],

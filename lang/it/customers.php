@@ -44,29 +44,29 @@ return [
             'payment' => 'Pagamento',
         ],
         'firstname' => [
-            'label' => 'Nome',
+            'label' => 'Name',
         ],
         'lastname' => [
-            'label' => 'Cognome',
+            'label' => 'Last name',
         ],
         'email' => [
             'label' => 'Email',
         ],
         'company' => [
-            'label' => 'Ragione Sociale',
+            'label' => 'Company name',
         ],
         'address' => [
-            'label' => 'Via',
+            'label' => 'Address',
         ],
         'city' => [
-            'label' => 'Città',
+            'label' => 'City',
         ],
         'postcode' => [
-            'label' => 'CAP',
+            'label' => 'Zip code',
         ],
         'country' => [
-            'label' => 'Nazione',
-            'hint' => 'Seleziona la Nazione dove opera questo rivenditore'
+            'label' => 'Country',
+            'hint' => 'Select your country'
         ],
         'vat_number' => [
             'label' => 'Partita IVA',
@@ -84,11 +84,11 @@ return [
             'label' => 'Email PEC',
         ],
         'payment_method' => [
-            'label' => 'Metodo di Pagamento',
+            'label' => 'Payment method',
         ],
         'addresses' => [
-            'shipping' => 'Indirizzo spedizione',
-            'billing' => 'Indirizzo fatturazione'
+            'shipping' => 'Shipping address',
+            'billing' => 'Billing address'
         ],
     ],
     'profile' => 'Profilo',
@@ -105,10 +105,10 @@ return [
             'address' => 'Modifica Indirizzi'
         ],
         'orders' => [
-            'title' => 'Ordini',
-            'order' => 'Ordine',
+            'title' => 'Orders',
+            'order' => 'Order',
             'status' => [
-                'paid' => 'Ordine confermato',
+                'paid' => 'Order confirmed',
                 'in_process' => 'In lavorazione',
                 'in_shipping' => 'In transito',
                 'shipped' => 'Spedito',
@@ -118,19 +118,19 @@ return [
             ]
         ],
     ],
-    'edit_data' => 'Modifica',
+    'edit_data' => 'Update',
     'password' => 'Password',
     'format_password' => [
-        'uppercase' => 'Un carattere in MAIUSCOLO',
-        'lowercase' => 'Un carattere in minuscolo',
-        'number' => 'Un numero',
-        'length' => '8 caratteri',
-        'special_character' => 'Un carattere speciale (&*€%)'
+        'uppercase' => 'One character in UPPERCASE',
+        'lowercase' => 'One character in LOWER CASE',
+        'number' => 'One number',
+        'length' => '8 Characters',
+        'special_character' => 'One special character (&*€%)'
     ],
     'buttons' => [
-        'cancel' => 'Annulla',
-        'save' => 'Salva',
-        'copy_shipping' => 'Uguale a Spedizione',
-        'back' => 'Indietro',
+        'cancel' => 'Clear',
+        'save' => 'Save',
+        'copy_shipping' => 'Like shipping',
+        'back' => 'Back',
     ]
 ];
