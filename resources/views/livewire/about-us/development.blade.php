@@ -52,7 +52,6 @@
                     <livewire:components.card-product
                         wire:key="prod_{{ $product->id }}"
                         :product="$product"
-                        :image="'SOXPro.png'"
                         :availableColors="$productColors[$product->id] ?? []"
                     />
                 @endforeach
@@ -67,7 +66,7 @@
 @push('scripts')
     <script>
         $(document).ready(function(){
-            var carousel_top = new $(".carousel_top").owlCarousel({g
+            var carousel_top = new $(".carousel_top").owlCarousel({
                 items: 3,
                 margin: 30,
                 loop: true,
