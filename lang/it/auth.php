@@ -2,7 +2,7 @@
 
 return [
     'login' => [
-        'title' => 'Accedi',
+        'title' => 'Log in',
         'description' => 'Insert your credentials to log in.',
         'email' => [
             'label'       => 'Email',
