@@ -8,7 +8,7 @@
                     slug="{{$product->slug}}"
                     image="{{ $product->defaultImages->medium ?: Vite::asset('resources/images/placeholder-medium.jpg') }}"
                     title="{{$product->name}}"
-                    description="{{$product->main_desc}}"
+                    description="{!! html_entity_decode($product->main_desc) !!}"
                     :colors="$productColors[$product->id] ?? []"
                     price="{{$product->price}}"
                 />
