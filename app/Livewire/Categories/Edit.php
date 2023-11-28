@@ -8,9 +8,14 @@ use Livewire\Attributes\On;
 use Illuminate\Support\Collection;
 use Illuminate\Contracts\View\View;
 use App\Livewire\Categories\Forms\CategoryForm;
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithFileUploads;
+
 
 class Edit extends Component
 {
+    use WithFileUploads;
+
     /**
      * @var Category
      */
@@ -30,6 +35,8 @@ class Edit extends Component
      * @var Collection
      */
     public Collection $categories;
+
+    public $image = null;
 
     /**
      * @var int|null
@@ -53,6 +60,18 @@ class Edit extends Component
     public function update()
     {
         $this->categoryForm->update();
+
+        if ($this->image) {
+            if ($this->category->image) {
+                storage::disk('public')->delete($this->category->image);
+            }
+
+            $image_path = Storage::disk('public')->put('categories/'. $this->category->name, $this->image);
+
+            $this->category->update([
+                'image' => $image_path
+            ]);
+        }
 
         $this->dispatch('open-notification',
             title: __('notifications.titles.updating'),

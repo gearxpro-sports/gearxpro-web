@@ -3,7 +3,12 @@
 
     <div class="owl-carousel carousel_top">
         @foreach ($categories as $category )
-            <x-card-top id_cat="{{$category['id']}}" title="{{$category['name']}}" description="{{$category['description']}}" image="gear/{{$category['image']}}"/>
+            <x-card-top
+                id_cat="{{$category->id}}"
+                image="{{ $category->image ? asset('storage/'. $category->image) : Vite::asset('resources/images/placeholder-medium.jpg')}}"
+                title="{{$category->name}}"
+                description="{{$category->description}}"
+            />
         @endforeach
     </div>
 </div>
