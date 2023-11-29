@@ -66,7 +66,7 @@ Route::middleware('country')->domain('{country_code}.'.env('APP_URL'))->group(fu
         Route::get('/shop/cart', [CartIndex::class, '__invoke'])->name('cart');
         Route::get('/shop/checkout', [CartCheckout::class, '__invoke'])->name('checkout');
         Route::get('/shop/payment', [CartPayment::class, '__invoke'])->name('payment');
-        Route::get('/shop/{product}', [ProductShow::class, '__invoke'])->name('show');
+        Route::get('/shop/{product}', [ProductShow::class, '__invoke'])->withTrashed()->name('show');
     });
 
     // TODO: check se vista accessibile sempre o solo se c'è un ordine effettuato in precedenza
@@ -129,8 +129,7 @@ Route::middleware(['auth', 'verified', 'set_reseller_missing_data'])->domain(env
             Route::get('/{supply}/invoice', InvoiceShow::class)->name('supply.purchases.invoice');
         });
 
-        // TODO: Inserire accesso superadmin
-        Route::prefix('orders')->middleware(['role:reseller'])->group(function () {
+        Route::prefix('orders')->middleware(['role:reseller|superadmin'])->group(function () {
             Route::get('/', OrdersIndex::class)->name('orders.index');
             Route::get('/{order}', OrderShow::class)->name('orders.show');
         });

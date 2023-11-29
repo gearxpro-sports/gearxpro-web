@@ -58,7 +58,7 @@ class Show extends Component
     //        ],
     //    ];
 
-    public function mount()
+    public function mount(Product $product)
     {
         $this->product->load('variants');
         //        $this->selectedVariant = $this->product->variants->firstWhere('position', 1);
@@ -66,7 +66,14 @@ class Show extends Component
         //        $this->selectedColor = $this->selectedVariant->color->id;
         //        $this->selectedSize = $this->selectedVariant->size->id;
 
-        $this->variants = Country::where('iso2_code', session('country_code'))->first()->reseller->stocks()->with('productVariant')->where('product_id', $this->product->id)->get();
+        $this->variants = Country::where('iso2_code', session('country_code'))
+            ->first()
+            ->reseller
+            ->stocks()
+            ->with('productVariant')
+            ->where('product_id', $this->product->id)
+            ->where('quantity', '>', 0)
+            ->get();
 
         if(!$this->variants->count()) {
             return redirect()->route('shop.index');

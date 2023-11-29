@@ -103,6 +103,7 @@ class Index extends Component
                 },
                 'variants' => function($query) {
                     $query
+                        ->withTrashed()
                         ->without(['product', 'attributes'])
                         ->with(['media', 'terms' => function($query) {
                             $query->whereNotNUll('color');
@@ -144,7 +145,7 @@ class Index extends Component
             }, '>=', count($terms));
         }
 
-        $this->products = $products->get();
+        $this->products = $products->withTrashed()->get();
 
         foreach ($this->products as $product) {
             if ($product->variants->count() > 0) {

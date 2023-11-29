@@ -15,7 +15,7 @@ class ProductAddedToCart extends Component
 
     #[On('product-added-to-cart')]
     public function showModal($variant_id, $quantity) {
-        $this->productVariant = ProductVariant::find($variant_id);
+        $this->productVariant = ProductVariant::withTrashed()->find($variant_id);
         $this->quantity = $quantity;
         $this->showModalCart = true;
     }
