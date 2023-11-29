@@ -26,7 +26,7 @@
     @stack('styles')
     @livewireStyles
 </head>
-<body class="text-gray-900 antialiased">
+<body class="text-gray-900 antialiased bg-color-010101">
 <div>
     <livewire:shop.navigation />
 

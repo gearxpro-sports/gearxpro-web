@@ -7,11 +7,11 @@
 
     <div id="action"
         @class([
-            'w-full pt-9 pb-5 xl:py-9 xl:w-fit xl:my-9 xl:px-12 z-20 bg-color-f2f0eb rounded-md flex items-center cursor-pointer overflow-x-auto scrollBar',
-            $filtersOpen ? '!shadow-none' : 'xl:sticky xl:top-10',
+            'w-full max-h-[184px] pt-9 pb-5 px-4 xl:py-9 lg:w-fit xl:my-9 xl:px-12 z-20 bg-color-f2f0eb rounded-md flex lg:flex-row items-center cursor-pointer overflow-x-auto scrollBar invisible',
+            $filtersOpen ? '!shadow-none' : 'lg:sticky lg:top-28 xl:top-10', '!visible' => $products->count() > 0,
         ])
     >
-        <div id="category" class="hidden xl:hidden w-full items-start justify-between">
+        <div id="category" class="hidden lg:!hidden w-full items-start justify-between">
             <div>
                 <h1 class="w-full bg-color-f2f0eb text-3xl font-bold mb-4 transition-all duration-300">{{$selectedCategory != null ? $selectedCategory->name : '' }}</h1>
                 <p class="text-sm transition-all duration-300 font-semibold text-color-18181a mt-3.5 mb-3">{{__('shop.products.description')}}</p>
@@ -23,8 +23,8 @@
         </div>
 
         <div wire:click="toggleFilters"
-            @class(["w-full xl:w-72 h-11 xl:h-12 bg-transparent rounded-md flex justify-between items-center border border-black hover:border-white group transition-all duration-300", 'hidden xl:flex' => !$selectedCategory])>
-            <div class="h-full rounded-l-md bg-white xl:bg-transparent flex items-center grow relative group-hover:text-white">
+            @class(["w-full lg:w-fit xl:w-72 min-h-[44px] h-11 lg:h-12 bg-transparent rounded-md flex justify-between items-center border border-black hover:border-white group transition-all duration-300 lg:translate-y-0", 'hidden lg:flex' => !$selectedCategory])>
+            <div class="h-full rounded-l-md bg-white lg:bg-transparent flex items-center grow relative group-hover:text-white">
                 <span class="z-10 text-sm xl:text-base font-semibold xl:m-auto px-5 xl:pr-8">
                     @if ($filtersOpen)
                         {{__('shop.products.button_filter_off')}}
@@ -34,14 +34,14 @@
                 </span>
                 <div class="h-full absolute top-0 w-0 bg-black group-hover:animate-line group-hover:w-full rounded-l-md"></div>
             </div>
-            <div class="h-full bg-white xl:bg-transparent border-l border-black group-hover:border-white w-12 flex items-center justify-center group-hover:bg-black rounded-r-md">
+            <div class="h-full bg-white lg:bg-transparent border-l border-black group-hover:border-white w-12 flex items-center justify-center group-hover:bg-black rounded-r-md">
                 <div class="group-hover:invert">
                     <x-icons name="filter_products" />
                 </div>
             </div>
         </div>
 
-        <div @class(["flex pl-4 space-x-2 xl:gap-3.5 xl:ml-7", 'hidden xl:flex' =>$selectedCategory])>
+        <div @class(["flex lg:pl-4 space-x-2 xl:gap-3.5 xl:ml-7", 'hidden lg:flex' =>$selectedCategory])>
             @foreach ($categories as $key => $category )
                 <button
                     wire:key="cat_{{ $key}}"
@@ -58,8 +58,8 @@
     </div>
 
     <div class="relative flex gap-10">
-        <div @class(["z-50 h-[100vh] max-w-0 xl:h-fit bg-color-f2f0eb overflow-auto xl:overflow-hidden scrollBar transition-all delay-150 duration-500 fixed xl:relative w-full inset-0", 'xl:min-w-[231px] max-w-[100%] xl:max-w-[360px] xl:ml-12 xl:mr-20' => $filtersOpen])>
-            <div class="xl:hidden w-full bg-white py-5 flex justify-between items-center px-4 xl:px-0">
+        <div @class(["z-50 lg:z-40 h-screen max-w-0 xl:h-fit bg-color-f2f0eb overflow-auto xl:overflow-hidden scrollBar transition-all delay-150 duration-500 fixed lg:relative w-full inset-0", 'lg:min-w-[231px] max-w-[100%] lg:max-w-[360px] xl:ml-12 xl:mr-20' => $filtersOpen])>
+            <div class="lg:hidden w-full bg-white py-5 flex justify-between items-center px-4 xl:px-0">
                 <h4 class="text-xl font-semibold text-color-18181a ">{{__('shop.products.button_filter_off')}}</h4>
                 <div wire:click="toggleFilters" class="p-2">
                     <x-icons name="x-close" />
@@ -77,7 +77,7 @@
             </div>
 
             {{-- SELECT ORDER MOBILE --}}
-            <div x-data="{opened: false}" class="xl:hidden w-full px-4 pt-4">
+            <div x-data="{opened: false}" class="2xl:hidden w-full px-4 xl:px-0 pt-4">
                 <div @click="opened = !opened" class="flex justify-between items-center pb-4 border-b border-color-e0e0df cursor-pointer">
                     <h5 class="font-medium text-color-18181a uppercase">{{__('shop.products.order')}}</h5>
                     <span class="invisible transition-all duration-300 ease-out opacity-20" :class="opened && '!visible !opacity-100'">
@@ -191,9 +191,9 @@
             </div>
         </div>
 
-        <div class="w-full relative" wire:loading.class="opacity-25">
+        <div class="w-full relative lg:-ml-9" wire:loading.class="opacity-25">
             {{-- SELECT ORDER --}}
-            <div class="hidden lg:block absolute top-[-120px] right-0">
+            <div class="hidden 2xl:block absolute top-[-120px] right-0">
                 <div x-data="{opened: false}" class="flex gap-2 items-center">
                     <label class="text-[15px] font-medium text-color-6c757d">{{ __('shop.products.order') }}</label>
                     <div class="relative h-[48px] w-[206px]">
@@ -222,19 +222,24 @@
                 </div>
             </div>
 
-            @if($products->count() > 0)
-                <div id="cards" @class(["w-full px-4 xl:px-0 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 xl:gap-5 relative",'xl:!grid-cols-3' => $filtersOpen])>
-                    @foreach ($products as $product )
-                        <livewire:components.card-product
-                          wire:key="prod_{{ $product->id }}"
-                          :product="$product"
-                          :image="'SOXPro.png'"
-                          :availableColors="$productColors[$product->id] ?? []"
-                        />
-                    @endforeach
+            <div id="cards" @class(["w-full px-4 xl:px-0 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 xl:gap-5 relative invisible",'lg:!grid-cols-3' => $filtersOpen, '!visible' => $products->count() > 0])>
+                @foreach ($products as $product )
+                    <livewire:components.card-product
+                        wire:key="prod_{{ $product->id }}"
+                        :product="$product"
+                        :image="'SOXPro.png'"
+                        :availableColors="$productColors[$product->id] ?? []"
+                    />
+                @endforeach
+            </div>
+
+            @if ($products->count() < 1)
+                <div @class(["text-2xl p-10 bg-white text-center font-bold"])>
+                    {{ __('shop.products.not_found') }}
+                    <button wire:click="resetCategory()" class="group">
+                        <x-icons name="arrow-right-xl" class="absolute top-0 right-4 rotate-180 scale-150"/>
+                    </button>
                 </div>
-            @else
-                <div class="p-10 bg-white text-center font-bold">{{ __('shop.products.not_found') }}</div>
             @endif
         </div>
     </div>
@@ -255,23 +260,23 @@
                     window.scrollTo(0,0);
                     title.classList.add("hidden");
                     category.classList.add("!flex");
-                    actionContainer.classList.add("fixed", "top-[106px]", "left-0", "flex-col", "px-4", "!items-start", "rounded-none");
-                    containerCard.classList.add("pt-[125px]","xl:pt-0");
+                    actionContainer.classList.add("fixed", "top-[106px]", "left-0", "flex-col", "!items-start", "rounded-none");
+                    containerCard.classList.add("pt-[125px]","lg:pt-0");
                 } else {
                     title.classList.remove("hidden");
-                    actionContainer.classList.remove("fixed", "top-[106px]", "left-0", "flex-col", "px-4", "!items-start", "rounded-none");
-                    containerCard.classList.remove("pt-[125px]","xl:pt-0");
+                    actionContainer.classList.remove("fixed", "top-[106px]", "left-0", "flex-col", "!items-start", "rounded-none");
+                    containerCard.classList.remove("pt-[125px]","lg:pt-0");
                 }
             })
         });
 
         window.onscroll = function(e) {
             if (this.oldScroll > this.scrollY) {
-                action.classList.add("pb-5");
+                action.classList.remove('!max-h-[150px]')
                 action.childNodes[3].classList.remove("translate-y-[-35px]");
             } else {
                 if (@this.selectedCategory) {
-                    action.classList.remove("pb-5");
+                    action.classList.add('!max-h-[150px]', "transition-all", "duration-300")
                     action.childNodes[3].classList.add("translate-y-[-35px]");
                 }
             }
@@ -289,12 +294,13 @@
 
             if (window.matchMedia("(max-width: 820px)").matches) {
                 if (@this.selectedCategory == null) {
-                    if (scrollPosition >= 138) {
+                    if (scrollPosition >= 100) {
+                        console.log('si');
                         actionContainer.classList.add("fixed", "top-[105px]", "left-0", "shadow");
-                        containerCard.classList.add("pt-[120px]","xl:pt-0");
+                        containerCard.classList.add("pt-[110px]","xl:pt-0");
                     }  else {
                         actionContainer.classList.remove("fixed", "top-[105px]", "left-0", "shadow");
-                        containerCard.classList.remove("pt-[120px]", "xl:pt-0");
+                        containerCard.classList.remove("pt-[110px]", "xl:pt-0");
                     }
                 }
 
