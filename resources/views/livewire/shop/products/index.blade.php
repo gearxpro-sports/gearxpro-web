@@ -1,4 +1,4 @@
-<div class="bg-color-f2f0eb py-8 xl:px-10 xl:py-20">
+<div class="bg-color-f2f0eb py-8 h-fit xl:px-10 xl:py-20">
 
     <div id="title" class="px-4 xl:px-0">
         <h1 class="text-3xl xl:text-7xl font-bold text-color-18181a">{{__('shop.products.title')}}</h1>
@@ -7,8 +7,8 @@
 
     <div id="action"
         @class([
-            'w-full max-h-[184px] pt-9 pb-5 px-4 xl:py-9 lg:w-fit xl:my-9 xl:px-12 z-20 bg-color-f2f0eb rounded-md flex lg:flex-row items-center cursor-pointer overflow-x-auto scrollBar invisible',
-            $filtersOpen ? '!shadow-none' : 'lg:sticky lg:top-28 xl:top-10', '!visible' => $products->count() > 0,
+            'w-full max-h-[184px] py-5 px-4 xl:py-9 lg:w-fit xl:my-9 xl:px-12 z-20 bg-color-f2f0eb rounded-md flex lg:flex-row items-center cursor-pointer overflow-x-auto scrollBar',
+            $filtersOpen ? '!shadow-none' : 'lg:sticky lg:top-28 xl:top-10', 'invisible lg:visible' => $products->count() < 1,
         ])
     >
         <div id="category" class="hidden lg:!hidden w-full items-start justify-between">
@@ -234,10 +234,10 @@
             </div>
 
             @if ($products->count() < 1)
-                <div @class(["text-2xl p-10 bg-white text-center font-bold"])>
+                <div @class(["w-full xl:w-[calc(100%-80px)] fixed top-44 lg:top-80 xl:top-[496px] md:text-2xl p-10 bg-white text-center font-bold"])>
                     {{ __('shop.products.not_found') }}
-                    <button wire:click="resetCategory()" class="group">
-                        <x-icons name="arrow-right-xl" class="absolute top-0 right-4 rotate-180 scale-150"/>
+                    <button wire:click="resetCategory()" class="group absolute top-4 right-4 lg:hidden">
+                        <x-icons name="arrow-right-xl" class="rotate-180 scale-150"/>
                     </button>
                 </div>
             @endif
@@ -287,9 +287,9 @@
             scrollPosition = window.scrollY;
 
             if (scrollPosition >= 300) {
-                actionContainer.classList.add('xl:shadow-md');
+                actionContainer.classList.add('lg:shadow-md');
             } else {
-                actionContainer.classList.remove('xl:shadow-md');
+                actionContainer.classList.remove('lg:shadow-md');
             }
 
             if (window.matchMedia("(max-width: 820px)").matches) {
