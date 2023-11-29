@@ -19,7 +19,11 @@
                                         class="inline-flex items-center space-x-3 py-1 border border-transparent text-sm leading-5 rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition">
                                     <div
                                         class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                        <div class="h-8 w-8 rounded-full bg-red-500"></div>
+                                        @role(\App\Models\User::RESELLER)
+                                        <div class="flex items-center justify-center h-8 w-8 overflow-hidden rounded-full">
+                                            <img class="object-cover object-center h-full w-full aspect-square" src="https://flagcdn.com/{{ auth()->user()->country_code }}.svg">
+                                        </div>
+                                        @endrole
                                     </div>
                                     <div class="flex flex-col items-start">
                                         <span class="text-white">{{ Auth::user()->fullname }}</span>
