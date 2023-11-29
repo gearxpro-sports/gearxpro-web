@@ -86,6 +86,7 @@ class Index extends Component
                 'password' => $this->password,
                 'country_id' => Country::where('iso2_code', session('country_code'))->first()->id
             ]);
+            $user->assignRole(User::CUSTOMER);
             // $this->dispatch('user', $user);
             Auth::login($user);
 
