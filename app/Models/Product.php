@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Vite;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +15,7 @@ use stdClass;
 
 class Product extends Model
 {
-    use HasFactory, HasTranslations, Searchable;
+    use HasFactory, HasTranslations, Searchable, SoftDeletes;
 
     /**
      * @var array
@@ -28,6 +30,10 @@ class Product extends Model
         'slug',
         'meta_title',
         'meta_description',
+    ];
+
+    protected $appends = [
+        'variants_combinations_array',
     ];
 
     /**
@@ -57,10 +63,36 @@ class Product extends Model
     {
         $defaultVariant = $this->variants->first();
 
+        if (!$defaultVariant) {
+            return (object) [
+                'thumb'  => Vite::asset('resources/images/placeholder-medium.jpg'),
+                'medium' => Vite::asset('resources/images/placeholder-medium.jpg'),
+            ];
+        }
+
         return (object) [
             'thumb'  => $defaultVariant->getThumbUrl(),
             'medium' => $defaultVariant->getThumbUrl('medium'),
         ];
+    }
+
+    public function getVariantsCombinationsArrayAttribute()
+    {
+        // Ottenere i ProductVariant in stock legati al Product
+        $variantsInStock = $this->variants()->withTrashed()->whereHas('stocks', function($query) {
+            $query->where('user_id', session('reseller_id'));
+            $query->where('quantity', '>', 0);
+        })->with('terms')->get();
+
+        // Creare un array con chiavi composte dagli ID dei termini di attributo
+        $attributeArray = [];
+        foreach ($variantsInStock as $variant) {
+            $terms = $variant->terms;
+            $key = implode('-', $terms->pluck('id')->toArray());
+            $attributeArray[] = $key;
+        }
+
+        return $attributeArray;
     }
 
     /**

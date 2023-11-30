@@ -58,7 +58,7 @@ class Show extends Component
     //        ],
     //    ];
 
-    public function mount()
+    public function mount(Product $product)
     {
         $this->product->load('variants');
         //        $this->selectedVariant = $this->product->variants->firstWhere('position', 1);
@@ -66,7 +66,14 @@ class Show extends Component
         //        $this->selectedColor = $this->selectedVariant->color->id;
         //        $this->selectedSize = $this->selectedVariant->size->id;
 
-        $this->variants = Country::where('iso2_code', session('country_code'))->first()->reseller->stocks()->with('productVariant')->where('product_id', $this->product->id)->get();
+        $this->variants = Country::where('iso2_code', session('country_code'))
+            ->first()
+            ->reseller
+            ->stocks()
+            ->with('productVariant')
+            ->where('product_id', $this->product->id)
+            ->where('quantity', '>', 0)
+            ->get();
 
         if(!$this->variants->count()) {
             return redirect()->route('shop.index');
@@ -74,6 +81,9 @@ class Show extends Component
 
         $this->terms = collect();
         foreach ($this->variants as $stock) {
+            if (!$stock->productVariant) {
+                continue;
+            }
             $this->terms = $this->terms->merge($stock->productVariant->terms);
         }
 
@@ -112,6 +122,9 @@ class Show extends Component
         }
 
         foreach ($this->variants as $stock) {
+            if (!$stock->productVariant) {
+                continue;
+            }
             foreach ($stock->productVariant->getMedia('products') as $media) {
                 $this->images[$stock->product->id] = $stock->productVariant->getMedia('products');
                 $this->allColors->put($stock->productVariant->color->id, [
@@ -177,6 +190,9 @@ class Show extends Component
         $this->variants = $variants->get();
         $this->images = [];
         foreach ($this->variants as $stock) {
+            if (!$stock->productVariant) {
+                continue;
+            }
             foreach ($stock->productVariant->getMedia('products') as $media) {
                 if (!array_key_exists($stock->productVariant->product->id, $this->images)) {
                     $this->images[$stock->productVariant->product->id] = $stock->productVariant->getMedia('products');
@@ -245,6 +261,9 @@ class Show extends Component
         $terms = collect();
 
         foreach ($this->variants as $stock) {
+            if (!$stock->productVariant) {
+                continue;
+            }
             $terms = $terms->merge($stock->productVariant->terms);
         }
 

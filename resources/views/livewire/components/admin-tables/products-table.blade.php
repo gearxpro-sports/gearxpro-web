@@ -45,7 +45,7 @@
                             <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="{{ route('products.edit', ['product' => $product->slug]) }}">
                                 <x-icons name="edit" class="w-4 h-4" />
                             </a>
-                            <button type="button" class="flex items-center justify-center bg-color-e54f33 text-white w-8 h-8 text-center rounded-sm" wire:click="deleteProduct({{ $product->id }})" wire:confirm="{{ __('products.index.alert.delete_product') }}">
+                            <button type="button" class="flex items-center justify-center bg-color-e54f33 text-white w-8 h-8 text-center rounded-sm" wire:click="deleteProduct('{{ $product->slug }}')" wire:confirm="{{ __('products.index.alert.delete_product') }}">
                                 <x-icons name="trash" class="w-3 h-3" />
                             </button>
                         </div>

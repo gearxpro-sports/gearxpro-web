@@ -59,7 +59,10 @@
             </div>
 
             @foreach($supply->rows as $row)
-                @php($variant = \App\Models\ProductVariant::find($row->product->id))
+                @php($variant = \App\Models\ProductVariant::where('id', $row->product->id)->withTrashed()->first())
+                @if (!$variant)
+                    @continue
+                @endif
                 <div class="flex !border-x border-x-gray-400 !divide-x !divide-x-gray-400 h-9">
                     <div class="w-52 print:w-32 relative border border-gray-400 py-2 text-xs !border-t-0 !border-x-0">
                         <div class="mx-2 uppercase min-h-[18px] !mt-0">

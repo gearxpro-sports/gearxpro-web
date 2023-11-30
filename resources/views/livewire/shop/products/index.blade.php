@@ -17,7 +17,7 @@
                 <p class="text-sm transition-all duration-300 font-semibold text-color-18181a mt-3.5 mb-3">{{__('shop.products.description')}}</p>
             </div>
 
-            <button wire:click="resetCategory()" class="group">
+            <button wire:click="resetCategory" class="group">
                 <x-icons name="arrow-right-xl" class="rotate-180 group-hover:translate-x-[-8px] duration-300 transition-all scale-150"/>
             </button>
         </div>
@@ -71,7 +71,7 @@
 
             <div class="hidden xl:flex w-full pb-5 justify-between items-center border-b border-color-18181a">
                 <h4 class="text-xl font-semibold text-color-18181a ">{{ $products->count() }} {{ __('shop.products.results') }}</h4>
-                @if ($selectedCategory || $selectedColors || $selectedSizes)
+                @if ($selectedCategory || $selectedColorId || $selectedSizeId)
                 <a href="#" wire:click.prevent="clearFilters" class="text-xs font-medium text-color-6c757d">{{ __('shop.products.remove_filters') }} x</a>
                 @endif
             </div>
@@ -152,7 +152,7 @@
                                     class="cursor-pointer h-8 w-8 rounded-full p-0.5 focus:outline-none ring-transparent ring ring-offset-2 ring-offset-color-f2f0eb"
                                     @style([
                                         'background-color : '.$color,
-                                        '--tw-ring-color: '.$color => in_array($id, $selectedColors)
+                                        '--tw-ring-color: '.$color => $id === $selectedColorId
                                     ])
                                     wire:click="selectColors('{{ $id }}')"
                                 >
@@ -178,7 +178,7 @@
                                     wire:click="selectSizes('{{ $id }}')"
                                     @class([
                                         'w-12 h-11 bg-color-edebe5 border border-color-e0e0df rounded flex items-center justify-center text-sm font-medium uppercase cursor-pointer hover:bg-color-18181a hover:text-white',
-                                        '!bg-color-18181a !text-white' => in_array($id, $selectedSizes)
+                                        '!bg-color-18181a !text-white' => $id === $selectedSizeId
                                     ])
                                 >
                                     {{ $size }}

@@ -15,7 +15,7 @@
 
             <div class="flex space-x-5 xl:border border-color-f2f0eb p-1">
                 <div class="w-20 h-20 xl:w-28 xl:h-28 overflow-hidden">
-                    <img src="{{ $productVariant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $productVariant->product->name }}">
+                    <img src="{{ $productVariant->getThumbUrl() }}" alt="{{ $productVariant->product->name }}">
                 </div>
                 <div class="flex flex-col gap-1 xl:gap-0">
                     <h4 class="text-sm font-bold xl:font-semibold text-white xl:text-color-18181a">{{ $productVariant->product->name }}</h4>

@@ -19,7 +19,7 @@
         <div class="col-span-12 px-4 md:px-8 lg:col-span-5 xl:col-start-8 lg:py-10">
             {{-- detail --}}
             <div>
-                <span class="text-sm xl:text-[17px] leading-[28px] text-color-6c757d">{{$product->name}}</span>
+                <span class="text-sm xl:text-[17px] leading-[28px] text-color-6c757d">{!! $product->categories?->first()->name ?? '&nbsp;' !!}</span>
                 <h1 class="text-xl xl:text-3xl font-semibold leading-[40px] text-color-18181a">{{$product->name}}</h1>
                 <p class="text-base xl:text-[21px] font-medium leading-[38px] text-color-18181a">@money($product->price)</p>
             </div>
@@ -84,7 +84,7 @@
                                                 $selectedColor == $color['id'] ? 'ring ring-offset-2' : 'border border-gray-800'])
                                             style="--tw-ring-color: {{$color['color']}}"
                                         >
-                                            <img src="{{ $color['image'] }}" alt=""
+                                            <img src="{{ $color['image'] ?? Vite::asset('resources/images/placeholder-medium.jpg') }}" alt=""
                                                  class="p-[3px] object-contain aspect-square">
                                         </div>
                                     @endif

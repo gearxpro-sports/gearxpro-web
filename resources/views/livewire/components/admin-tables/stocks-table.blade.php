@@ -21,7 +21,11 @@
             </thead>
             <tbody>
                 @foreach ($stocks as $stock)
-                <tr class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
+                <tr @class([
+                    '[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50',
+                    '!bg-red-50' => $stock->productVariant->trashed() && $stock->quantity <= 0,
+                    ])
+                >
                     <td>
                         <div class="flex flex-col space-y-1">
                             <span class="font-semibold text-sm">{{ $stock->productVariant->product->name }}</span>
@@ -48,9 +52,11 @@
                         <div>
                     </td>
                     <td class="text-right">
+                        @if (!$stock->productVariant->trashed() || $stock->quantity > 0)
                         <a target="_blank" class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="{{ route('shop.show', ['product' => $stock->product->slug, 'country_code' => session('country_code')]) }}">
                             <x-icons name="eye" class="w-4 h-4" />
                         </a>
+                        @endif
                     </td>
                 </tr>
                 @endforeach

@@ -155,7 +155,7 @@ class Payment extends Component
                 'type' => 'shipping'
             ],
                 [
-                    'country_id' => $this->customer->country_id,
+                    'country_id' => $this->customer->country_id ?? Country::where('iso2_code', session('country_code'))->first()->id,
                     'address_1' => trim($this->shipping_address) . ' ' . trim($this->shipping_civic),
                     'postcode' => $this->shipping_postcode,
                     'city' => $this->shipping_city,
@@ -178,7 +178,7 @@ class Payment extends Component
         } elseif ($this->currentTab === 1) {
 
             $addressHiddenFields = ['id', 'user_id', 'country_id', 'type', 'default', 'created_at', 'updated_at'];
-            $country = $this->customer->country;
+            $country = $this->customer->country ?? Country::where('iso2_code', session('country_code'))->first();
             $orderItems = [];
             $total = 0;
             foreach ($this->cart->items as $cartItem) {
@@ -195,7 +195,7 @@ class Payment extends Component
             $order = Order::create([
                 'reference' => Str::random(10),
                 'user_id' => $this->customer->id,
-                'reseller_id' => $country->reseller->id,
+                'reseller_id' => session('reseller_id'),
                 'country_id' => $country->id,
                 'status' => Order::PAID_STATUS,
                 'payment_method' => Order::STRIPE_PAYMENT,

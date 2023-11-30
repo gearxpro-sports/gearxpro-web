@@ -127,12 +127,15 @@
                 </thead>
                 <tbody>
                 @foreach ($order->items as $item)
-                    @php($variant = \App\Models\ProductVariant::find($item->variant_id))
+                    @php($variant = \App\Models\ProductVariant::where('id', $item->variant_id)->withTrashed()->first())
+                    @if (!$variant)
+                        @continue
+                    @endif
                     <tr class="[&>td]:p-4 [&>td]:px-7 border-t border-color-eff0f0 hover:bg-color-eff0f0/50">
                         <td class="text-left">
                             <div class="flex items-center space-x-4">
                                 <div>
-                                    <img class="w-10" src="{{ $variant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg') }}" alt="{{ $variant->product->name }}">
+                                    <img class="w-10" src="{{ $variant->getThumbUrl() }}" alt="{{ $variant->product->name }}">
                                 </div>
                                 <div>
                                     {{ $variant->product->name }}
