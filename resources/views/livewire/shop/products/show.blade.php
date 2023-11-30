@@ -7,7 +7,7 @@
         </a>
 
         <div dir="ltr"
-             class="flex lg:flex-col col-span-12 lg:col-span-7 xl:h-[1104px] overflow-auto scrollBar lg:gap-4 p-8 xl:p-0 snap-mandatory snap-x lg:snap-y relative">
+             class="flex lg:flex-col col-span-12 lg:col-span-7 2xl:h-[1104px] overflow-auto scrollBar lg:gap-4 p-8 xl:p-0 snap-mandatory snap-x lg:snap-y relative">
             @foreach ($images as $k => $media_collection)
                 @foreach($media_collection as $image)
                     <img class="snap-center w-full scroll-ms-6 shrink-0" src="{{ $image->getUrl() }}" alt="">
@@ -21,8 +21,7 @@
             <div>
                 <span class="text-sm xl:text-[17px] leading-[28px] text-color-6c757d">{{$product->name}}</span>
                 <h1 class="text-xl xl:text-3xl font-semibold leading-[40px] text-color-18181a">{{$product->name}}</h1>
-                <p class="text-base xl:text-[21px] font-medium leading-[38px] text-color-18181a">
-                    @money($product->price)</p>
+                <p class="text-base xl:text-[21px] font-medium leading-[38px] text-color-18181a">@money($product->price)</p>
             </div>
 
             <div class="w-full xl:max-w-md mt-6 xl:mt-10 space-y-10">
@@ -186,7 +185,7 @@
         </div>
 
         {{-- info product --}}
-        <div class="hidden lg:block px-8 xl:p-0 lg:col-span-12 xl:col-start-3 xl:col-span-8 xl:mt-16">
+        <div class="hidden lg:block px-8 xl:p-0 lg:col-span-12 2xl:col-start-3 2xl:col-span-8 xl:mt-16">
             {{-- section button --}}
             <div class="w-full h-[58px] rounded-md bg-color-edebe5 flex items-center gap-[10px] mb-8">
                 @foreach($tabs as $k => $tab)

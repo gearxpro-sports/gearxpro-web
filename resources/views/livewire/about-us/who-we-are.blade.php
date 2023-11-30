@@ -1,4 +1,4 @@
-<div class="w-full h-fit bg-color-18181a grid grid-cols-12">
+<div class="w-full h-fit bg-color-010101 grid grid-cols-12">
     <div class="col-span-12 h-[744px] xl:h-[1080px] relative overflow-hidden">
         <div class="absolute w-full h-full bg-about_us_1_mb sm:bg-about_us_1 bg-cover bg-center bg-no-repeat"></div>
         <div class="w-full absolute px-4 xl:p-0 top-[40%] sm:top-[60%] text-center z-10">
@@ -10,7 +10,7 @@
     </div>
 
     <div class="col-span-12 h-[850px] xl:h-[1080px] relative">
-        <div class="absolute w-full h-full row-span-6 bg-about_us_2_mb lg:bg-about_us_2 xl:bg-fixed bg-cover bg-center bg-no-repeat whoweare-bg"></div>
+        <div class="absolute w-full h-full row-span-6 bg-about_us_2_mb lg:bg-about_us_2 xl:bg-fixed bg-cover 2xl:bg-center bg-no-repeat whoweare-bg"></div>
         <div class="w-full px-4 xl:p-0 h-full absolute z-10 flex flex-col items-center justify-center">
             <h2 class="text-2xl xl:text-6xl text-white text-center font-bold leading-10 xl:leading-[60px] mb-5">
                 An entrepreneurial reality capable. <br class="hidden xl:block">
@@ -27,7 +27,7 @@
 
     <div class="col-span-12 h-[850px] xl:h-[1080px] relative">
         <div class="absolute w-full h-full row-span-6 bg-about_us_3 bg-cover bg-center bg-no-repeat"></div>
-        <div class="absolute px-4 xl:p-0 w-full h-full z-10 flex items-center justify-center">
+        <div class="absolute px-4 2xl:p-0 w-full h-full z-10 flex items-center justify-center">
             <p class="text-2xl xl:text-4xl text-center text-white leading-10">
                 GEARXPro is the embodiment of a singular, Italian idea, <br class="hidden xl:block">
                 which with perseverance, dedication and passion has led to the birth of a solid <br class="hidden xl:block">
@@ -37,7 +37,7 @@
     </div>
 
     <div class="col-span-12 h-[850px] xl:h-[1080px] relative">
-        <div class="absolute w-full h-full row-span-6 bg-about_us_3_mb xl:bg-about_us_4 xl:bg-fixed bg-cover bg-center bg-no-repeat whoweare-bg"></div>
+        <div class="absolute w-full h-full row-span-6 bg-about_us_3_mb xl:bg-about_us_4 xl:bg-fixed bg-cover 2xl:bg-center bg-no-repeat whoweare-bg"></div>
         <div class="absolute w-full h-full z-10 flex items-center justify-center">
             <div class="absolute px-4 xl:p-0 w-full h-full z-10 flex flex-col items-center justify-center mt-[-20px]">
                 <h2 class="text-8xl xl:text-[280px] leading-[120px] xl:leading-[320px] text-white/60 bg-clip-text font-black brightness-200 uppercase whoweare-h2">vision</h2>
@@ -70,7 +70,7 @@
     </div>
 
     <div class="col-span-12 h-[850px] xl:h-[1080px] relative">
-        <div class="absolute w-full h-full row-span-6 bg-about_us_4_mb sm:bg-about_us_6 xl:bg-fixed bg-cover bg-center bg-no-repeat"></div>
+        <div class="absolute w-full h-full row-span-6 bg-about_us_4_mb sm:bg-about_us_6 xl:bg-fixed bg-contain 2xl:bg-cover bg-center bg-no-repeat"></div>
         <div class="absolute px-4 xl:p-0 w-full h-full z-10 flex items-center justify-center">
             <div class="absolute px-4 xl:p-0 w-full h-full z-10 flex flex-col items-center justify-center mt-[-90px]">
                 <h2 class="text-7xl xl:text-[280px] leading-[120px] xl:leading-[320px] text-color-217285/40 font-black brightness-200 uppercase whoweare-h2">mission</h2>
@@ -90,7 +90,7 @@
 
 
     {{-- year --}}
-    <div class="hidden xl:block col-span-12">
+    <div class="hidden 2xl:block col-span-12">
         <x-about-us.year height="h-[1080px]" bg_image="bg-about_us_2018" year="2018">
             <div class="z-20 w-fit absolute top-56 left-9 flex flex-col gap-5">
                 <img class="w-fit" src="{{ Vite::asset('resources/images/logo_soxpro.png')}}" alt="">

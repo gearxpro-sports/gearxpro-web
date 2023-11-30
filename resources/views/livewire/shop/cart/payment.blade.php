@@ -1,5 +1,5 @@
 <div class="w-full max-w-7xl mx-auto">
-    <div class="flex flex-col xl:flex-row px-4 pt-8 pb-20 xl:px-0 xl:gap-16 xl:py-20">
+    <div class="flex flex-col md:flex-row px-4 pt-8 pb-20 xl:px-0 md:gap-16 xl:py-20">
         <div class="space-y-6 xl:space-y-12">
             <h1 class="text-xl xl:text-3xl font-semibold text-color-18181a capitalize">{{__('shop.payment.payment')}}</h1>
 
@@ -18,7 +18,7 @@
                 @endforeach
             </div>
 
-            <div class="space-y-6 xl:space-y-12 flex flex-col-reverse xl:flex-col">
+            <div class="space-y-6 md:space-y-12 flex flex-col-reverse md:flex-col">
                 {{-- dettaglio carrello --}}
                 <div>
                     <h2 class="hidden xl:block text-xl font-semibold text-color-18181a mb-3.5">{{__('shop.payment.in_to_cart')}}</h2>
@@ -102,7 +102,7 @@
         </div>
 
         {{-- Recapiti e consegna --}}
-        <form wire:submit="next" @class(["pt-8 xl:pt-20 w-full", $currentTab === 1 ? 'hidden' : ''])>
+        <form wire:submit="next" @class(["pt-8 md:pt-0 xl:pt-20 w-full", $currentTab === 1 ? 'hidden' : ''])>
             <h2 class="text-xl font-semibold text-color-18181a mb-3.5">{{__('shop.payment.address')}}</h2>
 
             <div class="flex flex-col xl:flex-row gap-5">
@@ -126,7 +126,7 @@
                               label="phone" required="true"/>
             </div>
 
-            <div class="mt-10 flex flex-col xl:flex-row gap-5 xl:gap-0 items-center justify-between px-9 xl:px-0">
+            <div class="mt-10 flex flex-col md:flex-row gap-5 xl:gap-0 items-center justify-between px-9 md:px-0">
                 <div class="w-full max-w-xs">
                     <x-shop.shopping-button href="{{ route('shop.cart', ['country_code' => session('country_code')]) }}"
                                             color="transparent"
@@ -200,7 +200,7 @@
                                   required="true"/>
 
                     <div
-                        class="mt-10 flex flex-col xl:flex-row gap-5 xl:gap-0 items-center justify-between px-9 xl:px-0">
+                        class="mt-10 flex flex-col md:flex-row gap-5 xl:gap-0 items-center justify-between px-9 md:px-0">
                         <div class="w-full max-w-xs">
                             <x-shop.shopping-button
                                 href="{{ route('shop.cart', ['country_code' => session('country_code')]) }}"
