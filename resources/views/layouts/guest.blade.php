@@ -26,7 +26,7 @@
     @stack('styles')
     @livewireStyles
 </head>
-<body class="text-gray-900 antialiased">
+<body class="text-gray-900 antialiased bg-color-010101">
 <div>
     <livewire:shop.navigation />
 
@@ -39,6 +39,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="https://unpkg.com/default-passive-events"></script>
 <x-notification></x-notification>
 @livewireScriptConfig
 @livewire('wire-elements-modal')

@@ -1,4 +1,4 @@
-<div class="rounded-b-md overflow-hidden max-w-[280px] xl:max-w-none">
+<div class="rounded-b-md overflow-hidden max-w-[280px] md:max-w-[315px] xl:max-w-[560px]">
     <div class="bg-white flex items-center justify-center overflow-hidden">
         <img class="w-full p-10" src="{{ $product->defaultImages->medium }}" alt="{{ $product->name }}">
     </div>

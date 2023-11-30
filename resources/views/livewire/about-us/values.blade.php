@@ -53,11 +53,11 @@
 
     <div id="pagepiling">
         <div class="section relative grid grid-cols-12 grid-rows-6 overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-[100vh] bg-about_us_10_mb xl:bg-about_us_10 bg-center bg-cover bg-no-repeat"></div>
+            <div class="absolute top-0 left-0 w-full h-[100vh] bg-about_us_10_mb sm:bg-about_us_10 bg-center bg-cover bg-no-repeat"></div>
 
-            <div class="z-10 row-start-2 xl:row-start-4 col-start-2 col-span-10 pt-14 xl:pt-10">
-                <h3 class="text-center text-2xl xl:text-[59px] font-bold leading-10 xl:leading-[124px] tracking-[0px] text-white mb-3">Uniqueness, Integrity, Environment and Respect.</h3>
-                <p class="text-center text-lg xl:text-[44px] xl:leading-[1px] tracking-[0px] text-white">Our values are clear and govern our work.</p>
+            <div class="w-full z-10 px-4 xl:p-0 absolute top-[30%] sm:top-[50%]">
+                <h3 class="text-center text-2xl sm:text-4xl xl:text-6xl font-bold leading-10 xl:leading-[124px] tracking-[0px] text-white mb-3">Uniqueness, Integrity, Environment and Respect.</h3>
+                <p class="text-center text-lg sm:text-3xl xl:text-5xl xl:leading-[1px] tracking-[0px] text-white">Our values are clear and govern our work.</p>
             </div>
         </div>
 
