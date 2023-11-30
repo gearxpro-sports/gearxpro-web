@@ -6,6 +6,7 @@ use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Product;
+use App\Models\Stock;
 use App\Models\Term;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -64,14 +65,14 @@ class Index extends Component
     public ?Category $selectedCategory = null;
 
     /**
-     * @var array
+     * @var int|null
      */
-    public array $selectedColors = [];
+    public ?int $selectedColorId = null;
 
     /**
-     * @var array
+     * @var int|null
      */
-    public array $selectedSizes = [];
+    public ?int $selectedSizeId = null;
 
     public function mount(Request $request)
     {
@@ -103,11 +104,11 @@ class Index extends Component
                 },
                 'variants' => function($query) {
                     $query
-                        ->withTrashed()
                         ->without(['product', 'attributes'])
                         ->with(['media', 'terms' => function($query) {
                             $query->whereNotNUll('color');
                         }])
+                        ->withTrashed()
                     ;
                 },
             ])
@@ -138,21 +139,43 @@ class Index extends Component
             });
         }
 
-        if ($this->selectedColors || $this->selectedSizes) {
-            $terms = array_merge($this->selectedColors, $this->selectedSizes);
-            $products->whereHas('variants.terms', function(Builder $query) use ($terms) {
-                $query->whereIn('id', $terms);
-            }, '>=', count($terms));
-        }
+//        if ($this->selectedColorId || $this->selectedSizeId) {
+//            $terms = array_merge($this->selectedColors, $this->selectedSizes);
+//            $products->whereHas('variants.terms', function(Builder $query) use ($terms) {
+//                $query->whereIn('id', $terms);
+//            }, '>=', count($terms));
+//        }
+
 
         $this->products = $products->withTrashed()->get();
 
-        foreach ($this->products as $product) {
-            if ($product->variants->count() > 0) {
-                foreach ($product->variants as $variant) {
-                    $this->productColors[$product->id][] = $variant->color?->color;
+        if ($this->selectedColorId || $this->selectedSizeId) {
+
+            $filters = array_filter([$this->selectedColorId, $this->selectedSizeId]);
+
+            $this->products = $this->products->filter(function($product) use ($filters) {
+                foreach ($product->variants_combinations_array as $termIds) {
+                    if (count(array_intersect($filters, explode('-', $termIds))) === count($filters)) {
+                        return true;
+                    }
                 }
-                $this->productColors[$product->id] = array_unique($this->productColors[$product->id]);
+                return false;
+            });
+        }
+
+        foreach ($this->products as $product) {
+            $stocks = Stock::with('productVariant')
+                ->where('user_id', session('reseller_id'))
+                ->whereIn('product_variant_id', $product->variants->pluck('id'))
+                ->where('quantity', '>', 0)
+                ->get()
+            ;
+
+            if ($stocks->count() > 0) {
+                foreach ($stocks as $stock) {
+                    $this->productColors[$stock->product_id][] = $stock->productVariant->color?->color;
+                }
+                $this->productColors[$stock->product_id] = array_unique($this->productColors[$stock->product_id]);
             }
         }
     }
@@ -181,7 +204,8 @@ class Index extends Component
 
     public function resetCategory()
     {
-        $this->clearFilters();
+        $this->selectedCategory = null;
+        $this->loadProducts();
     }
 
     /**
@@ -189,11 +213,7 @@ class Index extends Component
      */
     public function selectColors(Term $color)
     {
-        if (in_array($color->id, $this->selectedColors)) {
-            $this->selectedColors = array_diff($this->selectedColors, [$color->id]);
-        } else {
-            $this->selectedColors[] = $color->id;
-        }
+        $this->selectedColorId = $this->selectedColorId === $color->id ? null : $color->id;
 
         $this->loadProducts();
     }
@@ -203,11 +223,7 @@ class Index extends Component
      */
     public function selectSizes(Term $size)
     {
-        if (in_array($size->id, $this->selectedSizes)) {
-            $this->selectedSizes = array_diff($this->selectedSizes, [$size->id]);
-        } else {
-            $this->selectedSizes[] = $size->id;
-        }
+        $this->selectedSizeId = $this->selectedSizeId === $size->id ? null : $size->id;
 
         $this->loadProducts();
     }
@@ -220,8 +236,8 @@ class Index extends Component
     public function clearFilters()
     {
         $this->selectedCategory = null;
-        $this->selectedColors = [];
-        $this->selectedSizes = [];
+        $this->selectedColorId = null;
+        $this->selectedSizeId = null;
         $this->loadProducts();
     }
 }

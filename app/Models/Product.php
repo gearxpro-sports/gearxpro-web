@@ -32,6 +32,10 @@ class Product extends Model
         'meta_description',
     ];
 
+    protected $appends = [
+        'variants_combinations_array',
+    ];
+
     /**
      * @return string
      */
@@ -70,6 +74,25 @@ class Product extends Model
             'thumb'  => $defaultVariant->getThumbUrl(),
             'medium' => $defaultVariant->getThumbUrl('medium'),
         ];
+    }
+
+    public function getVariantsCombinationsArrayAttribute()
+    {
+        // Ottenere i ProductVariant in stock legati al Product
+        $variantsInStock = $this->variants()->withTrashed()->whereHas('stocks', function($query) {
+            $query->where('user_id', session('reseller_id'));
+            $query->where('quantity', '>', 0);
+        })->with('terms')->get();
+
+        // Creare un array con chiavi composte dagli ID dei termini di attributo
+        $attributeArray = [];
+        foreach ($variantsInStock as $variant) {
+            $terms = $variant->terms;
+            $key = implode('-', $terms->pluck('id')->toArray());
+            $attributeArray[] = $key;
+        }
+
+        return $attributeArray;
     }
 
     /**
