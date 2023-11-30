@@ -6,8 +6,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "barryvdh/laravel-debugbar": "^3.9",
         "blade-ui-kit/blade-heroicons": "^2.1",
         "cknow/laravel-money": "^7.2",
+        "doctrine/dbal": "^3.7",
         "fakerphp/faker": "^1.9.1",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/breeze": "^1.25",
@@ -20,8 +22,7 @@
         "spatie/laravel-permission": "^5.11",
         "spatie/laravel-ray": "^1.33",
         "spatie/laravel-translatable": "^6.5",
-        "wire-elements/modal": "^2.0",
-        "barryvdh/laravel-debugbar": "^3.9"
+        "wire-elements/modal": "^2.0"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
