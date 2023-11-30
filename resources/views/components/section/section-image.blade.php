@@ -1,4 +1,4 @@
-<div class="w-[calc(100%-1px)] h-[calc(100vh-106px)] xl:h-fit lg:flex items-center justify-center bg-section_image xl:bg-none bg-center bg-cover bg-no-repeat bg-color-e6e7e9 xl:px-[195px] xl:py-[90px] relative">
+<div class="w-full h-[calc(100vh-106px)] xl:h-fit lg:flex items-center justify-center bg-section_image xl:bg-none bg-center bg-cover bg-no-repeat bg-color-e6e7e9 xl:px-[195px] xl:py-[90px] relative">
     <div class="hidden xl:flex">
         <img class="w-1/2" src="{{ Vite::asset('resources/images/gear/reminder_left.jpg') }}" alt="">
         <img class="w-1/2" src="{{ Vite::asset('resources/images/gear/reminder_right.jpg') }}" alt="">
