@@ -139,14 +139,6 @@ class Index extends Component
             });
         }
 
-//        if ($this->selectedColorId || $this->selectedSizeId) {
-//            $terms = array_merge($this->selectedColors, $this->selectedSizes);
-//            $products->whereHas('variants.terms', function(Builder $query) use ($terms) {
-//                $query->whereIn('id', $terms);
-//            }, '>=', count($terms));
-//        }
-
-
         $this->products = $products->withTrashed()->get();
 
         if ($this->selectedColorId || $this->selectedSizeId) {
