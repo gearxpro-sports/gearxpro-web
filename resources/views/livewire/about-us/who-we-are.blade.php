@@ -1,15 +1,15 @@
-<div class="w-full h-fit bg-color-010101 grid grid-cols-12">
-    <div class="col-span-12 h-[744px] xl:h-[1080px] relative overflow-hidden">
-        <div class="absolute w-full h-full bg-about_us_1_mb sm:bg-about_us_1 bg-cover bg-center bg-no-repeat"></div>
+<div class="w-full h-fit bg-color-18181a grid grid-cols-12">
+    <div class="col-span-12 xl:-mt-[106px] h-[calc(100vh-106px)] md:min-h-[744px] xl:h-[1080px] relative overflow-hidden">
+        <div class="absolute w-full h-full bg-about_us_1_mb lg:bg-about_us_1 bg-cover bg-center sm:bg-top bg-no-repeat"></div>
         <div class="w-full absolute px-4 xl:p-0 top-[40%] sm:top-[60%] text-center z-10">
-            <h2 class="text-2xl xl:text-6xl text-white font-bold leading-10 xl:leading-[76px] mb-5">
+            <h2 class="text-2xl md:text-4xl xl:text-6xl text-white font-bold leading-10 xl:leading-[76px] mb-5">
                 A products manufacturer of <br>
                 ultra-modern sporting goods.
             </h2>
         </div>
     </div>
 
-    <div class="col-span-12 h-[850px] xl:h-[1080px] relative">
+    <div class="col-span-12 h-[850px] md:h-[680px] lg:h-[662px] xl:h-[1080px] relative">
         <div class="absolute w-full h-full row-span-6 bg-about_us_2_mb lg:bg-about_us_2 xl:bg-fixed bg-cover 2xl:bg-center bg-no-repeat whoweare-bg"></div>
         <div class="w-full px-4 xl:p-0 h-full absolute z-10 flex flex-col items-center justify-center">
             <h2 class="text-2xl xl:text-6xl text-white text-center font-bold leading-10 xl:leading-[60px] mb-5">
@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div class="col-span-12 h-[850px] xl:h-[1080px] relative">
+    <div class="col-span-12 h-[850px] md:h-[680px] lg:h-[662px] xl:h-[1080px] relative">
         <div class="absolute w-full h-full row-span-6 bg-about_us_3 bg-cover bg-center bg-no-repeat"></div>
         <div class="absolute px-4 2xl:p-0 w-full h-full z-10 flex items-center justify-center">
             <p class="text-2xl xl:text-4xl text-center text-white leading-10">
@@ -36,8 +36,8 @@
         </div>
     </div>
 
-    <div class="col-span-12 h-[850px] xl:h-[1080px] relative">
-        <div class="absolute w-full h-full row-span-6 bg-about_us_3_mb xl:bg-about_us_4 xl:bg-fixed bg-cover 2xl:bg-center bg-no-repeat whoweare-bg"></div>
+    <div class="col-span-12 h-[850px] md:h-[680px] lg:h-[662px] xl:h-[1080px] relative">
+        <div class="absolute w-full h-full row-span-6 bg-about_us_3_mb xl:bg-about_us_4 md:bg-fixed bg-cover 2xl:bg-center bg-no-repeat whoweare-bg"></div>
         <div class="absolute w-full h-full z-10 flex items-center justify-center">
             <div class="absolute px-4 xl:p-0 w-full h-full z-10 flex flex-col items-center justify-center mt-[-20px]">
                 <h2 class="text-8xl xl:text-[280px] leading-[120px] xl:leading-[320px] text-white/60 bg-clip-text font-black brightness-200 uppercase whoweare-h2">vision</h2>
@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <div class="col-span-12 h-[850px] xl:h-[1080px] relative">
+    <div class="col-span-12 h-[850px] md:h-[680px] lg:h-[662px] xl:h-[1080px] relative">
         <div class="absolute w-full h-full row-span-6 bg-about_us_5 bg-cover bg-center bg-no-repeat whoweare-bg"></div>
         <div class="absolute px-4 xl:p-0 w-full h-full z-10 flex items-center justify-center">
             <p class="text-2xl xl:text-4xl text-center text-white leading-10">
@@ -69,8 +69,8 @@
         </div>
     </div>
 
-    <div class="col-span-12 h-[850px] xl:h-[1080px] relative">
-        <div class="absolute w-full h-full row-span-6 bg-about_us_4_mb sm:bg-about_us_6 xl:bg-fixed bg-contain 2xl:bg-cover bg-center bg-no-repeat"></div>
+    <div class="col-span-12 h-[850px] md:h-[680px] lg:h-[662px] xl:h-[1080px] relative">
+        <div class="absolute w-full h-full row-span-6 bg-about_us_4_mb sm:bg-about_us_6 md:bg-fixed bg-cover bg-center bg-no-repeat"></div>
         <div class="absolute px-4 xl:p-0 w-full h-full z-10 flex items-center justify-center">
             <div class="absolute px-4 xl:p-0 w-full h-full z-10 flex flex-col items-center justify-center mt-[-90px]">
                 <h2 class="text-7xl xl:text-[280px] leading-[120px] xl:leading-[320px] text-color-217285/40 font-black brightness-200 uppercase whoweare-h2">mission</h2>
@@ -224,7 +224,7 @@
             scrollPosition = window.scrollY;
 
             // 2018
-            if (scrollPosition >= 6576) {
+            if (scrollPosition >= 6470) {
                 sectionContainer[0].childNodes[1].classList.add('!sticky')
                 sectionContainer[0].childNodes[3].childNodes[1].classList.add('!sticky')
 
@@ -238,7 +238,7 @@
                 sectionContainer[0].childNodes[3].childNodes[5].classList.remove("!opacity-100", "translate-x-10")
             }
             // 2019
-            if (scrollPosition >= 7656) {
+            if (scrollPosition >= 7550) {
                 sectionContainer[1].childNodes[1].classList.add('!sticky')
                 sectionContainer[1].childNodes[3].childNodes[1].classList.add('!sticky')
                 sectionContainer[0].childNodes[1].classList.add('hidden')
@@ -254,7 +254,7 @@
                 sectionContainer[1].childNodes[3].childNodes[5].classList.remove("!opacity-100", "translate-x-[-40px]")
             }
             // 2020
-            if (scrollPosition >= 8736) {
+            if (scrollPosition >= 8630) {
                 sectionContainer[2].childNodes[1].classList.add('!sticky')
                 sectionContainer[2].childNodes[3].childNodes[1].classList.add('!sticky')
                 sectionContainer[1].childNodes[1].classList.add('hidden')
@@ -270,7 +270,7 @@
                 sectionContainer[2].childNodes[3].childNodes[5].classList.remove("!opacity-100", "translate-x-[-40px]")
             }
             // 2021
-            if (scrollPosition >= 9816) {
+            if (scrollPosition >= 9710) {
                 sectionContainer[3].childNodes[1].classList.add('!sticky')
                 sectionContainer[3].childNodes[3].childNodes[1].classList.add('!sticky')
                 sectionContainer[2].childNodes[1].classList.add('hidden')
@@ -286,7 +286,7 @@
                 sectionContainer[3].childNodes[3].childNodes[5].classList.remove("!opacity-100", "translate-x-10")
             }
             // 2022
-            if (scrollPosition >= 10896) {
+            if (scrollPosition >= 10790) {
                 sectionContainer[4].childNodes[1].classList.add('!sticky')
                 sectionContainer[4].childNodes[3].childNodes[1].classList.add('!sticky')
                 sectionContainer[3].childNodes[1].classList.add('hidden')
@@ -304,7 +304,7 @@
                 sectionContainer[4].childNodes[3].childNodes[7].classList.remove("!opacity-100", "translate-x-[-40px]")
             }
             // 2023
-            if (scrollPosition >= 11976) {
+            if (scrollPosition >= 11870) {
                 sectionContainer[5].childNodes[1].classList.add('!sticky')
                 sectionContainer[5].childNodes[3].childNodes[1].classList.add('!sticky')
                 sectionContainer[4].childNodes[1].classList.add('hidden')

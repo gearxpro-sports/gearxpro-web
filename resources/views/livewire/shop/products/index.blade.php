@@ -234,7 +234,7 @@
             </div>
 
             @if ($products->count() < 1)
-                <div @class(["w-full xl:w-[calc(100%-80px)] fixed top-44 lg:top-80 xl:top-[496px] md:text-2xl p-10 bg-white text-center font-bold"])>
+                <div @class(["w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 fixed md:static lg:mr-4 top-44 lg:top-80 xl:top-[496px] text-xl xl:text-2xl p-10 bg-white text-center font-bold"])>
                     {{ __('shop.products.not_found') }}
                     <button wire:click="resetCategory()" class="group absolute top-4 right-4 lg:hidden">
                         <x-icons name="arrow-right-xl" class="rotate-180 scale-150"/>
