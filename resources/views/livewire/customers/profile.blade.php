@@ -294,12 +294,9 @@
                 @if ($showOrder)
                     <h2 class="text-xl font-semibold text-color-18181a leading-9">{{__('customers.tabs.orders.order')}} {{$showOrder->reference}}</h2>
                     <span class="text-base font-semibold text-color-18181a leading-5">{{date_format($showOrder->created_at,"d/m/Y ")}}</span>
-
+                    @php($color = \App\Models\Order::CUSTOMER_STATUSES)
                     <div class="mt-5">
-                        <div class="w-fit text-xs font-semibold text-white py-2 px-4 bg-color-15AF74 rounded-full">{{__('customers.tabs.orders.status.'. $showOrder->status)}}</div>
-                        @if ($showOrder->status == 'delivered')
-                            <p class="mt-6 text-sm text-color-18181a">{{__('shop.order.product_delivered')}}</p>
-                        @endif
+                        <x-badge class="justify-center" color="{{ $color[$showOrder->status] }}">{{__('customers.tabs.orders.status.'. $showOrder->status)}}</x-badge>
                     </div>
 
                     @foreach ($showOrder->items as $item)
