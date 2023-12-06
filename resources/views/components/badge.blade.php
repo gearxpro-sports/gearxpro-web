@@ -24,6 +24,27 @@
     @case('lightgreen')
         @php($class = 'bg-color-b9eddd text-color-0c9d87')
         @break
+    @case('customer_paid')
+        @php($class = 'bg-color-b9eddd text-color-0c9d87')
+        @break
+    @case('customer_processing')
+        @php($class = 'bg-color-b9eddd text-color-0c9d87')
+        @break
+    @case('customer_shipping')
+        @php($class = 'bg-color-b9eddd text-color-0c9d87')
+        @break
+    @case('customer_shipped')
+        @php($class = 'bg-color-b9eddd text-color-0c9d87')
+        @break
+    @case('customer_delivered')
+        @php($class = 'bg-color-20c391 text-white')
+        @break
+    @case('customer_refunded')
+        @php($class = 'bg-color-18181a text-white')
+        @break
+    @case('customer_canceled')
+        @php($class = 'bg-color-f55b3f text-white')
+        @break
 @endswitch
 <span {{ $attributes->merge(['class' => $class .' inline-flex items-center rounded-full px-3.5 py-1.5 text-xs font-medium']) }}>
     {{ $slot }}

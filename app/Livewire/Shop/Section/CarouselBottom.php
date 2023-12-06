@@ -2,59 +2,65 @@
 
 namespace App\Livewire\Shop\Section;
 
-use App\Models\Country;
 use App\Models\Product;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\ProductVariant;
+use App\Models\Stock;
+use App\Models\User;
 use Livewire\Component;
 
 class CarouselBottom extends Component
 {
-    public $currentCountry;
+    public $reseller;
+    public $orders;
 
     public function mount() {
-        $this->currentCountry = Country::with('reseller')->where('iso2_code', session('country_code'))->first();
+        $this->reseller = User::find(session('reseller_id'));
+        $this->orders = $this->reseller->resellerOrders;
     }
+
 
     public function render()
     {
+        $products = collect();
+        $productQuantities = [];
+
+        foreach ($this->orders as $order) {
+            foreach ($order->items as $item) {
+                $productId = $item->product_id;
+
+                if (!isset($productQuantities[$productId])) {
+                    $productQuantities[$productId] = 0;
+                }
+
+                $productQuantities[$productId] += $item->quantity;
+            }
+        }
+
+        arsort($productQuantities);
+
+        $mostSoldProductIds = array_keys($productQuantities);
+
+        foreach ($mostSoldProductIds as $mostSoldProductId) {
+            $products->push(Product::with('variants')->where('id', $mostSoldProductId)->withTrashed()->first());
+        }
+
+        $products = $products->take(5);
+
         $productColors = [];
-        $products = Product::with([
-            'categories' => function($query) {
-                $query->whereNull('parent_id');
-            },
-            'variants' => function($query) {
-                $query
-                    ->without(['product', 'attributes'])
-                    ->with(['media', 'terms' => function($query) {
-                        $query->whereNotNUll('color');
-                    }])
-                ;
-            },
-        ])->whereHas('stocks', function(Builder $query) {
-            $query
-                ->select('product_id')
-                ->where('user_id', $this->currentCountry->reseller->id)
-                ->havingRaw('SUM(quantity) > 0')
-                ->groupBy('product_id')
-            ;
-        })->whereHas('countries', function(Builder $query) {
-            $query
-                ->where('country_id', $this->currentCountry->id)
-                ->where(function(Builder $query) {
-                    $query
-                        ->whereNotNull('wholesale_price')
-                        ->whereNotNull('price')
-                    ;
-                })
-            ;
-        })->take(4)->get();
 
         foreach ($products as $product) {
-            if ($product->variants->count() > 0) {
-                foreach ($product->variants as $variant) {
-                    $productColors[$product->id][] = $variant->color?->color;
+            $stocks = Stock::with('productVariant')
+                ->where('user_id', session('reseller_id'))
+                ->whereIn('product_variant_id', $product->variants->pluck('id'))
+                ->where('quantity', '>', 0)
+                ->get()
+            ;
+
+            if ($stocks->count() > 0) {
+                foreach ($stocks as $stock) {
+                    $productColors[$stock->product_id][] = $stock->productVariant->color?->color;
                 }
-                $productColors[$product->id] = array_unique($productColors[$product->id]);
+                $productColors[$stock->product_id] = array_unique($productColors[$stock->product_id]);
             }
         }
 
