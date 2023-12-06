@@ -26,6 +26,7 @@ class Development extends Component
         $products = collect();
         $productQuantities = [];
 
+
         foreach ($this->orders as $order) {
             foreach ($order->items as $item) {
                 $productId = $item->product_id;
@@ -46,7 +47,9 @@ class Development extends Component
             $products->push(Product::with('variants')->where('id', $mostSoldProductId)->withTrashed()->first());
         }
 
-        $products = $products->random(5);
+        if ($products->count() > 4) {
+            $products = $products->random(5);
+        }
 
         $productColors = [];
 
