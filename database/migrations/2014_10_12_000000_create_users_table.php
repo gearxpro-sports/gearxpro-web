@@ -26,6 +26,8 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('country_id')->nullable()->constrained();
             $table->string('tax', 2)->nullable();
+            $table->longText('stripe_private_key')->nullable();
+            $table->longText('stripe_public_key')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
