@@ -25,6 +25,7 @@ use App\Livewire\Supply\Index as SupplyIndex;
 use App\Livewire\Supply\Recap as SupplyRecap;
 use App\Livewire\Supply\Purchases\Index as SupplyPurchasesIndex;
 use App\Livewire\Supply\Purchases\Show as SupplyPurchaseShow;
+use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Shop\Index as ShopIndex;
@@ -69,12 +70,17 @@ Route::middleware('country')->domain('{country_code}.'.env('APP_URL'))->group(fu
         Route::get('/shop/{product}', [ProductShow::class, '__invoke'])->withTrashed()->name('show');
     });
 
-    // TODO: check se vista accessibile sempre o solo se c'è un ordine effettuato in precedenza
-    Route::get('/confirm', function () {
-        if (Order::where('reference', session('order_reference'))->exists()) {
-            session()->remove('order_reference');
+    Route::get('/confirm', function (\Illuminate\Http\Request $request) {
+        if (
+            $request->exists('payment_intent') &&
+            (
+                Cart::where('user_id', auth()->user()->id)->where('stripe_payment_intent_id', $request->get('payment_intent'))->exists() ||
+                Order::where('user_id', auth()->user()->id)->where('stripe_payment_intent_id', $request->get('payment_intent'))->exists()
+            )
+        ) {
             return view('confirm');
         }
+
         return redirect()->route('home');
 
     })->name('confirm');
@@ -148,3 +154,5 @@ Route::middleware(['auth', 'verified', 'set_reseller_missing_data'])->domain(env
 
 
 require __DIR__.'/auth.php';
+
+Route::stripeWebhooks('stripe-webhooks');

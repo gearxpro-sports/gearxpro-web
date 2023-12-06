@@ -167,4 +167,12 @@ return [
         'delivered' => 'Consegnato',
         'product_delivered' => 'I tuoi articoli sono stati consegnati.'
     ],
+    'notifications' => [
+        'errors' => [
+            'payment' => [
+                'title' => 'Errore pagamento',
+                'description' => 'Si è verificato un errore durante il pagamento.',
+            ],
+        ],
+    ],
 ];

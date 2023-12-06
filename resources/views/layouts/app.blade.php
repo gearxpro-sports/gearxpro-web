@@ -24,6 +24,7 @@
     @stack('styles')
     @livewireStyles
     @mediaLibraryStyles
+    @stack('head_scripts')
 </head>
 <body class="antialiased bg-color-f3f7f9">
 <div x-cloak x-data="{ sidebarOpen: false }">

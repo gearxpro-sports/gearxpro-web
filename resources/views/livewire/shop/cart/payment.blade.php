@@ -163,7 +163,7 @@
                 </div>
 
                 {{-- spedizione --}}
-                @if(env('SHIPPING_COST') === 0)
+                @if(config('app.shipping_cost') === 0)
                     <div class="w-full p-6 border border-color-e0e0df rounded-md">
                         <div class="flex items-center gap-2">
                             <x-icons name="flag_ON"/>
@@ -177,28 +177,13 @@
 
             <div class="w-full">
                 <h2 class="text-base xl:text-xl font-semibold text-color-18181a">{{__('shop.payment.method_payment')}}</h2>
-
-                <div
-                    class="w-full mt-3.5 bg-color-f5e3d7 p-6 flex flex-col-reverse xl:flex-row items-center justify-between gap-2 xl:gap-8 rounded-md">
-                    <p class="text-sm font-medium text-color-6c757d">{{__('shop.payment.ssl')}}</p>
-                    <x-icons name="trust" class="flex-shrink-0"/>
-                </div>
-
-                <form wire:submit="next" class="mt-5">
-                    <x-input-text x-mask:dynamic="creditCardMask" wire:model="creditCard" width="w-full"
-                                  name="creditCard"
-                                  label="creditCard" required="true"/>
-
-                    <div class="flex flex-col xl:flex-row gap-5 mt-5 my-5">
-                        <x-input-text x-mask="99/99" wire:model="expiration" width="w-full xl:w-1/2" name="expiration"
-                                      label="expiration" required="true"/>
-                        <x-input-text x-mask="999" wire:model="ccv" width="w-full xl:w-1/2" name="ccv" label="ccv"
-                                      required="true"/>
+                <form id="payment-form">
+                    <div
+                        class="w-full mt-3.5 bg-color-f5e3d7 p-6 flex flex-col-reverse xl:flex-row items-center justify-between gap-2 xl:gap-8 rounded-md">
+                        <p class="text-sm font-medium text-color-6c757d">{{__('shop.payment.ssl')}}</p>
+                        <x-icons name="trust" class="flex-shrink-0"/>
                     </div>
-
-                    <x-input-text wire:model="accountHolder" width="w-full" name="accountHolder" label="accountHolder"
-                                  required="true"/>
-
+                    <div wire:ignore id="payment-fields" class="mt-10"></div>
                     <div
                         class="mt-10 flex flex-col md:flex-row gap-5 xl:gap-0 items-center justify-between px-9 md:px-0">
                         <div class="w-full max-w-xs">
@@ -208,8 +193,7 @@
                                 icon="back">{{ __('shop.payment.button_back') }}</x-shop.shopping-button>
                         </div>
                         <div class="w-full max-w-xs">
-                            <x-shop.shopping-button type="submit" color="orange"
-                                                    icon="pay">{{ __('shop.payment.pay') }}</x-shop.shopping-button>
+                            <x-shop.shopping-button type="submit" color="orange" icon="pay">{{ __('shop.payment.pay') }}</x-shop.shopping-button>
                         </div>
                     </div>
                 </form>
@@ -218,14 +202,58 @@
     </div>
 </div>
 
+@assets
+    <script src="https://js.stripe.com/v3" async></script>
+@endassets
+
+@script
+<script>
+    let stripeElements;
+    $wire.on('pay-order', async (event) => {
+        const stripe = Stripe(event.public_key);
+        stripeElements = stripe.elements({
+            clientSecret: event.client_secret,
+            appearance: {
+                theme: 'stripe',
+                variables: {
+                    colorPrimary: '#18181a',
+                    colorBackground: '#ffffff',
+                    colorText: '#6c757d',
+                    fontFamily: 'Montserrat, system-ui, sans-serif',
+                    fontSizeBase: '14px',
+                    borderRadius: '4px',
+                    padding: '10px'
+                },
+                rules: {
+                    '.AccordionItem': {
+                        padding: '20px'
+                    }
+                }
+            }
+        });
+        const paymentElement = stripeElements.create('payment', {layout: 'accordion'});
+        paymentElement.mount('#payment-fields');
+
+        document.getElementById('payment-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const { error } = await stripe.confirmPayment({
+                elements: stripeElements,
+                confirmParams: {
+                    return_url: '{{ route('confirm', ['country_code' => session('country_code')]) }}',
+                },
+            });
+
+            if (error.type !== 'validation_error') {
+                $wire.dispatch('payment-error', {msg: error.message});
+            }
+        });
+    });
+</script>
+@endscript
+
 @push('scripts')
-    <script>
-        function creditCardMask(input) {
-            return input.startsWith('34') || input.startsWith('37')
-                ? '9999 999999 99999'
-                : '9999 9999 9999 9999'
-        }
-    </script>
+
     <script
         src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initAutocomplete"
         type="text/javascript"

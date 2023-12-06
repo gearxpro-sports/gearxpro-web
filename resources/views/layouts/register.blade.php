@@ -21,6 +21,7 @@
         )
         @stack('styles')
         @livewireStyles
+        @stack('head_scripts')
     </head>
     <body class="bg-color-f2f0eb text-gray-900 antialiased">
         <div>

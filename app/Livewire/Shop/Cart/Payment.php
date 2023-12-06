@@ -5,10 +5,12 @@ namespace App\Livewire\Shop\Cart;
 use App\Models\Address;
 use App\Models\Country;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use Stripe\StripeClient;
 
 #[Layout('layouts.checkout')]
 class Payment extends Component
@@ -66,14 +68,7 @@ class Payment extends Component
                 'shipping_company' => 'nullable',
             ];
         }
-        if ($this->currentTab == 1) {
-            return [
-                'creditCard' => 'required',
-                'expiration' => 'required',
-                'ccv' => 'required',
-                'accountHolder' => 'required',
-            ];
-        }
+
         return [];
     }
 
@@ -89,14 +84,9 @@ class Payment extends Component
                 'shipping_civic.required' => __('shop.payment.required'),
                 'shipping_phone.required' => __('shop.payment.required'),
             ];
-        } elseif ($this->currentTab == 1) {
-            return [
-                'creditCard.required' => __('shop.payment.required'),
-                'expiration.required' => __('shop.payment.required'),
-                'ccv.required' => __('shop.payment.required'),
-                'accountHolder.required' => __('shop.payment.required'),
-            ];
         }
+
+        return [];
     }
 
     #[On('shipping-data-updated')]
@@ -142,9 +132,10 @@ class Payment extends Component
             );
         }
 
-        $this->validate();
-
         if ($this->currentTab === 0) {
+
+            $this->validate();
+
             $this->customer->update([
                 'firstname' => $this->firstname,
                 'lastname' => $this->lastname,
@@ -175,50 +166,50 @@ class Payment extends Component
 
             $this->currentTab = 1;
             $this->dataUser = true;
-        } elseif ($this->currentTab === 1) {
 
-            $addressHiddenFields = ['id', 'user_id', 'country_id', 'type', 'default', 'created_at', 'updated_at'];
-            $country = $this->customer->country ?? Country::where('iso2_code', session('country_code'))->first();
-            $orderItems = [];
-            $total = 0;
+            /****** STRIPE PAYMENT INTENT CREATION - Start *****/
+
+            $total = config('app.shipping_cost');
             foreach ($this->cart->items as $cartItem) {
-                $orderItems[] = [
-                    'product_id' => $cartItem->variant->product->id,
-                    'variant_id' => $cartItem->product_variant_id,
-                    'name'       => sprintf('%s : %s', $cartItem->variant->product->name, $cartItem->variant->terms->map(fn($term) => $term->value)->join(' - ')),
-                    'price'      => $cartItem->price,
-                    'quantity'   => $cartItem->quantity,
-                ];
                 $total += ($cartItem->quantity * $cartItem->price);
             }
+            $stripeKeys =  User::where('id', session('reseller_id'))->first(['stripe_public_key', 'stripe_private_key'])->toArray();
+            $stripe = new StripeClient($stripeKeys['stripe_private_key']);
 
-            $order = Order::create([
-                'reference' => Str::random(10),
-                'user_id' => $this->customer->id,
-                'reseller_id' => session('reseller_id'),
-                'country_id' => $country->id,
-                'status' => Order::PAID_STATUS,
-                'payment_method' => Order::STRIPE_PAYMENT,
-                'billing_address' => $this->customer->billing_address?->makeHidden($addressHiddenFields)->attributesToArray(),
-                'shipping_address' => $this->customer->shipping_address->makeHidden([...$addressHiddenFields, ...[ 'sdi', 'pec']])->attributesToArray(),
-                'items' => $orderItems,
-                'shipping_cost' => env('SHIPPING_COST'),
-                'paid_at' => now(),
-                'total' => $total,
-            ]);
-
-            foreach($order->items as $item) {
-                $country->reseller->stocks()->where('product_id', $item->product_id)->where('product_variant_id', $item->variant_id)->decrement('quantity', $item->quantity);
+            if ($this->cart->stripe_payment_intent_id) {
+                $paymentIntent = $stripe->paymentIntents->update($this->cart->stripe_payment_intent_id, [
+                    'amount' => $total * 100,
+                ]);
+            } else {
+                $paymentIntent = $stripe->paymentIntents->create([
+                    'amount' => $total * 100,
+                    'currency' => 'eur',
+                    'payment_method_types' => ['card', 'link'],
+                ]);
+                $this->cart->update(['stripe_payment_intent_id' => $paymentIntent->id]);
             }
 
-            $this->cart->delete();
+            $this->dispatch('pay-order',
+                public_key: $stripeKeys['stripe_public_key'],
+                client_secret:$paymentIntent->client_secret
+            );
 
-            return redirect()->route('confirm', ['country_code' => session('country_code')])->with(['order_reference' => $order->reference]);
+            /****** STRIPE PAYMENT INTENT CREATION - End *******/
         }
     }
 
     public function render()
     {
         return view('livewire.shop.cart.payment');
+    }
+
+    #[On('payment-error')]
+    public function showPaymentError($msg = null)
+    {
+        $this->dispatch('open-notification',
+            title: __('shop.notifications.errors.payment.title'),
+            subtitle: $msg ?? __('shop.notifications.errors.payment.description'),
+            type: 'error'
+        );
     }
 }

@@ -40,6 +40,7 @@ class Order extends Model
      */
     protected $casts = [
         'total'            => 'float',
+        'paid_at'          => 'datetime',
         'shipped_at'       => 'datetime',
         'billing_address'  => 'object',
         'shipping_address' => 'object',
