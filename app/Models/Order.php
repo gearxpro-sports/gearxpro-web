@@ -29,6 +29,16 @@ class Order extends Model
         self::CANCELED_STATUS     => 'red',
     ];
 
+    const CUSTOMER_STATUSES = [
+        self::PAID_STATUS         => 'customer_paid',
+        self::IN_PROCESS_STATUS   => 'customer_processing',
+        self::IN_SHIPPING_STATUS  => 'customer_shipping',
+        self::SHIPPED_STATUS      => 'customer_shipped',
+        self::DELIVERED_STATUS    => 'customer_delivered',
+        self::REFUNDED_STATUS     => 'customer_refunded',
+        self::CANCELED_STATUS     => 'customer_canceled',
+    ];
+
     const STRIPE_PAYMENT = 'stripe';
 
     const PAYMENT_METHODS = [
