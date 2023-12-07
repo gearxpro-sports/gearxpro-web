@@ -9,11 +9,11 @@
         {{-- button Tabs --}}
         <div class="flex gap-3 xl:block" >
             <template x-for="tab in tabs" :key="tab">
-                <button @if($modify) disabled @endif x-text="tab" x-on:click="currentTab = tab"
+                <button @if ($modify) disabled @endif x-text="tab" x-on:click="currentTab = tab"
                     :class="tab == currentTab ? '!bg-color-18181a !text-white' : ''"
                     @class([
                         "xl:w-[282px] h-[61px] px-5 mb-1 border rounded-md bg-transparent flex items-center justify-start text-sm xl:text-base font-medium leading-[19px] text-color-18181a capitalize",
-                        $modify != false ? 'opacity-80 cursor-not-allowed' : ''
+                        $modify ? 'opacity-80 cursor-not-allowed' : ''
                     ])
                 >
                 </button>
@@ -22,9 +22,9 @@
 
         {{-- Content Tabs --}}
         <div class="w-full xl:w-[654px]">
-            @if ($modify != 'orders')
+            @if ($modify && $modify !== 'orders')
                 <h2 x-text="currentTab" class="hidden xl:block text-xl font-semibold text-color-18181a"></h2>
-                <h2 class="xl:hidden text-xl font-semibold text-color-18181a">{{$modify}}</h2>
+                <h2 class="xl:hidden text-xl font-semibold text-color-18181a">{{ __('customers.tabs.'. $modify) }}</h2>
             @endif
 
             @if (!$modify)
@@ -40,7 +40,7 @@
                                 <x-box-data label="{{__('customers.edit.phone.label')}}" content="{{$customerPhone ?? '---'}}" width="w-full"/>
                             </div>
 
-                            <button wire:click="selectEditData('{{ __('customers.tabs.personal_data.user') }}', null)" type="button" class="w-full xl:w-36 px-3 text-xs font-semibold xl:font-medium text-color-6c757d flex items-center justify-end gap-1 hover:underline">
+                            <button wire:click="selectEditData('personal_data.user')" type="button" class="w-full xl:w-36 px-3 text-xs font-semibold xl:font-medium text-color-6c757d flex items-center justify-end gap-1 hover:underline">
                                 {{__('customers.edit_data')}}
                                 <x-icons name="edit_data" />
                             </button>
@@ -51,7 +51,7 @@
                         <div class="flex flex-col-reverse xl:flex-row items-center justify-between py-5 relative">
                             <x-box-data label="{{__('customers.edit.email.label')}}" content="{{$customer->email ?? '---'}}" width="w-full"/>
 
-                            <button wire:click="selectEditData('{{ __('customers.tabs.personal_data.email') }}', null)" type="button" class="w-full xl:w-36 px-3 text-xs font-semibold xl:font-medium text-color-6c757d flex items-center justify-end gap-1 hover:underline">
+                            <button wire:click="selectEditData('personal_data.email')" type="button" class="w-full xl:w-36 px-3 text-xs font-semibold xl:font-medium text-color-6c757d flex items-center justify-end gap-1 hover:underline">
                                 {{__('customers.edit_data')}}
                                 <x-icons name="edit_data" />
                             </button>
@@ -62,7 +62,7 @@
                         <div class="flex flex-col-reverse xl:flex-row items-center justify-between py-5 relative">
                             <x-box-data label="{{__('customers.password')}}" content="••••••••••••••••" width="w-full"/>
 
-                            <button wire:click="selectEditData('{{ __('customers.tabs.personal_data.password') }}', null)" type="button" class="w-full xl:w-36 px-3 text-xs font-semibold xl:font-medium text-color-6c757d flex items-center justify-end gap-1 hover:underline">
+                            <button wire:click="selectEditData('personal_data.password')" type="button" class="w-full xl:w-36 px-3 text-xs font-semibold xl:font-medium text-color-6c757d flex items-center justify-end gap-1 hover:underline">
                                 {{__('customers.edit_data')}}
                                 <x-icons name="edit_data" />
                             </button>
@@ -82,7 +82,7 @@
                             <x-box-data label="{{__('customers.edit.addresses.billing')}}" content="{{str_replace('\'', ' ',$full_billing_address) ?? '---'}}" width="w-full"/>
                         </div>
 
-                        <button wire:click="selectEditData('{{ __('customers.tabs.addresses.address') }}', null)" type="button" class="w-full xl:w-36 px-3 text-xs font-semibold xl:font-medium text-color-6c757d flex items-center justify-end gap-1 hover:underline">
+                        <button wire:click="selectEditData('addresses.address')" type="button" class="w-full xl:w-36 px-3 text-xs font-semibold xl:font-medium text-color-6c757d flex items-center justify-end gap-1 hover:underline">
                             {{__('customers.edit_data')}}
                             <x-icons name="edit_data" />
                         </button>
@@ -124,7 +124,7 @@
 
         {{-- Personal Data --}}
             {{-- user --}}
-            <div x-show="modify === '{{__('customers.tabs.personal_data.user')}}'">
+            <div x-show="modify === 'personal_data.user'">
                 <div class="flex items-center justify-between py-5 relative">
                     <div class="grow flex flex-col gap-5">
                         <div class="w-full flex flex-col xl:flex-row items-center gap-5">
@@ -148,7 +148,7 @@
                 </div>
             </div>
             {{-- Email --}}
-            <div x-show="modify === '{{ __('customers.tabs.personal_data.email') }}'">
+            <div x-show="modify === 'personal_data.email'">
                 <div class="flex items-center justify-between py-5 relative">
                     <div class="grow flex flex-col gap-5">
                         <x-input-text wire:model="customer.email" type="email" width="w-full" name="customer.email" label="email" required="true" />
@@ -167,7 +167,7 @@
                 </div>
             </div>
             {{-- Password --}}
-            <form x-show="modify === '{{ __('customers.tabs.personal_data.password') }}'" wire:submit="edit()" class="space-y-5 pt-5">
+            <form x-show="modify === 'personal_data.password'" wire:submit="edit()" class="space-y-5 pt-5">
                 <div class="w-full flex flex-col gap-1 relative">
                     <label for="current_password" class="text-[12px] font-medium leading-[15px] text-color-18181a">{{ __('shop.payment.current_password') }}*</label>
                     <div class="w-full flex flex-col gap-1 relative">
@@ -252,7 +252,7 @@
                 </div>
             </form>
             {{-- Address Shipping/Billing --}}
-            <div x-show="modify === '{{ __('customers.tabs.addresses.address') }}'">
+            <div x-show="modify === 'addresses.address'">
                 <div class="flex items-center justify-between py-5 relative">
                     <div class="grow flex flex-col gap-10 xl:gap-5">
                         <div class="relative flex flex-col gap-5 p-5 border rounded-md shadow">
@@ -286,7 +286,7 @@
             </div>
 
             <div x-show="modify === 'orders'" class="relative">
-                <button wire:click="selectEditData(null, null)" class="xl:absolute top-5 right-0 ml-auto mb-5 flex items-center gap-2 group">
+                <button wire:click="selectEditData(null)" class="xl:absolute top-5 right-0 ml-auto mb-5 flex items-center gap-2 group">
                     <x-icons name="arrow-right-xl" class="rotate-180 group-hover:translate-x-[-8px] duration-300 transition-all"/>
                     <span class="capitalize font-medium group-hover:underline">{{__('customers.buttons.back')}}</span>
                 </button>

@@ -34,7 +34,7 @@ class Profile extends Component
     public $billing_company;
 
     public $streetClicked = false;
-    public $modify = false;
+    public $modify = null;
     public $current_password = '';
     public $password = '';
     public $password_confirmation = '';
@@ -102,7 +102,7 @@ class Profile extends Component
         }
     }
 
-    public function selectEditData($data, $id) {
+    public function selectEditData($data, $id = null) {
         if ($id) {
             $this->showOrder = Order::find($id);
         }
@@ -111,25 +111,25 @@ class Profile extends Component
     }
 
     public function rules() {
-        if ($this->modify == __('customers.tabs.personal_data.user')) {
+        if ($this->modify === 'personal_data.user') {
             return [
                 'customer.firstname' => 'required',
                 'customer.lastname' => 'required',
                 'customerPhone' => 'required',
             ];
         }
-        if ($this->modify == __('customers.tabs.personal_data.email')) {
+        if ($this->modify === 'personal_data.email') {
             return [
                 'customer.email' => 'required|email|unique:users,email,'.$this->customer->id,
             ];
         }
-        if ($this->modify == __('customers.tabs.personal_data.password')) {
+        if ($this->modify === 'personal_data.password') {
             return [
                 'current_password' => ['required', 'current_password'],
                 'password' => ['required', 'confirmed'],
             ];
         }
-        if ($this->modify == __('customers.tabs.addresses.address')) {
+        if ($this->modify === 'addresses.address') {
             return [
                 //shipping
                 'shipping_address' => 'required',
@@ -152,19 +152,19 @@ class Profile extends Component
     }
 
     public function messages() {
-        if ($this->modify === 'data') {
+        if ($this->modify === 'personal_data.user') {
             return [
                 'customer.firstname.required' => __('shop.payment.required'),
                 'customer.lastname.required' => __('shop.payment.required'),
                 'customerPhone.required' => __('shop.payment.required'),
             ];
         }
-        if ($this->modify === 'email') {
+        if ($this->modify === 'personal_data.email') {
             return [
                 'customer.email.required' => __('shop.payment.required'),
             ];
         }
-        if ($this->modify === 'password') {
+        if ($this->modify === 'personal_data.password') {
             return [
                 'current_password.required' =>  __('shop.payment.required'),
                 'current_password.current_password' =>  __('shop.payment.password_confirmation'),
@@ -172,7 +172,7 @@ class Profile extends Component
                 'password.confirmed' => __('shop.payment.password_confirmation'),
             ];
         }
-        if ($this->modify === 'shipping') {
+        if ($this->modify === 'addresses.address') {
             return [
                 // shipping
                 'shipping_address.required' => __('shop.payment.required'),
@@ -216,7 +216,7 @@ class Profile extends Component
             );
         }
 
-        if ($this->modify === 'data' OR $this->modify === 'email') {
+        if ($this->modify === 'personal_data.user' OR $this->modify === 'personal_data.email') {
             $this->customer->update($this->validate()['customer']);
             $this->customer->update([
                 'phone' => $this->customerPhone
@@ -228,7 +228,7 @@ class Profile extends Component
                 type: 'success'
             );
             $this->cancel();
-        } elseif ($this->modify === 'password') {
+        } elseif ($this->modify === 'personal_data.password') {
             if (count($this->keyFormat) > 4 AND $this->password === $this->password_confirmation) {
                 $this->customer->update([
                     'password' => Hash::make($this->validate()['password'])
@@ -245,7 +245,7 @@ class Profile extends Component
                     type: 'error'
                 );
             }
-        } elseif ($this->modify === 'shipping') {
+        } elseif ($this->modify === 'addresses.address') {
             if (!$this->customer_shipping_address OR $this->shipping_address != $this->customer_shipping_address->address_1) {
                 \App\Models\Address::updateOrCreate(['user_id'   => $this->customer->id, 'type' => 'shipping'],
                     [
@@ -285,7 +285,7 @@ class Profile extends Component
     }
 
     public function cancel() {
-        $this->modify = false;
+        $this->modify = null;
         $this->current_password = '';
         $this->password = '';
         $this->password_confirmation = '';

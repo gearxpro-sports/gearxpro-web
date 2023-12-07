@@ -169,6 +169,10 @@ return [
     ],
     'notifications' => [
         'errors' => [
+            'pre_payment' => [
+                'title' => 'Impossibile procedere con il pagamento',
+                'description' => 'Si è verificato un errore durante la preparazione del pagamento.',
+            ],
             'payment' => [
                 'title' => 'Errore pagamento',
                 'description' => 'Si è verificato un errore durante il pagamento.',

@@ -4,9 +4,7 @@ namespace App\Livewire\Shop\Cart;
 
 use App\Models\Address;
 use App\Models\Country;
-use App\Models\Order;
 use App\Models\User;
-use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -157,42 +155,67 @@ class Payment extends Component
                 ]
             );
 
-            $this->dispatch('open-notification',
-                title: __('notifications.titles.updating'),
-                subtitle: __('notifications.profile.updating.success'),
-                type: 'success'
-            );
-            $this->dispatch('shipping-data-updated');
-
-            $this->currentTab = 1;
-            $this->dataUser = true;
-
             /****** STRIPE PAYMENT INTENT CREATION - Start *****/
 
-            $total = config('app.shipping_cost');
-            foreach ($this->cart->items as $cartItem) {
-                $total += ($cartItem->quantity * $cartItem->price);
-            }
-            $stripeKeys =  User::where('id', session('reseller_id'))->first(['stripe_public_key', 'stripe_private_key'])->toArray();
-            $stripe = new StripeClient($stripeKeys['stripe_private_key']);
+            try {
 
-            if ($this->cart->stripe_payment_intent_id) {
-                $paymentIntent = $stripe->paymentIntents->update($this->cart->stripe_payment_intent_id, [
-                    'amount' => $total * 100,
-                ]);
-            } else {
-                $paymentIntent = $stripe->paymentIntents->create([
-                    'amount' => $total * 100,
-                    'currency' => 'eur',
-                    'payment_method_types' => ['card', 'link'],
-                ]);
-                $this->cart->update(['stripe_payment_intent_id' => $paymentIntent->id]);
-            }
+                $total = config('app.shipping_cost');
+                foreach ($this->cart->items as $cartItem) {
+                    $total += ($cartItem->quantity * $cartItem->price);
+                }
+                $stripeKeys =  User::where('id', session('reseller_id'))->first(['stripe_public_key', 'stripe_private_key'])->toArray();
+                $stripe = new StripeClient($stripeKeys['stripe_private_key']);
 
-            $this->dispatch('pay-order',
-                public_key: $stripeKeys['stripe_public_key'],
-                client_secret:$paymentIntent->client_secret
-            );
+                if (!auth()->user()->stripe_customer_id) {
+                    $stripeCustomer = $stripe->customers->create([
+                        'name' => auth()->user()->fullName,
+                        'email' => auth()->user()->email,
+                        'metadata' => [
+                            'Country' => strtoupper(session('country_code')),
+                        ],
+                    ]);
+                    auth()->user()->update(['stripe_customer_id' => $stripeCustomer->id]);
+                }
+
+                $paymentOptions = [
+                    'amount' => $total * 100,
+                    'receipt_email' =>  auth()->user()->email,
+                ];
+
+                if ($this->cart->stripe_payment_intent_id) {
+                    $paymentIntent = $stripe->paymentIntents->update($this->cart->stripe_payment_intent_id, $paymentOptions);
+                } else {
+                    $paymentOptions = array_merge($paymentOptions, [
+                        'currency' => 'eur',
+                        'payment_method_types' => ['card', 'link'],
+                        'customer' => auth()->user()->stripe_customer_id,
+                    ]);
+                    $paymentIntent = $stripe->paymentIntents->create($paymentOptions);
+                    $this->cart->update(['stripe_payment_intent_id' => $paymentIntent->id]);
+                }
+
+                $this->dispatch('open-notification',
+                    title: __('notifications.titles.updating'),
+                    subtitle: __('notifications.profile.updating.success'),
+                    type: 'success'
+                );
+                $this->dispatch('shipping-data-updated');
+
+                $this->dispatch('pay-order',
+                    public_key: $stripeKeys['stripe_public_key'],
+                    client_secret:$paymentIntent->client_secret
+                );
+
+                $this->currentTab = 1;
+                $this->dataUser = true;
+
+            } catch (\Throwable $e) {
+                $this->dispatch('open-notification',
+                    title: __('shop.notifications.errors.pre_payment.title'),
+                    subtitle: $msg ?? __('shop.notifications.errors.pre_payment.description'),
+                    type: 'error'
+                );
+            }
 
             /****** STRIPE PAYMENT INTENT CREATION - End *******/
         }
