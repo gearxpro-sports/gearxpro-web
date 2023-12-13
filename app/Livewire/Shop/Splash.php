@@ -4,6 +4,7 @@ namespace App\Livewire\Shop;
 
 use App\Models\Country;
 use App\Models\User;
+use App\Services\IpApiService;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -12,22 +13,29 @@ class Splash extends Component
     #[Layout('layouts.blank')]
 
     public function mount() {
-        // TODO: MODIFICARE PER RIVEDERE LA SPLASH
-        session()->put('country_code', config('app.country'));
-        session()->put('reseller_id', 2);
-        return redirect()->route('home', ['country_code' => session('country_code')]);
 
-        if(session('country_code') && auth()->check() && auth()->user()->hasRole(User::SUPERADMIN)) {
-            return true;
+//        $ip = '101.46.224.0';
+//        $ip = '79.24.239.62';
+                $ip = '140.93.0.0';
+        //       $ip = $request->getClientIp();
+
+        if (session('user_ip') !== $ip) {
+            $countryCode = (new IpApiService($ip))->getIpInfo('countryCode');
+            if (!$countryCode) {
+                $countryCode = config('app.country');
+            }
+            $country = \App\Models\Country::where('iso2_code', strtolower($countryCode))->first();
+            session()->put('reseller_id', $country->reseller_id);
+            session()->put('country_code', strtolower($country->reseller->country_code));
+            session()->put('user_ip', $ip);
         }
-        if(session('country_code') && auth()->check()){
-            return redirect()->route('home', ['country_code' => session('country_code')]);
-        }
+
+        return redirect()->route('home', ['country_code' => session('country_code')]);
     }
 
     public function setCountry($iso) {
         session()->put('country_code', strtolower($iso));
-        $reseller = \App\Models\Country::where('iso2_code', $iso)->first()->reseller;
+        $reseller = Country::where('iso2_code', $iso)->first()->reseller;
         session()->put('reseller_id', $reseller->id);
 
         return redirect()->route('home', ['country_code' => session('country_code')]);
