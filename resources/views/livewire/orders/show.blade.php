@@ -101,9 +101,14 @@
             <div class="grow">
                 <h3 class="mb-4 text-color-18181a font-medium">{{ __('orders.show.boxes.payment_data') }}</h3>
                 <ul class="grow-0 text-sm">
-                    <li class="mt-2 text-color-6c757d">{{ __('orders.show.boxes.payment_method') }}<span
-                            class="ml-2 font-medium">{{ $order->payment_method ? __('payment_methods.'.$order->payment_method) : '-' }}</span>
+                    <li class="my-2 text-color-6c757d">{{ __('orders.show.boxes.payment_method') }}
+                        <span class="ml-2 font-medium">{{ $order->payment_method ? __('payment_methods.'.$order->payment_method) : '-' }}</span>
                     </li>
+                    @if ($order->payment_method === \App\Models\Order::STRIPE_PAYMENT && $receiptUrl)
+                        <li class="my-2">
+                            <a class="text-color-2cb2d1 font-bold underline hover:no-underline" href="{{ $receiptUrl }}" target="_blank">{{ __('orders.show.stripe_receipt') }}</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
             <div class="grow-0">
