@@ -76,5 +76,6 @@ return [
             'total' => 'Totale (Euro):',
         ],
         'shipping_details' => 'Dettagli Spedizione',
+        'stripe_receipt' => 'Visualizza ricevuta di pagamento Stripe',
     ],
 ];

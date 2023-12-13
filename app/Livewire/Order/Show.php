@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Stock;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
+use Stripe\StripeClient;
 
 class Show extends Component
 {
@@ -15,13 +16,28 @@ class Show extends Component
     public Order $order;
 
     /**
+     * @var string|null
+     */
+    public ?string $receiptUrl = null;
+
+    public function mount()
+    {
+        if ($this->order->stripe_payment_intent_id && auth()->user()->stripe_private_key) {
+            $this->receiptUrl = (new StripeClient(auth()->user()->stripe_private_key))
+                ->paymentIntents
+                ->retrieve($this->order->stripe_payment_intent_id, ['expand' => ['latest_charge']])
+                ->latest_charge
+                ->receipt_url;
+        }
+    }
+
+    /**
      * @return View
      */
     public function render()
     {
         return view('livewire.orders.show');
     }
-
 
     public function changeStatus(string $status)
     {
