@@ -19,8 +19,8 @@ class Country
     public function handle(Request $request, Closure $next): Response
     {
 //        $ip = '101.46.224.0';
-//        $ip = '79.24.239.62';
-        $ip = '140.93.0.0';
+        $ip = '79.24.239.62';
+//        $ip = '140.93.0.0';
 //       $ip = $request->getClientIp();
 
         if (session('user_ip') !== $ip) {
