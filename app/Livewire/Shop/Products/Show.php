@@ -146,9 +146,9 @@ class Show extends Component
         $this->tabs = [
             'product' => $this->product->name,
             'characteristics' => __('shop.products.characteristics'),
-            'advantages' => __('shop.products.advantages'),
-            'technicality' => __('shop.products.technicality'),
-            'wash' => __('shop.products.wash')
+//            'advantages' => __('shop.products.advantages'),
+//            'technicality' => __('shop.products.technicality'),
+//            'wash' => __('shop.products.wash')
         ];
     }
 

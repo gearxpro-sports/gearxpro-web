@@ -1,6 +1,7 @@
 @php
     $tabs = ['main', 'options', 'locale'];
-    $descFields = ['main', 'features', 'pros', 'technical', 'washing'];
+//    $descFields = ['main', 'features', 'pros', 'technical', 'washing'];
+$descFields = ['main', 'features'];
 @endphp
 
 <x-slot name="title">
