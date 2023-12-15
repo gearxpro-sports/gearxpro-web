@@ -224,12 +224,7 @@
 
             <div id="cards" @class(["w-full px-4 xl:px-0 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 xl:gap-5 relative invisible",'lg:!grid-cols-3' => $filtersOpen, '!visible' => $products->count() > 0])>
                 @foreach ($products as $product )
-                    <livewire:components.card-product
-                        wire:key="prod_{{ $product->id }}"
-                        :product="$product"
-                        :image="'SOXPro.png'"
-                        :availableColors="$productColors[$product->id] ?? []"
-                    />
+                    <livewire:components.card-product wire:key="prod_{{ $product->id }}" :product="$product" :availableColors="$productColors[$product->id] ?? []" />
                 @endforeach
             </div>
 

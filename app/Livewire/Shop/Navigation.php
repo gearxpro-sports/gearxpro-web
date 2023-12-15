@@ -13,7 +13,7 @@ class Navigation extends Component
     public $about_us = [];
 
     public function mount() {
-        $this->languages = config('gearxpro.languages');
+        $this->languages = array_keys(config('gearxpro.languages'));
         $this->about_us = [
             [
                 'route' => 'about_us.whoWeAre',

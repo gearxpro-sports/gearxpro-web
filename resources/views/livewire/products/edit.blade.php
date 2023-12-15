@@ -8,6 +8,37 @@
 </x-slot>
 
 <div x-data="{openedTab: '{{ $tabs[0] }}'}" x-on:list-updated="window.scrollTo(0, document.body.scrollHeight)">
+    <div class="flex items-center justify-end space-x-4">
+        <ul class="flex items-center justify-end space-x-2 text-sm">
+            @if ($currentLang !== config('app.locale'))
+                <li>
+                    <button
+                        class="block h-10 leading-10 bg-color-18181a text-white px-4 font-bold hover:bg-color-18181a/80"
+                        wire:click="translateAllFields"
+                        wire:confirm="{{ __('products.edit.languages.confirm_translation') }}"
+                        wire:loading.class="bg-color-ffa76c hover:bg-color-ffa76c"
+                        wire:target="translateAllFields"
+                    >
+                        <span wire:loading wire:target="translateAllFields">{{ __('products.edit.languages.translations_in_progress') }}</span>
+                        <span wire:loading.remove wire:target="translateAllFields">{{ __('products.edit.languages.translate_all_fields_from', ['lang' => strtoupper(config('app.locale'))]) }}</span>
+                    </button>
+                </li>
+            @endif
+            @foreach (config('gearxpro.languages') as $iso => $langData)
+                <li wire:key="lang_{{ $iso }}" @class([
+                    'p-2 border-t-2 hover:opacity-100',
+                    'bg-white border-color-18181a' => $currentLang === $iso,
+                    'opacity-50 border-transparent' => $currentLang !== $iso,
+            ])
+                >
+                    <button class="block p-0.5" wire:click="setCurrentLang('{{ $iso }}')">
+                        <span class="inline-block h-5 w-10 leading-5 text-sm font-semibold">{{ $langData['label'] }}</span>
+                    </button>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+
     <form wire:submit="save" class="bg-white p-4">
         <div class="p-8">
             <ul class="grid grid-cols-5 gap">
@@ -21,31 +52,35 @@
                 <div x-show="openedTab === 'main'">
                     <div class="grid grid-cols-4 gap-16">
                         <div class="flex flex-col space-y-4 col-span-3">
-                            <x-input type="text" wire:model.change="productForm.name" name="name" label="{{ __('products.edit.section.main.name.label') }}" required></x-input>
-                            <x-input type="text" wire:model.change="productForm.slug" name="slug" label="{{ __('products.edit.section.main.slug.label') }}" class="text-color-6c757d" required>
+                            <x-input type="text" wire:model.change="productForm.name.{{ $currentLang }}" name="productForm.name.{{ $currentLang }}" label="{{ __('products.edit.section.main.name.label') }}" required></x-input>
+                            <x-input type="text" wire:model.change="productForm.slug.{{ $currentLang }}" name="productForm.slug.{{ $currentLang }}" label="{{ __('products.edit.section.main.slug.label') }}" class="text-color-6c757d" required>
                                 <x-slot:action>
-                                    <button type="button" wire:click="updateSlug()" class="ml-auto text-color-18181a underline hover:no-underline" tabindex="-1">{{ __('products.edit.section.main.slug.action') }}</button>
+                                    <button type="button" wire:click="updateSlug('{{ $currentLang }}')" class="ml-auto text-color-18181a underline hover:no-underline" tabindex="-1">{{ __('products.edit.section.main.slug.action') }}</button>
                                 </x-slot:action>
                             </x-input>
-                            <div x-data="{openedDescTab: '{{ $descFields[0] }}'}">
-                                <div class="mb-2 text-xs">{{ __('products.edit.section.main.descriptons_label') }}</div>
-                                <ul class="flex flex-row space-x-4 border border-color-eff0f0">
-                                    @foreach($descFields as $descField)
-                                        <li wire:key="tab_desc_{{ $descField }}" class="border-color-eff0f0">
-                                            <button @click="openedDescTab = '{{ $descField }}'" :class="openedDescTab === '{{ $descField }}' && 'bg-color-18181a text-color-eff0f0'" type="button" class="block w-full py-2.5 px-5 text-center text-xs font-bold">
-                                                {{ __('products.edit.tabs.'. $descField .'_desc') }}
-                                            </button>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                                @foreach($descFields as $descField)
-                                <div wire:key="desc_{{ $descField }}" class="p-8 border border-color-eff0f0 border-t-0" x-show="openedDescTab === '{{ $descField }}'">
-                                    <x-rich-textarea wire:model="productForm.{{ $descField }}_desc" name="product.{{ $descField }}_desc" placeholder="{{ __('products.edit.section.main.'. $descField .'_desc.placeholder') }}"></x-rich-textarea>
+                            @foreach (array_keys(config('gearxpro.languages')) as $lang)
+                                <div wire:key="descriptions_{{ $lang }}" @class(['hidden' => $currentLang !== $lang])>
+                                    <div x-data="{openedDescTab: '{{ $descFields[0].'_'.$lang }}'}">
+                                        <div class="mb-2 text-xs">{{ __('products.edit.section.main.descriptons_label') }}</div>
+                                        <ul class="flex flex-row space-x-4 border border-color-eff0f0">
+                                            @foreach($descFields as $descField)
+                                                <li wire:key="tab_desc_{{ $descField.'_'.$lang }}" class="border-color-eff0f0">
+                                                    <button @click="openedDescTab = '{{ $descField.'_'.$lang }}'" :class="openedDescTab === '{{ $descField.'_'.$lang }}' && 'bg-color-18181a text-color-eff0f0'" type="button" class="block w-full py-2.5 px-5 text-center text-xs font-bold">
+                                                        {{ __('products.edit.tabs.'. $descField .'_desc') }}
+                                                    </button>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        @foreach($descFields as $descField)
+                                        <div wire:key="desc_{{ $descField.'_'.$lang }}" class="p-8 border border-color-eff0f0 border-t-0" x-show="openedDescTab === '{{ $descField.'_'.$lang }}'">
+                                            <x-rich-textarea wire:model="productForm.{{ $descField }}_desc.{{ $lang }}" name="product.{{ $descField }}_desc.{{ $lang }}" placeholder="{{ __('products.edit.section.main.'. $descField .'_desc.placeholder') }}"></x-rich-textarea>
+                                        </div>
+                                        @endforeach
+                                    </div>
                                 </div>
-                                @endforeach
-                            </div>
-                            <x-input type="text" wire:model.change="productForm.meta_title" name="meta_title" label="{{ __('products.edit.section.main.meta_title.label') }}"></x-input>
-                            <x-input type="text" wire:model.change="productForm.meta_description" name="meta_description" label="{{ __('products.edit.section.main.meta_description.label') }}"></x-input>
+                            @endforeach
+                            <x-input type="text" wire:model.change="productForm.meta_title.{{ $currentLang }}" name="meta_title.{{ $currentLang }}" label="{{ __('products.edit.section.main.meta_title.label') }}"></x-input>
+                            <x-input type="text" wire:model.change="productForm.meta_description.{{ $currentLang }}" name="meta_description.{{ $currentLang }}" label="{{ __('products.edit.section.main.meta_description.label') }}"></x-input>
                         </div>
                         <div>
                             @if ($categories->count())

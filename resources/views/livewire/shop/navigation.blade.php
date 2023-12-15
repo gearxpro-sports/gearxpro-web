@@ -124,7 +124,7 @@
                             </svg>
                         </a>
                         @endif
-                        <livewire:shop.components.language-switch />
+                        <livewire:shop.components.language-switch :route="['name' => request()->route()->getName(), 'params' => request()->route()->parameters]" />
                     </div>
                 </div>
 

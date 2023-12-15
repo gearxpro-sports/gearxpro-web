@@ -13,9 +13,9 @@ class Splash extends Component
 
     public function mount() {
         // TODO: MODIFICARE PER RIVEDERE LA SPLASH
-        session()->put('country_code', config('app.country'));
-        session()->put('reseller_id', 2);
-        return redirect()->route('home', ['country_code' => session('country_code')]);
+//        session()->put('country_code', config('app.country'));
+//        session()->put('reseller_id', 2);
+//        return redirect()->route('home', ['country_code' => session('country_code')]);
 
         if(session('country_code') && auth()->check() && auth()->user()->hasRole(User::SUPERADMIN)) {
             return true;
