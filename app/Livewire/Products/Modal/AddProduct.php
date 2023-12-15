@@ -3,6 +3,7 @@
 namespace App\Livewire\Products\Modal;
 
 use App\Models\Product;
+use DeepL\Translator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use LivewireUI\Modal\ModalComponent;
@@ -33,17 +34,21 @@ class AddProduct extends ModalComponent
     {
         $this->validate();
 
-        rescue(function() {
-            $product = Product::create([
-                'name' => $this->name,
-                'slug' => Str::kebab($this->name),
-            ]);
+        $translator = new Translator(env('DEEPL_API_KEY'));
 
-            return redirect()->route('products.edit', ['product' => $product->slug]);
+        $name = $slug = [];
+        foreach(config('gearxpro.languages') as $iso => $langData) {
+            $name[$iso] = $translator->translateText($this->name, config('app.locale'), $langData['trans_code'])->text;
+            $slug[$iso] = Str::kebab($name[$iso]);
+        }
 
-        }, function () {
-            session()->flash('error', __('Error!'));
-        });
+        $product = Product::create([
+            'name' => $name,
+            'slug' => $slug,
+        ]);
+
+
+        return redirect()->route('products.edit', ['product' => $product->slug]);
 
     }
 }

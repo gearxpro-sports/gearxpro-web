@@ -41,7 +41,11 @@ class Product extends Model
      */
     public function getRouteKeyName(): string
     {
-        return 'slug->'. session('country_code');
+        if (auth()->user()?->hasRole(User::SUPERADMIN)) {
+            return 'slug->'. session('country_code');
+        }
+
+        return 'slug->'. session('language');
     }
 
     public function getWholesalePriceAttribute()

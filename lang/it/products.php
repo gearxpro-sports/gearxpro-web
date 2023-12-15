@@ -33,6 +33,11 @@ return [
             'technical_desc' => 'Tecnicità',
             'washing_desc'   => 'Instruzioni di lavaggio',
         ],
+        'languages' => [
+            'translate_all_fields_from' => 'Traduci tutti i campi da :lang',
+            'confirm_translation' => 'Confermi questa operazione? Le precedenti traduzioni verrano sovrascritte.',
+            'translations_in_progress' => 'Traduzione in corso...',
+        ],
         'section' => [
             'locale' => [
                 'title' => 'Localizzazione',

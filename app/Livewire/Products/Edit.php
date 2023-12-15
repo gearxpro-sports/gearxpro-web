@@ -60,8 +60,14 @@ class Edit extends Component
      */
     public Collection $categories;
 
+    /**
+     * @var string
+     */
+    public string $currentLang;
+
     public function mount()
     {
+        $this->currentLang = config('app.locale');
         $this->categories = Category::with('children')->whereNull('parent_id')->get();
         $this->productForm->setProduct($this->product);
         $this->countriesAvailable = User::role(User::RESELLER)
@@ -240,6 +246,29 @@ class Edit extends Component
     }
 
     /**
+     * @param string $lang
+     */
+    public function setCurrentLang(string $lang)
+    {
+        $this->currentLang = $lang;
+    }
+
+    /**
+     * @throws \DeepL\DeepLException
+     */
+    public function translateAllFields()
+    {
+        $this->productForm->translateAllFields($this->currentLang);
+        $this->save();
+    }
+
+    public function loadProductVariants()
+    {
+        $this->productVariants = $this->product->variants()->with('terms.attribute')->get();
+        $this->dispatch('refresh-variant');
+    }
+
+    /**
      * @return array
      */
     private function getCompleteAttributesArray(): array
@@ -282,11 +311,5 @@ class Edit extends Component
         }
 
         return $combinations;
-    }
-
-    public function loadProductVariants()
-    {
-        $this->productVariants = $this->product->variants()->with('terms.attribute')->get();
-        $this->dispatch('refresh-variant');
     }
 }

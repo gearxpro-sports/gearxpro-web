@@ -9,6 +9,7 @@
         "barryvdh/laravel-debugbar": "^3.9",
         "blade-ui-kit/blade-heroicons": "^2.1",
         "cknow/laravel-money": "^7.2",
+        "deeplcom/deepl-php": "^1.6",
         "doctrine/dbal": "^3.7",
         "fakerphp/faker": "^1.9.1",
         "guzzlehttp/guzzle": "^7.2",

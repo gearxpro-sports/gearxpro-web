@@ -49,8 +49,8 @@ class Edit extends Component
 
     public function mount()
     {
-        $this->billing_address = $this->reseller->billing_address;
-        $this->shipping_address = $this->reseller->shipping_address;
+        $this->billing_address = $this->reseller->billing_address ?? new Address();
+        $this->shipping_address = $this->reseller->shipping_address ?? new Address();
     }
 
     public function copyFromBilling()

@@ -3,6 +3,7 @@
 namespace App\Livewire\Products\Forms;
 
 use App\Models\Category;
+use DeepL\Translator;
 use Livewire\Form;
 use App\Models\Product;
 use Illuminate\Support\Str;
@@ -16,49 +17,49 @@ class ProductForm extends Form
     public ?Product $product;
 
     /**
-     * @var string
+     * @var array
      */
-    public string $name = '';
+    public array $name = [];
 
     /**
-     * @var string
+     * @var array
      */
-    public string $slug = '';
+    public array $slug = [];
 
     /**
-     * @var string
+     * @var array
      */
-    public string $main_desc = '';
+    public array $main_desc = [];
 
     /**
-     * @var string
+     * @var array
      */
-    public string $features_desc = '';
+    public array $features_desc = [];
 
     /**
-     * @var string
+     * @var array
      */
-    public string $pros_desc = '';
+    public array $pros_desc = [];
 
     /**
-     * @var string
+     * @var array
      */
-    public string $technical_desc = '';
+    public array $technical_desc = [];
 
     /**
-     * @var string
+     * @var array
      */
-    public string $washing_desc = '';
+    public array $washing_desc = [];
 
     /**
-     * @var string
+     * @var array
      */
-    public string $meta_title = '';
+    public array $meta_title = [];
 
     /**
-     * @var string
+     * @var array
      */
-    public string $meta_description = '';
+    public array $meta_description = [];
 
     /**
      * @var array
@@ -96,14 +97,16 @@ class ProductForm extends Form
         $this->product = $product;
         $this->categories = $product->categories->pluck('id')->toArray();
 
-        foreach (array_keys($this->except('product', 'categories')) as $field) {
-            $this->{$field} = $product->{$field};
+        foreach (array_keys($this->except('product', 'categories', 'country_prices')) as $field) {
+            foreach (array_keys(config('gearxpro.languages')) as $lang) {
+                $this->{$field}[$lang] = $product->getTranslation($field, $lang, false);
+            }
         }
     }
 
-    public function updateSlug()
+    public function updateSlug(string $lang)
     {
-        $this->slug = Str::kebab($this->name);
+        $this->slug[$lang] = Str::kebab($this->name[$lang]);
     }
 
     public function updateCategories(Category $category)
@@ -130,7 +133,11 @@ class ProductForm extends Form
         // remove ids not exist in category table
         $this->categories = array_intersect($this->categories, Category::pluck('id')->toArray());
 
-        $this->product->update($this->except(['country_prices', 'product', 'categories']));
+        foreach ($this->except(['country_prices', 'product', 'categories']) as $field => $values) {
+            $this->product->replaceTranslations($field, $values);
+        }
+        $this->product->save();
+        //$this->product->update($this->except(['country_prices', 'product', 'categories']));
 
         // convert empty values with null
         array_walk_recursive($this->country_prices, function(&$value) {
@@ -145,5 +152,28 @@ class ProductForm extends Form
         }
 
         $this->product->categories()->sync($this->categories);
+    }
+
+    /**
+     * @param string $lang
+     * @throws \DeepL\DeepLException
+     */
+    public function translateAllFields(string $lang)
+    {
+        $translator = new Translator(env('DEEPL_API_KEY'));
+        $dataLang = config('gearxpro.languages')[$lang];
+        $defaultLang = config('app.locale');
+
+        foreach (array_keys($this->except(['country_prices', 'product', 'categories'])) as $field) {
+            $this->{$field}[$lang] = $translator->translateText(
+                $this->{$field}[$defaultLang] ?? '',
+                $defaultLang,
+                $dataLang['trans_code'],
+                [
+                    'preserve_formatting' => true,
+                    'tag_handling' => 'html',
+                ]
+            )->text;
+        }
     }
 }
