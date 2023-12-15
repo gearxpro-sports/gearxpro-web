@@ -11,6 +11,8 @@ use Illuminate\Support\Str;
 
 class OrderSeeder extends Seeder
 {
+    use WithoutModelEvents;
+
     /**
      * Run the database seeds.
      */

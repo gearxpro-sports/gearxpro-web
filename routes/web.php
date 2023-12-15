@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Countries\Index as CountriesIndex;
 use App\Livewire\Customers\Index as CustomersIndex;
 use App\Livewire\Customers\Show as CustomerShow;
 use App\Livewire\Customers\Edit as CustomerEdit;
@@ -146,6 +147,10 @@ Route::middleware(['auth', 'verified', 'set_reseller_missing_data'])->domain(env
 
         Route::prefix('stocks')->middleware(['role:reseller'])->group(function () {
             Route::get('/', StocksIndex::class)->name('stocks.index');
+        });
+
+        Route::prefix('countries')->middleware(['role:superadmin'])->group(function () {
+            Route::get('/', CountriesIndex::class)->name('countries.index');
         });
     });
 

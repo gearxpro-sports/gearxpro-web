@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\User;
+use App\Services\IpApiService;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -17,14 +18,33 @@ class Country
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // TODO: MODIFICARE DOPO MODIFICHE SPLASH
-//        if(!session('reseller_id')) {
-//            session()->put('reseller_id', 2);
-//        }
+//        $ip = '101.46.224.0';
+        $ip = '79.24.239.62';
+//        $ip = '140.93.0.0';
+//       $ip = $request->getClientIp();
+
+        if (session('user_ip') !== $ip) {
+            $countryCode = (new IpApiService($ip))->getIpInfo('countryCode');
+            if (!$countryCode) {
+                $countryCode = config('app.country');
+            }
+            $country = \App\Models\Country::where('iso2_code', strtolower($countryCode))->first();
+            if (!$country->reseller_id) {
+                $defaultReseller = \App\Models\Country::where('iso2_code', config('app.country'))->first()->reseller;
+                session()->put('reseller_id', $defaultReseller->id);
+                session()->put('country_code', $defaultReseller->country_code);
+            } else {
+                session()->put('reseller_id', $country->reseller_id);
+                session()->put('country_code', strtolower($country->reseller->country_code));
+            }
+
+//            dd(session('country_code'), session('reseller_id'));
+
+            session()->put('user_ip', $ip);
+        }
 
         $available_countries = User::role(User::RESELLER)->with('country')->get()->pluck('country.iso2_code');
         $available_countries = array_map('strtolower', $available_countries->toArray());
-
 
         if(!in_array($request->country_code, $available_countries)) {
             if(auth()->check() && auth()->user()->hasRole(User::SUPERADMIN)) {
@@ -48,9 +68,11 @@ class Country
         }
 
         if(!auth()->check() && $request->country_code !== session('country_code')) {
-            session()->put('country_code', $request->country_code);
-            $reseller = \App\Models\Country::where('iso2_code', $request->country_code)->first()->reseller;
-            session()->put('reseller_id', $reseller->id);
+            session()->put('country_code', session('country_code'));
+            $reseller = \App\Models\Country::where('iso2_code', session('country_code'))->first()->reseller;
+            session()->put('reseller_id', !$reseller ? session('reseller_id') : $reseller->id);
+
+            return redirect()->route('home', ['country_code' => session('country_code')]);
         }
 
         if($available_countries) {

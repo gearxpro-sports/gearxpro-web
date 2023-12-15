@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Country extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     /**
      * @var boolean
@@ -24,9 +25,12 @@ class Country extends Model
         return $this->hasMany(User::class);
     }
 
-    public function reseller(): HasOne
+    /**
+     * @return BelongsTo
+     */
+    public function reseller(): BelongsTo
     {
-        return $this->hasOne(User::class)->role(User::RESELLER);
+        return $this->belongsTo(User::class)->role(User::RESELLER);
     }
 
     /**

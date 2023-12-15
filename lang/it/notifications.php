@@ -128,4 +128,10 @@ return [
             'error' => 'Non é possibile modificare lo stato dell\'ordine',
         ]
     ],
+    'countries' => [
+        'updating_reseller' => [
+            'success' => 'Rivenditore aggiornato con successo',
+            'error' => 'Non é possibile aggiornare il rivenditore',
+        ],
+    ],
 ];

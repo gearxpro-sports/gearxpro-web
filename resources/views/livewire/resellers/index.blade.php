@@ -2,6 +2,7 @@
     {{ __('resellers.index.title') }}
 </x-slot>
 <x-slot name="actions">
+    <x-primary-button href="{{ route('countries.index') }}">{{ __('countries.title') }}</x-primary-button>
     <x-primary-button href="{{ route('resellers.create') }}">{{ __('common.create') }}</x-primary-button>
 </x-slot>
 
