@@ -46,7 +46,7 @@ class OrderSeeder extends Seeder
             }
 
             Order::create([
-                'reference' => Str::random(10),
+                'reference' => strtoupper(Str::random(10)),
                 'user_id' => $customer->id,
                 'reseller_id' => $reseller->id,
                 'country_id' => $countryId,
@@ -55,6 +55,7 @@ class OrderSeeder extends Seeder
                 'billing_address' => $customer->billing_address->makeHidden($addressHiddenFields)->attributesToArray(),
                 'shipping_address' => $customer->billing_address->makeHidden([...$addressHiddenFields, ...[ 'sdi', 'pec']])->attributesToArray(),
                 'items' => $orderItems,
+                'shipping_cost' => config('app.shipping_cost'),
                 'paid_at' => now(),
                 'total' => $total,
             ]);
