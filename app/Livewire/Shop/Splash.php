@@ -22,7 +22,7 @@ class Splash extends Component
         }
 
         // TODO: Con abbonamento IP PRO, togliere l'IF
-        if (session('user_ip') !== $ip) {
+//        if (session('user_ip') !== $ip) {
             $countryCode = (new IpApiService($ip))->getIpInfo('countryCode');
             if (!$countryCode) {
                 $countryCode = config('app.country');
@@ -40,7 +40,8 @@ class Splash extends Component
                 session()->put('country_code', strtolower($country->reseller->country_code));
             }
             session()->put('user_ip', $ip);
-        }
+            session()->put('ip_country_code', strtolower($countryCode));
+//        }
 
         return redirect()->route('home', ['country_code' => session('country_code')]);
     }

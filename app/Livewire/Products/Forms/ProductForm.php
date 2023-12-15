@@ -102,6 +102,13 @@ class ProductForm extends Form
                 $this->{$field}[$lang] = $product->getTranslation($field, $lang, false);
             }
         }
+
+        foreach($this->product->countries as $country) {
+            $this->country_prices[$country->id] = [
+                'wholesale_price' => $country->prices->wholesale_price,
+                'price' => $country->prices->price
+            ];
+        }
     }
 
     public function updateSlug(string $lang)

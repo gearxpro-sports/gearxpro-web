@@ -160,4 +160,4 @@ Route::middleware(['auth', 'verified', 'set_reseller_missing_data'])->domain(env
 
 require __DIR__.'/auth.php';
 
-Route::stripeWebhooks('stripe-webhooks');
+Route::stripeWebhooks('stripe_webhooks');

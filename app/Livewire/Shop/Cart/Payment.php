@@ -175,11 +175,22 @@ class Payment extends Component
                         ],
                     ]);
                     auth()->user()->update(['stripe_customer_id' => $stripeCustomer->id]);
+                } else {
+                    $stripe->customers->update(auth()->user()->stripe_customer_id, [
+                        'email' => auth()->user()->shipping_address->pec
+                    ]);
                 }
 
                 $paymentOptions = [
                     'amount' => $total * 100,
                     'receipt_email' =>  auth()->user()->email,
+                    'metadata' => [
+                        'reseller_id' => session('reseller_id'),
+                        'country_code' => session('country_code'),
+                        'user_ip' => session('user_ip'),
+                        'ip_country_code' => session('ip_country_code'),
+                        'language' => session('language'),
+                    ],
                 ];
 
                 if ($this->cart->stripe_payment_intent_id) {
@@ -203,7 +214,7 @@ class Payment extends Component
 
                 $this->dispatch('pay-order',
                     public_key: $stripeKeys['stripe_public_key'],
-                    client_secret:$paymentIntent->client_secret
+                    client_secret: $paymentIntent->client_secret
                 );
 
                 $this->currentTab = 1;

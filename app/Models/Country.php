@@ -30,7 +30,7 @@ class Country extends Model
      */
     public function reseller(): BelongsTo
     {
-        return $this->belongsTo(User::class)->role(User::RESELLER);
+        return $this->belongsTo(User::class)->withoutGlobalScope('country_scope')->role(User::RESELLER);
     }
 
     /**

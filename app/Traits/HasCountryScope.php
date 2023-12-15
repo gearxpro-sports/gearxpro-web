@@ -17,7 +17,7 @@ trait HasCountryScope
             if (Auth::hasUser()) {
                 /** @var User $user */
                 $user = Auth::user();
-                
+
                 $builder->when(!$user->hasRole(User::SUPERADMIN), fn (Builder $query) => $query->where('country_id', $user->country_id));
             }
         });

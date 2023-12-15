@@ -27,7 +27,7 @@ class Country
         }
 
         // TODO: Con abbonamento IP PRO, togliere l'IF
-        if (session('user_ip') !== $ip) {
+//        if (session('user_ip') !== $ip) {
             $countryCode = (new IpApiService($ip))->getIpInfo('countryCode');
             if (!$countryCode) {
                 $countryCode = config('app.country');
@@ -45,7 +45,8 @@ class Country
                 session()->put('country_code', strtolower($country->reseller->country_code));
             }
             session()->put('user_ip', $ip);
-        }
+            session()->put('ip_country_code', strtolower($countryCode));
+//        }
 
         $available_countries = User::role(User::RESELLER)->with('country')->get()->pluck('country.iso2_code');
         $available_countries = array_map('strtolower', $available_countries->toArray());

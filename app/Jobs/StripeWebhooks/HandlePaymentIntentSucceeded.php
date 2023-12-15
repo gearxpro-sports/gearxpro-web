@@ -3,7 +3,9 @@
 namespace App\Jobs\StripeWebhooks;
 
 use App\Models\Cart;
+use App\Models\Country;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -31,8 +33,8 @@ class HandlePaymentIntentSucceeded implements ShouldQueue
         $eventObj = $this->webhookCall->payload['data']['object'];
 
         if ($cart = Cart::where('stripe_payment_intent_id',$eventObj['id'])->first()) {
-
             $customer = $cart->user;
+
             $addressHiddenFields = ['id', 'user_id', 'country_id', 'type', 'default', 'created_at', 'updated_at'];
             $country = $customer->country;
 
@@ -50,7 +52,7 @@ class HandlePaymentIntentSucceeded implements ShouldQueue
             $order = Order::create([
                 'reference'                => strtoupper(Str::random(10)),
                 'user_id'                  => $customer->id,
-                'reseller_id'              => $country->reseller->id,
+                'reseller_id'              => $eventObj['metadata']['reseller_id'], // TODO: FIX -- reseller->id a "null"
                 'country_id'               => $country->id,
                 'status'                   => Order::PAID_STATUS,
                 'payment_method'           => Order::STRIPE_PAYMENT,
@@ -64,7 +66,8 @@ class HandlePaymentIntentSucceeded implements ShouldQueue
             ]);
 
             foreach($order->items as $item) {
-                $country->reseller->stocks()->where('product_id', $item->product_id)->where('product_variant_id', $item->variant_id)->decrement('quantity', $item->quantity);
+                $reseller = User::find($eventObj['metadata']['reseller_id']);
+                $reseller->stocks()->where('product_id', $item->product_id)->where('product_variant_id', $item->variant_id)->decrement('quantity', $item->quantity);
             }
 
             $cart->delete();

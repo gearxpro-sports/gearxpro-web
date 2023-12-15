@@ -15,7 +15,7 @@ class CarouselBottom extends Component
 
     public function mount() {
         $this->reseller = User::find(session('reseller_id'));
-        $this->orders = $this->reseller->resellerOrders;
+        $this->orders = $this->reseller->resellerOrders ?? [];
     }
 
 

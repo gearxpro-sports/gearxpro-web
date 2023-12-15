@@ -17,8 +17,7 @@ class UserObserver
                 ->customers->update(
                     $user->stripe_customer_id,
                     [
-                        'name' => $user->fullName,
-                        'email' => $user->email
+                        'name' => $user->fullName
                     ]
                 )
             ;
