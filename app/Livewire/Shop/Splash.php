@@ -13,11 +13,13 @@ class Splash extends Component
     #[Layout('layouts.blank')]
 
     public function mount() {
-
-//        $ip = '101.46.224.0';
-        $ip = '79.24.239.62';
-//                $ip = '140.93.0.0';
-        //       $ip = $request->getClientIp();
+        if (app()->environment() === 'local') {
+            //        $ip = '101.46.224.0'; // DE
+            $ip = '79.24.239.62'; // IT
+            //        $ip = '140.93.0.0'; // FE
+        } else {
+            $ip = request()->getClientIp();
+        }
 
         // TODO: Con abbonamento IP PRO, togliere l'IF
         if (session('user_ip') !== $ip) {
