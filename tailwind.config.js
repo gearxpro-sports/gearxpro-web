@@ -164,6 +164,7 @@ export default {
 
     plugins: [
         require('tailwindcss-labeled-groups')(['custom-button']),
+        require('@tailwindcss/typography'),
         forms
     ],
 };

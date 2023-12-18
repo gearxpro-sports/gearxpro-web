@@ -198,15 +198,15 @@
             </div>
 
             @if($currentTab === 'product')
-                <p class="text-[13px] leading-[24px] text-color-323a46">
+                <div class="prose  text-[13px] leading-[24px] text-color-323a46">
                     {!! $product->main_desc !!}
-                </p>
+                </div>
             @endif
 
             @if($currentTab === 'characteristics')
-                <p class="text-[13px] leading-[24px] text-color-323a46">
+                <div class="prose  text-[13px] leading-[24px] text-color-323a46">
                     {!! $product->features_desc !!}
-                </p>
+                </div>
             @endif
 
             @if($currentTab === 'advantages')
