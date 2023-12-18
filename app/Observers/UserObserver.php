@@ -16,7 +16,7 @@ class UserObserver
         if ($user->hasRole(User::CUSTOMER) && $user->stripe_customer_id) {
             $reseller =
                 Country::where('iso2_code', session('ip_country_code'))->first()->reseller ??
-                User::role(User::RESELLER)->where('country_id', Country::where('iso2_code', session('ip_country_code'))->first()->id)->first()
+                User::role(User::RESELLER)->where('country_id', Country::where('iso2_code', config('app.country'))->first()->id)->first()
             ;
 
             (new StripeClient($reseller->stripe_private_key))

@@ -68,7 +68,7 @@ class Show extends Component
         //        $this->selectedSize = $this->selectedVariant->size->id;
         $reseller =
             Country::where('iso2_code', session('ip_country_code'))->first()->reseller ??
-            User::role(User::RESELLER)->where('country_id', Country::where('iso2_code', session('ip_country_code'))->first()->id)->first()
+            User::role(User::RESELLER)->where('country_id', Country::where('iso2_code', config('app.country'))->first()->id)->first()
         ;
 
         if(!$reseller) {
@@ -178,7 +178,7 @@ class Show extends Component
 
         $reseller =
             Country::where('iso2_code', session('ip_country_code'))->first()->reseller ??
-            User::role(User::RESELLER)->where('country_id', Country::where('iso2_code', session('ip_country_code'))->first()->id)->first()
+            User::role(User::RESELLER)->where('country_id', Country::where('iso2_code', config('app.country'))->first()->id)->first()
         ;
 
         $variants = $reseller->stocks()->with('productVariant')->where('product_id', $this->product->id);

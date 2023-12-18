@@ -16,7 +16,7 @@ class Splash extends Component
         if (app()->environment() === 'local') {
             // $ip = '101.46.224.0'; // DE
             $ip = '101.56.0.0'; // IT
-            // $ip = '140.93.0.0'; // FE
+//             $ip = '140.93.0.0'; // FE
         } else {
             $ip = request()->getClientIp();
         }
