@@ -48,6 +48,14 @@ class Product extends Model
         return 'slug->'. session('language');
     }
 
+    public function getTranslatedSlugAttribute() {
+        if (auth()->user()?->hasRole(User::SUPERADMIN)) {
+            return $this->getTranslation('slug', config('app.locale_be'), false);
+        } else {
+            return $this->getTranslation('slug', config('app.locale'), true);
+        }
+    }
+
     public function getWholesalePriceAttribute()
     {
         $country_code = auth()->check() ? auth()->user()->country_code : session('country_code');

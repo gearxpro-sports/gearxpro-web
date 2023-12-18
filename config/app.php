@@ -85,6 +85,7 @@ return [
     |
     */
 
+    'locale_be' => 'it',
     'locale' => 'it',
     'country' => 'it',
 

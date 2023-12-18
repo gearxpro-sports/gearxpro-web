@@ -111,7 +111,7 @@ class Edit extends Component
 
     public function updateSlug()
     {
-        $this->productForm->updateSlug();
+        $this->productForm->updateSlug($this->currentLang);
     }
 
     /**
