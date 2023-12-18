@@ -102,7 +102,7 @@ class Payment extends Component
         }
 
         if ($this->customer_shipping_address) {
-            $this->full_shipping_address = trim($this->customer_shipping_address->address_1) . ' ' . trim($this->customer_shipping_address->city) . ' ' . trim($this->customer_shipping_address->postcode);
+            $this->full_shipping_address = trim($this->customer_shipping_address->address_1).' '.trim($this->customer_shipping_address->city).' '.trim($this->customer_shipping_address->postcode);
 
             $this->pec = $this->customer->shipping_address->pec ?? $this->customer->email;
             $this->phone = $this->customer->shipping_address->phone;
@@ -145,7 +145,7 @@ class Payment extends Component
             ],
                 [
                     'country_id' => $this->customer->country_id ?? Country::where('iso2_code', session('country_code'))->first()->id,
-                    'address_1' => trim($this->shipping_address) . ' ' . trim($this->shipping_civic),
+                    'address_1' => trim($this->shipping_address).' '.trim($this->shipping_civic),
                     'postcode' => $this->shipping_postcode,
                     'city' => $this->shipping_city,
                     'state' => $this->shipping_state,
@@ -163,7 +163,9 @@ class Payment extends Component
                 foreach ($this->cart->items as $cartItem) {
                     $total += ($cartItem->quantity * $cartItem->price);
                 }
-                $stripeKeys =  User::where('id', session('reseller_id'))->first(['stripe_public_key', 'stripe_private_key'])->toArray();
+                $stripeKeys = User::where('id', session('reseller_id'))->first([
+                    'stripe_public_key', 'stripe_private_key'
+                ])->toArray();
                 $stripe = new StripeClient($stripeKeys['stripe_private_key']);
 
                 if (!auth()->user()->stripe_customer_id) {
@@ -171,7 +173,12 @@ class Payment extends Component
                         'name' => auth()->user()->fullName,
                         'email' => auth()->user()->email,
                         'metadata' => [
-                            'Country' => strtoupper(session('country_code')),
+                            'reseller_id' => session('reseller_id'),
+                            'country_code' => strtoupper(session('country_code')),
+                            'user_ip' => session('user_ip'),
+                            'ip_country_code' => strtoupper(session('ip_country_code')),
+                            'language' => strtoupper(session('language')),
+                            'shipping_address' => $this->full_shipping_address ?? '-'
                         ],
                     ]);
                     auth()->user()->update(['stripe_customer_id' => $stripeCustomer->id]);
@@ -183,13 +190,14 @@ class Payment extends Component
 
                 $paymentOptions = [
                     'amount' => $total * 100,
-                    'receipt_email' =>  auth()->user()->email,
+                    'receipt_email' => auth()->user()->email,
                     'metadata' => [
                         'reseller_id' => session('reseller_id'),
-                        'country_code' => session('country_code'),
+                        'country_code' => strtoupper(session('country_code')),
                         'user_ip' => session('user_ip'),
-                        'ip_country_code' => session('ip_country_code'),
-                        'language' => session('language'),
+                        'ip_country_code' => strtoupper(session('ip_country_code')),
+                        'language' => strtoupper(session('language')),
+                        'shipping_address' => $this->full_shipping_address ?? '-'
                     ],
                 ];
 
