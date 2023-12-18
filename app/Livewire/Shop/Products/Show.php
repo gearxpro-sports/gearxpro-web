@@ -66,7 +66,10 @@ class Show extends Component
         //        $this->selectedLength = $this->selectedVariant->length->id;
         //        $this->selectedColor = $this->selectedVariant->color->id;
         //        $this->selectedSize = $this->selectedVariant->size->id;
-        $reseller = Country::where('iso2_code', session('ip_country_code'))->first()->reseller;
+        $reseller =
+            Country::where('iso2_code', session('ip_country_code'))->first()->reseller ??
+            User::role(User::RESELLER)->where('country_id', Country::where('iso2_code', session('ip_country_code'))->first()->id)->first()
+        ;
 
         if(!$reseller) {
             return abort(404);
@@ -173,7 +176,12 @@ class Show extends Component
             $this->selectedSize = $id;
         }
 
-        $variants = Country::where('iso2_code', session('ip_country_code'))->first()->reseller->stocks()->with('productVariant')->where('product_id', $this->product->id);
+        $reseller =
+            Country::where('iso2_code', session('ip_country_code'))->first()->reseller ??
+            User::role(User::RESELLER)->where('country_id', Country::where('iso2_code', session('ip_country_code'))->first()->id)->first()
+        ;
+
+        $variants = $reseller->stocks()->with('productVariant')->where('product_id', $this->product->id);
 
         if ($this->selectedColor) {
             $variants->whereHas('productVariant.terms', function (Builder $query) {

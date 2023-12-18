@@ -20,6 +20,11 @@ class AddChildCategory extends ModalComponent
     public Category $category;
 
     /**
+     * @var bool
+     */
+    public bool $submitDisabled = false;
+
+    /**
      * @return View
      */
     public function render(): View
@@ -29,6 +34,7 @@ class AddChildCategory extends ModalComponent
 
     public function store()
     {
+        $this->submitDisabled = true;
         if ($this->category->parent_id === null) {
             $this->childCategoryForm->store($this->category->id);
             $this->dispatch('open-notification',
@@ -40,5 +46,13 @@ class AddChildCategory extends ModalComponent
 
         $this->dispatch('closeModal');
         $this->dispatch('reload-child-categories');
+    }
+
+    /**
+     * @return bool
+     */
+    public static function destroyOnClose(): bool
+    {
+        return true;
     }
 }

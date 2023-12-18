@@ -4,7 +4,7 @@
         <form wire:submit="save" class="flex flex-col">
             @csrf
             <x-input class="mb-5" type="text" wire:model.blur="name" name="name" label="{{ __('products.edit.section.main.name.label') }}" required></x-input>
-            <x-primary-button>{{ __('common.create') }}</x-primary-button>
+            <x-primary-button wire:loading.attr="disabled" wire:target="save">{{ __('common.create') }}</x-primary-button>
         </form>
     </div>
 </div>

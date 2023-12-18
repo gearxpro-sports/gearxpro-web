@@ -193,7 +193,7 @@
                                 icon="back">{{ __('shop.payment.button_back') }}</x-shop.shopping-button>
                         </div>
                         <div class="w-full max-w-xs">
-                            <x-shop.shopping-button type="submit" color="orange" icon="pay">{{ __('shop.payment.pay') }}</x-shop.shopping-button>
+                            <x-shop.shopping-button id="pay-button" type="submit" color="orange" icon="pay">{{ __('shop.payment.pay') }}</x-shop.shopping-button>
                         </div>
                     </div>
                 </form>
@@ -236,6 +236,7 @@
 
         document.getElementById('payment-form').addEventListener('submit', async (e) => {
             e.preventDefault();
+            document.getElementById('pay-button').disabled = true;
 
             const { error } = await stripe.confirmPayment({
                 elements: stripeElements,
@@ -243,6 +244,8 @@
                     return_url: '{{ route('confirm', ['country_code' => session('country_code')]) }}',
                 },
             });
+
+            document.getElementById('pay-button').disabled = false;
 
             if (error.type !== 'validation_error') {
                 $wire.dispatch('payment-error', {msg: error.message});
