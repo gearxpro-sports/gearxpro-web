@@ -19,9 +19,9 @@ class Country
     public function handle(Request $request, Closure $next): Response
     {
         if (app()->environment() === 'local') {
-            //        $ip = '101.46.224.0'; // DE
-            $ip = '79.24.239.62'; // IT
-            //        $ip = '140.93.0.0'; // FE
+            // $ip = '101.46.224.0'; // DE
+            $ip = '101.56.0.0'; // IT
+            // $ip = '140.93.0.0'; // FE
         } else {
             $ip = $request->getClientIp();
         }

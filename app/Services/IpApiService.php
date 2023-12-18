@@ -10,16 +10,16 @@ class IpApiService
     const BASE_PATH = 'http://ip-api.com/json/';
 
     /**
-     * @var Collection
+     * @var Collection|null
      */
-    private Collection $ipInfo;
+    private ?Collection $ipInfo = null;
 
     /**
      * @param string $ip
      */
     public function __construct(private string $ip)
     {
-        $this->ipInfo = Http::get(self::BASE_PATH.$this->ip)->collect();
+        $this->ipInfo = rescue(fn () => Http::get(self::BASE_PATH.$this->ip)->collect());
     }
 
     /**
@@ -36,7 +36,7 @@ class IpApiService
      */
     public function getIpInfo(string ...$fields): array|string|null
     {
-        if ('fail' === $this->ipInfo->get('status')) {
+        if (!$this->ipInfo || 'fail' === $this->ipInfo->get('status')) {
             return null;
         }
 
