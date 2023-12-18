@@ -267,7 +267,7 @@
             const input_shipping_address = document.getElementsByName("shipping_address")[0];
 
             const options = {
-                componentRestrictions: {country: @json(session('country_code')) }
+                componentRestrictions: {country: @json(session('ip_country_code')) }
             }
 
             autocomplete_shipping_address = new google.maps.places.Autocomplete(input_shipping_address, options);
