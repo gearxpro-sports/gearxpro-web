@@ -14,7 +14,7 @@ class GroupAttributeWithAttributeSeeder extends Seeder
     public function run(): void
     {
         $lengthsGroup = Attribute::create([
-            'name' => 'Lughezza',
+            'name' => 'Lunghezza',
             'options_type' => 'select',
             'position' => 0,
         ]);
