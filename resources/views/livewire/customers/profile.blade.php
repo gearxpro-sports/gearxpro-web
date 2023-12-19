@@ -99,7 +99,7 @@
                                 <div class="h-full w-fit flex flex-col justify-between">
                                     <div class="flex flex-col items-start justify-start">
                                         <span class="text-base font-semibold text-color-18181a">{{date_format($order->created_at,"d/m/Y ")}}</span>
-                                        <span class="text-sm font-medium text-color-18181a">@money(($order->total + $order->shipping_cost))</span>
+                                        <span class="text-sm font-medium text-color-18181a">@money(($order->total))</span>
                                     </div>
                                     <div class="flex flex-col items-start justify-start">
                                         <span class="text-sm font-semibold text-color-18181a whitespace-nowrap">{{__('customers.tabs.orders.status.'. $order->status)}}</span>
@@ -298,6 +298,8 @@
                     <div class="mt-5">
                         <x-badge class="justify-center" color="{{ $color[$showOrder->status] }}">{{__('customers.tabs.orders.status.'. $showOrder->status)}}</x-badge>
                     </div>
+
+                    <a class="block mt-3 text-sm text-color-2cb2d1 font-bold underline hover:no-underline" href="{{ $receiptUrl }}" target="_blank">{{ __('orders.show.stripe_receipt') }}</a>
 
                     @foreach ($showOrder->items as $item)
                         @php($variant = \App\Models\ProductVariant::where('id', $item->variant_id)->withTrashed()->first())

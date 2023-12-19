@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Product;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use App\Models\Term;
 use App\Models\Attribute;
@@ -65,9 +66,13 @@ class Edit extends Component
      */
     public string $currentLang;
 
+    #[Url(keep: true)]
+    public $tab = null;
+
     public function mount()
     {
-        $this->currentLang = config('app.locale');
+        $this->tab = $this->tab ?? config('app.locale');
+        $this->currentLang = $this->tab ?? config('app.locale');
         $this->categories = Category::with('children')->whereNull('parent_id')->get();
         $this->productForm->setProduct($this->product);
         $this->countriesAvailable = User::role(User::RESELLER)
@@ -250,6 +255,7 @@ class Edit extends Component
      */
     public function setCurrentLang(string $lang)
     {
+        $this->tab = $lang;
         $this->currentLang = $lang;
     }
 
@@ -260,6 +266,8 @@ class Edit extends Component
     {
         $this->productForm->translateAllFields($this->currentLang);
         $this->save();
+
+        return redirect()->route('products.edit', ['product' => $this->product->slug, 'tab' => $this->tab]);
     }
 
     public function loadProductVariants()

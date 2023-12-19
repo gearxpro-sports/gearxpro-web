@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Customers;
 
+use App\Models\Country;
 use App\Models\Order;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Stripe\StripeClient;
 
 #[Layout('layouts.guest')]
 class Profile extends Component
@@ -42,6 +44,7 @@ class Profile extends Component
     public $formatPassword = [];
 
     public $showOrder = null;
+    public $receiptUrl = null;
 
     public function updated($property) {
         if ($property === 'password') {
@@ -105,6 +108,16 @@ class Profile extends Component
     public function selectEditData($data, $id = null) {
         if ($id) {
             $this->showOrder = Order::find($id);
+
+            $reseller = User::role(User::RESELLER)->where('country_id', auth()->user()->country_id)->first();
+
+            if ($this->showOrder->stripe_payment_intent_id && $reseller->stripe_private_key) {
+                $this->receiptUrl = (new StripeClient($reseller->stripe_private_key))
+                    ->paymentIntents
+                    ->retrieve($this->showOrder->stripe_payment_intent_id, ['expand' => ['latest_charge']])
+                    ->latest_charge
+                    ->receipt_url;
+            }
         }
 
         $this->modify = $data;

@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\Country;
 use App\Http\Middleware\Localization;
+use App\Http\Middleware\setDefaultLangInDashboard;
 use App\Http\Middleware\SetResellerMissingDataMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -72,6 +73,7 @@ class Kernel extends HttpKernel
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
         'country' => Country::class,
-        'set_reseller_missing_data' => SetResellerMissingDataMiddleware::class
+        'set_reseller_missing_data' => SetResellerMissingDataMiddleware::class,
+        'set_default_lang_in_dashboard' => setDefaultLangInDashboard::class
     ];
 }

@@ -97,7 +97,7 @@ Route::middleware(['auth', 'verified'])->domain(env('APP_URL'))->group(function 
     Route::get('customer/profile', CustomerProfile::class, '__invoke')->name('customer.profile');
 });
 
-Route::middleware(['auth', 'verified', 'set_reseller_missing_data'])->domain(env('APP_URL'))->prefix('dashboard')->group(function () {
+Route::middleware(['auth', 'verified', 'set_reseller_missing_data', 'set_default_lang_in_dashboard'])->domain(env('APP_URL'))->prefix('dashboard')->group(function () {
     Route::middleware(['role:superadmin|reseller'])->group(function () {
         Route::get('/', Dashboard::class)->name('dashboard');
 

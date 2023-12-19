@@ -41,19 +41,7 @@ class Product extends Model
      */
     public function getRouteKeyName(): string
     {
-        if (auth()->user()?->hasRole(User::SUPERADMIN)) {
-            return 'slug->'. session('country_code');
-        }
-
-        return 'slug->'. session('language');
-    }
-
-    public function getTranslatedSlugAttribute() {
-        if (auth()->user()?->hasRole(User::SUPERADMIN)) {
-            return $this->getTranslation('slug', config('app.locale_be'), false);
-        } else {
-            return $this->getTranslation('slug', config('app.locale'), true);
-        }
+        return 'slug->'.config('app.locale');
     }
 
     public function getWholesalePriceAttribute()
@@ -77,13 +65,13 @@ class Product extends Model
 
         if (!$defaultVariant) {
             return (object) [
-                'thumb'  => Vite::asset('resources/images/placeholder-medium.jpg'),
+                'thumb' => Vite::asset('resources/images/placeholder-medium.jpg'),
                 'medium' => Vite::asset('resources/images/placeholder-medium.jpg'),
             ];
         }
 
         return (object) [
-            'thumb'  => $defaultVariant->getThumbUrl(),
+            'thumb' => $defaultVariant->getThumbUrl(),
             'medium' => $defaultVariant->getThumbUrl('medium'),
         ];
     }
@@ -91,7 +79,7 @@ class Product extends Model
     public function getVariantsCombinationsArrayAttribute()
     {
         // Ottenere i ProductVariant in stock legati al Product
-        $variantsInStock = $this->variants()->withTrashed()->whereHas('stocks', function($query) {
+        $variantsInStock = $this->variants()->withTrashed()->whereHas('stocks', function ($query) {
             $query->where('user_id', session('reseller_id'));
             $query->where('quantity', '>', 0);
         })->with('terms')->get();
@@ -115,8 +103,7 @@ class Product extends Model
         return $this
             ->belongsToMany(Country::class)
             ->withPivot('wholesale_price', 'price')
-            ->as('prices')
-        ;
+            ->as('prices');
     }
 
     /**
@@ -154,7 +141,7 @@ class Product extends Model
     {
         $prices = [];
 
-        foreach($this->countries as $country) {
+        foreach ($this->countries as $country) {
             $prices[$country->id] = [
                 'wholesale_price' => $country->prices->wholesale_price,
                 'price' => $country->prices->price,
