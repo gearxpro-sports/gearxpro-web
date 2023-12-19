@@ -18,7 +18,6 @@ use App\Livewire\Resellers\Edit as ResellerEdit;
 use App\Livewire\Products\Index as ProductsIndex;
 use App\Livewire\Products\Edit as ProductsEdit;
 use App\Livewire\Categories\Index as CategoriesIndex;
-use App\Livewire\Categories\Create as CategoriesCreate;
 use App\Livewire\Categories\Edit as CategoriesEdit;
 use App\Livewire\Shop\Splash;
 use App\Livewire\Stocks\Index as StocksIndex;
@@ -121,7 +120,6 @@ Route::middleware(['auth', 'verified', 'set_reseller_missing_data', 'set_default
 
         Route::prefix('categories')->middleware(['role:superadmin'])->group(function () {
             Route::get('/', CategoriesIndex::class)->name('categories.index');
-            Route::get('/create', CategoriesCreate::class)->name('categories.create');
             Route::get('/{category}/edit', CategoriesEdit::class)->name('categories.edit');
         });
 

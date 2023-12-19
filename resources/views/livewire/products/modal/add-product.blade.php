@@ -1,5 +1,5 @@
 <div>
-    <h3 class="py-5 px-10 bg-color-18181a text-white text-center font-bold">Crea Prodotto</h3>
+    <h3 class="py-5 px-10 bg-color-18181a text-white text-center font-bold">{{ __('products.index.add_product_modal_title') }}</h3>
     <div class="p-10">
         <form wire:submit="save" class="flex flex-col">
             @csrf

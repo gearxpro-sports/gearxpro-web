@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Categories\Forms;
 
+use DeepL\DeepLException;
+use DeepL\Translator;
 use Livewire\Form;
 use App\Models\Category;
 use Livewire\Attributes\Rule;
@@ -14,14 +16,14 @@ class CategoryForm extends Form
     public ?Category $category;
 
     /**
-     * @var string|null
+     * @var array
      */
-    public ?string $name = '';
+    public array $name = [];
 
     /**
-     * @var string|null
+     * @var array
      */
-    public ?string $description = '';
+    public array $description = [];
 
     protected $rules = [
         'name'          => 'required',
@@ -36,25 +38,40 @@ class CategoryForm extends Form
         $this->category = $category;
 
         foreach (array_keys($this->rules) as $field) {
-            $this->{$field} = $category->{$field};
+            foreach (array_keys(config('gearxpro.languages')) as $lang) {
+                $this->{$field}[$lang] = $category->getTranslation($field, $lang, false);
+            }
         }
-    }
-
-    /**
-     * @param int|null $parentCategoryId
-     */
-    public function store(?int $parentCategoryId = null)
-    {
-        $fields = $this->only(['name', 'description']);
-        $fields['parent_id'] = (int) $parentCategoryId;
-
-        Category::create($fields);
     }
 
     public function update()
     {
         $this->validate();
 
-        $this->category->update($this->only(['name', 'description']));
+        foreach ($this->only(['name', 'description']) as $field => $values) {
+            $this->category->replaceTranslations($field, $values);
+        }
+
+        $this->category->save();
+    }
+
+    /**
+     * @param string $lang
+     * @throws DeepLException
+     */
+    public function translateAllFields(string $lang)
+    {
+        $translator = new Translator(env('DEEPL_API_KEY'));
+        $dataLang = config('gearxpro.languages')[$lang];
+        $defaultLang = config('app.locale');
+
+        foreach (array_keys($this->rules) as $field) {
+            $this->{$field}[$lang] = $translator->translateText(
+                $this->{$field}[$defaultLang] ?? '',
+                $defaultLang,
+                $dataLang['trans_code'],
+                ['preserve_formatting' => true,]
+            )->text;
+        }
     }
 }

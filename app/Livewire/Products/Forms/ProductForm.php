@@ -144,7 +144,6 @@ class ProductForm extends Form
             $this->product->replaceTranslations($field, $values);
         }
         $this->product->save();
-        //$this->product->update($this->except(['country_prices', 'product', 'categories']));
 
         // convert empty values with null
         array_walk_recursive($this->country_prices, function(&$value) {
