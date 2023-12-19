@@ -3,6 +3,7 @@
 </x-slot>
 
 <div>
+    <x-edit-language-selectors :currentLang="$currentLang" />
     <form wire:submit="update" class="bg-white p-8">
         @if ($category->parent)
             <x-primary-button class="mb-8 bg-color-38a39f"
@@ -14,8 +15,8 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
             <div class="flex flex-col space-y-4 col-span-1">
-                <x-input type="text" wire:model="categoryForm.name" name="name" label="{{ __('categories.edit.name.label') }}" required></x-input>
-                <x-textarea rows="11" wire:model="categoryForm.description" name="description" label="{{ __('categories.edit.description.label') }}"></x-textarea>
+                <x-input type="text" wire:model="categoryForm.name.{{ $currentLang }}" name="categoryForm.name.{{ $currentLang }}" label="{{ __('categories.edit.name.label') }}" required></x-input>
+                <x-textarea rows="11" wire:model="categoryForm.description.{{ $currentLang }}" name="categoryForm.description.{{ $currentLang }}" label="{{ __('categories.edit.description.label') }}"></x-textarea>
             </div>
 
             <div class="col-span-1 flex flex-col items-start justify-start">
@@ -47,7 +48,7 @@
                                     @endforeach
                                     <x-slot:action>
                                         <span
-                                            wire:click.prevent="$dispatch('openModal', { component: 'categories.modal.add-child-category', arguments: { category: {{ $categoryForm->category->id }} }})"
+                                            wire:click.prevent="$dispatch('openModal', { component: 'categories.modal.add-category', arguments: { parentCategory: {{ $categoryForm->category->id }} }})"
                                             class="text-xs text-color-2cb2d1 hover:cursor-pointer">{{ __('common.create') }}</span>
                                     </x-slot:action>
                                 </x-select>

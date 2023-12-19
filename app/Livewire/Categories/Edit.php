@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Categories;
 
+use DeepL\DeepLException;
 use Livewire\Component;
 use App\Models\Category;
 use Livewire\Attributes\On;
@@ -10,7 +11,6 @@ use Illuminate\Contracts\View\View;
 use App\Livewire\Categories\Forms\CategoryForm;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
-
 
 class Edit extends Component
 {
@@ -43,8 +43,14 @@ class Edit extends Component
      */
     public ?int $existingToAdd = null;
 
+    /**
+     * @var string
+     */
+    public string $currentLang;
+
     public function mount()
     {
+        $this->currentLang = config('app.locale');
         $this->categoryForm->setCategoryForm($this->category);
         $this->loadCategories();
     }
@@ -93,6 +99,11 @@ class Edit extends Component
     public function deleteChild(Category $category)
     {
         $category->delete();
+        $this->dispatch('open-notification',
+            title: __('notifications.titles.deleting'),
+            subtitle: __('notifications.categories.deleting.success'),
+            type: 'success'
+        );
         $this->dispatch('reload-child-categories');
     }
 
@@ -111,6 +122,23 @@ class Edit extends Component
             subtitle: __('notifications.categories.updating.children_success'),
             type: 'success'
         );
+    }
+
+    /**
+     * @param string $lang
+     */
+    public function setCurrentLang(string $lang)
+    {
+        $this->currentLang = $lang;
+    }
+
+    /**
+     * @throws DeepLException
+     */
+    public function translateAllFields()
+    {
+        $this->categoryForm->translateAllFields($this->currentLang);
+        $this->update();
     }
 
     private function loadCategories()

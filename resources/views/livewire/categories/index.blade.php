@@ -2,7 +2,7 @@
     {{ __('categories.index.title') }}
 </x-slot>
 <x-slot name="actions">
-    <x-primary-button href="{{ route('categories.create') }}">{{ __('common.create') }}</x-primary-button>
+    <x-primary-button type="button" onclick="event.preventDefault(); Livewire.dispatch('openModal', { component: 'categories.modal.add-category' });">{{ __('common.create') }}</x-primary-button>
 </x-slot>
 
 <div>

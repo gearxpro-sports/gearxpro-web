@@ -8,6 +8,7 @@ return [
     ],
     'index' => [
         'title' => 'Prodotti',
+        'add_product_modal_title' => 'Crea Prodotto',
         'table' => [
             'title' => 'Prodotti',
             'cols'  => [
