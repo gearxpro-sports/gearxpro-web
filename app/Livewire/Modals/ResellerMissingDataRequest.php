@@ -24,7 +24,7 @@ class ResellerMissingDataRequest extends ModalComponent
     public function rules()
     {
         return [
-            'missingData.tax'                => 'sometimes|required|integer',
+            'missingData.tax'                => 'sometimes|required|integer|max:99',
             'missingData.stripe_public_key'  => 'sometimes|required|string|alpha_dash',
             'missingData.stripe_private_key' => 'sometimes|required|string|alpha_dash',
         ];
@@ -34,6 +34,7 @@ class ResellerMissingDataRequest extends ModalComponent
     {
         return [
             'missingData.tax.required' => __('shop.payment.required'),
+            'missingData.tax.max' => __('shop.payment.required'),
             'missingData.stripe_public_key.required' => __('shop.payment.required'),
             'missingData.stripe_private_key.required' => __('shop.payment.required'),
         ];
