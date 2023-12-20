@@ -146,17 +146,32 @@
                     </div>
 
                     <div class="max-h-0 border-b border-color-e0e0df transition-all duration-500 ease-in-out overflow-hidden" :class="opened && 'max-h-96'">
-                        <div class="flex flex-wrap items-center gap-4 px-1 py-5">
+                        <div class="flex flex-wrap items-center gap-4 px-1.5 py-5">
                             @foreach ($productAttributes[2]->first()->terms->pluck('color', 'id') as $id => $color )
-                                <button
-                                    class="cursor-pointer h-8 w-8 rounded-full p-0.5 focus:outline-none ring-transparent ring ring-offset-2 ring-offset-color-f2f0eb"
-                                    @style([
-                                        'background-color : '.$color,
-                                        '--tw-ring-color: '.$color => $id === $selectedColorId
-                                    ])
-                                    wire:click="selectColors('{{ $id }}')"
-                                >
-                                </button>
+                                @php
+                                    $colors = explode(',', $color);
+                                @endphp
+                                @if(count($colors) > 1)
+                                    <button
+                                        class="cursor-pointer h-8 w-8 rounded-full p-0.5 focus:outline-none ring-transparent ring ring-offset-2 ring-offset-color-f2f0eb"
+                                        @style([
+                                            "background: linear-gradient(135deg, $colors[0] 50%, $colors[1] 50%)",
+                                            '--tw-ring-color: '.$colors[0] => $id === $selectedColorId
+                                        ])
+                                        wire:click="selectColors('{{ $id }}')"
+                                    >
+                                    </button>
+                                @else
+                                    <button
+                                        class="cursor-pointer h-8 w-8 rounded-full p-0.5 focus:outline-none ring-transparent ring ring-offset-2 ring-offset-color-f2f0eb"
+                                        @style([
+                                            'background-color : '.$color,
+                                            '--tw-ring-color: '.$color => $id === $selectedColorId
+                                        ])
+                                        wire:click="selectColors('{{ $id }}')"
+                                    >
+                                    </button>
+                                @endif
                             @endforeach
                         </div>
                     </div>

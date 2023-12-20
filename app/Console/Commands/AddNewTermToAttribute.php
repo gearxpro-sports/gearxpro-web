@@ -6,6 +6,7 @@ use App\Models\Attribute;
 use App\Models\Term;
 use DeepL\Translator;
 use Illuminate\Console\Command;
+use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\text;
 use function Laravel\Prompts\select;
 
@@ -34,7 +35,7 @@ class AddNewTermToAttribute extends Command
         $defaultLang = 'it';
         $langs = config('gearxpro.languages');
 
-        $attributes = Attribute::all()->pluck('name','id');
+        $attributes = Attribute::all()->pluck('name', 'id');
         $attribute = select(
             label: 'A quale attributo vuoi aggiungere il nuovo termine?',
             options: $attributes,
@@ -44,22 +45,51 @@ class AddNewTermToAttribute extends Command
             required: true
         );
         $existing_term = Term::where('attribute_id', $attribute)->where("value->$defaultLang", $name)->exists();
-        if($existing_term) {
+        if ($existing_term) {
             $this->error("Il termine '$name' associato all'attributo '$attributes[$attribute]' è già esistente.");
             exit;
         }
 
         $color = '';
-        if($attribute === 2) {
-            $color = text(
-                label: 'Qual è il suo codice esacedimale?',
-                placeholder: 'E.g. #FF0000'
+        if ($attribute === 2) {
+            $m_options = ['single', 'multicolor'];
+            $multicolor = select(
+                label: 'È un colore singolo o multicolor?',
+                options: $m_options,
             );
+
+            if ($multicolor === 'single') {
+                $color = text(
+                    label: 'Qual è il suo codice esacedimale?',
+                    placeholder: 'E.g. #FF0000'
+                );
+            } elseif($multicolor === 'multicolor') {
+                $color1 = text(
+                    label: 'Qual è il codice esacedimale del primo colore?',
+                    placeholder: 'E.g. #FF0000'
+                );
+                $color2 = text(
+                    label: 'Qual è il codice esacedimale del secondo colore?',
+                    placeholder: 'E.g. #FF0000'
+                );
+                $color = "$color1,$color2";
+            }
         }
 
-        $values = [];
-        foreach ($langs as $iso => $dataLang) {
-            $values[$iso] = $translator->translateText($name, $defaultLang, $dataLang['trans_code'])->text;
+        $translation = confirm(
+            label: 'Vuoi tradurre questo termine?',
+            default: 'No',
+            yes: 'Si',
+            no: 'No',
+        );
+
+        if($translation) {
+            $values = [];
+            foreach ($langs as $iso => $dataLang) {
+                $values[$iso] = $translator->translateText($name, $defaultLang, $dataLang['trans_code'])->text;
+            }
+        } else {
+            $values[$defaultLang] = $name;
         }
 
         $last_position = Term::where('attribute_id', $attribute)->orderBy('position', 'desc')->first()->position;

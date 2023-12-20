@@ -7,8 +7,18 @@
                     <span
                         class="inline-block h-5 w-5 rounded-full border border-color-b6b9bb bg-white"></span>
                 @else
-                    <span class="inline-block h-5 w-5 rounded-full"
-                          style="background-color: {{ $term->color }}"></span>
+                    @php
+                        $colors = explode(',', $term->color);
+                    @endphp
+                    @if(count($colors) > 1)
+                        <div
+                            class="h-5 w-5 rounded-full"
+                            style="background: linear-gradient(135deg, {{$colors[0]}} 50%, {{$colors[1]}} 50%);"
+                        ></div>
+                    @else
+                        <div class="inline-block h-5 w-5 rounded-full"
+                              style="background-color: {{ $term->color }}"></div>
+                    @endif
                 @endif
             @endif
             <span

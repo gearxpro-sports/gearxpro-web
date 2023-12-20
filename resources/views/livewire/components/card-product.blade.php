@@ -10,7 +10,17 @@
             @if ($availableColors)
                 <div class="relative flex space-x-1 my-2 z-10">
                     @foreach($availableColors as $color)
-                        <span style="background-color: {{ $color }}" class="inline-block w-3 h-3 border rounded-full"></span>
+                        @php
+                            $colors = explode(',', $color);
+                        @endphp
+                        @if(count($colors) > 1)
+                            <div
+                                class="inline-block h-3 w-3 border rounded-full"
+                                style="background: linear-gradient(135deg, {{$colors[0]}} 50%, {{$colors[1]}} 50%);"
+                            ></div>
+                        @else
+                            <div style="background-color: {{ $color }}" class="inline-block w-3 h-3 border rounded-full"></div>
+                        @endif
                     @endforeach
                 </div>
             @endif
