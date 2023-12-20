@@ -7,24 +7,25 @@ use App\Models\Term;
 use DeepL\Translator;
 use Illuminate\Console\Command;
 use function Laravel\Prompts\confirm;
-use function Laravel\Prompts\text;
+use function Laravel\Prompts\search;
 use function Laravel\Prompts\select;
+use function Laravel\Prompts\text;
 
-class AddNewTermToAttribute extends Command
+class EditAttributeTerm extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'gearxpro:add-term';
+    protected $signature = 'gearxpro:edit-term';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'This command add a new term to an attribute';
+    protected $description = 'This command edit a term';
 
     /**
      * Execute the console command.
@@ -37,12 +38,26 @@ class AddNewTermToAttribute extends Command
 
         $attributes = Attribute::all()->pluck('name', 'id');
         $attribute = select(
-            label: 'A quale attributo vuoi aggiungere il nuovo termine?',
+            label: 'A quale attributo appartiene il termine che vuoi modificare?',
             options: $attributes,
         );
+
+        $id = search(
+            'Cerca il termine che vuoi modificare..',
+            function (string $value) use ($attribute, $defaultLang) {
+                if (strlen($value) > 0) {
+                    return Term::where('attribute_id', $attribute)->where("value->$defaultLang", 'like', "%{$value}%")->pluck('value', 'id')->all();
+                } else {
+                    return [];
+                }
+            }
+        );
+
+        $term = Term::find($id);
         $name = text(
-            label: 'Qual è il nome del nuovo termine?',
-            required: true
+            label: 'Qual è il nuovo nome del termine?',
+            default: $term->value,
+            required: true,
         );
         $existing_term = Term::where('attribute_id', $attribute)->where("value->$defaultLang", $name)->exists();
         if ($existing_term) {
@@ -57,20 +72,22 @@ class AddNewTermToAttribute extends Command
                 label: 'È un colore singolo o multicolor?',
                 options: $m_options,
             );
-
+            $term_colors = explode(',', $term->color);
             if ($multicolor === 'single') {
                 $color = text(
                     label: 'Qual è il suo codice esacedimale?',
                     placeholder: 'E.g. #FF0000'
                 );
-            } elseif($multicolor === 'multicolor') {
+            } elseif ($multicolor === 'multicolor') {
                 $color1 = text(
                     label: 'Qual è il codice esacedimale del primo colore?',
-                    placeholder: 'E.g. #FF0000'
+                    placeholder: 'E.g. #FF0000',
+                    default: $term_colors[0] ?? ''
                 );
                 $color2 = text(
                     label: 'Qual è il codice esacedimale del secondo colore?',
-                    placeholder: 'E.g. #FF0000'
+                    placeholder: 'E.g. #FF0000',
+                    default: $term_colors[1] ?? ''
                 );
                 $color = "$color1,$color2";
             }
@@ -83,7 +100,7 @@ class AddNewTermToAttribute extends Command
             no: 'No',
         );
 
-        if($translation) {
+        if ($translation) {
             $values = [];
             foreach ($langs as $iso => $dataLang) {
                 $values[$iso] = $translator->translateText($name, $defaultLang, $dataLang['trans_code'])->text;
@@ -92,14 +109,11 @@ class AddNewTermToAttribute extends Command
             $values[$defaultLang] = $name;
         }
 
-        $last_position = Term::where('attribute_id', $attribute)->orderBy('position', 'desc')->first()->position;
-        Term::create([
-            'attribute_id' => $attribute,
+        $term->update([
             'value' => $values,
             'color' => $color !== '' ? $color : null,
-            'position' => $last_position + 1
         ]);
 
-        $this->info("Il termine '$name' è stato creato e associato correttamente all'attributo '$attributes[$attribute]'");
+        $this->info("Il termine '$name' è stato modificato correttamente");
     }
 }
