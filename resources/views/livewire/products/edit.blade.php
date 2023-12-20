@@ -24,7 +24,7 @@ $descFields = ['main', 'features'];
                     <div class="grid grid-cols-4 gap-16">
                         <div class="flex flex-col space-y-4 col-span-3">
                             <x-input type="text" wire:model.change="productForm.name.{{ $currentLang }}" name="productForm.name.{{ $currentLang }}" label="{{ __('products.edit.section.main.name.label') }}" required></x-input>
-                            <x-input type="text" wire:model.change="productForm.slug.{{ $currentLang }}" name="productForm.slug.{{ $currentLang }}" label="{{ __('products.edit.section.main.slug.label') }}" class="text-color-6c757d" required>
+                            <x-input type="text" wire:model.change="productForm.slug.{{ $currentLang }}" name="productForm.slug.{{ $currentLang }}" label="{{ __('products.edit.section.main.slug.label') }}" hint="{{ env('APP_URL') }}/{{$productForm->slug[$currentLang]}}" class="text-color-6c757d" required>
                                 <x-slot:action>
                                     <button type="button" wire:click="updateSlug('{{ $currentLang }}')" class="ml-auto text-color-18181a underline hover:no-underline" tabindex="-1">{{ __('products.edit.section.main.slug.action') }}</button>
                                 </x-slot:action>
