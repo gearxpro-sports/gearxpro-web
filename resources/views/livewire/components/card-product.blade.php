@@ -1,4 +1,4 @@
-<div class="rounded-b-md overflow-hidden max-w-[280px] md:max-w-[315px] xl:max-w-[560px]">
+<div class="rounded-md overflow-hidden max-w-[280px] md:max-w-[315px] xl:max-w-[560px]">
     <a href="{{route('shop.show', ['product' => $product->slug, 'country_code' => session('country_code')])}}" class="bg-white flex items-center justify-center overflow-hidden">
         <img class="w-full p-10" src="{{ $product->defaultImages->medium }}" alt="{{ $product->name }}">
     </a>
