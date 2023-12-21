@@ -198,31 +198,31 @@
             </div>
 
             @if($currentTab === 'product')
-                <div class="prose  text-[13px] leading-[24px] text-color-323a46">
+                <div class="prose max-w-none text-[13px] leading-[24px] text-color-323a46">
                     {!! $product->main_desc !!}
                 </div>
             @endif
 
             @if($currentTab === 'characteristics')
-                <div class="prose  text-[13px] leading-[24px] text-color-323a46">
+                <div class="prose max-w-none text-[13px] leading-[24px] text-color-323a46">
                     {!! $product->features_desc !!}
                 </div>
             @endif
 
             @if($currentTab === 'advantages')
-                <p class="text-[13px] leading-[24px] text-color-323a46">
+                <p class="prose max-w-none text-[13px] leading-[24px] text-color-323a46">
                     {!! $product->pros_desc !!}
                 </p>
             @endif
 
             @if($currentTab === 'technicality')
-                <p class="text-[13px] leading-[24px] text-color-323a46">
+                <p class="prose max-w-none text-[13px] leading-[24px] text-color-323a46">
                     {!! $product->technical_desc !!}
                 </p>
             @endif
 
             @if($currentTab === 'wash')
-                <p class="text-[13px] leading-[24px] text-color-323a46">
+                <p class="prose max-w-none text-[13px] leading-[24px] text-color-323a46">
                     {!! $product->washing_desc !!}
                 </p>
             @endif
