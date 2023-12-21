@@ -1,7 +1,7 @@
 <div class="rounded-b-md overflow-hidden max-w-[280px] md:max-w-[315px] xl:max-w-[560px]">
-    <div class="bg-white flex items-center justify-center overflow-hidden">
+    <a href="{{route('shop.show', ['product' => $product->slug, 'country_code' => session('country_code')])}}" class="bg-white flex items-center justify-center overflow-hidden">
         <img class="w-full p-10" src="{{ $product->defaultImages->medium }}" alt="{{ $product->name }}">
-    </div>
+    </a>
     <div class="bg-white flex border border-white border-x border-x-white hover:border-y-white rounded-b-md transition-all duration-300 group">
         <a href="{{route('shop.show', ['product' => $product->slug, 'country_code' => session('country_code')])}}"
             class="h-full grow flex flex-col px-2 py-3 xl:px-[20px] xl:py-[16px] relative">
