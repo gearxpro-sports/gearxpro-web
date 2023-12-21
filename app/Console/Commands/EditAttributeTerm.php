@@ -60,10 +60,6 @@ class EditAttributeTerm extends Command
             required: true,
         );
         $existing_term = Term::where('attribute_id', $attribute)->where("value->$defaultLang", $name)->exists();
-        if ($existing_term) {
-            $this->error("Il termine '$name' associato all'attributo '$attributes[$attribute]' è già esistente.");
-            exit;
-        }
 
         $color = '';
         if ($attribute === 2) {
