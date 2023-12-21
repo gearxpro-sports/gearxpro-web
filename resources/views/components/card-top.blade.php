@@ -1,6 +1,6 @@
 @props(['id_cat', 'title', 'description', 'image'])
 
-<div class="max-w-[294px] min-w-[268px] xl:min-w-[514px] h-[455px] sm:h-[393px] xl:h-[747px] rounded-b-md overflow-hidden border-b border-color-18181a group relative shadow">
+<div class="h-[600px] rounded-b-md overflow-hidden border-b border-color-18181a group relative shadow">
     <div class="z-10 w-full h-[calc(100%-61px)] absolute top-0 left-0 group-hover:bg-color-18181a/30 transition-all duration-500"></div>
     <div class="w-full h-[calc(100%-61px)] bg-white flex items-center justify-center overflow-hidden">
         <img class="h-full" src="{{ $image }}" alt="{{ $title }}">
