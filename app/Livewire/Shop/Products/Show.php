@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
+use App\Services\OmniSendApiService;
 
 
 #[Layout('layouts.guest')]
@@ -332,6 +333,10 @@ class Show extends Component
             ]);
         }
 
+        $omnisendService = new OmniSendApiService();
+        $test = $omnisendService->getCart('');
+        $test2 = $omnisendService->updateCart();
+        dd($test);
         $this->dispatch('product-added-to-cart', $this->selectedVariant->id, $this->quantity)->to(ProductAddedToCart::class);
         $this->dispatch('product-added-to-cart')->to(ShopNavigation::class);
 
