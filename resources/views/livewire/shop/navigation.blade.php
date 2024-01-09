@@ -19,9 +19,9 @@
             <!-- Navigation Links -->
             <div class="hidden lg:flex">
                 <div class="hidden space-x-10 sm:-my-px sm:ml-10 sm:flex items-center">
-                    <x-nav-link :href="route('home', ['country_code' => session('country_code')])" :active="request()->routeIs('home')">
-                        {{ __('shop.navigation.home') }}
-                    </x-nav-link>
+{{--                    <x-nav-link :href="route('home', ['country_code' => session('country_code')])" :active="request()->routeIs('home')">--}}
+{{--                        {{ __('shop.navigation.home') }}--}}
+{{--                    </x-nav-link>--}}
 
                     <x-nav-link :href="route('shop.index', ['country_code' => session('country_code')])" :active="request()->routeIs('shop.*')">
                         {{ __('shop.navigation.shop') }}
