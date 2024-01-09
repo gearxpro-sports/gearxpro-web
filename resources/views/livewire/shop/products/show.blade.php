@@ -99,7 +99,7 @@
                         <div class="flex items-center justify-between">
                             <p class="text-sm font-medium text-color-18181a uppercase">{{__('shop.products.size')}}</p>
                             <div class="flex items-center space-x-2">
-                                <a href="{{ route('shop.sizes-guide') }}" target="_blank"
+                                <a href="{{ route('shop.sizes-guide', ['country_code' => session('country_code')]) }}" target="_blank"
                                     class="text-xs font-semibold xl:font-medium text-color-18181a uppercase">{{__('shop.options.size_guide')}}</a>
                                 <x-icons name="meter" class="w-5 h-5"></x-icons>
                             </div>
