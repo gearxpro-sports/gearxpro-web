@@ -42,7 +42,12 @@ class BaseTable extends Component
     public function dateChanged($mode, $column, $operator, $value)
     {
         $this->resetPage();
-        if ($mode === 'single') {
+
+        if (isset($this->filters['date'])) {
+            unset($this->filters['date']);
+        }
+
+        if ($mode === 'single' &&  $value[0] !== '') {
             $dates = Carbon::createFromFormat('d-m-Y', $value[0])->format('Y-m-d');
             $this->filters['date'] = [
                 'mode' => $mode,
@@ -50,7 +55,7 @@ class BaseTable extends Component
                 'operator' => $operator,
                 'value' => $dates
             ];
-        } elseif ($mode === 'range' && count($value) === 2) {
+        } elseif ($mode === 'range' && count($value) === 2 && $value[0] !== '' && $value[1] !== '') {
             $dates = [
                 Carbon::createFromFormat('d-m-Y', $value[0])->startOfDay()->format('Y-m-d H:i:s'),
                 Carbon::createFromFormat('d-m-Y', $value[1])->endOfDay()->format('Y-m-d H:i:s')
