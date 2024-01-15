@@ -49,10 +49,13 @@
                             @else
                             <span class="inline-block w-3 h-3 bg-color-f55b3f rounded-full"></span><span>{{ __('common.sold_out') }}</span>
                             @endif
-                        <div>
+                        </div>
                     </td>
-                    <td class="text-right">
+                    <td class="text-right flex items-center space-x-3">
                         @if (!$stock->productVariant->trashed() || $stock->quantity > 0)
+                            <div wire:click="$dispatch('openModal', {component: 'stocks.modals.edit-quantity', arguments: {stock: {{$stock->id}}} })" class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm cursor-pointer">
+                                <x-icons name="edit" class="w-4 h-4" />
+                            </div>
                         <a target="_blank" class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm" href="{{ route('shop.show', ['product' => $stock->product->slug, 'country_code' => session('country_code')]) }}">
                             <x-icons name="eye" class="w-4 h-4" />
                         </a>

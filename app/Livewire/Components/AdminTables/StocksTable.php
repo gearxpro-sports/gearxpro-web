@@ -6,6 +6,9 @@ use Illuminate\Contracts\View\View;
 
 class StocksTable extends BaseTable
 {
+    protected $listeners = [
+        'quantity-updated' => '$refresh'
+    ];
     /**
      * @return View
      */

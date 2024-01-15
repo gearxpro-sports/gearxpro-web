@@ -18,4 +18,10 @@ return [
             'select_registration_date' => 'Seleziona Data Registrazione',
         ],
     ],
+    'modals' => [
+        'edit-quantity' => [
+            'title' => 'Modifica quantità in magazzino',
+            'update' => 'Aggiorna'
+        ],
+    ]
 ];
