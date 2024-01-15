@@ -11,6 +11,7 @@ use App\Models\ProductVariant;
 use App\Models\Stock;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -68,10 +69,9 @@ class Show extends Component
         //        $this->selectedSize = $this->selectedVariant->size->id;
         $reseller =
             Country::where('iso2_code', session('ip_country_code'))->first()->reseller ??
-            User::role(User::RESELLER)->where('country_id', Country::where('iso2_code', config('app.country'))->first()->id)->first()
-        ;
+            User::role(User::RESELLER)->where('country_id', Country::where('iso2_code', config('app.country'))->first()->id)->first();
 
-        if(!$reseller) {
+        if (!$reseller) {
             return abort(404);
         }
 
@@ -82,7 +82,7 @@ class Show extends Component
             ->where('quantity', '>', 0)
             ->get();
 
-        if(!$this->variants->count()) {
+        if (!$this->variants->count()) {
             return redirect()->route('shop.index');
         }
 
@@ -135,7 +135,8 @@ class Show extends Component
             foreach ($stock->productVariant->getMedia('products') as $media) {
                 $this->images[$stock->product->id] = $stock->productVariant->getMedia('products');
                 $this->allColors->put($stock->productVariant->color->id, [
-                    ...$this->allColors[$stock->productVariant->color->id], 'image' => $stock->productVariant->getFirstMediaUrl('products')
+                    ...$this->allColors[$stock->productVariant->color->id],
+                    'image' => $stock->productVariant->getFirstMediaUrl('products')
                 ]);
             }
         }
@@ -149,9 +150,9 @@ class Show extends Component
         $this->tabs = [
             'product' => $this->product->name,
             'characteristics' => __('shop.products.characteristics'),
-//            'advantages' => __('shop.products.advantages'),
-//            'technicality' => __('shop.products.technicality'),
-//            'wash' => __('shop.products.wash')
+            //            'advantages' => __('shop.products.advantages'),
+            //            'technicality' => __('shop.products.technicality'),
+            //            'wash' => __('shop.products.wash')
         ];
     }
 
@@ -178,8 +179,7 @@ class Show extends Component
 
         $reseller =
             Country::where('iso2_code', session('ip_country_code'))->first()->reseller ??
-            User::role(User::RESELLER)->where('country_id', Country::where('iso2_code', config('app.country'))->first()->id)->first()
-        ;
+            User::role(User::RESELLER)->where('country_id', Country::where('iso2_code', config('app.country'))->first()->id)->first();
 
         $variants = $reseller->stocks()->with('productVariant')->where('product_id', $this->product->id);
 
@@ -209,7 +209,8 @@ class Show extends Component
                 if (!array_key_exists($stock->productVariant->product->id, $this->images)) {
                     $this->images[$stock->productVariant->product->id] = $stock->productVariant->getMedia('products');
                     $this->allColors->put($stock->productVariant->color->id, [
-                        ...$this->allColors[$stock->productVariant->color->id], 'image' => $stock->productVariant->getFirstMediaUrl('products')
+                        ...$this->allColors[$stock->productVariant->color->id],
+                        'image' => $stock->productVariant->getFirstMediaUrl('products')
                     ]);
                 }
             }
@@ -256,7 +257,9 @@ class Show extends Component
 
     public function resetAll()
     {
-        $this->reset(['selectedColor', 'selectedSize', 'selectedLength', 'selectedVariant', 'quantity', 'selectedVariantQuantity']);
+        $this->reset([
+            'selectedColor', 'selectedSize', 'selectedLength', 'selectedVariant', 'quantity', 'selectedVariantQuantity'
+        ]);
         $this->filterVariantsByTerm('length', $this->selectedLength);
         $this->filterVariantsByTerm('color', $this->selectedColor);
         $this->filterVariantsByTerm('size', $this->selectedSize);
@@ -309,28 +312,75 @@ class Show extends Component
     public function addToCart()
     {
         if (auth()->check()) {
-            $cart = auth()->user()->cart ?? auth()->user()->cart()->create();
+            $cart = auth()->user()->cart ?? auth()->user()->cart()->create([
+                'omnisend_cart_id' => Str::random()
+            ]);
         } else {
             if (!session()->get('cart_user_token')) {
                 session()->put('cart_user_token', Str::random(10));
             }
             $cart = Cart::firstOrCreate([
-                'user_id' => session('cart_user_token')
+                'user_id' => session('cart_user_token'),
+                'omnisend_cart_id' => Str::random()
             ]);
         }
 
+        // Create Omnisend cart
+        Http::withHeaders([
+            'X-API-KEY' => env('OMNISEND_KEY'),
+        ])
+            ->post("https://api.omnisend.com/v3/carts", [
+                'cartID' => $cart->omnisend_cart_id,
+                'currency' => 'EUR',
+                'cartSum' => 0,
+                'email' => auth()->user()->email,
+            ]);
 
         $variant_in_cart = $cart->items()->where('product_variant_id', $this->selectedVariant->id)->first();
 
+        // Add product to Omnisend cart
         if ($variant_in_cart) {
+            // Update product quantity in Omnisend cart
+            Http::withHeaders([
+                'X-API-KEY' => env('OMNISEND_KEY'),
+            ])
+                ->patch("https://api.omnisend.com/v3/carts/{$cart->omnisend_cart_id}/products/{$variant_in_cart->omnisend_cart_product_id}", [
+                    'currency' => 'EUR',
+                    'quantity' => $variant_in_cart->quantity + $this->quantity
+                ]);
             $variant_in_cart->increment('quantity', $this->quantity);
         } else {
+            $omnisend_cart_product_id = Str::random();
+            Http::withHeaders([
+                'X-API-KEY' => env('OMNISEND_KEY'),
+            ])
+                ->post("https://api.omnisend.com/v3/carts/{$cart->omnisend_cart_id}/products", [
+                    'cartProductID' => $omnisend_cart_product_id,
+                    'currency' => 'EUR',
+                    'productID' => (string) $this->selectedVariant->product->id,
+                    'variantID' => (string) $this->selectedVariant->id,
+                    'title' => $this->selectedVariant->product->name,
+                    'quantity' => $this->quantity,
+                    'price' => intval($this->selectedVariant->product->price * 100),
+                    'sku' => strtoupper($this->selectedVariant->sku),
+                    'imageUrl' => $this->selectedVariant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg'),
+                    'productUrl' => route('shop.show', ['product' => $this->selectedVariant->product->slug, 'country_code' => session('country_code')])
+                ]);
             $cart->items()->create([
                 'product_variant_id' => $this->selectedVariant->id,
                 'price' => $this->selectedVariant->product->price,
-                'quantity' => $this->quantity
+                'quantity' => $this->quantity,
+                'omnisend_cart_product_id' => $omnisend_cart_product_id
             ]);
         }
+
+        Http::withHeaders([
+            'X-API-KEY' => env('OMNISEND_KEY'),
+        ])
+            ->patch("https://api.omnisend.com/v3/carts/{$cart->omnisend_cart_id}", [
+                'currency' => 'EUR',
+                'cartSum' => intval($cart->subtotal * 100)
+            ]);
 
         $this->dispatch('product-added-to-cart', $this->selectedVariant->id, $this->quantity)->to(ProductAddedToCart::class);
         $this->dispatch('product-added-to-cart')->to(ShopNavigation::class);
@@ -339,10 +389,10 @@ class Show extends Component
     }
 
     // TODO: Pay with Link
-    public function payWithLink()
-    {
-        dd("Pay with Link");
-    }
+    //    public function payWithLink()
+    //    {
+    //        dd("Pay with Link");
+    //    }
 
     #[On('reset-selection')]
     public function render()
