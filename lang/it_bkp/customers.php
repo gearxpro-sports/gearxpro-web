@@ -19,16 +19,16 @@ return [
         ],
     ],
     'show' => [
-        'title' => 'Profilo cliente',
+        'title' => 'Profilo Cliente',
         'data'  => [
             'title'             => 'Dati Cliente',
             'firstname'         => 'Nome:',
             'lastname'          => 'Cognome:',
             'email'             => 'Email:',
             'registration_date' => 'Data di Registrazione:',
-            'address'           => 'Indirizzo::',
+            'address'           => 'Indirizzo:',
             'city'              => 'Città:',
-            'postcode'          => 'CAP:',
+            'postcode'          => 'Cap:',
             'country'           => 'Paese:',
         ],
         'orders' => [
@@ -44,29 +44,29 @@ return [
             'payment' => 'Pagamento',
         ],
         'firstname' => [
-            'label' => 'Nome',
+            'label' => 'Name',
         ],
         'lastname' => [
-            'label' => 'Cognome',
+            'label' => 'Last name',
         ],
         'email' => [
             'label' => 'Email',
         ],
         'company' => [
-            'label' => 'Ragione sociale',
+            'label' => 'Company name',
         ],
         'address' => [
-            'label' => 'Indirizzo',
+            'label' => 'Address',
         ],
         'city' => [
-            'label' => 'Città',
+            'label' => 'City',
         ],
         'postcode' => [
-            'label' => 'CAP',
+            'label' => 'Zip code',
         ],
         'country' => [
-            'label' => 'Nazione',
-            'hint' => 'Seleziona la tua nazione'
+            'label' => 'Country',
+            'hint' => 'Select your country'
         ],
         'vat_number' => [
             'label' => 'Partita IVA',
@@ -81,14 +81,14 @@ return [
             'label' => 'Codice SDI',
         ],
         'pec' => [
-            'label' => 'PEC',
+            'label' => 'Email PEC',
         ],
         'payment_method' => [
-            'label' => 'Metodo di pagamento',
+            'label' => 'Payment method',
         ],
         'addresses' => [
-            'shipping' => 'Indirizzo di spedizione',
-            'billing' => 'Indirizzo di fatturazione'
+            'shipping' => 'Shipping address',
+            'billing' => 'Billing address'
         ],
     ],
     'profile' => 'Profilo',
@@ -105,32 +105,32 @@ return [
             'address' => 'Modifica Indirizzi'
         ],
         'orders' => [
-            'title' => 'Ordini',
-            'order' => 'Ordine',
+            'title' => 'Orders',
+            'order' => 'Order',
             'status' => [
-                'paid' => 'Ordine confermato',
+                'paid' => 'Order confirmed',
                 'in_process' => 'In lavorazione',
                 'in_shipping' => 'In transito',
                 'shipped' => 'Spedito',
                 'delivered' => 'Consegnato',
                 'refunded' => 'Rimborsato',
-                'canceled' => 'Cancellato'
+                'canceled' => 'cancellato'
             ]
         ],
     ],
-    'edit_data' => 'Modifica',
+    'edit_data' => 'Update',
     'password' => 'Password',
     'format_password' => [
-        'uppercase' => 'Un carattere maiuscolo',
-        'lowercase' => 'Un carattere minuscolo',
-        'number' => 'Un numero',
-        'length' => '8 caratteri',
-        'special_character' => 'Un carattere speciale (&*€%)'
+        'uppercase' => 'One character in UPPERCASE',
+        'lowercase' => 'One character in LOWER CASE',
+        'number' => 'One number',
+        'length' => '8 Characters',
+        'special_character' => 'One special character (&*€%)'
     ],
     'buttons' => [
-        'cancel' => 'Cancella',
-        'save' => 'Salva',
-        'copy_shipping' => 'Come indirizzo di spedizione',
-        'back' => 'Indietro',
+        'cancel' => 'Clear',
+        'save' => 'Save',
+        'copy_shipping' => 'Like shipping',
+        'back' => 'Back',
     ]
 ];

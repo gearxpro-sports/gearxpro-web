@@ -1,17 +1,17 @@
 <?php
 
 return [
-    'header' => 'Spedizioni in tutto il modo in  3/7 giorni',
+    'header' => 'Worldwide shipping in 3 to 7 days',
     'navigation' => [
         'home' => 'Home',
         'shop' => 'Shop',
-        'about_us' => 'Chi siamo',
+        'about_us' => 'Who We Are',
         'journal' => 'Partnership',
         'assistance' => 'Assistenza',
         'values' => 'Values',
         'production' => 'Production',
         'partnership' => 'Partnership',
-        'login_register' => 'Accedi / Registrati',
+        'login_register' => 'Sign in / Register',
     ],
     'splash' => [
         'title' => 'Seleziona il tuo Paese'
@@ -22,10 +22,13 @@ return [
         'button' => 'Acquista ora'
     ],
     'carousel-top' => [
-        'title' => 'Linea prodotti'
+        'title' => 'Product line'
     ],
     'carousel-bottom' => [
         'title' => 'Best Seller'
+    ],
+    'sizes-guide' => [
+        'title' => 'Guida alle taglie'
     ],
     'products' => [
         'title' => 'Improve Your Game',
@@ -156,10 +159,10 @@ return [
         'my_account' => [
             'title' => 'MY ACCOUNT',
             'dashboard' => 'Dashboard',
-            'cart' => 'Carrello',
+            'cart' => 'Cart',
             'checkout' => 'Checkout',
-            'orders' => 'Ordini',
-            'shipment' => 'Spedizioni'
+            'orders' => 'Orders',
+            'shipment' => 'Shipments'
         ],
         'privacy' => 'PRIVACY'
     ],

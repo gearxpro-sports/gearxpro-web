@@ -30,47 +30,47 @@ return [
             'stripe_account' => 'Account Stripe'
         ],
         'firstname' => [
-            'label' => 'Nome',
+            'label' => 'Name',
         ],
         'lastname' => [
-            'label' => 'Cognome',
+            'label' => 'Last name',
         ],
         'email' => [
             'label' => 'Email',
         ],
         'company' => [
-            'label' => 'Ragione sociale',
+            'label' => 'Company name',
         ],
         'address' => [
-            'label' => 'Indirizzo',
+            'label' => 'Address',
         ],
         'city' => [
-            'label' => 'Città',
+            'label' => 'City',
         ],
         'postcode' => [
-            'label' => 'Cap',
+            'label' => 'ZIP code',
         ],
         'country' => [
-            'label' => 'Nazione',
-            'hint' => 'Seleziona la tua nazione'
+            'label' => 'State',
+            'hint' => 'Select your country'
         ],
         'vat_number' => [
-            'label' => 'Partita IVA',
+            'label' => 'TAX code',
         ],
         'tax_code' => [
-            'label' => 'Codice Fiscale',
+            'label' => 'Fiscal code',
         ],
         'phone' => [
-            'label' => 'Telefono',
+            'label' => 'Phone number',
         ],
         'sdi' => [
-            'label' => 'Codice SDI',
+            'label' => 'SDI code',
         ],
         'pec' => [
-            'label' => 'PEC',
+            'label' => 'Email PEC',
         ],
         'payment_method' => [
-            'label' => 'Metodo di Pagamento',
+            'label' => 'Payment method',
         ],
         'tax' => [
             'label' => 'Iva %',

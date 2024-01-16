@@ -24,7 +24,7 @@ return [
         'child_categories_modal_title' => 'Crea Sottocategoria',
         'parent_link' => 'Categoria genitore',
         'name' => [
-            'label' => 'Nomee',
+            'label' => 'Nome',
         ],
         'description' => [
             'label' => 'Descrizione',

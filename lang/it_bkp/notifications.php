@@ -23,7 +23,7 @@ return [
             'error' => 'Errore durante il salvataggio del cliente!',
         ],
         'updating' => [
-            'success' => 'Il cliente è stato aggiornato con successo!Il cliente è stato aggiornato con successo!',
+            'success' => 'Il cliente è stato aggiornato con successo!',
             'error' => 'Errore durante l\'aggiornamento del cliente!',
         ],
         'deleting' => [

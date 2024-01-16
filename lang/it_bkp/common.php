@@ -32,12 +32,12 @@ return [
             'error' => 'Errore durante il salvataggio del cliente!',
         ],
         'updating' => [
-            'success' => 'Non Disponibile',
-            'error' => 'Errore durante l\\\'aggiornamento del cliente!',
+            'success' => 'Il cliente è stato aggiornato con successo!',
+            'error' => 'Errore durante l\'aggiornamento del cliente!',
         ],
         'deleting' => [
             'success' => 'Il cliente è stato eliminato con successo!',
-            'error' => 'Errore durante l\\\'eliminazione del cliente!',
+            'error' => 'Errore durante l\'eliminazione del cliente!',
         ],
     ],
     'select_all' => 'Seleziona tutto',

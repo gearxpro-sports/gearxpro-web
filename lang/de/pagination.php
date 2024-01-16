@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'label'    => 'Table pagination',
-    'previous' => 'Previous',
-    'next'     => 'Next',
+    'label'    => 'Tabellenpaginierung',
+    'previous' => 'Vorherige',
+    'next'     => 'Nächste',
 
 ];
