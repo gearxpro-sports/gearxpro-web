@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'previous' => '&laquo; Previous',
-    'next' => 'Next &raquo;',
+    'label'    => 'Table pagination',
+    'previous' => 'Previous',
+    'next'     => 'Next',
 
 ];

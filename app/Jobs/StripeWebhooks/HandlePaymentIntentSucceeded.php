@@ -12,6 +12,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Spatie\WebhookClient\Models\WebhookCall;
 
@@ -69,6 +70,11 @@ class HandlePaymentIntentSucceeded implements ShouldQueue
                 $reseller = User::find($eventObj['metadata']['reseller_id']);
                 $reseller->stocks()->where('product_id', $item->product_id)->where('product_variant_id', $item->variant_id)->decrement('quantity', $item->quantity);
             }
+            // Delete Omnisend Cart if there is no items
+            Http::withHeaders([
+                'X-API-KEY' => env('OMNISEND_KEY'),
+            ])
+                ->delete("https://api.omnisend.com/v3/carts/{$cart->omnisend_cart_id}");
 
             $cart->delete();
         }

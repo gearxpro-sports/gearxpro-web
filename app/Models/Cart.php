@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Http;
 
 class Cart extends Model
 {
@@ -11,7 +12,8 @@ class Cart extends Model
 
     public $timestamps = false;
 
-    public function getSubtotalAttribute() {
+    public function getSubtotalAttribute()
+    {
         $subtotal = 0;
         foreach ($this->items as $item) {
             $subtotal += $item->price * $item->quantity;
@@ -20,17 +22,20 @@ class Cart extends Model
         return $subtotal;
     }
 
-    public function getTotalAttribute() {
+    public function getTotalAttribute()
+    {
         $total = $this->subtotal + config('app.shipping_cost');
 
         return $total;
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function items() {
+    public function items()
+    {
         return $this->hasMany(CartItem::class);
     }
 }

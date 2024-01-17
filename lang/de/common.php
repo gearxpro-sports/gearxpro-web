@@ -1,0 +1,57 @@
+<?php
+
+return [
+    'title' => [
+        'resellers' => 'Einzelhändler',
+    ],
+    'search' => 'Nahe...',
+    'faq' => 'FAQ',
+    'create' => 'Erstellen',
+    'edit' => 'Bearbeiten',
+    'save' => 'Speichern',
+    'saved' => 'Gerettet',
+    'cancel' => 'Stornieren',
+    'delete' => 'Löschen',
+    'update' => 'Aktualisieren',
+    'add' => 'hinzufügen',
+    'send' => 'Schicken',
+    'print' => 'Drücken Sie',
+    'disable' => 'Deaktivieren',
+    'enable' => 'Fähigkeit',
+    'saving' => 'Rettung',
+    'select' => 'Wählen',
+    'filter' => 'Filter',
+    'filter_by' => 'Filtern nach:',
+    'loading_data' => 'Daten werden geladen...',
+    'search_not_found' => 'Deine Suche ergab keine Ergebnisse.',
+    'copy_from_billing' => 'Kopie aus der Rechnungsstellung',
+
+    'customers' => [
+        'saving' => [
+            'success' => 'Der Client wurde erfolgreich erstellt!',
+            'error' => 'Fehler beim Speichern des Kunden!',
+        ],
+        'updating' => [
+            'success' => 'Nicht verfügbar',
+            'error' => 'Fehler beim Aktualisieren des Kunden!',
+        ],
+        'deleting' => [
+            'success' => 'Der Kunde wurde erfolgreich gelöscht!',
+            'error' => 'Fehler beim Löschen des Kunden!',
+        ],
+    ],
+    'select_all' => 'Wählen Sie Alle',
+    'active' => 'aktivieren Sie',
+    'yes' => 'Ja',
+    'no' => 'NEIN',
+    'invoice' => 'Rechnung',
+    'running_low' => 'Niedrig',
+    'sold_out' => 'Nicht verfügbar',
+    'available' => 'Verfügbar',
+    'close' => 'Schließen',
+    'default' => 'Standard',
+    'free_shipping' => 'Frei',
+    'pz' => 'Stücke',
+    'all' => 'Alle',
+    'taxation' => 'Besteuerung',
+];

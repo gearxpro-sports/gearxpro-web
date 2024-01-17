@@ -1,16 +1,18 @@
 <?php
 
 return [
-    'title' => 'Nazioni',
+    'title' => 'Nazione',
     'index' => [
-        'title' => 'Nazioni',
+        'title' => 'Nazione',
         'table' => [
-            'title' => 'Nazioni',
+            'title' => 'Nazione',
             'cols'  => [
                 'name'    => 'Nome',
                 'reseller'   => 'Rivenditore',
             ],
         ],
-        'confirm' => 'Confermi di voler associare questo reseller a alla nazione :country'
+        'confirm' => 'C104
+
+Sei sicuro di voler associare il rivenditore alla nazione :country'
     ],
 ];

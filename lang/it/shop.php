@@ -1,17 +1,17 @@
 <?php
 
 return [
-    'header' => 'Worldwide shipping in 3 to 7 days',
+    'header' => 'Spedizioni in tutto il modo in  3/7 giorni',
     'navigation' => [
         'home' => 'Home',
         'shop' => 'Shop',
-        'about_us' => 'Who We Are',
+        'about_us' => 'Chi siamo',
         'journal' => 'Partnership',
         'assistance' => 'Assistenza',
         'values' => 'Values',
         'production' => 'Production',
         'partnership' => 'Partnership',
-        'login_register' => 'Sign in / Register',
+        'login_register' => 'Accedi / Registrati',
     ],
     'splash' => [
         'title' => 'Seleziona il tuo Paese'
@@ -22,7 +22,7 @@ return [
         'button' => 'Acquista ora'
     ],
     'carousel-top' => [
-        'title' => 'Product line'
+        'title' => 'Linea prodotti'
     ],
     'carousel-bottom' => [
         'title' => 'Best Seller'
@@ -159,10 +159,10 @@ return [
         'my_account' => [
             'title' => 'MY ACCOUNT',
             'dashboard' => 'Dashboard',
-            'cart' => 'Cart',
+            'cart' => 'Carrello',
             'checkout' => 'Checkout',
-            'orders' => 'Orders',
-            'shipment' => 'Shipments'
+            'orders' => 'Ordini',
+            'shipment' => 'Spedizioni'
         ],
         'privacy' => 'PRIVACY'
     ],

@@ -1,0 +1,57 @@
+<?php
+
+return [
+    'title' => [
+        'resellers' => 'Minoristas',
+    ],
+    'search' => 'Cerca...',
+    'faq' => 'Preguntas más frecuentes',
+    'create' => 'Crear',
+    'edit' => 'Editar',
+    'save' => 'Ahorrar',
+    'saved' => 'Salvado',
+    'cancel' => 'Cancelar',
+    'delete' => 'Borrar',
+    'update' => 'Actualizar',
+    'add' => 'agregar',
+    'send' => 'Enviar',
+    'print' => 'Prensa',
+    'disable' => 'Desactivar',
+    'enable' => 'Capacidad',
+    'saving' => 'Rescate',
+    'select' => 'Seleccionar',
+    'filter' => 'Filtrar',
+    'filter_by' => 'Filtrado por:',
+    'loading_data' => 'Cargando datos...',
+    'search_not_found' => 'Su búsqueda no produjo resultados.',
+    'copy_from_billing' => 'Copiar de facturación',
+
+    'customers' => [
+        'saving' => [
+            'success' => '¡El cliente ha sido creado exitosamente!',
+            'error' => '¡Error al guardar al cliente!',
+        ],
+        'updating' => [
+            'success' => 'No disponible',
+            'error' => '¡Error al actualizar el cliente!',
+        ],
+        'deleting' => [
+            'success' => '¡El cliente fue eliminado exitosamente!',
+            'error' => '¡Error al eliminar cliente!',
+        ],
+    ],
+    'select_all' => 'Seleccionar todo',
+    'active' => 'Activar',
+    'yes' => 'Sí',
+    'no' => 'No',
+    'invoice' => 'Factura',
+    'running_low' => 'Bajo',
+    'sold_out' => 'No disponible',
+    'available' => 'Disponible',
+    'close' => 'Cerca',
+    'default' => 'Por defecto',
+    'free_shipping' => 'Gratis',
+    'pz' => 'Piezas',
+    'all' => 'Todos',
+    'taxation' => 'Impuestos',
+];
