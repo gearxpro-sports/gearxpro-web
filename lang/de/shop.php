@@ -27,6 +27,9 @@ return [
     'carousel-bottom' => [
         'title' => 'Bestseller'
     ],
+    'sizes-guide' => [
+        'title' => 'Leitfaden zur Größe'
+    ],
     'products' => [
         'title' => 'Verbessern Sie Ihr Spiel',
         'description' => 'Beginnen Sie noch heute',

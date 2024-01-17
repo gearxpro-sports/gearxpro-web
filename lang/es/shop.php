@@ -27,6 +27,9 @@ return [
     'carousel-bottom' => [
         'title' => 'Mejor vendido'
     ],
+    'sizes-guide' => [
+        'title' => 'Guía de tallas'
+    ],
     'products' => [
         'title' => 'Mejora tu juego',
         'description' => 'Empiece hoy',

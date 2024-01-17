@@ -27,6 +27,9 @@ return [
     'carousel-bottom' => [
         'title' => 'Best Seller'
     ],
+    'sizes-guide' => [
+        'title' => 'Size guide'
+    ],
     'products' => [
         'title' => 'Improve Your Game',
         'description' => 'Get Started Today',
