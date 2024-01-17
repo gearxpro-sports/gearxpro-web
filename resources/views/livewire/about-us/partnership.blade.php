@@ -1,5 +1,5 @@
 <div>
-    <div class="bg-black py-10 text-5xl text-white font-extrabold text-center">
+    <div class="bg-black py-10 text-3xl text-white font-extrabold text-center sm:text-5xl">
         ABMASSADORS
     </div>
     <div class="bg-white">
@@ -14,10 +14,10 @@
             @endforeach
         </div>
     </div>
-    <div class="bg-white py-36">
+    <div class="bg-white py-36 px-4">
         <div class="mx-auto text-center">
-            <h3 class="text-4xl font-bold uppercase mb-8">Uniti nell'eccellenza, leader nel gioco.</h3>
-            <p class="text-2xl">
+            <h3 class="text-3xl md:text-4xl font-bold uppercase mb-8">Uniti nell'eccellenza, leader nel gioco.</h3>
+            <p class="text-lg md:text-2xl">
                 Le nostre collaborazioni brillano nel mosaico dei nostri successi.<br>
                 Attraverso una rete selezionata di club e ambasciatori,<br>
                 intrecciamo la nostra qualità a storie di spicco.<br>
@@ -25,7 +25,7 @@
             </p>
         </div>
     </div>
-    <div class="bg-black py-10 text-5xl text-white font-extrabold text-center">
+    <div class="bg-black py-10 text-3xl text-white font-extrabold text-center sm:text-5xl">
         PARTNERSHIPS
     </div>
     <div class="bg-white py-16">
@@ -45,7 +45,7 @@
     <div class="bg-black py-10 text-4xl text-white font-titling text-center sm:text-5xl md:text-7xl">
         ENGINEERED BY ATHLETES FOR ATHLETES
     </div>
-    <div class="relative h-[calc(100vh-96px)] py-10 w-full overflow-hidden sm:h-auto">
+    <div class="relative py-10 w-full overflow-hidden sm:h-auto">
         <video class="w-full scale-125" autoplay loop muted
                src="{{ Vite::asset('resources/videos/GEARXPro_Recovery_V2_OFFICIAL.mp4')}}"></video>
     </div>
