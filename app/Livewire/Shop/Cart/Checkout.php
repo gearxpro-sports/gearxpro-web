@@ -6,6 +6,8 @@ use App\Models\Cart;
 use App\Models\Country;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Vite;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Auth;
@@ -78,6 +80,37 @@ class Checkout extends Component
                 $cart->update([
                     'user_id' => $user->id
                 ]);
+                // Create Omnisend cart
+                Http::withHeaders([
+                    'X-API-KEY' => env('OMNISEND_KEY'),
+                ])
+                    ->post("https://api.omnisend.com/v3/carts", [
+                        'cartID' => $cart->omnisend_cart_id,
+                        'currency' => 'EUR',
+                        'cartSum' => intval($cart->subtotal * 100),
+                        'email' => $user->email ?? null,
+                    ]);
+
+                // Add product to Omnisend cart
+                foreach ($cart->items as $item) {
+                    Http::withHeaders([
+                        'X-API-KEY' => env('OMNISEND_KEY'),
+                    ])
+                        ->post("https://api.omnisend.com/v3/carts/{$cart->omnisend_cart_id}/products", [
+                            'cartProductID' => $item->omnisend_cart_product_id,
+                            'currency' => 'EUR',
+                            'productID' => (string) $item->variant->product->id,
+                            'variantID' => (string) $item->product_variant_id,
+                            'title' => $item->variant->product->name,
+                            'quantity' => $item->quantity,
+                            'price' => intval($item->price * 100),
+                            'sku' => $item->variant->sku,
+                            'imageUrl' => $item->variant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg'),
+                            'productUrl' => route('shop.show', [
+                                'product' => $item->variant->product->slug, 'country_code' => session('country_code')
+                            ])
+                        ]);
+                }
 
                 return redirect()->intended(route('shop.payment', ['country_code' => session('country_code')]));
             }

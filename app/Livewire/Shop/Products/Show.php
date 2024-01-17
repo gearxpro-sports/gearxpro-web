@@ -321,6 +321,7 @@ class Show extends Component
             }
             $cart = Cart::firstOrCreate([
                 'user_id' => session('cart_user_token'),
+            ], [
                 'omnisend_cart_id' => Str::random()
             ]);
         }
@@ -333,7 +334,7 @@ class Show extends Component
                 'cartID' => $cart->omnisend_cart_id,
                 'currency' => 'EUR',
                 'cartSum' => 0,
-                'email' => auth()->user()->email,
+                'email' => auth()->user()->email ?? null,
             ]);
 
         $variant_in_cart = $cart->items()->where('product_variant_id', $this->selectedVariant->id)->first();
@@ -364,7 +365,9 @@ class Show extends Component
                     'price' => intval($this->selectedVariant->product->price * 100),
                     'sku' => strtoupper($this->selectedVariant->sku),
                     'imageUrl' => $this->selectedVariant->getThumbUrl() ?: Vite::asset('resources/images/placeholder-medium.jpg'),
-                    'productUrl' => route('shop.show', ['product' => $this->selectedVariant->product->slug, 'country_code' => session('country_code')])
+                    'productUrl' => route('shop.show', [
+                        'product' => $this->selectedVariant->product->slug, 'country_code' => session('country_code')
+                    ])
                 ]);
             $cart->items()->create([
                 'product_variant_id' => $this->selectedVariant->id,
