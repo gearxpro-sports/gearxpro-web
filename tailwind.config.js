@@ -26,7 +26,8 @@ export default {
     theme: {
         fontFamily: {
             'app': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
-            'shop': ['Montserrat', 'system-ui', 'sans-serif']
+            'shop': ['Montserrat', 'system-ui', 'sans-serif'],
+            'titling': ['Big Noodle', 'system-ui', 'sans-serif'],
         },
         extend: {
             colors: {

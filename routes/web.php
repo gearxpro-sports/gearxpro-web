@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\AboutUs\Partnership;
 use App\Livewire\Countries\Index as CountriesIndex;
 use App\Livewire\Customers\Index as CustomersIndex;
 use App\Livewire\Customers\Show as CustomerShow;
@@ -91,6 +92,7 @@ Route::middleware('country')->domain('{country_code}.'.env('APP_URL'))->group(fu
     Route::name('about_us.')->group(function () {
         Route::get('/whoWeAre', [WhoWeAre::class, '__invoke'])->name('whoWeAre');
         Route::get('/values', [Values::class, '__invoke'])->name('values');
+        Route::get('/partnership', [Partnership::class, '__invoke'])->name('partnership');
         Route::get('/development', [Development::class, '__invoke'])->name('development');
     });
 });

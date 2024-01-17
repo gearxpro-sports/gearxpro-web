@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+    @font-face {
+        font-family: 'Big Noodle';
+        src: url("../../resources/fonts/big_noodle_titling.ttf") format('truetype');
+    }
     html {
         @apply font-shop;
     }
