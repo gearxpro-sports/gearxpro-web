@@ -5,8 +5,9 @@
     <div class="bg-white">
         <div class="owl-carousel ambassadors_carousel">
             @foreach ($ambassadors as $ambassador)
-                <a href="{{ $ambassador['url'] }}" target="_blank" class="relative flex justify-center bg-red-200 h-[760px] w-full bg-cover" style="background-image: url('{{ Vite::asset('resources/images/about_us/partnership/ambassadors/' . $ambassador['image'])}}')">
-                    <p class="absolute bottom-5 text-xl text-white uppercase tracking-tight">
+                <a href="{{ $ambassador['url'] }}" target="_blank" class="group relative flex justify-center bg-red-200 h-[760px] w-full bg-cover" style="background-image: url('{{ Vite::asset('resources/images/about_us/partnership/ambassadors/' . $ambassador['image'])}}')">
+                    <div class="absolute inset-0 transition-all group-hover:bg-black/20"></div>
+                    <p class="absolute bottom-5 text-xl text-white uppercase tracking-tight transition-all group-hover:bottom-8">
                         <span>{{ $ambassador['firstname'] }}</span>
                         <span class="font-extrabold">{{ $ambassador['lastname'] }}</span>
                     </p>
@@ -30,7 +31,7 @@
     </div>
     <div class="bg-white">
         <div class="mx-auto">
-            <div class="-mx-6 grid grid-cols-2 gap-0.5 overflow-hidden sm:mx-0 sm:rounded-2xl lg:grid-cols-4">
+            <div class="grid grid-cols-2 gap-0.5 overflow-hidden sm:mx-0 sm:rounded-2xl lg:grid-cols-4">
                 @foreach($partnerships as $partnership)
                     <a href="{{ $partnership['url'] }}" target="_blank" class="flex flex-col items-center p-4 hover:bg-gray-50">
                         <img class="aspect-square h-32 w-full object-contain shrink-0"
@@ -45,8 +46,8 @@
     <div class="bg-black py-10 text-4xl text-white font-titling text-center sm:text-5xl md:text-7xl">
         ENGINEERED BY ATHLETES FOR ATHLETES
     </div>
-    <div class="relative py-10 w-full overflow-hidden sm:h-auto">
-        <video class="w-full scale-125" autoplay loop muted
+    <div class="relative w-full overflow-hidden sm:h-auto">
+        <video class="w-full" autoplay loop muted
                src="{{ Vite::asset('resources/videos/GEARXPro_Recovery_V2_OFFICIAL.mp4')}}"></video>
     </div>
 </div>
