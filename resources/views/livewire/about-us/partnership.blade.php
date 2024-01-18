@@ -30,13 +30,13 @@
     </div>
     <div class="bg-white py-16">
         <div class="mx-auto px-6 lg:px-8">
-            <div class="-mx-6 grid grid-cols-2 gap-0.5 overflow-hidden sm:mx-0 sm:rounded-2xl md:grid-cols-4">
+            <div class="-mx-6 grid grid-cols-2 gap-0.5 overflow-hidden sm:mx-0 sm:rounded-2xl lg:grid-cols-4">
                 @foreach($partnerships as $partnership)
-                    <a href="{{ $partnership['url'] }}" target="_blank" class="flex flex-col items-center p-8 sm:p-10 hover:bg-gray-50">
-                        <img class="aspect-square h-32 w-full object-contain"
+                    <a href="{{ $partnership['url'] }}" target="_blank" class="flex flex-col items-center p-4 hover:bg-gray-50">
+                        <img class="aspect-square h-32 w-full object-contain shrink-0"
                              src="{{ Vite::asset('resources/images/about_us/partnership/logos/' . $partnership['image'])}}"
                              alt="{{ $partnership['title'] }}">
-                        <span class="mt-2 text-center font-bold uppercase">{{ $partnership['title'] }}</span>
+                        <span class="text-sm mt-2 text-center font-bold uppercase">{{ $partnership['title'] }}</span>
                     </a>
                 @endforeach
             </div>
