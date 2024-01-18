@@ -28,15 +28,15 @@
     <div class="bg-black py-10 text-3xl text-white font-extrabold text-center sm:text-5xl">
         PARTNERSHIPS
     </div>
-    <div class="bg-white py-16">
-        <div class="mx-auto px-6 lg:px-8">
+    <div class="bg-white">
+        <div class="mx-auto">
             <div class="-mx-6 grid grid-cols-2 gap-0.5 overflow-hidden sm:mx-0 sm:rounded-2xl lg:grid-cols-4">
                 @foreach($partnerships as $partnership)
                     <a href="{{ $partnership['url'] }}" target="_blank" class="flex flex-col items-center p-4 hover:bg-gray-50">
                         <img class="aspect-square h-32 w-full object-contain shrink-0"
                              src="{{ Vite::asset('resources/images/about_us/partnership/logos/' . $partnership['image'])}}"
                              alt="{{ $partnership['title'] }}">
-                        <span class="text-sm mt-2 text-center font-bold uppercase">{{ $partnership['title'] }}</span>
+                        <span class="text-sm mt-2 text-center font-bold uppercase md:text-base">{{ $partnership['title'] }}</span>
                     </a>
                 @endforeach
             </div>
