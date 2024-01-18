@@ -26,10 +26,12 @@
         <div id="title" class="px-4 xl:px-0">
             <h1 class="text-3xl xl:text-7xl font-bold text-color-18181a">{{__('shop.sizes-guide.title')}}</h1>
         </div>
-        <div class="mt-10 px-4 xl:px-0 space-y-8">
+        <div class="mt-10 px-4 xl:px-0 space-y-10">
+            <x-size-guide.recovery-table />
+
             <div>
-                <h3 class="font-semibold mb-1.5">SOXPro Ultra Light e SOXPro Sprint</h3>
-                <table>
+                <h3 class="text-red-800 font-semibold text-lg">Prodotto: <span class="text-black">SOXPro Ultra Light e SOXPro Sprint</span></h3>
+                <table class="mt-3">
                     <thead>
                     <tr>
                         <th>XS</th>
@@ -68,9 +70,9 @@
             </div>
 
             <div>
-                <h3 class="font-semibold mb-1.5">SOXPro Classic, SOXPro Trekking, SOXPro Fast Break, SOXPro Padel,
-                    SOXPro Ankle Support</h3>
-                <table>
+                <h3 class="text-red-800 font-semibold text-lg">Prodotto: <span class="text-black">SOXPro Classic, SOXPro Trekking, SOXPro Fast Break, SOXPro Padel,
+                    SOXPro Ankle Support</span></h3>
+                <table class="mt-3">
                     <thead>
                     <tr>
                         <th>S</th>
@@ -99,8 +101,8 @@
             </div>
 
             <div>
-                <h3 class="font-semibold mb-1.5">SOXPro Five To</h3>
-                <table>
+                <h3 class="text-red-800 font-semibold text-lg">Prodotto: <span class="text-black">SOXPro Five To</span></h3>
+                <table class="mt-3">
                     <thead>
                     <tr>
                         <th>S</th>
@@ -133,8 +135,8 @@
             </div>
 
             <div>
-                <h3 class="font-semibold mb-1.5">SOXPro Low Cut</h3>
-                <table>
+                <h3 class="text-red-800 font-semibold text-lg">Prodotto: <span class="text-black">SOXPro Low Cut</span></h3>
+                <table class="mt-3">
                     <thead>
                     <tr>
                         <th>S</th>
@@ -159,8 +161,8 @@
             </div>
 
             <div>
-                <h3 class="font-semibold mb-1.5">SOXPro Recovery</h3>
-                <table>
+                <h3 class="text-red-800 font-semibold text-lg">Prodotto: <span class="text-black">SOXPro Recovery</span></h3>
+                <table class="mt-3">
                     <thead>
                     <tr>
                         <th>S</th>
@@ -189,10 +191,9 @@
                 </table>
             </div>
 
-
             <div>
-                <h3 class="font-semibold mb-1.5">SOXPro Compression</h3>
-                <table>
+                <h3 class="text-red-800 font-semibold text-lg">Prodotto: <span class="text-black">SOXPro Compression</span></h3>
+                <table class="mt-3">
                     <thead>
                     <tr>
                         <th>XS +-</th>
