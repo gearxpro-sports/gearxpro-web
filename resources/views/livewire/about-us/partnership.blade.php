@@ -1,6 +1,6 @@
 <div>
     <div class="bg-black py-10 text-3xl text-white font-extrabold text-center sm:text-5xl">
-        ABMASSADORS
+        AMBASSADORS
     </div>
     <div class="bg-white">
         <div class="owl-carousel ambassadors_carousel">
@@ -24,7 +24,7 @@
                 Le nostre collaborazioni brillano nel mosaico dei nostri successi.<br>
                 Attraverso una rete selezionata di club e ambasciatori,<br>
                 intrecciamo la nostra qualità a storie di spicco.<br>
-                Qui, ogni atleta scopre il palcoscenico ideale per manifestare il suo genio.
+                Con GEARXPro, ogni atleta vive il palcoscenico ideale per manifestare il suo genio.
             </p>
         </div>
     </div>
