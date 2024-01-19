@@ -10,7 +10,8 @@ class Counter extends Component
     #[Modelable]
     public $value = 0;
 
-    public $min, $max;
+    public $min = 0;
+    public $max = 0;
 
     public $disabled = false;
 
