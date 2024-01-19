@@ -48,7 +48,7 @@
     </div>
     <div class="relative w-full overflow-hidden sm:h-auto">
         <video class="w-full" autoplay loop muted
-               src="{{ Vite::asset('resources/videos/GEARXPro_Recovery_V2_OFFICIAL.mp4')}}"></video>
+               src="{{ Vite::asset('resources/videos/08_SOXPro UltraLight CALCIO-RUGBY.mp4')}}"></video>
     </div>
 </div>
 
