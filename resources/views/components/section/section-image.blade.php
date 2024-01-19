@@ -1,4 +1,4 @@
-<div class="w-full h-[calc(100vh-106px)] xl:h-fit lg:flex items-center justify-center bg-section_image xl:bg-none bg-center bg-cover bg-no-repeat bg-color-e6e7e9 xl:px-[195px] xl:py-[90px] relative">
+<a href="{{ route('about_us.whoWeAre', ['country_code' => session('country_code')]) }}" class="w-full h-[calc(100vh-106px)] xl:h-fit lg:flex items-center justify-center bg-section_image xl:bg-none bg-center bg-cover bg-no-repeat bg-color-e6e7e9 xl:px-[195px] xl:py-[90px] relative">
     <div class="hidden xl:flex">
         <img class="w-1/2" src="{{ Vite::asset('resources/images/gear/reminder_left.jpg') }}" alt="">
         <img class="w-1/2" src="{{ Vite::asset('resources/images/gear/reminder_right.jpg') }}" alt="">
@@ -18,4 +18,4 @@
             <x-custom-button text="Scopri di più" :icon="'arrow-right'" :link="'/' " width="w-full"/>
         </div>
     </div> --}}
-</div>
+</a>

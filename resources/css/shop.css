@@ -37,7 +37,10 @@
 }
 
 .owl-dots {
-    @apply  w-full absolute bottom-5 flex items-center justify-center gap-2
+    @apply w-full absolute flex items-center justify-center gap-2
+}
+.carousel_top .owl-dots {
+    @apply -bottom-7 sm:-bottom-10;
 }
 .owl-dot {
     @apply h-2 w-2 rounded-full z-30 !bg-color-b6b9bb;

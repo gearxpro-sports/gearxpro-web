@@ -19,9 +19,11 @@
         <div class="col-span-12 px-4 md:px-8 lg:col-span-5 xl:col-start-8 lg:py-10">
             {{-- detail --}}
             <div>
-                <span class="text-sm xl:text-[17px] leading-[28px] text-color-6c757d">{!! $product->categories?->first()->name ?? '&nbsp;' !!}</span>
+                <span
+                    class="text-sm xl:text-[17px] leading-[28px] text-color-6c757d">{!! $product->categories?->first()->name ?? '&nbsp;' !!}</span>
                 <h1 class="text-xl xl:text-3xl font-semibold leading-[40px] text-color-18181a">{{$product->name}}</h1>
-                <p class="text-base xl:text-[21px] font-medium leading-[38px] text-color-18181a">@money($product->price)</p>
+                <p class="text-base xl:text-[21px] font-medium leading-[38px] text-color-18181a">
+                    @money($product->price)</p>
             </div>
 
             <div class="w-full xl:max-w-md mt-6 xl:mt-10 space-y-10">
@@ -73,8 +75,10 @@
                                                 $selectedColor == $color['id'] ? 'ring ring-offset-2 ring-offset-color-f2f0eb' : 'ring-2'])
                                             style="--tw-ring-color: {{$color['color']}}"
                                         >
-                                            <img src="{{ $color['image'] ?? Vite::asset('resources/images/placeholder-medium.jpg') }}" alt=""
-                                                 class="p-[3px] object-contain aspect-square">
+                                            <img
+                                                src="{{ $color['image'] ?? Vite::asset('resources/images/placeholder-medium.jpg') }}"
+                                                alt=""
+                                                class="p-[3px] object-contain aspect-square">
                                         </div>
                                     @else
                                         <div
@@ -84,8 +88,10 @@
                                                 $selectedColor == $color['id'] ? 'ring ring-offset-2' : 'border border-gray-800'])
                                             style="--tw-ring-color: {{$color['color']}}"
                                         >
-                                            <img src="{{ $color['image'] ?? Vite::asset('resources/images/placeholder-medium.jpg') }}" alt=""
-                                                 class="p-[3px] object-contain aspect-square">
+                                            <img
+                                                src="{{ $color['image'] ?? Vite::asset('resources/images/placeholder-medium.jpg') }}"
+                                                alt=""
+                                                class="p-[3px] object-contain aspect-square">
                                         </div>
                                     @endif
                                 @endforeach
@@ -99,8 +105,9 @@
                         <div class="flex items-center justify-between">
                             <p class="text-sm font-medium text-color-18181a uppercase">{{__('shop.products.size')}}</p>
                             <div class="flex items-center space-x-2">
-                                <a href="{{ route('shop.sizes-guide', ['country_code' => session('country_code')]) }}" target="_blank"
-                                    class="text-xs font-semibold xl:font-medium text-color-18181a uppercase">{{__('shop.options.size_guide')}}</a>
+                                <a href="{{ route('shop.sizes-guide', ['country_code' => session('country_code')]) }}"
+                                   target="_blank"
+                                   class="text-xs font-semibold xl:font-medium text-color-18181a uppercase">{{__('shop.options.size_guide')}}</a>
                                 <x-icons name="meter" class="w-5 h-5"></x-icons>
                             </div>
                         </div>
@@ -158,15 +165,15 @@
 
                 {{-- actions --}}
                 <div class="mt-[30px]">
-{{--                    <x-shop.shopping-button :disabled="!$selectedVariant" wire:click="payWithLink" color="green"--}}
-{{--                                            icon="arrow-right-xl">--}}
-{{--                        {{ __('shop.button.pay_link') }}--}}
-{{--                    </x-shop.shopping-button>--}}
-{{--                    <div class="xl:w-[438px] relative py-6 xl:p-6">--}}
-{{--                        <div class="h-[1px] bg-color-6c757d w-full"></div>--}}
-{{--                        <span--}}
-{{--                            class="absolute top-[15px] left-[calc(50%-36px)] px-[10px] bg-color-f2f0eb text-[13px] font-medium leading-[16px] text-color-6c757d">{{__('shop.options.or')}}</span>--}}
-{{--                    </div>--}}
+                    {{--                    <x-shop.shopping-button :disabled="!$selectedVariant" wire:click="payWithLink" color="green"--}}
+                    {{--                                            icon="arrow-right-xl">--}}
+                    {{--                        {{ __('shop.button.pay_link') }}--}}
+                    {{--                    </x-shop.shopping-button>--}}
+                    {{--                    <div class="xl:w-[438px] relative py-6 xl:p-6">--}}
+                    {{--                        <div class="h-[1px] bg-color-6c757d w-full"></div>--}}
+                    {{--                        <span--}}
+                    {{--                            class="absolute top-[15px] left-[calc(50%-36px)] px-[10px] bg-color-f2f0eb text-[13px] font-medium leading-[16px] text-color-6c757d">{{__('shop.options.or')}}</span>--}}
+                    {{--                    </div>--}}
                     <x-shop.shopping-button :disabled="!$selectedVariant" wire:click="addToCart" icon="bag">
                         {{ __('shop.button.add_to_cart') }}
                     </x-shop.shopping-button>
@@ -190,8 +197,8 @@
                 @foreach($tabs as $k => $tab)
                     <button
                         wire:click="$set('currentTab', '{{ $k }}')"
-                        class="w-[235px] h-[48px] rounded-md bg-transparent flex items-center justify-center text-sm font-medium leading-[19px] text-color-6c757d capitalize {{ $currentTab === $k ? '!bg-color-18181a !text-white' : '' }}">
-                        {{ $tab }}
+                        class="w-[235px] h-[48px] rounded-md bg-transparent flex items-center justify-center text-sm font-medium leading-[19px] text-color-6c757d capitalize overflow-hidden {{ $currentTab === $k ? '!bg-color-18181a !text-white' : '' }}">
+                        <span class="line-clamp-2">{{ $tab }}</span>
                     </button>
                 @endforeach
             </div>
@@ -229,33 +236,46 @@
 
         <!-- Responsive info product -->
         <div class="lg:hidden col-span-12 flex flex-col gap-6 px-4 md:px-8 pt-10 pb-16">
-            <x-drop-info-product title="{{$product->name}}">
-                <p class="text-[13px] leading-[24px] text-color-323a46">
-                    {{ $product->main_desc }}
-                </p>
-            </x-drop-info-product>
-            <x-drop-info-product title="{{__('shop.products.characteristics')}}">
-                <p class="text-[13px] leading-[24px] text-color-323a46">
-                    {{ $product->features_desc }}
-                </p>
-            </x-drop-info-product>
-            <x-drop-info-product title="{{__('shop.products.advantages')}}">
-                <p class="text-[13px] leading-[24px] text-color-323a46">
-                    {{ $product->pros_desc }}
-                </p>
-            </x-drop-info-product>
-            <x-drop-info-product title="{{__('shop.products.technicality')}}">
-                <p class="text-[13px] leading-[24px] text-color-323a46">
-                    {{ $product->technical_desc }}
-                </p>
-            </x-drop-info-product>
-            <x-drop-info-product title="{{__('shop.products.wash')}}">
-                <p class="text-[13px] leading-[24px] text-color-323a46">
-                    {{ $product->washing_desc }}
-                </p>
-            </x-drop-info-product>
+            @foreach($tabs as $k => $tab)
+                @switch($k)
+                    @case('product')
+                        <x-drop-info-product title="{{$product->name}}">
+                            <p class="prose max-w-none text-[13px] leading-[24px] text-color-323a46">
+                                {!! $product->main_desc !!}
+                            </p>
+                        </x-drop-info-product>
+                        @break
+                    @case('characteristics')
+                        <x-drop-info-product title="{{__('shop.products.characteristics')}}">
+                            <p class="prose max-w-none text-[13px] leading-[24px] text-color-323a46">
+                                {!! $product->features_desc !!}
+                            </p>
+                        </x-drop-info-product>
+                        @break
+                    @case('advantages')
+                        <x-drop-info-product title="{{__('shop.products.advantages')}}">
+                            <p class="prose max-w-none text-[13px] leading-[24px] text-color-323a46">
+                                {!! $product->pros_desc !!}
+                            </p>
+                        </x-drop-info-product>
+                        @break
+                    @case('technicality')
+                        <x-drop-info-product title="{{__('shop.products.technicality')}}">
+                            <p class="prose max-w-none text-[13px] leading-[24px] text-color-323a46">
+                                {!! $product->technical_desc !!}
+                            </p>
+                        </x-drop-info-product>
+                        @break
+                    @case('wash')
+                        <x-drop-info-product title="{{__('shop.products.wash')}}">
+                            <p class="prose max-w-none text-[13px] leading-[24px] text-color-323a46">
+                                {!! $product->washing_desc !!}
+                            </p>
+                        </x-drop-info-product>
+                        @break
+                @endswitch
+            @endforeach
         </div>
-
     </div>
 
     {{-- carousel --}}

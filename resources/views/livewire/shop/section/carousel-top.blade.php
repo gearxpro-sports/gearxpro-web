@@ -1,4 +1,4 @@
-<div class="w-full xl:h-[877px] bg-white pt-5 pb-10 xl:pt-[60px] xl:pb-[70px] px-[0px] overflow-hidden pl-4 xl:pl-[39px]">
+<div class="w-full bg-white pt-5 pb-10 xl:pt-[60px] xl:pb-[70px] px-[0px] overflow-hidden pl-4 xl:pl-[39px]">
     <h2 class="text-2xl xl:text-[33px] font-bold leading-[86px]">{{ __('shop.carousel-top.title') }}</h2>
 
     <div class="owl-carousel carousel_top">
@@ -17,9 +17,9 @@
     <script>
         $(document).ready(function(){
             var carousel_top = new $(".carousel_top").owlCarousel({
-                items: 4,
+                items: 1,
                 margin: 30,
-                dots: false,
+                dots: true,
                 loop: true,
                 autoWidth: true,
                 autoplay: true,

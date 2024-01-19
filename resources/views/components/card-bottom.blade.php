@@ -5,23 +5,28 @@
         <img src="{{ $product->defaultImages->medium }}" alt="">
     </a>
     <div class="bg-color-f2f0eb h-[108px] w-full flex border-y border-color-18181a border-x border-x-color-f2f0eb hover:border-y-color-f2f0eb rounded-b-md transition-all duration-300 group">
-        <div class="h-full grow flex flex-col pl-3 xl:pl-5 py-4 relative">
+        <div class="h-full grow flex flex-col pl-3 xl:pl-5 py-4 relative overflow-hidden">
             <h3 class="z-10 text-[15px] font-semibold leading-[19px] group-hover:text-white">{!! $product->categories?->first()->name ?? '&nbsp;' !!}</h3>
-            <div class="z-10 pr-4 text-[12px] font-medium text-color-6c757d group-hover:text-color-b6b9bb line-clamp-1">{{ $product->name }}</div>
+            <div class="z-10 pr-4 text-[12px] font-medium text-color-323a46 group-hover:text-color-b6b9bb truncate">{{ $product->name }}</div>
             @if ($colors)
                 <div class="relative flex space-x-1 my-1 z-10">
                     @foreach($colors as $color)
                         @php
-                            $colors = explode(',', $color);
+                            $cc = explode(',', $color);
                         @endphp
-                        @if(count($colors) > 1)
-                            <div
-                                class="h-3 w-3 rounded-full"
-                                style="background: linear-gradient(135deg, {{$colors[0]}} 50%, {{$colors[1]}} 50%);"
-                            ></div>
+                        @if($loop->index < 10)
+                            @if(count($cc) > 1)
+                                <div
+                                    class="h-3 w-3 rounded-full"
+                                    style="background: linear-gradient(135deg, {{$cc[0]}} 50%, {{$cc[1]}} 50%);"
+                                ></div>
+                            @else
+                                <div class="inline-block h-3 w-3 rounded-full"
+                                     style="background-color: {{ $color }}"></div>
+                            @endif
                         @else
-                            <div class="inline-block h-3 w-3 rounded-full"
-                                 style="background-color: {{ $color }}"></div>
+                            <span class="text-xs font-medium">+{{ (count($colors) - $loop->index) }}</span>
+                            @break
                         @endif
                     @endforeach
                 </div>

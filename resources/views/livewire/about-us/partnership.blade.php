@@ -6,7 +6,7 @@
         <div class="owl-carousel ambassadors_carousel">
             @foreach ($ambassadors as $ambassador)
                 <a href="{{ $ambassador['url'] }}" target="_blank"
-                   class="group relative flex justify-center h-[760px] w-full bg-cover"
+                   class="group relative flex justify-center h-[760px] w-full bg-cover bg-center"
                    style="background-image: url('{{ Vite::asset('resources/images/about_us/partnership/ambassadors/' . $ambassador['image'])}}')">
                     <div class="absolute inset-0 transition-all group-hover:bg-black/20"></div>
                     <p class="absolute bottom-5 text-xl text-white uppercase tracking-tight transition-all group-hover:bottom-8">

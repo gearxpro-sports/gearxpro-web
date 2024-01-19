@@ -2,36 +2,14 @@
 
 namespace App\Livewire\Shop\Section;
 
+use App\Models\Category;
 use Livewire\Component;
 
 class Footer extends Component
 {
-    public $brands = [];
     public $account = [];
 
     public function mount() {
-        $this->brands = [
-            [
-                'route' => 'shop.index',
-                'name' =>  'SOXPro',
-            ],
-            [
-                'route' => 'shop.index',
-                'name' => 'FLEXGXPro',
-            ],
-            [
-                'route' => 'shop.index',
-                'name' => 'LACEXPro',
-            ],
-            [
-                'route' => 'shop.index',
-                'name' => 'TUBEXPro',
-            ],
-            [
-                'route' => 'shop.index',
-                'name' => 'Recovery',
-            ],
-        ];
         $this->account = [
             [
                 'route' => 'shop.cart',
@@ -55,6 +33,10 @@ class Footer extends Component
 
     public function render()
     {
-        return view('livewire.shop.section.footer');
+        $categories = Category::where('parent_id', null)->get();
+
+        return view('livewire.shop.section.footer', [
+            'categories' => $categories
+        ]);
     }
 }
