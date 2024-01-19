@@ -14,7 +14,7 @@
     <td>@money($variant->product->wholesale_price)</td>
     <td>@money($variant->product->price)</td>
     <td>
-        <livewire:components.counter wire:model="quantity" wire:key="$variant->id" :disabled="!$variant->inStock()"/>
+        <livewire:components.counter wire:model="quantity" wire:key="$variant->id" :min="0" :max="$variant->quantity" :disabled="!$variant->inStock()"/>
     </td>
     <td class="whitespace-nowrap">
         <div class="flex items-center space-x-2">

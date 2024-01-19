@@ -10,6 +10,8 @@ class Counter extends Component
     #[Modelable]
     public $value = 0;
 
+    public $min, $max;
+
     public $disabled = false;
 
     public function increment()
@@ -17,14 +19,22 @@ class Counter extends Component
         if(!$this->disabled) {
             $this->value++;
         }
+        $this->updatedValue();
     }
 
     public function decrement()
     {
         if(!$this->disabled) {
-            if($this->value > 0) {
+            if($this->value > $this->min) {
                 $this->value--;
             }
+        }
+        $this->updatedValue();
+    }
+
+    public function updatedValue() {
+        if($this->value >= $this->max) {
+            $this->value = $this->max;
         }
     }
 
