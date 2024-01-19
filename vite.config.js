@@ -12,7 +12,8 @@ export default defineConfig({
                 'resources/css/pagepiling.min.css',
                 'resources/js/app.js',
                 'resources/js/auth.js',
-                'resources/js/owl.carousel.min.js'
+                'resources/js/owl.carousel.min.js',
+                'resources/videos/08_SOXPro UltraLight CALCIO-RUGBY.mp4'
             ],
             refresh: true,
         }),
