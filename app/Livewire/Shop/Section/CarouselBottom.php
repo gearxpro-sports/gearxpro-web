@@ -21,32 +21,35 @@ class CarouselBottom extends Component
 
     public function render()
     {
-        $products = collect();
-        $productQuantities = [];
-
-        foreach ($this->orders as $order) {
-            foreach ($order->items as $item) {
-                $productId = $item->product_id;
-
-                if (!isset($productQuantities[$productId])) {
-                    $productQuantities[$productId] = 0;
-                }
-
-                $productQuantities[$productId] += $item->quantity;
-            }
-        }
-
-        arsort($productQuantities);
-
-        $mostSoldProductIds = array_keys($productQuantities);
-
-        foreach ($mostSoldProductIds as $mostSoldProductId) {
-            $products->push(Product::with('variants')->where('id', $mostSoldProductId)->withTrashed()->first());
-        }
-
-        $products = $products->take(5);
-
+        // TODO: Bestseller => decommentare righe
+//        $products = collect();
+//        $productQuantities = [];
+//
+//        foreach ($this->orders as $order) {
+//            foreach ($order->items as $item) {
+//                $productId = $item->product_id;
+//
+//                if (!isset($productQuantities[$productId])) {
+//                    $productQuantities[$productId] = 0;
+//                }
+//
+//                $productQuantities[$productId] += $item->quantity;
+//            }
+//        }
+//
+//        arsort($productQuantities);
+//
+//        $mostSoldProductIds = array_keys($productQuantities);
+//
+//        foreach ($mostSoldProductIds as $mostSoldProductId) {
+//            $products->push(Product::with('variants')->where('id', $mostSoldProductId)->withTrashed()->first());
+//        }
+//
+//        $products = $products->take(5);
+//
         $productColors = [];
+
+        $products = Product::with('variants')->take(20)->get(); // TODO: Bestseller => eliminare riga
 
         foreach ($products as $product) {
             $stocks = Stock::with('productVariant')

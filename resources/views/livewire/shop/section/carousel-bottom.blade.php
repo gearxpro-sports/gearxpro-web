@@ -1,6 +1,9 @@
 @if ($products->count() > 0)
     <div class="w-full xl:h-[1002px] bg-black pt-5 pb-10 xl:pt-[60px] xl:pb-[70px] pl-4 xl:pl-[39px]">
-        <h2 class="text-2xl xl:text-[33px] font-bold leading-[86px] text-white">{{ __('shop.carousel-bottom.title') }}</h2>
+        {{-- TODO: Bestseller => decommentare riga --}}
+{{--        <h2 class="text-2xl xl:text-[33px] font-bold leading-[86px] text-white">{{ __('shop.carousel-bottom.title') }}</h2>--}}
+        {{-- TODO: Bestseller => eliminare riga --}}
+        <h2 class="text-2xl xl:text-[33px] font-bold leading-[86px] text-white">{{ __('supply.recap.table.title') }}</h2>
 
         <div class="owl-carousel carousel_bottom">
             @foreach ($products as $product )
