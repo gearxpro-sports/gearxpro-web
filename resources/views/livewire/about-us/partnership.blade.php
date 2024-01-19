@@ -5,7 +5,9 @@
     <div class="bg-white">
         <div class="owl-carousel ambassadors_carousel">
             @foreach ($ambassadors as $ambassador)
-                <a href="{{ $ambassador['url'] }}" target="_blank" class="group relative flex justify-center bg-red-200 h-[760px] w-full bg-cover" style="background-image: url('{{ Vite::asset('resources/images/about_us/partnership/ambassadors/' . $ambassador['image'])}}')">
+                <a href="{{ $ambassador['url'] }}" target="_blank"
+                   class="group relative flex justify-center bg-red-200 h-[760px] w-full bg-cover"
+                   style="background-image: url('{{ Vite::asset('resources/images/about_us/partnership/ambassadors/' . $ambassador['image'])}}')">
                     <div class="absolute inset-0 transition-all group-hover:bg-black/20"></div>
                     <p class="absolute bottom-5 text-xl text-white uppercase tracking-tight transition-all group-hover:bottom-8">
                         <span>{{ $ambassador['firstname'] }}</span>
@@ -33,11 +35,13 @@
         <div class="mx-auto">
             <div class="grid grid-cols-2 gap-0.5 overflow-hidden sm:mx-0 sm:rounded-2xl lg:grid-cols-4">
                 @foreach($partnerships as $partnership)
-                    <a href="{{ $partnership['url'] }}" target="_blank" class="flex flex-col items-center p-4 hover:bg-gray-50">
+                    <a href="{{ $partnership['url'] }}" target="_blank"
+                       class="flex flex-col items-center p-4 hover:bg-gray-50">
                         <img class="aspect-square h-32 w-full object-contain shrink-0"
                              src="{{ Vite::asset('resources/images/about_us/partnership/logos/' . $partnership['image'])}}"
                              alt="{{ $partnership['title'] }}">
-                        <span class="text-sm mt-2 text-center font-bold uppercase md:text-base">{{ $partnership['title'] }}</span>
+                        <span
+                            class="text-sm mt-2 text-center font-bold uppercase md:text-base">{{ $partnership['title'] }}</span>
                     </a>
                 @endforeach
             </div>
@@ -47,8 +51,9 @@
         ENGINEERED BY ATHLETES FOR ATHLETES
     </div>
     <div class="relative w-full overflow-hidden sm:h-auto">
-        <video class="w-full" autoplay loop muted
-               src="{{ Vite::asset('resources/videos/08_SOXPro UltraLight CALCIO-RUGBY.mp4')}}"></video>
+        <iframe class="w-full aspect-video" src="https://player.vimeo.com/video/904381774?h=83f2f042ef&background=1"
+                frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <script src="https://player.vimeo.com/api/player.js"></script>
     </div>
 </div>
 
@@ -65,7 +70,7 @@
                 autoplaySpeed: 2000,
                 autoplayHoverPause: true,
                 infinite: true,
-                responsive : {
+                responsive: {
                     0: {
                         items: 1
                     },
