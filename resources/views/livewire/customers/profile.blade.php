@@ -5,14 +5,14 @@
         <p class="text-sm xl:text-base font-normal text-color-18181a leading-5">{{__('customers.profile_description')}}</p>
     </div>
 
-    <div class="mt-8 flex flex-col gap-5 xl:flex-row xl:gap-40">
+    <div class="mt-8 flex flex-col gap-5 xl:flex-row xl:gap-14 2xl:gap-40">
         {{-- button Tabs --}}
-        <div class="flex gap-3 xl:block overflow-x-scroll no-scrollbar xl:overflow-hidden">
+        <div class="flex gap-3 xl:block overflow-x-scroll no-scrollbar xl:overflow-hidden xl:w-full xl:max-w-[282px]">
             <template x-for="tab in tabs" :key="tab">
                 <button @if ($modify) disabled @endif x-text="tab" x-on:click="currentTab = tab"
                     :class="tab == currentTab ? '!bg-color-18181a !text-white' : ''"
                     @class([
-                        "xl:w-[282px] h-[61px] px-5 mb-1 border rounded-md bg-transparent flex items-center justify-start text-sm xl:text-base font-medium leading-[19px] text-color-18181a capitalize",
+                        "xl:w-full h-[61px] px-5 mb-1 border rounded-md bg-transparent flex items-center text-left justify-start text-sm xl:text-base font-medium leading-[19px] text-color-18181a capitalize",
                         $modify ? 'opacity-80 cursor-not-allowed' : ''
                     ])
                 >
@@ -341,7 +341,7 @@
                 current_password: false,
                 showPassword: false,
                 password_confirmation: false,
-                currentTab: @json(__('customers.tabs.personal_data.title')),
+                currentTab: @json(__('customers.tabs.orders.title')) {{-- @json(__('customers.tabs.personal_data.title')) --}},
                 tabs: [
                     @json(__('customers.tabs.personal_data.title')),
                     @json(__('customers.tabs.addresses.title')),
