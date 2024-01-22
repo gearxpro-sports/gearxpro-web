@@ -7,7 +7,7 @@
 
     <div class="mt-8 flex flex-col gap-5 xl:flex-row xl:gap-40">
         {{-- button Tabs --}}
-        <div class="flex gap-3 xl:block" >
+        <div class="flex gap-3 xl:block overflow-x-scroll no-scrollbar xl:overflow-hidden">
             <template x-for="tab in tabs" :key="tab">
                 <button @if ($modify) disabled @endif x-text="tab" x-on:click="currentTab = tab"
                     :class="tab == currentTab ? '!bg-color-18181a !text-white' : ''"
@@ -113,7 +113,7 @@
                                         @if (!$variant)
                                             @continue
                                         @endif
-                                        <img class="w-fit" src="{{ $variant->getThumbUrl() }}" alt="{{ $variant->product?->name }}">
+                                        <img class="w-fit min-w-[100px]" src="{{ $variant->getThumbUrl() }}" alt="{{ $variant->product?->name }}">
                                     @endforeach
                                 </div>
                             </div>
