@@ -45,10 +45,10 @@ return [
                 'price_description' => 'Per rendere disponibile questo prodotto in fase di approvvigionamento e di vendita
                                         é necessario inserire entrambi i prezzi.',
                 'wholesale_price' => [
-                    'label' => 'Prezzo di acquisto',
+                    'label' => 'Prezzo di acquisto (B2B)',
                 ],
                 'price' => [
-                    'label' => 'Prezzo di vendita',
+                    'label' => 'Prezzo di vendita (B2C)',
                 ],
             ],
             'main' => [

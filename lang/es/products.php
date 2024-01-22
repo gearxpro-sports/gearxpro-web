@@ -44,10 +44,10 @@ return [
                 'title' => 'Ubicación',
                 'price_description' => 'Para que este producto esté disponible durante la fase de adquisición y venta, se deben ingresar ambos precios.',
                 'wholesale_price' => [
-                    'label' => 'Precio de compra',
+                    'label' => 'Precio de compra (B2B)',
                 ],
                 'price' => [
-                    'label' => 'Precio de venta',
+                    'label' => 'Precio de venta (B2C)',
                 ],
             ],
             'main' => [

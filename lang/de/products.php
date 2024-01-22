@@ -44,10 +44,10 @@ return [
                 'title' => 'Standort',
                 'price_description' => 'Um dieses Produkt während der Beschaffungs- und Verkaufsphase verfügbar zu machen, müssen beide Preise eingegeben werden.',
                 'wholesale_price' => [
-                    'label' => 'Kaufpreis',
+                    'label' => 'Kaufpreis (B2B)',
                 ],
                 'price' => [
-                    'label' => 'Verkaufspreis',
+                    'label' => 'Verkaufspreis (B2C)',
                 ],
             ],
             'main' => [

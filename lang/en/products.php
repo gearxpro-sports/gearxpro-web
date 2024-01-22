@@ -44,10 +44,10 @@ return [
                 'title' => 'Location',
                 'price_description' => 'To make this product available during the procurement and sales phase, both prices must be entered.',
                 'wholesale_price' => [
-                    'label' => 'Purchase price',
+                    'label' => 'Purchase price (B2B)',
                 ],
                 'price' => [
-                    'label' => 'Selling price',
+                    'label' => 'Selling price (B2C)',
                 ],
             ],
             'main' => [
