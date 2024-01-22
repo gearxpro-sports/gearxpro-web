@@ -9,6 +9,7 @@
             <h3 class="z-10 text-[15px] font-semibold leading-[19px] group-hover:text-white">{!! $product->categories?->first()->name ?? '&nbsp;' !!}</h3>
             <div class="z-10 pr-4 text-[12px] font-medium text-color-323a46 group-hover:text-color-b6b9bb truncate">{{ $product->name }}</div>
             @if ($colors)
+{{--                @dump($colors)--}}
                 <div class="relative flex space-x-1 my-1 z-10">
                     @foreach($colors as $color)
                         @php

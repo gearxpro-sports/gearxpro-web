@@ -76,6 +76,7 @@ class CarouselBottom extends Component
                 ->get()
             ;
 
+
             if ($stocks->count() > 0) {
                 foreach ($stocks as $stock) {
                     $productColors[$stock->product_id][] = $stock->productVariant->color?->color;

@@ -6,7 +6,7 @@
         <h2 class="text-2xl xl:text-[33px] font-bold leading-[86px] text-white">{{ __('supply.recap.table.title') }}</h2>
 
         <div class="owl-carousel carousel_bottom">
-            @foreach ($products as $product )
+            @foreach ($products as $product)
                 <x-card-bottom
                     :product="$product"
                     :colors="$productColors[$product->id] ?? []"
