@@ -125,7 +125,7 @@ class Index extends Component
                     ->where('country_id', $this->currentCountry->id)
                     ->where(function(Builder $query) {
                         $query
-                            ->whereNotNull('wholesale_price')
+//                            ->whereNotNull('wholesale_price')
                             ->whereNotNull('price')
                         ;
                     })

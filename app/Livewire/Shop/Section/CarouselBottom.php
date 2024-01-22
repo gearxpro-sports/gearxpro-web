@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Shop\Section;
 
+use App\Models\Country;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\Stock;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 
 class CarouselBottom extends Component
@@ -49,7 +51,22 @@ class CarouselBottom extends Component
 //
         $productColors = [];
 
-        $products = Product::with('variants')->take(20)->get(); // TODO: Bestseller => eliminare riga
+        $currentCountry = Country::with('reseller')->where('iso2_code', session('country_code'))->first();
+        $products = Product::with('variants')
+            ->withTrashed()
+            ->whereHas('countries', function(Builder $query) use ($currentCountry) {
+                $query
+                    ->where('country_id', $currentCountry->id)
+                    ->where(function(Builder $query) {
+                        $query
+//                            ->whereNotNull('wholesale_price')
+                            ->whereNotNull('price')
+                        ;
+                    })
+                ;
+            })
+            ->take(20)
+            ->get(); // TODO: Bestseller => eliminare righe
 
         foreach ($products as $product) {
             $stocks = Stock::with('productVariant')

@@ -75,6 +75,10 @@ class Show extends Component
             return abort(404);
         }
 
+        if(!$this->product->price) {
+            return redirect()->route('shop.index');
+        }
+
         $this->variants = $reseller
             ->stocks()
             ->with('productVariant')
