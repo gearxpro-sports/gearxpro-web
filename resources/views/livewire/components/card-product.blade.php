@@ -27,7 +27,9 @@
                                      class="inline-block w-3 h-3 border rounded-full"></div>
                             @endif
                         @else
-                            <span class="text-xs font-medium">+{{ (count($availableColors) - $loop->index) }}</span>
+                            <div class="inline-flex">
+                                <span class="text-xs font-medium leading-none">+{{ (count($availableColors) - $loop->index) }}</span>
+                            </div>
                             @break
                         @endif
                     @endforeach

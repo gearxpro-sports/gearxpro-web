@@ -240,7 +240,7 @@
 
                 <!-- Product grid -->
                 <div
-                    id="cards" @class(["grid grid-cols-2 gap-3 w-full px-4 xl:px-0 sm:grid-cols-3 xl:grid-cols-4"])>
+                    id="cards" @class(["grid grid-cols-2 gap-3 w-full px-4 xl:px-0 sm:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4"])>
                     @forelse ($products as $product )
                         <livewire:components.card-product
                             wire:key="prod_{{ $product->id }}"
