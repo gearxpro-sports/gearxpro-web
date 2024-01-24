@@ -156,7 +156,7 @@
 
                 @if($selectedLength || $selectedColor || $selectedSize)
                     <div wire:click="resetAll()"
-                         class="!mt-5 text-color-6c757d text-xs cursor-pointer hover:underline">{{ __('shop.products.reset_selection') }}</div>
+                         class="!mt-5 text-color-6c757d text-sm cursor-pointer hover:underline">{{ __('shop.products.reset_selection') }}</div>
                 @endif
 
                 {{-- quantita --}}
