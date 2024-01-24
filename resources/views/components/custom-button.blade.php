@@ -6,6 +6,6 @@
         <div class="h-full absolute top-0 w-0 bg-black group-hover:animate-line group-hover:w-full rounded-l-md"></div>
     </div>
     <div class="h-full border-l border-black group-hover:border-white w-[47px] flex items-center justify-center group-hover:bg-black rounded-r-md">
-        <x-icons class="group-hover:invert" name="{{$icon}}" />
+        <x-icons class="w-4 h-4 group-hover:invert shrink-0" name="{{$icon}}" />
     </div>
 </a>

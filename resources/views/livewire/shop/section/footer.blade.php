@@ -59,8 +59,8 @@
             </div>
         </div>
         <div class="mt-20 md:flex md:items-center md:justify-between">
-            <p class="mt-8 text-xs leading-5 text-white md:mt-0">Copyright &copy; {{ now()->format('Y') }}  |  GEARXPRO SPORTS CO. LIMITED</p>
-            <div class="flex justify-end gap-[25px] text-xs font-medium text-white whitespace-nowrap">
+            <p class="mt-8 mb-4 text-center text-xs leading-5 text-white md:mb-0 md:mt-0">Copyright &copy; {{ now()->format('Y') }}  |  GEARXPRO SPORTS CO. LIMITED</p>
+            <div class="flex justify-center md:justify-end gap-[25px] text-xs font-medium text-white whitespace-nowrap">
                 <a href="">Privacy policy</a>
                 <a href="">Returns & refounds</a>
                 <a href="">Cookie</a>

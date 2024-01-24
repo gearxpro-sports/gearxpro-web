@@ -341,7 +341,7 @@
                 current_password: false,
                 showPassword: false,
                 password_confirmation: false,
-                currentTab: @json(__('customers.tabs.orders.title')) {{-- @json(__('customers.tabs.personal_data.title')) --}},
+                currentTab: @json(__('customers.tabs.personal_data.title')) {{-- @json(__('customers.tabs.orders.title')) --}},
                 tabs: [
                     @json(__('customers.tabs.personal_data.title')),
                     @json(__('customers.tabs.addresses.title')),

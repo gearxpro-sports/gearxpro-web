@@ -6,24 +6,38 @@
             <x-icons name="chevron-left-xl"/>
         </a>
 
-        <div dir="ltr"
-             class="flex lg:flex-col col-span-12 lg:col-span-7 2xl:h-[1104px] overflow-auto scrollBar lg:gap-4 p-8 xl:p-0 snap-mandatory snap-x lg:snap-y relative">
-            @foreach ($images as $k => $media_collection)
-                @foreach($media_collection as $image)
-                    <img class="snap-center w-full scroll-ms-6 shrink-0" src="{{ $image->getUrl() }}" alt="">
+{{--        <div class="flex mt-12 mb-5 col-span-12 overflow-auto scrollBar xl:p-0 snap-mandatory snap-x lg:snap-y relative lg:flex-col lg:col-span-7 lg:gap-4 2xl:h-[1104px]">--}}
+{{--            @foreach ($images as $k => $media_collection)--}}
+{{--                @foreach($media_collection as $image)--}}
+{{--                    <img class="snap-center w-full shrink-0 px-2" src="{{ $image->getUrl() }}" alt="">--}}
+{{--                @endforeach--}}
+{{--            @endforeach--}}
+{{--        </div>--}}
+
+        <div class="flex flex-col mt-12 col-span-full sm:flex-row lg:col-span-7 sm:mb-5 sm:items-start">
+            <img class="aspect-square object-contain w-full shrink-0 px-2 sm:mx-auto sm:max-w-md sm:order-1 lg:max-w-2xl" src="{{ $currentImage }}" alt="">
+            <div class="flex px-2 gap-3 my-4 shrink-0 overflow-x-scroll no-scrollbar sm:gap-1 sm:my-0 sm:order-0 sm:flex-col sm:max-h-[450px] sm:overflow-y-scroll sm:no-scrollbar">
+                @foreach ($images as $k => $media_collection)
+                    @foreach($media_collection as $image)
+                        <img wire:click="$set('currentImage', '{{ $image->getUrl() }}')" class="{{ $image->getUrl() === $currentImage ? 'ring-2 ring-color-5a6472 bg-white' : 'hover:cursor-pointer bg-white/50' }} rounded-md w-14 h-14 aspect-square p-1 my-1 object-contain" src="{{ $image->getUrl() }}" alt="">
+                    @endforeach
                 @endforeach
-            @endforeach
+            </div>
         </div>
 
         {{-- options --}}
         <div class="col-span-12 px-4 md:px-8 lg:col-span-5 xl:col-start-8 lg:py-10">
             {{-- detail --}}
             <div>
-                <span
-                    class="text-sm xl:text-[17px] leading-[28px] text-color-6c757d">{!! $product->categories?->first()->name ?? '&nbsp;' !!}</span>
-                <h1 class="text-xl xl:text-3xl font-semibold leading-[40px] text-color-18181a">{{$product->name}}</h1>
-                <p class="text-base xl:text-[21px] font-medium leading-[38px] text-color-18181a">
-                    @money($product->price)</p>
+                <span class="text-base xl:text-lg text-color-6c757d">
+                    {!! $product->categories?->first()->name ?? '&nbsp;' !!}
+                </span>
+                <h1 class="text-xl my-1 xl:text-3xl font-bold text-color-18181a">
+                    {{$product->name}}
+                </h1>
+                <p class="text-base xl:text-xl font-medium text-color-18181a">
+                    @money($product->price)
+                </p>
             </div>
 
             <div class="w-full xl:max-w-md mt-6 xl:mt-10 space-y-10">
@@ -107,7 +121,7 @@
                             <div class="flex items-center space-x-2">
                                 <a href="{{ route('shop.sizes-guide', ['country_code' => session('country_code')]) }}"
                                    target="_blank"
-                                   class="text-xs font-semibold xl:font-medium text-color-18181a uppercase">{{__('shop.options.size_guide')}}</a>
+                                   class="text-xs font-semibold xl:font-medium text-color-18181a uppercase hover:underline">{{__('shop.options.size_guide')}}</a>
                                 <x-icons name="meter" class="w-5 h-5"></x-icons>
                             </div>
                         </div>
@@ -155,7 +169,7 @@
                             <x-icons name="minus" class="h-3 w-3"></x-icons>
                         </div>
                         <div
-                            class="grow xl:w-[65px] h-full flex items-center justify-center text-sm font-medium leading-[16px] text-color-18181a font-mono select-none">{{ $quantity }}</div>
+                            class="w-full grow xl:w-[65px] h-full flex items-center justify-center text-sm font-medium leading-[16px] text-color-18181a font-mono select-none">{{ $quantity }}</div>
                         <div wire:click="increment"
                              class="{{ $quantity >= $this->selectedVariantQuantity ? 'pointer-events-none text-gray-300' : 'pointer-events-auto cursor-pointer' }} w-[60px] h-full flex items-center justify-center bg-transparent border-l border-color-b6b9bb">
                             <x-icons name="plus" class="h-3 w-3"></x-icons>

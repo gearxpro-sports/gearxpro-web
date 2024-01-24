@@ -9,7 +9,7 @@
                     <button wire:click="changeTab({{$key}})"
                             @if ($key != 0 && !$dataUser) disabled @endif
                         @class([
-                            "w-[232px] m-auto xl:w-[365px] xl:h-20 py-2 rounded-md flex flex-col items-center justify-center gap-1 font-medium text-color-6c757d capitalize",
+                            "w-[232px] m-auto xl:w-[365px] xl:h-20 py-2 rounded-md flex flex-col items-center justify-center gap-2 text-sm font-medium text-color-6c757d capitalize",
                             $key == $currentTab ? '!bg-color-18181a !text-white' : 'text-color-6c757d bg-color-edebe5'])
                     >
                         <x-icons :name="$tab['icon']"/>

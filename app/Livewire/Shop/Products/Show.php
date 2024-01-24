@@ -25,6 +25,7 @@ class Show extends Component
     public Product $product;
     public ProductVariant $selectedVariant;
     public $images;
+    public $currentImage;
     public $variants = null;
     public $tabs = [];
     public $currentTab = 'product';
@@ -136,6 +137,7 @@ class Show extends Component
             if (!$stock->productVariant) {
                 continue;
             }
+//            dd($stock->productVariant->getMedia('products'));
             foreach ($stock->productVariant->getMedia('products') as $media) {
                 $this->images[$stock->product->id] = $stock->productVariant->getMedia('products');
                 $this->allColors->put($stock->productVariant->color->id, [
@@ -163,6 +165,7 @@ class Show extends Component
     protected function getProductVariantImages()
     {
         $this->images[$this->product->id] = $this->variants->where('productVariant.position', 1)->first() !== null ? $this->variants->where('productVariant.position', 1)->first()->productVariant->getMedia('products') : $this->variants->first()->productVariant->getMedia('products');
+        $this->currentImage = $this->images[$this->product->id][0]->getUrl();
     }
 
     protected function filterVariantsByTerm($type, $id)
@@ -226,6 +229,7 @@ class Show extends Component
             $this->selectedColor = $this->selectedVariant->color?->id;
             $this->selectedSize = $this->selectedVariant->size?->id;
         }
+        $this->getProductVariantImages();
     }
 
     protected function processTerms($terms, $id)
