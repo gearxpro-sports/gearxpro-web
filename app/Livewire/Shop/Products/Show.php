@@ -165,9 +165,7 @@ class Show extends Component
 
     protected function getProductVariantImages()
     {
-        ray()->clearAll();
         $this->images[$this->product->id] = $this->variants->where('productVariant.position', 1)->first() !== null ? $this->variants->where('productVariant.position', 1)->first()->productVariant->getMedia('products') : $this->variants->first()->productVariant->getMedia('products');
-        ray($this->images);
         if(isset($this->images[$this->product->id][0])) {
             $this->currentImage = $this->images[$this->product->id][0]->getUrl();
         }
