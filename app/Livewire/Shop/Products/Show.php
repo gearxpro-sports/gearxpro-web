@@ -76,7 +76,7 @@ class Show extends Component
             return abort(404);
         }
 
-        if(!$this->product->price) {
+        if (!$this->product->price) {
             return redirect()->route('shop.index');
         }
 
@@ -137,13 +137,14 @@ class Show extends Component
             if (!$stock->productVariant) {
                 continue;
             }
-//            dd($stock->productVariant->getMedia('products'));
             foreach ($stock->productVariant->getMedia('products') as $media) {
-                $this->images[$stock->product->id] = $stock->productVariant->getMedia('products');
-                $this->allColors->put($stock->productVariant->color->id, [
-                    ...$this->allColors[$stock->productVariant->color->id],
-                    'image' => $stock->productVariant->getFirstMediaUrl('products')
-                ]);
+                if (!isset($this->allColors[$stock->productVariant->color->id]['image'])) {
+                    $this->images[$stock->product->id] = $stock->productVariant->getMedia('products');
+                    $this->allColors->put($stock->productVariant->color->id, [
+                        ...$this->allColors[$stock->productVariant->color->id],
+                        'image' => $stock->productVariant->getFirstMediaUrl('products')
+                    ]);
+                }
             }
         }
 
@@ -164,8 +165,12 @@ class Show extends Component
 
     protected function getProductVariantImages()
     {
+        ray()->clearAll();
         $this->images[$this->product->id] = $this->variants->where('productVariant.position', 1)->first() !== null ? $this->variants->where('productVariant.position', 1)->first()->productVariant->getMedia('products') : $this->variants->first()->productVariant->getMedia('products');
-        $this->currentImage = $this->images[$this->product->id][0]->getUrl();
+        ray($this->images);
+        if(isset($this->images[$this->product->id][0])) {
+            $this->currentImage = $this->images[$this->product->id][0]->getUrl();
+        }
     }
 
     protected function filterVariantsByTerm($type, $id)
