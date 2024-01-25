@@ -6,20 +6,25 @@
             <x-icons name="chevron-left-xl"/>
         </a>
 
-{{--        <div class="flex mt-12 mb-5 col-span-12 overflow-auto scrollBar xl:p-0 snap-mandatory snap-x lg:snap-y relative lg:flex-col lg:col-span-7 lg:gap-4 2xl:h-[1104px]">--}}
-{{--            @foreach ($images as $k => $media_collection)--}}
-{{--                @foreach($media_collection as $image)--}}
-{{--                    <img class="snap-center w-full shrink-0 px-2" src="{{ $image->getUrl() }}" alt="">--}}
-{{--                @endforeach--}}
-{{--            @endforeach--}}
-{{--        </div>--}}
+        {{--        <div class="flex mt-12 mb-5 col-span-12 overflow-auto scrollBar xl:p-0 snap-mandatory snap-x lg:snap-y relative lg:flex-col lg:col-span-7 lg:gap-4 2xl:h-[1104px]">--}}
+        {{--            @foreach ($images as $k => $media_collection)--}}
+        {{--                @foreach($media_collection as $image)--}}
+        {{--                    <img class="snap-center w-full shrink-0 px-2" src="{{ $image->getUrl() }}" alt="">--}}
+        {{--                @endforeach--}}
+        {{--            @endforeach--}}
+        {{--        </div>--}}
 
         <div class="flex flex-col mt-12 col-span-full sm:flex-row lg:col-span-7 sm:mb-5 sm:items-start">
-            <img class="aspect-square object-contain w-full shrink-0 px-2 sm:mx-auto sm:max-w-md sm:order-1 lg:max-w-2xl" src="{{ $currentImage }}" alt="">
-            <div class="flex px-2 gap-3 my-4 shrink-0 overflow-x-scroll no-scrollbar sm:gap-1 sm:my-0 sm:order-0 sm:flex-col sm:max-h-[450px] sm:overflow-y-scroll sm:no-scrollbar">
+            <img
+                class="aspect-square object-contain w-full shrink-0 px-2 sm:mx-auto sm:max-w-md sm:order-1 lg:max-w-2xl"
+                src="{{ $currentImage }}" alt="">
+            <div
+                class="flex px-2 gap-3 my-4 shrink-0 overflow-x-scroll no-scrollbar sm:gap-1 sm:my-0 sm:order-0 sm:flex-col sm:max-h-[450px] sm:overflow-y-scroll sm:no-scrollbar">
                 @foreach ($images as $k => $media_collection)
                     @foreach($media_collection as $image)
-                        <img wire:click="$set('currentImage', '{{ $image->getUrl() }}')" class="{{ $image->getUrl() === $currentImage ? 'ring-2 ring-color-5a6472 bg-white' : 'hover:cursor-pointer bg-white/50' }} rounded-md w-14 h-14 aspect-square p-1 my-1 object-contain" src="{{ $image->getUrl() }}" alt="">
+                        <img wire:click="$set('currentImage', '{{ $image->getUrl() }}')"
+                             class="{{ $image->getUrl() === $currentImage ? 'ring-2 ring-color-5a6472 bg-white' : 'hover:cursor-pointer bg-white/50' }} rounded-md w-14 h-14 aspect-square p-1 my-1 object-contain"
+                             src="{{ $image->getUrl() }}" alt="">
                     @endforeach
                 @endforeach
             </div>
@@ -118,12 +123,27 @@
                     <div wire:key="sizes" class="space-y-5">
                         <div class="flex items-center justify-between">
                             <p class="text-sm font-medium text-color-18181a uppercase">{{__('shop.products.size')}}</p>
-                            <div class="flex items-center space-x-2">
-                                <a href="{{ route('shop.sizes-guide', ['country_code' => session('country_code')]) }}"
-                                   target="_blank"
-                                   class="text-xs font-semibold xl:font-medium text-color-18181a uppercase hover:underline">{{__('shop.options.size_guide')}}</a>
-                                <x-icons name="meter" class="w-5 h-5"></x-icons>
-                            </div>
+                            @php
+                            $cc = $product->categories->whereNull('parent_id');
+                            $c_count = 0;
+                            foreach ($cc as $c) {
+                                if($c->size_guide) {
+                                    foreach(json_decode($c->size_guide) as $table) {
+                                        $c_count++;
+                                    }
+                                }
+                            }
+                            @endphp
+                            @if($c_count)
+                                <div class="flex items-center space-x-2">
+                                    <div
+                                        wire:click.prevent="$dispatch('openModal', { component: 'shop.products.modals.size-guide', arguments: { product_id: {{$product->id}} }})"
+                                        class="text-xs font-semibold xl:font-medium text-color-18181a uppercase hover:underline hover:cursor-pointer">
+                                        {{__('shop.options.size_guide')}}
+                                    </div>
+                                    <x-icons name="meter" class="w-5 h-5"></x-icons>
+                                </div>
+                            @endif
                         </div>
                         <div>
                             <div class="grid grid-cols-6 xl:grid-cols-3 gap-3">

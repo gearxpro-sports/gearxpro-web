@@ -29,6 +29,10 @@ return [
         'description' => [
             'label' => 'Description',
         ],
+        'size_guide' => [
+            'title' => 'Size guide',
+            'subtitle' => 'Select which tables to display in the "Size Guide"',
+        ],
         'add_existing' => 'Add existing',
         'languages' => [
             'translate_all_fields_from' => 'Translate all fields from :lang',

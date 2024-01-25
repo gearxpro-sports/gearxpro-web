@@ -29,6 +29,10 @@ return [
         'description' => [
             'label' => 'Descrizione',
         ],
+        'size_guide' => [
+            'title' => 'Guida alle taglie',
+            'subtitle' => 'Seleccione los cuadros que se mostrarán en la "Guía de tallas".',
+        ],
         'add_existing' => 'Aggiungi esistente',
         'languages' => [
             'translate_all_fields_from' => 'Traduci tutti i campi da :lang',
