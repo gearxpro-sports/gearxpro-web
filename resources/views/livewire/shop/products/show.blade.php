@@ -6,20 +6,25 @@
             <x-icons name="chevron-left-xl"/>
         </a>
 
-{{--        <div class="flex mt-12 mb-5 col-span-12 overflow-auto scrollBar xl:p-0 snap-mandatory snap-x lg:snap-y relative lg:flex-col lg:col-span-7 lg:gap-4 2xl:h-[1104px]">--}}
-{{--            @foreach ($images as $k => $media_collection)--}}
-{{--                @foreach($media_collection as $image)--}}
-{{--                    <img class="snap-center w-full shrink-0 px-2" src="{{ $image->getUrl() }}" alt="">--}}
-{{--                @endforeach--}}
-{{--            @endforeach--}}
-{{--        </div>--}}
+        {{--        <div class="flex mt-12 mb-5 col-span-12 overflow-auto scrollBar xl:p-0 snap-mandatory snap-x lg:snap-y relative lg:flex-col lg:col-span-7 lg:gap-4 2xl:h-[1104px]">--}}
+        {{--            @foreach ($images as $k => $media_collection)--}}
+        {{--                @foreach($media_collection as $image)--}}
+        {{--                    <img class="snap-center w-full shrink-0 px-2" src="{{ $image->getUrl() }}" alt="">--}}
+        {{--                @endforeach--}}
+        {{--            @endforeach--}}
+        {{--        </div>--}}
 
         <div class="flex flex-col mt-12 col-span-full sm:flex-row lg:col-span-7 sm:mb-5 sm:items-start">
-            <img class="aspect-square object-contain w-full shrink-0 px-2 sm:mx-auto sm:max-w-md sm:order-1 lg:max-w-2xl" src="{{ $currentImage }}" alt="">
-            <div class="flex px-2 gap-3 my-4 shrink-0 overflow-x-scroll no-scrollbar sm:gap-1 sm:my-0 sm:order-0 sm:flex-col sm:max-h-[450px] sm:overflow-y-scroll sm:no-scrollbar">
+            <img
+                class="aspect-square object-contain w-full shrink-0 px-2 sm:mx-auto sm:max-w-md sm:order-1 lg:max-w-2xl"
+                src="{{ $currentImage }}" alt="">
+            <div
+                class="flex px-2 gap-3 my-4 shrink-0 overflow-x-scroll no-scrollbar sm:gap-1 sm:my-0 sm:order-0 sm:flex-col sm:max-h-[450px] sm:overflow-y-scroll sm:no-scrollbar">
                 @foreach ($images as $k => $media_collection)
                     @foreach($media_collection as $image)
-                        <img wire:click="$set('currentImage', '{{ $image->getUrl() }}')" class="{{ $image->getUrl() === $currentImage ? 'ring-2 ring-color-5a6472 bg-white' : 'hover:cursor-pointer bg-white/50' }} rounded-md w-14 h-14 aspect-square p-1 my-1 object-contain" src="{{ $image->getUrl() }}" alt="">
+                        <img wire:click="$set('currentImage', '{{ $image->getUrl() }}')"
+                             class="{{ $image->getUrl() === $currentImage ? 'ring-2 ring-color-5a6472 bg-white' : 'hover:cursor-pointer bg-white/50' }} rounded-md w-14 h-14 aspect-square p-1 my-1 object-contain"
+                             src="{{ $image->getUrl() }}" alt="">
                     @endforeach
                 @endforeach
             </div>
@@ -154,7 +159,8 @@
                     </div>
                 @endif
 
-                @if($selectedLength || $selectedColor || $selectedSize)
+                {{-- $selectedLength || $selectedColor || $selectedSize --}}
+                @if($selectedVariant)
                     <div wire:click="resetAll()"
                          class="!mt-5 text-color-6c757d text-sm cursor-pointer hover:underline">{{ __('shop.products.reset_selection') }}</div>
                 @endif
@@ -179,6 +185,11 @@
 
                 {{-- actions --}}
                 <div class="mt-[30px]">
+                    @if($selectedVariant && $selectedVariantQuantity == 0)
+                        <span class="block text-red-500 text-xs font-semibold my-1 text-center">
+                            La variante selezionata non è attualmente disponibile.
+                        </span>
+                    @endif
                     {{--                    <x-shop.shopping-button :disabled="!$selectedVariant" wire:click="payWithLink" color="green"--}}
                     {{--                                            icon="arrow-right-xl">--}}
                     {{--                        {{ __('shop.button.pay_link') }}--}}
@@ -188,7 +199,8 @@
                     {{--                        <span--}}
                     {{--                            class="absolute top-[15px] left-[calc(50%-36px)] px-[10px] bg-color-f2f0eb text-[13px] font-medium leading-[16px] text-color-6c757d">{{__('shop.options.or')}}</span>--}}
                     {{--                    </div>--}}
-                    <x-shop.shopping-button :disabled="!$selectedVariant" wire:click="addToCart" icon="bag">
+                    <x-shop.shopping-button :disabled="!$selectedVariant || $selectedVariantQuantity <= 0"
+                                            wire:click="addToCart" icon="bag">
                         {{ __('shop.button.add_to_cart') }}
                     </x-shop.shopping-button>
                 </div>

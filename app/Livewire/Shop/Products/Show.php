@@ -166,7 +166,7 @@ class Show extends Component
     protected function getProductVariantImages()
     {
         $this->images[$this->product->id] = $this->variants->where('productVariant.position', 1)->first() !== null ? $this->variants->where('productVariant.position', 1)->first()->productVariant->getMedia('products') : $this->variants->first()->productVariant->getMedia('products');
-        if(isset($this->images[$this->product->id][0])) {
+        if (isset($this->images[$this->product->id][0])) {
             $this->currentImage = $this->images[$this->product->id][0]->getUrl();
         }
     }
@@ -250,20 +250,38 @@ class Show extends Component
 
     public function setLength($id)
     {
-        $this->filterVariantsByTerm('length', $id);
-        $this->recalculateTerms();
+        if ($this->selectedLength == $id) {
+            $this->reset(['selectedLength', 'selectedVariant', 'quantity', 'selectedVariantQuantity']);
+            $this->filterVariantsByTerm('length', $this->selectedLength);
+            $this->recalculateTerms();
+        } else {
+            $this->filterVariantsByTerm('length', $id);
+            $this->recalculateTerms();
+        }
     }
 
     public function setColor($id)
     {
-        $this->filterVariantsByTerm('color', $id);
-        $this->recalculateTerms();
+        if ($this->selectedColor == $id) {
+            $this->reset(['selectedColor', 'selectedVariant', 'quantity', 'selectedVariantQuantity']);
+            $this->filterVariantsByTerm('color', $this->selectedColor);
+            $this->recalculateTerms();
+        } else {
+            $this->filterVariantsByTerm('color', $id);
+            $this->recalculateTerms();
+        }
     }
 
     public function setSize($id)
     {
-        $this->filterVariantsByTerm('size', $id);
-        $this->recalculateTerms();
+        if ($this->selectedSize == $id) {
+            $this->reset(['selectedSize', 'selectedVariant', 'quantity', 'selectedVariantQuantity']);
+            $this->filterVariantsByTerm('size', $this->selectedSize);
+            $this->recalculateTerms();
+        } else {
+            $this->filterVariantsByTerm('size', $id);
+            $this->recalculateTerms();
+        }
     }
 
     public function resetAll()
