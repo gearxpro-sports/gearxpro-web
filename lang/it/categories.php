@@ -31,7 +31,7 @@ return [
         ],
         'size_guide' => [
             'title' => 'Guida alle taglie',
-            'subtitle' => 'Seleccione los cuadros que se mostrarán en la "Guía de tallas".',
+            'subtitle' => 'Seleziona quali tabelle visualizzare nella "Guida alle taglie"',
         ],
         'add_existing' => 'Aggiungi esistente',
         'languages' => [
