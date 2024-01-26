@@ -12,7 +12,6 @@ use Livewire\Attributes\Layout;
 #[Layout('layouts.guest')]
 class Index extends Component
 {
-    public $cart;
     public $not_available = [];
     public $promoCode;
     public $productsRecommended = [
@@ -75,7 +74,14 @@ class Index extends Component
     public function checkIfCartItemsAreAvailable()
     {
         $reseller = User::find(session('reseller_id'));
-        foreach ($this->cart->items as $item) {
+
+        if (auth()->check()) {
+            $cart = auth()->user()->cart;
+        } else {
+            $cart = Cart::where('user_id', session('cart_user_token'))->first();
+        }
+
+        foreach ($cart->items as $item) {
             $stock = $reseller->stocks()->where('product_variant_id', $item->product_variant_id)->first();
             if ($stock->quantity < $item->quantity) {
                 $this->not_available[$stock->product_variant_id] = $stock->quantity;
@@ -96,11 +102,13 @@ class Index extends Component
     public function render()
     {
         if (auth()->check()) {
-            $this->cart = auth()->user()->cart;
+            $cart = auth()->user()->cart;
         } else {
-            $this->cart = Cart::where('user_id', session('cart_user_token'))->first();
+            $cart = Cart::where('user_id', session('cart_user_token'))->first();
         }
 
-        return view('livewire.shop.cart.index');
+        return view('livewire.shop.cart.index', [
+            'cart' => $cart
+        ]);
     }
 }
