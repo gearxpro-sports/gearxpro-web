@@ -67,15 +67,17 @@ class Index extends Component
         ],
     ];
 
-    public function applyCode() {
+    public function applyCode()
+    {
         // TODO: Coupon Code
     }
 
-    public function checkIfCartItemsAreAvailable() {
+    public function checkIfCartItemsAreAvailable()
+    {
         $reseller = User::find(session('reseller_id'));
         foreach ($this->cart->items as $item) {
             $stock = $reseller->stocks()->where('product_variant_id', $item->product_variant_id)->first();
-            if($stock->quantity < $item->quantity) {
+            if ($stock->quantity < $item->quantity) {
                 $this->not_available[$stock->product_variant_id] = $stock->quantity;
                 $this->dispatch('open-notification',
                     title: __('notifications.titles.generic_error'),
@@ -93,14 +95,12 @@ class Index extends Component
     #[On('item-removed')]
     public function render()
     {
-        if(auth()->check()) {
+        if (auth()->check()) {
             $this->cart = auth()->user()->cart;
         } else {
             $this->cart = Cart::where('user_id', session('cart_user_token'))->first();
         }
 
-        return view('livewire.shop.cart.index', [
-            'cart' => $this->cart
-        ]);
+        return view('livewire.shop.cart.index');
     }
 }

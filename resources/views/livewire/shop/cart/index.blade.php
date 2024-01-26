@@ -16,7 +16,7 @@
             {{-- Prodotti inseriti --}}
             <div class="col-span-6 xl:col-span-4 mt-12 xl:mt-14">
                 @foreach($cart->items as $item)
-                    <div class="relative">
+                    <div class="relative" wire:key="wrapper_{{$item->product_variant_id}}">
                         @if(in_array($item->product_variant_id, array_keys($not_available)))
                                 <x-icons
                                     x-data
@@ -24,7 +24,7 @@
                                     name="exclamation-circle"
                                     class="absolute -left-4 top-0 -translate-y-4 lg:-translate-y-6 lg:top-1/2 z-10 w-8 h-8 text-white fill-red-400"></x-icons>
                         @endif
-                        <livewire:shop.components.cart.cart-item wire:key="{{$item}}" :$item/>
+                        <livewire:shop.components.cart.cart-item wire:key="item_{{$item->product_variant_id}}" :$item/>
                     </div>
                 @endforeach
 
