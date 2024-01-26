@@ -5,7 +5,8 @@ return [
         'saving' => 'Creation',
         'updating' => 'Update',
         'deleting' => 'Cancellation',
-        'adding' => 'Addition'
+        'adding' => 'Addition',
+        'generic_error' => 'Error'
     ],
     'actions' => [
         'show' => 'You see',
@@ -134,4 +135,10 @@ return [
             'error' => 'It is not possible to update the reseller',
         ],
     ],
+    'cart' => [
+        'product_not_available' => [
+            'tooltip' => 'Availability: :quantity',
+            'error' => "The quantity available for some products in the cart is not sufficient.\nPlease change the quantity and try again.",
+        ]
+    ]
 ];

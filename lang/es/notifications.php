@@ -5,7 +5,8 @@ return [
         'saving' => 'Creación',
         'updating' => 'Actualizar',
         'deleting' => 'Cancelación',
-        'adding' => 'Suma'
+        'adding' => 'Suma',
+        'generic_error' => 'Error'
     ],
     'actions' => [
         'show' => 'Verás',
@@ -134,4 +135,10 @@ return [
             'error' => 'No es posible actualizar el revendedor.',
         ],
     ],
+    'cart' => [
+        'product_not_available' => [
+            'tooltip' => 'Disponibilidad: :quantity',
+            'error' => "La cantidad disponible para algunos de los productos de la cesta de la compra no es suficiente.\nPor favor, cambie la cantidad e inténtelo de nuevo.",
+        ]
+    ]
 ];
