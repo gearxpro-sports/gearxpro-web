@@ -25,6 +25,7 @@ return [
         'categories_title' => 'Categorías',
         'tabs' => [
             'main'           => 'Información',
+            'size_guide' => 'Guía de tallas',
             'options'        => 'Opciones',
             'locale'         => 'Ubicación',
             'images'         => 'Imágenes',
@@ -106,6 +107,10 @@ return [
             'images' => [
 
             ]
+        ],
+        'size_guide' => [
+            'title' => 'Guía de tallas',
+            'subtitle' => 'Select which tables to display in the "Size Guide"',
         ],
     ],
 ];

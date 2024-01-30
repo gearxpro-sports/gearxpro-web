@@ -43,8 +43,6 @@ class Edit extends Component
      */
     public ?int $existingToAdd = null;
 
-    public $size_guide_tables = [];
-
     /**
      * @var string
      */
@@ -54,7 +52,6 @@ class Edit extends Component
     {
         $this->currentLang = config('app.locale');
         $this->categoryForm->setCategoryForm($this->category);
-        $this->size_guide_tables =  (array) json_decode($this->category->size_guide);
         $this->loadCategories();
     }
 
@@ -64,17 +61,6 @@ class Edit extends Component
     public function render()
     {
         return view('livewire.categories.edit');
-    }
-
-    public function toggleSizeGuideTable($table) {
-        if(!in_array($table, $this->size_guide_tables)) {
-            $this->size_guide_tables[] = $table;
-        } else {
-            if (($k = array_search($table, $this->size_guide_tables)) !== false) {
-                unset($this->size_guide_tables[$k]);
-            }
-            unset($this->size_guide_tables[$table]);
-        }
     }
 
     public function update()
@@ -92,10 +78,6 @@ class Edit extends Component
                 'image' => $image_path,
             ]);
         }
-
-        $this->category->update([
-            'size_guide' => $this->size_guide_tables
-        ]);
 
         $this->dispatch('open-notification',
             title: __('notifications.titles.updating'),

@@ -25,6 +25,7 @@ return [
         'categories_title' => 'Kategorien',
         'tabs' => [
             'main'           => 'Information',
+            'size_guide' => 'Leitfaden zur Größe',
             'options'        => 'Optionen',
             'locale'         => 'Standort',
             'images'         => 'Bilder',
@@ -105,6 +106,10 @@ return [
             'images' => [
 
             ]
+        ],
+        'size_guide' => [
+            'title' => 'Leitfaden zur Größe',
+            'subtitle' => 'Wählen Sie aus, welche Tabellen in der "Größentabelle" angezeigt werden sollen.',
         ],
     ],
 ];

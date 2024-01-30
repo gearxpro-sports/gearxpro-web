@@ -29,10 +29,6 @@ return [
         'description' => [
             'label' => 'Descrizione',
         ],
-        'size_guide' => [
-            'title' => 'Guida alle taglie',
-            'subtitle' => 'Seleziona quali tabelle visualizzare nella "Guida alle taglie"',
-        ],
         'add_existing' => 'Aggiungi esistente',
         'languages' => [
             'translate_all_fields_from' => 'Traduci tutti i campi da :lang',

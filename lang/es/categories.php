@@ -29,10 +29,6 @@ return [
         'description' => [
             'label' => 'Descripción',
         ],
-        'size_guide' => [
-            'title' => 'Guía de tallas',
-            'subtitle' => 'Select which tables to display in the "Size Guide"',
-        ],
         'add_existing' => 'Agregar existente',
         'languages' => [
             'translate_all_fields_from' => 'Traducir todos los campos de :lang',

@@ -1,5 +1,5 @@
 @php
-    $tabs = ['main', 'options', 'locale'];
+    $tabs = ['main', 'size_guide', 'options', 'locale'];
 //    $descFields = ['main', 'features', 'pros', 'technical', 'washing'];
 $descFields = ['main', 'features'];
 @endphp
@@ -91,6 +91,23 @@ $descFields = ['main', 'features'];
                                     @endforeach
                                 </ul>
                             @endif
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Size Guide Tab -->
+                <div x-show="openedTab === 'size_guide'">
+                    <div class="sm:col-span-2">
+                        <h3 class="font-medium">{{ __('products.edit.size_guide.title') }}</h3>
+                        <p class="text-xs">{{ __('products.edit.size_guide.subtitle') }}</p>
+                        <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-5">
+                            @foreach(config('gearxpro.size-guide-tables') as $table)
+                                <img
+                                    wire:click="toggleSizeGuideTable('{{$table}}')"
+                                    src="{{ Vite::asset('resources/images/size-guide-tables/'. $table) }}"
+                                    class="ring rounded-md cursor-pointer {{ in_array($table, $size_guide_tables) ? 'ring-indigo-400 hover:ring-indigo-500' : 'ring-gray-100 hover:ring-gray-300' }}"
+                                    alt="">
+                            @endforeach
                         </div>
                     </div>
                 </div>

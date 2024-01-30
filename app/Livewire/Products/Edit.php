@@ -66,6 +66,8 @@ class Edit extends Component
      */
     public string $currentLang;
 
+    public $size_guide_tables = [];
+
     #[Url(keep: true)]
     public $tab = null;
 
@@ -75,6 +77,7 @@ class Edit extends Component
         $this->currentLang = $this->tab ?? config('app.locale');
         $this->categories = Category::with('children')->whereNull('parent_id')->get();
         $this->productForm->setProduct($this->product);
+        $this->size_guide_tables =  (array) json_decode($this->product->size_guide);
         $this->countriesAvailable = User::role(User::RESELLER)
                     ->with('country')
                     ->get()
@@ -95,6 +98,17 @@ class Edit extends Component
         }
     }
 
+    public function toggleSizeGuideTable($table) {
+        if(!in_array($table, $this->size_guide_tables)) {
+            $this->size_guide_tables[] = $table;
+        } else {
+            if (($k = array_search($table, $this->size_guide_tables)) !== false) {
+                unset($this->size_guide_tables[$k]);
+            }
+            unset($this->size_guide_tables[$table]);
+        }
+    }
+
     /**
      * @return View
      */
@@ -106,6 +120,10 @@ class Edit extends Component
     public function save()
     {
         $this->productForm->update();
+
+        $this->product->update([
+            'size_guide' => $this->size_guide_tables
+        ]);
 
         $this->dispatch('open-notification',
             title: __('notifications.titles.updating'),

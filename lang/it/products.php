@@ -25,6 +25,7 @@ return [
         'categories_title' => 'Categorie',
         'tabs' => [
             'main'           => 'Informazioni',
+            'size_guide' => 'Guida alle taglie',
             'options'        => 'Opzioni',
             'locale'         => 'Localizzazione',
             'images'         => 'Immagini',
@@ -107,6 +108,10 @@ return [
             'images' => [
 
             ]
+        ],
+        'size_guide' => [
+            'title' => 'Guida alle taglie',
+            'subtitle' => 'Seleziona quali tabelle visualizzare nella "Guida alle taglie"',
         ],
     ],
 ];

@@ -34,20 +34,6 @@
                         @endif
                     </div>
                 </div>
-                <hr class="col-span-2">
-                <div class="sm:col-span-2">
-                    <h3 class="font-medium">{{ __('categories.edit.size_guide.title') }}</h3>
-                    <p class="text-xs">{{ __('categories.edit.size_guide.subtitle') }}</p>
-                    <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-5">
-                        @foreach(config('gearxpro.size-guide-tables') as $table)
-                            <img
-                                wire:click="toggleSizeGuideTable('{{$table}}')"
-                                src="{{ Vite::asset('resources/images/size-guide-tables/'. $table) }}"
-                                class="ring rounded-md cursor-pointer {{ in_array($table, $size_guide_tables) ? 'ring-indigo-400 hover:ring-indigo-500' : 'ring-gray-100 hover:ring-gray-300' }}"
-                                alt="">
-                        @endforeach
-                    </div>
-                </div>
             </div>
             <div>
                 @if ($category->parent_id === null)

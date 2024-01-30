@@ -29,10 +29,6 @@ return [
         'description' => [
             'label' => 'Beschreibung',
         ],
-        'size_guide' => [
-            'title' => 'Leitfaden zur Größe',
-            'subtitle' => 'Wählen Sie aus, welche Tabellen in der "Größentabelle" angezeigt werden sollen.',
-        ],
         'add_existing' => 'Vorhandenes hinzufügen',
         'languages' => [
             'translate_all_fields_from' => 'Alle Felder von :lang übersetzen',
