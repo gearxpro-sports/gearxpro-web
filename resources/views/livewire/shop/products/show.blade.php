@@ -123,7 +123,7 @@
                     <div wire:key="sizes" class="space-y-5">
                         <div class="flex items-center justify-between">
                             <p class="text-sm font-medium text-color-18181a uppercase">{{__('shop.products.size')}}</p>
-                            @if(count(json_decode($product->size_guide)))
+                            @if($product->size_guide && count(json_decode($product->size_guide)))
                                 <div class="flex items-center space-x-2">
                                     <div
                                         wire:click.prevent="$dispatch('openModal', { component: 'shop.products.modals.size-guide', arguments: { product_id: {{$product->id}} }})"

@@ -26,7 +26,7 @@ return [
             'lastname'          => 'Cognome:',
             'email'             => 'Email:',
             'registration_date' => 'Data di Registrazione:',
-            'address'           => 'Indirizzo::',
+            'address'           => 'Indirizzo:',
             'city'              => 'Città:',
             'postcode'          => 'CAP:',
             'country'           => 'Paese:',

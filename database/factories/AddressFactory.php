@@ -20,6 +20,7 @@ class AddressFactory extends Factory
         return [
             'country_id' => Country::where('iso2_code', 'IT')->first()->id,
             'address_1'  => fake()->streetAddress(),
+            'civic' => fake()->buildingNumber(),
             'postcode'   => fake()->postcode(),
             'city'       => fake()->city(),
             'state'      => fake()->stateAbbr(),

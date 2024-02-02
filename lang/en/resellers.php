@@ -44,6 +44,9 @@ return [
         'address' => [
             'label' => 'Address',
         ],
+        'civic' => [
+            'label' => 'Civic',
+        ],
         'city' => [
             'label' => 'City',
         ],

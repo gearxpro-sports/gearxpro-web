@@ -40,7 +40,7 @@
                 <h3 class="font-bold">Dati di fatturazione</h3>
                 <li class="flex space-x-2">
                     <span class="inline-block text-color-6c757d">{{ __('customers.show.data.address') }}</span>
-                    <span>{{ $billing_address->address_1 }} {{ $billing_address->address_2 }}</span>
+                    <span>{{ $billing_address->address_1 }} {{ $billing_address->civic }} {{ $billing_address->address_2 }}</span>
                 </li>
                 <li class="flex space-x-2">
                     <span class="inline-block text-color-6c757d">{{ __('customers.show.data.city') }}</span>
@@ -59,7 +59,7 @@
                 <h3 class="font-bold">Dati di spedizione</h3>
                 <li class="flex space-x-2">
                     <span class="inline-block text-color-6c757d">{{ __('customers.show.data.address') }}</span>
-                    <span>{{ $shipping_address->address_1 }} {{ $shipping_address->address_2 }}</span>
+                    <span>{{ $shipping_address->address_1 }} {{ $shipping_address->civic }} {{ $shipping_address->address_2 }}</span>
                 </li>
                 <li class="flex space-x-2">
                     <span class="inline-block text-color-6c757d">{{ __('customers.show.data.city') }}</span>

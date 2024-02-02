@@ -44,7 +44,7 @@
                 @if($supply->reseller->shipping_address)
                     <div class="flex flex-col text-sm">
                         <span class="font-semibold">{{ __('supply.recap.order_review.shipping.address') }}:</span>
-                        <span>{{ $supply->reseller->shipping_address->address_1 }} - {{ $supply->reseller->shipping_address->city }} {{ $supply->reseller->shipping_address->postcode }} {{ $supply->reseller->shipping_address->state }}</span>
+                        <span>{{ $supply->reseller->shipping_address->address_1 }} {{ $supply->reseller->shipping_address->civic }} - {{ $supply->reseller->shipping_address->city }} {{ $supply->reseller->shipping_address->postcode }} {{ $supply->reseller->shipping_address->state }}</span>
                     </div>
                     <div class="flex flex-col text-sm">
                         <span class="font-semibold">{{ __('supply.recap.order_review.shipping.phone') }}:</span>

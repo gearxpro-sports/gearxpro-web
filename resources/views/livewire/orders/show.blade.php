@@ -189,10 +189,10 @@
                     <h3 class="text-color-18181a font-medium">{{ __('orders.show.order_total') }}</h3>
                     <div class="text-sm">
                         <div class="flex items-center text-color-6c757d pt-5">
-                            <span>{{ __('orders.show.summary.subtotal') }}</span><span class="ml-auto">@money($order->total - config('app.shipping_cost'))</span>
+                            <span>{{ __('orders.show.summary.subtotal') }}</span><span class="ml-auto">@money($order->total - $order->shipping_cost)</span>
                         </div>
                         <div class="flex items-center text-color-6c757d pt-5">
-                            <span>{{ __('orders.show.summary.shipping_costs') }}:</span><span class="ml-auto">@money(config('app.shipping_cost'))</span>
+                            <span>{{ __('orders.show.summary.shipping_costs') }}:</span><span class="ml-auto">@money($order->shipping_cost)</span>
                         </div>
                         <div class="flex items-center text-color-6c757d pt-5">
                             <span>{{ __('orders.show.summary.tax') }}</span><span class="ml-auto">@money(0)</span>

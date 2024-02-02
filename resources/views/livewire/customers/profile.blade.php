@@ -374,44 +374,171 @@
         }
 
         function onPlaceChange() {
-            @this.set('streetClicked', true);
+        @this.set('streetClicked', true)
+            ;
             const place_shipping_address = autocomplete_shipping_address.getPlace();
             const place_billing_address = autocomplete_billing_address.getPlace();
             // shipping data
             if (place_shipping_address) {
                 if (place_shipping_address.address_components.length > 0) {
+                    let street_number = null;
+                    let route = null;
+                    let postal_code = null;
+                    let locality = null;
+                    let country = null
+                    let state = null;
                     place_shipping_address.address_components.forEach(element => {
                         if (element.types[0] === 'street_number') {
-                            @this.set('shipping_civic', place_shipping_address.address_components[0]['long_name']);
-                        } else if (element.types[0] === 'route') {
-                            @this.set('shipping_address', place_shipping_address.address_components[1]['long_name']);
-                        } else if (element.types[0] === 'postal_code') {
-                            @this.set('shipping_postcode', place_shipping_address.address_components[7]['long_name']);
-                        } else if (element.types[0] === 'locality') {
-                            @this.set('shipping_city', place_shipping_address.address_components[2]['long_name']);
-                        } else if (element.types[0] === 'country') {
-                            @this.set('shipping_state', place_shipping_address.address_components[6]['short_name']);
+                            street_number = element.long_name
+                        @this.set('shipping_civic', street_number)
                         }
+                        if (element.types[0] === 'route') {
+                            route = element.long_name
+                        @this.set('shipping_address', route)
+                        }
+                        if (element.types[0] === 'postal_code') {
+                            postal_code = element.long_name
+                        @this.set('shipping_postcode', postal_code)
+                        }
+                        if (element.types[0] === 'locality') {
+                            locality = element.long_name
+                        @this.set('shipping_city', locality)
+                        }
+                        if (element.types[0] === 'country') {
+                            country = element.short_name
+                        }
+                        // if (element.types[0] === 'street_number') {
+                        // @this.set('shipping_civic', street_number)
+                        //     ;
+                        // } else if (element.types[0] === 'route') {
+                        // @this.set('shipping_address', route)
+                        //     ;
+                        // } else if (element.types[0] === 'postal_code') {
+                        // @this.set('shipping_postcode', postal_code)
+                        //     ;
+                        // } else if (element.types[0] === 'locality') {
+                        // @this.set('shipping_city', locality)
+                        //     ;
+                        // } else if (element.types[0] === 'country') {
+                        //     if (place_shipping_address.address_components[index]['short_name'] === 'IT' || place_shipping_address.address_components[index]['short_name'] === 'AU') {
+                        //     @this.set('shipping_state', place_shipping_address.address_components[4]['short_name'])
+                        //         ;
+                        //     } else if (place_shipping_address.address_components[index]['short_name'] === 'US') {
+                        //     @this.set('shipping_state', place_shipping_address.address_components[5]['short_name'])
+                        //         ;
+                        //     } else {
+                        //     @this.set('shipping_state', place_shipping_address.address_components[index]['short_name'])
+                        //         ;
+                        //     }
+                        // }
                     });
+                    place_shipping_address.address_components.forEach(element => {
+                        if (country === 'US') {
+                            if (element.types[0] === 'administrative_area_level_1') {
+                                state = element.short_name
+                            @this.set('shipping_state', state)
+                            }
+                        }
+                        if (country === 'CA') {
+                            if (element.types[0] === 'administrative_area_level_1') {
+                                state = element.short_name
+                            @this.set('shipping_state', state)
+                            }
+                        }
+                        if (country === 'AU') {
+                            if (element.types[0] === 'administrative_area_level_1') {
+                                state = element.short_name
+                            @this.set('shipping_state', state)
+                            }
+                        }
+                        if (country === 'IT') {
+                            if (element.types[0] === 'administrative_area_level_2') {
+                                state = element.short_name
+                            @this.set('shipping_state', state)
+                            }
+                        }
+                    })
                 }
             }
             // billing data
             if (place_billing_address) {
                 if (place_billing_address.address_components.length > 0) {
+                    let street_number = null;
+                    let route = null;
+                    let postal_code = null;
+                    let locality = null;
+                    let country = null
+                    let state = null;
                     place_billing_address.address_components.forEach(element => {
                         if (element.types[0] === 'street_number') {
-                            @this.set('billing_civic', place_billing_address.address_components[0]['long_name']);
-                        } else if (element.types[0] === 'route') {
-                            @this.set('billing_address', place_billing_address.address_components[1]['long_name']);
-                        } else if (element.types[0] === 'postal_code') {
-                            @this.set('billing_postcode', place_billing_address.address_components[7]['long_name']);
-                        } else if (element.types[0] === 'locality') {
-                            @this.set('billing_city', place_billing_address.address_components[2]['long_name']);
-                        } else if (element.types[0] === 'country') {
-                            @this.set('billing_state', place_billing_address.address_components[6]['short_name']);
+                            street_number = element.long_name
+                        @this.set('billing_civic', street_number)
                         }
-
+                        if (element.types[0] === 'route') {
+                            route = element.long_name
+                        @this.set('billing_address', route)
+                        }
+                        if (element.types[0] === 'postal_code') {
+                            postal_code = element.long_name
+                        @this.set('billing_postcode', postal_code)
+                        }
+                        if (element.types[0] === 'locality') {
+                            locality = element.long_name
+                        @this.set('billing_city', locality)
+                        }
+                        if (element.types[0] === 'country') {
+                            country = element.short_name
+                        }
+                        // place_billing_address.address_components.forEach(element => {
+                        //     if (element.types[0] === 'street_number') {
+                        //     @this.set('billing_civic', place_billing_address.address_components[0]['long_name'])
+                        //         ;
+                        //     } else if (element.types[0] === 'route') {
+                        //     @this.set('billing_address', place_billing_address.address_components[1]['long_name'])
+                        //         ;
+                        //     } else if (element.types[0] === 'postal_code') {
+                        //     @this.set('billing_postcode', place_billing_address.address_components[7]['long_name'])
+                        //         ;
+                        //     } else if (element.types[0] === 'locality') {
+                        //     @this.set('billing_city', place_billing_address.address_components[2]['long_name'])
+                        //         ;
+                        //     } else if (element.types[0] === 'country') {
+                        //         if (place_billing_address.address_components[6]['short_name'] === 'IT') {
+                        //         @this.set('billing_state', place_billing_address.address_components[4]['short_name'])
+                        //             ;
+                        //         } else {
+                        //         @this.set('billing_state', place_billing_address.address_components[6]['short_name'])
+                        //             ;
+                        //         }
+                        //     }
+                        // });
                     });
+                    place_billing_address.address_components.forEach(element => {
+                        if (country === 'US') {
+                            if (element.types[0] === 'administrative_area_level_1') {
+                                state = element.short_name
+                            @this.set('billing_state', state)
+                            }
+                        }
+                        if (country === 'CA') {
+                            if (element.types[0] === 'administrative_area_level_1') {
+                                state = element.short_name
+                            @this.set('billing_state', state)
+                            }
+                        }
+                        if (country === 'AU') {
+                            if (element.types[0] === 'administrative_area_level_1') {
+                                state = element.short_name
+                            @this.set('billing_state', state)
+                            }
+                        }
+                        if (country === 'IT') {
+                            if (element.types[0] === 'administrative_area_level_2') {
+                                state = element.short_name
+                            @this.set('billing_state', state)
+                            }
+                        }
+                    })
                 }
             }
         }
