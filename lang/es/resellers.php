@@ -42,7 +42,10 @@ return [
             'label' => 'Nombre del Negocio',
         ],
         'address' => [
-            'label' => 'DIRECCIÓN',
+            'label' => 'Direcciòn',
+        ],
+        'civic' => [
+            'label' => 'Nùmero de casa',
         ],
         'city' => [
             'label' => 'Ciudad',

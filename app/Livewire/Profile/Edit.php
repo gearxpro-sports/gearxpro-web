@@ -27,6 +27,7 @@ class Edit extends Component
             'reseller.stripe_private_key' => $this->reseller->hasRole(User::RESELLER) ? 'required|string|alpha_dash' : 'nullable',
             // Billing
             'billing_address.address_1' => 'required',
+            'billing_address.civic' => 'required',
             'billing_address.city' => 'required',
             'billing_address.postcode' => 'required',
             'billing_address.country_id' => 'required|exists:countries,id',
@@ -37,6 +38,7 @@ class Edit extends Component
             'billing_address.pec' => 'nullable',
             // Shipping
             'shipping_address.address_1' => 'required',
+            'shipping_address.civic' => 'required',
             'shipping_address.city' => 'required',
             'shipping_address.postcode' => 'required',
             'shipping_address.country_id' => 'required|exists:countries,id',
@@ -58,6 +60,7 @@ class Edit extends Component
     public function copyFromBilling()
     {
         $this->shipping_address->address_1 = $this->billing_address->address_1;
+        $this->shipping_address->civic = $this->billing_address->civic;
         $this->shipping_address->city = $this->billing_address->city;
         $this->shipping_address->postcode = $this->billing_address->postcode;
         $this->shipping_address->country_id = $this->billing_address->country_id;
@@ -70,7 +73,6 @@ class Edit extends Component
 
     public function save()
     {
-        // dd($this->validate());
         $this->validate();
         $this->reseller->update([
             'firstname' => $this->reseller->firstname,
@@ -86,6 +88,7 @@ class Edit extends Component
         ], [
             'country_id' => $this->billing_address->country_id,
             'address_1' => $this->billing_address->address_1,
+            'civic' => $this->billing_address->civic,
             'postcode' => $this->billing_address->postcode,
             'city' => $this->billing_address->city,
             'state' => Country::find($this->billing_address->country_id)->iso2_code,
@@ -104,6 +107,7 @@ class Edit extends Component
         ], [
             'country_id' => $this->shipping_address->country_id,
             'address_1' => $this->shipping_address->address_1,
+            'civic' => $this->shipping_address->civic,
             'postcode' => $this->shipping_address->postcode,
             'city' => $this->shipping_address->city,
             'state' => Country::find($this->shipping_address->country_id)->iso2_code,

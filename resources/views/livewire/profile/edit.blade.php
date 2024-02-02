@@ -22,7 +22,9 @@
                 <h3 class="col-span-1 sm:col-span-2">{{ __('resellers.create.titles.billing_data') }}</h3>
                 <x-input type="text" wire:model="billing_address.address_1" name="billing_address"
                          label="{{ __('resellers.create.address.label') }}" required></x-input>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <x-input type="text" wire:model="billing_address.civic" name="billing_civic"
+                             label="{{ __('resellers.create.civic.label') }}" required></x-input>
                     <x-input type="text" wire:model="billing_address.city" name="billing_city"
                              label="{{ __('resellers.create.city.label') }}" required></x-input>
                     <x-input x-mask="{{ __('masks.postcode') }}" type="text" wire:model="billing_address.postcode"
@@ -55,7 +57,9 @@
                 </div>
                 <x-input type="text" wire:model="shipping_address.address_1" name="shipping_address"
                          label="{{ __('resellers.create.address.label') }}" required></x-input>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <x-input type="text" wire:model="shipping_address.civic" name="shipping_civic"
+                             label="{{ __('resellers.create.civic.label') }}" required></x-input>
                     <x-input type="text" wire:model="shipping_address.city" name="shipping_city"
                              label="{{ __('resellers.create.city.label') }}" required></x-input>
                     <x-input x-mask="{{ __('masks.postcode') }}" type="text" wire:model="shipping_address.postcode"

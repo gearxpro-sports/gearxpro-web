@@ -39,4 +39,21 @@ return [
             'trans_code' => 'ru',
         ],
     ],
+    'size-guide-tables' => [
+        'taglie-01.jpg',
+        'taglie-02.jpg',
+        'taglie-03.jpg',
+        'taglie-04.jpg',
+        'taglie-05.jpg',
+        'taglie-06.jpg',
+        'taglie-07.jpg',
+        'taglie-08.jpg',
+        'taglie-09.jpg',
+        'taglie-10.jpg',
+        'taglie-11.jpg',
+        'taglie-12.jpg',
+        'taglie-13.jpg',
+        'taglie-14.jpg',
+        'taglie-15.jpg',
+    ]
 ];

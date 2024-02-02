@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "@alpinejs/mask": "^3.13.2",
+        "@ryangjchandler/alpine-tooltip": "^2.0.0",
         "lodash": "^4.17.21",
         "pagepiling.js": "^1.5.6"
     }

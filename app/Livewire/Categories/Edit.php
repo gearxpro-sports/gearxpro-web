@@ -75,7 +75,7 @@ class Edit extends Component
             $image_path = Storage::disk('public')->put('categories/'. $this->category->name, $this->image);
 
             $this->category->update([
-                'image' => $image_path
+                'image' => $image_path,
             ]);
         }
 

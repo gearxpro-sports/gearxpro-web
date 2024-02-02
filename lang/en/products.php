@@ -25,6 +25,7 @@ return [
         'categories_title' => 'Categories',
         'tabs' => [
             'main'           => 'Informations',
+            'size_guide' => 'Size guide',
             'options'        => 'Options',
             'locale'         => 'Location',
             'images'         => 'Images',
@@ -106,6 +107,10 @@ return [
             'images' => [
 
             ]
+        ],
+        'size_guide' => [
+            'title' => 'Size guide',
+            'subtitle' => 'Select which tables to display in the "Size Guide"',
         ],
     ],
 ];

@@ -65,9 +65,6 @@ Route::middleware('country')->domain('{country_code}.'.env('APP_URL'))->group(fu
         Route::get('/shop/register', [RegisterIndex::class, '__invoke'])->name('register');
 
         Route::get('/shop', [ProductIndex::class, '__invoke'])->name('index');
-        Route::get('/shop/sizes-guide', function() {
-            return view('sizes-guide');
-        })->name('sizes-guide');
         Route::get('/shop/cart', [CartIndex::class, '__invoke'])->name('cart');
         Route::get('/shop/checkout', [CartCheckout::class, '__invoke'])->name('checkout');
         Route::get('/shop/payment', [CartPayment::class, '__invoke'])->name('payment');

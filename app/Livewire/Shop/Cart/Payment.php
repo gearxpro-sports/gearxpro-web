@@ -24,7 +24,7 @@ class Payment extends Component
     //Shipping Address
     public $full_shipping_address;
     public $shipping_address;
-    public $shipping_civic = null;
+    public $shipping_civic;
     public $shipping_postcode;
     public $shipping_city;
     public $shipping_state;
@@ -59,7 +59,7 @@ class Payment extends Component
                 'pec' => 'required',
                 'phone' => 'required',
                 'shipping_address' => 'required',
-                'shipping_civic' => 'nullable',
+                'shipping_civic' => 'required',
                 'shipping_postcode' => 'required',
                 'shipping_city' => 'required',
                 'shipping_state' => 'required',
@@ -102,12 +102,12 @@ class Payment extends Component
         }
 
         if ($this->customer_shipping_address) {
-            $this->full_shipping_address = trim($this->customer_shipping_address->address_1).' '.trim($this->customer_shipping_address->city).' '.trim($this->customer_shipping_address->postcode);
+            $this->full_shipping_address = trim($this->customer_shipping_address->address_1).' '.trim($this->customer_shipping_address->civic). ' ' .trim($this->customer_shipping_address->city).' '.trim($this->customer_shipping_address->postcode);
 
             $this->pec = $this->customer->shipping_address->pec ?? $this->customer->email;
             $this->phone = $this->customer->shipping_address->phone;
             $this->shipping_address = $this->customer_shipping_address->address_1;
-            // $this->shipping_civic = $this->customer_shipping_address->address_1;
+             $this->shipping_civic = $this->customer_shipping_address->civic;
             $this->shipping_postcode = $this->customer_shipping_address->postcode;
             $this->shipping_city = $this->customer_shipping_address->city;
             $this->shipping_state = $this->customer_shipping_address->state;
@@ -145,7 +145,8 @@ class Payment extends Component
             ],
                 [
                     'country_id' => $this->customer->country_id ?? Country::where('iso2_code', session('country_code'))->first()->id,
-                    'address_1' => trim($this->shipping_address).' '.trim($this->shipping_civic),
+                    'address_1' => trim($this->shipping_address),
+                    'civic' => trim($this->shipping_civic),
                     'postcode' => $this->shipping_postcode,
                     'city' => $this->shipping_city,
                     'state' => $this->shipping_state,

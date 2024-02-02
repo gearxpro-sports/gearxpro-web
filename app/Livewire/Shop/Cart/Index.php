@@ -3,6 +3,8 @@
 namespace App\Livewire\Shop\Cart;
 
 use App\Models\Cart;
+use App\Models\ProductVariant;
+use App\Models\User;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -10,6 +12,7 @@ use Livewire\Attributes\Layout;
 #[Layout('layouts.guest')]
 class Index extends Component
 {
+    public $not_available = [];
     public $promoCode;
     public $productsRecommended = [
         0 => [
@@ -63,15 +66,42 @@ class Index extends Component
         ],
     ];
 
-    public function applyCode() {
+    public function applyCode()
+    {
         // TODO: Coupon Code
+    }
+
+    public function checkIfCartItemsAreAvailable()
+    {
+        $reseller = User::find(session('reseller_id'));
+
+        if (auth()->check()) {
+            $cart = auth()->user()->cart;
+        } else {
+            $cart = Cart::where('user_id', session('cart_user_token'))->first();
+        }
+
+        foreach ($cart->items as $item) {
+            $stock = $reseller->stocks()->where('product_variant_id', $item->product_variant_id)->first();
+            if ($stock->quantity < $item->quantity) {
+                $this->not_available[$stock->product_variant_id] = $stock->quantity;
+                $this->dispatch('open-notification',
+                    title: __('notifications.titles.generic_error'),
+                    subtitle: __('notifications.cart.product_not_available.error'),
+                    type: 'error'
+                );
+                return false;
+            }
+        }
+
+        return redirect()->route('shop.payment', ['country_code' => session('country_code')]);
     }
 
     #[On('item-updated')]
     #[On('item-removed')]
     public function render()
     {
-        if(auth()->check()) {
+        if (auth()->check()) {
             $cart = auth()->user()->cart;
         } else {
             $cart = Cart::where('user_id', session('cart_user_token'))->first();

@@ -123,12 +123,16 @@
                     <div wire:key="sizes" class="space-y-5">
                         <div class="flex items-center justify-between">
                             <p class="text-sm font-medium text-color-18181a uppercase">{{__('shop.products.size')}}</p>
-                            <div class="flex items-center space-x-2">
-                                <a href="{{ route('shop.sizes-guide', ['country_code' => session('country_code')]) }}"
-                                   target="_blank"
-                                   class="text-xs font-semibold xl:font-medium text-color-18181a uppercase hover:underline">{{__('shop.options.size_guide')}}</a>
-                                <x-icons name="meter" class="w-5 h-5"></x-icons>
-                            </div>
+                            @if($product->size_guide && count(json_decode($product->size_guide)))
+                                <div class="flex items-center space-x-2">
+                                    <div
+                                        wire:click.prevent="$dispatch('openModal', { component: 'shop.products.modals.size-guide', arguments: { product_id: {{$product->id}} }})"
+                                        class="text-xs font-semibold xl:font-medium text-color-18181a uppercase hover:underline hover:cursor-pointer">
+                                        {{__('shop.options.size_guide')}}
+                                    </div>
+                                    <x-icons name="meter" class="w-5 h-5"></x-icons>
+                                </div>
+                            @endif
                         </div>
                         <div>
                             <div class="grid grid-cols-6 xl:grid-cols-3 gap-3">

@@ -8,7 +8,7 @@
                 <span>
                     ({{ trans_choice('shop.cart.product', $cart->items->count(), ['value' => $cart->items->count()]) }})
                 </span>
-            {{--<span class="font-semibold">@money($cart->subtotal)</span>--}}
+                {{--<span class="font-semibold">@money($cart->subtotal)</span>--}}
             </p>
             <p class="text-sm xl:text-base text-color-18181a font-normal mt-2 xl:mt-0">{{ __('shop.cart.shop_complete')}}</p>
         </div>
@@ -16,13 +16,24 @@
             {{-- Prodotti inseriti --}}
             <div class="col-span-6 xl:col-span-4 mt-12 xl:mt-14">
                 @foreach($cart->items as $item)
-                    <livewire:shop.components.cart.cart-item wire:key="{{$item}}" :$item/>
+                    <div class="relative" wire:key="wrapper_{{$item->product_variant_id}}">
+                        @if(in_array($item->product_variant_id, array_keys($not_available)))
+                                <x-icons
+                                    x-data
+                                    x-tooltip.raw="{{ __('notifications.cart.product_not_available.tooltip', ['quantity' => $not_available[$item->product_variant_id]]) }}"
+                                    name="exclamation-circle"
+                                    class="absolute -left-4 top-0 -translate-y-4 lg:-translate-y-6 lg:top-1/2 z-10 w-8 h-8 text-white fill-red-400"></x-icons>
+                        @endif
+                        <livewire:shop.components.cart.cart-item wire:key="item_{{$item->product_variant_id}}" :$item/>
+                    </div>
                 @endforeach
 
                 <div class="w-full h-px bg-color-ff7f6e -mt-5 mb-11 xl:my-6"></div>
                 <div class="w-72 hidden xl:block">
-                    <x-shop.shopping-button href="{{ route('shop.index', ['country_code' => session('country_code')]) }}" color="transparent"
-                                            icon="back">
+                    <x-shop.shopping-button
+                        href="{{ route('shop.index', ['country_code' => session('country_code')]) }}"
+                        color="transparent"
+                        icon="back">
                         {{ __('shop.cart.back_to_shopping') }}
                     </x-shop.shopping-button>
                 </div>
@@ -31,14 +42,14 @@
             {{-- riepilogo ordine --}}
             <div class="col-span-6 xl:col-span-2">
                 <h2 class="text-xl font-semibold text-color-18181a">{{ __('shop.cart.summary')}}</h2>
-                {{-- PromoCode --}}
-                <div
-                    class="bg-color-edebe5 w-full h-12 flex items-center justify-between px-5 rounded-md mt-4">
-                    <input wire:model='promoCode' type="text" placeholder="{{ __('shop.cart.promo_code')}}"
-                           class="bg-transparent border-none p-0 text-xs placeholder:text-xs placeholder:font-normal placeholder:text-color-6c757d border-transparent focus:border-transparent focus:ring-0">
-                    <button wire:click='applyCode'
-                            class=" text-xs font-medium text-color-6c757d">{{ __('shop.cart.apply')}}</button>
-                </div>
+                {{-- TODO: Coupon Code --}}
+                {{--                <div--}}
+                {{--                    class="bg-color-edebe5 w-full h-12 flex items-center justify-between px-5 rounded-md mt-4">--}}
+                {{--                    <input wire:model='promoCode' type="text" placeholder="{{ __('shop.cart.promo_code')}}"--}}
+                {{--                           class="bg-transparent border-none p-0 text-xs placeholder:text-xs placeholder:font-normal placeholder:text-color-6c757d border-transparent focus:border-transparent focus:ring-0">--}}
+                {{--                    <button wire:click='applyCode'--}}
+                {{--                            class=" text-xs font-medium text-color-6c757d">{{ __('shop.cart.apply')}}</button>--}}
+                {{--                </div>--}}
 
                 {{-- subtotale --}}
                 <div class="flex justify-between items-center my-6">
@@ -59,7 +70,8 @@
                     </span>
                 </div>
                 {{-- totale --}}
-                <div class="w-full py-3.5 border-y border-color-ff7f6e flex items-center justify-between mb-5 xl:mb-[47px]">
+                <div
+                    class="w-full py-3.5 border-y border-color-ff7f6e flex items-center justify-between mb-5 xl:mb-[47px]">
                     <span
                         class="font-medium text-color-18181a">{{ __('shop.cart.total')}}</span>
                     <span class="font-semibold text-color-18181a">@money($cart->total)</span>
@@ -67,13 +79,15 @@
 
                 <div class="sticky bottom-10 left-0">
                     @auth
-                        <x-shop.shopping-button href="{{ route('shop.payment', ['country_code' => session('country_code')]) }}" color="orange"
+                        <x-shop.shopping-button wire:click="checkIfCartItemsAreAvailable" color="orange"
                                                 icon="arrow-right-xl">
                             {{ __('shop.cart.go_to_pay') }}
                         </x-shop.shopping-button>
                     @else
-                        <x-shop.shopping-button href="{{ route('shop.checkout', ['country_code' => session('country_code')]) }}" color="orange"
-                                                icon="arrow-right-xl">
+                        <x-shop.shopping-button
+                            href="{{ route('shop.checkout', ['country_code' => session('country_code')]) }}"
+                            color="orange"
+                            icon="arrow-right-xl">
                             {{ __('shop.cart.go_to_pay') }}
                         </x-shop.shopping-button>
                     @endauth

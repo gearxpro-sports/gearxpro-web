@@ -5,7 +5,8 @@ return [
         'saving' => 'Creazione',
         'updating' => 'Aggiornamento',
         'deleting' => 'Cancellazione',
-        'adding' => 'Aggiunta'
+        'adding' => 'Aggiunta',
+        'generic_error' => 'Errore'
     ],
     'actions' => [
         'show' => 'Vedi',
@@ -134,4 +135,10 @@ return [
             'error' => 'Non é possibile aggiornare il rivenditore',
         ],
     ],
+    'cart' => [
+        'product_not_available' => [
+            'tooltip' => 'Disponibilità: :quantity',
+            'error' => "La quantità disponibile per alcuni dei prodotti nel carrello non è sufficiente.\nPer favore modifica la quantità e riprova.",
+        ]
+    ]
 ];

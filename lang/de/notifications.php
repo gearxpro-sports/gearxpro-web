@@ -5,7 +5,8 @@ return [
         'saving' => 'Schaffung',
         'updating' => 'Aktualisieren',
         'deleting' => 'Stornierung',
-        'adding' => 'Zusatz'
+        'adding' => 'Zusatz',
+        'generic_error' => 'Fehler'
     ],
     'actions' => [
         'show' => 'Sie sehen',
@@ -134,4 +135,10 @@ return [
             'error' => 'Es ist nicht möglich, den Reseller zu aktualisieren',
         ],
     ],
+    'cart' => [
+        'product_not_available' => [
+            'tooltip' => 'Verfügbarkeit: :quantity',
+            'error' => "Die verfügbare Menge für einige Produkte im Warenkorb ist nicht ausreichend.\nBitte ändern Sie die Menge und versuchen Sie es erneut.",
+        ]
+    ]
 ];
