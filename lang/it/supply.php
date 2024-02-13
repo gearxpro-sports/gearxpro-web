@@ -8,6 +8,15 @@ return [
         'delivered' => 'Consegnato',
         'canceled' => 'Annullato',
     ],
+    'availabilities' => [
+        'lt_150' => 'Disponibilità con meno di 150 pezzi',
+        'lt_100' => 'Disponibilità con meno di 100 pezzi',
+        'lt_50' => 'Disponibilità con meno di 50 pezzi',
+    ],
+    'prices' => [
+        'asc' => 'Prezzo crescente',
+        'desc' => 'Prezzo decrescente'
+    ],
     'title' => 'Approvvigionamento',
     'index' => [
         'title' => 'Approvvigionamento',
@@ -32,6 +41,7 @@ return [
         'filter' => [
             'prices' => 'Seleziona prezzo',
             'availabilities' => 'Seleziona disponibilità',
+            'status' => 'Seleziona stato'
         ],
     ],
     'purchases' => [

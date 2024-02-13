@@ -16,21 +16,23 @@ class SupplyTable extends BaseTable
     public $supply;
     public $items = [];
     public $amount = 0;
-    //    public $prices = [
-    //        '0-20',
-    //        '21-50',
-    //        '51-100',
-    //        '100+'
-    //    ];
-    //    public $availabilities = [
-    //        'Disponibile',
-    //        'Non disponibile'
-    //    ];
+    public $availabilities = [
+        'lt_150',
+        'lt_100',
+        'lt_50',
+    ];
+    public $prices = [
+        'asc',
+        'desc',
+    ];
+    public $selected_availability = null;
+    public $selected_price = null;
 
-    public function mount() {
+    public function mount()
+    {
         $this->supply = auth()->user()->supplies()->where('confirmed', false)->first();
 
-        if($this->supply) {
+        if ($this->supply) {
             foreach ($this->supply->rows as $row) {
                 $this->items[$row->product->id] = [
                     'id' => $row->product->id,
@@ -42,7 +44,8 @@ class SupplyTable extends BaseTable
         }
     }
 
-    public function calculateAmount() {
+    public function calculateAmount()
+    {
         $this->amount = 0;
         foreach ($this->items as $item) {
             $this->amount += $item['quantity'] * $item['price'];
@@ -97,40 +100,30 @@ class SupplyTable extends BaseTable
     public function render()
     {
         $variants = ProductVariant::with('product')
-            ->whereHas('product.countries', function(Builder $query) {
+            ->whereHas('product.countries', function (Builder $query) {
                 $query
                     ->where('country_id', auth()->user()->country_id)
-                    ->where(function(Builder $query) {
-                        $query
-                            ->whereNotNull('wholesale_price')
-                            ->whereNotNull('price')
-                        ;
-                    })
-                ;
+                    ->whereNotNull('wholesale_price')
+                    ->whereNotNull('price');
+            })
+            ->when($this->selected_availability, function ($query) {
+                $amount = explode('lt_', $this->selected_availability)[1];
+                return $query->where('quantity', '<=', $amount);
+            })
+            ->when($this->selected_price, function ($query) {
+                return $query->join('country_product', 'country_product.product_id', '=', 'product_variants.product_id')
+                    ->where('country_id', auth()->user()->country_id)
+                    ->orderBy('country_product.wholesale_price', $this->selected_price);
             })
             ->search($this->search, [
-//                'product.name',
-//                'terms.value',
+                'product.name',
+                'terms.value',
                 'sku'
             ])
-            ->orderBy('product_id');
-
-        //dd($variants);
-
-        //        foreach($this->filters as $k => $filter) {
-        //            if($k === 'date') {
-        //                if($filter['mode'] === 'single') {
-        //                    $customers->whereDate($filter['column'], $filter['operator'], $filter['value']);
-        //                } elseif($filter['mode'] === 'range') {
-        //                    $customers->whereBetween($filter['column'], $filter['value']);
-        //                }
-        //            } else {
-        //                $customers->where($filter['column'], $filter['operator'], $filter['value']);
-        //            }
-        //        }
+            ->orderBy('product_variants.product_id');
 
         return view('livewire.components.admin-tables.supply.supply-table', [
-            'variants' => $variants->paginate()
+            'variants' => $variants->paginate(25)
         ]);
     }
 }

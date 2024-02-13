@@ -1,6 +1,7 @@
 <div class="relative">
     <div wire:loading wire:target="send" class="absolute inset-0 bg-white/50 z-10"></div>
-    <div class="grid grid-cols-1 gap-4 items-end mb-2.5 bg-white py-4 px-4 text-xs rounded shadow-shadow-1 md:grid-cols-2 md:px-7">
+    <div
+        class="grid grid-cols-1 gap-4 items-end mb-2.5 bg-white py-4 px-4 text-xs rounded shadow-shadow-1 md:grid-cols-2 md:px-7">
         <div>
             <div class="relative">
                 <x-input wire:model.live.debounce.500ms="search" name="search" placeholder="{{ __('common.search') }}" class="h-10 py-0">
@@ -10,6 +11,24 @@
                     </span>
                     </x-slot:append>
                 </x-input>
+            </div>
+        </div>
+        <div class="flex items-end gap-2">
+            <div class="w-full max-w-xs">
+                <x-select wire:model.live="selected_price" name="selected_price">
+                    <option value="">{{ __('supply.index.filter.prices') }}</option>
+                    @foreach($prices as $price)
+                        <option value="{{$price}}">{{ __('supply.prices.'. $price) }}</option>
+                    @endforeach
+                </x-select>
+            </div>
+            <div class="w-full max-w-xs">
+                <x-select wire:model.live="selected_availability" name="selected_availability">
+                    <option value="">{{ __('supply.index.filter.availabilities') }}</option>
+                    @foreach($availabilities as $availability)
+                        <option value="{{$availability}}">{{ __('supply.availabilities.'. $availability) }}</option>
+                    @endforeach
+                </x-select>
             </div>
         </div>
     </div>

@@ -11,6 +11,7 @@ class OrdersTable extends BaseTable
      * @var array
      */
     public array $selectedOrders = [];
+    public $selected_status = null;
 
     /**
      * @return View
@@ -20,15 +21,20 @@ class OrdersTable extends BaseTable
         $orders = auth()->user()->resellerOrders()
             ->search($this->search, [
                 'reference',
-//                'customer.firstname',
-//                'customer.lastname',
+                'customer.firstname',
+                'customer.lastname',
             ])
             ->orderByDesc('id');
 
         $this->filterByDate($orders);
 
+        if($this->selected_status) {
+            $orders->where('orders.status', $this->selected_status);
+        }
+
         return view('livewire.components.admin-tables.orders-table', [
-            'orders' => $orders->paginate()
+            'orders' => $orders->paginate(),
+            'statuses' => array_keys(Order::STATUSES)
         ]);
     }
 

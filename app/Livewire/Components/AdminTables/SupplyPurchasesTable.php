@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 
 class SupplyPurchasesTable extends BaseTable
 {
+    public $selected_status = null;
+
     /**
      * @return View
      */
@@ -31,8 +33,13 @@ class SupplyPurchasesTable extends BaseTable
 
         $this->filterByDate($orders);
 
+        if($this->selected_status) {
+            $orders->where('supplies.status', $this->selected_status);
+        }
+
         return view('livewire.components.admin-tables.supply-purchases-table', [
-            'orders' => $orders->paginate()
+            'orders' => $orders->paginate(),
+            'statuses' => array_keys(Supply::STATUSES)
         ]);
     }
 }

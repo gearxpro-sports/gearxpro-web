@@ -22,6 +22,14 @@
                     </x-slot:append>
                 </x-flatpickr>
             </div>
+            <div class="w-full max-w-xs">
+                <x-select wire:model.live="selected_status" name="selected_status">
+                    <option value="">{{ __('supply.index.filter.status') }}</option>
+                    @foreach($statuses as $status)
+                        <option value="{{$status}}">{{ __('supply.statuses.'. $status) }}</option>
+                    @endforeach
+                </x-select>
+            </div>
         </div>
     </div>
     <div class="p-8 bg-white rounded space-y-8">
