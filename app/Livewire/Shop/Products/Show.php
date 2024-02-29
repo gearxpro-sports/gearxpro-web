@@ -262,6 +262,7 @@ class Show extends Component
 
     public function setColor($id)
     {
+        $this->resetAll();
         if ($this->selectedColor == $id) {
             $this->reset(['selectedColor', 'selectedVariant', 'quantity', 'selectedVariantQuantity']);
             $this->filterVariantsByTerm('color', $this->selectedColor);
