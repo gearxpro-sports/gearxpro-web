@@ -262,7 +262,10 @@ class Show extends Component
 
     public function setColor($id)
     {
+        // First I reset every selection
         $this->resetAll();
+
+        // Then I set the selected color
         if ($this->selectedColor == $id) {
             $this->reset(['selectedColor', 'selectedVariant', 'quantity', 'selectedVariantQuantity']);
             $this->filterVariantsByTerm('color', $this->selectedColor);
@@ -275,6 +278,10 @@ class Show extends Component
 
     public function setSize($id)
     {
+        // First I reset every selection
+        $this->resetAll();
+
+        // Then I set the selected size
         if ($this->selectedSize == $id) {
             $this->reset(['selectedSize', 'selectedVariant', 'quantity', 'selectedVariantQuantity']);
             $this->filterVariantsByTerm('size', $this->selectedSize);
