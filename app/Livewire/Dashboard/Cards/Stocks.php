@@ -18,9 +18,10 @@ class Stocks extends Component
 
     public function render()
     {
+        $items = 0;
         if (auth()->user()->hasRole(User::SUPERADMIN)) {
             $items = Product::count();
-        } else if (auth()->user()->hasRole(User::RESELLER)) {
+        } else if (auth()->user()->hasRole(User::RESELLER, User::AGENT)) {
             $items = auth()->user()->stocks->count();
         }
         return view('livewire.dashboard.cards.stocks', [

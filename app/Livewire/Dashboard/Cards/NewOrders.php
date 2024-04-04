@@ -17,10 +17,13 @@ class NewOrders extends Component
 
     public function render()
     {
+        $orders_count = 0;
+        $items = collect();
+        
         if (auth()->user()->hasRole(User::SUPERADMIN)) {
             $orders_count = Supply::where('status', 'new')->count();
             $items = Supply::latest()->get()->take(5);
-        } else if (auth()->user()->hasRole(User::RESELLER)) {
+        } else if (auth()->user()->hasRole(User::RESELLER, User::AGENT)) {
             $orders_count = auth()->user()->resellerOrders->count();
             $items = auth()->user()->resellerOrders()->latest()->get()->take(5);
         }

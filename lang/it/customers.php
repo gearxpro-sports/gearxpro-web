@@ -4,6 +4,7 @@ return [
     'title' => 'Anagrafica Clienti',
     'index' => [
         'title' => 'Anagrafica Clienti',
+        'title-agent' => 'Anagrafica Clienti per Agente',
         'table' => [
             'title' => 'Clienti',
             'cols'  => [
@@ -12,6 +13,8 @@ return [
                 'reseller'          => 'Rivenditore',
                 'registration_date' => 'Data di Registrazione',
                 'last_order_date'   => 'Data Ultimo Ordine',
+                'country'           => 'Nazione',
+                'agent'             => 'Agente'
             ],
         ],
         'filter' => [

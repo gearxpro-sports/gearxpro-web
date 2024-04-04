@@ -94,6 +94,30 @@ class SupplyTable extends BaseTable
         return redirect()->route('supply.recap');
     }
 
+    public function sendAgent()
+    {
+        $supply = Supply::updateorCreate([
+            'uuid' => $this->supply->uuid ?? Str::random(10),
+        ], [
+            'user_id' => auth()->user()->id,
+            'amount' => $this->amount,
+            'status' => 'new'
+        ]);
+
+        foreach ($this->items as $item) {
+            $variant = ProductVariant::find($item['id']);
+            $supply->rows()->updateOrCreate([
+                'product->id' => $variant->id
+            ], [
+                'product' => $variant,
+                'price' => $variant->product->wholesale_price,
+                'quantity' => $item['quantity']
+            ]);
+        }
+
+        return redirect()->route('supply.agent.recap');
+    }
+
     /**
      * @return View
      */

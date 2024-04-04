@@ -1,0 +1,5 @@
+Host *github*
+    HostName github.com
+    User lucamellGEARX
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/id_ed25519

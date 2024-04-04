@@ -154,6 +154,40 @@ Route::middleware(['auth', 'verified', 'set_reseller_missing_data', 'set_default
         });
     });
 
+    Route::middleware(['role:superadmin|agent|reseller'])->group(function () {
+        Route::get('/', Dashboard::class)->name('dashboard');
+
+        Route::prefix('orders')->middleware(['role:reseller|superadmin'])->group(function () {
+            Route::get('/', OrdersIndex::class)->name('orders.index');
+            Route::get('/{order}', OrderShow::class)->name('orders.show');
+        });
+
+        Route::prefix('customers')->group(function () {
+            Route::get('/', CustomersIndex::class)->name('customers.index');
+            Route::get('/{customer}', CustomerShow::class)->name('customers.show');
+            Route::get('/{customer}/edit', CustomerEdit::class)->name('customers.edit')->middleware(['role:superadmin']);
+        });
+
+        Route::prefix('invoices')->group(function () {
+            Route::get('/', InvoicesIndex::class)->name('invoices.index');
+        });
+
+        Route::prefix('purchases')->group(function () {
+            Route::get('/', SupplyPurchasesIndex::class)->name('supply.purchases.index');
+            Route::get('/{supply}', SupplyPurchaseShow::class)->name('supply.purchases.show')->middleware(['role:superadmin|reseller']);
+            Route::get('/{supply}/invoice', InvoiceShow::class)->name('supply.purchases.invoice');
+        });
+
+        Route::prefix('supply')->group(function () {
+            Route::get('/', SupplyIndex::class)->name('supply.index');
+            Route::get('/recap', SupplyRecap::class)->name('supply.recap');
+        });
+
+        Route::prefix('stocks')->middleware(['role:reseller'])->group(function () {
+            Route::get('/', StocksIndex::class)->name('stocks.index');
+        });
+    });
+
     Route::get('/profile', ProfileEdit::class)->name('profile.edit');
 });
 

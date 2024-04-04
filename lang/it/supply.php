@@ -20,6 +20,7 @@ return [
     'title' => 'Approvvigionamento',
     'index' => [
         'title' => 'Approvvigionamento',
+        'title-agent' => 'Approvvigionamento - Ordini Agente',
         'table' => [
             'title' => 'Lista Referenze',
             'cols' => [
@@ -41,7 +42,8 @@ return [
         'filter' => [
             'prices' => 'Seleziona prezzo',
             'availabilities' => 'Seleziona disponibilità',
-            'status' => 'Seleziona stato'
+            'status' => 'Seleziona stato',
+            'customers' => 'Clienti assegnati'
         ],
     ],
     'purchases' => [

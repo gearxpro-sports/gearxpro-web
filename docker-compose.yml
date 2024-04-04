@@ -50,6 +50,17 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        restart: always
+        environment:
+            PMA_HOST: 192.168.178.124
+            PMA_PORT: 3306
+            PMA_USER: root
+            PMA_PASSWORD: 
+            UPLOAD_LIMIT: 100000000
+        ports:
+        - "8080:80"
     redis:
         image: 'redis:alpine'
         ports:

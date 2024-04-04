@@ -25,6 +25,7 @@ class User extends Authenticatable
     const SUPERADMIN = 'superadmin';
     const RESELLER   = 'reseller';
     const CUSTOMER   = 'customer';
+    const AGENT      = 'agent';
 
     protected $perPage = 10;
 
@@ -108,6 +109,10 @@ class User extends Authenticatable
     public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class);
+    }
+    public function agent(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'idAgent', 'id');
     }
 
     /**

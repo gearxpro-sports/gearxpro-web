@@ -20,24 +20,27 @@ class Bestsellers extends Component
     public function render()
     {
         $items = collect();
+        $orders = collect();
 
         if(auth()->user()->hasRole(User::SUPERADMIN)) {
             $orders = Order::all();
-        } elseif(auth()->user()->hasRole(User::RESELLER)) {
+        } elseif(auth()->user()->hasRole(User::RESELLER, User::AGENT)) {
             $orders = auth()->user()->resellerOrders;
         }
 
         $productQuantities = [];
 
-        foreach ($orders as $order) {
-            foreach ($order->items as $item) {
-                $productId = $item->product_id;
+        if ($orders) {
+            foreach ($orders as $order) {
+                foreach ($order->items as $item) {
+                    $productId = $item->product_id;
 
-                if (!isset($productQuantities[$productId])) {
-                    $productQuantities[$productId] = 0;
+                    if (!isset($productQuantities[$productId])) {
+                        $productQuantities[$productId] = 0;
+                    }
+
+                    $productQuantities[$productId] += $item->quantity;
                 }
-
-                $productQuantities[$productId] += $item->quantity;
             }
         }
 

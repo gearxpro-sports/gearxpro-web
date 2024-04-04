@@ -17,5 +17,6 @@ class RolePermissionSeeder extends Seeder
         $superadmin = Role::create(['name' => User::SUPERADMIN, 'label' => 'Superadmin']);
         $reseller = Role::create(['name' => User::RESELLER, 'label' => 'Reseller']);
         $customer = Role::create(['name' => User::CUSTOMER, 'label' => 'Customer']);
+        $agent = Role::create(['name' => User::AGENT, 'label' => 'Agent']);
     }
 }

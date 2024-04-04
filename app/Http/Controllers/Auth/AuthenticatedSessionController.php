@@ -35,7 +35,9 @@ class AuthenticatedSessionController extends Controller
         session()->put('country_code', auth()->user()->country_code);
         session()->put('language', session('language', config('app.locale')));
 
-        if(auth()->user()->hasRole(User::SUPERADMIN) || auth()->user()->hasRole(User::RESELLER)) {
+        if(auth()->user()->hasRole(User::SUPERADMIN) 
+            || auth()->user()->hasRole(User::RESELLER) 
+            || auth()->user()->hasRole(User::AGENT)) {
             return redirect()->intended(RouteServiceProvider::HOME);
         }
 

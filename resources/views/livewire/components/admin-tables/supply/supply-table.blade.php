@@ -80,9 +80,17 @@
             <p class="text-color-6c757d text-sm">
                 {{ __('supply.index.table.footer.cart_total') }}: <span class="font-bold">@money($amount)</span>
             </p>
+            @role(App\Models\User::RESELLER)
             <x-primary-button wire:click="send" wire:loading.attr="disabled" wire:target="send" type="button" :disabled="!$items" class="!bg-color-0c9d87 hover:!bg-color-0c9d87/90">
                 {{ __('supply.index.table.footer.review_order') }}
             </x-primary-button>
+            @endrole
+
+            @role(App\Models\User::AGENT)
+            <x-primary-button wire:click="sendAgent" wire:loading.attr="disabled" wire:target="send" type="button" :disabled="!$items" class="!bg-color-0c9d87 hover:!bg-color-0c9d87/90">
+                {{ __('supply.index.table.footer.review_order') }} [AGENT]
+            </x-primary-button>
+            @endrole
         </div>
     </div>
     @endteleport

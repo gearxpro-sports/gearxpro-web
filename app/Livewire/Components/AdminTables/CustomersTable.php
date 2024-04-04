@@ -24,6 +24,11 @@ class CustomersTable extends BaseTable
             $customers->with(['country.reseller', 'customerOrders']);
         }
 
+        if (auth()->user()->hasRole(User::AGENT)) {
+            $customers->where('idAgent', auth()->user()->id);
+            $customers->with(['agent']);
+        }
+
         foreach ($this->filters as $k => $filter) {
             if ($k === 'date') {
                 if ($filter['mode'] === 'single') {
