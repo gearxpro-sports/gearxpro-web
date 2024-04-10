@@ -120,7 +120,7 @@ class User extends Authenticatable
      */
     public function supplies(): HasMany
     {
-        return $this->hasMany(Supply::class);
+        return $this->hasMany(Supply::class, 'creator_id', 'id');
     }
 
     /**

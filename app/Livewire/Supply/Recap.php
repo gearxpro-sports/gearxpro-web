@@ -5,11 +5,12 @@ namespace App\Livewire\Supply;
 use App\Models\ProductVariant;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use App\Models\Supply;
+use Illuminate\Http\Request;
 
 class Recap extends Component
 {
     public $supply;
-
     public function mount() {
         $this->supply = auth()->user()->supplies()->where('confirmed', false)->first();
         if(!$this->supply) {
@@ -36,4 +37,5 @@ class Recap extends Component
     {
         return view('livewire.supply.recap');
     }
+
 }

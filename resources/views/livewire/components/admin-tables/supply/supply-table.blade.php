@@ -1,5 +1,23 @@
 <div class="relative">
     <div wire:loading wire:target="send" class="absolute inset-0 bg-white/50 z-10"></div>
+    
+    @role(App\Models\User::AGENT)
+    <div wire:loading wire:target="sendAgent" class="absolute inset-0 bg-white/50 z-10"></div>
+    
+    <div class="relative">
+        <div class="grid grid-cols-1 gap-4 items-end mb-2.5 bg-white py-4 px-4 text-xs rounded shadow-shadow-1 md:grid-cols-2 md:px-7">
+            <div class="w-full max-w-xs">
+                <x-select wire:model.live="selected_customer" name="selected_customer">
+                    <option value="">{{ __('supply.index.filter.customers') }}</option>
+                    @foreach($customers as $customer)
+                        <option value="{{$customer}}">{{ $customer->firstname." ".$customer->lastname }}</option>
+                    @endforeach
+                </x-select>
+            </div>
+        </div>
+    </div>
+    @endrole
+    
     <div
         class="grid grid-cols-1 gap-4 items-end mb-2.5 bg-white py-4 px-4 text-xs rounded shadow-shadow-1 md:grid-cols-2 md:px-7">
         <div>
@@ -87,8 +105,8 @@
             @endrole
 
             @role(App\Models\User::AGENT)
-            <x-primary-button wire:click="sendAgent" wire:loading.attr="disabled" wire:target="send" type="button" :disabled="!$items" class="!bg-color-0c9d87 hover:!bg-color-0c9d87/90">
-                {{ __('supply.index.table.footer.review_order') }} [AGENT]
+            <x-primary-button wire:click="sendAgent" wire:loading.attr="disabled" wire:target="sendAgent" type="button" :disabled="!$items || !$selected_customer" class="!bg-color-0c9d87 hover:!bg-color-0c9d87/90">
+                {{ __('supply.index.table.footer.review_order') }}
             </x-primary-button>
             @endrole
         </div>

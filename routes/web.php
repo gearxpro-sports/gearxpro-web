@@ -181,6 +181,7 @@ Route::middleware(['auth', 'verified', 'set_reseller_missing_data', 'set_default
         Route::prefix('supply')->group(function () {
             Route::get('/', SupplyIndex::class)->name('supply.index');
             Route::get('/recap', SupplyRecap::class)->name('supply.recap');
+            Route::get('/recap-agent', SupplyRecap::class)->name('supply.recap-agent');
         });
 
         Route::prefix('stocks')->middleware(['role:reseller'])->group(function () {

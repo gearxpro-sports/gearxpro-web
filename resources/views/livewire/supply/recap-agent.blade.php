@@ -3,11 +3,9 @@
 </x-slot>
 
 <div class="grid grid-cols-3 gap-6 bg-white p-8">
-
     <div class="col-span-2 border">
         <livewire:components.admin-tables.supply.recap-table/>
     </div>
-    
     <div class="col-span-1 space-y-6">
         <div class="bg-white">
             <div class="p-4 border border-b-0">

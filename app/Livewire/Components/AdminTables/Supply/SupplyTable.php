@@ -3,7 +3,7 @@
 namespace App\Livewire\Components\AdminTables\Supply;
 
 use App\Livewire\Components\AdminTables\BaseTable;
-use App\Models\Product;
+use App\Models\User;
 use App\Models\ProductVariant;
 use App\Models\Supply;
 use Illuminate\Contracts\View\View;
@@ -27,6 +27,7 @@ class SupplyTable extends BaseTable
     ];
     public $selected_availability = null;
     public $selected_price = null;
+    public $selected_customer = null;
 
     public function mount()
     {
@@ -42,6 +43,7 @@ class SupplyTable extends BaseTable
             }
             $this->calculateAmount();
         }
+
     }
 
     public function calculateAmount()
@@ -96,10 +98,14 @@ class SupplyTable extends BaseTable
 
     public function sendAgent()
     {
+        $selCustomer = json_decode($this->selected_customer, true);
+        $userId = auth()->user()->hasRole(User::AGENT) ? $selCustomer["id"] : auth()->user()->id;
+
         $supply = Supply::updateorCreate([
-            'uuid' => $this->supply->uuid ?? Str::random(10),
+            'uuid' => $this->supply->uuid ?? Str::random(10), // TODO: Random string to check before in the db.
         ], [
-            'user_id' => auth()->user()->id,
+            'user_id' => $userId,
+            'creator_id' => auth()->user()->id,
             'amount' => $this->amount,
             'status' => 'new'
         ]);
@@ -115,7 +121,7 @@ class SupplyTable extends BaseTable
             ]);
         }
 
-        return redirect()->route('supply.agent.recap');
+        return redirect()->route('supply.recap-agent');
     }
 
     /**
@@ -145,9 +151,13 @@ class SupplyTable extends BaseTable
                 'sku'
             ])
             ->orderBy('product_variants.product_id');
+        
+        if (auth()->user()->hasRole(User::AGENT))
+            $customersList = User::where('idAgent', auth()->user()->id)->select('id', "firstname", "lastname")->get();
 
         return view('livewire.components.admin-tables.supply.supply-table', [
-            'variants' => $variants->paginate(25)
+            'variants' => $variants->paginate(25),
+            'customers' => $customersList ?? [],
         ]);
     }
 }
