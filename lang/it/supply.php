@@ -57,6 +57,7 @@ return [
                     'total' => 'Importo',
                     'status' => 'Stato',
                     'reseller' => 'Rivenditore',
+                    'customer' => 'Negoziante'
                 ],
                 'trashed' => 'Cancellato'
             ],

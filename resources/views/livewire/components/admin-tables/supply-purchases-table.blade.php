@@ -51,6 +51,9 @@
                                 @role(App\Models\User::SUPERADMIN)
                                 <th>{{ __('supply.purchases.index.table.cols.reseller') }}</th>
                                 @endrole
+                                @role(App\Models\User::AGENT)
+                                <th>{{ __('supply.purchases.index.table.cols.customer') }}</th>
+                                @endrole
                                 <th>{{ __('supply.purchases.index.table.cols.status') }}</th>
                                 <th></th>
                             </tr>
@@ -78,13 +81,16 @@
                                         </a>
                                     </td>
                                     @endrole
+                                    @role(App\Models\User::AGENT)
+                                    <td>{{ $order->reseller->firstname . " " . $order->reseller->lastname }}</td>
+                                    @endrole
                                     <td class="whitespace-nowrap">
                                         <x-badge
                                             color="{{ \App\Models\Supply::STATUSES[$order->status] }}">{{ __('supply.statuses.' . $order->status) }}</x-badge>
                                     </td>
                                     <td class="text-right">
                                         <div class="inline-flex space-x-2">
-                                            @hasanyrole([App\Models\User::RESELLER, App\Models\User::SUPERADMIN])
+                                            @hasanyrole([App\Models\User::RESELLER, App\Models\User::SUPERADMIN, App\Models\User::AGENT])
                                             <a class="flex items-center justify-center ml-auto bg-color-eff0f0 w-8 h-8 text-center rounded-sm hover:bg-color-eff0f0/90"
                                                href="{{ route('supply.purchases.show', ['supply' => $order->id]) }}">
                                                 <x-icons name="eye" class="w-4 h-4"/>

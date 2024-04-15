@@ -14,7 +14,7 @@ class InvoicesTable extends BaseTable
      */
     public function render()
     {
-        if(auth()->user()->hasRole(User::RESELLER)) {
+        if(auth()->user()->hasRole(User::RESELLER) || auth()->user()->hasRole(User::AGENT)) {
             $invoices = auth()->user()->invoices()->with('supply.reseller')
                 ->search($this->search, [
                     'code',

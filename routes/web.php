@@ -157,7 +157,7 @@ Route::middleware(['auth', 'verified', 'set_reseller_missing_data', 'set_default
     Route::middleware(['role:superadmin|agent|reseller'])->group(function () {
         Route::get('/', Dashboard::class)->name('dashboard');
 
-        Route::prefix('orders')->middleware(['role:reseller|superadmin'])->group(function () {
+        Route::prefix('orders')->group(function () {
             Route::get('/', OrdersIndex::class)->name('orders.index');
             Route::get('/{order}', OrderShow::class)->name('orders.show');
         });
@@ -165,7 +165,7 @@ Route::middleware(['auth', 'verified', 'set_reseller_missing_data', 'set_default
         Route::prefix('customers')->group(function () {
             Route::get('/', CustomersIndex::class)->name('customers.index');
             Route::get('/{customer}', CustomerShow::class)->name('customers.show');
-            Route::get('/{customer}/edit', CustomerEdit::class)->name('customers.edit')->middleware(['role:superadmin']);
+            Route::get('/{customer}/edit', CustomerEdit::class)->name('customers.edit');
         });
 
         Route::prefix('invoices')->group(function () {
@@ -174,7 +174,7 @@ Route::middleware(['auth', 'verified', 'set_reseller_missing_data', 'set_default
 
         Route::prefix('purchases')->group(function () {
             Route::get('/', SupplyPurchasesIndex::class)->name('supply.purchases.index');
-            Route::get('/{supply}', SupplyPurchaseShow::class)->name('supply.purchases.show')->middleware(['role:superadmin|reseller']);
+            Route::get('/{supply}', SupplyPurchaseShow::class)->name('supply.purchases.show');
             Route::get('/{supply}/invoice', InvoiceShow::class)->name('supply.purchases.invoice');
         });
 
