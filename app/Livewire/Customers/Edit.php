@@ -5,6 +5,7 @@ namespace App\Livewire\Customers;
 use App\Models\Address;
 use App\Models\Country;
 use App\Models\User;
+use App\Models\Discount;
 use Livewire\Component;
 
 class Edit extends Component
@@ -12,6 +13,10 @@ class Edit extends Component
     public User $customer;
     public Address $billing_address;
     public Address $shipping_address;
+
+    public $discount1;
+    public $discount2;
+    public $discount3;
 
     public function rules() {
         return [
@@ -47,6 +52,12 @@ class Edit extends Component
     {
         $this->billing_address = $this->customer->billing_address;
         $this->shipping_address = $this->customer->shipping_address;
+        
+        // Caricare i primi tre sconti basati sulla priorità
+        $discounts = $this->customer->discounts()->orderBy('pivot_priority')->take(3)->get();
+        if ($discounts->count() > 0) $this->discount1 = $discounts[0]->percentage ?? null;
+        if ($discounts->count() > 1) $this->discount2 = $discounts[1]->percentage ?? null;
+        if ($discounts->count() > 2) $this->discount3 = $discounts[2]->percentage ?? null;
     }
 
     public function copyFromBilling()
@@ -101,6 +112,18 @@ class Edit extends Component
             'pec' => $this->shipping_address->pec,
             'default' => true
         ]);
+
+        // Salva i sconti
+        $discounts = $this->customer->discounts()->orderBy('pivot_priority')->take(3)->get();
+        if ($discounts->count() > 0 && $this->discount1 !== null) {
+            $discounts[0]->update(['percentage' => $this->discount1]);
+        }
+        if ($discounts->count() > 1 && $this->discount2 !== null) {
+            $discounts[1]->update(['percentage' => $this->discount2]);
+        }
+        if ($discounts->count() > 2 && $this->discount3 !== null) {
+            $discounts[2]->update(['percentage' => $this->discount3]);
+        }
 
         $this->dispatch('open-notification',
             title: __('notifications.titles.updating'),

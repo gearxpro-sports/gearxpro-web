@@ -9,14 +9,15 @@ use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Crypt;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Discount;
 
 class User extends Authenticatable
 {
@@ -114,6 +115,22 @@ class User extends Authenticatable
     {
         return $this->belongsTo(User::class, 'idAgent', 'id');
     }
+    public function discounts(): BelongsToMany
+    {
+        return $this->belongsToMany(Discount::class, 'user_discounts')
+                    ->withPivot('priority')
+                    ->orderBy('pivot_priority');
+    }
+
+    /**
+     * Accessor to get the primary (or only) discount.
+     *
+     * @return \App\Models\Discount|null
+     */
+    public function getPrimaryDiscountAttribute()
+    {
+        return $this->discounts->first();
+    }
 
     /**
      * @return HasMany
@@ -161,5 +178,21 @@ class User extends Authenticatable
     public function resellerOrders(): HasMany
     {
         return $this->hasMany(Order::class, 'reseller_id')->with('customer');
+    }
+
+    /**
+     * Retrieve active discounts for the user.
+     *
+     * @return array
+     */
+    public function getActiveDiscountsAttribute()
+    {
+        return $this->discounts()
+                    ->orderBy('pivot_priority')
+                    ->get()
+                    ->map(function ($discount) {
+                        return $discount->percentage;
+                    })
+                    ->toArray();
     }
 }

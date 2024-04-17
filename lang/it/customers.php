@@ -41,10 +41,12 @@ return [
     'edit' => [
         'title' => 'Modifica Cliente',
         'titles' => [
-            'general_data' => 'Dati generali',
-            'billing_data' => 'Dati di Fatturazione',
-            'shipping_data' => 'Dati di Spedizione',
-            'payment' => 'Pagamento',
+            'general_data'      => 'Dati generali',
+            'billing_data'      => 'Dati di Fatturazione',
+            'shipping_data'     => 'Dati di Spedizione',
+            'payment'           => 'Pagamento',
+            'commissions'       => 'Commissioni/Scontistica',
+            'discount'          => 'Scontistica'
         ],
         'firstname' => [
             'label' => 'Nome',
@@ -93,6 +95,14 @@ return [
             'shipping' => 'Indirizzo di spedizione',
             'billing' => 'Indirizzo di fatturazione'
         ],
+        'commissions' => [
+            'label' => 'Commissioni'
+        ],
+        'discount' => [
+            'label1' => 'Sconto 1',
+            'label2' => 'Sconto 2',
+            'label3' => 'Sconto 3'
+        ]
     ],
     'profile' => 'Profilo',
     'profile_description' => 'Visualizza i tuoi dati, le impostazioni di accesso e password, i tuoi ordini.',
