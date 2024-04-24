@@ -122,8 +122,8 @@
             </div>
         </div>
     </div>
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
-        <div class="lg:col-span-3 p-8 bg-white rounded-sm">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-2">
+        <div class="lg:col-span-4 p-8 bg-white rounded-sm">
             <h3 class="text-color-18181a font-medium">{{ __('supply.purchases.show.table.title') }}</h3>
             <table
                 class="my-8 table-auto border-collapse w-full text-xs text-black-1 border border-color-eff0f0 font-medium">
@@ -174,11 +174,11 @@
                 <div class="flex flex-col text-center space-y-4 p-8 border-dashed border-2 border-color-dee2e6">
                     <span class="text-xs text-color-6c757d">{{ __('supply.purchases.show.ship_date') }}</span>
                     <span
-                        class="text-color-18181a font-medium">{{ $supply->shipped_at ? $supply->shipped_at->format('d M Y') : '-' }}</span>
+                        class="text-color-18181a font-medium">{{ $supply->shipped_at ? $supply->shipped_at->format('d M Y') : '-' }}<br><span class="text-[12px]">[Tracking URL coming]</span></span>
                 </div>
                 <div class="flex flex-col text-center space-y-4 p-8 border-dashed border-2 border-color-dee2e6">
                     <span class="text-xs text-color-6c757d">{{ __('supply.purchases.show.supply_total') }}</span>
-                    <span class="text-color-18181a font-medium">@money($supply->amount)</span>
+                    <span class="text-color-18181a font-medium">@money($supply->amount)<br><span class="text-[12px]">(Sconto applicato: {{ $supply->discount }})</span></span>
                 </div>
                 <div class="flex flex-col text-center space-y-4 p-8 border-dashed border-2 border-color-dee2e6">
                     <span class="text-xs text-color-6c757d">{{ __('supply.purchases.show.supply_state') }}</span>
@@ -186,9 +186,9 @@
                         @if(auth()->user()->hasRole(\App\Models\User::SUPERADMIN))
                             <x-dropdown-supply-statuses
                                 current_status="{{ $supply->status }}"></x-dropdown-supply-statuses>
-                        @elseif(auth()->user()->hasRole(\App\Models\User::RESELLER))
+                        @else
                             <x-badge
-                                color="{{ App\Models\Supply::STATUSES[$supply->status] }}">{{ __('supply.statuses.'.$supply->status) }}</x-badge>
+                                color="{{ \App\Models\Supply::STATUSES[$supply->status] }}">{{ __('supply.statuses.' . $supply->status) }}</x-badge>
                         @endif
                     </div>
                 </div>
