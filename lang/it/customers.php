@@ -96,7 +96,8 @@ return [
             'billing' => 'Indirizzo di fatturazione'
         ],
         'commissions' => [
-            'label' => 'Commissioni'
+            'title' => 'Commissioni agente',
+            'label' => 'Valore commissioni'
         ],
         'discount' => [
             'label1' => 'Sconto 1',

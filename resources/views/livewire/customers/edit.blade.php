@@ -96,7 +96,7 @@
         </div>
         <div x-show="tab === 'commissions'" class="space-y-10">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <h3 class="col-span-1 sm:col-span-2">{{ __('customers.edit.commissions.label') }}</h3>
+                <h3 class="col-span-1 sm:col-span-2">{{ __('customers.edit.commissions.title') }}</h3>
                 <x-input type="text" wire:model="customer.commissions" name="commissions"
                         label="{{ __('customers.edit.commissions.label') }}" disabled></x-input>
             </div>

@@ -15,7 +15,7 @@
                 <div class="mt-4 space-y-3 text-color-6c757d">
                     <div class="flex items-center justify-between">
                         <span>{{ __('supply.recap.order_review.order.subtotal') }}:</span>
-                        <span>@money($supply->amount)</span>
+                        <span>@money($supply->amount_full)</span>
                     </div>
                     <div class="flex items-center justify-between">
                         <span>{{ __('supply.recap.order_review.order.discount') }}:</span>
@@ -34,7 +34,7 @@
             <div class="p-4 border">
                 <div class="flex items-center justify-between text-color-18181a font-semibold">
                     <span>{{ __('supply.recap.order_review.order.total') }}</span>
-                    <span>@money($supply->discountedPrice)</span>
+                    <span>@money($supply->amount)</span>
                 </div>
             </div>
         </div>

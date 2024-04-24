@@ -17,8 +17,6 @@ class Recap extends Component
     }
 
     public function confirm() {
-        dd($this->supply);
-        
         $this->supply->update([
             'confirmed' => true,
             'payment_method' => $this->supply->reseller->payment_method
