@@ -5,8 +5,6 @@ namespace App\Livewire\Supply;
 use App\Models\ProductVariant;
 use Livewire\Attributes\On;
 use Livewire\Component;
-use App\Models\Supply;
-use Illuminate\Http\Request;
 
 class Recap extends Component
 {
@@ -19,6 +17,8 @@ class Recap extends Component
     }
 
     public function confirm() {
+        dd($this->supply);
+        
         $this->supply->update([
             'confirmed' => true,
             'payment_method' => $this->supply->reseller->payment_method
@@ -35,6 +35,7 @@ class Recap extends Component
     #[On('item-deleted')]
     public function render()
     {
+        $this->supply->discountedPrice = $this->supply->reseller->calculateDiscountedPrice($this->supply->amount);
         return view('livewire.supply.recap');
     }
 

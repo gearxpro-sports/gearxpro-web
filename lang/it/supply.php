@@ -118,6 +118,7 @@ return [
             'order' => [
                 'title' => 'Totale Ordine',
                 'subtotal' => 'Subtotale',
+                'discount' => 'Sconto applicato',
                 'shipping_cost' => 'Costo di Spedizione',
                 'vat' => 'IVA',
                 'total' => 'Totale'

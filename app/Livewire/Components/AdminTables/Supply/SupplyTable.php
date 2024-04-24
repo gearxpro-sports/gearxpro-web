@@ -100,6 +100,7 @@ class SupplyTable extends BaseTable
     {
         $selCustomer = json_decode($this->selected_customer, true);
         $userId = auth()->user()->hasRole(User::AGENT) ? $selCustomer["id"] : auth()->user()->id;
+        $resellerDiscount = $this->supply->reseller->active_discounts[0]."/".$this->supply->reseller->active_discounts[1]."/".$this->supply->reseller->active_discounts[2];
 
         $supply = Supply::updateorCreate([
             'uuid' => $this->supply->uuid ?? Str::random(10), // TODO: Random string to check before in the db.
@@ -107,6 +108,8 @@ class SupplyTable extends BaseTable
             'user_id' => $userId,
             'creator_id' => auth()->user()->id,
             'amount' => $this->amount,
+            'amount_full' => $this->amount,
+            'discount' => $resellerDiscount,
             'status' => 'new'
         ]);
 

@@ -18,6 +18,10 @@
                         <span>@money($supply->amount)</span>
                     </div>
                     <div class="flex items-center justify-between">
+                        <span>{{ __('supply.recap.order_review.order.discount') }}:</span>
+                        <span>{{ $supply->reseller->active_discounts[0]."/".$supply->reseller->active_discounts[1]."/".$supply->reseller->active_discounts[2] }}</span>
+                    </div>
+                    <div class="flex items-center justify-between">
                         <span>{{ __('supply.recap.order_review.order.shipping_cost') }}:</span>
                         <span>@money(0.00)</span>
                     </div>
@@ -30,7 +34,7 @@
             <div class="p-4 border">
                 <div class="flex items-center justify-between text-color-18181a font-semibold">
                     <span>{{ __('supply.recap.order_review.order.total') }}</span>
-                    <span>@money($supply->amount)</span>
+                    <span>@money($supply->discountedPrice)</span>
                 </div>
             </div>
         </div>
@@ -93,8 +97,8 @@
         </div>
         <div class="w-full">
             <x-primary-button wire:click="confirm" wire:loading.attr="disabled" wire:target="confirm"
-                              :disabled="$supply->rows->count() <= 0 || !$supply->reseller->shipping_address" type="button"
-                              class="w-full !bg-color-0c9d87 hover:!bg-color-0c9d87/90">
+                :disabled="$supply->rows->count() <= 0 || !$supply->reseller->shipping_address" type="button"
+                class="w-full !bg-color-0c9d87 hover:!bg-color-0c9d87/90">
                 {{ __('supply.recap.order_review.confirm') }}
             </x-primary-button>
         </div>

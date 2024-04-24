@@ -20,7 +20,7 @@ class RecapAgentTable extends BaseTable
 
     public function deleteItem($id) {
         $row = $this->rows->find($id);
-        $this->supply->update([
+        $this->supply->update([ 
             'amount' => $this->supply->amount - ($row->quantity * $row->price)
         ]);
         $row->delete();

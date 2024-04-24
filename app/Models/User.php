@@ -195,4 +195,21 @@ class User extends Authenticatable
                     })
                     ->toArray();
     }
+
+    /**
+     * Calculate the discounted price based on the original price and user discounts.
+     *
+     * @param float $originalPrice The original price of the order.
+     * @return float
+     */
+    public function calculateDiscountedPrice($originalPrice)
+    {
+        $discountedPrice = $originalPrice;
+
+        foreach ($this->active_discounts as $discount) {
+            $discountedPrice -= ($discountedPrice * ($discount / 100));
+        }
+
+        return $discountedPrice;
+    }
 }

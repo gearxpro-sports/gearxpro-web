@@ -50,6 +50,8 @@ class Order extends Model
      */
     protected $casts = [
         'total'            => 'float',
+        'total_full'       => 'float',
+        'discount'         => 'string',
         'paid_at'          => 'datetime',
         'shipped_at'       => 'datetime',
         'billing_address'  => 'object',

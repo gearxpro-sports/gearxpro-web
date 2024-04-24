@@ -20,6 +20,8 @@ class Supply extends Model
 
     protected $casts = [
         'amount' => 'float',
+        'amount_full' => 'float',   
+        'discount' => 'string',
         'shipped_at' => 'datetime'
     ];
 
