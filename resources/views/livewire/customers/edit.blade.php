@@ -57,6 +57,15 @@
                         label="{{ __('customers.edit.sdi.label') }}"></x-input>
                 <x-input type="text" wire:model="billing_address.pec" name="billing_pec"
                         label="{{ __('customers.edit.pec.label') }}"></x-input>
+                <x-select wire:model="customer.payment_method" name="payment_method"
+                        label="{{ __('customers.edit.payment_method.label') }}" required>
+                        <option value="before_delivery">Prima della consegna</option>
+                        <option value="delivery">Alla consegna</option>
+                        <option value="30_60_days">30/60 giorni</option>
+                        <option value="45_days">45 giorni</option>
+                        <option value="60_days">60 giorni</option>
+                        <option value="90_days">90 giorni</option>
+                </x-select>
             </div>
         </div>
         <div x-show="tab === 'shipping'" class="space-y-10">

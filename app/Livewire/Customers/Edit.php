@@ -35,6 +35,7 @@ class Edit extends Component
             'billing_address.tax_code' => 'required',
             'billing_address.sdi' => 'nullable',
             'billing_address.pec' => 'nullable',
+            'customer.payment_method' => 'required',
             // Shipping
             'shipping_address.address_1' => 'required',
             'shipping_address.city' => 'required',
@@ -81,6 +82,7 @@ class Edit extends Component
             'lastname' => $this->customer->lastname,
             'email' => $this->customer->email,
             'phone' => $this->customer->phone,
+            'payment_method' => $this->customer->payment_method,
         ]);
 
         $this->billing_address->update([
